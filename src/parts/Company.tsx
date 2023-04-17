@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import {Img, staticFile} from 'remotion';
-import { Product } from '../parts/Product';
+import { Product } from './Product';
 
 export const Company: React.FC<{style?: CSSProperties}> = ({ style }) => {
   return (
