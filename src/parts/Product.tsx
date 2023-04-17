@@ -1,11 +1,7 @@
 import React, { CSSProperties } from 'react';
 import {Img, staticFile} from 'remotion';
 
-interface MyComponentProps {
-  style?: CSSProperties;
-}
-
-export const Product: React.FC<MyComponentProps> = ({ style }) => {
+export const Product: React.FC<{style?: CSSProperties}> = ({ style }) => {
 
   return (
       <div style={style}>
