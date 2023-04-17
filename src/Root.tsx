@@ -1,5 +1,6 @@
 import {Composition, staticFile} from 'remotion';
 import {Scene} from './Scene';
+import {SceneCustomer} from './SceneCustomer';
 
 // Welcome to the Remotion Three Starter Kit!
 // Two compositions have been created, showing how to use
@@ -24,7 +25,7 @@ const deviceType: Device = 'phone';
 export const RemotionRoot: React.FC = () => {
 	return (
 		<>
-			<Composition
+			{/* <Composition
 				id="Scene"
 				component={Scene}
 				durationInFrames={300}
@@ -38,6 +39,14 @@ export const RemotionRoot: React.FC = () => {
 							: staticFile('tablet.mp4'),
 					baseScale: deviceType === 'phone' ? 1 : 1.8,
 				}}
+			/> */}
+			<Composition
+				id="SceneCustomer"
+				component={ SceneCustomer }
+				durationInFrames={300}
+				fps={30}
+				width={1280}
+				height={720}
 			/>
 		</>
 	);
