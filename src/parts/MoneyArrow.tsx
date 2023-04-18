@@ -2,16 +2,17 @@
 import React from 'react';
 import { Img, staticFile, useCurrentFrame} from 'remotion';
 
-export const ValueArrow: React.FC = () => {
+export const MoneyArrow: React.FC = () => {
   const frame = useCurrentFrame();
 
   return (
     <div style={{position: 'relative', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-    <Img src={staticFile("assets/Music.svg")} style={{position: 'absolute', left: '30%', top: '30%', width: '15%'}} />
-    <Img src={staticFile("assets/Clawn.svg")} style={{position: 'absolute', left: '50%', top: '30%', width: '15%'}} />
+    <Img src={staticFile("assets/Money.svg")} style={{position: 'absolute', left: '45%', top: '63%', width: '10%'}} />
+    <Img src={staticFile("assets/Money.svg")} style={{position: 'absolute', left: '60%', top: '60%', width: '10%'}} />
+    <Img src={staticFile("assets/Money.svg")} style={{position: 'absolute', left: '70%', top: '56%', width: '10%'}} />
     <svg
-      viewBox="0 0 200 100"
       style={{position: 'absolute', left: '0%', top: '0%', width: '100%'}}
+      viewBox="0 0 300 130"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
@@ -28,7 +29,7 @@ export const ValueArrow: React.FC = () => {
         </marker>
       </defs>
       <path
-        d="M10 80 Q100 50 190 80"
+        d="M310 60 Q220 120 10 100"
         stroke="#000"
         strokeWidth="5"
         strokeLinecap="round"
