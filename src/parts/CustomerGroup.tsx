@@ -1,7 +1,9 @@
 import React, { CSSProperties } from 'react';
 import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
+import { Subtitle } from 'src/models/Subtitles';
 
-export const CustomerGroup: React.FC<{style?: CSSProperties, happySince: number}> = ({ style, happySince }) => {
+// eslint-disable-next-line react/no-unused-prop-types
+export const CustomerGroup: React.FC<{style?: CSSProperties, subtitles: Subtitle[], happySince: number}> = ({ style, happySince }) => {
 	const frame = useCurrentFrame();
   // Const { fps } = useVideoConfig();
 	const transitionDuration = 90;

@@ -6,7 +6,7 @@
 		"start": "remotion preview",
 		"build": "remotion render SceneCustomer out/video.mp4",
 		"upgrade": "remotion upgrade",
-		"test": "eslint src --ext ts,tsx,js,jsx && tsc && npx jest"
+		"test": "npx jest && eslint src --ext ts,tsx,js,jsx && tsc"
 	},
 	"repository": {},
 	"license": "UNLICENSED",

@@ -7,6 +7,13 @@ interface StageTransform {
 }
 
 describe('useCurrentStage', () => {
+  const CurrentSubtitle = {
+    globalFps: 30,
+    globalFrame: 60,
+    subtitle: { id: '1', startTime: 0, endTime: 2, text: 'First subtitle' },
+    text: 'First subtitle',
+  };
+
   it('should return the correct interpolated value based on the stage transform', () => {
     const subtitles: Subtitle[] = [
       { id: 'subtitle1', startTime: 1, endTime: 3, text: 'First subtitle.' },
@@ -18,10 +25,7 @@ describe('useCurrentStage', () => {
       { subtitleId: 'subtitle2', durationInSeconds: 1 },
     ];
 
-    const frame = 120;
-    const fps = 30;
-
-    const result = useCurrentStage(subtitles, stageTransforms, frame, fps);
+    const result = useCurrentStage(subtitles, stageTransforms, CurrentSubtitle);
 
     expect(result).toEqual(100);
   });
@@ -29,10 +33,7 @@ describe('useCurrentStage', () => {
   it('should throw an error if no stage transform is found', () => {
     const subtitles: Subtitle[] = [];
     const stageTransforms: StageTransform[] = [];
-    const frame = 0;
-    const fps = 30;
-
-    expect(() => useCurrentStage(subtitles, stageTransforms, frame, fps)).toThrowError(
+    expect(() => useCurrentStage(subtitles, stageTransforms, CurrentSubtitle)).toThrowError(
       'No stage transform found'
     );
   });
@@ -42,10 +43,8 @@ describe('useCurrentStage', () => {
     const stageTransforms: StageTransform[] = [
       { subtitleId: 'subtitle2', durationInSeconds: 1 },
     ];
-    const frame = 0;
-    const fps = 30;
 
-    expect(() => useCurrentStage(subtitles, stageTransforms, frame, fps)).toThrowError(
+    expect(() => useCurrentStage(subtitles, stageTransforms, CurrentSubtitle)).toThrowError(
       'No target subtitle found'
     );
   });

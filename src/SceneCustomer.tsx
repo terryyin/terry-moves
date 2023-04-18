@@ -23,14 +23,14 @@ const StageTransforms: StageTransform[] = [
 export const SceneCustomer: React.FC = () => {
   const frame = useCurrentFrame();
 	const fps = 30;
-	const currentStutitle: CurrentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
-	const viewPosition = useCurrentStage(subtitles, StageTransforms, frame, fps);
+	const currentSubtitle: CurrentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
+	const viewPosition = useCurrentStage(subtitles, StageTransforms, currentSubtitle);
 
   return (
     <Sequence  durationInFrames={10 * 30}>
       <Stage viewPosition={ viewPosition}>
 				<Company style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
-				<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} happySince={2 * fps}/>
+				<CustomerGroup subtitles={subtitles} style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} happySince={2 * fps}/>
 				<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
 					{frame > fps / 2 && <ValueArrow />}
 				</div>
@@ -38,7 +38,7 @@ export const SceneCustomer: React.FC = () => {
 					{frame > 4 * fps  && <MoneyArrow />}
 				</div>
 			</Stage>
-			<Subtitles currentSubtitle={currentStutitle}/>
+			<Subtitles currentSubtitle={currentSubtitle}/>
     </Sequence>
   );
 };
