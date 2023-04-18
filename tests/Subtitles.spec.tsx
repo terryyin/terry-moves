@@ -8,6 +8,7 @@ const subtitle: Subtitle =
   { id: 'subtitle1', startTime: 1, endTime: 3, text: 'First subtitle.' };
 
 const currentSubtitle: CurrentSubtitle = {
+  allSubtitles: [subtitle],
   globalFps: 30,
   globalFrame: 60,
   subtitle,

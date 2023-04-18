@@ -3,36 +3,32 @@ import { Subtitle } from '../models/Subtitles';
 import { interpolate } from 'remotion';
 
 export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle => {
-  for (let i = 0; i < subtitles.length; i++) {
-    const subtitle = subtitles[i];
-    if (frame >= subtitle.startTime * fps) {
-      return {
-        globalFps: fps,
-        globalFrame: frame,
-        subtitle,
-        text: frame > subtitle.endTime * fps ? '' : subtitle.text,
-      };
-    }
+  let i = 0;
+  for (; i < subtitles.length; i++) {
+    if (subtitles[i].startTime * fps > frame)
+      break;
   }
-
+  const subtitle = i === 0 ? subtitles[0] : subtitles[i - 1];
   return {
+    allSubtitles: subtitles,
     globalFps: fps,
     globalFrame: frame,
-    subtitle: subtitles[0],
-    text: ''
-  }
+    subtitle,
+    text: frame > subtitle.endTime * fps || frame < subtitle.startTime * fps ? '' : subtitle.text,
+  };
 };
+
 
 export interface StageTransform {
 	subtitleId: string;
 	durationInSeconds: number;
 }
 
-export const useCurrentStage = (subtitles: Subtitle[], stageTransforms: StageTransform[], currentSubtitle: CurrentSubtitle) => {
+export const useCurrentStage = (stageTransforms: StageTransform[], currentSubtitle: CurrentSubtitle) => {
 	const stageTransform = stageTransforms[0];
 	if(!stageTransform) throw new Error("No stage transform found");
 	const targetSubtitleId = stageTransform.subtitleId;
-  const targetSubtitle = subtitles.find((subtitle) => subtitle.id === targetSubtitleId);
+  const targetSubtitle = currentSubtitle.allSubtitles.find((subtitle) => subtitle.id === targetSubtitleId);
 	if(!targetSubtitle) throw new Error("No target subtitle found");
 
 	const targetTime = targetSubtitle.startTime;

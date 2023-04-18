@@ -24,7 +24,7 @@ export const SceneCustomer: React.FC = () => {
   const frame = useCurrentFrame();
 	const fps = 30;
 	const currentSubtitle: CurrentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
-	const viewPosition = useCurrentStage(subtitles, StageTransforms, currentSubtitle);
+	const viewPosition = useCurrentStage(StageTransforms, currentSubtitle);
 
   return (
     <Sequence  durationInFrames={10 * 30}>
