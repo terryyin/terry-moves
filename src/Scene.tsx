@@ -13,7 +13,7 @@ const videoStyle: React.CSSProperties = {
 	opacity: 0,
 };
 
-export const Scene: React.FC<{
+export const SceneCustomer: React.FC<{
 	videoSrc: string;
 	baseScale: number;
 }> = ({baseScale, videoSrc}) => {

@@ -1,6 +1,7 @@
+import { CurrentSubtitle } from 'src/models/CurrentSubtitle';
 import { Subtitle } from '../models/Subtitles';
 
-export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: number): Subtitle => {
+export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle => {
   const currentSubtitle = subtitles.find(
     (subtitle) =>
       frame >= subtitle.startTime * fps && frame <= subtitle.endTime * fps
@@ -10,5 +11,10 @@ export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: nu
     throw new Error('No subtitle found for current frame');
   }
 
-  return currentSubtitle;
+  return {
+    globalFps: fps,
+    globalFrame: frame,
+    subtitle: currentSubtitle,
+    text: currentSubtitle.text,
+  }
 };

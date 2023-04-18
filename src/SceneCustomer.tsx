@@ -18,12 +18,7 @@ const subtitles = [
 export const SceneCustomer: React.FC = () => {
   const frame = useCurrentFrame();
 	const fps = 30;
-	const currentStutitle: CurrentSubtitle = {
-		subtitle: useCurrentSubtitle(subtitles, frame, fps),
-		text: "xxxx",
-		globalFrame: frame,
-		globalFps: fps,
-	};
+	const currentStutitle: CurrentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
 	const viewPosition = interpolate(frame, [7 * fps, 8 * fps], [100, 50], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
