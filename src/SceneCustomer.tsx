@@ -1,4 +1,3 @@
-import {interpolate} from 'remotion'
 import React from 'react';
 import {Sequence, useCurrentFrame} from 'remotion';
 import { Company } from './parts/Company';
@@ -7,13 +6,8 @@ import { ValueArrow } from './parts/ValueArrow';
 import { MoneyArrow } from './parts/MoneyArrow';
 import { Subtitles } from './video_components/Subtitles';
 import { CurrentSubtitle } from './models/CurrentSubtitle';
-import { useCurrentSubtitle } from './hooks/useCurrentSubtitle';
+import { StageTransform, useCurrentStage, useCurrentSubtitle } from './hooks/useCurrentSubtitle';
 import { Subtitle } from './models/Subtitles';
-
-interface StageTransform {
-	subtitleId: string;
-	durationInSeconds: number;
-}
 
 const subtitles: Subtitle[] = [
 	{ id: 'subtitle1', startTime: 1, endTime: 4, text: 'First subtitle.' },
@@ -24,20 +18,6 @@ const subtitles: Subtitle[] = [
 const StageTransforms: StageTransform[] = [
 	{ subtitleId: 'subtitle2', durationInSeconds: 1 },
 ];
-
-const useCurrentStage = (subtitles: Subtitle[], stageTransforms: StageTransform[], frame: number, fps: number) => {
-	const stageTransform = stageTransforms[0];
-	if(!stageTransform) throw new Error("No stage transform found");
-	const targetSubtitleId = stageTransform.subtitleId;
-  const targetSubtitle = subtitles.find((subtitle) => subtitle.id === targetSubtitleId);
-	if(!targetSubtitle) throw new Error("No target subtitle found");
-
-	const targetTime = targetSubtitle.startTime;
-	return interpolate(frame, [targetTime * fps, (targetTime + stageTransform.durationInSeconds) * fps], [100, 50], {
-		extrapolateLeft: 'clamp',
-		extrapolateRight: 'clamp',
-	});
-}
 
 export const SceneCustomer: React.FC = () => {
   const frame = useCurrentFrame();
