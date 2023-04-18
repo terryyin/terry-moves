@@ -8,21 +8,42 @@ import { MoneyArrow } from './parts/MoneyArrow';
 import { Subtitles } from './video_components/Subtitles';
 import { CurrentSubtitle } from './models/CurrentSubtitle';
 import { useCurrentSubtitle } from './hooks/useCurrentSubtitle';
+import { Subtitle } from './models/Subtitles';
 
-const subtitles = [
-	{ id: 'subtitle1', startTime: 1, endTime: 3, text: 'First subtitle.' },
-	{ id: 'subtitle2', startTime: 4, endTime: 6, text: 'Second subtitle.' },
-	{ id: 'subtitle3', startTime: 7, endTime: 9, text: 'Third subtitle.' },
+interface StageTransform {
+	subtitleId: string;
+	durationInSeconds: number;
+}
+
+const subtitles: Subtitle[] = [
+	{ id: 'subtitle1', startTime: 1, endTime: 4, text: 'First subtitle.' },
+	{ id: 'subtitle2', startTime: 4, endTime: 7, text: 'Second subtitle.' },
+	{ id: 'subtitle3', startTime: 7, endTime: 100, text: 'Third subtitle.' },
 ];
+
+const StageTransforms: StageTransform[] = [
+	{ subtitleId: 'subtitle2', durationInSeconds: 1 },
+];
+
+const useCurrentStage = (subtitles: Subtitle[], stageTransforms: StageTransform[], frame: number, fps: number) => {
+	const stageTransform = stageTransforms[0];
+	if(!stageTransform) throw new Error("No stage transform found");
+	const targetSubtitleId = stageTransform.subtitleId;
+  const targetSubtitle = subtitles.find((subtitle) => subtitle.id === targetSubtitleId);
+	if(!targetSubtitle) throw new Error("No target subtitle found");
+
+	const targetTime = targetSubtitle.startTime;
+	return interpolate(frame, [targetTime * fps, (targetTime + stageTransform.durationInSeconds) * fps], [100, 50], {
+		extrapolateLeft: 'clamp',
+		extrapolateRight: 'clamp',
+	});
+}
 
 export const SceneCustomer: React.FC = () => {
   const frame = useCurrentFrame();
 	const fps = 30;
 	const currentStutitle: CurrentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
-	const viewPosition = interpolate(frame, [7 * fps, 8 * fps], [100, 50], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+	const viewPosition = useCurrentStage(subtitles, StageTransforms, frame, fps);
 
   return (
     <Sequence  durationInFrames={10 * 30}>
