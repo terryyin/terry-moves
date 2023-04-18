@@ -1,15 +1,10 @@
-import { Subtitle } from "../models/Subtitles";
-import { useCurrentSubtitle } from "../hooks/useCurrentSubtitle";
+import { CurrentSubtitle } from "src/models/CurrentSubtitle";
 
 interface SubtitlesProps {
-  frame: number,
-  fps: number,
-  subtitles: Subtitle[];
+  currentSubtitle: CurrentSubtitle;
 }
 
-export const Subtitles: React.FC<SubtitlesProps> = ({ subtitles, frame, fps }) => {
-  const currentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
-
+export const Subtitles: React.FC<SubtitlesProps> = ({ currentSubtitle }) => {
   return (
 			<div style={{
             position: 'absolute',
@@ -25,7 +20,7 @@ export const Subtitles: React.FC<SubtitlesProps> = ({ subtitles, frame, fps }) =
 						minHeight: '60px',
           }}>
       {currentSubtitle && (
-        <span>{currentSubtitle.text}</span>
+        <span>{currentSubtitle?.text}</span>
       )}
     </div>
   );

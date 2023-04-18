@@ -6,6 +6,8 @@ import { CustomerGroup } from './parts/CustomerGroup';
 import { ValueArrow } from './parts/ValueArrow';
 import { MoneyArrow } from './parts/MoneyArrow';
 import { Subtitles } from './video_components/Subtitles';
+import { CurrentSubtitle } from './models/CurrentSubtitle';
+import { useCurrentSubtitle } from './hooks/useCurrentSubtitle';
 
 const subtitles = [
 	{ id: 'subtitle1', startTime: 1, endTime: 3, text: 'First subtitle.' },
@@ -16,6 +18,12 @@ const subtitles = [
 export const SceneCustomer: React.FC = () => {
   const frame = useCurrentFrame();
 	const fps = 30;
+	const currentStutitle: CurrentSubtitle = {
+		subtitle: useCurrentSubtitle(subtitles, frame, fps),
+		text: "xxxx",
+		globalFrame: frame,
+		globalFps: fps,
+	};
 	const viewPosition = interpolate(frame, [7 * fps, 8 * fps], [100, 50], {
     extrapolateLeft: 'clamp',
     extrapolateRight: 'clamp',
@@ -33,7 +41,7 @@ export const SceneCustomer: React.FC = () => {
 					{frame > 4 * fps  && <MoneyArrow />}
 				</div>
 			</div>
-			<Subtitles subtitles={subtitles} frame={frame} fps={fps}/>
+			<Subtitles currentSubtitle={currentStutitle}/>
     </Sequence>
   );
 };
