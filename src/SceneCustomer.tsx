@@ -33,7 +33,7 @@ export const SceneCustomer: React.FC = () => {
 					{frame > 4 * fps  && <MoneyArrow />}
 				</div>
 			</div>
-			<Subtitles subtitles={subtitles} />
+			<Subtitles subtitles={subtitles} frame={frame} fps={fps}/>
     </Sequence>
   );
 };

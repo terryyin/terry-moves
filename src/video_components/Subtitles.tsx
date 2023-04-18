@@ -2,11 +2,13 @@ import { Subtitle } from "../models/Subtitles";
 import { useCurrentSubtitle } from "../hooks/useCurrentSubtitle";
 
 interface SubtitlesProps {
+  frame: number,
+  fps: number,
   subtitles: Subtitle[];
 }
 
-export const Subtitles: React.FC<SubtitlesProps> = ({ subtitles }) => {
-  const currentSubtitle = useCurrentSubtitle(subtitles);
+export const Subtitles: React.FC<SubtitlesProps> = ({ subtitles, frame, fps }) => {
+  const currentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
 
   return (
 			<div style={{
