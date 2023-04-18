@@ -10,15 +10,15 @@ const subtitles: Subtitle[] = [
   { id: 'subtitle3', startTime: 7, endTime: 9, text: 'Third subtitle.' },
 ];
 
-interface SubtitlesWrapperProps {
+interface CurrentSubtitle {
   frame: number;
   fps: number;
 }
 
-const SubtitlesWrapper: React.FC<SubtitlesWrapperProps> = ({ frame, fps }) => {
+const SubtitlesWrapper: React.FC<CurrentSubtitle> = (currentSubtitle) => {
   return (
     <div style={{ position: 'relative', width: '100%', height: '100%' }}>
-      <Subtitles subtitles={subtitles} frame={frame} fps={fps} />
+      <Subtitles subtitles={subtitles} frame={currentSubtitle.frame} fps={currentSubtitle.fps} />
     </div>
   );
 };
