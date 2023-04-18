@@ -8,6 +8,7 @@ import { Subtitles } from './video_components/Subtitles';
 import { CurrentSubtitle } from './models/CurrentSubtitle';
 import { StageTransform, useCurrentStage, useCurrentSubtitle } from './hooks/useCurrentSubtitle';
 import { Subtitle } from './models/Subtitles';
+import Stage from './video_components/Stage';
 
 const subtitles: Subtitle[] = [
 	{ id: 'subtitle1', startTime: 1, endTime: 4, text: 'First subtitle.' },
@@ -27,7 +28,7 @@ export const SceneCustomer: React.FC = () => {
 
   return (
     <Sequence  durationInFrames={10 * 30}>
-      <div style={{position: 'relative', left: `${100 - viewPosition}%`, top:'0%', width: `${viewPosition}%`, height: `${viewPosition}%`}}>
+      <Stage viewPosition={ viewPosition}>
 				<Company style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
 				<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} happySince={2 * fps}/>
 				<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
@@ -36,7 +37,7 @@ export const SceneCustomer: React.FC = () => {
 				<div style={{position: 'absolute', left: '45%', top: '50%', width: '37%', height: '37%'}}>
 					{frame > 4 * fps  && <MoneyArrow />}
 				</div>
-			</div>
+			</Stage>
 			<Subtitles currentSubtitle={currentStutitle}/>
     </Sequence>
   );
