@@ -17,7 +17,7 @@ const subtitles: Subtitle[] = [
 ];
 
 const StageTransforms: StageTransform[] = [
-	{ subtitleId: 'subtitle2', durationInSeconds: 1 },
+	{ subtitleId: 'subtitle2', durationInSeconds: 1, outputRange: [100, 50] },
 ];
 
 export const SceneCustomer: React.FC = () => {

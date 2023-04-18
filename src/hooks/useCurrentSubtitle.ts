@@ -22,6 +22,7 @@ export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: nu
 export interface StageTransform {
 	subtitleId: string;
 	durationInSeconds: number;
+  outputRange: number[];
 }
 
 export const useCurrentStage = (stageTransforms: StageTransform[], currentSubtitle: CurrentSubtitle) => {
@@ -32,7 +33,7 @@ export const useCurrentStage = (stageTransforms: StageTransform[], currentSubtit
 	if(!targetSubtitle) throw new Error("No target subtitle found");
 
 	const targetTime = targetSubtitle.startTime;
-	return interpolate(currentSubtitle.globalFrame, [targetTime * currentSubtitle.globalFps, (targetTime + stageTransform.durationInSeconds) * currentSubtitle.globalFps], [100, 50], {
+	return interpolate(currentSubtitle.globalFrame, [targetTime * currentSubtitle.globalFps, (targetTime + stageTransform.durationInSeconds) * currentSubtitle.globalFps], stageTransform.outputRange, {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});

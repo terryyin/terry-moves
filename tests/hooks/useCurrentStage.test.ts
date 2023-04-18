@@ -1,10 +1,5 @@
-import { useCurrentStage } from "src/hooks/useCurrentSubtitle";
+import { StageTransform, useCurrentStage } from "src/hooks/useCurrentSubtitle";
 import { Subtitle } from "src/models/Subtitles";
-
-interface StageTransform {
-  subtitleId: string;
-  durationInSeconds: number;
-}
 
 describe('useCurrentStage', () => {
   const subtitles: Subtitle[] = [
@@ -24,11 +19,11 @@ describe('useCurrentStage', () => {
   it('should return the correct interpolated value based on the stage transform', () => {
 
     const stageTransforms: StageTransform[] = [
-      { subtitleId: 'subtitle2', durationInSeconds: 1 },
+      { subtitleId: 'subtitle2', durationInSeconds: 1, outputRange: [50, 100]},
     ];
 
     const result = useCurrentStage(stageTransforms, currentSubtitle);
 
-    expect(result).toEqual(100);
+    expect(result).toEqual(50);
   });
 });
