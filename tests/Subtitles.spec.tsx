@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
-import { Subtitle } from 'src/models/Subtitles';
-import { Subtitles } from 'src/video_components/Subtitles';
-import { CurrentSubtitle } from 'src/models/CurrentSubtitle';
+import { Subtitle } from '@/models/Subtitles';
+import { Subtitles } from '@/video_components/Subtitles';
+import { CurrentSubtitle } from '@/models/CurrentSubtitle';
 
 const subtitle: Subtitle = 
   { id: 'subtitle1', startTime: 1, endTime: 3, text: 'First subtitle.' };

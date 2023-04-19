@@ -1,4 +1,4 @@
-import { CurrentSubtitle } from "src/models/CurrentSubtitle";
+import { CurrentSubtitle } from "@/models/CurrentSubtitle";
 
 interface SubtitlesProps {
   currentSubtitle: CurrentSubtitle;

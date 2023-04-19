@@ -1,5 +1,5 @@
-import { StageTransform, useCurrentStage } from "src/hooks/useCurrentSubtitle";
-import { Subtitle } from "src/models/Subtitles";
+import { StageTransform, useCurrentStage } from "@/hooks/useCurrentSubtitle";
+import { Subtitle } from "@/models/Subtitles";
 
 describe('useCurrentStage', () => {
   const subtitles: Subtitle[] = [

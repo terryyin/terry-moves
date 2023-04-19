@@ -1,6 +1,6 @@
 // UseCurrentSubtitle.test.ts
-import { useCurrentSubtitle } from 'src/hooks/useCurrentSubtitle';
-import { Subtitle } from 'src/models/Subtitles';
+import { useCurrentSubtitle } from '@/hooks/useCurrentSubtitle';
+import { Subtitle } from '@/models/Subtitles';
 
 describe('useCurrentSubtitle', () => {
   const subtitles: Subtitle[] = [

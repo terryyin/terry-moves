@@ -1,4 +1,3 @@
-// CurvedArrow.tsx
 import React from 'react';
 import { Img, staticFile, useCurrentFrame} from 'remotion';
 

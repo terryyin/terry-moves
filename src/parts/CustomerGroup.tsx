@@ -11,7 +11,6 @@ const StageTransforms: StageTransform[] = [
 export const CustomerGroup: React.FC<{style?: CSSProperties, currentSubtitle: CurrentSubtitle}> = ({ style, currentSubtitle }) => {
 	const opacity = useCurrentStage(StageTransforms, currentSubtitle);
 
-
   return (
       <div style={style}>
 				<div style={{position: 'relative', left: '0%', top:'0%', width: '100%', height: '100%'}}>
