@@ -30,7 +30,7 @@ export const useCurrentStage = (stageTransforms: StageTransform[], currentSubtit
 	if(!stageTransform) throw new Error("No stage transform found");
 	const targetSubtitleId = stageTransform.subtitleId;
   const targetSubtitle = currentSubtitle.allSubtitles.find((subtitle) => subtitle.id === targetSubtitleId);
-	if(!targetSubtitle) throw new Error("No target subtitle found");
+	if(!targetSubtitle) throw new Error(`No target subtitle found: ${targetSubtitleId}`);
 
 	const targetTime = targetSubtitle.startTime;
 	return interpolate(currentSubtitle.globalFrame, [targetTime * currentSubtitle.globalFps, (targetTime + stageTransform.durationInSeconds) * currentSubtitle.globalFps], stageTransform.outputRange, {

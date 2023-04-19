@@ -4,7 +4,7 @@ import { StageTransform, useCurrentStage } from '../hooks/useCurrentSubtitle';
 import { CurrentSubtitle } from '../models/CurrentSubtitle';
 
 const StageTransforms: StageTransform[] = [
-	{ subtitleId: 'subtitle2', durationInSeconds: 2, outputRange: [0, 1] },
+	{ subtitleId: 'intro2', durationInSeconds: 2, outputRange: [0, 1] },
 ];
 
 // eslint-disable-next-line react/no-unused-prop-types
