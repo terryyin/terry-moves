@@ -3,7 +3,6 @@ import { Subtitle } from '../models/Subtitles';
 import { interpolate } from 'remotion';
 
 export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle => {
-
   let endTime = 0;
   let subtitle: Subtitle = subtitles[0];
 
@@ -13,7 +12,6 @@ export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: nu
     if (endTime * fps > frame)
       break;
   }
-
 
   return {
     allSubtitles: subtitles,
@@ -31,7 +29,7 @@ export interface StageTransform {
   outputRange: number[];
 }
 
-const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]): number => {
+export const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]): number => {
   let endTime = 0;
   let targetSubtitle: Subtitle = subtitles[0];
 

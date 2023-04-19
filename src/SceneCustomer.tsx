@@ -12,15 +12,15 @@ import Stage from './video_components/Stage';
 import autonomousComponent from './video_components/autonomousComponent';
 
 const subtitles: Subtitle[] = [
-	{ id: 'intro1', leadingBlank: 0, duration: 3, text: 'A company delivers services to users,' },
-	{ id: 'intro2', leadingBlank: 1, duration: 3, text: 'aiming to solve customers\' problems' },
-	{ id: 'intro3', leadingBlank: 1, duration: 3, text: 'or meet their needs.' },
-	{ id: 'customerResources1', leadingBlank: 1, duration: 3, text: 'In return, customers provide resources,' },
-	{ id: 'customerResources2', leadingBlank: 1, duration: 3, text: 'such as money, to fuel growth.' },
+	{ id: 'intro1', leadingBlank: 1, duration: 3, text: 'A company delivers services to users,' },
+	{ id: 'intro2', leadingBlank: 0, duration: 3, text: 'aiming to solve customers\' problems' },
+	{ id: 'intro3', leadingBlank: 0, duration: 3, text: 'or meet their needs.' },
+	{ id: 'customerResources1', leadingBlank: 1, duration: 3, text: 'In exchange, customers provide resources,' },
+	{ id: 'customerResources2', leadingBlank: 0, duration: 4, text: 'such as money, to fuel growth.' },
 	{ id: 'softwareRole1', leadingBlank: 1, duration: 3, text: 'Software products often play a' },
-	{ id: 'softwareRole2', leadingBlank: 1, duration: 3, text: 'crucial role in providing services.' },
+	{ id: 'softwareRole2', leadingBlank: 0, duration: 3, text: 'crucial role in providing services.' },
 	{ id: 'traditionalBelief1', leadingBlank: 1, duration: 3, text: 'Traditionally, businesses focused on' },
-	{ id: 'traditionalBelief2', leadingBlank: 1, duration: 3, text: 'their core domain, not software.' },
+	{ id: 'traditionalBelief2', leadingBlank: 0, duration: 3, text: 'their core domain, not software.' },
 	{ id: 'externalTeams1', leadingBlank: 1, duration: 3, text: 'Developers were part of external teams,' },
 	{ id: 'externalTeams2', leadingBlank: 1, duration: 3, text: 'hired to work on projects.' },
 	{ id: 'integration1', leadingBlank: 1, duration: 3, text: 'They delivered components to be' },
@@ -36,7 +36,7 @@ const subtitles: Subtitle[] = [
 ];
 
 const StageTransforms: StageTransform[] = [
-	{ subtitleId: 'softwareRole1', durationInSeconds: 1, outputRange: [100, 50] },
+	{ subtitleId: 'externalTeams1', durationInSeconds: 1, outputRange: [100, 70] },
 ];
 
 export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
@@ -46,7 +46,7 @@ export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
   return (
     <Sequence  durationInFrames={73 * 30}>
       <Stage viewPosition={ viewPosition}>
-				<Company style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
+				<Company currentSubtitle={currentSubtitle} style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
 				<CustomerGroup currentSubtitle={currentSubtitle} style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
 				<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
 					{sinceSubtitle(currentSubtitle, "intro1") && <ValueArrow />}
