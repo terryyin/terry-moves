@@ -31,26 +31,34 @@ export interface StageTransform {
   outputRange: number[];
 }
 
-export const useCurrentStage = (stageTransforms: StageTransform[], currentSubtitle: CurrentSubtitle) => {
-	const stageTransform = stageTransforms[0];
-	if(!stageTransform) throw new Error("No stage transform found");
+const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]): number => {
   let endTime = 0;
-  let targetSubtitle: Subtitle = currentSubtitle.allSubtitles[0];
+  let targetSubtitle: Subtitle = subtitles[0];
 
-  for (let i = 0; i < currentSubtitle.allSubtitles.length; i++) {
-    targetSubtitle = currentSubtitle.allSubtitles[i];
+  for (let i = 0; i < subtitles.length; i++) {
+    targetSubtitle = subtitles[i];
     endTime += targetSubtitle.leadingBlank + targetSubtitle.duration;
-    if (stageTransform.subtitleId === targetSubtitle.id)
+    if (subtitleId === targetSubtitle.id)
       break;
   }
 
-	const targetTime = endTime - targetSubtitle.duration;
-	return interpolate(currentSubtitle.globalFrame, [targetTime * currentSubtitle.globalFps, (targetTime + stageTransform.durationInSeconds) * currentSubtitle.globalFps], stageTransform.outputRange, {
+  return endTime - targetSubtitle.duration;
+}
+
+const interpolateStage = (stageTransforms: StageTransform[], currentSubtitle: CurrentSubtitle) => {
+	const stageTransform = stageTransforms[0];
+	if(!stageTransform) throw new Error("No stage transform found");
+
+	const startTime = getStartTimeOfSubtitle(stageTransform.subtitleId, currentSubtitle.allSubtitles);
+	return interpolate(currentSubtitle.globalFrame, [startTime * currentSubtitle.globalFps, (startTime + stageTransform.durationInSeconds) * currentSubtitle.globalFps], stageTransform.outputRange, {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
 }
 
-export const sinceSubtitle = (currentSubtitle: CurrentSubtitle, subtitleId: string) => {
-  return true;
+export const useCurrentStage = interpolateStage;
+
+export const sinceSubtitle = (currentSubtitle: CurrentSubtitle, subtitleId: string): boolean => {
+	const startTime = getStartTimeOfSubtitle(subtitleId, currentSubtitle.allSubtitles);
+  return currentSubtitle.globalFrame >= startTime * currentSubtitle.globalFps;
 }
