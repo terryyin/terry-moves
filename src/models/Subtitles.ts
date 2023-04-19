@@ -1,8 +1,6 @@
 export interface Subtitle {
   id: string;
-  leadingBlank?: number;
-  duration?: number;
-  startTime: number;
-  endTime: number;
+  leadingBlank: number;
+  duration: number;
   text: string;
 }

@@ -5,7 +5,7 @@ import { Subtitles } from '@/video_components/Subtitles';
 import { CurrentSubtitle } from '@/models/CurrentSubtitle';
 
 const subtitle: Subtitle = 
-  { id: 'subtitle1', startTime: 1, endTime: 3, text: 'First subtitle.' };
+  { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.' };
 
 const currentSubtitle: CurrentSubtitle = {
   allSubtitles: [subtitle],

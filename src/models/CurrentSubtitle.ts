@@ -1,5 +1,5 @@
 import { Subtitle } from './Subtitles';
-export interface CurrentSubtitle {
+export type CurrentSubtitle = {
   allSubtitles: Subtitle[];
   globalFrame: number;
   globalFps: number;
