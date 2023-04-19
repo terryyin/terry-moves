@@ -7,6 +7,7 @@ import { useCurrentFrame } from 'remotion';
 jest.mock('remotion', () => ({
   ...jest.requireActual('remotion'),
   useCurrentFrame: jest.fn(),
+  useVideoConfig: jest.fn().mockReturnValue({ fps: 3 }),
 }));
 
 describe('ValueArrow component', () => {

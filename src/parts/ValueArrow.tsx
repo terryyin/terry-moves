@@ -1,8 +1,9 @@
+import autonomousComponent, { AutonomousComponentProps } from '@/video_components/autonomousComponent';
 import React from 'react';
-import { Img, staticFile, useCurrentFrame} from 'remotion';
+import { Img, staticFile} from 'remotion';
 
-export const ValueArrow: React.FC = () => {
-  const frame = useCurrentFrame();
+type ValueArrowProps = AutonomousComponentProps
+const ValueArrowInner: React.FC<ValueArrowProps> = ({frame}) => {
 
   return (
     <div style={{position: 'relative', left: '0%', top: '0%', width: '100%', height: '100%'}}>
@@ -43,3 +44,5 @@ export const ValueArrow: React.FC = () => {
     </div>
   );
 };
+
+export const ValueArrow: React.FC = autonomousComponent(ValueArrowInner);
