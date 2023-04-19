@@ -1,6 +1,6 @@
-import autonomousComponent, { AutonomousComponentProps } from '@/video_components/autonomousComponent';
 import React from 'react';
 import { Img, staticFile} from 'remotion';
+import autonomousComponent, { AutonomousComponentProps } from '../video_components/autonomousComponent';
 
 type ValueArrowProps = AutonomousComponentProps
 const ValueArrowInner: React.FC<ValueArrowProps> = ({frame}) => {
