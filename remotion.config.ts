@@ -4,15 +4,4 @@
 
 import { Config } from 'remotion';
 
-Config.overrideWebpackConfig((config) => {
-    return {
-      ...config,
-      resolve: {
-        ...config.resolve,
-        alias: {
-          ...config.resolve?.alias,
-          '@': `${__dirname}/src`,
-        },
-      },
-    };
-  });
+Config.setImageFormat('jpeg');
