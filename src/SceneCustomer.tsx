@@ -1,5 +1,5 @@
 import React from 'react';
-import {Sequence, useCurrentFrame} from 'remotion';
+import {Sequence } from 'remotion';
 import { Company } from './parts/Company';
 import { CustomerGroup } from './parts/CustomerGroup';
 import { ValueArrow } from './parts/ValueArrow';
@@ -9,6 +9,7 @@ import { CurrentSubtitle } from './models/CurrentSubtitle';
 import { StageTransform, useCurrentStage, useCurrentSubtitle } from './hooks/useCurrentSubtitle';
 import { Subtitle } from './models/Subtitles';
 import Stage from './video_components/Stage';
+import autonomousComponent from './video_components/autonomousComponent';
 
 const subtitles: Subtitle[] = [
 	{ id: 'subtitle1', startTime: 1, endTime: 4, text: 'First subtitle.' },
@@ -20,9 +21,7 @@ const StageTransforms: StageTransform[] = [
 	{ subtitleId: 'subtitle2', durationInSeconds: 1, outputRange: [100, 50] },
 ];
 
-export const SceneCustomer: React.FC = () => {
-  const frame = useCurrentFrame();
-	const fps = 30;
+export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
 	const currentSubtitle: CurrentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
 	const viewPosition = useCurrentStage(StageTransforms, currentSubtitle);
 
@@ -41,4 +40,4 @@ export const SceneCustomer: React.FC = () => {
 			<Subtitles currentSubtitle={currentSubtitle}/>
     </Sequence>
   );
-};
+});
