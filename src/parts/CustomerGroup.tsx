@@ -1,16 +1,15 @@
 import React, { CSSProperties } from 'react';
-import {Img, interpolate, staticFile, useCurrentFrame} from 'remotion';
-import { Subtitle } from 'src/models/Subtitles';
+import {Img, staticFile} from 'remotion';
+import { StageTransform, useCurrentStage } from '../hooks/useCurrentSubtitle';
+import { CurrentSubtitle } from '../models/CurrentSubtitle';
+
+const StageTransforms: StageTransform[] = [
+	{ subtitleId: 'subtitle2', durationInSeconds: 2, outputRange: [0, 1] },
+];
 
 // eslint-disable-next-line react/no-unused-prop-types
-export const CustomerGroup: React.FC<{style?: CSSProperties, subtitles: Subtitle[], happySince: number}> = ({ style, happySince }) => {
-	const frame = useCurrentFrame();
-  // Const { fps } = useVideoConfig();
-	const transitionDuration = 90;
-	const opacity = interpolate(frame, [happySince, happySince + transitionDuration], [0, 1], {
-    extrapolateLeft: 'clamp',
-    extrapolateRight: 'clamp',
-  });
+export const CustomerGroup: React.FC<{style?: CSSProperties, currentSubtitle: CurrentSubtitle}> = ({ style, currentSubtitle }) => {
+	const opacity = useCurrentStage(StageTransforms, currentSubtitle);
 
 
   return (
