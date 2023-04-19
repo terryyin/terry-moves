@@ -44,7 +44,7 @@ export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
 	const viewPosition = useCurrentStage(StageTransforms, currentSubtitle);
 
   return (
-    <Sequence  durationInFrames={10 * 30}>
+    <Sequence  durationInFrames={73 * 30}>
       <Stage viewPosition={ viewPosition}>
 				<Company style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
 				<CustomerGroup currentSubtitle={currentSubtitle} style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
