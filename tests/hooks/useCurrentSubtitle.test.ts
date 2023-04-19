@@ -1,5 +1,5 @@
 // UseCurrentSubtitle.test.ts
-import { useCurrentSubtitle1, useCurrentSubtitle } from '@/hooks/useCurrentSubtitle';
+import { useCurrentSubtitle1 } from '@/hooks/useCurrentSubtitle';
 import { Subtitle } from '@/models/Subtitles';
 
 describe('useCurrentSubtitle1', () => {

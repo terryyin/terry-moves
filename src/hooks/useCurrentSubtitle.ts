@@ -3,6 +3,7 @@ import { Subtitle } from '../models/Subtitles';
 import { interpolate } from 'remotion';
 
 export const useCurrentSubtitle1 = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle => {
+
   let endTime = 0;
   let subtitle: Subtitle = subtitles[0];
 
@@ -50,11 +51,17 @@ export interface StageTransform {
 export const useCurrentStage = (stageTransforms: StageTransform[], currentSubtitle: CurrentSubtitle) => {
 	const stageTransform = stageTransforms[0];
 	if(!stageTransform) throw new Error("No stage transform found");
-	const targetSubtitleId = stageTransform.subtitleId;
-  const targetSubtitle = currentSubtitle.allSubtitles.find((subtitle) => subtitle.id === targetSubtitleId);
-	if(!targetSubtitle) throw new Error(`No target subtitle found: ${targetSubtitleId}`);
+  let endTime = 0;
+  let targetSubtitle: Subtitle = currentSubtitle.allSubtitles[0];
 
-	const targetTime = targetSubtitle.startTime;
+  for (let i = 0; i < currentSubtitle.allSubtitles.length; i++) {
+    targetSubtitle = currentSubtitle.allSubtitles[i];
+    endTime += targetSubtitle.leadingBlank! + targetSubtitle.duration!;
+    if (stageTransform.subtitleId === targetSubtitle.id)
+      break;
+  }
+
+	const targetTime = endTime - targetSubtitle.duration!;
 	return interpolate(currentSubtitle.globalFrame, [targetTime * currentSubtitle.globalFps, (targetTime + stageTransform.durationInSeconds) * currentSubtitle.globalFps], stageTransform.outputRange, {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',

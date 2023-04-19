@@ -3,9 +3,9 @@ import { Subtitle } from "@/models/Subtitles";
 
 describe('useCurrentStage', () => {
   const subtitles: Subtitle[] = [
-    { id: 'subtitle1', startTime: 1, endTime: 3, text: 'First subtitle.' },
-    { id: 'subtitle2', startTime: 4, endTime: 6, text: 'Second subtitle.' },
-    { id: 'subtitle3', startTime: 7, endTime: 9, text: 'Third subtitle.' },
+    { id: 'subtitle1', startTime: 1, endTime: 3, leadingBlank: 1, duration: 2, text: 'First subtitle.' },
+    { id: 'subtitle2', startTime: 4, endTime: 6, leadingBlank: 1, duration: 2, text: 'Second subtitle.' },
+    { id: 'subtitle3', startTime: 7, endTime: 9, leadingBlank: 1, duration: 2, text: 'Third subtitle.' },
   ];
 
   const currentSubtitle = {
