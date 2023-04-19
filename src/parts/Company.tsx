@@ -11,7 +11,7 @@ export const Company: React.FC<{style?: CSSProperties, currentSubtitle: CurrentS
 				<div style={{position: 'relative', left: '0%', top:'0%', width: '100%', height: '100%'}}>
 					<Img src={staticFile("assets/House.svg")} style={{position: 'absolute', left: '0%', top: '0%', width: '100%'}} />
 					<Img src={staticFile("assets/ServicePerson.svg")} style={{position: 'absolute', left: '45%', top: '30%', width: '40%'}} />
-					<Product style={{position: 'absolute', left: '20%', top: '50%', width: '30%'}} />
+					<Product style={{position: 'absolute', left: '20%', top: '45%', width: '30%', height: '25%'}} />
 				</div>
 				</GrowingEffect>
       </div>
