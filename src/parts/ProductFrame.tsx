@@ -21,8 +21,8 @@ export const ProductFrame: React.FC<{
 					<ambientLight intensity={1.5} color={0xffffff} />
 					<pointLight position={[10, 10, 0]} />
 					<Phone
-						baseScale={1}
-						aspectRatio={1.5}
+						baseScale={1.4}
+						aspectRatio={1}
 					/>
 				</ThreeCanvas>
 		</AbsoluteFill>

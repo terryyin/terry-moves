@@ -57,7 +57,7 @@ export const getPhoneLayout = (
 	baseScale: number
 ): PhoneLayout => {
 	// The depth of the phone body
-	const phoneThickness = baseScale * 0.15;
+	const phoneThickness = baseScale * 0.6;
 
 	// How big the border of the phone is.
 	const phoneBevel = baseScale * 0.04;
@@ -67,13 +67,13 @@ export const getPhoneLayout = (
 
 	const phoneHeight = getPhoneHeight(aspectRatio, baseScale);
 	const phoneWidth = getPhoneWidth(aspectRatio, baseScale);
-	const phonePosition: Vector3 = [-phoneWidth / 2, -phoneHeight / 2, 0];
+	const phonePosition: Vector3 = [-phoneWidth / 2, -phoneHeight / 2, -phoneThickness/2];
 	const screenWidth = phoneWidth - phoneBevel * 2;
 	const screenHeight = phoneHeight - phoneBevel * 2;
 	const screenPosition: Vector3 = [
 		-screenWidth / 2,
 		-screenHeight / 2,
-		phoneThickness + Z_FLICKER_PREVENTION,
+		phoneThickness/2 + Z_FLICKER_PREVENTION,
 	];
 
 	// Define the outer radius of the phone.

@@ -1,6 +1,6 @@
-import {useThree} from '@react-three/fiber';
+import {useLoader, useThree} from '@react-three/fiber';
 import React, {useEffect, useMemo} from 'react';
-import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {interpolate, spring, staticFile, useCurrentFrame, useVideoConfig} from 'remotion';
 import {
 	CAMERA_DISTANCE,
 	getPhoneLayout,
@@ -10,6 +10,7 @@ import {
 } from './helpers/layout';
 import {roundedRect} from './helpers/rounded-rectangle';
 import {RoundedBox} from './RoundedBox';
+import { TextureLoader } from 'three';
 
 export const Phone: React.FC<{
 	aspectRatio: number;
@@ -38,7 +39,7 @@ export const Phone: React.FC<{
 	const constantRotation = interpolate(
 		frame,
 		[0, durationInFrames],
-		[0, Math.PI * 6]
+		[0, Math.PI * durationInFrames / fps]
 	);
 
 	// When the composition starts, there is some extra
@@ -76,6 +77,8 @@ export const Phone: React.FC<{
 		});
 	}, [layout.screen.height, layout.screen.radius, layout.screen.width]);
 
+	const servicePersonTexture = useLoader(TextureLoader, staticFile('assets/ServicePerson.svg'));
+
 	return (
 		<group
 			scale={entranceAnimation}
@@ -93,10 +96,10 @@ export const Phone: React.FC<{
 				<meshPhongMaterial color={PHONE_COLOR} shininess={PHONE_SHININESS} />
 			</RoundedBox>
 			<mesh position={layout.screen.position}>
-				<shapeGeometry args={[screenGeometry]} />
+				<shapeGeometry args={[screenGeometry]}/>
 					<meshBasicMaterial
-						color={0xffffff}
 						toneMapped={false}
+						map={servicePersonTexture}
 					/>
 			</mesh>
 		</group>
