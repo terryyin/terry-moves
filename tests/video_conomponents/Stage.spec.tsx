@@ -8,7 +8,7 @@ import { AnimationContextProvider } from '@/hooks/useAnimationContext';
 class AnimationContextBuilder {
   subtitle: Subtitle = 
     { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-      { objectId: "under-test", action: 'scaleToUpperRight', duration: 1, outputRange: [0, 100] },
+      { objectId: "under-test", action: 'scaleToUpperRight', duration: 1, outputRange: [50, 100] },
 
     ] };
 
@@ -36,16 +36,24 @@ class MakeMe {
 const makeMe = new MakeMe();
 
 describe('Subtitles component', () => {
-  test('displays the correct subtitle text when there is an active subtitle', () => {
-    const animationContext: AnimationContext = makeMe.animationContext.sec(0).please();
-    const { container } = render(
-      <AnimationContextProvider value={animationContext}>
-        <Stage id="under-test"> </Stage>
-      </AnimationContextProvider>
-    );
-    const div = container.querySelector('#under-test');
-    if (!div) throw new Error('Div not found');
-    const computedStyle = window.getComputedStyle(div);
-    expect(computedStyle.getPropertyValue('width')).toBe('100%');
+  [
+    { sec: 0, expectedWidth: '50%' },
+    { sec: 1, expectedWidth: '50%' },
+    { sec: 1.1, expectedWidth: '55%' },
+
+  ].forEach(({sec, expectedWidth}) => {
+    test('displays the correct transformation', () => {
+      const animationContext: AnimationContext = makeMe.animationContext.sec(sec).please();
+      const { container } = render(
+        <AnimationContextProvider value={animationContext}>
+          <Stage id="under-test"> </Stage>
+        </AnimationContextProvider>
+      );
+      const div = container.querySelector('#under-test');
+      if (!div) throw new Error('Div not found');
+      const computedStyle = window.getComputedStyle(div);
+      expect(computedStyle.getPropertyValue('width')).toBe(expectedWidth);
+    });
   });
+
 });

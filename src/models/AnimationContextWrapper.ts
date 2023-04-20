@@ -18,17 +18,6 @@ export const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]
   return endTime - targetSubtitle.duration;
 }
 
-const interpolateStage = (stageTransforms: StageTransform[], animationContext: AnimationContext) => {
-	const stageTransform = stageTransforms[0];
-	if(!stageTransform) throw new Error("No stage transform found");
-
-	const startTime = getStartTimeOfSubtitle(stageTransform.subtitleId, animationContext.allSubtitles);
-	return interpolate(animationContext.globalFrame, [startTime * animationContext.globalFps, (startTime + stageTransform.durationInSeconds) * animationContext.globalFps], stageTransform.outputRange, {
-		extrapolateLeft: 'clamp',
-		extrapolateRight: 'clamp',
-	});
-}
-
 export default class AnimationContextWrapper {
 
   animationContext: AnimationContext;
@@ -38,11 +27,22 @@ export default class AnimationContextWrapper {
   }
 
   getScaleOf(objectId: string): number {
-    return 100;
+    const subtitle = this.animationContext.allSubtitles[0];
+    if(!subtitle.actions) return 100;
+    const action = subtitle.actions[0];
+    return this.interpolate1(subtitle.leadingBlank, action.duration, action.outputRange);
   }
 
-  getNumber(StageTransforms: StageTransform[]): number {
-    return interpolateStage(StageTransforms, this.animationContext);
+  private interpolate1(startTime: number, durationInSeconds: number, outputRange: number[]): number {
+    return interpolate(this.animationContext.globalFrame, [startTime * this.animationContext.globalFps, (startTime + durationInSeconds) * this.animationContext.globalFps], outputRange, {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    });
+  }
+
+  getNumber({ subtitleId, durationInSeconds, outputRange }: StageTransform): number {
+    const startTime = getStartTimeOfSubtitle(subtitleId, this.animationContext.allSubtitles);
+    return this.interpolate1(startTime, durationInSeconds, outputRange);
   }
 
   getSpring(startSubtitleId: string) {

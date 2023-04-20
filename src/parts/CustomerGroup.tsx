@@ -8,7 +8,7 @@ const StageTransforms: StageTransform[] = [
 
 // eslint-disable-next-line react/no-unused-prop-types
 export const CustomerGroup: React.FC<{style?: CSSProperties}> = ({ style }) => {
-	const opacity = useAnimationContext().getNumber(StageTransforms);
+	const opacity = useAnimationContext().getNumber(StageTransforms[0]);
 
   return (
       <div style={style}>

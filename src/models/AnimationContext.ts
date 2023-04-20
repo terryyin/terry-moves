@@ -4,8 +4,3 @@ export type AnimationContext = {
   globalFrame: number;
   globalFps: number;
 }
-
-export type CurrentSubtitle1 = {
-  text: string;
-  subtitle: Subtitle;
-}

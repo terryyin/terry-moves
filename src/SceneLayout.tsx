@@ -15,7 +15,7 @@ const StageTransforms: StageTransform[] = [
 export const SceneLayout: React.FC = () => {
 	const animationContextWrapper = useAnimationContext();
 
-	const viewPosition = animationContextWrapper.getNumber(StageTransforms);
+	const viewPosition = animationContextWrapper.getNumber(StageTransforms[0]);
 
   return (
     <AbsoluteFill>

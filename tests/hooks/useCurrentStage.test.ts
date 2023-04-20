@@ -24,7 +24,7 @@ describe('useCurrentStage', () => {
     ];
 
     const animationContextWrapper = new AnimationContextWrapper(animationContext);
-    const result = animationContextWrapper.getNumber(stageTransforms);
+    const result = animationContextWrapper.getNumber(stageTransforms[0]);
 
     expect(result).toEqual(50);
   });
