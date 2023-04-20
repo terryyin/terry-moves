@@ -7,12 +7,11 @@ import useParentSize from '../hooks/useParentSize';
 const container: React.CSSProperties = {
 	width: '100%',
 	height: '100%',
-	backgroundColor: 'red',
 };
 
 export const ProductFrame: React.FC<{
 	baseScale: number;
-}> = ({baseScale}) => {
+}> = () => {
 	const {ref, size} = useParentSize();
 
 	return (
