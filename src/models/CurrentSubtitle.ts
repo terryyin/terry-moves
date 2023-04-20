@@ -6,3 +6,9 @@ export type CurrentSubtitle = {
   text: string;
   subtitle: Subtitle;
 }
+
+export type CurrentSubtitle1 = {
+  currentSubtitle: CurrentSubtitle;
+  text: string;
+  subtitle: Subtitle;
+}

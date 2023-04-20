@@ -1,4 +1,4 @@
-import { CurrentSubtitle } from '@/models/CurrentSubtitle';
+import { CurrentSubtitle, CurrentSubtitle1 } from '@/models/CurrentSubtitle';
 import { Subtitle } from '../models/Subtitles';
 import { interpolate } from 'remotion';
 
@@ -22,6 +22,14 @@ export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: nu
   };
 };
 
+export const useCurrentSubtitle1 = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle1 => {
+  const currentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
+  return {
+    currentSubtitle,
+    subtitle: currentSubtitle.subtitle,
+    text: currentSubtitle.text,
+  };
+};
 
 export interface StageTransform {
 	subtitleId: string;
