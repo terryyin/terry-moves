@@ -1,4 +1,4 @@
-type ActionType = 'scaleToUpperRight';
+type ActionType = 'scaleToUpperRight' | 'appear';
 
 export interface Action {
   objectId: string;

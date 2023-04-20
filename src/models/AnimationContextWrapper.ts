@@ -1,9 +1,55 @@
+import { CSSProperties } from 'react';
 import {spring} from 'remotion'
 import {interpolate} from 'remotion'
-import { Subtitle } from '@/models/Subtitles';
+import { Action, Subtitle } from '@/models/Subtitles';
 import { StageTransform } from "@/hooks/useAnimationContext";
 import { AnimationContext } from "./AnimationContext";
 
+
+class Actioner {
+  subtitle: Subtitle | undefined;
+  action: Action | undefined;
+  animationContextWrapper: AnimationContextWrapper;
+
+
+  constructor(subtitle: Subtitle | undefined, action: Action | undefined, animationContextWrapper: AnimationContextWrapper) {
+    this.subtitle = subtitle;
+    this.action = action;
+    this.animationContextWrapper = animationContextWrapper;
+  }
+
+  getStyle(): CSSProperties {
+    if(!this.action) return {};
+    switch(this.action.action) {
+      case 'scaleToUpperRight':
+        return this.getScaleToUpperRightStyle();
+      case 'appear':
+        return this.getAppearStyle();
+      default:
+        return {};
+    }
+  }
+
+  getScaleToUpperRightStyle(): CSSProperties {
+    const scale = this.getScale();
+    return {
+      left: `${100 - scale}%`, top:'0%', width: `${scale}%`, height: `${scale}%`
+    }
+  }
+
+  getAppearStyle(): CSSProperties {
+    const scale = this.getScale();
+    return {
+      opacity: scale,
+    }
+  }
+
+  getScale(): number {
+    if(!this.subtitle?.actions) return 100;
+    if(!this.action) return 100;
+    return this.animationContextWrapper.interpolate1(this.animationContextWrapper.getStartTimeOfSubtitle(this.subtitle.id), this.action.duration, this.action.outputRange);
+  }
+}
 export default class AnimationContextWrapper {
 
   animationContext: AnimationContext;
@@ -12,22 +58,31 @@ export default class AnimationContextWrapper {
     this.animationContext = animationContext;
   }
 
-  getScaleOf(objectId: string): number {
-    const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
+  getScaleOf1(subtitle?: Subtitle, action?: Action): number {
     if(!subtitle?.actions) return 100;
-    const action = subtitle.actions.find(action => action.objectId === objectId);
     if(!action) return 100;
     return this.interpolate1(this.getStartTimeOfSubtitle(subtitle.id), action.duration, action.outputRange);
   }
 
-  private interpolate1(startTime: number, durationInSeconds: number, outputRange: number[]): number {
+  getStyleOf(objectId: string): CSSProperties {
+    const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
+    let action: Action | undefined;
+    if(subtitle?.actions) {
+      action = subtitle.actions.find(action => action.objectId === objectId);
+    }
+
+    const actioner = new Actioner(subtitle, action, this);
+    return actioner.getStyle();
+  }
+
+  interpolate1(startTime: number, durationInSeconds: number, outputRange: number[]): number {
     return interpolate(this.animationContext.globalFrame, [startTime * this.animationContext.globalFps, (startTime + durationInSeconds) * this.animationContext.globalFps], outputRange, {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     });
   }
 
-  private getStartTimeOfSubtitle(subtitleId: string): number {
+  getStartTimeOfSubtitle(subtitleId: string): number {
     let endTime = 0;
     let targetSubtitle: Subtitle = this.animationContext.allSubtitles[0];
     for (let i = 0; i < this.animationContext.allSubtitles.length; i++) {

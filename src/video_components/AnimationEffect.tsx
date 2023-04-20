@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import { useAnimationContext } from "../hooks/useAnimationContext";
 
 interface StageProps {
@@ -8,9 +8,10 @@ interface StageProps {
 
 const AnimationEffect: React.FC<StageProps> = ({ id, children }) => {
   const animationContextWrapper = useAnimationContext();
-  const viewPosition = animationContextWrapper.getScaleOf(id);
+  const effectStyle: CSSProperties = animationContextWrapper.getStyleOf(id);
+
   return (
-    <div id={id} style={{position: 'absolute', left: `${100 - viewPosition}%`, top:'0%', width: `${viewPosition}%`, height: `${viewPosition}%`}}>
+    <div id={id} style={{position: 'absolute', width: '100%', height:'100%', ...effectStyle}}>
       {children}
     </div>
   );
