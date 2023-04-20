@@ -4,10 +4,10 @@ import { Product } from './Product';
 import { GrowingEffect } from '../video_components/GrowingEffect';
 import { AnimationContext } from '@/models/AnimationContext';
 
-export const Company: React.FC<{style?: CSSProperties, currentSubtitle: AnimationContext}> = ({ style, currentSubtitle }) => {
+export const Company: React.FC<{style?: CSSProperties, animationContext: AnimationContext}> = ({ style, animationContext }) => {
   return (
       <div style={style}>
-				<GrowingEffect currentSubtitle={currentSubtitle} startSubtitleId="customerResources2">
+				<GrowingEffect animationContext={animationContext} startSubtitleId="customerResources2">
 				<div style={{position: 'relative', left: '0%', top:'0%', width: '100%', height: '100%'}}>
 					<Img src={staticFile("assets/House.svg")} style={{position: 'absolute', left: '0%', top: '0%', width: '100%'}} />
 					<Img src={staticFile("assets/ServicePerson.svg")} style={{position: 'absolute', left: '45%', top: '30%', width: '40%'}} />

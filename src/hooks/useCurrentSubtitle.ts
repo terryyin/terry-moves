@@ -39,12 +39,12 @@ export const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]
   return endTime - targetSubtitle.duration;
 }
 
-const interpolateStage = (stageTransforms: StageTransform[], currentSubtitle: AnimationContext) => {
+const interpolateStage = (stageTransforms: StageTransform[], animationContext: AnimationContext) => {
 	const stageTransform = stageTransforms[0];
 	if(!stageTransform) throw new Error("No stage transform found");
 
-	const startTime = getStartTimeOfSubtitle(stageTransform.subtitleId, currentSubtitle.allSubtitles);
-	return interpolate(currentSubtitle.globalFrame, [startTime * currentSubtitle.globalFps, (startTime + stageTransform.durationInSeconds) * currentSubtitle.globalFps], stageTransform.outputRange, {
+	const startTime = getStartTimeOfSubtitle(stageTransform.subtitleId, animationContext.allSubtitles);
+	return interpolate(animationContext.globalFrame, [startTime * animationContext.globalFps, (startTime + stageTransform.durationInSeconds) * animationContext.globalFps], stageTransform.outputRange, {
 		extrapolateLeft: 'clamp',
 		extrapolateRight: 'clamp',
 	});
@@ -52,7 +52,7 @@ const interpolateStage = (stageTransforms: StageTransform[], currentSubtitle: An
 
 export const useCurrentStage = interpolateStage;
 
-export const sinceSubtitle = (currentSubtitle: AnimationContext, subtitleId: string): boolean => {
-	const startTime = getStartTimeOfSubtitle(subtitleId, currentSubtitle.allSubtitles);
-  return currentSubtitle.globalFrame >= startTime * currentSubtitle.globalFps;
+export const sinceSubtitle = (animationContext: AnimationContext, subtitleId: string): boolean => {
+	const startTime = getStartTimeOfSubtitle(subtitleId, animationContext.allSubtitles);
+  return animationContext.globalFrame >= startTime * animationContext.globalFps;
 }

@@ -2,11 +2,11 @@ import { useCurrentSubtitle1 } from "@/hooks/useCurrentSubtitle";
 import { AnimationContext, CurrentSubtitle1 } from "@/models/AnimationContext";
 
 interface SubtitlesProps {
-  currentSubtitle: AnimationContext;
+  animationContext: AnimationContext;
 }
 
-export const Subtitles: React.FC<SubtitlesProps> = ({ currentSubtitle }) => {
-  const t: CurrentSubtitle1 = useCurrentSubtitle1(currentSubtitle.allSubtitles, currentSubtitle.globalFrame, currentSubtitle.globalFps);
+export const Subtitles: React.FC<SubtitlesProps> = ({ animationContext }) => {
+  const t: CurrentSubtitle1 = useCurrentSubtitle1(animationContext.allSubtitles, animationContext.globalFrame, animationContext.globalFps);
   return (
 			<div style={{
             position: 'absolute',
@@ -21,7 +21,7 @@ export const Subtitles: React.FC<SubtitlesProps> = ({ currentSubtitle }) => {
             borderRadius: '5px',
 						minHeight: '60px',
           }}>
-      {currentSubtitle && (
+      {animationContext && (
         <span>{t.text}</span>
       )}
     </div>

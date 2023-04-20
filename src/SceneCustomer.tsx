@@ -39,27 +39,27 @@ const StageTransforms: StageTransform[] = [
 ];
 
 export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
-  const currentSubtitle  = {
+  const animationContext  = {
     allSubtitles: subtitles,
     globalFps: fps,
     globalFrame: frame,
   };
 
-	const viewPosition = useCurrentStage(StageTransforms, currentSubtitle);
+	const viewPosition = useCurrentStage(StageTransforms, animationContext);
 
   return (
     <Sequence  durationInFrames={73 * 30}>
       <Stage viewPosition={ viewPosition}>
-				<Company currentSubtitle={currentSubtitle} style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
-				<CustomerGroup currentSubtitle={currentSubtitle} style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
+				<Company animationContext={animationContext} style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
+				<CustomerGroup animationContext={animationContext} style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
 				<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
-					{sinceSubtitle(currentSubtitle, "intro1") && <ValueArrow />}
+					{sinceSubtitle(animationContext, "intro1") && <ValueArrow />}
 				</div>
 				<div style={{position: 'absolute', left: '45%', top: '50%', width: '37%', height: '37%'}}>
-					{sinceSubtitle(currentSubtitle, "customerResources1") && <MoneyArrow />}
+					{sinceSubtitle(animationContext, "customerResources1") && <MoneyArrow />}
 				</div>
 			</Stage>
-			<Subtitles currentSubtitle={currentSubtitle}/>
+			<Subtitles animationContext={animationContext}/>
     </Sequence>
   );
 });

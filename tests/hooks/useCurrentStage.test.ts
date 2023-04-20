@@ -8,7 +8,7 @@ describe('useCurrentStage', () => {
     { id: 'subtitle3', leadingBlank: 1, duration: 2, text: 'Third subtitle.' },
   ];
 
-  const currentSubtitle = {
+  const animationContext = {
     allSubtitles: subtitles,
     globalFps: 30,
     globalFrame: 60,
@@ -22,7 +22,7 @@ describe('useCurrentStage', () => {
       { subtitleId: 'subtitle2', durationInSeconds: 1, outputRange: [50, 100]},
     ];
 
-    const result = useCurrentStage(stageTransforms, currentSubtitle);
+    const result = useCurrentStage(stageTransforms, animationContext);
 
     expect(result).toEqual(50);
   });

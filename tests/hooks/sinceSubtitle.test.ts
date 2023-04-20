@@ -10,7 +10,7 @@ describe('sinceSubtitle', () => {
   ];
 
   it('should be false before the subtitle', () => {
-    const currentSubtitle = {
+    const animationContext = {
       allSubtitles: subtitles,
       globalFps: 30,
       globalFrame: 0,
@@ -18,11 +18,11 @@ describe('sinceSubtitle', () => {
       text: 'First subtitle',
     };
 
-    expect(sinceSubtitle(currentSubtitle, "1")).toBeFalsy();
+    expect(sinceSubtitle(animationContext, "1")).toBeFalsy();
   });
 
   it('should be true during the subtitle', () => {
-    const currentSubtitle = {
+    const animationContext = {
       allSubtitles: subtitles,
       globalFps: 30,
       globalFrame: 45,
@@ -30,7 +30,7 @@ describe('sinceSubtitle', () => {
       text: 'First subtitle',
     };
 
-    expect(sinceSubtitle(currentSubtitle, "1")).toBeTruthy();
+    expect(sinceSubtitle(animationContext, "1")).toBeTruthy();
   });
 
 });

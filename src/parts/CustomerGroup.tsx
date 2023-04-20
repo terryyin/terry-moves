@@ -8,8 +8,8 @@ const StageTransforms: StageTransform[] = [
 ];
 
 // eslint-disable-next-line react/no-unused-prop-types
-export const CustomerGroup: React.FC<{style?: CSSProperties, currentSubtitle: AnimationContext}> = ({ style, currentSubtitle }) => {
-	const opacity = useCurrentStage(StageTransforms, currentSubtitle);
+export const CustomerGroup: React.FC<{style?: CSSProperties, animationContext: AnimationContext}> = ({ style, animationContext }) => {
+	const opacity = useCurrentStage(StageTransforms, animationContext);
 
   return (
       <div style={style}>

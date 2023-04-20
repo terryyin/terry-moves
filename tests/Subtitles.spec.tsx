@@ -7,7 +7,7 @@ import { AnimationContext } from '@/models/AnimationContext';
 const subtitle: Subtitle = 
   { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.' };
 
-const currentSubtitle: AnimationContext = {
+const animationContext: AnimationContext = {
   allSubtitles: [subtitle],
   globalFps: 30,
   globalFrame: 60,
@@ -15,7 +15,7 @@ const currentSubtitle: AnimationContext = {
 
 describe('Subtitles component', () => {
   test('displays the correct subtitle text when there is an active subtitle', () => {
-    render(<Subtitles currentSubtitle={currentSubtitle} />);
+    render(<Subtitles animationContext={animationContext} />);
     expect(screen.getByText('First subtitle.')).toBeInTheDocument();
   });
 });

@@ -3,10 +3,10 @@ import React, {CSSProperties} from 'react';
 import { AnimationContext } from '../models/AnimationContext';
 import { getStartTimeOfSubtitle } from '../hooks/useCurrentSubtitle';
 
-export const GrowingEffect: React.FC<{children: React.ReactNode, currentSubtitle: AnimationContext, startSubtitleId: string}> = ({
-  children, currentSubtitle, startSubtitleId}) => {
+export const GrowingEffect: React.FC<{children: React.ReactNode, animationContext: AnimationContext, startSubtitleId: string}> = ({
+  children, animationContext, startSubtitleId}) => {
   const progress = spring({
-    frame: currentSubtitle.globalFrame - getStartTimeOfSubtitle(startSubtitleId, currentSubtitle.allSubtitles) * currentSubtitle.globalFps,
+    frame: animationContext.globalFrame - getStartTimeOfSubtitle(startSubtitleId, animationContext.allSubtitles) * animationContext.globalFps,
     durationInFrames: 60,
     fps: 30,
     config: {
