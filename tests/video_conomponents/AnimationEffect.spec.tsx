@@ -116,17 +116,21 @@ describe('AnimationEffect', () => {
     });
   });
 
-  describe('appear', () => {
-    const subtitleWithAction: Subtitle = 
-      { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-        { objectId: "under-test", action: 'appear', duration: 1 },
-      ] };
+  describe('appear and disappear', () => {
 
     [
-      { sec: 0, expectedOpacity: '0' },
-      { sec: 1, expectedOpacity: '0' },
-      { sec: 1.1, expectedOpacity: '0.1' },
-    ].forEach(({sec, expectedOpacity}) => {
+      { actionType: 'appear', sec: 0, expectedOpacity: '0' },
+      { actionType: 'appear', sec: 1, expectedOpacity: '0' },
+      { actionType: 'appear', sec: 1.1, expectedOpacity: '0.1' },
+      { actionType: 'disappear', sec: 0, expectedOpacity: '1' },
+      { actionType: 'disappear', sec: 1, expectedOpacity: '1' },
+      { actionType: 'disappear', sec: 1.1, expectedOpacity: '0.9' },
+    ].forEach(({actionType, sec, expectedOpacity}) => {
+      const subtitleWithAction: Subtitle = 
+        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+          { objectId: "under-test", action: actionType as 'appear' | 'disappear', duration: 1 },
+        ] };
+
       test('displays the correct transformation', () => {
         const animationContext: AnimationContext = makeMe
                 .animationContext

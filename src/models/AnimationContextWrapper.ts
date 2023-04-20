@@ -25,9 +25,11 @@ class Actioner {
       case 'scaleToUpperRight':
         return this.getScaleToUpperRightStyle(this.action);
       case 'appear':
-        return this.getAppearStyle();
+        return this.getAppearStyle([0, 1]);
+      case 'disappear':
+        return this.getAppearStyle([1, 0]);
       default:
-        return {};
+        throw new Error('Unknown action type');
     }
   }
 
@@ -38,8 +40,8 @@ class Actioner {
     }
   }
 
-  getAppearStyle(): CSSProperties {
-    const scale = this.getScale([0, 1]);
+  getAppearStyle(range: number[]): CSSProperties {
+    const scale = this.getScale(range);
     return {
       opacity: scale,
     }
