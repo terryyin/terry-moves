@@ -1,6 +1,5 @@
 import { AnimationContext } from '@/models/AnimationContext';
 import { Subtitle } from '../models/Subtitles';
-import { interpolate } from 'remotion';
 import { ReactNode, createContext, useContext } from 'react';
 import AnimationContextWrapper from '../models/AnimationContextWrapper';
 
@@ -42,16 +41,3 @@ export const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]
 
   return endTime - targetSubtitle.duration;
 }
-
-const interpolateStage = (stageTransforms: StageTransform[], animationContext: AnimationContext) => {
-	const stageTransform = stageTransforms[0];
-	if(!stageTransform) throw new Error("No stage transform found");
-
-	const startTime = getStartTimeOfSubtitle(stageTransform.subtitleId, animationContext.allSubtitles);
-	return interpolate(animationContext.globalFrame, [startTime * animationContext.globalFps, (startTime + stageTransform.durationInSeconds) * animationContext.globalFps], stageTransform.outputRange, {
-		extrapolateLeft: 'clamp',
-		extrapolateRight: 'clamp',
-	});
-}
-
-export const useCurrentStage = interpolateStage;

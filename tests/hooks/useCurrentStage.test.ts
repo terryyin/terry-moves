@@ -1,4 +1,5 @@
-import { StageTransform, useCurrentStage } from "@/hooks/useCurrentSubtitle";
+import { StageTransform } from "@/hooks/useCurrentSubtitle";
+import AnimationContextWrapper from "@/models/AnimationContextWrapper";
 import { Subtitle } from "@/models/Subtitles";
 
 describe('useCurrentStage', () => {
@@ -22,7 +23,8 @@ describe('useCurrentStage', () => {
       { subtitleId: 'subtitle2', durationInSeconds: 1, outputRange: [50, 100]},
     ];
 
-    const result = useCurrentStage(stageTransforms, animationContext);
+    const animationContextWrapper = new AnimationContextWrapper(animationContext);
+    const result = animationContextWrapper.getNumber(stageTransforms);
 
     expect(result).toEqual(50);
   });
