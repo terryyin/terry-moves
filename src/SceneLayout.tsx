@@ -7,13 +7,12 @@ import { MoneyArrow } from './parts/MoneyArrow';
 import { Subtitles } from './video_components/Subtitles';
 import { StageTransform, useAnimationContext } from './hooks/useCurrentSubtitle';
 import Stage from './video_components/Stage';
-import autonomousComponent from './video_components/autonomousComponent';
 
 const StageTransforms: StageTransform[] = [
 	{ subtitleId: 'externalTeams1', durationInSeconds: 1, outputRange: [100, 70] },
 ];
 
-export const SceneLayout: React.FC = autonomousComponent(({frame, fps}) => {
+export const SceneLayout: React.FC = () => {
 	const animationContextWrapper = useAnimationContext();
 
 	const viewPosition = animationContextWrapper.getNumber(StageTransforms);
@@ -33,4 +32,4 @@ export const SceneLayout: React.FC = autonomousComponent(({frame, fps}) => {
 			<Subtitles />
     </AbsoluteFill>
   );
-});
+};

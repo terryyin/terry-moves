@@ -3,6 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
 import { Subtitles } from '@/video_components/Subtitles';
 import { AnimationContext } from '@/models/AnimationContext';
+import { AnimationContextProvider } from '@/hooks/useCurrentSubtitle';
 
 const subtitle: Subtitle = 
   { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.' };
@@ -15,7 +16,11 @@ const animationContext: AnimationContext = {
 
 describe('Subtitles component', () => {
   test('displays the correct subtitle text when there is an active subtitle', () => {
-    render(<Subtitles animationContext={animationContext} />);
+    render(
+      <AnimationContextProvider value={animationContext}>
+        <Subtitles/>
+      </AnimationContextProvider>
+    );
     expect(screen.getByText('First subtitle.')).toBeInTheDocument();
   });
 });
