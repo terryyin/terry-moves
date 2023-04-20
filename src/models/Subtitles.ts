@@ -1,6 +1,8 @@
+type ActionType = 'scaleToUpperRight';
+
 export interface Action {
   objectId: string;
-  action: string;
+  action: ActionType;
   duration: number;
   outputRange: number[];
 }

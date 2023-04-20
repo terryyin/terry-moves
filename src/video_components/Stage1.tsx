@@ -1,12 +1,14 @@
 import React from 'react';
+import { useAnimationContext } from "../hooks/useAnimationContext";
 
 interface StageProps {
-  id?: string;
+  id: string;
   children: React.ReactNode;
-  viewPosition: number;
 }
 
-const Stage: React.FC<StageProps> = ({ id, children, viewPosition }) => {
+const Stage1: React.FC<StageProps> = ({ id, children }) => {
+  const animationContextWrapper = useAnimationContext();
+  const viewPosition = animationContextWrapper.getScaleOf(id);
   return (
     <div id={id} style={{position: 'absolute', left: `${100 - viewPosition}%`, top:'0%', width: `${viewPosition}%`, height: `${viewPosition}%`}}>
       {children}
@@ -14,4 +16,4 @@ const Stage: React.FC<StageProps> = ({ id, children, viewPosition }) => {
   );
 };
 
-export default Stage;
+export default Stage1;

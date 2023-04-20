@@ -37,6 +37,10 @@ export default class AnimationContextWrapper {
     this.animationContext = animationContext;
   }
 
+  getScaleOf(objectId: string): number {
+    return 100;
+  }
+
   getNumber(StageTransforms: StageTransform[]): number {
     return interpolateStage(StageTransforms, this.animationContext);
   }
