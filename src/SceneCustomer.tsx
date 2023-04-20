@@ -7,7 +7,8 @@ import { SceneLayout } from './SceneLayout';
 const subtitles: Subtitle[] = [
 	{ id: 'intro1', leadingBlank: 1, duration: 3, text: 'A company delivers services to users,' },
 	{ id: 'intro2', leadingBlank: 0, duration: 3, text: 'aiming to solve customers\' problems', actions:[
-		{ objectId: 'happy-mom', action: 'appear', duration: 1 },
+		{ objectId: 'worried-mom', action: 'disappear', duration: 2 },
+		{ objectId: 'happy-mom', action: 'appear', duration: 2 },
 	] },
 	{ id: 'intro3', leadingBlank: 0, duration: 3, text: 'or meet their needs.' },
 	{ id: 'customerResources1', leadingBlank: 1, duration: 3, text: 'In exchange, customers provide resources,' },
