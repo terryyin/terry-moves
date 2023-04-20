@@ -2,6 +2,7 @@ import { AnimationContext, CurrentSubtitle1 } from '@/models/AnimationContext';
 import { Subtitle } from '../models/Subtitles';
 import { interpolate } from 'remotion';
 import { ReactNode, createContext, useContext } from 'react';
+import AnimationContextWrapper from '../models/AnimationContextWrapper';
 
 const AnimationContextContext = createContext<AnimationContext | undefined>(undefined);
 
@@ -12,18 +13,6 @@ interface AnimationContextProviderProps {
 
 export function AnimationContextProvider({ children, value }: AnimationContextProviderProps) {
   return <AnimationContextContext.Provider value={value}>{children}</AnimationContextContext.Provider>;
-}
-
-class AnimationContextWrapper {
-  animationContext: AnimationContext;
-
-  constructor(animationContext: AnimationContext) {
-    this.animationContext = animationContext;
-  }
-
-  getNumber(StageTransforms: StageTransform[]): number {
-    return interpolateStage(StageTransforms, this.animationContext);
-  }
 }
 
 export function useAnimationContext(): AnimationContextWrapper {
