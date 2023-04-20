@@ -1,6 +1,6 @@
 import React, { CSSProperties } from 'react';
 import {Img, staticFile} from 'remotion';
-import { StageTransform, useAnimationContext  } from '../hooks/useCurrentSubtitle';
+import { StageTransform, useAnimationContext  } from '../hooks/useAnimationContext';
 
 const StageTransforms: StageTransform[] = [
 	{ subtitleId: 'intro2', durationInSeconds: 2, outputRange: [0, 1] },

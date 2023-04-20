@@ -1,7 +1,7 @@
 import {spring} from 'remotion'
 import {interpolate} from 'remotion'
 import { Subtitle } from '@/models/Subtitles';
-import { StageTransform } from "@/hooks/useCurrentSubtitle";
+import { StageTransform } from "@/hooks/useAnimationContext";
 import { AnimationContext } from "./AnimationContext";
 
 export const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]): number => {

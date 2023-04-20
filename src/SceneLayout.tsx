@@ -5,7 +5,7 @@ import { CustomerGroup } from './parts/CustomerGroup';
 import { ValueArrow } from './parts/ValueArrow';
 import { MoneyArrow } from './parts/MoneyArrow';
 import { Subtitles } from './video_components/Subtitles';
-import { StageTransform, useAnimationContext } from './hooks/useCurrentSubtitle';
+import { StageTransform, useAnimationContext } from './hooks/useAnimationContext';
 import Stage from './video_components/Stage';
 
 const StageTransforms: StageTransform[] = [

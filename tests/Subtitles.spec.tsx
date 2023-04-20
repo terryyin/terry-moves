@@ -3,7 +3,7 @@ import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
 import { Subtitles } from '@/video_components/Subtitles';
 import { AnimationContext } from '@/models/AnimationContext';
-import { AnimationContextProvider } from '@/hooks/useCurrentSubtitle';
+import { AnimationContextProvider } from '@/hooks/useAnimationContext';
 
 const subtitle: Subtitle = 
   { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.' };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { AnimationContextProvider } from './hooks/useCurrentSubtitle';
+import { AnimationContextProvider } from './hooks/useAnimationContext';
 import { Subtitle } from './models/Subtitles';
 import autonomousComponent from './video_components/autonomousComponent';
 import { SceneLayout } from './SceneLayout';

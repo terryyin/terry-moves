@@ -1,6 +1,6 @@
 import {interpolate} from 'remotion';
 import React, {CSSProperties} from 'react';
-import { useAnimationContext } from '../hooks/useCurrentSubtitle';
+import { useAnimationContext } from '../hooks/useAnimationContext';
 
 export const GrowingEffect: React.FC<{children: React.ReactNode, startSubtitleId: string}> = ({
   children, startSubtitleId}) => {

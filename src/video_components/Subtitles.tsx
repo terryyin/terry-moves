@@ -1,4 +1,4 @@
-import { useAnimationContext } from "../hooks/useCurrentSubtitle";
+import { useAnimationContext } from "../hooks/useAnimationContext";
 
 export const Subtitles: React.FC = () => {
   const text = useAnimationContext().getCurrentSubtitleText();

@@ -1,4 +1,4 @@
-import { StageTransform } from "@/hooks/useCurrentSubtitle";
+import { StageTransform } from "@/hooks/useAnimationContext";
 import AnimationContextWrapper from "@/models/AnimationContextWrapper";
 import { Subtitle } from "@/models/Subtitles";
 
