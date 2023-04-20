@@ -1,3 +1,4 @@
+import { Vector3 } from '@react-three/fiber';
 import { CSSProperties } from 'react';
 import {spring} from 'remotion'
 import {interpolate} from 'remotion'
@@ -23,6 +24,22 @@ export default class AnimationContextWrapper {
 
     const actioner = new Actioner(subtitle, action, this);
     return actioner.getStyle();
+  }
+
+  get3DPosition(objectId: string): Vector3 {
+    const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
+    if(!subtitle) return [0, 0, 0];
+    const entranceAnimation = spring({
+      frame: this.animationContext.globalFrame - this.getStartTimeOfSubtitle(subtitle.id) * this.animationContext.globalFps,
+      fps: this.animationContext.globalFps,
+      config: {
+        damping: 200,
+        mass: 3,
+      },
+    });
+
+	  const translateY = interpolate(entranceAnimation, [0, 1], [-4, 0]);
+    return [0, translateY, 0];
   }
 
   interpolate1(startTime: number, durationInSeconds: number, outputRange: number[]): number {

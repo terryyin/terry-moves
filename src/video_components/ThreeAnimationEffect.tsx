@@ -44,26 +44,16 @@ export const ThreeAnimationEffect: React.FC<{
 		},
 	});
 
-	// Calculate the entrance rotation,
-	// doing one full spin
-	const entranceRotation = interpolate(
-		entranceAnimation,
-		[0, 1],
-		[-Math.PI, Math.PI]
-	);
-
 	// Calculating the total rotation of the phone
-	const rotateY = entranceRotation + constantRotation;
+	const rotateY = constantRotation;
 
-	// Calculating the translation of the phone at the beginning.
-	// The start position of the phone is set to 4 "units"
-	const translateY = interpolate(entranceAnimation, [0, 1], [-4, 0]);
+	const position = animationContextWrapper.get3DPosition(id);
 
 	return (
 		<group
 			scale={entranceAnimation}
 			rotation={[0, rotateY, 0]}
-			position={[0, translateY, 0]}
+			position={ position }
 		>
 			{children}
 		</group>

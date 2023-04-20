@@ -49,8 +49,8 @@ describe('AnimationEffect', () => {
 
     [
       { sec: 0, expectedTranslateY: '-4' },
-      { sec: 1, expectedTranslateY: '-0.08423119045904448' },
-      { sec: 1.1, expectedTranslateY: '-0.05131653575456019' },
+      { sec: 1, expectedTranslateY: '-4' },
+      { sec: 1.1, expectedTranslateY: '-3.54199627019786' },
     ].forEach(({sec, expectedTranslateY}) => {
       test('displays the correct transformation', () => {
         const animationContext: AnimationContext = makeMe
