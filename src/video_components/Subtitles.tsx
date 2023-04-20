@@ -1,5 +1,5 @@
-import { useCurrentSubtitle1 } from "@/hooks/useCurrentSubtitle";
-import { AnimationContext, CurrentSubtitle1 } from "@/models/AnimationContext";
+import { useCurrentSubtitle1 } from "../hooks/useCurrentSubtitle";
+import { AnimationContext, CurrentSubtitle1 } from "../models/AnimationContext";
 
 interface SubtitlesProps {
   animationContext: AnimationContext;

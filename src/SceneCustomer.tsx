@@ -1,5 +1,5 @@
+import {AbsoluteFill} from 'remotion'
 import React from 'react';
-import {Sequence } from 'remotion';
 import { Company } from './parts/Company';
 import { CustomerGroup } from './parts/CustomerGroup';
 import { ValueArrow } from './parts/ValueArrow';
@@ -48,7 +48,7 @@ export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
 	const viewPosition = useCurrentStage(StageTransforms, animationContext);
 
   return (
-    <Sequence  durationInFrames={73 * 30}>
+    <AbsoluteFill>
       <Stage viewPosition={ viewPosition}>
 				<Company animationContext={animationContext} style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
 				<CustomerGroup animationContext={animationContext} style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
@@ -60,6 +60,6 @@ export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
 				</div>
 			</Stage>
 			<Subtitles animationContext={animationContext}/>
-    </Sequence>
+    </AbsoluteFill>
   );
 });
