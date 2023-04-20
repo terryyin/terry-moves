@@ -3,7 +3,6 @@ export type CurrentSubtitle = {
   allSubtitles: Subtitle[];
   globalFrame: number;
   globalFps: number;
-  text: string;
 }
 
 export type CurrentSubtitle1 = {

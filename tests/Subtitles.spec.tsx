@@ -11,12 +11,11 @@ const currentSubtitle: CurrentSubtitle = {
   allSubtitles: [subtitle],
   globalFps: 30,
   globalFrame: 60,
-  text: 'nah nah nah',
 };
 
 describe('Subtitles component', () => {
   test('displays the correct subtitle text when there is an active subtitle', () => {
     render(<Subtitles currentSubtitle={currentSubtitle} />);
-    expect(screen.getByText('nah nah nah')).toBeInTheDocument();
+    expect(screen.getByText('First subtitle.')).toBeInTheDocument();
   });
 });

@@ -17,12 +17,11 @@ export const useCurrentSubtitle1 = (subtitles: Subtitle[], frame: number, fps: n
     allSubtitles: subtitles,
     globalFps: fps,
     globalFrame: frame,
-    text: frame > (endTime) * fps || frame < (endTime - subtitle.duration) * fps ? '' : subtitle.text,
   };
   return {
     currentSubtitle,
     subtitle,
-    text: currentSubtitle.text,
+    text: frame > (endTime) * fps || frame < (endTime - subtitle.duration) * fps ? '' : subtitle.text,
   };
 };
 
