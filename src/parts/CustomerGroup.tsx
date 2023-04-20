@@ -1,14 +1,14 @@
 import React, { CSSProperties } from 'react';
 import {Img, staticFile} from 'remotion';
 import { StageTransform, useCurrentStage } from '../hooks/useCurrentSubtitle';
-import { CurrentSubtitle } from '../models/CurrentSubtitle';
+import { AnimationContext } from '../models/AnimationContext';
 
 const StageTransforms: StageTransform[] = [
 	{ subtitleId: 'intro2', durationInSeconds: 2, outputRange: [0, 1] },
 ];
 
 // eslint-disable-next-line react/no-unused-prop-types
-export const CustomerGroup: React.FC<{style?: CSSProperties, currentSubtitle: CurrentSubtitle}> = ({ style, currentSubtitle }) => {
+export const CustomerGroup: React.FC<{style?: CSSProperties, currentSubtitle: AnimationContext}> = ({ style, currentSubtitle }) => {
 	const opacity = useCurrentStage(StageTransforms, currentSubtitle);
 
   return (

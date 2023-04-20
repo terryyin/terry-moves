@@ -1,8 +1,8 @@
 import { useCurrentSubtitle1 } from "@/hooks/useCurrentSubtitle";
-import { CurrentSubtitle, CurrentSubtitle1 } from "@/models/CurrentSubtitle";
+import { AnimationContext, CurrentSubtitle1 } from "@/models/AnimationContext";
 
 interface SubtitlesProps {
-  currentSubtitle: CurrentSubtitle;
+  currentSubtitle: AnimationContext;
 }
 
 export const Subtitles: React.FC<SubtitlesProps> = ({ currentSubtitle }) => {

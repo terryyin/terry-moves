@@ -2,12 +2,12 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
 import { Subtitles } from '@/video_components/Subtitles';
-import { CurrentSubtitle } from '@/models/CurrentSubtitle';
+import { AnimationContext } from '@/models/AnimationContext';
 
 const subtitle: Subtitle = 
   { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.' };
 
-const currentSubtitle: CurrentSubtitle = {
+const currentSubtitle: AnimationContext = {
   allSubtitles: [subtitle],
   globalFps: 30,
   globalFrame: 60,

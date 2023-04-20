@@ -1,4 +1,4 @@
-import { CurrentSubtitle, CurrentSubtitle1 } from '@/models/CurrentSubtitle';
+import { AnimationContext, CurrentSubtitle1 } from '@/models/AnimationContext';
 import { Subtitle } from '../models/Subtitles';
 import { interpolate } from 'remotion';
 
@@ -13,13 +13,7 @@ export const useCurrentSubtitle1 = (subtitles: Subtitle[], frame: number, fps: n
       break;
   }
 
-  const currentSubtitle  = {
-    allSubtitles: subtitles,
-    globalFps: fps,
-    globalFrame: frame,
-  };
   return {
-    currentSubtitle,
     subtitle,
     text: frame > (endTime) * fps || frame < (endTime - subtitle.duration) * fps ? '' : subtitle.text,
   };
@@ -45,7 +39,7 @@ export const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]
   return endTime - targetSubtitle.duration;
 }
 
-const interpolateStage = (stageTransforms: StageTransform[], currentSubtitle: CurrentSubtitle) => {
+const interpolateStage = (stageTransforms: StageTransform[], currentSubtitle: AnimationContext) => {
 	const stageTransform = stageTransforms[0];
 	if(!stageTransform) throw new Error("No stage transform found");
 
@@ -58,7 +52,7 @@ const interpolateStage = (stageTransforms: StageTransform[], currentSubtitle: Cu
 
 export const useCurrentStage = interpolateStage;
 
-export const sinceSubtitle = (currentSubtitle: CurrentSubtitle, subtitleId: string): boolean => {
+export const sinceSubtitle = (currentSubtitle: AnimationContext, subtitleId: string): boolean => {
 	const startTime = getStartTimeOfSubtitle(subtitleId, currentSubtitle.allSubtitles);
   return currentSubtitle.globalFrame >= startTime * currentSubtitle.globalFps;
 }

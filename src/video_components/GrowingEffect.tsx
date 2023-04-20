@@ -1,9 +1,9 @@
 import {interpolate, spring} from 'remotion';
 import React, {CSSProperties} from 'react';
-import { CurrentSubtitle } from '../models/CurrentSubtitle';
+import { AnimationContext } from '../models/AnimationContext';
 import { getStartTimeOfSubtitle } from '../hooks/useCurrentSubtitle';
 
-export const GrowingEffect: React.FC<{children: React.ReactNode, currentSubtitle: CurrentSubtitle, startSubtitleId: string}> = ({
+export const GrowingEffect: React.FC<{children: React.ReactNode, currentSubtitle: AnimationContext, startSubtitleId: string}> = ({
   children, currentSubtitle, startSubtitleId}) => {
   const progress = spring({
     frame: currentSubtitle.globalFrame - getStartTimeOfSubtitle(startSubtitleId, currentSubtitle.allSubtitles) * currentSubtitle.globalFps,

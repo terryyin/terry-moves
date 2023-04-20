@@ -2,9 +2,9 @@ import React, { CSSProperties } from 'react';
 import {Img, staticFile} from 'remotion';
 import { Product } from './Product';
 import { GrowingEffect } from '../video_components/GrowingEffect';
-import { CurrentSubtitle } from '@/models/CurrentSubtitle';
+import { AnimationContext } from '@/models/AnimationContext';
 
-export const Company: React.FC<{style?: CSSProperties, currentSubtitle: CurrentSubtitle}> = ({ style, currentSubtitle }) => {
+export const Company: React.FC<{style?: CSSProperties, currentSubtitle: AnimationContext}> = ({ style, currentSubtitle }) => {
   return (
       <div style={style}>
 				<GrowingEffect currentSubtitle={currentSubtitle} startSubtitleId="customerResources2">
