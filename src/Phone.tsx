@@ -35,7 +35,7 @@ export const Phone: React.FC<{
 	const servicePersonTexture = useLoader(TextureLoader, staticFile('assets/ServicePerson.svg'));
 
 	return (
-		<ThreeAnimationEffect >
+		<ThreeAnimationEffect id="product">
 			<RoundedBox
 				radius={layout.phone.radius}
 				depth={layout.phone.thickness}

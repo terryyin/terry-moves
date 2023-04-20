@@ -4,36 +4,7 @@ import { Subtitle } from '@/models/Subtitles';
 import AnimationEffect from '@/video_components/AnimationEffect';
 import { AnimationContext } from '@/models/AnimationContext';
 import { AnimationContextProvider } from '@/hooks/useAnimationContext';
-
-class AnimationContextBuilder {
-
-  animationContext: AnimationContext = {
-    allSubtitles: [],
-    globalFps: 30,
-    globalFrame: 60,
-  };
-
-  withSubtitle(subtitle: Subtitle) {
-    this.animationContext.allSubtitles.push(subtitle);
-    return this;
-  }
-
-  seconds(sec: number) {
-    this.animationContext.globalFrame = sec * this.animationContext.globalFps;
-    return this;
-  }
-
-  please() {
-    return this.animationContext;
-  }
-}
-class MakeMe {
-  get animationContext() {
-    return new AnimationContextBuilder();
-  }
-}
-
-const makeMe = new MakeMe();
+import { makeMe } from '../helpers/makeMe';
 
 describe('AnimationEffect', () => {
   const renderAndGetDivStyle = (animationContext: AnimationContext) => {

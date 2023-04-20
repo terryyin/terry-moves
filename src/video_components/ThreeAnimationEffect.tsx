@@ -1,15 +1,19 @@
 import {useThree} from '@react-three/fiber';
 import React, {useEffect} from 'react';
-import {interpolate, spring, useCurrentFrame, useVideoConfig} from 'remotion';
+import {interpolate, spring, } from 'remotion';
 import {
 	CAMERA_DISTANCE,
 } from '../helpers/layout';
+import { useAnimationContext } from '../hooks/useAnimationContext';
 
 export const ThreeAnimationEffect: React.FC<{
+	id: string,
   children: React.ReactNode;
-}> = ({children, }) => {
-	const frame = useCurrentFrame();
-	const {fps, durationInFrames} = useVideoConfig();
+}> = ({id, children, }) => {
+	const animationContextWrapper = useAnimationContext();
+	const frame = animationContextWrapper.animationContext.globalFrame;
+	const fps = animationContextWrapper.animationContext.globalFps;
+	const durationInFrames = 1000;
 
 	// Place a camera and set the distance to the object.
 	// Then make it look at the object.
