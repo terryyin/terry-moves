@@ -20,9 +20,3 @@ export function useAnimationContext(): AnimationContextWrapper {
   }
   return new AnimationContextWrapper(context);
 }
-
-export interface StageTransform {
-	subtitleId: string;
-	durationInSeconds: number;
-  outputRange: number[];
-}

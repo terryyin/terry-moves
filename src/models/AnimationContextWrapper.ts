@@ -2,7 +2,6 @@ import { CSSProperties } from 'react';
 import {spring} from 'remotion'
 import {interpolate} from 'remotion'
 import { Action, Subtitle } from '@/models/Subtitles';
-import { StageTransform } from "@/hooks/useAnimationContext";
 import { AnimationContext } from "./AnimationContext";
 import Actioner from './Actioner';
 
@@ -43,11 +42,6 @@ export default class AnimationContextWrapper {
         break;
     }
     return endTime - targetSubtitle.duration;
-  }
-
-  getNumber({ subtitleId, durationInSeconds, outputRange }: StageTransform): number {
-    const startTime = this.getStartTimeOfSubtitle(subtitleId);
-    return this.interpolate1(startTime, durationInSeconds, outputRange);
   }
 
   getSpring(startSubtitleId: string) {
