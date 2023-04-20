@@ -119,7 +119,7 @@ describe('AnimationEffect', () => {
   describe('appear', () => {
     const subtitleWithAction: Subtitle = 
       { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-        { objectId: "under-test", action: 'appear', duration: 1, outputRange: [0, 1] },
+        { objectId: "under-test", action: 'appear', duration: 1 },
       ] };
 
     [

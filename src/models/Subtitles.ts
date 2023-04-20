@@ -1,11 +1,22 @@
 type ActionType = 'scaleToUpperRight' | 'appear';
 
-export interface Action {
+interface BaseAction {
   objectId: string;
   action: ActionType;
   duration: number;
+}
+
+export interface ScaleToUpperRightAction extends BaseAction {
+  action: 'scaleToUpperRight';
   outputRange: number[];
 }
+
+export interface AppearAction extends BaseAction {
+  action: 'appear';
+}
+
+export type Action = ScaleToUpperRightAction | AppearAction;
+
 export interface Subtitle {
   id: string;
   leadingBlank: number;

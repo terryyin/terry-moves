@@ -1,3 +1,4 @@
+import { ScaleToUpperRightAction } from './Subtitles';
 import { CSSProperties } from 'react';
 import {spring} from 'remotion'
 import {interpolate} from 'remotion'
@@ -22,7 +23,7 @@ class Actioner {
     if(!this.action) return {};
     switch(this.action.action) {
       case 'scaleToUpperRight':
-        return this.getScaleToUpperRightStyle();
+        return this.getScaleToUpperRightStyle(this.action);
       case 'appear':
         return this.getAppearStyle();
       default:
@@ -30,24 +31,24 @@ class Actioner {
     }
   }
 
-  getScaleToUpperRightStyle(): CSSProperties {
-    const scale = this.getScale();
+  getScaleToUpperRightStyle(action: ScaleToUpperRightAction): CSSProperties {
+    const scale = this.getScale(action.outputRange);
     return {
       left: `${100 - scale}%`, top:'0%', width: `${scale}%`, height: `${scale}%`
     }
   }
 
   getAppearStyle(): CSSProperties {
-    const scale = this.getScale();
+    const scale = this.getScale([0, 1]);
     return {
       opacity: scale,
     }
   }
 
-  getScale(): number {
+  getScale(outputRange: number[]): number {
     if(!this.subtitle?.actions) return 100;
     if(!this.action) return 100;
-    return this.animationContextWrapper.interpolate1(this.animationContextWrapper.getStartTimeOfSubtitle(this.subtitle.id), this.action.duration, this.action.outputRange);
+    return this.animationContextWrapper.interpolate1(this.animationContextWrapper.getStartTimeOfSubtitle(this.subtitle.id), this.action.duration, outputRange);
   }
 }
 export default class AnimationContextWrapper {
@@ -56,12 +57,6 @@ export default class AnimationContextWrapper {
 
   constructor(animationContext: AnimationContext) {
     this.animationContext = animationContext;
-  }
-
-  getScaleOf1(subtitle?: Subtitle, action?: Action): number {
-    if(!subtitle?.actions) return 100;
-    if(!action) return 100;
-    return this.interpolate1(this.getStartTimeOfSubtitle(subtitle.id), action.duration, action.outputRange);
   }
 
   getStyleOf(objectId: string): CSSProperties {
