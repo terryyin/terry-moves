@@ -52,7 +52,7 @@ export const SceneLayout: React.FC = autonomousComponent(({frame, fps}) => {
   return (
     <AbsoluteFill>
       <Stage viewPosition={ viewPosition}>
-				<Company animationContext={animationContext} style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
+				<Company style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
 				<CustomerGroup animationContext={animationContext} style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
 				<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
 					{sinceSubtitle(animationContext, "intro1") && <ValueArrow />}
