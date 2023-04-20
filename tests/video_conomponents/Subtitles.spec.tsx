@@ -1,7 +1,7 @@
-import { render } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
-import Stage from '@/video_components/Stage';
+import { Subtitles } from '@/video_components/Subtitles';
 import { AnimationContext } from '@/models/AnimationContext';
 import { AnimationContextProvider } from '@/hooks/useAnimationContext';
 
@@ -16,14 +16,11 @@ const animationContext: AnimationContext = {
 
 describe('Subtitles component', () => {
   test('displays the correct subtitle text when there is an active subtitle', () => {
-    const { container } = render(
+    render(
       <AnimationContextProvider value={animationContext}>
-        <Stage id="under-test" viewPosition={1}> </Stage>
+        <Subtitles/>
       </AnimationContextProvider>
     );
-    const div = container.querySelector('#under-test');
-    if (!div) throw new Error('Div not found');
-    const computedStyle = window.getComputedStyle(div);
-    expect(computedStyle.getPropertyValue('width')).toBe('1%');
+    expect(screen.getByText('First subtitle.')).toBeInTheDocument();
   });
 });
