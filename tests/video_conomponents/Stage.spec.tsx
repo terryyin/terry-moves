@@ -100,4 +100,19 @@ describe('Subtitles component', () => {
     expect(computedStyle.getPropertyValue('width')).toBe('55%');
   });
 
+  test('find the action in the first subtitle but its second action', () => {
+  const subtitleWithAction: Subtitle = 
+    { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+      { objectId: "other-object", action: 'scaleToUpperRight', duration: 1, outputRange: [0, 1] },
+      { objectId: "under-test", action: 'scaleToUpperRight', duration: 1, outputRange: [50, 100] },
+    ] };
+    const animationContext: AnimationContext = makeMe
+              .animationContext
+              .withSubtitle(subtitleWithAction)
+              .seconds(1.1)
+              .please();
+    const computedStyle = renderAndGetDivStyle(animationContext);
+    expect(computedStyle.getPropertyValue('width')).toBe('55%');
+  });
+
 });

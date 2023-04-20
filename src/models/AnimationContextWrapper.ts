@@ -15,7 +15,8 @@ export default class AnimationContextWrapper {
   getScaleOf(objectId: string): number {
     const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
     if(!subtitle?.actions) return 100;
-    const action = subtitle.actions[0];
+    const action = subtitle.actions.find(action => action.objectId === objectId);
+    if(!action) return 100;
     return this.interpolate1(this.getStartTimeOfSubtitle(subtitle.id), action.duration, action.outputRange);
   }
 
