@@ -4,20 +4,6 @@ import { Subtitle } from '@/models/Subtitles';
 import { StageTransform } from "@/hooks/useAnimationContext";
 import { AnimationContext } from "./AnimationContext";
 
-export const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]): number => {
-  let endTime = 0;
-  let targetSubtitle: Subtitle = subtitles[0];
-
-  for (let i = 0; i < subtitles.length; i++) {
-    targetSubtitle = subtitles[i];
-    endTime += targetSubtitle.leadingBlank + targetSubtitle.duration;
-    if (subtitleId === targetSubtitle.id)
-      break;
-  }
-
-  return endTime - targetSubtitle.duration;
-}
-
 export default class AnimationContextWrapper {
 
   animationContext: AnimationContext;
@@ -27,10 +13,10 @@ export default class AnimationContextWrapper {
   }
 
   getScaleOf(objectId: string): number {
-    const subtitle = this.animationContext.allSubtitles[0];
-    if(!subtitle.actions) return 100;
+    const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
+    if(!subtitle?.actions) return 100;
     const action = subtitle.actions[0];
-    return this.interpolate1(subtitle.leadingBlank, action.duration, action.outputRange);
+    return this.interpolate1(this.getStartTimeOfSubtitle(subtitle.id), action.duration, action.outputRange);
   }
 
   private interpolate1(startTime: number, durationInSeconds: number, outputRange: number[]): number {
@@ -40,14 +26,26 @@ export default class AnimationContextWrapper {
     });
   }
 
+  private getStartTimeOfSubtitle(subtitleId: string): number {
+    let endTime = 0;
+    let targetSubtitle: Subtitle = this.animationContext.allSubtitles[0];
+    for (let i = 0; i < this.animationContext.allSubtitles.length; i++) {
+      targetSubtitle = this.animationContext.allSubtitles[i];
+      endTime += targetSubtitle.leadingBlank + targetSubtitle.duration;
+      if (subtitleId === targetSubtitle.id)
+        break;
+    }
+    return endTime - targetSubtitle.duration;
+  }
+
   getNumber({ subtitleId, durationInSeconds, outputRange }: StageTransform): number {
-    const startTime = getStartTimeOfSubtitle(subtitleId, this.animationContext.allSubtitles);
+    const startTime = this.getStartTimeOfSubtitle(subtitleId);
     return this.interpolate1(startTime, durationInSeconds, outputRange);
   }
 
   getSpring(startSubtitleId: string) {
     return spring({
-      frame: this.animationContext.globalFrame - getStartTimeOfSubtitle(startSubtitleId, this.animationContext.allSubtitles) * this.animationContext.globalFps,
+      frame: this.animationContext.globalFrame - this.getStartTimeOfSubtitle(startSubtitleId) * this.animationContext.globalFps,
       durationInFrames: 60,
       fps: 30,
       config: {
@@ -60,7 +58,7 @@ export default class AnimationContextWrapper {
   }
 
   sinceSubtitle(subtitleId: string): boolean {
-    const startTime = getStartTimeOfSubtitle(subtitleId, this.animationContext.allSubtitles);
+    const startTime = this.getStartTimeOfSubtitle(subtitleId);
     return this.animationContext.globalFrame >= startTime * this.animationContext.globalFps;
   }
 
