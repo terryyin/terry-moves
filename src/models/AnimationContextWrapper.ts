@@ -1,11 +1,15 @@
 import { Vector3 } from '@react-three/fiber';
 import { CSSProperties } from 'react';
 import {spring} from 'remotion'
-import {interpolate} from 'remotion'
 import { Action, Subtitle } from '@/models/Subtitles';
 import { AnimationContext } from "./AnimationContext";
 import Actioner from './Actioner';
 
+type ThreeGroupAttributes = {
+  scale: number;
+  position: Vector3;
+  rotation: Vector3;
+}
 
 export default class AnimationContextWrapper {
 
@@ -15,38 +19,30 @@ export default class AnimationContextWrapper {
     this.animationContext = animationContext;
   }
 
-  getStyleOf(objectId: string): CSSProperties {
+  private getActioner(objectId: string): Actioner {
     const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
     let action: Action | undefined;
     if(subtitle?.actions) {
       action = subtitle.actions.find(action => action.objectId === objectId);
     }
-
-    const actioner = new Actioner(subtitle, action, this);
-    return actioner.getStyle();
+    const startTime = subtitle ? this.getStartTimeOfSubtitle(subtitle.id) : 0; 
+    return new Actioner(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
   }
 
-  get3DPosition(objectId: string): Vector3 {
-    const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
-    if(!subtitle) return [0, 0, 0];
-    const entranceAnimation = spring({
-      frame: this.animationContext.globalFrame - this.getStartTimeOfSubtitle(subtitle.id) * this.animationContext.globalFps,
-      fps: this.animationContext.globalFps,
-      config: {
-        damping: 200,
-        mass: 3,
-      },
-    });
-
-	  const translateY = interpolate(entranceAnimation, [0, 1], [-4, 0]);
-    return [0, translateY, 0];
+  getStyleOf(objectId: string): CSSProperties {
+    return this.getActioner(objectId).getStyle();
   }
 
-  interpolate1(startTime: number, durationInSeconds: number, outputRange: number[]): number {
-    return interpolate(this.animationContext.globalFrame, [startTime * this.animationContext.globalFps, (startTime + durationInSeconds) * this.animationContext.globalFps], outputRange, {
-      extrapolateLeft: 'clamp',
-      extrapolateRight: 'clamp',
-    });
+  get3DPosition(objectId: string): ThreeGroupAttributes {
+    const actioner = this.getActioner(objectId);
+    const translateY = actioner.getThreeTranslateY();
+    const scale = actioner.getThreeScale();
+
+    return {
+      position: [0, translateY, 0],
+      scale,
+      rotation: [0, 0, 0],
+    }
   }
 
   getStartTimeOfSubtitle(subtitleId: string): number {

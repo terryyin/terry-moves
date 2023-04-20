@@ -1,19 +1,21 @@
+import {interpolate} from 'remotion'
+import {spring} from 'remotion'
 import { ScaleToUpperRightAction } from './Subtitles';
 import { CSSProperties } from 'react';
-import { Action, Subtitle } from '@/models/Subtitles';
-import AnimationContextWrapper from './AnimationContextWrapper';
-
+import { Action } from '@/models/Subtitles';
 
 export default class Actioner {
-  subtitle: Subtitle | undefined;
   action: Action | undefined;
-  animationContextWrapper: AnimationContextWrapper;
+  startTime: number;
+  frame: number;
+  fps: number;
 
 
-  constructor(subtitle: Subtitle | undefined, action: Action | undefined, animationContextWrapper: AnimationContextWrapper) {
-    this.subtitle = subtitle;
+  constructor(action: Action | undefined, startTime: number, frame: number, fps: number) {
     this.action = action;
-    this.animationContextWrapper = animationContextWrapper;
+    this.startTime = startTime;
+    this.frame = frame;
+    this.fps = fps;
   }
 
   getStyle(): CSSProperties {
@@ -26,27 +28,52 @@ export default class Actioner {
       case 'disappear':
         return this.getAppearStyle([1, 0]);
       default:
-        throw new Error('Unknown action type');
+        throw new Error(`Unknown action type for div ${this.action.action}`);
     }
   }
 
-  getScaleToUpperRightStyle(action: ScaleToUpperRightAction): CSSProperties {
+  getThreeTranslateY(): number {
+    if(!this.action) return 0;
+    const entranceAnimation = this.getThreeScale();
+    return interpolate(entranceAnimation, [0, 1], [-4, 0]);
+  }
+
+  getThreeScale(): number {
+    if(!this.action) return 0;
+    return spring({
+      frame: this.frame - this.startTime * this.fps,
+      fps: this.fps,
+      config: {
+        damping: 200,
+        mass: 3,
+      },
+    });
+  }
+
+  private getScaleToUpperRightStyle(action: ScaleToUpperRightAction): CSSProperties {
     const scale = this.getScale(action.outputRange);
     return {
       left: `${100 - scale}%`, top:'0%', width: `${scale}%`, height: `${scale}%`
     }
   }
 
-  getAppearStyle(range: number[]): CSSProperties {
+  private getAppearStyle(range: number[]): CSSProperties {
     const scale = this.getScale(range);
     return {
       opacity: scale,
     }
   }
 
-  getScale(outputRange: number[]): number {
-    if(!this.subtitle?.actions) return 100;
+  private getScale(outputRange: number[]): number {
     if(!this.action) return 100;
-    return this.animationContextWrapper.interpolate1(this.animationContextWrapper.getStartTimeOfSubtitle(this.subtitle.id), this.action.duration, outputRange);
+    return this.interpolate1(this.action.duration, outputRange);
   }
+  
+  private interpolate1(durationInSeconds: number, outputRange: number[]): number {
+    return interpolate(this.frame, [this.startTime * this.fps, (this.startTime + durationInSeconds) * this.fps], outputRange, {
+      extrapolateLeft: 'clamp',
+      extrapolateRight: 'clamp',
+    });
+  }
+
 }

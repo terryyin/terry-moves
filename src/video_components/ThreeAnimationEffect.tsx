@@ -1,6 +1,6 @@
 import {useThree} from '@react-three/fiber';
 import React, {useEffect} from 'react';
-import {interpolate, spring, } from 'remotion';
+import {interpolate, } from 'remotion';
 import {
 	CAMERA_DISTANCE,
 } from '../helpers/layout';
@@ -33,25 +33,14 @@ export const ThreeAnimationEffect: React.FC<{
 		[0, Math.PI * durationInFrames / fps]
 	);
 
-	// When the composition starts, there is some extra
-	// rotation and translation.
-	const entranceAnimation = spring({
-		frame,
-		fps,
-		config: {
-			damping: 200,
-			mass: 3,
-		},
-	});
-
 	// Calculating the total rotation of the phone
 	const rotateY = constantRotation;
 
-	const position = animationContextWrapper.get3DPosition(id);
+	const { scale, position } = animationContextWrapper.get3DPosition(id);
 
 	return (
 		<group
-			scale={entranceAnimation}
+			scale={scale}
 			rotation={[0, rotateY, 0]}
 			position={ position }
 		>
