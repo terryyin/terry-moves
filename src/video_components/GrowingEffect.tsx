@@ -1,21 +1,11 @@
-import {interpolate, spring} from 'remotion';
+import {interpolate} from 'remotion';
 import React, {CSSProperties} from 'react';
-import { getStartTimeOfSubtitle, useAnimationContext } from '../hooks/useCurrentSubtitle';
+import { useAnimationContext } from '../hooks/useCurrentSubtitle';
 
 export const GrowingEffect: React.FC<{children: React.ReactNode, startSubtitleId: string}> = ({
   children, startSubtitleId}) => {
-  const {animationContext} = useAnimationContext();
-  const progress = spring({
-    frame: animationContext.globalFrame - getStartTimeOfSubtitle(startSubtitleId, animationContext.allSubtitles) * animationContext.globalFps,
-    durationInFrames: 60,
-    fps: 30,
-    config: {
-      damping: 50,
-      mass: 0.5,
-      stiffness: 200,
-      overshootClamping: true,
-    },
-  });
+  const animationContextWrapper = useAnimationContext();
+  const progress = animationContextWrapper.getSpring(startSubtitleId);
 
   // Map progress from 0 to 1 to size from 100% to 110%
   const size = interpolate(progress, [0, 1], [100, 120]);

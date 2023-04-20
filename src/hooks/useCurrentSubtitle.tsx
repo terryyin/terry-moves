@@ -1,5 +1,4 @@
 import { AnimationContext } from '@/models/AnimationContext';
-import { Subtitle } from '../models/Subtitles';
 import { ReactNode, createContext, useContext } from 'react';
 import AnimationContextWrapper from '../models/AnimationContextWrapper';
 
@@ -26,18 +25,4 @@ export interface StageTransform {
 	subtitleId: string;
 	durationInSeconds: number;
   outputRange: number[];
-}
-
-export const getStartTimeOfSubtitle = (subtitleId: string, subtitles: Subtitle[]): number => {
-  let endTime = 0;
-  let targetSubtitle: Subtitle = subtitles[0];
-
-  for (let i = 0; i < subtitles.length; i++) {
-    targetSubtitle = subtitles[i];
-    endTime += targetSubtitle.leadingBlank + targetSubtitle.duration;
-    if (subtitleId === targetSubtitle.id)
-      break;
-  }
-
-  return endTime - targetSubtitle.duration;
 }

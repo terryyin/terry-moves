@@ -1,3 +1,4 @@
+import {spring} from 'remotion'
 import {interpolate} from 'remotion'
 import { Subtitle } from '@/models/Subtitles';
 import { StageTransform } from "@/hooks/useCurrentSubtitle";
@@ -29,6 +30,7 @@ const interpolateStage = (stageTransforms: StageTransform[], animationContext: A
 }
 
 export default class AnimationContextWrapper {
+
   animationContext: AnimationContext;
 
   constructor(animationContext: AnimationContext) {
@@ -37,6 +39,20 @@ export default class AnimationContextWrapper {
 
   getNumber(StageTransforms: StageTransform[]): number {
     return interpolateStage(StageTransforms, this.animationContext);
+  }
+
+  getSpring(startSubtitleId: string) {
+    return spring({
+      frame: this.animationContext.globalFrame - getStartTimeOfSubtitle(startSubtitleId, this.animationContext.allSubtitles) * this.animationContext.globalFps,
+      durationInFrames: 60,
+      fps: 30,
+      config: {
+        damping: 50,
+        mass: 0.5,
+        stiffness: 200,
+        overshootClamping: true,
+      },
+    });
   }
 
   sinceSubtitle(subtitleId: string): boolean {
