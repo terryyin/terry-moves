@@ -14,7 +14,9 @@ const subtitles: Subtitle[] = [
 	{ id: 'softwareRole2', leadingBlank: 0, duration: 3, text: 'crucial role in providing services.' },
 	{ id: 'traditionalBelief1', leadingBlank: 1, duration: 3, text: 'Traditionally, businesses focused on' },
 	{ id: 'traditionalBelief2', leadingBlank: 0, duration: 3, text: 'their core domain, not software.' },
-	{ id: 'externalTeams1', leadingBlank: 1, duration: 3, text: 'Developers were part of external teams,' },
+	{ id: 'externalTeams1', leadingBlank: 1, duration: 3, text: 'Developers were part of external teams,', actions:[
+		{ objectId: 'stage', action: 'scaleToUpperRight', duration: 1, outputRange: [100, 70] },
+	] },
 	{ id: 'externalTeams2', leadingBlank: 1, duration: 3, text: 'hired to work on projects.' },
 	{ id: 'integration1', leadingBlank: 1, duration: 3, text: 'They delivered components to be' },
 	{ id: 'integration2', leadingBlank: 1, duration: 3, text: 'integrated with other parts later.' },
