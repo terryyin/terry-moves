@@ -72,8 +72,3 @@ const interpolateStage = (stageTransforms: StageTransform[], animationContext: A
 }
 
 export const useCurrentStage = interpolateStage;
-
-export const sinceSubtitle = (animationContext: AnimationContext, subtitleId: string): boolean => {
-	const startTime = getStartTimeOfSubtitle(subtitleId, animationContext.allSubtitles);
-  return animationContext.globalFrame >= startTime * animationContext.globalFps;
-}

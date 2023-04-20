@@ -38,5 +38,10 @@ export default class AnimationContextWrapper {
   getNumber(StageTransforms: StageTransform[]): number {
     return interpolateStage(StageTransforms, this.animationContext);
   }
+
+  sinceSubtitle(subtitleId: string): boolean {
+    const startTime = getStartTimeOfSubtitle(subtitleId, this.animationContext.allSubtitles);
+    return this.animationContext.globalFrame >= startTime * this.animationContext.globalFps;
+  }
 }
 

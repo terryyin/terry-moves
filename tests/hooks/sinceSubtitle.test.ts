@@ -1,5 +1,5 @@
+import AnimationContextWrapper from '@/models/AnimationContextWrapper';
 // UseCurrentSubtitle.test.ts
-import { sinceSubtitle } from '@/hooks/useCurrentSubtitle';
 import { Subtitle } from '@/models/Subtitles';
 
 describe('sinceSubtitle', () => {
@@ -10,27 +10,23 @@ describe('sinceSubtitle', () => {
   ];
 
   it('should be false before the subtitle', () => {
-    const animationContext = {
+    const animationContext: AnimationContextWrapper = new AnimationContextWrapper({
       allSubtitles: subtitles,
       globalFps: 30,
       globalFrame: 0,
-      subtitle: subtitles[1],
-      text: 'First subtitle',
-    };
+    });
 
-    expect(sinceSubtitle(animationContext, "1")).toBeFalsy();
+    expect(animationContext.sinceSubtitle("1")).toBeFalsy();
   });
 
   it('should be true during the subtitle', () => {
-    const animationContext = {
+    const animationContext: AnimationContextWrapper = new AnimationContextWrapper({
       allSubtitles: subtitles,
       globalFps: 30,
       globalFrame: 45,
-      subtitle: subtitles[1],
-      text: 'First subtitle',
-    };
+    });
 
-    expect(sinceSubtitle(animationContext, "1")).toBeTruthy();
+    expect(animationContext.sinceSubtitle("1")).toBeTruthy();
   });
 
 });
