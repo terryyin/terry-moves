@@ -1,4 +1,4 @@
-import { AnimationContext, CurrentSubtitle1 } from '@/models/AnimationContext';
+import { AnimationContext } from '@/models/AnimationContext';
 import { Subtitle } from '../models/Subtitles';
 import { interpolate } from 'remotion';
 import { ReactNode, createContext, useContext } from 'react';
@@ -22,23 +22,6 @@ export function useAnimationContext(): AnimationContextWrapper {
   }
   return new AnimationContextWrapper(context);
 }
-
-export const useCurrentSubtitle1 = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle1 => {
-  let endTime = 0;
-  let subtitle: Subtitle = subtitles[0];
-
-  for (let i = 0; i < subtitles.length; i++) {
-    subtitle = subtitles[i];
-    endTime += subtitles[i].leadingBlank + subtitles[i].duration;
-    if (endTime * fps > frame)
-      break;
-  }
-
-  return {
-    subtitle,
-    text: frame > (endTime) * fps || frame < (endTime - subtitle.duration) * fps ? '' : subtitle.text,
-  };
-};
 
 export interface StageTransform {
 	subtitleId: string;
