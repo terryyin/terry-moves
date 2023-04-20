@@ -1,6 +1,26 @@
 import { AnimationContext, CurrentSubtitle1 } from '@/models/AnimationContext';
 import { Subtitle } from '../models/Subtitles';
 import { interpolate } from 'remotion';
+import { ReactNode, createContext, useContext } from 'react';
+
+const AnimationContextContext = createContext<AnimationContext | undefined>(undefined);
+
+interface AnimationContextProviderProps {
+  children: ReactNode;
+  value: AnimationContext;
+}
+
+export function AnimationContextProvider({ children, value }: AnimationContextProviderProps) {
+  return <AnimationContextContext.Provider value={value}>{children}</AnimationContextContext.Provider>;
+}
+
+export function useAnimationContext(): AnimationContext {
+  const context = useContext(AnimationContextContext);
+  if (!context) {
+    throw new Error('useAnimationContext must be used within an AnimationProvider');
+  }
+  return context;
+}
 
 export const useCurrentSubtitle1 = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle1 => {
   let endTime = 0;
