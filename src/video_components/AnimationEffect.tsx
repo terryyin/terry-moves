@@ -6,7 +6,7 @@ interface StageProps {
   children: React.ReactNode;
 }
 
-const Stage: React.FC<StageProps> = ({ id, children }) => {
+const AnimationEffect: React.FC<StageProps> = ({ id, children }) => {
   const animationContextWrapper = useAnimationContext();
   const viewPosition = animationContextWrapper.getScaleOf(id);
   return (
@@ -16,4 +16,4 @@ const Stage: React.FC<StageProps> = ({ id, children }) => {
   );
 };
 
-export default Stage;
+export default AnimationEffect;

@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
-import Stage from '@/video_components/Stage';
+import AnimationEffect from '@/video_components/AnimationEffect';
 import { AnimationContext } from '@/models/AnimationContext';
 import { AnimationContextProvider } from '@/hooks/useAnimationContext';
 
@@ -44,7 +44,7 @@ describe('Subtitles component', () => {
   const renderAndGetDivStyle = (animationContext: AnimationContext) => {
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
-        <Stage id="under-test"> </Stage>
+        <AnimationEffect id="under-test"> </AnimationEffect>
       </AnimationContextProvider>
     );
     const div = container.querySelector('#under-test');
