@@ -2,7 +2,7 @@ import { CurrentSubtitle, CurrentSubtitle1 } from '@/models/CurrentSubtitle';
 import { Subtitle } from '../models/Subtitles';
 import { interpolate } from 'remotion';
 
-export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle => {
+export const useCurrentSubtitle1 = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle1 => {
   let endTime = 0;
   let subtitle: Subtitle = subtitles[0];
 
@@ -13,20 +13,15 @@ export const useCurrentSubtitle = (subtitles: Subtitle[], frame: number, fps: nu
       break;
   }
 
-  return {
+  const currentSubtitle  = {
     allSubtitles: subtitles,
     globalFps: fps,
     globalFrame: frame,
-    subtitle,
     text: frame > (endTime) * fps || frame < (endTime - subtitle.duration) * fps ? '' : subtitle.text,
   };
-};
-
-export const useCurrentSubtitle1 = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle1 => {
-  const currentSubtitle = useCurrentSubtitle(subtitles, frame, fps);
   return {
     currentSubtitle,
-    subtitle: currentSubtitle.subtitle,
+    subtitle,
     text: currentSubtitle.text,
   };
 };

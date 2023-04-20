@@ -4,7 +4,6 @@ export type CurrentSubtitle = {
   globalFrame: number;
   globalFps: number;
   text: string;
-  subtitle: Subtitle;
 }
 
 export type CurrentSubtitle1 = {

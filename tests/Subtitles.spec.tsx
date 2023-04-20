@@ -11,7 +11,6 @@ const currentSubtitle: CurrentSubtitle = {
   allSubtitles: [subtitle],
   globalFps: 30,
   globalFrame: 60,
-  subtitle,
   text: 'nah nah nah',
 };
 
