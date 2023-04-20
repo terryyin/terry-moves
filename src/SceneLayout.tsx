@@ -1,8 +1,14 @@
+import {AbsoluteFill} from 'remotion'
 import React from 'react';
-import { AnimationContextProvider } from './hooks/useCurrentSubtitle';
+import { Company } from './parts/Company';
+import { CustomerGroup } from './parts/CustomerGroup';
+import { ValueArrow } from './parts/ValueArrow';
+import { MoneyArrow } from './parts/MoneyArrow';
+import { Subtitles } from './video_components/Subtitles';
+import { StageTransform, sinceSubtitle, useAnimationContext } from './hooks/useCurrentSubtitle';
 import { Subtitle } from './models/Subtitles';
+import Stage from './video_components/Stage';
 import autonomousComponent from './video_components/autonomousComponent';
-import { SceneLayout } from './SceneLayout';
 
 const subtitles: Subtitle[] = [
 	{ id: 'intro1', leadingBlank: 1, duration: 3, text: 'A company delivers services to users,' },
@@ -28,16 +34,34 @@ const subtitles: Subtitle[] = [
 	{ id: 'wholeProduct2', leadingBlank: 1, duration: 3, text: 'and its seamless user experience.' },
 ];
 
-export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
+const StageTransforms: StageTransform[] = [
+	{ subtitleId: 'externalTeams1', durationInSeconds: 1, outputRange: [100, 70] },
+];
+
+export const SceneLayout: React.FC = autonomousComponent(({frame, fps}) => {
   const animationContext  = {
     allSubtitles: subtitles,
     globalFps: fps,
     globalFrame: frame,
   };
 
+	const animationContextWrapper = useAnimationContext();
+
+	const viewPosition = animationContextWrapper.getNumber(StageTransforms);
+
   return (
-    <AnimationContextProvider value={animationContext}>
-			<SceneLayout />
-    </AnimationContextProvider>
+    <AbsoluteFill>
+      <Stage viewPosition={ viewPosition}>
+				<Company animationContext={animationContext} style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
+				<CustomerGroup animationContext={animationContext} style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
+				<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
+					{sinceSubtitle(animationContext, "intro1") && <ValueArrow />}
+				</div>
+				<div style={{position: 'absolute', left: '45%', top: '50%', width: '37%', height: '37%'}}>
+					{sinceSubtitle(animationContext, "customerResources1") && <MoneyArrow />}
+				</div>
+			</Stage>
+			<Subtitles animationContext={animationContext}/>
+    </AbsoluteFill>
   );
 });

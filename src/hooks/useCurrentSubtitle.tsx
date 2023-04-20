@@ -14,12 +14,24 @@ export function AnimationContextProvider({ children, value }: AnimationContextPr
   return <AnimationContextContext.Provider value={value}>{children}</AnimationContextContext.Provider>;
 }
 
-export function useAnimationContext(): AnimationContext {
+class AnimationContextWrapper {
+  animationContext: AnimationContext;
+
+  constructor(animationContext: AnimationContext) {
+    this.animationContext = animationContext;
+  }
+
+  getNumber(StageTransforms: StageTransform[]): number {
+    return interpolateStage(StageTransforms, this.animationContext);
+  }
+}
+
+export function useAnimationContext(): AnimationContextWrapper {
   const context = useContext(AnimationContextContext);
   if (!context) {
     throw new Error('useAnimationContext must be used within an AnimationProvider');
   }
-  return context;
+  return new AnimationContextWrapper(context);
 }
 
 export const useCurrentSubtitle1 = (subtitles: Subtitle[], frame: number, fps: number): CurrentSubtitle1 => {
