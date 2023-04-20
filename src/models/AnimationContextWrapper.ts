@@ -43,5 +43,19 @@ export default class AnimationContextWrapper {
     const startTime = getStartTimeOfSubtitle(subtitleId, this.animationContext.allSubtitles);
     return this.animationContext.globalFrame >= startTime * this.animationContext.globalFps;
   }
-}
+
+  getCurrentSubtitleText(): string {
+    let endTime = 0;
+    let subtitle: Subtitle = this.animationContext.allSubtitles[0];
+
+    for (let i = 0; i < this.animationContext.allSubtitles.length; i++) {
+      subtitle = this.animationContext.allSubtitles[i];
+      endTime += subtitle.leadingBlank + subtitle.duration;
+      if (endTime * this.animationContext.globalFps > this.animationContext.globalFrame)
+        break;
+    }
+
+    return this.animationContext.globalFrame > (endTime) * this.animationContext.globalFps || this.animationContext.globalFrame < (endTime - subtitle.duration) * this.animationContext.globalFps ? '' : subtitle.text;
+  }
+};
 
