@@ -1,4 +1,4 @@
-import {useThree} from '@react-three/fiber';
+import {Euler, useThree} from '@react-three/fiber';
 import React, {useEffect} from 'react';
 import {
 	CAMERA_DISTANCE,
@@ -26,8 +26,8 @@ export const ThreeAnimationEffect: React.FC<{
 	return (
 		<group
 			scale={scale}
-			rotation={ rotation }
-			position={ position }
+			rotation={ rotation.toArray() as Euler }
+			position={ position.toArray() }
 		>
 			{children}
 		</group>

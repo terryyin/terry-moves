@@ -1,11 +1,11 @@
-import { Euler, Vector3 } from '@react-three/fiber';
+import * as THREE from 'three';
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
 
 export type ThreeGroupAttributes = {
   scale: number;
-  position: Vector3;
-  rotation: Euler;
+  position: THREE.Vector3;
+  rotation: THREE.Euler;
 }
 
 export default class ThreeDGroupActioner {
@@ -14,8 +14,8 @@ export default class ThreeDGroupActioner {
 
   static defaultValue: ThreeGroupAttributes = {
     scale: 1,
-    position: [0, 0, 0],
-    rotation: [0, 0, 0],
+    position: new THREE.Vector3(0, 0, 0),
+    rotation: new THREE.Euler(0, 0, 0),
   };
 
   constructor(action: Action, effectCalculator: EffectCalculator) {
@@ -23,15 +23,24 @@ export default class ThreeDGroupActioner {
     this.action = action;
   }
 
-  get3DGroupAttributes(): ThreeGroupAttributes {
+  multiply(prev: ThreeGroupAttributes): ThreeGroupAttributes {
+    const current = this.get3DGroupAttributes();
+    return {
+      scale: prev.scale * current.scale,
+      position: prev.position.clone().add(current.position),
+      rotation: new THREE.Euler(prev.rotation.x + current.rotation.x, prev.rotation.y + current.rotation.y, prev.rotation.z + current.rotation.z),
+    }
+  }
+
+  private get3DGroupAttributes(): ThreeGroupAttributes {
     const translateY = this.getThreeTranslateY();
     const rotateY = this.getThreeRotateY();
     const scale = this.getThreeScale();
 
     return {
-      position: [0, translateY, 0],
+      position: new THREE.Vector3(0, translateY, 0),
       scale,
-      rotation: [0, rotateY, 0],
+      rotation: new THREE.Euler(0, rotateY, 0),
     }
   }
  

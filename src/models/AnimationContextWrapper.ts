@@ -36,9 +36,9 @@ export default class AnimationContextWrapper {
 
   get3DGroupAttributes(objectId: string): ThreeGroupAttributes {
     const effectCalculators = this.getActioner(objectId);
-    if(effectCalculators.length === 0) return ThreeDGroupActioner.defaultValue;
-    const actioner = new ThreeDGroupActioner(effectCalculators[0].action as Action, effectCalculators[0]);
-    return actioner.get3DGroupAttributes();
+    return effectCalculators
+      .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator))
+      .reduce((prev, curr) => curr.multiply(prev), ThreeDGroupActioner.defaultValue);
   }
 
   getStartTimeOfSubtitle(subtitleId: string): number {
