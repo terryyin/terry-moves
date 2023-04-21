@@ -46,7 +46,7 @@ export default class AnimationContextWrapper {
       .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue);
   }
 
-  getStartTimeOfSubtitle(subtitleId: string): number {
+  private getStartTimeOfSubtitle(subtitleId: string): number {
     let endTime = 0;
     let targetSubtitle: Subtitle = this.animationContext.allSubtitles[0];
     for (let i = 0; i < this.animationContext.allSubtitles.length; i++) {
@@ -56,11 +56,6 @@ export default class AnimationContextWrapper {
         break;
     }
     return endTime - targetSubtitle.duration;
-  }
-
-  sinceSubtitle(subtitleId: string): boolean {
-    const startTime = this.getStartTimeOfSubtitle(subtitleId);
-    return this.animationContext.globalFrame >= startTime * this.animationContext.globalFps;
   }
 
   getCurrentSubtitleText(): string {
