@@ -30,7 +30,7 @@ export default class AnimationContextWrapper {
     return this.getActioner(objectId)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .getStyle();
+      .getStyle(this.animationContext.globalFrame);
   }
 
   get3DGroupAttributes(objectId: string): ThreeGroupAttributes {

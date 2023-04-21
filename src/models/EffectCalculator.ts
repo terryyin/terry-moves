@@ -20,6 +20,10 @@ export default class EffectCalculator {
     return this.startFrame + this.action.duration * this.fps;
   }
 
+  get frameRange(): [number, number] {
+    return [this.startFrame, this.endFrame];
+  }
+
   getSpring(): number {
     return spring({
       frame: this.frame - this.startFrame,
@@ -36,7 +40,7 @@ export default class EffectCalculator {
   }
 
   interpolateDuration(outputRange: number[]): number {
-    return interpolate(this.frame, [this.startFrame, this.endFrame], outputRange, {
+    return interpolate(this.frame, this.frameRange, outputRange, {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     });
