@@ -25,14 +25,14 @@ describe('AnimationEffect', () => {
 
   describe('scaleToUpperRight', () => {
     const subtitleWithAction: Subtitle = 
-      { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+      { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
         { objectId: "under-test", action: 'scaleToUpperRight', duration: 1, outputRange: [50, 100] },
       ] };
 
     test('default value when no action specified', () => {
       const animationContext: AnimationContext = makeMe
               .animationContext
-              .withSubtitle({ id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.'})
+              .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.'})
               .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
       expect(computedStyle.getPropertyValue('width')).toBe("100%");
@@ -66,7 +66,7 @@ describe('AnimationEffect', () => {
     test('find the action in the second subtitle', () => {
       const animationContext: AnimationContext = makeMe
                 .animationContext
-                .withSubtitle({ id: 'subtitle2', leadingBlank: 1, duration: 3, text: 'before first subtitle.'})
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'before first subtitle.'})
                 .withSubtitle(subtitleWithAction)
                 .seconds(1)
                 .please();
@@ -77,7 +77,7 @@ describe('AnimationEffect', () => {
     test('find the action in the second subtitle should act at the right time', () => {
       const animationContext: AnimationContext = makeMe
                 .animationContext
-                .withSubtitle({ id: 'subtitle2', leadingBlank: 1, duration: 3, text: 'before first subtitle.'})
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'before first subtitle.'})
                 .withSubtitle(subtitleWithAction)
                 .seconds(5.1)
                 .please();
@@ -87,7 +87,7 @@ describe('AnimationEffect', () => {
 
     test('find the action in the first subtitle but its second action', () => {
     const subtitleWithAction: Subtitle = 
-      { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+      { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
         { objectId: "other-object", action: 'scaleToUpperRight', duration: 1, outputRange: [0, 1] },
         { objectId: "under-test", action: 'scaleToUpperRight', duration: 1, outputRange: [50, 100] },
       ] };
@@ -111,7 +111,7 @@ describe('AnimationEffect', () => {
       { actionType: 'disappear', sec: 1.1, expectedOpacity: '0.9' },
     ].forEach(({actionType, sec, expectedOpacity}) => {
       const subtitleWithAction: Subtitle = 
-        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: actionType as 'appear' | 'disappear', duration: 1 },
         ] };
       test('displays the correct transformation', () => {
@@ -136,11 +136,11 @@ describe('AnimationEffect', () => {
     ].forEach(({sec, expectedOpacity}) => {
       test(`appear, then disappear at sec ${sec}`, () => {
         const subtitleWithActionAppear: Subtitle = 
-        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: 'appear', duration: 1 },
         ] };
         const subtitleWithActionDisappear: Subtitle = 
-        { id: 'subtitle2', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: 'disappear', duration: 1 },
         ] };
         const animationContext: AnimationContext = makeMe
@@ -162,11 +162,11 @@ describe('AnimationEffect', () => {
     ].forEach(({sec, expectedOpacity}) => {
       test(`appear, then disappear at sec ${sec}`, () => {
         const subtitleWithActionAppear: Subtitle = 
-        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: 'appear', duration: 5 },
         ] };
         const subtitleWithActionDisappear: Subtitle = 
-        { id: 'subtitle2', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: 'disappear', duration: 3 },
         ] };
         const animationContext: AnimationContext = makeMe
@@ -189,7 +189,7 @@ describe('AnimationEffect', () => {
     ].forEach(({sec, shadowExist, expectedOpacity, expectedTransform}) => {
       test(`appear, then disappear at sec ${sec}`, () => {
         const subtitle: Subtitle = 
-        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: 'glow', duration: 1 },
         ] };
         const animationContext: AnimationContext = makeMe
@@ -216,11 +216,11 @@ describe('AnimationEffect', () => {
     ].forEach(({sec, expectedOpacity}) => {
       test(`appear, then disappear at sec ${sec}`, () => {
         const subtitleWithActionAppear: Subtitle = 
-        { id: 'subtitle1', leadingBlank: 1, duration: 2, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 2, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: 'appear', duration: 1 },
         ] };
         const subtitleWithActionGlow: Subtitle = 
-        { id: 'subtitle2', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: 'glow', duration: 1 },
         ] };
         const animationContext: AnimationContext = makeMe

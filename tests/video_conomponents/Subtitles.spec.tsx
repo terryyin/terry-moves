@@ -6,7 +6,7 @@ import { AnimationContext } from '@/models/AnimationContext';
 import { AnimationContextProvider } from '@/hooks/useAnimationContext';
 
 const subtitle: Subtitle = 
-  { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.' };
+  { leadingBlank: 1, duration: 3, text: 'First subtitle.' };
 
 const animationContext: AnimationContext = {
   allSubtitles: [subtitle],

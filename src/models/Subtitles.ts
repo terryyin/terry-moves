@@ -22,7 +22,6 @@ export interface ThreeDAction extends BaseAction {
 export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction;
 
 export interface Subtitle {
-  id: string;
   leadingBlank: number;
   duration: number;
   text: string;

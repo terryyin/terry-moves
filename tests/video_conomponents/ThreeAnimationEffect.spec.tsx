@@ -46,7 +46,7 @@ describe('ThreeAnimationEffect', () => {
       {tid: "1", expectScale: '1', expectRotateY: '0', expectTransY: '0' },
     ].forEach(({tid, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
-        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
         ] };
       test(`3d effect when no action specified, test id: ${tid}`, () => {
         const animationContext: AnimationContext = makeMe
@@ -71,7 +71,7 @@ describe('ThreeAnimationEffect', () => {
       {tid: "6", actionType: '3d rotate', sec: 1.1, expectScale: '1', expectRotateY: '0.3141592653589793', expectTransY: '0' },
     ].forEach(({tid, actionType, sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
-        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: actionType as '3d rise', duration: 1 },
         ] };
       test(`3d effect, test id: ${tid}`, () => {
@@ -95,7 +95,7 @@ describe('ThreeAnimationEffect', () => {
       {tid: "3", sec: 1.1, expectScale: '0.1912078645890012', expectRotateY: '-4.767631596417811', expectTransY: '-3.2351685416439953' },
     ].forEach(({tid, sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
-        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: '3d rise', duration: 1 },
           { objectId: "under-test", action: '3d rotate', duration: 1 },
         ] };

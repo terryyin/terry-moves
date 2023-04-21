@@ -12,9 +12,9 @@ function getCurrentSubtitleText(subtitles: Subtitle[], frame: number, fps: numbe
 
 describe('useCurrentSubtitle1', () => {
   const subtitles: Subtitle[] = [
-    { id: '1', leadingBlank: 1, duration: 1, text: 'First subtitle' },
-    { id: '2', leadingBlank: 1, duration: 1, text: 'Second subtitle' },
-    { id: '3', leadingBlank: 0, duration: 2, text: 'Third subtitle' },
+    { leadingBlank: 1, duration: 1, text: 'First subtitle' },
+    { leadingBlank: 1, duration: 1, text: 'Second subtitle' },
+    { leadingBlank: 0, duration: 2, text: 'Third subtitle' },
   ];
 
   it('should return the first subtitle if before the first one', () => {
