@@ -10,7 +10,7 @@ import AnimationEffect from './video_components/AnimationEffect';
 export const SceneLayout: React.FC = () => {
 
   return (
-    <AbsoluteFill>
+    <AbsoluteFill style={{ backgroundColor: 'beige'}}>
       <AnimationEffect actor="stage">
 				<Company style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
 				<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
