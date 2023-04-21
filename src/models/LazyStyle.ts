@@ -54,4 +54,13 @@ export default class LazyStyle {
 
     return { ...this.style, ...(opacity === undefined ? {} : {opacity}) };
   }
+
+  getStylePresence(frame: number): CSSProperties | undefined {
+    const style = this.getStyle(frame);
+    console.log(style)
+    const { opacity, ...rest } = style;
+    if(Object.keys(rest).length !== 0) return style;
+    if (opacity === undefined || Number(opacity) === 1) return undefined;
+    return style;
+  }
 }

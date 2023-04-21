@@ -5,6 +5,7 @@ import { AnimationContext } from "./AnimationContext";
 import DivActioner from './DivActioner';
 import EffectCalculator from './EffectCalculator';
 import ThreeDGroupActioner, { ThreeGroupAttributes } from './ThreeDGroupActioner';
+import DivShadowActioner from './DivShadowActioner';
 
 export default class AnimationContextWrapper {
 
@@ -31,6 +32,13 @@ export default class AnimationContextWrapper {
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
       .getStyle(this.animationContext.globalFrame);
+  }
+
+  getShadowStyleOf(objectId: string): CSSProperties | undefined {
+    return this.getActioner(objectId)
+      .map(effectCalculator => new DivShadowActioner(effectCalculator.action as Action, effectCalculator))
+      .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
+      .getStylePresence(this.animationContext.globalFrame);
   }
 
   get3DGroupAttributes(objectId: string): ThreeGroupAttributes {

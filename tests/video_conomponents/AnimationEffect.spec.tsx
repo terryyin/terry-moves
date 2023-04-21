@@ -7,15 +7,20 @@ import { AnimationContextProvider } from '@/hooks/useAnimationContext';
 import { makeMe } from '../helpers/makeMe';
 
 describe('AnimationEffect', () => {
-  const renderAndGetDivStyle = (animationContext: AnimationContext) => {
+
+  const renderAndGetDiv = (animationContext: AnimationContext): HTMLDivElement => {
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
         <AnimationEffect id="under-test"> </AnimationEffect>
       </AnimationContextProvider>
     );
-    const div = container.querySelector('#under-test');
+    const div = container.querySelector<HTMLDivElement>('#under-test');
     if (!div) throw new Error('Div not found');
-    return window.getComputedStyle(div);
+    return div;
+  };
+
+  const renderAndGetDivStyle = (animationContext: AnimationContext) => {
+    return window.getComputedStyle(renderAndGetDiv(animationContext));
   };
 
   describe('scaleToUpperRight', () => {
@@ -172,6 +177,33 @@ describe('AnimationEffect', () => {
                 .please();
         const computedStyle = renderAndGetDivStyle(animationContext);
         expect(computedStyle.getPropertyValue('opacity')).toBe(expectedOpacity);
+      });
+    });
+  });
+
+  describe('glow', () => {
+    [
+      { sec: 0, shadowExist: true, expectedOpacity: '0.9' },
+      { sec: 1.1, shadowExist: true, expectedOpacity: '0' },
+      { sec: 4.1, shadowExist: true, expectedOpacity: '0' },
+    ].forEach(({sec, shadowExist, }) => {
+      test(`appear, then disappear at sec ${sec}`, () => {
+        const subtitle: Subtitle = 
+        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+          { objectId: "under-test", action: 'glow', duration: 5 },
+        ] };
+        const animationContext: AnimationContext = makeMe
+                .animationContext
+                .withSubtitle(subtitle)
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        const shadow = div.nextElementSibling;
+        expect(Boolean(shadow)).toBe(shadowExist);
+        if(shadowExist) {
+          // Const computedStyle = renderAndGetDivStyle(shadow);
+          // Expect(computedStyle.getPropertyValue('opacity')).toBe(expectedOpacity);
+        }
       });
     });
   });

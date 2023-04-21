@@ -16,8 +16,8 @@ export const GrowingEffect: React.FC<{children: React.ReactNode, startSubtitleId
     height: '100%',
   };
 
-  return <div style={style}>
-    <div style={{ ...style, transform: `scale(${size / 100})`, transformOrigin: 'center', opacity: `${1 - progress}` }}>{children}</div>
+  return <>
+    {size !== 100 && <div style={{ ...style, transform: `scale(${size / 100})`, transformOrigin: 'center', opacity: `${1 - progress}` }}>{children}</div>}
     <div style={style}>{children}</div>
-  </div>;
+  </>;
 };

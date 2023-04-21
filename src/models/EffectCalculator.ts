@@ -16,8 +16,12 @@ export default class EffectCalculator {
     this.fps = fps;
   }
 
+  get durationInFrames(): number {
+    return this.action.duration * this.fps;
+  }
+
   get endFrame(): number {
-    return this.startFrame + this.action.duration * this.fps;
+    return this.startFrame + this.durationInFrames;
   }
 
   get frameRange(): [number, number] {
@@ -31,6 +35,20 @@ export default class EffectCalculator {
       config: {
         damping: 200,
         mass: 3,
+      },
+    });
+  }
+
+  getSpring1() {
+    return spring({
+      frame: this.frame - this.startFrame,
+      fps: this.fps,
+      durationInFrames: this.durationInFrames,
+      config: {
+        damping: 50,
+        mass: 0.5,
+        stiffness: 200,
+        overshootClamping: true,
       },
     });
   }
