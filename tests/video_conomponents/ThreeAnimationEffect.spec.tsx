@@ -46,9 +46,9 @@ describe('ThreeAnimationEffect', () => {
       {tid: "1", actionType: '3d rise',   sec: 0,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
       {tid: "2", actionType: '3d rise',   sec: 1,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
       {tid: "3", actionType: '3d rise',   sec: 1.1, expectScale: '0.11450093245053505', expectRotateY: '-5.563754730748022', expectTransY: '-3.54199627019786' },
-      {tid: "4", actionType: '3d rotate', sec: 0,   expectScale: '0', expectRotateY: '0', expectTransY: '0' },
-      {tid: "5", actionType: '3d rotate', sec: 1,   expectScale: '0', expectRotateY: '0', expectTransY: '0' },
-      {tid: "6", actionType: '3d rotate', sec: 1.1, expectScale: '0.11450093245053505', expectRotateY: '0', expectTransY: '0' },
+      {tid: "4", actionType: '3d rotate', sec: 0,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
+      {tid: "5", actionType: '3d rotate', sec: 1,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
+      {tid: "6", actionType: '3d rotate', sec: 1.1, expectScale: '1', expectRotateY: '0.3141592653589793', expectTransY: '0' },
     ].forEach(({tid, actionType, sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
         { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [

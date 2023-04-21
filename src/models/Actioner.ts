@@ -45,21 +45,30 @@ export default class Actioner {
     switch(this.action?.action) {
       case '3d rise':
         return interpolate(this.getThreeScale(), [0, 1], [-Math.PI * 2, 0]);
+      case '3d rotate':
+        return interpolate(this.frame, [this.startTime * this.fps, (this.startTime + this.action.duration) * this.fps], [0, Math.PI * this.action.duration], {
+          extrapolateLeft: 'clamp',
+          extrapolateRight: 'clamp',
+        });
       default:
         return 0;
     }
   }
 
   getThreeScale(): number {
-    if(!this.action) return 0;
-    return spring({
-      frame: this.frame - this.startTime * this.fps,
-      fps: this.fps,
-      config: {
-        damping: 200,
-        mass: 3,
-      },
-    });
+    switch(this.action?.action) {
+      case '3d rise':
+        return spring({
+          frame: this.frame - this.startTime * this.fps,
+          fps: this.fps,
+          config: {
+            damping: 200,
+            mass: 3,
+          },
+        });
+      default:
+        return 1;
+    }
   }
 
   private getScaleToUpperRightStyle(action: ScaleToUpperRightAction): CSSProperties {
