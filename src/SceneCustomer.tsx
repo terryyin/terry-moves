@@ -10,10 +10,12 @@ const subtitles: Subtitle[] = [
 		{ objectId: 'worried-mom', action: 'disappear', duration: 2 },
 		{ objectId: 'happy-mom', action: 'appear', duration: 2 },
 	] },
-	{ id: 'intro3', leadingBlank: 0, duration: 3, text: 'or meet their needs.' },
+	{ id: 'intro3', leadingBlank: 0, duration: 3, text: 'or meet their needs.', actions:[
+		{ objectId: 'happy-mom', action: 'glow', duration: 2 },
+	] },
 	{ id: 'customerResources1', leadingBlank: 1, duration: 3, text: 'In exchange, customers provide resources,' },
 	{ id: 'customerResources2', leadingBlank: 0, duration: 4, text: 'such as money, to fuel growth.', actions:[
-		{ objectId: 'company', action: 'glow', duration: 1 },
+		{ objectId: 'company', action: 'glow', duration: 2 },
 	] },
 	{ id: 'softwareRole1', leadingBlank: 1, duration: 3, text: 'Software products often play a', actions:[
 		{ objectId: 'product', action: '3d rise', duration: 1 },
