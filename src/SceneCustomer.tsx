@@ -5,7 +5,9 @@ import autonomousComponent from './video_components/autonomousComponent';
 import { SceneLayout } from './SceneLayout';
 
 const subtitles: Subtitle[] = [
-	{ id: 'intro1', leadingBlank: 1, duration: 3, text: 'A company delivers services to users,' },
+	{ id: 'intro1', leadingBlank: 1, duration: 3, text: 'A company delivers services to users,', actions:[
+		{ objectId: 'value to customer', action: 'appear', duration: 1 },
+	] },
 	{ id: 'intro2', leadingBlank: 0, duration: 3, text: 'aiming to solve customers\' problems', actions:[
 		{ objectId: 'worried-mom', action: 'disappear', duration: 2 },
 		{ objectId: 'happy-mom', action: 'appear', duration: 2 },
@@ -13,7 +15,9 @@ const subtitles: Subtitle[] = [
 	{ id: 'intro3', leadingBlank: 0, duration: 3, text: 'or meet their needs.', actions:[
 		{ objectId: 'happy-mom', action: 'glow', duration: 2 },
 	] },
-	{ id: 'customerResources1', leadingBlank: 1, duration: 3, text: 'In exchange, customers provide resources,' },
+	{ id: 'customerResources1', leadingBlank: 1, duration: 3, text: 'In exchange, customers provide resources,', actions: [
+		{ objectId: 'value from customer', action: 'appear', duration: 1 },
+	] },
 	{ id: 'customerResources2', leadingBlank: 0, duration: 4, text: 'such as money, to fuel growth.', actions:[
 		{ objectId: 'company', action: 'glow', duration: 2 },
 	] },
