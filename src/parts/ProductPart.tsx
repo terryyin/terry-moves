@@ -6,13 +6,13 @@ import {
 	PHONE_COLOR,
 	PHONE_CURVE_SEGMENTS,
 	PHONE_SHININESS,
-} from './helpers/layout';
-import {roundedRect} from './helpers/rounded-rectangle';
-import {RoundedBox} from './RoundedBox';
+} from '../helpers/layout';
+import {roundedRect} from '../helpers/rounded-rectangle';
+import {RoundedBox} from '../RoundedBox';
 import { TextureLoader } from 'three';
-import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
+import { ThreeAnimationEffect } from '../video_components/ThreeAnimationEffect';
 
-export const Phone: React.FC<{
+export const ProductPart: React.FC<{
 	aspectRatio: number;
 	baseScale: number;
 }> = ({aspectRatio, baseScale}) => {
@@ -32,7 +32,7 @@ export const Phone: React.FC<{
 		});
 	}, [layout.screen.height, layout.screen.radius, layout.screen.width]);
 
-	const servicePersonTexture = useLoader(TextureLoader, staticFile('assets/ServicePerson.svg'));
+	const servicePersonTexture = useLoader(TextureLoader, staticFile('assets/ProductPart1.svg'));
 
 	return (
 		<ThreeAnimationEffect id="product">

@@ -15,7 +15,7 @@ export const ThreeAnimationEffect: React.FC<{
 	// Then make it look at the object.
 	const camera = useThree((state) => state.camera);
 	useEffect(() => {
-		camera.position.set(0, 0, CAMERA_DISTANCE);
+		camera.position.set(0, -0.5, CAMERA_DISTANCE);
 		camera.near = 0.2;
 		camera.far = Math.max(5000, CAMERA_DISTANCE * 2);
 		camera.lookAt(0, 0, 0);
