@@ -1,5 +1,4 @@
 import { CSSProperties } from 'react';
-import {spring} from 'remotion'
 import { Action, Subtitle } from '@/models/Subtitles';
 import { AnimationContext } from "./AnimationContext";
 import DivActioner from './DivActioner';
@@ -57,20 +56,6 @@ export default class AnimationContextWrapper {
         break;
     }
     return endTime - targetSubtitle.duration;
-  }
-
-  getSpring(startSubtitleId: string) {
-    return spring({
-      frame: this.animationContext.globalFrame - this.getStartTimeOfSubtitle(startSubtitleId) * this.animationContext.globalFps,
-      durationInFrames: 60,
-      fps: 30,
-      config: {
-        damping: 50,
-        mass: 0.5,
-        stiffness: 200,
-        overshootClamping: true,
-      },
-    });
   }
 
   sinceSubtitle(subtitleId: string): boolean {
