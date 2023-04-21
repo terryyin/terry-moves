@@ -41,6 +41,15 @@ export default class Actioner {
     }
   }
 
+  getThreeRotateY(): number {
+    switch(this.action?.action) {
+      case '3d rise':
+        return interpolate(this.getThreeScale(), [0, 1], [-Math.PI * 2, 0]);
+      default:
+        return 0;
+    }
+  }
+
   getThreeScale(): number {
     if(!this.action) return 0;
     return spring({

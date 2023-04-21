@@ -36,12 +36,13 @@ export default class AnimationContextWrapper {
   get3DGroupAttributes(objectId: string): ThreeGroupAttributes {
     const actioner = this.getActioner(objectId);
     const translateY = actioner.getThreeTranslateY();
+    const rotateY = actioner.getThreeRotateY();
     const scale = actioner.getThreeScale();
 
     return {
       position: [0, translateY, 0],
       scale,
-      rotation: [0, 0, 0],
+      rotation: [0, rotateY, 0],
     }
   }
 

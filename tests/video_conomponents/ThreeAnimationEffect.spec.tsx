@@ -43,9 +43,9 @@ describe('ThreeAnimationEffect', () => {
 
   describe('3d effects', () => {
     [
-      {tid: "1", actionType: '3d rise', sec: 0,   expectScale: '0', expectRotateY: '0', expectTransY: '-4' },
-      {tid: "2", actionType: '3d rise', sec: 1,   expectScale: '0', expectRotateY: '0', expectTransY: '-4' },
-      {tid: "3", actionType: '3d rise', sec: 1.1, expectScale: '0.11450093245053505', expectRotateY: '0', expectTransY: '-3.54199627019786' },
+      {tid: "1", actionType: '3d rise',   sec: 0,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
+      {tid: "2", actionType: '3d rise',   sec: 1,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
+      {tid: "3", actionType: '3d rise',   sec: 1.1, expectScale: '0.11450093245053505', expectRotateY: '-5.563754730748022', expectTransY: '-3.54199627019786' },
       {tid: "4", actionType: '3d rotate', sec: 0,   expectScale: '0', expectRotateY: '0', expectTransY: '0' },
       {tid: "5", actionType: '3d rotate', sec: 1,   expectScale: '0', expectRotateY: '0', expectTransY: '0' },
       {tid: "6", actionType: '3d rotate', sec: 1.1, expectScale: '0.11450093245053505', expectRotateY: '0', expectTransY: '0' },
