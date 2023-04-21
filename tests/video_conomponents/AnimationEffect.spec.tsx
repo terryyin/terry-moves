@@ -184,9 +184,9 @@ describe('AnimationEffect', () => {
   describe('glow', () => {
     [
       { sec: 0, shadowExist: false, expectedOpacity: undefined },
-      { sec: 1.1, shadowExist: true, expectedOpacity: '0.8087921354109988' },
+      { sec: 1.1, shadowExist: true, expectedOpacity: '0.8087921354109988', expectedTransform: 'scale(1.0382415729178003)' },
       { sec: 5.1, shadowExist: false, expectedOpacity: undefined },
-    ].forEach(({sec, shadowExist, expectedOpacity}) => {
+    ].forEach(({sec, shadowExist, expectedOpacity, expectedTransform}) => {
       test(`appear, then disappear at sec ${sec}`, () => {
         const subtitle: Subtitle = 
         { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
@@ -203,6 +203,7 @@ describe('AnimationEffect', () => {
         if(shadow) {
           const computedStyle = window.getComputedStyle(shadow);
           expect(computedStyle.getPropertyValue('opacity')).toBe(expectedOpacity);
+          expect(computedStyle.getPropertyValue('transform')).toBe(expectedTransform);
         }
       });
     });
