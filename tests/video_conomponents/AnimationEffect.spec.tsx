@@ -24,6 +24,15 @@ describe('AnimationEffect', () => {
         { objectId: "under-test", action: 'scaleToUpperRight', duration: 1, outputRange: [50, 100] },
       ] };
 
+    test('default value when no action specified', () => {
+      const animationContext: AnimationContext = makeMe
+              .animationContext
+              .withSubtitle({ id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.'})
+              .please();
+      const computedStyle = renderAndGetDivStyle(animationContext);
+      expect(computedStyle.getPropertyValue('width')).toBe("100%");
+    });
+
     [
       { sec: 0, expectedWidth: '50%' },
       { sec: 1, expectedWidth: '50%' },
