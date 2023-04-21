@@ -18,7 +18,7 @@ jest.mock('@react-three/fiber', () => ({
 },
 }));
 
-describe('AnimationEffect', () => {
+describe('ThreeAnimationEffect', () => {
   let  consoleSpy: jest.SpyInstance;
   beforeEach(() => {
     // eslint-disable-next-line @typescript-eslint/no-empty-function
@@ -41,26 +41,31 @@ describe('AnimationEffect', () => {
     return group;
   };
 
-  describe('scaleToUpperRight', () => {
-    const subtitleWithAction: Subtitle = 
-      { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-        { objectId: "under-test", action: '3d rise', duration: 1 },
-      ] };
-
+  describe('3d effects', () => {
     [
-      { sec: 0, expectedTranslateY: '-4' },
-      { sec: 1, expectedTranslateY: '-4' },
-      { sec: 1.1, expectedTranslateY: '-3.54199627019786' },
-    ].forEach(({sec, expectedTranslateY}) => {
-      test('displays the correct transformation', () => {
+      {tid: "1", actionType: '3d rise', sec: 0,   expectScale: '0', expectRotateY: '0', expectTransY: '-4' },
+      {tid: "2", actionType: '3d rise', sec: 1,   expectScale: '0', expectRotateY: '0', expectTransY: '-4' },
+      {tid: "3", actionType: '3d rise', sec: 1.1, expectScale: '0.11450093245053505', expectRotateY: '0', expectTransY: '-3.54199627019786' },
+      {tid: "4", actionType: '3d rotate', sec: 0,   expectScale: '0', expectRotateY: '0', expectTransY: '0' },
+      {tid: "5", actionType: '3d rotate', sec: 1,   expectScale: '0', expectRotateY: '0', expectTransY: '0' },
+      {tid: "6", actionType: '3d rotate', sec: 1.1, expectScale: '0.11450093245053505', expectRotateY: '0', expectTransY: '0' },
+    ].forEach(({tid, actionType, sec, expectScale, expectRotateY, expectTransY}) => {
+      const subtitleWithAction: Subtitle = 
+        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+          { objectId: "under-test", action: actionType as '3d rise', duration: 1 },
+        ] };
+      test(`3d effect, test id: ${tid}`, () => {
         const animationContext: AnimationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .seconds(sec)
                 .please();
         const group = renderAndGetGroup(animationContext);
-        expect(group).toHaveAttribute('position', `0,${expectedTranslateY},0`);
+        expect(group).toHaveAttribute('position', `0,${expectTransY},0`);
+        expect(group).toHaveAttribute('rotation', `0,${expectRotateY},0`);
+        expect(group).toHaveAttribute('scale', `${expectScale}`);
       });
     });
   });
+
 });

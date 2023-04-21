@@ -33,9 +33,12 @@ export default class Actioner {
   }
 
   getThreeTranslateY(): number {
-    if(!this.action) return 0;
-    const entranceAnimation = this.getThreeScale();
-    return interpolate(entranceAnimation, [0, 1], [-4, 0]);
+    switch(this.action?.action) {
+      case '3d rise':
+        return interpolate(this.getThreeScale(), [0, 1], [-4, 0]);
+      default:
+        return 0;
+    }
   }
 
   getThreeScale(): number {

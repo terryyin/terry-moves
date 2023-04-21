@@ -1,4 +1,4 @@
-import { Vector3 } from '@react-three/fiber';
+import { Euler, Vector3 } from '@react-three/fiber';
 import { CSSProperties } from 'react';
 import {spring} from 'remotion'
 import { Action, Subtitle } from '@/models/Subtitles';
@@ -8,7 +8,7 @@ import Actioner from './Actioner';
 type ThreeGroupAttributes = {
   scale: number;
   position: Vector3;
-  rotation: Vector3;
+  rotation: Euler;
 }
 
 export default class AnimationContextWrapper {
@@ -33,7 +33,7 @@ export default class AnimationContextWrapper {
     return this.getActioner(objectId).getStyle();
   }
 
-  get3DPosition(objectId: string): ThreeGroupAttributes {
+  get3DGroupAttributes(objectId: string): ThreeGroupAttributes {
     const actioner = this.getActioner(objectId);
     const translateY = actioner.getThreeTranslateY();
     const scale = actioner.getThreeScale();

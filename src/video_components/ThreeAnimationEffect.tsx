@@ -36,12 +36,14 @@ export const ThreeAnimationEffect: React.FC<{
 	// Calculating the total rotation of the phone
 	const rotateY = constantRotation;
 
-	const { scale, position } = animationContextWrapper.get3DPosition(id);
+	console.log(rotateY)
+
+	const { scale, position, rotation } = animationContextWrapper.get3DGroupAttributes(id);
 
 	return (
 		<group
 			scale={scale}
-			rotation={[0, rotateY, 0]}
+			rotation={ rotation }
 			position={ position }
 		>
 			{children}
