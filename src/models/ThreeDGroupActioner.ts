@@ -1,9 +1,22 @@
+import { Euler, Vector3 } from '@react-three/fiber';
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
+
+export type ThreeGroupAttributes = {
+  scale: number;
+  position: Vector3;
+  rotation: Euler;
+}
 
 export default class ThreeDGroupActioner {
   action: Action;
   effectCalculator: EffectCalculator;
+
+  static defaultValue: ThreeGroupAttributes = {
+    scale: 1,
+    position: [0, 0, 0],
+    rotation: [0, 0, 0],
+  };
 
   constructor(action: Action, effectCalculator: EffectCalculator) {
     this.effectCalculator = effectCalculator;
