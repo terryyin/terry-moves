@@ -19,22 +19,31 @@ export default class AnimationContextWrapper {
     this.animationContext = animationContext;
   }
 
-  private getActioner(objectId: string): Actioner {
+  private getActioner(objectId: string): Actioner | undefined {
     const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
     let action: Action | undefined;
     if(subtitle?.actions) {
       action = subtitle.actions.find(action => action.objectId === objectId);
     }
     const startTime = subtitle ? this.getStartTimeOfSubtitle(subtitle.id) : 0; 
-    return new Actioner(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
+    if(action) {
+      return new Actioner(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
+    }
   }
 
   getStyleOf(objectId: string): CSSProperties {
-    return this.getActioner(objectId).getStyle();
+    const actioner = this.getActioner(objectId);
+    if(!actioner) return {};
+    return actioner.getStyle();
   }
 
   get3DGroupAttributes(objectId: string): ThreeGroupAttributes {
     const actioner = this.getActioner(objectId);
+    if(!actioner) return {
+      position: [0, 0, 0],
+      scale: 1,
+      rotation: [0, 0, 0],
+    };
     const translateY = actioner.getThreeTranslateY();
     const rotateY = actioner.getThreeRotateY();
     const scale = actioner.getThreeScale();

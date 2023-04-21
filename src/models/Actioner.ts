@@ -5,13 +5,13 @@ import { CSSProperties } from 'react';
 import { Action } from '@/models/Subtitles';
 
 export default class Actioner {
-  action: Action | undefined;
+  action: Action;
   startFrame: number;
   frame: number;
   fps: number;
 
 
-  constructor(action: Action | undefined, startTime: number, frame: number, fps: number) {
+  constructor(action: Action, startTime: number, frame: number, fps: number) {
     this.action = action;
     this.startFrame = startTime * fps;
     this.frame = frame;
@@ -19,12 +19,10 @@ export default class Actioner {
   }
 
   private get endFrame(): number {
-    if(!this.action) throw new Error('Action is undefined');
     return this.startFrame + this.action.duration * this.fps;
   }
 
   getStyle(): CSSProperties {
-    if(!this.action) return {};
     switch(this.action.action) {
       case 'scaleToUpperRight':
         return this.getScaleToUpperRightStyle(this.action);
@@ -38,7 +36,7 @@ export default class Actioner {
   }
 
   getThreeTranslateY(): number {
-    switch(this.action?.action) {
+    switch(this.action.action) {
       case '3d rise':
         return this.interpolateSpring([-4, 0]);
       default:
@@ -47,7 +45,7 @@ export default class Actioner {
   }
 
   getThreeRotateY(): number {
-    switch(this.action?.action) {
+    switch(this.action.action) {
       case '3d rise':
         return this.interpolateSpring([-Math.PI * 2, 0]);
       case '3d rotate':
@@ -58,7 +56,7 @@ export default class Actioner {
   }
 
   getThreeScale(): number {
-    switch(this.action?.action) {
+    switch(this.action.action) {
       case '3d rise':
         return this.getSpring();
       default:
