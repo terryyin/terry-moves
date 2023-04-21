@@ -3,7 +3,7 @@ import {spring} from 'remotion'
 import { BaseAction } from './Subtitles';
 import { CSSProperties } from 'react';
 
-export default class Actioner {
+export default class EffectCalculator {
   action: BaseAction;
   startFrame: number;
   frame: number;
@@ -17,11 +17,11 @@ export default class Actioner {
     this.fps = fps;
   }
 
-  protected get endFrame(): number {
+  get endFrame(): number {
     return this.startFrame + this.action.duration * this.fps;
   }
 
-  protected getSpring(): number {
+  getSpring(): number {
     return spring({
       frame: this.frame - this.startFrame,
       fps: this.fps,
@@ -32,22 +32,21 @@ export default class Actioner {
     });
   }
 
-  protected getAppearStyle(range: number[]): CSSProperties {
+  getAppearStyle(range: number[]): CSSProperties {
     const scale = this.interpolateDuration(range);
     return {
       opacity: scale,
     }
   }
 
-  protected interpolateSpring(outputRange: number[]): number {
+  interpolateSpring(outputRange: number[]): number {
     return interpolate(this.getSpring(), [0, 1], outputRange);
   }
 
-  protected interpolateDuration(outputRange: number[]): number {
+  interpolateDuration(outputRange: number[]): number {
     return interpolate(this.frame, [this.startFrame, this.endFrame], outputRange, {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     });
   }
-
 }
