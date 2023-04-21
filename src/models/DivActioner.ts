@@ -2,13 +2,15 @@ import { ScaleToUpperRightAction } from './Subtitles';
 import { CSSProperties } from 'react';
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
+import ThreeDGroupActioner from './TreeDGroupActioner';
 
-export default class DivActioner {
+export default class DivActioner extends ThreeDGroupActioner {
   action: Action;
   effectCalculator: EffectCalculator;
 
-  constructor(action: Action, startTime: number, frame: number, fps: number) {
-    this.effectCalculator = new EffectCalculator(action, startTime, frame, fps);
+  constructor(action: Action, effectCalculator: EffectCalculator) {
+    super(action, effectCalculator)
+    this.effectCalculator = effectCalculator;
     this.action = action;
   }
 
@@ -22,35 +24,6 @@ export default class DivActioner {
         return this.effectCalculator.getAppearStyle([1, 0]);
       default:
         throw new Error(`Unknown action type for div ${this.action.action}`);
-    }
-  }
-
-  getThreeTranslateY(): number {
-    switch(this.action.action) {
-      case '3d rise':
-        return this.effectCalculator.interpolateSpring([-4, 0]);
-      default:
-        return 0;
-    }
-  }
-
-  getThreeRotateY(): number {
-    switch(this.action.action) {
-      case '3d rise':
-        return this.effectCalculator.interpolateSpring([-Math.PI * 2, 0]);
-      case '3d rotate':
-        return this.effectCalculator.interpolateDuration([0, Math.PI * this.action.duration]);
-      default:
-        return 0;
-    }
-  }
-
-  getThreeScale(): number {
-    switch(this.action.action) {
-      case '3d rise':
-        return this.effectCalculator.getSpring();
-      default:
-        return 1;
     }
   }
 

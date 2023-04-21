@@ -4,6 +4,7 @@ import {spring} from 'remotion'
 import { Action, Subtitle } from '@/models/Subtitles';
 import { AnimationContext } from "./AnimationContext";
 import DivActioner from './DivActioner';
+import EffectCalculator from './EffectCalculator';
 
 type ThreeGroupAttributes = {
   scale: number;
@@ -27,7 +28,8 @@ export default class AnimationContextWrapper {
     }
     const startTime = subtitle ? this.getStartTimeOfSubtitle(subtitle.id) : 0; 
     if(action) {
-      return new DivActioner(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
+      const effectCalculator = new EffectCalculator(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
+      return new DivActioner(action, effectCalculator);
     }
   }
 
