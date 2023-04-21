@@ -5,17 +5,17 @@ import autonomousComponent from './video_components/autonomousComponent';
 import { SceneLayout } from './SceneLayout';
 
 const subtitles: Subtitle[] = [
-	{ leadingBlank: 1, duration: 3, text: 'A company delivers services to users,', actions:[
+	{ leadingBlank: 1, duration: 4, text: 'A company delivers services to users,', actions:[
 		{ actor: 'value to customer', actionType: 'appear', duration: 1 },
 	] },
-	{ leadingBlank: 0, duration: 3, text: 'aiming to solve customers\' problems', actions:[
+	{ leadingBlank: 0, duration: 4, text: 'aiming to solve customers\' problems', actions:[
 		{ actor: 'worried-mom', actionType: 'disappear', duration: 2 },
 		{ actor: 'happy-mom', actionType: 'appear', duration: 2 },
 	] },
-	{ leadingBlank: 0, duration: 3, text: 'or meet their needs.', actions:[
+	{ leadingBlank: 0, duration: 4, text: 'or meet their needs.', actions:[
 		{ actor: 'happy-mom', actionType: 'glow', duration: 2 },
 	] },
-	{ leadingBlank: 1, duration: 3, text: 'In exchange, customers provide resources,', actions: [
+	{ leadingBlank: 1, duration: 4, text: 'In exchange, customers provide resources,', actions: [
 		{ actor: 'value from customer', actionType: 'appear', duration: 1 },
 	] },
 	{ leadingBlank: 0, duration: 4, text: 'such as money, to fuel growth.', actions:[
@@ -23,9 +23,9 @@ const subtitles: Subtitle[] = [
 	] },
 	{ leadingBlank: 1, duration: 3, text: 'Software products often play a', actions:[
 		{ actor: 'product', actionType: '3d rise', duration: 1 },
-		{ actor: 'product', actionType: '3d rotate', duration: 1000 },
+		{ actor: 'product', actionType: '3d rotate', duration: 4, totalRotation: 360 + 30 },
 	] },
-	{ leadingBlank: 0, duration: 3, text: 'crucial role in providing services.', actions: [
+	{ leadingBlank: 0, duration: 4, text: 'crucial role in providing services.', actions: [
 	]},
 	{ leadingBlank: 1, duration: 3, text: 'Traditionally, businesses focused on' },
 	{ leadingBlank: 0, duration: 3, text: 'their core domain, not software.' },

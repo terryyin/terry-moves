@@ -1,3 +1,4 @@
+import { ThreeDRotateAction } from './Subtitles';
 import * as THREE from 'three';
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
@@ -59,7 +60,7 @@ export default class ThreeDGroupActioner {
       case '3d rise':
         return this.effectCalculator.interpolateSpring([-Math.PI * 2, 0]);
       case '3d rotate':
-        return this.effectCalculator.interpolateDuration([0, Math.PI * this.action.duration]);
+        return this.effectCalculator.interpolateDuration([0, Math.PI * (this.action as ThreeDRotateAction).totalRotation / 180]);
       default:
         return 0;
     }

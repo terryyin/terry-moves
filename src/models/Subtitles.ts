@@ -15,9 +15,17 @@ export interface AppearAction extends BaseAction {
   actionType: 'appear' | 'disappear' | 'glow';
 }
 
-export interface ThreeDAction extends BaseAction {
-  actionType: '3d rise' | '3d rotate';
+interface ThreeDRiseAction extends BaseAction {
+  actionType: '3d rise';
 }
+
+export interface ThreeDRotateAction extends BaseAction {
+  actionType: '3d rotate';
+  totalRotation: number;
+}
+
+
+export type ThreeDAction = ThreeDRiseAction | ThreeDRotateAction;
 
 export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction;
 
