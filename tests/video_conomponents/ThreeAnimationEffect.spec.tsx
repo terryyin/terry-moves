@@ -41,6 +41,26 @@ describe('ThreeAnimationEffect', () => {
     return group;
   };
 
+  describe('3d effects default values', () => {
+    [
+      {tid: "1", expectScale: '1', expectRotateY: '0', expectTransY: '0' },
+    ].forEach(({tid, expectScale, expectRotateY, expectTransY}) => {
+      const subtitleWithAction: Subtitle = 
+        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+        ] };
+      test(`3d effect when no action specified, test id: ${tid}`, () => {
+        const animationContext: AnimationContext = makeMe
+                .animationContext
+                .withSubtitle(subtitleWithAction)
+                .please();
+        const group = renderAndGetGroup(animationContext);
+        expect(group).toHaveAttribute('position', `0,${expectTransY},0`);
+        expect(group).toHaveAttribute('rotation', `0,${expectRotateY},0`);
+        expect(group).toHaveAttribute('scale', `${expectScale}`);
+      });
+    });
+  });
+
   describe('3d effects', () => {
     [
       {tid: "1", actionType: '3d rise',   sec: 0,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
