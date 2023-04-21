@@ -15,16 +15,15 @@ export default class AnimationContextWrapper {
   }
 
   private getActioner(objectId: string): EffectCalculator[] {
-    const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
-    if(subtitle?.actions) {
+    return this.animationContext.allSubtitles.map(subtitle => {
+      if(!subtitle?.actions) return [];
       return subtitle.actions
         .filter(action => action.objectId === objectId)
         .map(action => {
           const startTime = subtitle ? this.getStartTimeOfSubtitle(subtitle.id) : 0; 
           return new EffectCalculator(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
         });
-      }
-    return []
+    }).flat();
   }
 
   getStyleOf(objectId: string): CSSProperties {
@@ -35,10 +34,9 @@ export default class AnimationContextWrapper {
   }
 
   get3DGroupAttributes(objectId: string): ThreeGroupAttributes {
-    const effectCalculators = this.getActioner(objectId);
-    return effectCalculators
+    return this.getActioner(objectId)
       .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator))
-      .reduce((prev, curr) => curr.multiply(prev), ThreeDGroupActioner.defaultValue);
+      .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue);
   }
 
   getStartTimeOfSubtitle(subtitleId: string): number {

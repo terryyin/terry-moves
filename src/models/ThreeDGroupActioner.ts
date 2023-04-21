@@ -23,7 +23,7 @@ export default class ThreeDGroupActioner {
     this.action = action;
   }
 
-  multiply(prev: ThreeGroupAttributes): ThreeGroupAttributes {
+  combine(prev: ThreeGroupAttributes): ThreeGroupAttributes {
     const current = this.get3DGroupAttributes();
     return {
       scale: prev.scale * current.scale,
