@@ -15,12 +15,12 @@ export default class AnimationContextWrapper {
   }
 
   private getActioner(objectId: string): EffectCalculator[] {
-    return this.animationContext.allSubtitles.map(subtitle => {
+    return this.animationContext.allSubtitles.map((subtitle, index) => {
       if(!subtitle?.actions) return [];
       return subtitle.actions
         .filter(action => action.objectId === objectId)
         .map(action => {
-          const startTime = subtitle ? this.getStartTimeOfSubtitle(subtitle.id) : 0; 
+          const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0; 
           return new EffectCalculator(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
         });
     }).flat();
@@ -46,13 +46,13 @@ export default class AnimationContextWrapper {
       .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue);
   }
 
-  private getStartTimeOfSubtitle(subtitleId: string): number {
+  private getStartTimeOfSubtitle(subtitleIndex: number): number {
     let endTime = 0;
     let targetSubtitle: Subtitle = this.animationContext.allSubtitles[0];
     for (let i = 0; i < this.animationContext.allSubtitles.length; i++) {
       targetSubtitle = this.animationContext.allSubtitles[i];
       endTime += targetSubtitle.leadingBlank + targetSubtitle.duration;
-      if (subtitleId === targetSubtitle.id)
+      if (subtitleIndex === i)
         break;
     }
     return endTime - targetSubtitle.duration;
@@ -72,4 +72,3 @@ export default class AnimationContextWrapper {
     return this.animationContext.globalFrame > (endTime) * this.animationContext.globalFps || this.animationContext.globalFrame < (endTime - subtitle.duration) * this.animationContext.globalFps ? '' : subtitle.text;
   }
 };
-
