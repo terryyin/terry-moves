@@ -15,8 +15,10 @@ const subtitles: Subtitle[] = [
 	{ id: 'customerResources2', leadingBlank: 0, duration: 4, text: 'such as money, to fuel growth.' },
 	{ id: 'softwareRole1', leadingBlank: 1, duration: 3, text: 'Software products often play a', actions:[
 		{ objectId: 'product', action: '3d rise', duration: 1 },
+		{ objectId: 'product', action: '3d rotate', duration: 1000 },
 	] },
-	{ id: 'softwareRole2', leadingBlank: 0, duration: 3, text: 'crucial role in providing services.' },
+	{ id: 'softwareRole2', leadingBlank: 0, duration: 3, text: 'crucial role in providing services.', actions: [
+	]},
 	{ id: 'traditionalBelief1', leadingBlank: 1, duration: 3, text: 'Traditionally, businesses focused on' },
 	{ id: 'traditionalBelief2', leadingBlank: 0, duration: 3, text: 'their core domain, not software.' },
 	{ id: 'externalTeams1', leadingBlank: 1, duration: 3, text: 'Developers were part of external teams,', actions:[

@@ -6,16 +6,21 @@ import { Action } from '@/models/Subtitles';
 
 export default class Actioner {
   action: Action | undefined;
-  startTime: number;
+  startFrame: number;
   frame: number;
   fps: number;
 
 
   constructor(action: Action | undefined, startTime: number, frame: number, fps: number) {
     this.action = action;
-    this.startTime = startTime;
+    this.startFrame = startTime * fps;
     this.frame = frame;
     this.fps = fps;
+  }
+
+  private get endFrame(): number {
+    if(!this.action) throw new Error('Action is undefined');
+    return this.startFrame + this.action.duration * this.fps;
   }
 
   getStyle(): CSSProperties {
@@ -35,7 +40,7 @@ export default class Actioner {
   getThreeTranslateY(): number {
     switch(this.action?.action) {
       case '3d rise':
-        return interpolate(this.getThreeScale(), [0, 1], [-4, 0]);
+        return this.interpolateSpring([-4, 0]);
       default:
         return 0;
     }
@@ -44,12 +49,9 @@ export default class Actioner {
   getThreeRotateY(): number {
     switch(this.action?.action) {
       case '3d rise':
-        return interpolate(this.getThreeScale(), [0, 1], [-Math.PI * 2, 0]);
+        return this.interpolateSpring([-Math.PI * 2, 0]);
       case '3d rotate':
-        return interpolate(this.frame, [this.startTime * this.fps, (this.startTime + this.action.duration) * this.fps], [0, Math.PI * this.action.duration], {
-          extrapolateLeft: 'clamp',
-          extrapolateRight: 'clamp',
-        });
+        return this.interpolateDuration([0, Math.PI * this.action.duration]);
       default:
         return 0;
     }
@@ -58,40 +60,43 @@ export default class Actioner {
   getThreeScale(): number {
     switch(this.action?.action) {
       case '3d rise':
-        return spring({
-          frame: this.frame - this.startTime * this.fps,
-          fps: this.fps,
-          config: {
-            damping: 200,
-            mass: 3,
-          },
-        });
+        return this.getSpring();
       default:
         return 1;
     }
   }
 
+  private getSpring(): number {
+    return spring({
+      frame: this.frame - this.startFrame,
+      fps: this.fps,
+      config: {
+        damping: 200,
+        mass: 3,
+      },
+    });
+  }
+
   private getScaleToUpperRightStyle(action: ScaleToUpperRightAction): CSSProperties {
-    const scale = this.getScale(action.outputRange);
+    const scale = this.interpolateDuration(action.outputRange);
     return {
       left: `${100 - scale}%`, top:'0%', width: `${scale}%`, height: `${scale}%`
     }
   }
 
   private getAppearStyle(range: number[]): CSSProperties {
-    const scale = this.getScale(range);
+    const scale = this.interpolateDuration(range);
     return {
       opacity: scale,
     }
   }
 
-  private getScale(outputRange: number[]): number {
-    if(!this.action) return 100;
-    return this.interpolate1(this.action.duration, outputRange);
+  private interpolateSpring(outputRange: number[]): number {
+    return interpolate(this.getSpring(), [0, 1], outputRange);
   }
-  
-  private interpolate1(durationInSeconds: number, outputRange: number[]): number {
-    return interpolate(this.frame, [this.startTime * this.fps, (this.startTime + durationInSeconds) * this.fps], outputRange, {
+
+  private interpolateDuration(outputRange: number[]): number {
+    return interpolate(this.frame, [this.startFrame, this.endFrame], outputRange, {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',
     });
