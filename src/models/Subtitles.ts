@@ -1,7 +1,7 @@
 export type ActionType = 'scaleToUpperRight' | 'appear' | 'disappear' | '3d rise' | '3d rotate' | 'glow';
 
 export interface BaseAction {
-  objectId: string;
+  actor: string;
   actionType: ActionType;
   duration: number;
 }

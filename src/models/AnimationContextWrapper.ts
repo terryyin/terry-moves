@@ -14,11 +14,11 @@ export default class AnimationContextWrapper {
     this.animationContext = animationContext;
   }
 
-  private getActioner(objectId: string): EffectCalculator[] {
+  private getActioner(actor: string): EffectCalculator[] {
     return this.animationContext.allSubtitles.map((subtitle, index) => {
       if(!subtitle?.actions) return [];
       return subtitle.actions
-        .filter(action => action.objectId === objectId)
+        .filter(action => action.actor === actor)
         .map(action => {
           const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0; 
           return new EffectCalculator(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
@@ -26,22 +26,22 @@ export default class AnimationContextWrapper {
     }).flat();
   }
 
-  getStyleOf(objectId: string): CSSProperties {
-    return this.getActioner(objectId)
+  getStyleOf(actor: string): CSSProperties {
+    return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
       .getStyle(this.animationContext.globalFrame);
   }
 
-  getShadowStyleOf(objectId: string): CSSProperties | undefined {
-    return this.getActioner(objectId)
+  getShadowStyleOf(actor: string): CSSProperties | undefined {
+    return this.getActioner(actor)
       .map(effectCalculator => new DivShadowActioner(effectCalculator.action as Action, effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
       .getStylePresence(this.animationContext.globalFrame);
   }
 
-  get3DGroupAttributes(objectId: string): ThreeGroupAttributes {
-    return this.getActioner(objectId)
+  get3DGroupAttributes(actor: string): ThreeGroupAttributes {
+    return this.getActioner(actor)
       .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue);
   }

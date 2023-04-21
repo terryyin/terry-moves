@@ -6,7 +6,7 @@ import AnimationEffect from '../video_components/AnimationEffect';
 export const Company: React.FC<{style?: CSSProperties}> = ({ style }) => {
   return (
       <div style={style}>
-				<AnimationEffect id="company">
+				<AnimationEffect actor="company">
 				<div style={{position: 'relative', left: '0%', top:'0%', width: '100%', height: '100%'}}>
 					<Img src={staticFile("assets/House.svg")} style={{position: 'absolute', left: '0%', top: '0%', width: '100%'}} />
 					<Img src={staticFile("assets/ServicePerson.svg")} style={{position: 'absolute', left: '45%', top: '30%', width: '40%'}} />
