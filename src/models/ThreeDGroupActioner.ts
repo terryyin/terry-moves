@@ -46,7 +46,7 @@ export default class ThreeDGroupActioner {
  
 
   getThreeTranslateY(): number {
-    switch(this.action.action) {
+    switch(this.action.actionType) {
       case '3d rise':
         return this.effectCalculator.interpolateSpring([-4, 0]);
       default:
@@ -55,7 +55,7 @@ export default class ThreeDGroupActioner {
   }
 
   getThreeRotateY(): number {
-    switch(this.action.action) {
+    switch(this.action.actionType) {
       case '3d rise':
         return this.effectCalculator.interpolateSpring([-Math.PI * 2, 0]);
       case '3d rotate':
@@ -66,7 +66,7 @@ export default class ThreeDGroupActioner {
   }
 
   getThreeScale(): number {
-    switch(this.action.action) {
+    switch(this.action.actionType) {
       case '3d rise':
         return this.effectCalculator.getSpring();
       default:

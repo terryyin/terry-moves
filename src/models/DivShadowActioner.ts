@@ -7,7 +7,7 @@ export default class DivActioner extends DivBaseActioner{
   static defaultValue: LazyStyle = new LazyStyle({});
 
   protected getStyle(): LazyStyle {
-    switch(this.action.action) {
+    switch(this.action.actionType) {
       case 'glow':
         return this.getGrow();
       default:

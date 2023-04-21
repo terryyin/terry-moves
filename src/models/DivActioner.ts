@@ -7,7 +7,7 @@ export default class DivActioner extends DivBaseActioner{
   static defaultValue: LazyStyle = new LazyStyle({})
 
   protected getStyle(): LazyStyle {
-    switch(this.action.action) {
+    switch(this.action.actionType) {
       case 'scaleToUpperRight':
         return this.getScaleToUpperRightStyle(this.action);
       case 'appear':
@@ -17,7 +17,7 @@ export default class DivActioner extends DivBaseActioner{
       case 'glow':
         return DivActioner.defaultValue;
       default:
-        throw new Error(`Unknown action type for div ${this.action.action}`);
+        throw new Error(`Unknown action type for div ${this.action.actionType}`);
     }
   }
 

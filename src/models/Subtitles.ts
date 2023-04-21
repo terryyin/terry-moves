@@ -2,21 +2,21 @@ export type ActionType = 'scaleToUpperRight' | 'appear' | 'disappear' | '3d rise
 
 export interface BaseAction {
   objectId: string;
-  action: ActionType;
+  actionType: ActionType;
   duration: number;
 }
 
 export interface ScaleToUpperRightAction extends BaseAction {
-  action: 'scaleToUpperRight';
+  actionType: 'scaleToUpperRight';
   outputRange: number[];
 }
 
 export interface AppearAction extends BaseAction {
-  action: 'appear' | 'disappear' | 'glow';
+  actionType: 'appear' | 'disappear' | 'glow';
 }
 
 export interface ThreeDAction extends BaseAction {
-  action: '3d rise' | '3d rotate';
+  actionType: '3d rise' | '3d rotate';
 }
 
 export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction;
