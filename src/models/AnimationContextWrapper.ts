@@ -20,7 +20,7 @@ export default class AnimationContextWrapper {
     this.animationContext = animationContext;
   }
 
-  private getActioner(objectId: string): DivActioner | undefined {
+  private getActioner(objectId: string): EffectCalculator | undefined {
     const subtitle = this.animationContext.allSubtitles.find(subtitle => subtitle.actions?.find(action => action.objectId === objectId));
     let action: Action | undefined;
     if(subtitle?.actions) {
@@ -28,24 +28,25 @@ export default class AnimationContextWrapper {
     }
     const startTime = subtitle ? this.getStartTimeOfSubtitle(subtitle.id) : 0; 
     if(action) {
-      const effectCalculator = new EffectCalculator(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
-      return new DivActioner(action, effectCalculator);
+      return new EffectCalculator(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
     }
   }
 
   getStyleOf(objectId: string): CSSProperties {
-    const actioner = this.getActioner(objectId);
-    if(!actioner) return {};
+    const effectCalculator = this.getActioner(objectId);
+    if(!effectCalculator) return {};
+    const actioner = new DivActioner(effectCalculator.action as Action, effectCalculator);
     return actioner.getStyle();
   }
 
   get3DGroupAttributes(objectId: string): ThreeGroupAttributes {
-    const actioner = this.getActioner(objectId);
-    if(!actioner) return {
+    const effectCalculator = this.getActioner(objectId);
+    if(!effectCalculator) return {
       position: [0, 0, 0],
       scale: 1,
       rotation: [0, 0, 0],
     };
+    const actioner = new DivActioner(effectCalculator.action as Action, effectCalculator);
     const translateY = actioner.getThreeTranslateY();
     const rotateY = actioner.getThreeRotateY();
     const scale = actioner.getThreeScale();
