@@ -12,7 +12,9 @@ const subtitles: Subtitle[] = [
 	] },
 	{ id: 'intro3', leadingBlank: 0, duration: 3, text: 'or meet their needs.' },
 	{ id: 'customerResources1', leadingBlank: 1, duration: 3, text: 'In exchange, customers provide resources,' },
-	{ id: 'customerResources2', leadingBlank: 0, duration: 4, text: 'such as money, to fuel growth.' },
+	{ id: 'customerResources2', leadingBlank: 0, duration: 4, text: 'such as money, to fuel growth.', actions:[
+		{ objectId: 'company', action: 'glow', duration: 1 },
+	] },
 	{ id: 'softwareRole1', leadingBlank: 1, duration: 3, text: 'Software products often play a', actions:[
 		{ objectId: 'product', action: '3d rise', duration: 1 },
 		{ objectId: 'product', action: '3d rotate', duration: 1000 },
