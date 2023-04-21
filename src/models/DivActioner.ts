@@ -21,9 +21,9 @@ export default class DivActioner extends DivBaseActioner{
     }
   }
 
-  private getAppearStyle(range: number[]): LazyStyle {
+  private getAppearStyle(outputRange: number[]): LazyStyle {
     const result = new LazyStyle({});
-    result.setOpacityInterpolation(this.effectCalculator.frameRange, range);
+    result.setOpacityInterpolation({inputRange: this.effectCalculator.frameRange, outputRange});
     return result;
   }
 

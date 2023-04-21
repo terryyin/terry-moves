@@ -157,7 +157,7 @@ describe('AnimationEffect', () => {
 
   describe('appear and disappear overlapped', () => {
     [
-      { sec: 5.1, expectedOpacity: '0.9' },
+      { sec: 5.1, expectedOpacity: '1' },
       { sec: 8.1, expectedOpacity: '0' },
     ].forEach(({sec, expectedOpacity}) => {
       test(`appear, then disappear at sec ${sec}`, () => {
@@ -167,7 +167,7 @@ describe('AnimationEffect', () => {
         ] };
         const subtitleWithActionDisappear: Subtitle = 
         { id: 'subtitle2', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { objectId: "under-test", action: 'disappear', duration: 1 },
+          { objectId: "under-test", action: 'disappear', duration: 3 },
         ] };
         const animationContext: AnimationContext = makeMe
                 .animationContext

@@ -1,52 +1,30 @@
+import { InterpolateRanges, combineInterpolates } from './combine_interpolates';
 import {interpolate} from 'remotion'
 import { CSSProperties } from 'react';
 
 export default class LazyStyle {
   private style: CSSProperties;
-  private opacityInterpolationInputRange: number[] = [];
-  private opacityInterpolationOutputRange: number[] = [];
+  private opaciytInterpolateRanges: InterpolateRanges = {inputRange: [], outputRange: []};
 
   constructor(style: CSSProperties) {
     this.style = style;
   }
 
-  setOpacityInterpolation(inputRange: number[], outputRange: number[]) {
-    this.opacityInterpolationInputRange = inputRange;
-    this.opacityInterpolationOutputRange = outputRange;
+  setOpacityInterpolation(interpolateRanges: InterpolateRanges): void {
+    this.opaciytInterpolateRanges = interpolateRanges;
   }
 
   combine(prev: LazyStyle): LazyStyle {
-    // Combine opacity interpolation into strictly monotonically non-decreasing input range
-    // and average output range if there's overlap
-    const combinedInputRange: number[] = [];
-    const combinedOutputRange: number[] = [];
-    let prevOpacityOutputRangeIndex = 0;
-    for (let i = 0; i < this.opacityInterpolationInputRange.length; i++) {
-      const input = this.opacityInterpolationInputRange[i];
-      const output = this.opacityInterpolationOutputRange[i];
-      while (prevOpacityOutputRangeIndex < prev.opacityInterpolationInputRange.length && prev.opacityInterpolationInputRange[prevOpacityOutputRangeIndex] < input) {
-        combinedInputRange.push(prev.opacityInterpolationInputRange[prevOpacityOutputRangeIndex]);
-        combinedOutputRange.push(prev.opacityInterpolationOutputRange[prevOpacityOutputRangeIndex]);
-        prevOpacityOutputRangeIndex++;
-      }
-      if (prevOpacityOutputRangeIndex > 0 && prev.opacityInterpolationInputRange[prevOpacityOutputRangeIndex - 1] === input) {
-        combinedOutputRange[combinedOutputRange.length - 1] = (combinedOutputRange[combinedOutputRange.length - 1] + output) / 2;
-      } else {
-        combinedInputRange.push(input);
-        combinedOutputRange.push(output);
-      }
-    }
-
     const combinedStyle = new LazyStyle({ ...prev.style, ...this.style });
-    combinedStyle.setOpacityInterpolation(combinedInputRange, combinedOutputRange);
+    combinedStyle.setOpacityInterpolation(combineInterpolates(this.opaciytInterpolateRanges, prev.opaciytInterpolateRanges));
 
     return combinedStyle;
   }
 
   getStyle(frame: number): CSSProperties {
     const opacity =
-      this.opacityInterpolationInputRange.length > 0
-        ? interpolate(frame, this.opacityInterpolationInputRange, this.opacityInterpolationOutputRange, {
+      this.opaciytInterpolateRanges.inputRange.length > 0
+        ? interpolate(frame, this.opaciytInterpolateRanges.inputRange, this.opaciytInterpolateRanges.outputRange, {
             extrapolateLeft: "clamp",
             extrapolateRight: "clamp",
           })
