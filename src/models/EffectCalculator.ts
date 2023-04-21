@@ -1,7 +1,6 @@
 import {interpolate} from 'remotion'
 import {spring} from 'remotion'
 import { BaseAction } from './Subtitles';
-import { CSSProperties } from 'react';
 
 export default class EffectCalculator {
   action: BaseAction;
@@ -30,13 +29,6 @@ export default class EffectCalculator {
         mass: 3,
       },
     });
-  }
-
-  getAppearStyle(range: number[]): CSSProperties {
-    const scale = this.interpolateDuration(range);
-    return {
-      opacity: scale,
-    }
   }
 
   interpolateSpring(outputRange: number[]): number {

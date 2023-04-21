@@ -110,11 +110,37 @@ describe('AnimationEffect', () => {
         { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { objectId: "under-test", action: actionType as 'appear' | 'disappear', duration: 1 },
         ] };
-
       test('displays the correct transformation', () => {
         const animationContext: AnimationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
+                .seconds(sec)
+                .please();
+        const computedStyle = renderAndGetDivStyle(animationContext);
+        expect(computedStyle.getPropertyValue('opacity')).toBe(expectedOpacity);
+      });
+    });
+
+    [
+      { sec: 0, expectedOpacity: '0' },
+      { sec: 1.1, expectedOpacity: '1' },
+      { sec: 4.1, expectedOpacity: '1' },
+      { sec: 5.1, expectedOpacity: '0.9' },
+      { sec: 8.1, expectedOpacity: '0' },
+    ].forEach(({sec, expectedOpacity}) => {
+      test(`appear, then disappear at sec ${sec}`, () => {
+        const subtitleWithActionAppear: Subtitle = 
+        { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+          { objectId: "under-test", action: 'appear', duration: 1 },
+        ] };
+        const subtitleWithActionDisappear: Subtitle = 
+        { id: 'subtitle2', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+          { objectId: "under-test", action: 'disappear', duration: 1 },
+        ] };
+        const animationContext: AnimationContext = makeMe
+                .animationContext
+                .withSubtitle(subtitleWithActionAppear)
+                .withSubtitle(subtitleWithActionDisappear)
                 .seconds(sec)
                 .please();
         const computedStyle = renderAndGetDivStyle(animationContext);

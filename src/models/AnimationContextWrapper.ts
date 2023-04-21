@@ -27,10 +27,10 @@ export default class AnimationContextWrapper {
   }
 
   getStyleOf(objectId: string): CSSProperties {
-    const effectCalculators = this.getActioner(objectId);
-    if(effectCalculators.length === 0) return {};
-    const actioner = new DivActioner(effectCalculators[0].action as Action, effectCalculators[0]);
-    return actioner.getStyle();
+    return this.getActioner(objectId)
+      .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator))
+      .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
+      .getStyle();
   }
 
   get3DGroupAttributes(objectId: string): ThreeGroupAttributes {
