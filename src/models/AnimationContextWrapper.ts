@@ -5,6 +5,7 @@ import { Action, Subtitle } from '@/models/Subtitles';
 import { AnimationContext } from "./AnimationContext";
 import DivActioner from './DivActioner';
 import EffectCalculator from './EffectCalculator';
+import ThreeDGroupActioner from './TreeDGroupActioner';
 
 type ThreeGroupAttributes = {
   scale: number;
@@ -46,7 +47,7 @@ export default class AnimationContextWrapper {
       scale: 1,
       rotation: [0, 0, 0],
     };
-    const actioner = new DivActioner(effectCalculator.action as Action, effectCalculator);
+    const actioner = new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator);
     const translateY = actioner.getThreeTranslateY();
     const rotateY = actioner.getThreeRotateY();
     const scale = actioner.getThreeScale();
