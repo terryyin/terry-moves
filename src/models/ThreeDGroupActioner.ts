@@ -23,6 +23,19 @@ export default class ThreeDGroupActioner {
     this.action = action;
   }
 
+  get3DGroupAttributes(): ThreeGroupAttributes {
+    const translateY = this.getThreeTranslateY();
+    const rotateY = this.getThreeRotateY();
+    const scale = this.getThreeScale();
+
+    return {
+      position: [0, translateY, 0],
+      scale,
+      rotation: [0, rotateY, 0],
+    }
+  }
+ 
+
   getThreeTranslateY(): number {
     switch(this.action.action) {
       case '3d rise':
