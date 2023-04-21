@@ -1,6 +1,6 @@
 export type ActionType = 'scaleToUpperRight' | 'appear' | 'disappear' | '3d rise' | '3d rotate';
 
-interface BaseAction {
+export interface BaseAction {
   objectId: string;
   action: ActionType;
   duration: number;
@@ -15,11 +15,11 @@ export interface AppearAction extends BaseAction {
   action: 'appear' | 'disappear';
 }
 
-export interface OtherAction extends BaseAction {
+export interface ThreeDAction extends BaseAction {
   action: '3d rise' | '3d rotate';
 }
 
-export type Action = ScaleToUpperRightAction | AppearAction | OtherAction;
+export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction;
 
 export interface Subtitle {
   id: string;
