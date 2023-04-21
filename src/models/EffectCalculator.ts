@@ -28,18 +28,7 @@ export default class EffectCalculator {
     return [this.startFrame, this.endFrame];
   }
 
-  getSpring(): number {
-    return spring({
-      frame: this.frame - this.startFrame,
-      fps: this.fps,
-      config: {
-        damping: 200,
-        mass: 3,
-      },
-    });
-  }
-
-  getSpring1() {
+  getSpring() {
     return spring({
       frame: this.frame - this.startFrame,
       fps: this.fps,

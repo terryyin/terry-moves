@@ -183,14 +183,14 @@ describe('AnimationEffect', () => {
 
   describe('glow', () => {
     [
-      { sec: 0, shadowExist: true, expectedOpacity: '0.9' },
-      { sec: 1.1, shadowExist: true, expectedOpacity: '0' },
-      { sec: 4.1, shadowExist: true, expectedOpacity: '0' },
-    ].forEach(({sec, shadowExist, }) => {
+      { sec: 0, shadowExist: false, expectedOpacity: undefined },
+      { sec: 1.1, shadowExist: true, expectedOpacity: '0.8087921354109988' },
+      { sec: 5.1, shadowExist: false, expectedOpacity: undefined },
+    ].forEach(({sec, shadowExist, expectedOpacity}) => {
       test(`appear, then disappear at sec ${sec}`, () => {
         const subtitle: Subtitle = 
         { id: 'subtitle1', leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { objectId: "under-test", action: 'glow', duration: 5 },
+          { objectId: "under-test", action: 'glow', duration: 1 },
         ] };
         const animationContext: AnimationContext = makeMe
                 .animationContext
@@ -200,9 +200,9 @@ describe('AnimationEffect', () => {
         const div = renderAndGetDiv(animationContext);
         const shadow = div.nextElementSibling;
         expect(Boolean(shadow)).toBe(shadowExist);
-        if(shadowExist) {
-          // Const computedStyle = renderAndGetDivStyle(shadow);
-          // Expect(computedStyle.getPropertyValue('opacity')).toBe(expectedOpacity);
+        if(shadow) {
+          const computedStyle = window.getComputedStyle(shadow);
+          expect(computedStyle.getPropertyValue('opacity')).toBe(expectedOpacity);
         }
       });
     });

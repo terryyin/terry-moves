@@ -16,7 +16,7 @@ export default class DivActioner extends DivBaseActioner{
   }
 
   private getGrow(): LazyStyle {
-    const progress = this.effectCalculator.getSpring1();
+    const progress = this.effectCalculator.getSpring();
     const size = interpolate(progress, [0, 1], [100, 120]);
     return new LazyStyle({transform: `scale(${size / 100})`, transformOrigin: 'center', opacity: `${1 - progress}`});
   }
