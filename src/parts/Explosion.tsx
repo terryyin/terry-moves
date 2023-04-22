@@ -8,7 +8,7 @@ export const RocketPlume: React.FC<{
 }> = ({ position, scale }) => {
 
   return (
-    <AnimatedGlb url={ staticFile('assets/simple_engine_plume_test.glb') }
+    <AnimatedGlb url={ staticFile('assets/timeframe_explosion.glb') }
      position={position}
      scale={scale }
      rotation= {[Math.PI, 0, 0]}
