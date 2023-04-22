@@ -49,14 +49,12 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
     <AnimationContextProvider value={animationContext}>
     <AbsoluteFill style={{ backgroundColor: 'beige'}}>
       <AnimationEffect actor="stage">
-				<AbsoluteFill style={{position: 'absolute', left: '20%', top: '40%', width: '40%', height: '45%'}}>
-        <div style={{position: 'relative', left: '0%', top: '0%', width: '100%', height: '100%'}}>
+				<AbsoluteFill style={{position: 'absolute', left: '20%', top: '0%', width: '50%', height: '100%'}}>
           <ThreeDFrame >
-            <ThreeAnimationEffect id="starship" cameraDistance={15}>
+            <ThreeAnimationEffect id="starship" cameraDistance={35} lookAtY={15} cameraY={15}>
               <Starship aspectRatio={1} baseScale={1}/>
             </ThreeAnimationEffect>
           </ThreeDFrame>
-				</div>
       </AbsoluteFill>
 				<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
 				<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>

@@ -5,18 +5,20 @@ import { useAnimationContext } from '../hooks/useAnimationContext';
 export const ThreeAnimationEffect: React.FC<{
 	id: string,
 	cameraDistance: number,
+	lookAtY?: number
+	cameraY?: number
   children: React.ReactNode;
-}> = ({id, cameraDistance, children, }) => {
+}> = ({id, cameraDistance, lookAtY, cameraY, children, }) => {
 	const animationContextWrapper = useAnimationContext();
 
 	// Place a camera and set the distance to the object.
 	// Then make it look at the object.
 	const camera = useThree((state) => state.camera);
 	useEffect(() => {
-		camera.position.set(0, -0.5, cameraDistance);
+		camera.position.set(0, cameraY || -0, cameraDistance);
 		camera.near = 0.2;
 		camera.far = Math.max(5000, cameraDistance * 2);
-		camera.lookAt(0, 0, 0);
+		camera.lookAt(0, lookAtY || 0, 0);
 	}, [camera]);
 
 	const { scale, position, rotation } = animationContextWrapper.get3DGroupAttributes(id);

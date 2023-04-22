@@ -6,7 +6,7 @@ import useParentSize from '../hooks/useParentSize';
 const container: React.CSSProperties = {
 	width: '100%',
 	height: '100%',
-	backgroundColor: 'red',
+	border: '1px solid red',
 };
 
 export const ThreeDFrame: React.FC<{
