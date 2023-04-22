@@ -65,6 +65,9 @@ export default class ThreeDGroupActioner {
   }
 
   private getOcillatingY(action: ThreeDUnitAction): number {
+    if (!this.effectCalculator.withInDuration()) {
+      return 0;
+    }
     return -Math.sin(this.effectCalculator.timeWithIn() * Math.PI * 2) * action.unit;
 
 

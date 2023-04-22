@@ -17,7 +17,7 @@ import { GroupInitialState } from './video_components/GroupInitialState';
 const subtitles: Subtitle[] = [
 	{ leadingBlank: 2, duration: 4, text: "SpaceX is celebrating their rocket explosion,", actions: [
 			{ actor: "starship", actionType: "3d rise", duration: 3 },
-			{ actor: "starship", actionType: "3d ocillating", duration: 300, unit: 0.1 },
+			{ actor: "starship", actionType: "3d ocillating", duration: 10, unit: 0.1 },
 	]},
 	{ leadingBlank: 0, duration: 5, text: "highlighting different attitudes towards failure in software development.", actions: [
 			{ actor: "starship", actionType: "3d going up", duration: 5, unit: 30 },
@@ -25,7 +25,7 @@ const subtitles: Subtitle[] = [
 			{ actor: "software-dev", actionType: "appear", duration: 1 },
 	]},
 	{ leadingBlank: 1, duration: 3, text: "Learning from failures,", actions: [
-			{ actor: "starship", actionType: "3d rotate", duration: 10, totalRotation: 90 },
+			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: 90 },
 			{ actor: "explosion", actionType: "3d animation start", duration: 2, speed: 0.5 },
 	]},
 
@@ -33,7 +33,7 @@ const subtitles: Subtitle[] = [
 	]},
 
 	{ leadingBlank: 0, duration: 6, text: "is more valuable than merely experiencing them.", actions: [
-			{ actor: "explosion", actionType: "3d animation reverse", duration: 2, speed: 0.5, percentage: 50, pauseAtEnd: true },
+			{ actor: "explosion", actionType: "3d animation reverse", duration: 1, speed: 1, percentage: 50, pauseAtEnd: true },
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: "Thomas Edison's light bulb story shows the importance of", actions: [
@@ -80,12 +80,6 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
             </ThreeAnimationEffect>
           </ThreeDFrame>
       </AbsoluteFill>
-				<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
-				<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
-					<AnimationEffect actor="value to customer">
-						<ValueArrow />
-					</AnimationEffect>
-				</div>
 			</AnimationEffect>
 			<Subtitles />
     </AbsoluteFill>
