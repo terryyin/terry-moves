@@ -21,12 +21,12 @@ describe('ThreeAnimationEffect', () => {
     [
       {sec: 0,   expectPlaying: false, expectTime: 0, },
       {sec: 1,   expectPlaying: true, expectTime: 0,  },
-      {sec: 1.1, expectPlaying: true, expectTime: 0.1,},
-      {sec: 2.1, expectPlaying: false,expectTime: 1.1,},
+      {sec: 1.1, expectPlaying: true, expectTime: 0.2,},
+      {sec: 2.1, expectPlaying: false,expectTime: 2.2,},
     ].forEach(({sec, expectPlaying, expectTime, }) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: '3d animation start', duration: 1 },
+          { actor: "under-test", actionType: '3d animation start', duration: 1, speed: 2 },
         ] };
 
       test(`test sec: ${sec}`, () => {

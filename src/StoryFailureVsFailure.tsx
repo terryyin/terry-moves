@@ -23,7 +23,7 @@ const subtitles: Subtitle[] = [
 	]},
 	{ leadingBlank: 1, duration: 6, text: "Learning from failures, like SpaceX's Starship test flight,", actions: [
 			{ actor: "rocket", actionType: "glow", duration: 2 },
-			{ actor: "explosion", actionType: "3d animation start", duration: 3 },
+			{ actor: "explosion", actionType: "3d animation start", duration: 2, speed: 0.5 },
 	]},
 	{ leadingBlank: 0, duration: 6, text: "is more valuable than merely experiencing them.", actions: []},
 	{ leadingBlank: 1, duration: 6, text: "Thomas Edison's light bulb story shows the importance of", actions: [

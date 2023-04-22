@@ -28,6 +28,7 @@ export type ThreeDAction = ThreeDRiseAction | ThreeDRotateAction;
 
 interface ThreeDAnimationAction extends BaseAction {
   actionType: '3d animation start';
+  speed: number;
 }
 
 export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction | ThreeDAnimationAction;

@@ -35,7 +35,7 @@ export default class GLBAnimationActioner {
       case '3d animation start':
         return {
           playing: this.effectCalculator.withInDuration(),
-          time: this.effectCalculator.timeWithIn(),
+          time: this.effectCalculator.timeWithIn() * this.action.speed,
           loopOnce: true,
         };
       default:
