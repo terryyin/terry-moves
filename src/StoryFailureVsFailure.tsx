@@ -12,6 +12,7 @@ import { ThreeDFrame } from './video_components/ThreeDFrame';
 import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
 import { StarshipPlume } from './parts/StarshipPlume';
 import { Explosion } from './parts/Explosion';
+import { GroupInitialState } from './video_components/GroupInitialState';
 
 const subtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 5, text: "SpaceX is celebrating their rocket explosion,", actions: [
@@ -62,7 +63,9 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 						/>	
               <Starship aspectRatio={1} baseScale={1}/>
               <StarshipPlume aspectRatio={1} baseScale={1}/>
-              <Explosion position={[0, 0, 1]} scale={0.2} />
+              <GroupInitialState position={[0, 0, 1]} scale={0.2} >
+                <Explosion actor="explosion" />
+							</GroupInitialState>
             </ThreeAnimationEffect>
           </ThreeDFrame>
       </AbsoluteFill>
