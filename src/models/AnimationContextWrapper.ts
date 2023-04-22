@@ -26,6 +26,10 @@ export default class AnimationContextWrapper {
     }).flat();
   }
 
+  getGLBAnimationAttributes(actor: string): { playing: any; time: any; loopOnce: any; } {
+    return { playing: true, time: this.animationContext.globalFrame / this.animationContext.globalFps, loopOnce: false };
+  }
+
   getStyleOf(actor: string): CSSProperties {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator))
