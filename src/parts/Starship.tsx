@@ -9,6 +9,7 @@ export const Starship: React.FC<{
 	baseScale: number;
 }> = ({aspectRatio, baseScale}) => {
 	useVideoConfig();
+	
 	const { scene } = useLoader(GLTFLoader, url);
 
   return <primitive object={scene} />;

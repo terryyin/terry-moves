@@ -10,6 +10,7 @@ import AnimationEffect from './video_components/AnimationEffect';
 import { Starship } from './parts/Starship';
 import { ThreeDFrame } from './video_components/ThreeDFrame';
 import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
+import { StarshipPlume } from './parts/StarshipPlume';
 
 const subtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 5, text: "SpaceX is celebrating their rocket explosion,", actions: [
@@ -47,7 +48,7 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 
   return (
     <AnimationContextProvider value={animationContext}>
-    <AbsoluteFill style={{ backgroundColor: 'beige'}}>
+    <AbsoluteFill style={{ backgroundColor: 'black'}}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '20%', top: '0%', width: '50%', height: '100%'}}>
           <ThreeDFrame >
@@ -58,7 +59,8 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 							intensity={200}
 							color={0xffffff}
 						/>	
-              <Starship aspectRatio={1} baseScale={1}/>
+              {/* <Starship aspectRatio={1} baseScale={1}/> */}
+              <StarshipPlume aspectRatio={1} baseScale={1}/>
             </ThreeAnimationEffect>
           </ThreeDFrame>
       </AbsoluteFill>
