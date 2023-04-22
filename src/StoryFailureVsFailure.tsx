@@ -51,7 +51,13 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '20%', top: '0%', width: '50%', height: '100%'}}>
           <ThreeDFrame >
-            <ThreeAnimationEffect id="starship" cameraDistance={35} lookAtY={15} cameraY={15}>
+            <ThreeAnimationEffect id="starship" cameraDistance={30} lookAtY={16} cameraY={10}>
+						<directionalLight
+							castShadow
+							position={[50, 100, 50]}
+							intensity={200}
+							color={0xffffff}
+						/>	
               <Starship aspectRatio={1} baseScale={1}/>
             </ThreeAnimationEffect>
           </ThreeDFrame>
