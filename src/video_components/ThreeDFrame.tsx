@@ -1,7 +1,6 @@
 import {ThreeCanvas } from '@remotion/three';
 import React from 'react';
 import {AbsoluteFill } from 'remotion';
-import {ProductPart} from './ProductPart';
 import useParentSize from '../hooks/useParentSize';
 
 const container: React.CSSProperties = {
@@ -9,9 +8,9 @@ const container: React.CSSProperties = {
 	height: '100%',
 };
 
-export const ProductFrame: React.FC<{
-	baseScale: number;
-}> = () => {
+export const ThreeDFrame: React.FC<{
+  children: React.ReactNode;
+}> = ({children}) => {
 	const {ref, size} = useParentSize();
 
 	return (
@@ -19,10 +18,7 @@ export const ProductFrame: React.FC<{
 				<ThreeCanvas linear width={size.width} height={size.height} >
 					<ambientLight intensity={1.5} color={0xffffff} />
 					<pointLight position={[10, 10, 0]} />
-					<ProductPart
-						baseScale={1.4}
-						aspectRatio={1}
-					/>
+					{children}
 				</ThreeCanvas>
 		</AbsoluteFill>
 	);
