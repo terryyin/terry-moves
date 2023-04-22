@@ -1,4 +1,4 @@
-import { ThreeDRotateAction } from './Subtitles';
+import { ThreeDRotateAction, ThreeDUnitAction } from './Subtitles';
 import * as THREE from 'three';
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
@@ -57,9 +57,17 @@ export default class ThreeDGroupActioner {
         return this.effectCalculator.interpolateSpring([-4, 0]);
       case '3d going up':
         return this.effectCalculator.interpolateSpring([0, this.action.unit]);
+      case '3d ocillating':
+        return this.getOcillatingY(this.action as ThreeDUnitAction);
       default:
         return 0;
     }
+  }
+
+  private getOcillatingY(action: ThreeDUnitAction): number {
+    return -Math.sin(this.effectCalculator.timeWithIn() * Math.PI * 2) * action.unit;
+
+
   }
 
   private getLookAtYd(): number {
