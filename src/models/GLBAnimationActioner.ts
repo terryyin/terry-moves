@@ -1,4 +1,4 @@
-import { Action } from '@/models/Subtitles';
+import { Action, ThreeDAnimationAction } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
 
 export type GLBAnimationAttributes = {
@@ -33,13 +33,18 @@ export default class GLBAnimationActioner {
   private getCurrentValue(): GLBAnimationAttributes {
     switch(this.action.actionType) {
       case '3d animation start':
-        return {
-          playing: this.effectCalculator.withInDuration(),
-          time: this.effectCalculator.timeWithIn() * this.action.speed,
-          loopOnce: true,
-        };
+        return  this.getAnimationAttributes(this.action as ThreeDAnimationAction);
       default:
-        return GLBAnimationActioner.defaultValue;
+        return { ...GLBAnimationActioner.defaultValue};
     }
   }
+
+  private getAnimationAttributes(action: ThreeDAnimationAction): GLBAnimationAttributes {
+    return { 
+      playing: this.effectCalculator.withInDuration(),
+      time: this.effectCalculator.withInDuration() ? this.effectCalculator.timeWithIn() * action.speed : undefined,
+      loopOnce: true,
+    }
+  }
+
 }

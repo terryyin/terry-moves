@@ -22,7 +22,7 @@ describe('ThreeAnimationEffect', () => {
       {sec: 0,   expectPlaying: false, expectTime: 0, },
       {sec: 1,   expectPlaying: true, expectTime: 0,  },
       {sec: 1.1, expectPlaying: true, expectTime: 0.2,},
-      {sec: 2.1, expectPlaying: false,expectTime: 2.2,},
+      {sec: 2.1, expectPlaying: false,expectTime: 2.1,},
     ].forEach(({sec, expectPlaying, expectTime, }) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
