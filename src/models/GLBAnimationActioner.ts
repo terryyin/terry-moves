@@ -48,11 +48,21 @@ export default class GLBAnimationActioner {
   }
 
   private getAnimationAttributes(action: ThreeDAnimationAction): GLBAnimationAttributes {
-    const percentage = action.percentage ?? 100;
     return { 
       playing: this.effectCalculator.withInDuration(),
-      time: this.effectCalculator.withInDuration() ? this.effectCalculator.timeWithIn() * percentage / 100 * action.speed : undefined,
+      time: this.getAnimationTime(action),
       loopOnce: true,
+    }
+  }
+
+  private getAnimationTime(action: ThreeDAnimationAction): number | undefined {
+    const percentage = action.percentage ?? 100;
+    if (this.effectCalculator.withInDuration()) {
+     return this.effectCalculator.timeWithIn() * percentage / 100 * action.speed
+    }
+
+    if (this.effectCalculator.isAfter() && action.pauseAtEnd) {
+      return action.duration * percentage / 100 * action.speed;
     }
   }
 

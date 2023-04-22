@@ -32,8 +32,12 @@ export default class EffectCalculator {
     return Math.max(0, (this.frame - this.startFrame) / this.fps);
   }
 
+  isAfter(): boolean {
+    return this.frame > this.endFrame;
+  }
+
   withInDuration(): boolean {
-    return this.frame >= this.startFrame && this.frame <= this.endFrame;
+    return this.frame >= this.startFrame && !this.isAfter();
   }
 
   getSpring() {
