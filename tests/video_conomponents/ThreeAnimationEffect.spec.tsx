@@ -33,7 +33,7 @@ describe('ThreeAnimationEffect', () => {
   const renderAndGetGroup = (animationContext: AnimationContext) => {
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
-        <ThreeAnimationEffect id="under-test"> </ThreeAnimationEffect>
+        <ThreeAnimationEffect id="under-test" cameraDistance={2}> </ThreeAnimationEffect>
       </AnimationContextProvider>
     );
     const group = container.querySelector('group');

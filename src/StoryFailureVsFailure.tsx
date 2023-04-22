@@ -52,7 +52,7 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 				<AbsoluteFill style={{position: 'absolute', left: '20%', top: '40%', width: '40%', height: '45%'}}>
         <div style={{position: 'relative', left: '0%', top: '0%', width: '100%', height: '100%'}}>
           <ThreeDFrame >
-            <ThreeAnimationEffect id="product">
+            <ThreeAnimationEffect id="starship" cameraDistance={15}>
               <Starship aspectRatio={1} baseScale={1}/>
             </ThreeAnimationEffect>
           </ThreeDFrame>
