@@ -48,7 +48,7 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 
   return (
     <AnimationContextProvider value={animationContext}>
-    <AbsoluteFill style={{ backgroundColor: 'black'}}>
+    <AbsoluteFill style={{ backgroundColor: 'green'}}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '20%', top: '0%', width: '50%', height: '100%'}}>
           <ThreeDFrame >
