@@ -11,7 +11,10 @@ export const AnimatedGlb: React.FC<{
   url: string,
 }> = ({ actor, url }) => {
 	const animationContextWrapper = useAnimationContext();
-	const { playing, time, loopOnce } = animationContextWrapper.getGLBAnimationAttributes(actor);
+	let { playing, time, loopOnce } = animationContextWrapper.getGLBAnimationAttributes(actor);
+  playing = true;
+  loopOnce = false;
+
   const groupRef = React.useRef<Group>();
   const { scene, animations } = useLoader(GLTFLoader, url);
   const { actions, mixer } = useAnimations(animations, groupRef);

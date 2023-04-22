@@ -28,9 +28,11 @@ export default class AnimationContextWrapper {
   }
 
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
-    return this.getActioner(actor)
+    const result = this.getActioner(actor)
       .map(effectCalculator => new GLBAnimationActioner(effectCalculator.action as Action, effectCalculator))
-      .reduce((prev, curr) => curr.combine(prev), GLBAnimationActioner.defaultValue);
+      .reduce((prev, curr) => curr.combine(prev), { ...GLBAnimationActioner.defaultValue});
+    result.time = result.time ?? this.animationContext.globalFrame / this.animationContext.globalFps;
+    return result;
   }
 
   getStyleOf(actor: string): CSSProperties {

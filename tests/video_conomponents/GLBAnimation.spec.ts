@@ -5,6 +5,17 @@ import { makeMe } from '../helpers/makeMe';
 import AnimationContextWrapper from '@/models/AnimationContextWrapper';
 
 describe('ThreeAnimationEffect', () => {
+  test(`default value`, () => {
+    const animationContext: AnimationContext = makeMe
+            .animationContext
+            .seconds(1)
+            .please();
+    const animationContextWrapper = new AnimationContextWrapper(animationContext);
+    const result = animationContextWrapper.getGLBAnimationAttributes('under-test');
+    expect(result.playing).toBe(true);
+    expect(result.time).toBe(1);
+    expect(result.loopOnce).toBe(false);
+  });
 
   describe('3d animation start', () => {
     [
@@ -30,6 +41,7 @@ describe('ThreeAnimationEffect', () => {
         expect(result.time).toBe(expectTime);
         expect(result.loopOnce).toBe(expectOnceOnly);
       });
+
     });
   });
 });
