@@ -31,7 +31,7 @@ const subtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 4, text: "In conclusion, read the error message!", actions: []},
 ];
 
-export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
+export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}) => {
   const animationContext  = {
     allSubtitles: subtitles,
     globalFps: fps,

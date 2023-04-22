@@ -46,7 +46,7 @@ const subtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 3, text: 'and its seamless user experience.' },
 ];
 
-export const SceneCustomer: React.FC = autonomousComponent(({frame, fps}) => {
+export const StoryProductDeveloper: React.FC = autonomousComponent(({frame, fps}) => {
   const animationContext  = {
     allSubtitles: subtitles,
     globalFps: fps,

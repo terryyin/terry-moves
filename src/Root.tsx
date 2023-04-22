@@ -1,5 +1,6 @@
 import {Composition} from 'remotion';
-import {SceneCustomer} from './SceneCustomer';
+import {StoryFailureVsFailure} from './StoryFailureVsFailure';
+import { StoryProductDeveloper } from './StoryProductDeveloper';
 
 // Remotion Docs:
 // https://remotion.dev/docs
@@ -30,7 +31,8 @@ export const RemotionRoot: React.FC = () => {
 			/> */}
 			<Composition
 				id="SceneCustomer"
-				component={ SceneCustomer }
+				// Component={ StoryFailureVsFailure }
+				component={ StoryProductDeveloper }
 				durationInFrames={73*30}
 				fps={30}
 				width={1280}
