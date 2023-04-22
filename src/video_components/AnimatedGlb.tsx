@@ -8,11 +8,8 @@ import { useAnimationContext } from '../hooks/useAnimationContext';
 
 export const AnimatedGlb: React.FC<{
   actor: string,
-  position: [number, number, number];
-  rotation?: [number, number, number];
   url: string,
-  scale: number;
-}> = ({ actor, position, rotation, scale, url }) => {
+}> = ({ actor, url }) => {
 	const animationContextWrapper = useAnimationContext();
 	const { playing, time, loopOnce } = animationContextWrapper.getGLBAnimationAttributes(actor);
   const groupRef = React.useRef<Group>();
@@ -42,7 +39,7 @@ export const AnimatedGlb: React.FC<{
   });
 
   return (
-    <group ref={groupRef} scale={scale} position={position} rotation={ rotation || [0, 0, 0]}>
+    <group ref={groupRef}>
       <Clone object={scene} matrixWorldAutoUpdate={undefined} getObjectsByProperty={undefined} />
     </group>
   );
