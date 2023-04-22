@@ -19,14 +19,23 @@ const subtitles: Subtitle[] = [
 			{ actor: "starship", actionType: "3d rise", duration: 3 },
 	]},
 	{ leadingBlank: 0, duration: 5, text: "highlighting different attitudes towards failure in software development.", actions: [
-			{ actor: "starship", actionType: "3d watched going up", duration: 3, unit: 20 },
+			{ actor: "starship", actionType: "3d going up", duration: 3, unit: 20 },
+			{ actor: "starship", actionType: "3d camera up", duration: 3, unit: 10 },
 			{ actor: "software-dev", actionType: "appear", duration: 1 },
 	]},
-	{ leadingBlank: 1, duration: 6, text: "Learning from failures, like SpaceX's Starship test flight,", actions: [
-			{ actor: "rocket", actionType: "glow", duration: 2 },
+	{ leadingBlank: 1, duration: 3, text: "Learning from failures,", actions: [
+			{ actor: "starship", actionType: "3d rotate", duration: 10, totalRotation: 90 },
 			{ actor: "explosion", actionType: "3d animation start", duration: 2, speed: 0.5 },
 	]},
-	{ leadingBlank: 0, duration: 6, text: "is more valuable than merely experiencing them.", actions: []},
+
+	{ leadingBlank: 1, duration: 6, text: "like SpaceX's Starship test flight,", actions: [
+			{ actor: "explosion", actionType: "3d animation start", duration: 2, speed: 0.5 },
+	]},
+
+	{ leadingBlank: 0, duration: 6, text: "is more valuable than merely experiencing them.", actions: [
+			// { actor: "starship", actionType: "3d disappear", duration: 10, totalRotation: 90 },
+
+	]},
 	{ leadingBlank: 1, duration: 6, text: "Thomas Edison's light bulb story shows the importance of", actions: [
 			{ actor: "light-bulb", actionType: "appear", duration: 1 },
 	]},
@@ -65,7 +74,7 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 							/>	
               <Starship/>
               <StarshipPlume/>
-              <GroupInitialState position={[0, 0, 1]} scale={0.2} >
+              <GroupInitialState position={[0, 0, 0]} scale={0.2} >
                 <Explosion actor="explosion" />
 							</GroupInitialState>
             </ThreeAnimationEffect>

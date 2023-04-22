@@ -1,4 +1,4 @@
-export type ActionType = 'scaleToUpperRight' | 'appear' | 'disappear' | '3d rise' | '3d watched going up' | '3d rotate' | 'glow' | '3d animation start';
+export type ActionType = 'scaleToUpperRight' | 'appear' | 'disappear' | '3d rise' | '3d going up' | '3d camera up' | '3d rotate' | 'glow' | '3d animation start';
 
 export interface BaseAction {
   actor: string;
@@ -19,8 +19,13 @@ interface ThreeDRiseAction extends BaseAction {
   actionType: '3d rise';
 }
 
-interface ThreeDWatchedGoingUpAction extends BaseAction {
-  actionType: '3d watched going up';
+interface ThreeDGoingUpAction extends BaseAction {
+  actionType: '3d going up';
+  unit: number;
+}
+
+interface ThreeDCameraUpAction extends BaseAction {
+  actionType: '3d camera up';
   unit: number;
 }
 
@@ -29,7 +34,7 @@ export interface ThreeDRotateAction extends BaseAction {
   totalRotation: number;
 }
 
-export type ThreeDAction = ThreeDRiseAction | ThreeDRotateAction | ThreeDWatchedGoingUpAction;
+export type ThreeDAction = ThreeDRiseAction | ThreeDRotateAction | ThreeDGoingUpAction | ThreeDCameraUpAction;
 
 interface ThreeDAnimationAction extends BaseAction {
   actionType: '3d animation start';
