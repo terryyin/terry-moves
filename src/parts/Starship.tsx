@@ -12,5 +12,8 @@ export const Starship: React.FC<{
 	
 	const { scene } = useLoader(GLTFLoader, url);
 
-  return <primitive object={scene} />;
+  return <group>
+			<primitive object={scene} />
+		</group>
+
 };

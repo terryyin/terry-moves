@@ -59,7 +59,7 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 							intensity={200}
 							color={0xffffff}
 						/>	
-              {/* <Starship aspectRatio={1} baseScale={1}/> */}
+              <Starship aspectRatio={1} baseScale={1}/>
               <StarshipPlume aspectRatio={1} baseScale={1}/>
             </ThreeAnimationEffect>
           </ThreeDFrame>
