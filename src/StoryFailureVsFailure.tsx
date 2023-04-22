@@ -3,8 +3,6 @@ import { AnimationContextProvider } from './hooks/useAnimationContext';
 import { Subtitle } from './models/Subtitles';
 import autonomousComponent from './video_components/autonomousComponent';
 import { AbsoluteFill } from 'remotion';
-import { CustomerGroup } from './parts/CustomerGroup';
-import { ValueArrow } from './parts/ValueArrow';
 import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
 import { Starship } from './parts/Starship';
@@ -25,7 +23,7 @@ const subtitles: Subtitle[] = [
 			{ actor: "software-dev", actionType: "appear", duration: 1 },
 	]},
 	{ leadingBlank: 1, duration: 3, text: "Learning from failures,", actions: [
-			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: 90 },
+			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: 240 },
 			{ actor: "explosion", actionType: "3d animation start", duration: 2, speed: 0.5 },
 	]},
 
@@ -61,9 +59,9 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 
   return (
     <AnimationContextProvider value={animationContext}>
-    <AbsoluteFill style={{ backgroundColor: 'green'}}>
+    <AbsoluteFill style={{ backgroundColor: '#55ceff'}}>
       <AnimationEffect actor="stage">
-				<AbsoluteFill style={{position: 'absolute', left: '20%', top: '0%', width: '50%', height: '100%'}}>
+				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
           <ThreeDFrame >
             <ThreeAnimationEffect id="starship" cameraDistance={30} lookAtY={16} cameraY={10}>
 							<directionalLight
