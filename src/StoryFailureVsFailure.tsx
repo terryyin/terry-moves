@@ -15,10 +15,11 @@ import { Explosion } from './parts/Explosion';
 import { GroupInitialState } from './video_components/GroupInitialState';
 
 const subtitles: Subtitle[] = [
-	{ leadingBlank: 1, duration: 5, text: "SpaceX is celebrating their rocket explosion,", actions: [
-			{ actor: "rocket", actionType: "appear", duration: 1 },
+	{ leadingBlank: 2, duration: 4, text: "SpaceX is celebrating their rocket explosion,", actions: [
+			{ actor: "starship", actionType: "3d rise", duration: 3 },
 	]},
 	{ leadingBlank: 0, duration: 5, text: "highlighting different attitudes towards failure in software development.", actions: [
+			{ actor: "starship", actionType: "3d watched going up", duration: 3 },
 			{ actor: "software-dev", actionType: "appear", duration: 1 },
 	]},
 	{ leadingBlank: 1, duration: 6, text: "Learning from failures, like SpaceX's Starship test flight,", actions: [
@@ -56,12 +57,12 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 				<AbsoluteFill style={{position: 'absolute', left: '20%', top: '0%', width: '50%', height: '100%'}}>
           <ThreeDFrame >
             <ThreeAnimationEffect id="starship" cameraDistance={30} lookAtY={16} cameraY={10}>
-						<directionalLight
-							castShadow
-							position={[50, 100, 50]}
-							intensity={200}
-							color={0xffffff}
-						/>	
+							<directionalLight
+								castShadow
+								position={[50, 100, 50]}
+								intensity={200}
+								color={0xffffff}
+							/>	
               <Starship/>
               <StarshipPlume/>
               <GroupInitialState position={[0, 0, 1]} scale={0.2} >
