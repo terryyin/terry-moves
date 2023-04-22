@@ -50,6 +50,8 @@ export default class ThreeDGroupActioner {
     switch(this.action.actionType) {
       case '3d rise':
         return this.effectCalculator.interpolateSpring([-4, 0]);
+      case '3d watched going up':
+        return this.effectCalculator.interpolateSpring([0, this.action.unit]);
       default:
         return 0;
     }

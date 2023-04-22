@@ -134,4 +134,28 @@ describe('ThreeAnimationEffect', () => {
     });
   });
 
+  describe('3d watched going up', () => {
+    [
+      {tid: "4", sec: 0,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
+      {tid: "5", sec: 1,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
+      {tid: "6", sec: 1.1, expectScale: '1', expectRotateY: '0', expectTransY: '0.5736235937670036' },
+    ].forEach(({tid, sec, expectScale, expectRotateY, expectTransY}) => {
+      const subtitleWithAction: Subtitle = 
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+          { actor: "under-test", actionType: '3d watched going up', duration: 1, unit: 3 },
+        ] };
+      test(`3d effect, test id: ${tid}`, () => {
+        const animationContext: AnimationContext = makeMe
+                .animationContext
+                .withSubtitle(subtitleWithAction)
+                .seconds(sec)
+                .please();
+        const group = renderAndGetGroup(animationContext);
+        expect(group).toHaveAttribute('position', `0,${expectTransY},0`);
+        expect(group).toHaveAttribute('rotation', `0,${expectRotateY},0,XYZ`);
+        expect(group).toHaveAttribute('scale', `${expectScale}`);
+      });
+    });
+  });
+
 });
