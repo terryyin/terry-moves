@@ -1,4 +1,4 @@
-export type ActionType = 'scaleToUpperRight' | 'appear' | 'disappear' | '3d rise' | '3d rotate' | 'glow';
+export type ActionType = 'scaleToUpperRight' | 'appear' | 'disappear' | '3d rise' | '3d rotate' | 'glow' | '3d animation start';
 
 export interface BaseAction {
   actor: string;
@@ -24,10 +24,13 @@ export interface ThreeDRotateAction extends BaseAction {
   totalRotation: number;
 }
 
-
 export type ThreeDAction = ThreeDRiseAction | ThreeDRotateAction;
 
-export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction;
+interface ThreeDAnimationAction extends BaseAction {
+  actionType: '3d animation start';
+}
+
+export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction | ThreeDAnimationAction;
 
 export interface Subtitle {
   leadingBlank: number;

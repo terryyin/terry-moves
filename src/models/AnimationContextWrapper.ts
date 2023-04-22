@@ -5,6 +5,7 @@ import DivActioner from './DivActioner';
 import EffectCalculator from './EffectCalculator';
 import ThreeDGroupActioner, { ThreeGroupAttributes } from './ThreeDGroupActioner';
 import DivShadowActioner from './DivShadowActioner';
+import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 
 export default class AnimationContextWrapper {
 
@@ -26,8 +27,10 @@ export default class AnimationContextWrapper {
     }).flat();
   }
 
-  getGLBAnimationAttributes(actor: string): { playing: any; time: any; loopOnce: any; } {
-    return { playing: true, time: this.animationContext.globalFrame / this.animationContext.globalFps, loopOnce: false };
+  getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
+    return this.getActioner(actor)
+      .map(effectCalculator => new GLBAnimationActioner(effectCalculator.action as Action, effectCalculator))
+      .reduce((prev, curr) => curr.combine(prev), GLBAnimationActioner.defaultValue);
   }
 
   getStyleOf(actor: string): CSSProperties {

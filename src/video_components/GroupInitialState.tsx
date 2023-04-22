@@ -11,4 +11,4 @@ export const GroupInitialState: React.FC<{
       { children }
     </group>
   );
-};
+}

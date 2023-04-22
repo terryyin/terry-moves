@@ -28,6 +28,14 @@ export default class EffectCalculator {
     return [this.startFrame, this.endFrame];
   }
 
+  getProgress(): number {
+    return Math.max(0, (this.frame - this.startFrame) / this.durationInFrames);
+  }
+
+  withInDuration(): boolean {
+    return this.frame >= this.startFrame && this.frame <= this.endFrame;
+  }
+
   getSpring() {
     return spring({
       frame: this.frame - this.startFrame,
