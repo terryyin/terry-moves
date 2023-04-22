@@ -19,7 +19,7 @@ export const ThreeAnimationEffect: React.FC<{
 		camera.near = 0.2;
 		camera.far = Math.max(5000, cameraDistance * 2);
 		camera.lookAt(0, lookAtY || 0, 0);
-	}, [camera]);
+	}, [camera, cameraDistance, lookAtY, cameraY]);
 
 	const { scale, position, rotation } = animationContextWrapper.get3DGroupAttributes(id);
 

@@ -4,7 +4,6 @@ import { Clone, useAnimations } from '@react-three/drei';
 import { GLTFLoader } from 'three-stdlib/loaders/GLTFLoader';
 import { Group } from 'three/src/Three';
 import { useAnimationContext } from '../hooks/useAnimationContext';
-import * as THREE from 'three';
 
 export const AnimatedGlb: React.FC<{
   actor: string,
@@ -13,7 +12,7 @@ export const AnimatedGlb: React.FC<{
 	const animationContextWrapper = useAnimationContext();
 	const {playing, time } = animationContextWrapper.getGLBAnimationAttributes(actor);
 
-  const groupRef = React.useRef<Group>();
+  const groupRef = React.useRef<Group | null>(null);
   const { scene, animations } = useLoader(GLTFLoader, url);
   const { actions, mixer } = useAnimations(animations, groupRef);
 
@@ -29,7 +28,9 @@ export const AnimatedGlb: React.FC<{
 
 
   useFrame(() => {
-    mixer.setTime(time);
+    if(time !== undefined) {
+      mixer.setTime(time);
+    }
   });
 
 

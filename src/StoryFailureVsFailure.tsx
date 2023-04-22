@@ -63,7 +63,7 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 							color={0xffffff}
 						/>	
               <Starship/>
-              <StarshipPlume aspectRatio={1} baseScale={1}/>
+              <StarshipPlume/>
               <GroupInitialState position={[0, 0, 1]} scale={0.2} >
                 <Explosion actor="explosion" />
 							</GroupInitialState>

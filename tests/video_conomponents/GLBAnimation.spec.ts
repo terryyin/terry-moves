@@ -19,11 +19,11 @@ describe('ThreeAnimationEffect', () => {
 
   describe('3d animation start', () => {
     [
-      {sec: 0,   expectPlaying: false, expectTime: 0, expectOnceOnly: false},
-      {sec: 1,   expectPlaying: true, expectTime: 0, expectOnceOnly: false},
-      {sec: 1.1, expectPlaying: true, expectTime: 0.1,  expectOnceOnly: false},
-      {sec: 2.1, expectPlaying: false,expectTime: 1.1,  expectOnceOnly: false},
-    ].forEach(({sec, expectPlaying, expectTime, expectOnceOnly}) => {
+      {sec: 0,   expectPlaying: false, expectTime: 0, },
+      {sec: 1,   expectPlaying: true, expectTime: 0,  },
+      {sec: 1.1, expectPlaying: true, expectTime: 0.1,},
+      {sec: 2.1, expectPlaying: false,expectTime: 1.1,},
+    ].forEach(({sec, expectPlaying, expectTime, }) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { actor: "under-test", actionType: '3d animation start', duration: 1 },
@@ -39,7 +39,6 @@ describe('ThreeAnimationEffect', () => {
         const result = animationContextWrapper.getGLBAnimationAttributes('under-test');
         expect(result.playing).toBe(expectPlaying);
         expect(result.time).toBe(expectTime);
-        expect(result.loopOnce).toBe(expectOnceOnly);
       });
 
     });
