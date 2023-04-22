@@ -26,7 +26,7 @@ export default class GLBAnimationActioner {
     return {
       playing: current.playing,
       time: current.time ?? prev.time,
-      loopOnce: current.loopOnce || prev.loopOnce,
+      loopOnce: current.loopOnce,
     }
   }
 
@@ -35,9 +35,9 @@ export default class GLBAnimationActioner {
       case '3d animation start':
         return {
           playing: this.effectCalculator.withInDuration(),
-          time: this.effectCalculator.getProgress(),
-          loopOnce: false,
-        }
+          time: this.effectCalculator.timeWithIn(),
+          loopOnce: true,
+        };
       default:
         return GLBAnimationActioner.defaultValue;
     }

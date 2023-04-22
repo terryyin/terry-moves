@@ -23,6 +23,7 @@ const subtitles: Subtitle[] = [
 	]},
 	{ leadingBlank: 1, duration: 6, text: "Learning from failures, like SpaceX's Starship test flight,", actions: [
 			{ actor: "rocket", actionType: "glow", duration: 2 },
+			{ actor: "explosion", actionType: "3d animation start", duration: 3 },
 	]},
 	{ leadingBlank: 0, duration: 6, text: "is more valuable than merely experiencing them.", actions: []},
 	{ leadingBlank: 1, duration: 6, text: "Thomas Edison's light bulb story shows the importance of", actions: [
@@ -61,7 +62,7 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 							intensity={200}
 							color={0xffffff}
 						/>	
-              <Starship aspectRatio={1} baseScale={1}/>
+              <Starship/>
               <StarshipPlume aspectRatio={1} baseScale={1}/>
               <GroupInitialState position={[0, 0, 1]} scale={0.2} >
                 <Explosion actor="explosion" />
