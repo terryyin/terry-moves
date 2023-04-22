@@ -10,18 +10,18 @@ export const ThreeAnimationEffect: React.FC<{
   children: React.ReactNode;
 }> = ({id, cameraDistance, lookAtY, cameraY, children, }) => {
 	const animationContextWrapper = useAnimationContext();
+	const { scale, position, rotation, lookAtYd } = animationContextWrapper.get3DGroupAttributes(id);
 
 	// Place a camera and set the distance to the object.
 	// Then make it look at the object.
 	const camera = useThree((state) => state.camera);
 	useEffect(() => {
-		camera.position.set(0, cameraY || -0, cameraDistance);
+		camera.position.set(0, cameraY || -0, cameraDistance - lookAtYd);
 		camera.near = 0.2;
 		camera.far = Math.max(5000, cameraDistance * 2);
-		camera.lookAt(0, lookAtY || 0, 0);
-	}, [camera, cameraDistance, lookAtY, cameraY]);
+		camera.lookAt(0, (lookAtY || 0) + lookAtYd, 0);
+	}, [camera, cameraDistance, lookAtY , cameraY, lookAtYd]);
 
-	const { scale, position, rotation } = animationContextWrapper.get3DGroupAttributes(id);
 
 	return (
 		<group
