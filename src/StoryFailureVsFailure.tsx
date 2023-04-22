@@ -2,7 +2,14 @@ import React from 'react';
 import { AnimationContextProvider } from './hooks/useAnimationContext';
 import { Subtitle } from './models/Subtitles';
 import autonomousComponent from './video_components/autonomousComponent';
-import { SceneLayout } from './SceneLayout';
+import { AbsoluteFill } from 'remotion';
+import { CustomerGroup } from './parts/CustomerGroup';
+import { ValueArrow } from './parts/ValueArrow';
+import { Subtitles } from './video_components/Subtitles';
+import AnimationEffect from './video_components/AnimationEffect';
+import { Starship } from './parts/Starship';
+import { ThreeDFrame } from './video_components/ThreeDFrame';
+import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
 
 const subtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 5, text: "SpaceX is celebrating their rocket explosion,", actions: [
@@ -40,7 +47,26 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 
   return (
     <AnimationContextProvider value={animationContext}>
-			<SceneLayout />
+    <AbsoluteFill style={{ backgroundColor: 'beige'}}>
+      <AnimationEffect actor="stage">
+				<AbsoluteFill style={{position: 'absolute', left: '20%', top: '40%', width: '40%', height: '45%'}}>
+        <div style={{position: 'relative', left: '0%', top: '0%', width: '100%', height: '100%'}}>
+          <ThreeDFrame >
+            <ThreeAnimationEffect id="product">
+              <Starship aspectRatio={1} baseScale={1}/>
+            </ThreeAnimationEffect>
+          </ThreeDFrame>
+				</div>
+      </AbsoluteFill>
+				<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
+				<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
+					<AnimationEffect actor="value to customer">
+						<ValueArrow />
+					</AnimationEffect>
+				</div>
+			</AnimationEffect>
+			<Subtitles />
+    </AbsoluteFill>
     </AnimationContextProvider>
   );
 });

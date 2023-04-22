@@ -31,8 +31,8 @@ export const RemotionRoot: React.FC = () => {
 			/> */}
 			<Composition
 				id="SceneCustomer"
-				// Component={ StoryFailureVsFailure }
-				component={ StoryProductDeveloper }
+				component={ StoryFailureVsFailure }
+				// Component={ StoryProductDeveloper }
 				durationInFrames={73*30}
 				fps={30}
 				width={1280}
