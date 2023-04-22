@@ -30,10 +30,10 @@ const subtitles: Subtitle[] = [
 	]},
 
 	{ leadingBlank: 1, duration: 6, text: "like SpaceX's Starship test flight,", actions: [
-			{ actor: "explosion", actionType: "3d animation reverse", duration: 2, speed: 0.5, percentage: 30 },
 	]},
 
 	{ leadingBlank: 0, duration: 6, text: "is more valuable than merely experiencing them.", actions: [
+			{ actor: "explosion", actionType: "3d animation reverse", duration: 2, speed: 0.5, percentage: 50, pauseAtEnd: true },
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: "Thomas Edison's light bulb story shows the importance of", actions: [

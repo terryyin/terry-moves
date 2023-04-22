@@ -35,6 +35,7 @@ export interface ThreeDAnimationAction extends BaseAction {
   actionType: '3d animation start' | '3d animation reverse';
   speed: number;
   percentage?: number;
+  pauseAtEnd?: boolean;
 }
 
 export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction | ThreeDAnimationAction;

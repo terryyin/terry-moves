@@ -24,7 +24,7 @@ export default class GLBAnimationActioner {
   combine(prev: GLBAnimationAttributes): GLBAnimationAttributes {
     const current = this.getCurrentValue();
     return {
-      playing: current.playing,
+      playing: current.time!==undefined ||  prev.time !== undefined,
       time: current.time ?? prev.time,
       loopOnce: current.loopOnce,
     }
@@ -33,16 +33,25 @@ export default class GLBAnimationActioner {
   private getCurrentValue(): GLBAnimationAttributes {
     switch(this.action.actionType) {
       case '3d animation start':
-        return  this.getAnimationAttributes(this.action as ThreeDAnimationAction);
+        return  this.getAnimationAttributes(this.action);
+      case '3d animation reverse':
+        return this.getReverseAnimationAttributes(this.action);
       default:
         return { ...GLBAnimationActioner.defaultValue};
     }
   }
 
+  private getReverseAnimationAttributes(action: ThreeDAnimationAction): GLBAnimationAttributes {
+    const {time, ...rest} = this.getAnimationAttributes(action);
+    if(time === undefined) return { ...rest}
+    return { ...rest, time: this.action.duration - time}
+  }
+
   private getAnimationAttributes(action: ThreeDAnimationAction): GLBAnimationAttributes {
+    const percentage = action.percentage ?? 100;
     return { 
       playing: this.effectCalculator.withInDuration(),
-      time: this.effectCalculator.withInDuration() ? this.effectCalculator.timeWithIn() * action.speed : undefined,
+      time: this.effectCalculator.withInDuration() ? this.effectCalculator.timeWithIn() * percentage / 100 * action.speed : undefined,
       loopOnce: true,
     }
   }
