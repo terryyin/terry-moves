@@ -15,23 +15,11 @@ export default class AnimationContextWrapper {
     this.animationContext = animationContext;
   }
 
-  private getActioner(actor: string): EffectCalculator[] {
-    return this.animationContext.allSubtitles.map((subtitle, index) => {
-      if(!subtitle?.actions) return [];
-      return subtitle.actions
-        .filter(action => action.actor === actor)
-        .map(action => {
-          const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0; 
-          return new EffectCalculator(action, startTime, this.animationContext.globalFrame, this.animationContext.globalFps);
-        });
-    }).flat();
-  }
-
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
     const result = this.getActioner(actor)
       .map(effectCalculator => new GLBAnimationActioner(effectCalculator.action as Action, effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), { ...GLBAnimationActioner.defaultValue});
-    result.time = result.time ?? this.animationContext.globalFrame / this.animationContext.globalFps;
+    result.time = result.time ?? this.adjustedFrame / this.animationContext.globalFps;
     return result;
   }
 
@@ -39,20 +27,36 @@ export default class AnimationContextWrapper {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .getStyle(this.animationContext.globalFrame);
+      .getStyle(this.adjustedFrame);
   }
 
   getShadowStyleOf(actor: string): CSSProperties | undefined {
     return this.getActioner(actor)
       .map(effectCalculator => new DivShadowActioner(effectCalculator.action as Action, effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .getStylePresence(this.animationContext.globalFrame);
+      .getStylePresence(this.adjustedFrame);
   }
 
   get3DGroupAttributes(actor: string): ThreeGroupAttributes {
     return this.getActioner(actor)
       .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue);
+  }
+
+  private getActioner(actor: string): EffectCalculator[] {
+    return this.animationContext.allSubtitles.map((subtitle, index) => {
+      if(!subtitle?.actions) return [];
+      return subtitle.actions
+        .filter(action => action.actor === actor)
+        .map(action => {
+          const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0; 
+          return new EffectCalculator(action, startTime, this.adjustedFrame, this.animationContext.globalFps);
+        });
+    }).flat();
+  }
+
+  private get adjustedFrame(): number {
+    return this.animationContext.globalFrame;
   }
 
   private getStartTimeOfSubtitle(subtitleIndex: number): number {
