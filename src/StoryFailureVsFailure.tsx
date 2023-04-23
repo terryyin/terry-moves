@@ -13,6 +13,7 @@ import { Explosion } from './parts/Explosion';
 import { GroupInitialState } from './video_components/GroupInitialState';
 import { OddeLogo } from './parts/OddeLogo';
 import { OddeLogoInner } from './parts/OddeLogoInner';
+import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 
 const subtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 4, scale: 1.5, position: 'center', text: [
@@ -108,7 +109,9 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 			<OddeLogo />
 		</AbsoluteFill>
     <AbsoluteFill style={{ left: '70%', top: '5%', width: '15%', height: '20%'}}>
-			<OddeLogoInner />
+			<FlipCoin speed={2} interval={4} shift={1} >
+			  <OddeLogoInner />
+			</FlipCoin>
 		</AbsoluteFill>
     </AnimationContextProvider>
   );
