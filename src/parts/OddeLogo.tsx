@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import {Img, staticFile} from 'remotion';
 
 export const OddeLogo: React.FC = () => {
