@@ -4,9 +4,7 @@
 <svg
    version="1.1"
    id="svg2"
-   width="566.66669"
-   height="566.66669"
-   viewBox="0 0 566.66669 566.66669"
+   viewBox="0 0 579.66669 566.66669"
    sodipodi:docname="Odd-e_logo.ai"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
@@ -83,7 +81,7 @@
           <g
              id="g20"
              clip-path="url(#clipPath24)">
-             <circle cx="217" cy="211" r="97" fill="none" stroke="#fad052" stroke-width="20" />
+             <circle cx="217" cy="211" r="100" fill="none" stroke="#fad052" stroke-width="10" />
           </g>
         </g>
 

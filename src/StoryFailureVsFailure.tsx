@@ -105,10 +105,11 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 			</AnimationEffect>
 			<Subtitles scale={2} />
     </AbsoluteFill>
-    <AbsoluteFill style={{ left: '70%', top: '5%', width: '15%', height: '20%'}}>
-			<OddeLogo />
+    <AbsoluteFill style={{ left: '87%', top: '9%', width: '10%', height: '20%'}}>
+			<span style={{fontSize: '25px'}}>terry@</span>
 		</AbsoluteFill>
-    <AbsoluteFill style={{ left: '70%', top: '5%', width: '15%', height: '20%'}}>
+    <AbsoluteFill style={{ left: '90%', top: '2%', width: '10%', height: '20%'}}>
+			<OddeLogo />
 			<FlipCoin speed={2} interval={4} shift={1} >
 			  <OddeLogoInner />
 			</FlipCoin>
