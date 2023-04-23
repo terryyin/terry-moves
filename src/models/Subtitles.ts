@@ -49,7 +49,7 @@ export type FlashBack = {
 interface SubtitleBasic {
   leadingBlank: number;
   duration: number;
-  text: string;
+  text: string | string[];
   scale?: number;
 }
 

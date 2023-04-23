@@ -13,7 +13,11 @@ import { Explosion } from './parts/Explosion';
 import { GroupInitialState } from './video_components/GroupInitialState';
 
 const subtitles: Subtitle[] = [
-	{ leadingBlank: 0, duration: 2, text: "SpaceX is celebrating their rocket explosion,",
+	{ leadingBlank: 0, duration: 2, text: [
+			"Learning by Failures",
+			"vs.",
+			"Learning from Failures",
+		],
 	  flashBack: {from: 40, duration: 2, speed: 1} },
 
 	{ leadingBlank: 2, duration: 4, text: "SpaceX is celebrating their rocket explosion,", actions: [

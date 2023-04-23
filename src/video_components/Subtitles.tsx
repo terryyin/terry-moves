@@ -4,6 +4,8 @@ export const Subtitles: React.FC<{scale?: number}> = ({scale}) => {
   const { subtitle, text} = useAnimationContext().getCurrentSubtitleText();
   const basicSize = 28;
   const size = basicSize * (scale ?? 1) * (subtitle.scale ?? 1);
+  const textArray = Array.isArray(text) ? text : [text];
+
   return (
 			<div style={{
             position: 'absolute',
@@ -18,7 +20,9 @@ export const Subtitles: React.FC<{scale?: number}> = ({scale}) => {
             borderRadius: '5px',
 						minHeight: `${size * 2}px`
           }}>
-        <span>{text}</span>
+        {textArray.map((item, index) => (
+        <span key={index} style={{display: 'block'}}>{item}</span>
+      ))}
     </div>
   );
 };

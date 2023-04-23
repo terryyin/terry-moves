@@ -32,9 +32,13 @@ describe('Subtitles component', () => {
   });
 
   test('font size', () => {
-    renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', scale: 1.5 });
-    const style = renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.' });
-    expect(style.getPropertyValue('font-size')).toBe("56px");
+    const style = renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', scale: 1.5 });
+    expect(style.getPropertyValue('font-size')).toBe("84px");
+  });
+
+  test('multiple lines', () => {
+    renderSubtitle({ leadingBlank: 1, duration: 3, text: ['line1', 'line2'] });
+    expect(screen.getByText('line1')).toBeInTheDocument();
   });
 
 });
