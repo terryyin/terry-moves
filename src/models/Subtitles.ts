@@ -50,6 +50,7 @@ interface SubtitleBasic {
   leadingBlank: number;
   duration: number;
   text: string;
+  size?: number;
 }
 
 export interface SubtitleWithAction extends SubtitleBasic {

@@ -19,11 +19,19 @@ describe('Subtitles component', () => {
         <Subtitles/>
       </AnimationContextProvider>
     );
-    return container;
+    const div = container.querySelector<HTMLDivElement>('div div');
+    if (!div) throw new Error('Div not found');
+    return window.getComputedStyle(div);
   }
 
   test('displays the correct subtitle text when there is an active subtitle', () => {
-    renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.' });
+    const style = renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.' });
+    expect(screen.getByText('First subtitle.')).toBeInTheDocument();
+    expect(style.getPropertyValue('width')).toBe("100%");
+  });
+
+  test('font size', () => {
+    renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', size: 1.5 });
     expect(screen.getByText('First subtitle.')).toBeInTheDocument();
   });
 
