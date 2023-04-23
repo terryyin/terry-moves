@@ -61,6 +61,9 @@ export default class AnimationContextWrapper {
   }
 
   private get adjustedFrame(): number {
+    if(this.currentSubtitle && 'flashBack' in this.currentSubtitle) {
+      return this.animationContext.globalFrame;
+    }
     return this.animationContext.globalFrame;
   }
 
