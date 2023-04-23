@@ -1,5 +1,6 @@
+import { SubtitleWithFlashBack } from './Subtitles';
 import { CSSProperties } from 'react';
-import { Action, Subtitle } from '@/models/Subtitles';
+import { Action, Subtitle, SubtitleWithAction } from '@/models/Subtitles';
 import { AnimationContext } from "./AnimationContext";
 import DivActioner from './DivActioner';
 import EffectCalculator from './EffectCalculator';
@@ -48,9 +49,17 @@ export default class AnimationContextWrapper {
       .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue);
   }
 
+  private isSubtitleWithAction(subtitle: Subtitle): subtitle is SubtitleWithAction {
+    return subtitle && (subtitle as SubtitleWithAction).actions !== undefined;
+  }
+
+  private isSubtitleWithFlashBack(subtitle: Subtitle): subtitle is SubtitleWithFlashBack {
+    return subtitle && (subtitle as SubtitleWithAction).actions !== undefined;
+  }
+
   private getActioner(actor: string): EffectCalculator[] {
     return this.animationContext.allSubtitles.map((subtitle, index) => {
-      if(!subtitle?.actions) return [];
+      if (!this.isSubtitleWithAction(subtitle)) return [];
       return subtitle.actions
         .filter(action => action.actor === actor)
         .map(action => {
@@ -61,7 +70,7 @@ export default class AnimationContextWrapper {
   }
 
   private get adjustedFrame(): number {
-    if(this.currentSubtitle && 'flashBack' in this.currentSubtitle) {
+    if (this.isSubtitleWithFlashBack(this.currentSubtitle)) {
       return this.animationContext.globalFrame;
     }
     return this.animationContext.globalFrame;

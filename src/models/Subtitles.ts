@@ -46,10 +46,18 @@ export type FlashBack = {
   speed: number;
 };
 
-export interface Subtitle {
+interface SubtitleBasic {
   leadingBlank: number;
   duration: number;
   text: string;
-  actions?: Action[];
-  flashBack?: FlashBack;
 }
+
+export interface SubtitleWithAction extends SubtitleBasic {
+  actions: Action[];
+}
+
+export interface SubtitleWithFlashBack extends SubtitleBasic {
+  flashBack: FlashBack;
+}
+
+export type Subtitle = SubtitleBasic | SubtitleWithAction | SubtitleWithFlashBack;
