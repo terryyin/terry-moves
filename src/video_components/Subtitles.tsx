@@ -18,7 +18,7 @@ export const Subtitles: React.FC<{scale?: number}> = ({scale}) => {
             width: '100%',
             textAlign: 'center',
             fontSize: `${size}px`,
-            fontFamily: 'Arial, sans-serif',
+            fontFamily: 'Helvetica, sans-serif',
             backgroundColor: 'rgba(0, 0, 0, 0.5)',
             color: 'white',
             padding: '10px',

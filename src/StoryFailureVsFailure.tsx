@@ -11,6 +11,7 @@ import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
 import { StarshipPlume } from './parts/StarshipPlume';
 import { Explosion } from './parts/Explosion';
 import { GroupInitialState } from './video_components/GroupInitialState';
+import { OddeLogo } from './parts/OddeLogo';
 
 const subtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 4, scale: 1.5, position: 'center', text: [
@@ -102,6 +103,9 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 			</AnimationEffect>
 			<Subtitles scale={2} />
     </AbsoluteFill>
+    <AbsoluteFill style={{ left: '70%', top: '5%', width: '15%', height: '20%'}}>
+			<OddeLogo />
+		</AbsoluteFill>
     </AnimationContextProvider>
   );
 });
