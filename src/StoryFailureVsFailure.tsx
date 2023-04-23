@@ -18,6 +18,7 @@ const subtitles: Subtitle[] = [
 			{ actor: "starship", actionType: "3d ocillating", duration: 10, unit: 0.1 },
 	]},
 	{ leadingBlank: 0, duration: 5, text: "highlighting different attitudes towards failure in software development.", actions: [
+			{ actor: "blue background", actionType: "disappear", duration: 5 },
 			{ actor: "starship", actionType: "3d going up", duration: 5, unit: 20 },
 			{ actor: "starship", actionType: "3d camera up", duration: 6, unit: 5 },
 			{ actor: "starship", actionType: "3d camera closer", duration: 6, unit: -20 },
@@ -60,7 +61,10 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 
   return (
     <AnimationContextProvider value={animationContext}>
-    <AbsoluteFill style={{ backgroundColor: '#55ceff'}}>
+    <AbsoluteFill style={{ backgroundColor: '#19bdff'}}>
+      <AnimationEffect actor="blue background">
+        <AbsoluteFill style={{ backgroundColor: '#b9ebff'}}/>
+			</AnimationEffect>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
           <ThreeDFrame >
