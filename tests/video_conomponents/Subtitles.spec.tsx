@@ -28,11 +28,13 @@ describe('Subtitles component', () => {
     const style = renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.' });
     expect(screen.getByText('First subtitle.')).toBeInTheDocument();
     expect(style.getPropertyValue('width')).toBe("100%");
+    expect(style.getPropertyValue('font-size')).toBe("28px");
   });
 
   test('font size', () => {
     renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', size: 1.5 });
-    expect(screen.getByText('First subtitle.')).toBeInTheDocument();
+    const style = renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.' });
+    expect(style.getPropertyValue('font-size')).toBe("28px");
   });
 
 });

@@ -87,7 +87,7 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
-			<Subtitles />
+			<Subtitles scale={2} />
     </AbsoluteFill>
     </AnimationContextProvider>
   );
