@@ -14,3 +14,4 @@ export const Starship: React.FC = () => {
 		</group>
 
 };
+useLoader.preload(GLTFLoader, url);

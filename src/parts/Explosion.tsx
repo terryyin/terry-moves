@@ -1,11 +1,14 @@
 import React from 'react';
 import {staticFile} from 'remotion';
 import { AnimatedGlb } from '../video_components/AnimatedGlb';
+import { useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three-stdlib';
+
+const url = staticFile('assets/animated_low_poly_explosion.glb') 
 
 export const Explosion: React.FC<{
   actor: string,
 }> = ({ actor }) => {
-  const url = staticFile('assets/animated_low_poly_explosion.glb') 
   return (
     <>
     <ambientLight intensity={20} color={0xff0000} />
@@ -13,3 +16,5 @@ export const Explosion: React.FC<{
     </>
   );
 };
+
+useLoader.preload(GLTFLoader, url);
