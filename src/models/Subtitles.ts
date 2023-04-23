@@ -51,6 +51,7 @@ interface SubtitleBasic {
   duration: number;
   text: string | string[];
   scale?: number;
+  position?: 'center';
 }
 
 export interface SubtitleWithAction extends SubtitleBasic {

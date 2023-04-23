@@ -41,4 +41,9 @@ describe('Subtitles component', () => {
     expect(screen.getByText('line1')).toBeInTheDocument();
   });
 
+  test('center', () => {
+    renderSubtitle({ leadingBlank: 1, duration: 3, text: 'line1', poistion: 'center' });
+    expect(screen.getByText('line1')).toBeInTheDocument();
+  });
+
 });
