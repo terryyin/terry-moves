@@ -54,7 +54,7 @@ export default class AnimationContextWrapper {
   }
 
   private isSubtitleWithFlashBack(subtitle: Subtitle): subtitle is SubtitleWithFlashBack {
-    return subtitle && (subtitle as SubtitleWithAction).actions !== undefined;
+    return subtitle && (subtitle as SubtitleWithFlashBack).flashBack !== undefined;
   }
 
   private getActioner(actor: string): EffectCalculator[] {
@@ -71,7 +71,13 @@ export default class AnimationContextWrapper {
 
   private get adjustedFrame(): number {
     if (this.isSubtitleWithFlashBack(this.currentSubtitle)) {
-      return this.animationContext.globalFrame;
+      const {flashBack} = this.currentSubtitle;
+      const startTime = this.currentSubtitleEndTime - this.currentSubtitle.duration;
+      const actualTimeWithInSubtitle = this.animationContext.globalFrame / this.animationContext.globalFps - startTime;
+      if(actualTimeWithInSubtitle < flashBack.duration) {
+        const resulttime = actualTimeWithInSubtitle * flashBack.speed + flashBack.from;
+        return resulttime * this.animationContext.globalFps;
+      }
     }
     return this.animationContext.globalFrame;
   }

@@ -13,6 +13,9 @@ import { Explosion } from './parts/Explosion';
 import { GroupInitialState } from './video_components/GroupInitialState';
 
 const subtitles: Subtitle[] = [
+	{ leadingBlank: 0, duration: 2, text: "SpaceX is celebrating their rocket explosion,",
+	  flashBack: {from: 40, duration: 2, speed: 1} },
+
 	{ leadingBlank: 2, duration: 4, text: "SpaceX is celebrating their rocket explosion,", actions: [
 			{ actor: "starship", actionType: "3d rise", duration: 3 },
 			{ actor: "starship", actionType: "3d ocillating", duration: 10, unit: 0.1 },
