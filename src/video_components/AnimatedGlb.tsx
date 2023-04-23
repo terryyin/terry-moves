@@ -1,9 +1,9 @@
 import React from 'react';
-import { useLoader, useFrame } from '@react-three/fiber';
+import { useFrame } from '@react-three/fiber';
 import { Clone, useAnimations } from '@react-three/drei';
-import { GLTFLoader } from 'three-stdlib/loaders/GLTFLoader';
 import { Group } from 'three/src/Three';
 import { useAnimationContext } from '../hooks/useAnimationContext';
+import { useGLTF } from '@react-three/drei';
 
 export const AnimatedGlb: React.FC<{
   actor: string,
@@ -13,7 +13,7 @@ export const AnimatedGlb: React.FC<{
 	const {playing, time } = animationContextWrapper.getGLBAnimationAttributes(actor);
 
   const groupRef = React.useRef<Group | null>(null);
-  const { scene, animations } = useLoader(GLTFLoader, url);
+  const { scene, animations } = useGLTF(url);
   const { actions, mixer } = useAnimations(animations, groupRef);
 
   React.useEffect(() => {

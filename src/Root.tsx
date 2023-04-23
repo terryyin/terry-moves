@@ -33,7 +33,7 @@ export const RemotionRoot: React.FC = () => {
 				id="SceneCustomer"
 				component={ StoryFailureVsFailure }
 				// Component={ StoryProductDeveloper }
-				durationInFrames={73*30}
+				durationInFrames={60*30}
 				fps={30}
 				width={1280}
 				height={720}
