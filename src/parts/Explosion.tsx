@@ -7,6 +7,9 @@ export const Explosion: React.FC<{
 }> = ({ actor }) => {
   const url = staticFile('assets/animated_low_poly_explosion.glb') 
   return (
+    <>
+    <ambientLight intensity={20} color={0xff0000} />
     <AnimatedGlb url={url} actor={actor}/>
+    </>
   );
 };

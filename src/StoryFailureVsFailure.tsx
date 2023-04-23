@@ -18,8 +18,9 @@ const subtitles: Subtitle[] = [
 			{ actor: "starship", actionType: "3d ocillating", duration: 10, unit: 0.1 },
 	]},
 	{ leadingBlank: 0, duration: 5, text: "highlighting different attitudes towards failure in software development.", actions: [
-			{ actor: "starship", actionType: "3d going up", duration: 5, unit: 30 },
-			{ actor: "starship", actionType: "3d camera up", duration: 6, unit: 15 },
+			{ actor: "starship", actionType: "3d going up", duration: 5, unit: 20 },
+			{ actor: "starship", actionType: "3d camera up", duration: 6, unit: 5 },
+			{ actor: "starship", actionType: "3d camera closer", duration: 6, unit: -20 },
 			{ actor: "software-dev", actionType: "appear", duration: 1 },
 	]},
 	{ leadingBlank: 1, duration: 3, text: "Learning from failures,", actions: [

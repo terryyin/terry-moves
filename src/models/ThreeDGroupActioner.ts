@@ -8,6 +8,7 @@ export type ThreeGroupAttributes = {
   position: THREE.Vector3;
   rotation: THREE.Euler;
   lookAtYd: number;
+  cameraDistanceD: number;
 }
 
 export default class ThreeDGroupActioner {
@@ -19,6 +20,7 @@ export default class ThreeDGroupActioner {
     position: new THREE.Vector3(0, 0, 0),
     rotation: new THREE.Euler(0, 0, 0),
     lookAtYd: 0,
+    cameraDistanceD: 0,
   };
 
   constructor(action: Action, effectCalculator: EffectCalculator) {
@@ -33,6 +35,7 @@ export default class ThreeDGroupActioner {
       position: prev.position.clone().add(current.position),
       rotation: new THREE.Euler(prev.rotation.x + current.rotation.x, prev.rotation.y + current.rotation.y, prev.rotation.z + current.rotation.z),
       lookAtYd: current.lookAtYd + prev.lookAtYd,
+      cameraDistanceD: current.cameraDistanceD + prev.cameraDistanceD,
     }
   }
 
@@ -41,12 +44,14 @@ export default class ThreeDGroupActioner {
     const rotateY = this.getThreeRotateY();
     const scale = this.getThreeScale();
     const lookAtYd = this.getLookAtYd();
+    const cameraDistanceD = this.getCameraDistanceD();
 
     return {
       position: new THREE.Vector3(0, translateY, 0),
       scale,
       rotation: new THREE.Euler(0, rotateY, 0),
       lookAtYd,
+      cameraDistanceD,
     }
   }
  
@@ -69,8 +74,15 @@ export default class ThreeDGroupActioner {
       return 0;
     }
     return -Math.sin(this.effectCalculator.timeWithIn() * Math.PI * 2) * action.unit;
+  }
 
-
+  private getCameraDistanceD(): number {
+    switch(this.action.actionType) {
+      case '3d camera closer':
+        return this.effectCalculator.interpolateSpring([0, this.action.unit]);
+      default:
+        return 0;
+    }
   }
 
   private getLookAtYd(): number {
