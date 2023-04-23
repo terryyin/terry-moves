@@ -40,9 +40,16 @@ export interface ThreeDAnimationAction extends BaseAction {
 
 export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction | ThreeDAnimationAction;
 
+export type FlashBack = {
+  duration: number;
+  from: number;
+  speed: number;
+};
+
 export interface Subtitle {
   leadingBlank: number;
   duration: number;
   text: string;
   actions?: Action[];
+  flashBack?: FlashBack;
 }
