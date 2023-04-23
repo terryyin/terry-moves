@@ -10,9 +10,14 @@ import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActi
 export default class AnimationContextWrapper {
 
   animationContext: AnimationContext;
+  private currentSubtitle: Subtitle;
+  private currentSubtitleEndTime: number;
 
   constructor(animationContext: AnimationContext) {
     this.animationContext = animationContext;
+    const { subtitle, endTime } = this.getCurrentSubtitleAndItsEndTime();
+    this.currentSubtitle = subtitle;
+    this.currentSubtitleEndTime = endTime;
   }
 
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
@@ -71,7 +76,7 @@ export default class AnimationContextWrapper {
     return endTime - targetSubtitle.duration;
   }
 
-  getCurrentSubtitleText(): string {
+  private getCurrentSubtitleAndItsEndTime() {
     let endTime = 0;
     let subtitle: Subtitle = this.animationContext.allSubtitles[0];
 
@@ -82,6 +87,13 @@ export default class AnimationContextWrapper {
         break;
     }
 
+    return { subtitle, endTime }
+  }
+
+  getCurrentSubtitleText(): string {
+    const subtitle = this.currentSubtitle;
+    const endTime = this.currentSubtitleEndTime;
     return this.animationContext.globalFrame > (endTime) * this.animationContext.globalFps || this.animationContext.globalFrame < (endTime - subtitle.duration) * this.animationContext.globalFps ? '' : subtitle.text;
   }
+
 };
