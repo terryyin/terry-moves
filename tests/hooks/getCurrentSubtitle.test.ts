@@ -7,7 +7,7 @@ function getCurrentSubtitleText(subtitles: Subtitle[], frame: number, fps: numbe
     globalFps: fps,
     globalFrame: frame,
   });
-  return animationContextWrapeper.getCurrentSubtitleText();
+  return animationContextWrapeper.getCurrentSubtitleText().text;
 }
 
 describe('useCurrentSubtitle1', () => {

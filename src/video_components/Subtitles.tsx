@@ -1,9 +1,9 @@
 import { useAnimationContext } from "../hooks/useAnimationContext";
 
 export const Subtitles: React.FC<{scale?: number}> = ({scale}) => {
-  const text = useAnimationContext().getCurrentSubtitleText();
+  const { subtitle, text} = useAnimationContext().getCurrentSubtitleText();
   const basicSize = 28;
-  const size = basicSize * (scale ?? 1);
+  const size = basicSize * (scale ?? 1) * (subtitle.scale ?? 1);
   return (
 			<div style={{
             position: 'absolute',

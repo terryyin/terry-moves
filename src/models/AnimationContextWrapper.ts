@@ -108,10 +108,13 @@ export default class AnimationContextWrapper {
     return { subtitle, endTime }
   }
 
-  getCurrentSubtitleText(): string {
+  getCurrentSubtitleText() {
     const subtitle = this.currentSubtitle;
     const endTime = this.currentSubtitleEndTime;
-    return this.animationContext.globalFrame > (endTime) * this.animationContext.globalFps || this.animationContext.globalFrame < (endTime - subtitle.duration) * this.animationContext.globalFps ? '' : subtitle.text;
+    return {
+      subtitle,
+      text: this.animationContext.globalFrame > (endTime) * this.animationContext.globalFps || this.animationContext.globalFrame < (endTime - subtitle.duration) * this.animationContext.globalFps ? '' : subtitle.text,
+    }
   }
 
 };

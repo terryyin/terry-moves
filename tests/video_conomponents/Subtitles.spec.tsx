@@ -16,7 +16,7 @@ describe('Subtitles component', () => {
 
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
-        <Subtitles/>
+        <Subtitles scale={2}/>
       </AnimationContextProvider>
     );
     const div = container.querySelector<HTMLDivElement>('div div');
@@ -28,13 +28,13 @@ describe('Subtitles component', () => {
     const style = renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.' });
     expect(screen.getByText('First subtitle.')).toBeInTheDocument();
     expect(style.getPropertyValue('width')).toBe("100%");
-    expect(style.getPropertyValue('font-size')).toBe("28px");
+    expect(style.getPropertyValue('font-size')).toBe("56px");
   });
 
   test('font size', () => {
-    renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', size: 1.5 });
+    renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', scale: 1.5 });
     const style = renderSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.' });
-    expect(style.getPropertyValue('font-size')).toBe("28px");
+    expect(style.getPropertyValue('font-size')).toBe("56px");
   });
 
 });
