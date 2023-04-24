@@ -37,7 +37,7 @@ export default class DivActioner extends DivBaseActioner{
 
   private getScaleStyle(action: ScaleAction): LazyTransitions {
     const scale = this.getScale(action);
-    const result = new LazyTransitions({scale: scale / 100})
+    const result = new LazyTransitions({scale: scale / 100, translateX: (0), translateY: (0)})
     return result;
   }
 

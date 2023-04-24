@@ -13,6 +13,7 @@ import { OddeLogo } from './parts/OddeLogo';
 import { OddeLogoInner } from './parts/OddeLogoInner';
 import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 import { Story } from './video_components/Story';
+import { ProblemDomain } from './parts/ProblemDomain';
 
 const storyFailureVsFailureSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 2, scale: 1.5, position: 'center', text: [
@@ -42,11 +43,12 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 			{ actor: "problem domain", actionType: "appear", duration: 2 },
 	]},
 	{ leadingBlank: 0, duration: 3, text: "do not necessarily lead to success.", actions: [
-			{ actor: "problem domain", actionType: "scale", duration: 2, outputRange: [5, 100]},
+			{ actor: "problem domain", actionType: "scale", duration: 2, outputRange: [600, 100]},
 	]},
 
 
 	{ leadingBlank: 0.5, duration: 3, text: "Learning from the failure", actions: [
+			{ actor: "problem domain", actionType: "disappear", duration: 2 },
 			{ actor: "stage", actionType: "scaleToUpperRight", duration: 2, outputRange: [50, 100] },
 			{ actor: "explosion", actionType: "3d animation reverse", duration: 1, speed: 1, percentage: 50, pauseAtEnd: true },
 	]},
@@ -72,6 +74,11 @@ export const StoryFailureVsFailure: React.FC = () => {
       <AnimationEffect actor="blue background">
         <AbsoluteFill style={{ backgroundColor: '#e1f6ff'}}/>
 			</AnimationEffect>
+			<AbsoluteFill style={{ left: '10%', top: '2%', width: '70%', height: '100%'}}>
+				<AnimationEffect actor="problem domain">
+					<ProblemDomain />
+				</AnimationEffect>
+			</AbsoluteFill>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
           <ThreeDFrame >
