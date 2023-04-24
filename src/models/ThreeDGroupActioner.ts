@@ -61,7 +61,7 @@ export default class ThreeDGroupActioner {
     switch(this.action.actionType) {
       case '3d rise':
         return this.effectCalculator.interpolateSpring([-4, 0]);
-      case '3d going up':
+      case '3d move':
         return this.effectCalculator.interpolateSpring([0, toVector3(this.action.distances)[1]]);
       case '3d ocillating':
         return this.getOcillatingY(this.action as ThreeDUnitAction);
