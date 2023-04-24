@@ -38,7 +38,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 	]},
 
 	{ leadingBlank: 0.5, duration: 2.5, text: "Repeated failures alone", actions: [
-			{ actor: "stage", actionType: "scaleToUpperRight", duration: 2, outputRange: [100, 50] },
+			{ actor: "stage", actionType: "scale", duration: 2, outputRange: [100, 50] },
 			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: 240 },
 			{ actor: "problem domain", actionType: "appear", duration: 2 },
 	]},
@@ -49,7 +49,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 
 	{ leadingBlank: 0.5, duration: 3, text: "Learning from the failure", actions: [
 			{ actor: "problem domain", actionType: "disappear", duration: 2 },
-			{ actor: "stage", actionType: "scaleToUpperRight", duration: 2, outputRange: [50, 100] },
+			// { actor: "stage", actionType: "scaleToUpperRight", duration: 2, outputRange: [50, 100] },
 			{ actor: "explosion", actionType: "3d animation reverse", duration: 1, speed: 1, percentage: 50, pauseAtEnd: true },
 	]},
 	{ leadingBlank: 0, duration: 3, text: "is more valuable than merely experiencing them.", actions: [

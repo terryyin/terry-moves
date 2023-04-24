@@ -3,12 +3,22 @@ import {interpolate} from 'remotion'
 import { CSSProperties } from 'react';
 
 type TransformProperties = {
-  scale?: number;
   translateX?: number;
   translateY?: number;
 };
+
+const getInterpolate = (frame: number, interpolateRanges: InterpolateRanges): number | undefined => {
+  return  interpolateRanges.inputRange.length > 0
+      ? interpolate(frame, interpolateRanges.inputRange, interpolateRanges.outputRange, {
+          extrapolateLeft: "clamp",
+          extrapolateRight: "clamp",
+        })
+      : undefined;
+}
+
 export default class LazyTransitions {
   private opaciytInterpolateRanges: InterpolateRanges = {inputRange: [], outputRange: []};
+  private scaleInterpolateRanges: InterpolateRanges = {inputRange: [], outputRange: []};
   private transformProperties: TransformProperties;
 
   constructor(transformProperties: TransformProperties) {
@@ -19,30 +29,29 @@ export default class LazyTransitions {
     this.opaciytInterpolateRanges = interpolateRanges;
   }
 
+  setScaleInterpolation(interpolateRanges: InterpolateRanges) {
+      this.scaleInterpolateRanges = interpolateRanges;
+  }
+
   combine(prev: LazyTransitions): LazyTransitions {
     const combinedStyle = new LazyTransitions(combineTransformProperties(this.transformProperties));
     combinedStyle.setOpacityInterpolation(combineInterpolates(this.opaciytInterpolateRanges, prev.opaciytInterpolateRanges));
+    combinedStyle.setScaleInterpolation(combineInterpolates(this.scaleInterpolateRanges, prev.scaleInterpolateRanges));
 
     return combinedStyle;
   }
 
   getStyle(frame: number): CSSProperties {
-    const opacity =
-      this.opaciytInterpolateRanges.inputRange.length > 0
-        ? interpolate(frame, this.opaciytInterpolateRanges.inputRange, this.opaciytInterpolateRanges.outputRange, {
-            extrapolateLeft: "clamp",
-            extrapolateRight: "clamp",
-          })
-        : undefined;
-
-    return { ...(opacity === undefined ? {} : {opacity}), ...this.getTransform() };
+    const opacity = getInterpolate(frame, this.opaciytInterpolateRanges);
+    const scale = getInterpolate(frame, this.scaleInterpolateRanges);
+    return { ...this.getTransform(scale), ...(opacity === undefined ? {} : {opacity})  };
   }
 
-  private getTransform()  {
-    if (this.transformProperties.scale === undefined) {
+  private getTransform(scale: number | undefined)  {
+    if (scale === undefined) {
       return {};
     }
-    const transform = `scale(${this.transformProperties.scale}) translateX(${this.transformProperties.translateX}%) translateY(${this.transformProperties.translateY}%)`;
+    const transform = `scale(${scale}) translateX(${this.transformProperties.translateX}%) translateY(${this.transformProperties.translateY}%)`;
     return { transform, transformOrigin: 'center'};
   }
 

@@ -4,9 +4,9 @@ import {makeMe} from '../helpers/makeMe';
 describe('AnimationContext', () => {
 	describe('scaleToUpperLeft combined', () => {
 		[
-			{sec: 0, expectPlaying: "scale(1) translateX(0%) translateY(0%)",  },
-			{sec: 1, expectPlaying: "scale(1) translateX(0%) translateY(0%)",   },
-			{sec: 1.1, expectPlaying: "scale(1) translateX(0%) translateY(0%)", },
+			{sec: 0, expectPlaying: "scale(0.5) translateX(0%) translateY(0%)",  },
+			{sec: 1, expectPlaying: "scale(0.5) translateX(0%) translateY(0%)",   },
+			{sec: 1.1, expectPlaying: "scale(0.55) translateX(0%) translateY(0%)", },
 			{sec: 2.1, expectPlaying: "scale(1) translateX(0%) translateY(0%)",},
 			{sec: 3.1, expectPlaying: "scale(1.1) translateX(-10%) translateY(10%)",},
 		].forEach(({sec, expectPlaying, }) => {

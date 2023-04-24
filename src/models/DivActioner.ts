@@ -31,13 +31,14 @@ export default class DivActioner extends DivBaseActioner{
 
   private getScaleToUpperRightStyle(action: ScaleAction): LazyTransitions {
     const scale = this.getScale(action);
-    const result = new LazyTransitions({scale: scale / 100, translateX: (100 - scale), translateY: (scale-100)})
+    const result = new LazyTransitions({translateX: (100 - scale), translateY: (scale-100)})
+    result.setScaleInterpolation({inputRange: this.effectCalculator.frameRange, outputRange: action.outputRange.map((value) => value / 100)});
     return result;
   }
 
   private getScaleStyle(action: ScaleAction): LazyTransitions {
-    const scale = this.getScale(action);
-    const result = new LazyTransitions({scale: scale / 100, translateX: (0), translateY: (0)})
+    const result = new LazyTransitions({translateX: (0), translateY: (0)})
+    result.setScaleInterpolation({inputRange: this.effectCalculator.frameRange, outputRange: action.outputRange});
     return result;
   }
 
