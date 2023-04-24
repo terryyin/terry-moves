@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom/extend-expect';
 import { makeMe } from '../helpers/makeMe';
 
-describe('AnimationContext', () => {
+describe('Script', () => {
   test(`total frames`, () => {
     const animationContext = makeMe
             .script

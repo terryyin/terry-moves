@@ -9,13 +9,8 @@ import { Script } from "../models/Script";
 export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React.ReactNode}> = (({subtitles, id, children}) => {
   const globalFps = 30;
   const script = new Script(subtitles, globalFps);
-  const InnerStory = autonomousComponent(({frame, fps}) => {
-    const animationContext  = {
-      globalFps: fps,
-      globalFrame: frame,
-    };
-
-    const animationContextWrapper = new AnimationContextWrapper(animationContext, script);
+  const InnerStory = autonomousComponent(({frame}) => {
+    const animationContextWrapper = new AnimationContextWrapper(frame, script);
 
     return (
       <AnimationContextProvider value={animationContextWrapper}>

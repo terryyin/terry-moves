@@ -1,6 +1,5 @@
 import { Script } from "@/models/Script";
 import { Subtitle } from '@/models/Subtitles';
-import { AnimationContext } from '@/models/AnimationContext';
 import AnimationContextWrapper from '@/models/AnimationContextWrapper';
 
 class ScriptBuilder {
@@ -17,10 +16,7 @@ class ScriptBuilder {
 }
 class AnimationContextBuilder {
   scriptBuilder: ScriptBuilder = new ScriptBuilder();
-  animationContext: AnimationContext = {
-    globalFps: 30,
-    globalFrame: 60,
-  };
+  second = 2;
 
   withSubtitle(subtitle: Subtitle) {
     this.scriptBuilder.withSubtitle(subtitle);
@@ -28,12 +24,13 @@ class AnimationContextBuilder {
   }
 
   seconds(sec: number) {
-    this.animationContext.globalFrame = sec * this.animationContext.globalFps;
+    this.second = sec;
     return this;
   }
 
   please() {
-    return new AnimationContextWrapper(this.animationContext, this.scriptBuilder.please());
+    const script = this.scriptBuilder.please();
+    return new AnimationContextWrapper(this.second * script.fps, script);
   }
 }
 class MakeMe {

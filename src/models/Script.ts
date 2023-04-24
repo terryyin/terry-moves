@@ -3,7 +3,7 @@ import EffectCalculator from './EffectCalculator';
 
 export class Script {
 	private subtitles: Subtitle[];
-	private fps = 30;
+	fps = 30;
 
 	constructor(subtitles: Subtitle[], fps: number) {
 		this.subtitles = subtitles;
