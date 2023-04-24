@@ -34,14 +34,16 @@ export default class LazyTransitions {
             extrapolateRight: "clamp",
           })
         : undefined;
-      const transform = this.getTransform();
 
-    return { ...(opacity === undefined ? {} : {opacity}), ...(transform === undefined ? {} : {transform, transformOrigin: 'center'}) };
+    return { ...(opacity === undefined ? {} : {opacity}), ...this.getTransform() };
   }
 
-  private getTransform(): string | undefined {
-    const transform = this.transformProperties.scale ? `scale(${this.transformProperties.scale}) translateX(${this.transformProperties.translateX}%) translateY(${this.transformProperties.translateY}%)` : undefined;
-    return transform;
+  private getTransform()  {
+    if (this.transformProperties.scale === undefined) {
+      return {};
+    }
+    const transform = `scale(${this.transformProperties.scale}) translateX(${this.transformProperties.translateX}%) translateY(${this.transformProperties.translateY}%)`;
+    return { transform, transformOrigin: 'center'};
   }
 
   getStylePresence(frame: number): CSSProperties | undefined {
