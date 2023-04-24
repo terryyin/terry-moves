@@ -21,6 +21,10 @@ export default class AnimationContextWrapper {
     this.currentSubtitleEndTime = endTime;
   }
 
+  getTotalFrame() {
+    return this.animationContext.allSubtitles.reduce((prev, curr) => prev + curr.leadingBlank + curr.duration, 0) * this.animationContext.globalFps;
+  }
+
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
     const result = this.getActioner(actor)
       .map(effectCalculator => new GLBAnimationActioner(effectCalculator.action as Action, effectCalculator))
