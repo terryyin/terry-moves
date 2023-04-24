@@ -12,8 +12,9 @@ import { GroupInitialState } from './video_components/GroupInitialState';
 import { OddeLogo } from './parts/OddeLogo';
 import { OddeLogoInner } from './parts/OddeLogoInner';
 import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
+import { Story } from './video_components/Story';
 
-export const storyFailureVsFailureSubtitles: Subtitle[] = [
+const storyFailureVsFailureSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 3, scale: 1.5, position: 'center', text: [
 			"Learning by Failures",
 			"vs.",
@@ -67,7 +68,7 @@ export const storyFailureVsFailureSubtitles: Subtitle[] = [
 
 export const StoryFailureVsFailure: React.FC = () => {
   return (
-		<>
+		<Story id="StoryFailureVsFailure" subtitles={storyFailureVsFailureSubtitles}  >
     <AbsoluteFill style={{ backgroundColor: '#19bdff'}}>
       <AnimationEffect actor="blue background">
         <AbsoluteFill style={{ backgroundColor: '#b9ebff'}}/>
@@ -102,6 +103,6 @@ export const StoryFailureVsFailure: React.FC = () => {
 			  <OddeLogoInner />
 			</FlipCoin>
 		</AbsoluteFill>
-  </>
+		</Story>
   );
 };
