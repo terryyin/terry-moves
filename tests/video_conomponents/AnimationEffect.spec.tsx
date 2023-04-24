@@ -35,13 +35,13 @@ describe('AnimationEffect', () => {
               .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.'})
               .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('width')).toBe("100%");
+      expect(computedStyle.getPropertyValue('transform')).toBe("");
     });
 
     [
-      { sec: 0, expectedWidth: '50%' },
-      { sec: 1, expectedWidth: '50%' },
-      { sec: 1.1, expectedWidth: '55%' },
+      { sec: 0, expectedWidth: 'scale(0.5) translateX(50%) translateY(-50%)' },
+      { sec: 1, expectedWidth: 'scale(0.5) translateX(50%) translateY(-50%)' },
+      { sec: 1.1, expectedWidth: 'scale(0.55) translateX(45%) translateY(-45%)' },
     ].forEach(({sec, expectedWidth}) => {
       test('displays the correct transformation', () => {
         const animationContext = makeMe
@@ -50,7 +50,7 @@ describe('AnimationEffect', () => {
                 .seconds(sec)
                 .please();
         const computedStyle = renderAndGetDivStyle(animationContext);
-        expect(computedStyle.getPropertyValue('width')).toBe(expectedWidth);
+        expect(computedStyle.getPropertyValue('transform')).toBe(expectedWidth);
       });
     });
 
@@ -60,7 +60,7 @@ describe('AnimationEffect', () => {
                 .seconds(1)
                 .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('width')).toBe('100%');
+      expect(computedStyle.getPropertyValue('transform')).toBe('');
     });
 
     test('find the action in the second subtitle', () => {
@@ -71,7 +71,7 @@ describe('AnimationEffect', () => {
                 .seconds(1)
                 .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('width')).toBe('50%');
+      expect(computedStyle.getPropertyValue('transform')).toBe('scale(0.5) translateX(50%) translateY(-50%)');
     });
 
     test('find the action in the second subtitle should act at the right time', () => {
@@ -82,7 +82,7 @@ describe('AnimationEffect', () => {
                 .seconds(5.1)
                 .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('width')).toBe('55%');
+      expect(computedStyle.getPropertyValue('transform')).toBe('scale(0.55) translateX(45%) translateY(-45%)');
     });
 
     test('find the action in the first subtitle but its second action', () => {
@@ -97,7 +97,7 @@ describe('AnimationEffect', () => {
                 .seconds(1.1)
                 .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('width')).toBe('55%');
+      expect(computedStyle.getPropertyValue('transform')).toBe('scale(0.55) translateX(45%) translateY(-45%)');
     });
   });
 

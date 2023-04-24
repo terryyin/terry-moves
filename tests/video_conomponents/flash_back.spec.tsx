@@ -30,9 +30,9 @@ describe('Flash back', () => {
       ] };
 
     [
-      { sec: 0.5, expectedWidth: '50%' },
-      { sec: 1.1, expectedWidth: '52.5%' },
-      { sec: 1.6, expectedWidth: '50%' },
+      { sec: 0.5, expectedWidth: 'scale(0.5) translateX(50%) translateY(-50%)' },
+      { sec: 1.1, expectedWidth: 'scale(0.525) translateX(47.5%) translateY(-47.5%)' },
+      { sec: 1.6, expectedWidth: 'scale(0.5) translateX(50%) translateY(-50%)' },
     ].forEach(({sec, expectedWidth}) => {
       test(`test for sec ${sec}`, () => {
         const animationContext = makeMe
@@ -42,7 +42,7 @@ describe('Flash back', () => {
                 .seconds(sec)
                 .please();
         const computedStyle = renderAndGetDivStyle(animationContext);
-        expect(computedStyle.getPropertyValue('width')).toBe(expectedWidth);
+        expect(computedStyle.getPropertyValue('transform')).toBe(expectedWidth);
       });
     });
   });

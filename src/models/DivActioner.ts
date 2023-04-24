@@ -30,7 +30,7 @@ export default class DivActioner extends DivBaseActioner{
   private getScaleToUpperRightStyle(action: ScaleToUpperRightAction): LazyTransitions {
     const scale = this.effectCalculator.interpolateDuration(action.outputRange);
     return new LazyTransitions({
-      left: `${100 - scale}%`, top:'0%', width: `${scale}%`, height: `${scale}%`
+      transform: `scale(${scale / 100}) translateX(${(100 - scale)}%) translateY(${(scale-100)}%)`, transformOrigin: 'center',
     })
   }
 }
