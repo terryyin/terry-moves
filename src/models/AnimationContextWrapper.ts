@@ -22,7 +22,23 @@ export class Script {
     return this.subtitles.reduce((prev, curr) => prev + curr.leadingBlank + curr.duration, 0) * this.fps;
   }
 
-  getStartTimeOfSubtitle(subtitleIndex: number): number {
+  getActioner(actor: string, frame: number): EffectCalculator[] {
+    return this.subtitles.map((subtitle, index) => {
+      if (!this.isSubtitleWithAction(subtitle)) return [];
+      return subtitle.actions
+        .filter(action => action.actor === actor)
+        .map(action => {
+          const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0; 
+          return new EffectCalculator(action, startTime, frame, this.fps);
+        });
+    }).flat();
+  }
+
+  private isSubtitleWithAction(subtitle: Subtitle): subtitle is SubtitleWithAction {
+    return subtitle && (subtitle as SubtitleWithAction).actions !== undefined;
+  }
+
+  private getStartTimeOfSubtitle(subtitleIndex: number): number {
     let endTime = 0;
     let targetSubtitle: Subtitle = this.subtitles[0];
     for (let i = 0; i < this.subtitles.length; i++) {
@@ -79,24 +95,12 @@ export default class AnimationContextWrapper {
       .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue);
   }
 
-  private isSubtitleWithAction(subtitle: Subtitle): subtitle is SubtitleWithAction {
-    return subtitle && (subtitle as SubtitleWithAction).actions !== undefined;
-  }
-
   private isSubtitleWithFlashBack(subtitle: Subtitle): subtitle is SubtitleWithFlashBack {
     return subtitle && (subtitle as SubtitleWithFlashBack).flashBack !== undefined;
   }
 
   private getActioner(actor: string): EffectCalculator[] {
-    return this.animationContext.allSubtitles.map((subtitle, index) => {
-      if (!this.isSubtitleWithAction(subtitle)) return [];
-      return subtitle.actions
-        .filter(action => action.actor === actor)
-        .map(action => {
-          const startTime = subtitle ? this.script.getStartTimeOfSubtitle(index) : 0; 
-          return new EffectCalculator(action, startTime, this.adjustedFrame, this.animationContext.globalFps);
-        });
-    }).flat();
+    return this.script.getActioner(actor, this.adjustedFrame);
   }
 
   private get adjustedFrame(): number {
