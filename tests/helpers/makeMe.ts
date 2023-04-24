@@ -18,7 +18,6 @@ class ScriptBuilder {
 class AnimationContextBuilder {
   scriptBuilder: ScriptBuilder = new ScriptBuilder();
   animationContext: AnimationContext = {
-    allSubtitles: [],
     globalFps: 30,
     globalFrame: 60,
   };

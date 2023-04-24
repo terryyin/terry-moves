@@ -10,7 +10,6 @@ export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React
   const script = new Script(subtitles, globalFps);
   const InnerStory = autonomousComponent(({frame, fps}) => {
     const animationContext  = {
-      allSubtitles: subtitles,
       globalFps: fps,
       globalFrame: frame,
     };

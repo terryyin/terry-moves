@@ -3,7 +3,6 @@ import { Subtitle } from '@/models/Subtitles';
 
 function getCurrentSubtitleText(subtitles: Subtitle[], frame: number, fps: number) {
   const animationContextWrapeper = new AnimationContextWrapper({
-    allSubtitles: subtitles,
     globalFps: fps,
     globalFrame: frame,
   },
