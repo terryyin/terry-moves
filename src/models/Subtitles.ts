@@ -1,4 +1,4 @@
-export type ActionType = 'scaleToUpperRight' | 'appear' | 'disappear' | '3d rise' | '3d ocillating' | '3d going up' | '3d camera up' | '3d camera closer' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse';
+export type ActionType = 'scaleToUpperRight' | 'appear' | 'disappear' | '3d rise' | '3d ocillating' | '3d going up' | '3d camera up' | '3d camera closer' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -6,8 +6,8 @@ export interface BaseAction {
   duration: number;
 }
 
-export interface ScaleToUpperRightAction extends BaseAction {
-  actionType: 'scaleToUpperRight';
+export interface ScaleAction extends BaseAction {
+  actionType: 'scaleToUpperRight' | 'scale';
   outputRange: number[];
 }
 
@@ -38,7 +38,7 @@ export interface ThreeDAnimationAction extends BaseAction {
   pauseAtEnd?: boolean;
 }
 
-export type Action = ScaleToUpperRightAction | AppearAction | ThreeDAction | ThreeDAnimationAction;
+export type Action = ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction;
 
 export type FlashBack = {
   duration: number;

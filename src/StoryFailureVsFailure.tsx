@@ -15,40 +15,39 @@ import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 import { Story } from './video_components/Story';
 
 const storyFailureVsFailureSubtitles: Subtitle[] = [
-	{ leadingBlank: 0, duration: 3, scale: 1.5, position: 'center', text: [
+	{ leadingBlank: 0, duration: 2, scale: 1.5, position: 'center', text: [
 			"Learning by Failures",
-			"vs.",
+			"vs",
 			"Learning from Failures",
 		],
 	  flashBack: {from: 40, duration: 3, speed: 0.5} },
 
-	{ leadingBlank: 0.5, duration: 2.5, text: "SpaceX is celebrating their rocket explosion,", actions: [
+	{ leadingBlank: 0.5, duration: 3, text: "SpaceX is celebrating their rocket explosion.", actions: [
 			{ actor: "starship", actionType: "3d rise", duration: 3 },
 			{ actor: "starship", actionType: "3d ocillating", duration: 10, unit: 0.1 },
 	]},
-	{ leadingBlank: 0, duration: 3.5, text: "highlighting different attitudes towards failure in software development.", actions: [
+	{ leadingBlank: 0, duration: 4, text: "Software developers also have different attitudes towards failures.", actions: [
 			{ actor: "blue background", actionType: "disappear", duration: 5 },
 			{ actor: "starship", actionType: "3d going up", duration: 5, unit: 20 },
 			{ actor: "starship", actionType: "3d camera up", duration: 6, unit: 5 },
 			{ actor: "starship", actionType: "3d camera closer", duration: 6, unit: -20 },
-			{ actor: "software-dev", actionType: "appear", duration: 1 },
+	]},
+	{ leadingBlank: 0, duration: 1.5, text: "", actions: [
+			{ actor: "explosion", actionType: "3d animation start", duration: 1, speed: 1 },
 	]},
 
-	{ leadingBlank: 0.5, duration: 2.5, text: "Just by failing repeatedly,", actions: [
+	{ leadingBlank: 0.5, duration: 2.5, text: "Repeated failures alone", actions: [
+			{ actor: "stage", actionType: "scaleToUpperRight", duration: 2, outputRange: [100, 50] },
 			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: 240 },
-			{ actor: "explosion", actionType: "3d animation start", duration: 2, speed: 0.5 },
+			{ actor: "problem domain", actionType: "appear", duration: 2 },
 	]},
-	{ leadingBlank: 0, duration: 1, text: "like in Thomas Edison's light bulb story,", actions: [
-			{ actor: "explosion", actionType: "3d animation start", duration: 1, speed: 1 },
-	]},
-	{ leadingBlank: 0, duration: 1, text: "like in Thomas Edison's light bulb story,", actions: [
-			{ actor: "explosion", actionType: "3d animation start", duration: 1, speed: 1 },
-	]},
-	{ leadingBlank: 0, duration: 3, text: "not necessarily lead to success.", actions: [
+	{ leadingBlank: 0, duration: 3, text: "do not necessarily lead to success.", actions: [
+			{ actor: "problem domain", actionType: "scale", duration: 2, outputRange: [5, 100]},
 	]},
 
 
 	{ leadingBlank: 0.5, duration: 3, text: "Learning from the failure", actions: [
+			{ actor: "stage", actionType: "scaleToUpperRight", duration: 2, outputRange: [50, 100] },
 			{ actor: "explosion", actionType: "3d animation reverse", duration: 1, speed: 1, percentage: 50, pauseAtEnd: true },
 	]},
 	{ leadingBlank: 0, duration: 3, text: "is more valuable than merely experiencing them.", actions: [
@@ -69,9 +68,9 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 export const StoryFailureVsFailure: React.FC = () => {
   return (
 		<Story id="StoryFailureVsFailure" subtitles={storyFailureVsFailureSubtitles}  >
-    <AbsoluteFill style={{ backgroundColor: '#19bdff'}}>
+    <AbsoluteFill style={{ backgroundColor: '#00abf0'}}>
       <AnimationEffect actor="blue background">
-        <AbsoluteFill style={{ backgroundColor: '#b9ebff'}}/>
+        <AbsoluteFill style={{ backgroundColor: '#e1f6ff'}}/>
 			</AnimationEffect>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>

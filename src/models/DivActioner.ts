@@ -1,4 +1,4 @@
-import { ScaleToUpperRightAction } from './Subtitles';
+import { ScaleAction } from './Subtitles';
 import LazyTransitions from './LazyTransitions';
 import DivBaseActioner from './DivBaseActioner';
 
@@ -8,6 +8,8 @@ export default class DivActioner extends DivBaseActioner{
 
   protected getStyle(): LazyTransitions {
     switch(this.action.actionType) {
+      case 'scale':
+        return this.getScaleStyle(this.action);
       case 'scaleToUpperRight':
         return this.getScaleToUpperRightStyle(this.action);
       case 'appear':
@@ -27,10 +29,20 @@ export default class DivActioner extends DivBaseActioner{
     return result;
   }
 
-  private getScaleToUpperRightStyle(action: ScaleToUpperRightAction): LazyTransitions {
-    const scale = this.effectCalculator.interpolateDuration(action.outputRange);
+  private getScaleToUpperRightStyle(action: ScaleAction): LazyTransitions {
+    const scale = this.getScale(action);
     const result = new LazyTransitions({scale: scale / 100, translateX: (100 - scale), translateY: (scale-100)})
-
     return result;
   }
+
+  private getScaleStyle(action: ScaleAction): LazyTransitions {
+    const scale = this.getScale(action);
+    const result = new LazyTransitions({scale: scale / 100})
+    return result;
+  }
+
+  private getScale(action: ScaleAction): number {
+    return this.effectCalculator.interpolateDuration(action.outputRange);
+  }
+
 }
