@@ -73,9 +73,9 @@ export default class AnimationContextWrapper {
   private currentSubtitleEndTime: number;
   private script: Script;
 
-  constructor(animationContext: AnimationContext) {
+  constructor(animationContext: AnimationContext, script: Script) {
     this.animationContext = animationContext;
-    this.script = new Script(animationContext.allSubtitles, animationContext.globalFps);
+    this.script = script;
     const { subtitle, endTime } = this.script.getSubtitleAndItsEndTimeAt(animationContext.globalFrame);
     this.currentSubtitle = subtitle;
     this.currentSubtitleEndTime = endTime;

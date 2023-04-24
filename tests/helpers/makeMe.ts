@@ -16,6 +16,7 @@ class ScriptBuilder {
   }
 }
 class AnimationContextBuilder {
+  scriptBuilder: ScriptBuilder = new ScriptBuilder();
   animationContext: AnimationContext = {
     allSubtitles: [],
     globalFps: 30,
@@ -23,7 +24,7 @@ class AnimationContextBuilder {
   };
 
   withSubtitle(subtitle: Subtitle) {
-    this.animationContext.allSubtitles.push(subtitle);
+    this.scriptBuilder.withSubtitle(subtitle);
     return this;
   }
 
@@ -33,7 +34,7 @@ class AnimationContextBuilder {
   }
 
   please() {
-    return new AnimationContextWrapper(this.animationContext);
+    return new AnimationContextWrapper(this.animationContext, this.scriptBuilder.please());
   }
 }
 class MakeMe {

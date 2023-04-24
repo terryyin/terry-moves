@@ -1,4 +1,4 @@
-import AnimationContextWrapper from '@/models/AnimationContextWrapper';
+import AnimationContextWrapper, { Script } from '@/models/AnimationContextWrapper';
 import { Subtitle } from '@/models/Subtitles';
 
 function getCurrentSubtitleText(subtitles: Subtitle[], frame: number, fps: number) {
@@ -6,7 +6,8 @@ function getCurrentSubtitleText(subtitles: Subtitle[], frame: number, fps: numbe
     allSubtitles: subtitles,
     globalFps: fps,
     globalFrame: frame,
-  });
+  },
+  new Script(subtitles, fps));
   return animationContextWrapeper.getCurrentSubtitleText().text;
 }
 

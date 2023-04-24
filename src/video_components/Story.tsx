@@ -3,16 +3,19 @@ import { AnimationContextProvider } from '../hooks/useAnimationContext';
 import { Subtitle } from '../models/Subtitles';
 import autonomousComponent from './autonomousComponent';
 import React from 'react';
-import AnimationContextWrapper from '../models/AnimationContextWrapper';
+import AnimationContextWrapper, { Script } from '../models/AnimationContextWrapper';
 
 export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React.ReactNode}> = (({subtitles, id, children}) => {
+  const globalFps = 30;
+  const script = new Script(subtitles, globalFps);
   const InnerStory = autonomousComponent(({frame, fps}) => {
     const animationContext  = {
       allSubtitles: subtitles,
       globalFps: fps,
       globalFrame: frame,
     };
-    const animationContextWrapper = new AnimationContextWrapper(animationContext);
+
+    const animationContextWrapper = new AnimationContextWrapper(animationContext, script);
 
     return (
       <AnimationContextProvider value={animationContextWrapper}>
@@ -24,8 +27,8 @@ export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React
   return <Composition
     id={ id }
     component={ InnerStory }
-    durationInFrames={40*30}
-    fps={30}
+    durationInFrames={script.getTotalFrame()}
+    fps={globalFps}
     width={1280}
     height={720}
     />
