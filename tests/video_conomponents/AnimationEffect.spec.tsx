@@ -184,7 +184,7 @@ describe('AnimationEffect', () => {
   describe('glow', () => {
     [
       { sec: 0, shadowExist: false, expectedOpacity: undefined },
-      { sec: 1.1, shadowExist: true, expectedOpacity: '0.8087921354109988', expectedTransform: 'scale(1.0382415729178003)' },
+      { sec: 1.1, shadowExist: true, expectedOpacity: '0.9', expectedTransform: 'scale(1.0382415729178003) translateX(0px) translateY(0px)' },
       { sec: 5.1, shadowExist: false, expectedOpacity: undefined },
     ].forEach(({sec, shadowExist, expectedOpacity, expectedTransform}) => {
       test(`appear, then disappear at sec ${sec}`, () => {
