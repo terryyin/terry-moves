@@ -1,12 +1,12 @@
 import {interpolate} from 'remotion'
-import LazyStyle from './LazyStyle';
+import LazyTransitions from './LazyTransitions';
 import DivBaseActioner from './DivBaseActioner';
 
 export default class DivActioner extends DivBaseActioner{
 
-  static defaultValue: LazyStyle = new LazyStyle({});
+  static defaultValue: LazyTransitions = new LazyTransitions({});
 
-  protected getStyle(): LazyStyle {
+  protected getStyle(): LazyTransitions {
     switch(this.action.actionType) {
       case 'glow':
         return this.getGrow();
@@ -15,10 +15,10 @@ export default class DivActioner extends DivBaseActioner{
     }
   }
 
-  private getGrow(): LazyStyle {
+  private getGrow(): LazyTransitions {
     const progress = this.effectCalculator.getSpring();
     const size = interpolate(progress, [0, 1], [100, 120]);
-    return new LazyStyle({transform: `scale(${size / 100})`, transformOrigin: 'center', opacity: `${1 - progress}`});
+    return new LazyTransitions({transform: `scale(${size / 100})`, transformOrigin: 'center', opacity: `${1 - progress}`});
   }
 
 }

@@ -2,7 +2,7 @@ import { InterpolateRanges, combineInterpolates } from './combine_interpolates';
 import {interpolate} from 'remotion'
 import { CSSProperties } from 'react';
 
-export default class LazyStyle {
+export default class LazyTransitions {
   private style: CSSProperties;
   private opaciytInterpolateRanges: InterpolateRanges = {inputRange: [], outputRange: []};
 
@@ -14,8 +14,8 @@ export default class LazyStyle {
     this.opaciytInterpolateRanges = interpolateRanges;
   }
 
-  combine(prev: LazyStyle): LazyStyle {
-    const combinedStyle = new LazyStyle({ ...prev.style, ...this.style });
+  combine(prev: LazyTransitions): LazyTransitions {
+    const combinedStyle = new LazyTransitions({ ...prev.style, ...this.style });
     combinedStyle.setOpacityInterpolation(combineInterpolates(this.opaciytInterpolateRanges, prev.opaciytInterpolateRanges));
 
     return combinedStyle;

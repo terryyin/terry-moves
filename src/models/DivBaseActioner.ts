@@ -1,6 +1,6 @@
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
-import LazyStyle from './LazyStyle';
+import LazyTransitions from './LazyTransitions';
 
 export default abstract class DivBaseActioner {
   action: Action;
@@ -11,9 +11,9 @@ export default abstract class DivBaseActioner {
     this.action = action;
   }
 
-  combine(prev: LazyStyle): LazyStyle {
+  combine(prev: LazyTransitions): LazyTransitions {
     return this.getStyle().combine(prev);
   }
 
-  protected abstract getStyle(): LazyStyle;
+  protected abstract getStyle(): LazyTransitions;
 }

@@ -1,12 +1,12 @@
 import { ScaleToUpperRightAction } from './Subtitles';
-import LazyStyle from './LazyStyle';
+import LazyTransitions from './LazyTransitions';
 import DivBaseActioner from './DivBaseActioner';
 
 export default class DivActioner extends DivBaseActioner{
 
-  static defaultValue: LazyStyle = new LazyStyle({})
+  static defaultValue: LazyTransitions = new LazyTransitions({})
 
-  protected getStyle(): LazyStyle {
+  protected getStyle(): LazyTransitions {
     switch(this.action.actionType) {
       case 'scaleToUpperRight':
         return this.getScaleToUpperRightStyle(this.action);
@@ -21,15 +21,15 @@ export default class DivActioner extends DivBaseActioner{
     }
   }
 
-  private getAppearStyle(outputRange: number[]): LazyStyle {
-    const result = new LazyStyle({});
+  private getAppearStyle(outputRange: number[]): LazyTransitions {
+    const result = new LazyTransitions({});
     result.setOpacityInterpolation({inputRange: this.effectCalculator.frameRange, outputRange});
     return result;
   }
 
-  private getScaleToUpperRightStyle(action: ScaleToUpperRightAction): LazyStyle {
+  private getScaleToUpperRightStyle(action: ScaleToUpperRightAction): LazyTransitions {
     const scale = this.effectCalculator.interpolateDuration(action.outputRange);
-    return new LazyStyle({
+    return new LazyTransitions({
       left: `${100 - scale}%`, top:'0%', width: `${scale}%`, height: `${scale}%`
     })
   }
