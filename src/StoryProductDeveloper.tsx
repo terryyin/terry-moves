@@ -3,6 +3,7 @@ import { AnimationContextProvider } from './hooks/useAnimationContext';
 import { Subtitle } from './models/Subtitles';
 import autonomousComponent from './video_components/autonomousComponent';
 import { SceneLayout } from './SceneLayout';
+import { Story } from './video_components/Story';
 
 const subtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 4, text: 'A company delivers services to users,', actions:[
@@ -46,16 +47,10 @@ const subtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 3, text: 'and its seamless user experience.' },
 ];
 
-export const StoryProductDeveloper: React.FC = autonomousComponent(({frame, fps}) => {
-  const animationContext  = {
-    allSubtitles: subtitles,
-    globalFps: fps,
-    globalFrame: frame,
-  };
-
+export const StoryProductDeveloper: React.FC = () => {
   return (
-    <AnimationContextProvider value={animationContext}>
+		<Story id="StoryProductDeveloper" subtitles={subtitles}  >
 			<SceneLayout />
-    </AnimationContextProvider>
+    </Story>
   );
-});
+};
