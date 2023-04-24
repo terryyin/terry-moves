@@ -20,7 +20,7 @@ export default class LazyTransitions {
   }
 
   combine(prev: LazyTransitions): LazyTransitions {
-    const combinedStyle = new LazyTransitions(this.transformProperties);
+    const combinedStyle = new LazyTransitions(combineTransformProperties(this.transformProperties));
     combinedStyle.setOpacityInterpolation(combineInterpolates(this.opaciytInterpolateRanges, prev.opaciytInterpolateRanges));
 
     return combinedStyle;
@@ -54,4 +54,9 @@ export default class LazyTransitions {
     if (opacity === undefined || Number(opacity) === 1 || Number(opacity) < 0.01) return undefined;
     return style;
   }
+}
+
+
+function combineTransformProperties(left: TransformProperties): TransformProperties {
+  return  { ...left };
 }
