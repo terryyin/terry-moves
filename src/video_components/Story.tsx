@@ -3,7 +3,8 @@ import { AnimationContextProvider } from '../hooks/useAnimationContext';
 import { Subtitle } from '../models/Subtitles';
 import autonomousComponent from './autonomousComponent';
 import React from 'react';
-import AnimationContextWrapper, { Script } from '../models/AnimationContextWrapper';
+import AnimationContextWrapper from '../models/AnimationContextWrapper';
+import { Script } from "../models/Script";
 
 export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React.ReactNode}> = (({subtitles, id, children}) => {
   const globalFps = 30;

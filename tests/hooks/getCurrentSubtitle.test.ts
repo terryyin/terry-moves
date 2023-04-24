@@ -1,4 +1,5 @@
-import AnimationContextWrapper, { Script } from '@/models/AnimationContextWrapper';
+import AnimationContextWrapper from '@/models/AnimationContextWrapper';
+import { Script } from "@/models/Script";
 import { Subtitle } from '@/models/Subtitles';
 
 function getCurrentSubtitleText(subtitles: Subtitle[], frame: number, fps: number) {

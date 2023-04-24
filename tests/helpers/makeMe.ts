@@ -1,4 +1,4 @@
-import { Script } from '@/models/AnimationContextWrapper';
+import { Script } from "@/models/Script";
 import { Subtitle } from '@/models/Subtitles';
 import { AnimationContext } from '@/models/AnimationContext';
 import AnimationContextWrapper from '@/models/AnimationContextWrapper';
