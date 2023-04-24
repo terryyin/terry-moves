@@ -22,6 +22,18 @@ export class Script {
     return this.subtitles.reduce((prev, curr) => prev + curr.leadingBlank + curr.duration, 0) * this.fps;
   }
 
+  getStartTimeOfSubtitle(subtitleIndex: number): number {
+    let endTime = 0;
+    let targetSubtitle: Subtitle = this.subtitles[0];
+    for (let i = 0; i < this.subtitles.length; i++) {
+      targetSubtitle = this.subtitles[i];
+      endTime += targetSubtitle.leadingBlank + targetSubtitle.duration;
+      if (subtitleIndex === i)
+        break;
+    }
+    return endTime - targetSubtitle.duration;
+  }
+
 }
 
 export default class AnimationContextWrapper {
@@ -29,14 +41,14 @@ export default class AnimationContextWrapper {
   animationContext: AnimationContext;
   private currentSubtitle: Subtitle;
   private currentSubtitleEndTime: number;
-  // Private script: Script;
+  private script: Script;
 
   constructor(animationContext: AnimationContext) {
     this.animationContext = animationContext;
     const { subtitle, endTime } = this.getCurrentSubtitleAndItsEndTime();
     this.currentSubtitle = subtitle;
     this.currentSubtitleEndTime = endTime;
-    // This.script = new Script(animationContext.allSubtitles, animationContext.globalFps);
+    this.script = new Script(animationContext.allSubtitles, animationContext.globalFps);
   }
 
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
@@ -81,7 +93,7 @@ export default class AnimationContextWrapper {
       return subtitle.actions
         .filter(action => action.actor === actor)
         .map(action => {
-          const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0; 
+          const startTime = subtitle ? this.script.getStartTimeOfSubtitle(index) : 0; 
           return new EffectCalculator(action, startTime, this.adjustedFrame, this.animationContext.globalFps);
         });
     }).flat();
@@ -98,18 +110,6 @@ export default class AnimationContextWrapper {
       }
     }
     return this.animationContext.globalFrame;
-  }
-
-  private getStartTimeOfSubtitle(subtitleIndex: number): number {
-    let endTime = 0;
-    let targetSubtitle: Subtitle = this.animationContext.allSubtitles[0];
-    for (let i = 0; i < this.animationContext.allSubtitles.length; i++) {
-      targetSubtitle = this.animationContext.allSubtitles[i];
-      endTime += targetSubtitle.leadingBlank + targetSubtitle.duration;
-      if (subtitleIndex === i)
-        break;
-    }
-    return endTime - targetSubtitle.duration;
   }
 
   private getCurrentSubtitleAndItsEndTime() {
