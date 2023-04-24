@@ -2,12 +2,19 @@ import { InterpolateRanges, combineInterpolates } from './combine_interpolates';
 import {interpolate} from 'remotion'
 import { CSSProperties } from 'react';
 
+type TransformProperties = {
+  scale?: number;
+  translateX?: string;
+  translateY?: string;
+};
 export default class LazyTransitions {
   private style: CSSProperties;
   private opaciytInterpolateRanges: InterpolateRanges = {inputRange: [], outputRange: []};
+  private transformProperties?: TransformProperties;
 
-  constructor(style: CSSProperties) {
+  constructor(style: CSSProperties, transformProperties?: TransformProperties) {
     this.style = style;
+    this.transformProperties = transformProperties;
   }
 
   setOpacityInterpolation(interpolateRanges: InterpolateRanges): void {
@@ -15,7 +22,7 @@ export default class LazyTransitions {
   }
 
   combine(prev: LazyTransitions): LazyTransitions {
-    const combinedStyle = new LazyTransitions({ ...prev.style, ...this.style });
+    const combinedStyle = new LazyTransitions({ ...prev.style, ...this.style }, this.transformProperties);
     combinedStyle.setOpacityInterpolation(combineInterpolates(this.opaciytInterpolateRanges, prev.opaciytInterpolateRanges));
 
     return combinedStyle;
@@ -29,8 +36,9 @@ export default class LazyTransitions {
             extrapolateRight: "clamp",
           })
         : undefined;
+      const transform = this.transformProperties ? `scale(${this.transformProperties.scale}) translateX(${this.transformProperties.translateX}) translateY(${this.transformProperties.translateY})` : undefined;
 
-    return { ...this.style, ...(opacity === undefined ? {} : {opacity}) };
+    return { ...this.style, ...(opacity === undefined ? {} : {opacity}), ...(transform === undefined ? {} : {transform, transformOrigin: 'center'}) };
   }
 
   getStylePresence(frame: number): CSSProperties | undefined {
