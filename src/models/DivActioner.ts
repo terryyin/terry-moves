@@ -4,7 +4,7 @@ import DivBaseActioner from './DivBaseActioner';
 
 export default class DivActioner extends DivBaseActioner{
 
-  static defaultValue: LazyTransitions = new LazyTransitions()
+  static defaultValue: LazyTransitions = new LazyTransitions({})
 
   protected getStyle(): LazyTransitions {
     switch(this.action.actionType) {

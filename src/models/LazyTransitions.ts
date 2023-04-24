@@ -9,9 +9,9 @@ type TransformProperties = {
 };
 export default class LazyTransitions {
   private opaciytInterpolateRanges: InterpolateRanges = {inputRange: [], outputRange: []};
-  private transformProperties?: TransformProperties;
+  private transformProperties: TransformProperties;
 
-  constructor(transformProperties?: TransformProperties) {
+  constructor(transformProperties: TransformProperties) {
     this.transformProperties = transformProperties;
   }
 
@@ -34,9 +34,14 @@ export default class LazyTransitions {
             extrapolateRight: "clamp",
           })
         : undefined;
-      const transform = this.transformProperties ? `scale(${this.transformProperties.scale}) translateX(${this.transformProperties.translateX}%) translateY(${this.transformProperties.translateY}%)` : undefined;
+      const transform = this.getTransform();
 
     return { ...(opacity === undefined ? {} : {opacity}), ...(transform === undefined ? {} : {transform, transformOrigin: 'center'}) };
+  }
+
+  private getTransform(): string | undefined {
+    const transform = this.transformProperties.scale ? `scale(${this.transformProperties.scale}) translateX(${this.transformProperties.translateX}%) translateY(${this.transformProperties.translateY}%)` : undefined;
+    return transform;
   }
 
   getStylePresence(frame: number): CSSProperties | undefined {
