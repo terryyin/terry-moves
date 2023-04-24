@@ -26,13 +26,13 @@ describe('Flash back', () => {
   describe('flash back', () => {
     const subtitleWithAction: Subtitle = 
       { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-        { actor: "under-test", actionType: 'scaleToUpperRight', duration: 1, outputRange: [50, 100] },
+        { actor: "under-test", actionType: 'scale', duration: 1, outputRange: [0.5, 1] },
       ] };
 
     [
-      { sec: 0.5, expectedWidth: 'scale(0.5) translateX(50%) translateY(-50%)' },
-      { sec: 1.1, expectedWidth: 'scale(0.525) translateX(47.5%) translateY(-47.5%)' },
-      { sec: 1.6, expectedWidth: 'scale(0.5) translateX(50%) translateY(-50%)' },
+      { sec: 0.5, expectedWidth: 'scale(0.5)' },
+      { sec: 1.1, expectedWidth: 'scale(0.525)' },
+      { sec: 1.6, expectedWidth: 'scale(0.5)' },
     ].forEach(({sec, expectedWidth}) => {
       test(`test for sec ${sec}`, () => {
         const animationContext = makeMe

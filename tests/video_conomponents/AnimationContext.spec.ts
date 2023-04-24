@@ -4,11 +4,11 @@ import {makeMe} from '../helpers/makeMe';
 describe('AnimationContext', () => {
 	describe('scaleToUpperLeft combined', () => {
 		[
-			{sec: 0, expectPlaying: "scale(0.5) translateX(0%) translateY(0%)",  },
-			{sec: 1, expectPlaying: "scale(0.5) translateX(0%) translateY(0%)",   },
-			{sec: 1.1, expectPlaying: "scale(0.55) translateX(0%) translateY(0%)", },
-			{sec: 2.1, expectPlaying: "scale(1) translateX(0%) translateY(0%)",},
-			{sec: 3.1, expectPlaying: "scale(1.1) translateX(-10%) translateY(10%)",},
+			{sec: 0, expectPlaying: "scale(0.5) translateX(0px) translateY(0px)",  },
+			{sec: 1, expectPlaying: "scale(0.5) translateX(0px) translateY(0px)",   },
+			{sec: 1.1, expectPlaying: "scale(0.55) translateX(0.05px) translateY(0.1px)", },
+			{sec: 2.1, expectPlaying: "scale(1) translateX(0.45px) translateY(0.9px)",},
+			{sec: 3.1, expectPlaying: "scale(1.1) translateX(0.1px) translateY(0.2px)",},
 		].forEach(({sec, expectPlaying, }) => {
 			test(`test sec: ${sec}`, () => {
 				const animationContext = makeMe.animationContext
@@ -19,9 +19,15 @@ describe('AnimationContext', () => {
 						actions: [
 							{
 								actor: 'under-test',
-								actionType: 'scaleToUpperRight',
+								actionType: 'scale',
 								duration: 1,
-								outputRange: [50, 100],
+								outputRange: [0.5, 1],
+							},
+							{
+								actor: 'under-test',
+								actionType: 'move',
+								duration: 1,
+								distances: [0.5, 1],
 							},
 						],
 					})
@@ -32,10 +38,17 @@ describe('AnimationContext', () => {
 						actions: [
 							{
 								actor: 'under-test',
-								actionType: 'scaleToUpperRight',
+								actionType: 'scale',
 								duration: 1,
-								outputRange: [100, 200],
+								outputRange: [1, 2],
 							},
+							{
+								actor: 'under-test',
+								actionType: 'move',
+								duration: 1,
+								distances: [1, 2],
+							},
+	
 						],
 					})
 					.seconds(sec)

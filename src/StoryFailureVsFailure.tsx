@@ -25,13 +25,13 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 
 	{ leadingBlank: 0.5, duration: 3, text: "SpaceX is celebrating their rocket explosion.", actions: [
 			{ actor: "starship", actionType: "3d rise", duration: 3 },
-			{ actor: "starship", actionType: "3d ocillating", duration: 10, unit: 0.1 },
+			{ actor: "starship", actionType: "3d ocillating", duration: 10, distances: [0, 0.1, 0] },
 	]},
 	{ leadingBlank: 0, duration: 4, text: "Software developers also have different attitudes towards failures.", actions: [
 			{ actor: "blue background", actionType: "disappear", duration: 5 },
-			{ actor: "starship", actionType: "3d going up", duration: 5, unit: 20 },
-			{ actor: "starship", actionType: "3d camera up", duration: 6, unit: 5 },
-			{ actor: "starship", actionType: "3d camera closer", duration: 6, unit: -20 },
+			{ actor: "starship", actionType: "3d going up", duration: 5, distances: [0, 20, 0] },
+			{ actor: "starship", actionType: "3d camera move", duration: 6, distances: [0, 5, 0] },
+			{ actor: "starship", actionType: "3d camera closer", duration: 6, distance: -20 },
 	]},
 	{ leadingBlank: 0, duration: 1.5, text: "", actions: [
 			{ actor: "explosion", actionType: "3d animation start", duration: 1, speed: 1 },
@@ -49,7 +49,8 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 
 	{ leadingBlank: 0.5, duration: 3, text: "Learning from the failure", actions: [
 			{ actor: "problem domain", actionType: "disappear", duration: 2 },
-			// { actor: "stage", actionType: "scaleToUpperRight", duration: 2, outputRange: [50, 100] },
+			// { actor: "stage", actionType: "scale", duration: 2, outputRange: [0.5, 1] },
+			// { actor: "stage", actionType: "move", duration: 2, unit: [50, -50] },
 			{ actor: "explosion", actionType: "3d animation reverse", duration: 1, speed: 1, percentage: 50, pauseAtEnd: true },
 	]},
 	{ leadingBlank: 0, duration: 3, text: "is more valuable than merely experiencing them.", actions: [

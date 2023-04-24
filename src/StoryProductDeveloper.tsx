@@ -29,7 +29,8 @@ const subtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 3, text: 'Traditionally, businesses focused on' },
 	{ leadingBlank: 0, duration: 3, text: 'their core domain, not software.' },
 	{ leadingBlank: 1, duration: 3, text: 'Developers were part of external teams,', actions:[
-		{ actor: 'stage', actionType: 'scaleToUpperRight', duration: 1, outputRange: [100, 70] },
+		{ actor: 'stage', actionType: 'scale', duration: 1, outputRange: [1, 0.7] },
+		{ actor: 'stage', actionType: 'move', duration: 1, distances: [100, 70] },
 	] },
 	{ leadingBlank: 1, duration: 3, text: 'hired to work on projects.' },
 

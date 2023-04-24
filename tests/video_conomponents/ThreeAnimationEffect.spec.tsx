@@ -142,7 +142,7 @@ describe('ThreeAnimationEffect', () => {
     ].forEach(({tid, sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: '3d going up', duration: 1, unit: 3 },
+          { actor: "under-test", actionType: '3d going up', duration: 1, distances: [0, 3, 0] },
         ] };
       test(`3d effect, test id: ${tid}`, () => {
         const animationContext = makeMe

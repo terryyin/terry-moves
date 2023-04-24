@@ -2,6 +2,7 @@ import { ThreeDRotateAction, ThreeDUnitAction } from './Subtitles';
 import * as THREE from 'three';
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
+import { toVector3 } from './DivActioner';
 
 export type ThreeGroupAttributes = {
   scale: number;
@@ -61,7 +62,7 @@ export default class ThreeDGroupActioner {
       case '3d rise':
         return this.effectCalculator.interpolateSpring([-4, 0]);
       case '3d going up':
-        return this.effectCalculator.interpolateSpring([0, this.action.unit]);
+        return this.effectCalculator.interpolateSpring([0, toVector3(this.action.distances)[1]]);
       case '3d ocillating':
         return this.getOcillatingY(this.action as ThreeDUnitAction);
       default:
@@ -73,13 +74,13 @@ export default class ThreeDGroupActioner {
     if (!this.effectCalculator.withInDuration()) {
       return 0;
     }
-    return -Math.sin(this.effectCalculator.timeWithIn() * Math.PI * 2) * action.unit;
+    return -Math.sin(this.effectCalculator.timeWithIn() * Math.PI * 2) * toVector3(action.distances)[1];
   }
 
   private getCameraDistanceD(): number {
     switch(this.action.actionType) {
       case '3d camera closer':
-        return this.effectCalculator.interpolateSpring([0, this.action.unit]);
+        return this.effectCalculator.interpolateSpring([0, this.action.distance]);
       default:
         return 0;
     }
@@ -87,8 +88,8 @@ export default class ThreeDGroupActioner {
 
   private getLookAtYd(): number {
     switch(this.action.actionType) {
-      case '3d camera up':
-        return this.effectCalculator.interpolateSpring([0, this.action.unit]);
+      case '3d camera move':
+        return this.effectCalculator.interpolateSpring([0, toVector3(this.action.distances)[1]]);
       default:
         return 0;
     }
