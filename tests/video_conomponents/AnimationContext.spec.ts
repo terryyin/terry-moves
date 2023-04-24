@@ -1,32 +1,48 @@
 import '@testing-library/jest-dom/extend-expect';
-import { Subtitle } from '@/models/Subtitles';
-import { makeMe } from '../helpers/makeMe';
+import {makeMe} from '../helpers/makeMe';
 
 describe('AnimationContext', () => {
-
-  describe('scaleToUpperLeft combined', () => {
-    [
-      {sec: 0,   expectPlaying: false, expectTime: 0, },
-      {sec: 1,   expectPlaying: true, expectTime: 0,  },
-      {sec: 1.1, expectPlaying: true, expectTime: 0.2,},
-      {sec: 2.1, expectPlaying: false,expectTime: 2.1,},
-    ].forEach(({sec, expectPlaying, expectTime, }) => {
-      const subtitleWithAction: Subtitle = 
-        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: '3d animation start', duration: 1, speed: 2 },
-        ] };
-
-      test(`test sec: ${sec}`, () => {
-        const animationContext = makeMe
-                .animationContext
-                .withSubtitle(subtitleWithAction)
-                .seconds(sec)
-                .please();
-        const result = animationContext.getGLBAnimationAttributes('under-test');
-        expect(result.playing).toBe(expectPlaying);
-        expect(result.time).toBe(expectTime);
-      });
-
-    });
-  });
+	describe('scaleToUpperLeft combined', () => {
+		[
+			{sec: 0, expectPlaying: "scale(1) translateX(0%) translateY(0%)",  },
+			{sec: 1, expectPlaying: "scale(1) translateX(0%) translateY(0%)",   },
+			{sec: 1.1, expectPlaying: "scale(1) translateX(0%) translateY(0%)", },
+			{sec: 2.1, expectPlaying: "scale(1) translateX(0%) translateY(0%)",},
+			{sec: 3.1, expectPlaying: "scale(1.1) translateX(-10%) translateY(10%)",},
+		].forEach(({sec, expectPlaying, }) => {
+			test(`test sec: ${sec}`, () => {
+				const animationContext = makeMe.animationContext
+					.withSubtitle({
+						leadingBlank: 1,
+						duration: 1,
+						text: 'First subtitle.',
+						actions: [
+							{
+								actor: 'under-test',
+								actionType: 'scaleToUpperRight',
+								duration: 1,
+								outputRange: [50, 100],
+							},
+						],
+					})
+					.withSubtitle({
+						leadingBlank: 1,
+						duration: 1,
+						text: 'First subtitle.',
+						actions: [
+							{
+								actor: 'under-test',
+								actionType: 'scaleToUpperRight',
+								duration: 1,
+								outputRange: [100, 200],
+							},
+						],
+					})
+					.seconds(sec)
+					.please();
+				const result = animationContext.getStyleOf('under-test');
+				expect(result.transform).toBe(expectPlaying);
+			});
+		});
+	});
 });

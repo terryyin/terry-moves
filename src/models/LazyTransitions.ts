@@ -4,8 +4,8 @@ import { CSSProperties } from 'react';
 
 type TransformProperties = {
   scale?: number;
-  translateX?: string;
-  translateY?: string;
+  translateX?: number;
+  translateY?: number;
 };
 export default class LazyTransitions {
   private opaciytInterpolateRanges: InterpolateRanges = {inputRange: [], outputRange: []};
@@ -34,7 +34,7 @@ export default class LazyTransitions {
             extrapolateRight: "clamp",
           })
         : undefined;
-      const transform = this.transformProperties ? `scale(${this.transformProperties.scale}) translateX(${this.transformProperties.translateX}) translateY(${this.transformProperties.translateY})` : undefined;
+      const transform = this.transformProperties ? `scale(${this.transformProperties.scale}) translateX(${this.transformProperties.translateX}%) translateY(${this.transformProperties.translateY}%)` : undefined;
 
     return { ...(opacity === undefined ? {} : {opacity}), ...(transform === undefined ? {} : {transform, transformOrigin: 'center'}) };
   }

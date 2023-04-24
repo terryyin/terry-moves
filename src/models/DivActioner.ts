@@ -29,7 +29,7 @@ export default class DivActioner extends DivBaseActioner{
 
   private getScaleToUpperRightStyle(action: ScaleToUpperRightAction): LazyTransitions {
     const scale = this.effectCalculator.interpolateDuration(action.outputRange);
-    const result = new LazyTransitions({scale: scale / 100, translateX: (100 - scale) + '%', translateY: (scale-100) + '%'})
+    const result = new LazyTransitions({scale: scale / 100, translateX: (100 - scale), translateY: (scale-100)})
 
     return result;
   }
