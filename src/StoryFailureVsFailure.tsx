@@ -1,7 +1,5 @@
 import React from 'react';
-import { AnimationContextProvider } from './hooks/useAnimationContext';
 import { Subtitle } from './models/Subtitles';
-import autonomousComponent from './video_components/autonomousComponent';
 import { AbsoluteFill } from 'remotion';
 import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
@@ -15,7 +13,7 @@ import { OddeLogo } from './parts/OddeLogo';
 import { OddeLogoInner } from './parts/OddeLogoInner';
 import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 
-const subtitles: Subtitle[] = [
+export const storyFailureVsFailureSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 3, scale: 1.5, position: 'center', text: [
 			"Learning by Failures",
 			"vs.",
@@ -67,15 +65,9 @@ const subtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 5, text: "read the error message!", scale: 3, position: 'center', actions: []},
 ];
 
-export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}) => {
-  const animationContext  = {
-    allSubtitles: subtitles,
-    globalFps: fps,
-    globalFrame: frame,
-  };
-
+export const StoryFailureVsFailure: React.FC = () => {
   return (
-    <AnimationContextProvider value={animationContext}>
+		<>
     <AbsoluteFill style={{ backgroundColor: '#19bdff'}}>
       <AnimationEffect actor="blue background">
         <AbsoluteFill style={{ backgroundColor: '#b9ebff'}}/>
@@ -110,6 +102,6 @@ export const StoryFailureVsFailure: React.FC = autonomousComponent(({frame, fps}
 			  <OddeLogoInner />
 			</FlipCoin>
 		</AbsoluteFill>
-    </AnimationContextProvider>
+  </>
   );
-});
+};

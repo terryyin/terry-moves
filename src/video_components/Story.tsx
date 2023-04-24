@@ -1,7 +1,7 @@
 import {Composition} from 'remotion'
-import { AnimationContextProvider } from './hooks/useAnimationContext';
-import { Subtitle } from './models/Subtitles';
-import autonomousComponent from './video_components/autonomousComponent';
+import { AnimationContextProvider } from '../hooks/useAnimationContext';
+import { Subtitle } from '../models/Subtitles';
+import autonomousComponent from './autonomousComponent';
 import React from 'react';
 
 export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React.ReactNode}> = (({subtitles, id, children}) => {
