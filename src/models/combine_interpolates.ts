@@ -4,14 +4,14 @@ export type InterpolateRanges = {
 }
 
 export function combineInterpolates(
-  ranges1: InterpolateRanges,
-  ranges2: InterpolateRanges,
-): InterpolateRanges {
-  if (ranges1.inputRange.length === 0) {
+  ranges1?: InterpolateRanges,
+  ranges2?: InterpolateRanges,
+): InterpolateRanges | undefined {
+  if (!ranges1 || ranges1.inputRange.length === 0) {
     return ranges2;
   }
 
-  if (ranges2.inputRange.length === 0) {
+  if (!ranges2 || ranges2.inputRange.length === 0) {
     return ranges1;
   }
 

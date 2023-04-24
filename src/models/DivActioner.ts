@@ -30,20 +30,16 @@ export default class DivActioner extends DivBaseActioner{
   }
 
   private getScaleToUpperRightStyle(action: ScaleAction): LazyTransitions {
-    const scale = this.getScale(action);
-    const result = new LazyTransitions({translateX: (100 - scale), translateY: (scale-100)})
+    const result = new LazyTransitions({})
     result.setScaleInterpolation({inputRange: this.effectCalculator.frameRange, outputRange: action.outputRange.map((value) => value / 100)});
+    result.setTranslateXInterpolation({inputRange: this.effectCalculator.frameRange, outputRange: action.outputRange});
+    result.setTranslateYInterpolation({inputRange: this.effectCalculator.frameRange, outputRange: action.outputRange});
     return result;
   }
 
   private getScaleStyle(action: ScaleAction): LazyTransitions {
-    const result = new LazyTransitions({translateX: (0), translateY: (0)})
+    const result = new LazyTransitions({})
     result.setScaleInterpolation({inputRange: this.effectCalculator.frameRange, outputRange: action.outputRange});
     return result;
   }
-
-  private getScale(action: ScaleAction): number {
-    return this.effectCalculator.interpolateDuration(action.outputRange);
-  }
-
 }

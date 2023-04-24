@@ -7,8 +7,9 @@ type TransformProperties = {
   translateY?: number;
 };
 
-const getInterpolate = (frame: number, interpolateRanges: InterpolateRanges): number | undefined => {
-  return  interpolateRanges.inputRange.length > 0
+const getInterpolate = (frame: number, interpolateRanges?: InterpolateRanges): number | undefined => {
+
+  return  interpolateRanges && interpolateRanges.inputRange.length > 0
       ? interpolate(frame, interpolateRanges.inputRange, interpolateRanges.outputRange, {
           extrapolateLeft: "clamp",
           extrapolateRight: "clamp",
@@ -16,9 +17,9 @@ const getInterpolate = (frame: number, interpolateRanges: InterpolateRanges): nu
       : undefined;
 }
 
+type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX';
 export default class LazyTransitions {
-  private opaciytInterpolateRanges: InterpolateRanges = {inputRange: [], outputRange: []};
-  private scaleInterpolateRanges: InterpolateRanges = {inputRange: [], outputRange: []};
+  private interpolateRanges: Map<InterpolateFields, InterpolateRanges> = new Map();
   private transformProperties: TransformProperties;
 
   constructor(transformProperties: TransformProperties) {
@@ -26,33 +27,63 @@ export default class LazyTransitions {
   }
 
   setOpacityInterpolation(interpolateRanges: InterpolateRanges): void {
-    this.opaciytInterpolateRanges = interpolateRanges;
+    this.interpolateRanges.set('opacity', interpolateRanges);
   }
 
   setScaleInterpolation(interpolateRanges: InterpolateRanges) {
-      this.scaleInterpolateRanges = interpolateRanges;
+    this.interpolateRanges.set('scale', interpolateRanges);
+  }
+
+  setTranslateXInterpolation(interpolateRanges: InterpolateRanges) {
+    this.interpolateRanges.set('translateX', interpolateRanges);
+  }
+
+  setTranslateYInterpolation(interpolateRanges: InterpolateRanges) {
+    this.interpolateRanges.set('translateY', interpolateRanges);
   }
 
   combine(prev: LazyTransitions): LazyTransitions {
     const combinedStyle = new LazyTransitions(combineTransformProperties(this.transformProperties));
-    combinedStyle.setOpacityInterpolation(combineInterpolates(this.opaciytInterpolateRanges, prev.opaciytInterpolateRanges));
-    combinedStyle.setScaleInterpolation(combineInterpolates(this.scaleInterpolateRanges, prev.scaleInterpolateRanges));
+    (['opacity', 'scale', 'translateY', 'translateX'] as InterpolateFields[]).forEach((key) => {
+      const combined = combineInterpolates(this.interpolateRanges.get(key), prev.interpolateRanges.get(key));
+      if(combined) {
+        combinedStyle.interpolateRanges.set(key, combined);
+      }
+    });
 
     return combinedStyle;
   }
 
   getStyle(frame: number): CSSProperties {
-    const opacity = getInterpolate(frame, this.opaciytInterpolateRanges);
-    const scale = getInterpolate(frame, this.scaleInterpolateRanges);
-    return { ...this.getTransform(scale), ...(opacity === undefined ? {} : {opacity})  };
-  }
+    const opacity = getInterpolate(frame, this.interpolateRanges.get('opacity'));
+    const scale = getInterpolate(frame, this.interpolateRanges.get('scale'));
+    const translateX = getInterpolate(frame, this.interpolateRanges.get('translateX'));
+    const translateY = getInterpolate(frame, this.interpolateRanges.get('translateY'));
+    const transforms: string[] = [];
 
-  private getTransform(scale: number | undefined)  {
-    if (scale === undefined) {
-      return {};
+    if (scale !== undefined) {
+      transforms.push(`scale(${scale})`);
     }
-    const transform = `scale(${scale}) translateX(${this.transformProperties.translateX}%) translateY(${this.transformProperties.translateY}%)`;
-    return { transform, transformOrigin: 'center'};
+    if (translateX !== undefined) {
+      transforms.push(`translateX(${translateX}px)`);
+    }
+    if (translateY !== undefined) {
+      transforms.push(`translateY(${translateY}px)`);
+    }
+
+    const result: CSSProperties = {};
+
+    if (transforms.length > 0) {
+      result.transform = transforms.join(' ');
+      if (scale !== undefined) {
+        result.transformOrigin = 'center';
+      }
+    }
+    if (opacity !== undefined) {
+      result.opacity = opacity;
+    }
+
+    return result;
   }
 
   getStylePresence(frame: number): CSSProperties | undefined {
