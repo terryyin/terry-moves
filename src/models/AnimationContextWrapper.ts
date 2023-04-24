@@ -8,21 +8,35 @@ import ThreeDGroupActioner, { ThreeGroupAttributes } from './ThreeDGroupActioner
 import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 
+
+export class Script {
+  private subtitles: Subtitle[];
+  private fps = 30;
+
+  constructor(subtitles: Subtitle[], fps: number) {
+    this.subtitles = subtitles;
+    this.fps = fps;
+  }
+
+  getTotalFrame() {
+    return this.subtitles.reduce((prev, curr) => prev + curr.leadingBlank + curr.duration, 0) * this.fps;
+  }
+
+}
+
 export default class AnimationContextWrapper {
 
   animationContext: AnimationContext;
   private currentSubtitle: Subtitle;
   private currentSubtitleEndTime: number;
+  // Private script: Script;
 
   constructor(animationContext: AnimationContext) {
     this.animationContext = animationContext;
     const { subtitle, endTime } = this.getCurrentSubtitleAndItsEndTime();
     this.currentSubtitle = subtitle;
     this.currentSubtitleEndTime = endTime;
-  }
-
-  getTotalFrame() {
-    return this.animationContext.allSubtitles.reduce((prev, curr) => prev + curr.leadingBlank + curr.duration, 0) * this.animationContext.globalFps;
+    // This.script = new Script(animationContext.allSubtitles, animationContext.globalFps);
   }
 
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {

@@ -4,7 +4,7 @@ import { makeMe } from '../helpers/makeMe';
 describe('AnimationContext', () => {
   test(`total frames`, () => {
     const animationContext = makeMe
-            .animationContext
+            .script
             .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.' })
             .withSubtitle({ leadingBlank: 1, duration: 3, text: 'second subtitle.' })
             .please();
