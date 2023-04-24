@@ -34,6 +34,20 @@ export class Script {
     }).flat();
   }
 
+  getSubtitleAndItsEndTimeAt(frame: number) {
+    let endTime = 0;
+    let subtitle: Subtitle = this.subtitles[0];
+
+    for (let i = 0; i < this.subtitles.length; i++) {
+      subtitle = this.subtitles[i];
+      endTime += subtitle.leadingBlank + subtitle.duration;
+      if (endTime * this.fps > frame)
+        break;
+    }
+
+    return { subtitle, endTime }
+  }
+
   private isSubtitleWithAction(subtitle: Subtitle): subtitle is SubtitleWithAction {
     return subtitle && (subtitle as SubtitleWithAction).actions !== undefined;
   }
@@ -61,10 +75,10 @@ export default class AnimationContextWrapper {
 
   constructor(animationContext: AnimationContext) {
     this.animationContext = animationContext;
-    const { subtitle, endTime } = this.getCurrentSubtitleAndItsEndTime();
+    this.script = new Script(animationContext.allSubtitles, animationContext.globalFps);
+    const { subtitle, endTime } = this.script.getSubtitleAndItsEndTimeAt(animationContext.globalFrame);
     this.currentSubtitle = subtitle;
     this.currentSubtitleEndTime = endTime;
-    this.script = new Script(animationContext.allSubtitles, animationContext.globalFps);
   }
 
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
@@ -114,20 +128,6 @@ export default class AnimationContextWrapper {
       }
     }
     return this.animationContext.globalFrame;
-  }
-
-  private getCurrentSubtitleAndItsEndTime() {
-    let endTime = 0;
-    let subtitle: Subtitle = this.animationContext.allSubtitles[0];
-
-    for (let i = 0; i < this.animationContext.allSubtitles.length; i++) {
-      subtitle = this.animationContext.allSubtitles[i];
-      endTime += subtitle.leadingBlank + subtitle.duration;
-      if (endTime * this.animationContext.globalFps > this.animationContext.globalFrame)
-        break;
-    }
-
-    return { subtitle, endTime }
   }
 
   getCurrentSubtitleText() {
