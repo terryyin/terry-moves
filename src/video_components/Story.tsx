@@ -3,6 +3,7 @@ import { AnimationContextProvider } from '../hooks/useAnimationContext';
 import { Subtitle } from '../models/Subtitles';
 import autonomousComponent from './autonomousComponent';
 import React from 'react';
+import AnimationContextWrapper from '../models/AnimationContextWrapper';
 
 export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React.ReactNode}> = (({subtitles, id, children}) => {
   const InnerStory = autonomousComponent(({frame, fps}) => {
@@ -11,9 +12,10 @@ export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React
       globalFps: fps,
       globalFrame: frame,
     };
+    const animationContextWrapper = new AnimationContextWrapper(animationContext);
 
     return (
-      <AnimationContextProvider value={animationContext}>
+      <AnimationContextProvider value={animationContextWrapper}>
         {children}
       </AnimationContextProvider>
     );

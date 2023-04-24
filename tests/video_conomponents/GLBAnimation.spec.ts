@@ -1,17 +1,14 @@
 import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
-import { AnimationContext } from '@/models/AnimationContext';
 import { makeMe } from '../helpers/makeMe';
-import AnimationContextWrapper from '@/models/AnimationContextWrapper';
 
 describe('ThreeAnimationEffect', () => {
   test(`default value`, () => {
-    const animationContext: AnimationContext = makeMe
+    const animationContext = makeMe
             .animationContext
             .seconds(1)
             .please();
-    const animationContextWrapper = new AnimationContextWrapper(animationContext);
-    const result = animationContextWrapper.getGLBAnimationAttributes('under-test');
+    const result = animationContext.getGLBAnimationAttributes('under-test');
     expect(result.playing).toBe(true);
     expect(result.time).toBe(1);
     expect(result.loopOnce).toBe(false);
@@ -30,13 +27,12 @@ describe('ThreeAnimationEffect', () => {
         ] };
 
       test(`test sec: ${sec}`, () => {
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .seconds(sec)
                 .please();
-        const animationContextWrapper = new AnimationContextWrapper(animationContext);
-        const result = animationContextWrapper.getGLBAnimationAttributes('under-test');
+        const result = animationContext.getGLBAnimationAttributes('under-test');
         expect(result.playing).toBe(expectPlaying);
         expect(result.time).toBe(expectTime);
       });

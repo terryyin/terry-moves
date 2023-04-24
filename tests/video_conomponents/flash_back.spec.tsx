@@ -2,13 +2,13 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
 import AnimationEffect from '@/video_components/AnimationEffect';
-import { AnimationContext } from '@/models/AnimationContext';
 import { AnimationContextProvider } from '@/hooks/useAnimationContext';
 import { makeMe } from '../helpers/makeMe';
+import AnimationContextWrapper from '@/models/AnimationContextWrapper';
 
 describe('Flash back', () => {
 
-  const renderAndGetDiv = (animationContext: AnimationContext): HTMLDivElement => {
+  const renderAndGetDiv = (animationContext: AnimationContextWrapper): HTMLDivElement => {
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
         <AnimationEffect actor="under-test"> </AnimationEffect>
@@ -19,7 +19,7 @@ describe('Flash back', () => {
     return div;
   };
 
-  const renderAndGetDivStyle = (animationContext: AnimationContext) => {
+  const renderAndGetDivStyle = (animationContext: AnimationContextWrapper) => {
     return window.getComputedStyle(renderAndGetDiv(animationContext));
   };
 
@@ -35,7 +35,7 @@ describe('Flash back', () => {
       { sec: 1.6, expectedWidth: '50%' },
     ].forEach(({sec, expectedWidth}) => {
       test(`test for sec ${sec}`, () => {
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 1, text: '', flashBack: {from: 3, duration: 0.5, speed: 0.5} })
                 .withSubtitle(subtitleWithAction)

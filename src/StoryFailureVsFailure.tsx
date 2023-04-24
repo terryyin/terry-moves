@@ -76,13 +76,13 @@ export const StoryFailureVsFailure: React.FC = () => {
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
           <ThreeDFrame >
+						<directionalLight
+							castShadow
+							position={[50, 100, 50]}
+							intensity={200}
+							color={0xffffff}
+						/>	
             <ThreeAnimationEffect id="starship" cameraDistance={30} lookAtY={16} cameraY={10}>
-							<directionalLight
-								castShadow
-								position={[50, 100, 50]}
-								intensity={200}
-								color={0xffffff}
-							/>	
               <Starship/>
               <StarshipPlume/>
               <GroupInitialState position={[0, 0, 0]} scale={0.2} >

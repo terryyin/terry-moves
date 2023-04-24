@@ -1,5 +1,6 @@
 import { Subtitle } from '@/models/Subtitles';
 import { AnimationContext } from '@/models/AnimationContext';
+import AnimationContextWrapper from '@/models/AnimationContextWrapper';
 
 class AnimationContextBuilder {
 
@@ -20,7 +21,7 @@ class AnimationContextBuilder {
   }
 
   please() {
-    return this.animationContext;
+    return new AnimationContextWrapper(this.animationContext);
   }
 }
 class MakeMe {

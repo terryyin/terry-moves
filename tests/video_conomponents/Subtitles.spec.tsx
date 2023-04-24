@@ -2,17 +2,13 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
 import { Subtitles } from '@/video_components/Subtitles';
-import { AnimationContext } from '@/models/AnimationContext';
 import { AnimationContextProvider } from '@/hooks/useAnimationContext';
+import { makeMe } from '../helpers/makeMe';
 
 describe('Subtitles component', () => {
 
   const renderSubtitle = (subtitle: Subtitle) => {
-    const animationContext: AnimationContext = {
-      allSubtitles: [subtitle],
-      globalFps: 30,
-      globalFrame: 60,
-    };
+    const animationContext = makeMe.animationContext.withSubtitle(subtitle).please();
 
     const { container } = render(
       <AnimationContextProvider value={animationContext}>

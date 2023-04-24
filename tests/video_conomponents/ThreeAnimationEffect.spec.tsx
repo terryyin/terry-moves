@@ -2,9 +2,9 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
 import { ThreeAnimationEffect } from '@/video_components/ThreeAnimationEffect';
-import { AnimationContext } from '@/models/AnimationContext';
 import { AnimationContextProvider } from '@/hooks/useAnimationContext';
 import { makeMe } from '../helpers/makeMe';
+import AnimationContextWrapper from '@/models/AnimationContextWrapper';
 
 jest.mock('@react-three/fiber', () => ({
   ...jest.requireActual('@react-three/fiber'),
@@ -30,7 +30,7 @@ describe('ThreeAnimationEffect', () => {
   });
 
 
-  const renderAndGetGroup = (animationContext: AnimationContext) => {
+  const renderAndGetGroup = (animationContext: AnimationContextWrapper) => {
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
         <ThreeAnimationEffect id="under-test" cameraDistance={2}> </ThreeAnimationEffect>
@@ -49,7 +49,7 @@ describe('ThreeAnimationEffect', () => {
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
         ] };
       test(`3d effect when no action specified, test id: ${tid}`, () => {
-        const animationContext: AnimationContext = makeMe
+        const animationContext: AnimationContextWrapper = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .please();
@@ -72,7 +72,7 @@ describe('ThreeAnimationEffect', () => {
           { actor: "under-test", actionType: '3d rise', duration: 1 },
         ] };
       test(`3d effect, test id: ${tid}`, () => {
-        const animationContext: AnimationContext = makeMe
+        const animationContext: AnimationContextWrapper = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .seconds(sec)
@@ -96,7 +96,7 @@ describe('ThreeAnimationEffect', () => {
           { actor: "under-test", actionType: '3d rotate', duration: 1, totalRotation: 180 },
         ] };
       test(`3d effect, test id: ${tid}`, () => {
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .seconds(sec)
@@ -121,7 +121,7 @@ describe('ThreeAnimationEffect', () => {
           { actor: "under-test", actionType: '3d rotate', duration: 1, totalRotation: 360 },
         ] };
       test(`3d effect, test id: ${tid}`, () => {
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .seconds(sec)
@@ -145,7 +145,7 @@ describe('ThreeAnimationEffect', () => {
           { actor: "under-test", actionType: '3d going up', duration: 1, unit: 3 },
         ] };
       test(`3d effect, test id: ${tid}`, () => {
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .seconds(sec)

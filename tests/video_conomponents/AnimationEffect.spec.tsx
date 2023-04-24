@@ -2,13 +2,13 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom/extend-expect';
 import { Subtitle } from '@/models/Subtitles';
 import AnimationEffect from '@/video_components/AnimationEffect';
-import { AnimationContext } from '@/models/AnimationContext';
 import { AnimationContextProvider } from '@/hooks/useAnimationContext';
 import { makeMe } from '../helpers/makeMe';
+import AnimationContextWrapper from '@/models/AnimationContextWrapper';
 
 describe('AnimationEffect', () => {
 
-  const renderAndGetDiv = (animationContext: AnimationContext): HTMLDivElement => {
+  const renderAndGetDiv = (animationContext: AnimationContextWrapper): HTMLDivElement => {
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
         <AnimationEffect actor="under-test"> </AnimationEffect>
@@ -19,7 +19,7 @@ describe('AnimationEffect', () => {
     return div;
   };
 
-  const renderAndGetDivStyle = (animationContext: AnimationContext) => {
+  const renderAndGetDivStyle = (animationContext: AnimationContextWrapper) => {
     return window.getComputedStyle(renderAndGetDiv(animationContext));
   };
 
@@ -30,7 +30,7 @@ describe('AnimationEffect', () => {
       ] };
 
     test('default value when no action specified', () => {
-      const animationContext: AnimationContext = makeMe
+      const animationContext = makeMe
               .animationContext
               .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.'})
               .please();
@@ -44,7 +44,7 @@ describe('AnimationEffect', () => {
       { sec: 1.1, expectedWidth: '55%' },
     ].forEach(({sec, expectedWidth}) => {
       test('displays the correct transformation', () => {
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .seconds(sec)
@@ -55,7 +55,7 @@ describe('AnimationEffect', () => {
     });
 
     test('return default value when there is not action defined for the objectId', () => {
-      const animationContext: AnimationContext = makeMe
+      const animationContext = makeMe
                 .animationContext
                 .seconds(1)
                 .please();
@@ -64,7 +64,7 @@ describe('AnimationEffect', () => {
     });
 
     test('find the action in the second subtitle', () => {
-      const animationContext: AnimationContext = makeMe
+      const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'before first subtitle.'})
                 .withSubtitle(subtitleWithAction)
@@ -75,7 +75,7 @@ describe('AnimationEffect', () => {
     });
 
     test('find the action in the second subtitle should act at the right time', () => {
-      const animationContext: AnimationContext = makeMe
+      const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'before first subtitle.'})
                 .withSubtitle(subtitleWithAction)
@@ -91,7 +91,7 @@ describe('AnimationEffect', () => {
         { actor: "other-object", actionType: 'scaleToUpperRight', duration: 1, outputRange: [0, 1] },
         { actor: "under-test", actionType: 'scaleToUpperRight', duration: 1, outputRange: [50, 100] },
       ] };
-      const animationContext: AnimationContext = makeMe
+      const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .seconds(1.1)
@@ -115,7 +115,7 @@ describe('AnimationEffect', () => {
           { actor: "under-test", actionType: actionType as 'appear' | 'disappear', duration: 1 },
         ] };
       test('displays the correct transformation', () => {
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)
                 .seconds(sec)
@@ -143,7 +143,7 @@ describe('AnimationEffect', () => {
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { actor: "under-test", actionType: 'disappear', duration: 1 },
         ] };
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithActionAppear)
                 .withSubtitle(subtitleWithActionDisappear)
@@ -169,7 +169,7 @@ describe('AnimationEffect', () => {
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { actor: "under-test", actionType: 'disappear', duration: 3 },
         ] };
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithActionAppear)
                 .withSubtitle(subtitleWithActionDisappear)
@@ -192,7 +192,7 @@ describe('AnimationEffect', () => {
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { actor: "under-test", actionType: 'glow', duration: 1 },
         ] };
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitle)
                 .seconds(sec)
@@ -223,7 +223,7 @@ describe('AnimationEffect', () => {
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { actor: "under-test", actionType: 'glow', duration: 1 },
         ] };
-        const animationContext: AnimationContext = makeMe
+        const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithActionAppear)
                 .withSubtitle(subtitleWithActionGlow)
