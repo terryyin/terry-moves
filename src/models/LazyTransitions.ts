@@ -11,7 +11,7 @@ type InterpolateRanges = {
 type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX';
 
 export default class LazyTransitions {
-  private interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
+  interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
 
   private setInterpolation(key: InterpolateFields, interpolateRange: InterpolateRanges): void {
     if(!this.interpolateRanges.get(key)) {

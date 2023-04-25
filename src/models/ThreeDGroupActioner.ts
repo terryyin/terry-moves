@@ -57,7 +57,7 @@ export default class ThreeDGroupActioner {
   combine(prev: ThreeGroupAttributes): ThreeGroupAttributes {
     const current = this.get3DGroupAttributes();
     const result = new ThreeGroupAttributes(combineOld(prev.old, current.old));
-    result.lazyTransitions.combine(prev.lazyTransitions).combine(current.lazyTransitions);
+    result.lazyTransitions = (prev.lazyTransitions.combine(current.lazyTransitions));
     return result;
   }
 
@@ -75,6 +75,10 @@ export default class ThreeDGroupActioner {
       lookAtYd,
       cameraDistanceD,
     });
+    if(this.action.actionType === '3d move') {
+      result.lazyTransitions = this.move(this.action);
+    }
+
     return result;
   }
  
@@ -83,14 +87,27 @@ export default class ThreeDGroupActioner {
     switch(this.action.actionType) {
       case 'rotate and rise':
         return this.effectCalculator.interpolateSpring([-this.action.distance, 0]);
-      case '3d move':
-        return this.effectCalculator.interpolateSpring([0, toVector3(this.action.distances)[1]]);
       case '3d ocillating':
         return this.getOcillatingY(this.action as ThreeDUnitAction);
       default:
         return 0;
     }
   }
+
+	private move(action: ThreeDUnitAction): LazyTransitions {
+		const result = new LazyTransitions();
+		const vector: [number, number, number] = toVector3(action.distances);
+
+		result.setTranslateXInterpolation({
+			inputRange: this.effectCalculator.frameRange,
+			outputRange: [0, vector[0]],
+		});
+		result.setTranslateYInterpolation({
+			inputRange: this.effectCalculator.frameRange,
+			outputRange: [0, vector[1]],
+		});
+		return result;
+	}
 
   private getOcillatingY(action: ThreeDUnitAction): number {
     if (!this.effectCalculator.withInDuration()) {
