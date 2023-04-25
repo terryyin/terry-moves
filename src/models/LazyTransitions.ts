@@ -1,11 +1,10 @@
-import { InterpolateRanges } from './combine_interpolates';
 import {interpolate} from 'remotion'
 import { CSSProperties } from 'react';
 
-type TransformProperties = {
-  translateX?: number;
-  translateY?: number;
-};
+type InterpolateRanges = {
+  inputRange: number[];
+  outputRange: number[];
+}
 
 const getInterpolate = (frame: number, interpolateRanges?: InterpolateRanges[]): number | undefined => {
   if(!interpolateRanges || interpolateRanges.length === 0) return undefined;
@@ -30,11 +29,6 @@ const getInterpolate = (frame: number, interpolateRanges?: InterpolateRanges[]):
 type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX';
 export default class LazyTransitions {
   private interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
-  private transformProperties: TransformProperties;
-
-  constructor(transformProperties: TransformProperties) {
-    this.transformProperties = transformProperties;
-  }
 
   private setInterpolation(key: InterpolateFields, interpolateRange: InterpolateRanges): void {
     if(!this.interpolateRanges.get(key)) {
@@ -63,7 +57,7 @@ export default class LazyTransitions {
   }
 
   combine(prev: LazyTransitions): LazyTransitions {
-    const combinedStyle = new LazyTransitions(combineTransformProperties(this.transformProperties));
+    const combinedStyle = new LazyTransitions();
     (['opacity', 'scale', 'translateY', 'translateX'] as InterpolateFields[]).forEach((key) => {
       const combined = [...prev.interpolateRanges.get(key) || [], ...this.interpolateRanges.get(key) || []];
       combinedStyle.interpolateRanges.set(key, combined);
@@ -112,9 +106,4 @@ export default class LazyTransitions {
     if (opacity === undefined || Number(opacity) === 1 || Number(opacity) < 0.01) return undefined;
     return style;
   }
-}
-
-
-function combineTransformProperties(left: TransformProperties): TransformProperties {
-  return  { ...left };
 }

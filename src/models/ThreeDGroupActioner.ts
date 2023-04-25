@@ -3,8 +3,10 @@ import * as THREE from 'three';
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
 import { toVector3 } from './DivActioner';
+import LazyTransitions from './LazyTransitions';
 
 export type ThreeGroupAttributes = {
+  lazyTransitions: LazyTransitions;
   scale: number;
   position: THREE.Vector3;
   rotation: THREE.Euler;
@@ -17,6 +19,7 @@ export default class ThreeDGroupActioner {
   effectCalculator: EffectCalculator;
 
   static defaultValue: ThreeGroupAttributes = {
+    lazyTransitions: new LazyTransitions(),
     scale: 1,
     position: new THREE.Vector3(0, 0, 0),
     rotation: new THREE.Euler(0, 0, 0),
@@ -32,6 +35,7 @@ export default class ThreeDGroupActioner {
   combine(prev: ThreeGroupAttributes): ThreeGroupAttributes {
     const current = this.get3DGroupAttributes();
     return {
+      lazyTransitions: new LazyTransitions(),
       scale: prev.scale * current.scale,
       position: prev.position.clone().add(current.position),
       rotation: new THREE.Euler(prev.rotation.x + current.rotation.x, prev.rotation.y + current.rotation.y, prev.rotation.z + current.rotation.z),
@@ -48,6 +52,7 @@ export default class ThreeDGroupActioner {
     const cameraDistanceD = this.getCameraDistanceD();
 
     return {
+      lazyTransitions: new LazyTransitions(),
       position: new THREE.Vector3(0, translateY, 0),
       scale,
       rotation: new THREE.Euler(0, rotateY, 0),

@@ -17,7 +17,7 @@ export const toVector3 = (value: number | Vector2 | Vector3): [number, number, n
 }
 
 export default class DivActioner extends DivBaseActioner {
-	static defaultValue: LazyTransitions = new LazyTransitions({});
+	static defaultValue: LazyTransitions = new LazyTransitions();
 
 	protected getStyle(): LazyTransitions {
 		switch (this.action.actionType) {
@@ -39,7 +39,7 @@ export default class DivActioner extends DivBaseActioner {
 	}
 
 	private getAppearStyle(outputRange: number[]): LazyTransitions {
-		const result = new LazyTransitions({});
+		const result = new LazyTransitions();
 		result.setOpacityInterpolation({
 			inputRange: this.effectCalculator.frameRange,
 			outputRange,
@@ -48,7 +48,7 @@ export default class DivActioner extends DivBaseActioner {
 	}
 
 	private move(action: ThreeDUnitAction): LazyTransitions {
-		const result = new LazyTransitions({});
+		const result = new LazyTransitions();
 		const vector: [number, number, number] = toVector3(action.distances);
 
 		result.setTranslateXInterpolation({
@@ -63,7 +63,7 @@ export default class DivActioner extends DivBaseActioner {
 	}
 
 	private getScaleStyle(action: ScaleAction): LazyTransitions {
-		const result = new LazyTransitions({});
+		const result = new LazyTransitions();
 		result.setScaleInterpolation({
 			inputRange: this.effectCalculator.frameRange,
 			outputRange: action.outputRange,

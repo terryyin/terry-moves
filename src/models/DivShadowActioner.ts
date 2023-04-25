@@ -3,7 +3,7 @@ import DivBaseActioner from './DivBaseActioner';
 
 export default class DivActioner extends DivBaseActioner{
 
-  static defaultValue: LazyTransitions = new LazyTransitions({});
+  static defaultValue: LazyTransitions = new LazyTransitions();
 
   protected getStyle(): LazyTransitions {
     switch(this.action.actionType) {
@@ -15,7 +15,7 @@ export default class DivActioner extends DivBaseActioner{
   }
 
   private getGrow(): LazyTransitions {
-    const result = new LazyTransitions({ translateX: 0, translateY: 0});
+    const result = new LazyTransitions();
     result.setOpacityInterpolation({inputRange: this.effectCalculator.frameRange, outputRange: [1, 0]});
     result.setScaleInterpolation({inputRange: this.effectCalculator.frameRange, outputRange: [1, 1.2]});
     return result;
