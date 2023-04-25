@@ -1,5 +1,7 @@
+import { ThreeGroupAttributesOld } from './ThreeDGroupActioner';
 import {interpolate} from 'remotion'
 import { CSSProperties } from 'react';
+import THREE from 'three';
 
 type InterpolateRanges = {
   inputRange: number[];
@@ -7,6 +9,7 @@ type InterpolateRanges = {
 }
 
 type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX';
+
 export default class LazyTransitions {
   private interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
 
@@ -75,6 +78,17 @@ export default class LazyTransitions {
       result.opacity = opacity;
     }
 
+    return result;
+  }
+
+  get3DGroupAttributes(adjustedFrame: number): ThreeGroupAttributesOld {
+    const result: ThreeGroupAttributesOld = {
+      scale: 1,
+      position: new THREE.Vector3(0, 0, 0),
+      rotation: new THREE.Euler(0, 0, 0),
+      lookAtYd: 0,
+      cameraDistanceD: 0,
+    };
     return result;
   }
 
