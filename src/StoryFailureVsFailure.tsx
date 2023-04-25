@@ -25,7 +25,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 	  flashBack: {from: 40, duration: 3, speed: 0.5} },
 
 	{ leadingBlank: 0.5, duration: 4, text: "SpaceX is celebrating their rocket explosion.", actions: [
-			{ actor: "starship", actionType: "3d rise", duration: 3 },
+			{ actor: "starship", actionType: "rotate and rise", duration: 3, distance: 4 },
 			{ actor: "starship", actionType: "3d ocillating", duration: 10, distances: [0, 0.1, 0] },
 	]},
 	{ leadingBlank: 0, duration: 5, text: "Software developers also have different attitudes towards failures.", actions: [

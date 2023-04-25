@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-export type ActionType = 'move' | 'appear' | 'disappear' | '3d rise' | '3d ocillating' | '3d move' | '3d camera move' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'move' | 'appear' | 'disappear' | 'rotate and rise' | '3d ocillating' | '3d move' | '3d camera move' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -16,17 +16,13 @@ export interface AppearAction extends BaseAction {
   actionType: 'appear' | 'disappear' | 'glow';
 }
 
-interface ThreeDRiseAction extends BaseAction {
-  actionType: '3d rise';
-}
-
 export interface ThreeDUnitAction extends BaseAction {
   actionType: 'move' | '3d move' | '3d camera move' | '3d ocillating';
   distances: number | Vector2 | Vector3;
 }
 
 export interface OneDimensionalAction extends BaseAction {
-  actionType: 'camera zoom in';
+  actionType: 'camera zoom in' | 'rotate and rise';
   distance: number;
 }
 
@@ -35,7 +31,7 @@ export interface ThreeDRotateAction extends BaseAction {
   totalRotation: number;
 }
 
-export type ThreeDAction = ThreeDRiseAction | ThreeDRotateAction | ThreeDUnitAction | OneDimensionalAction;
+export type ThreeDAction = ThreeDRotateAction | ThreeDUnitAction | OneDimensionalAction;
 
 export interface ThreeDAnimationAction extends BaseAction {
   actionType: '3d animation start' | '3d animation reverse';
