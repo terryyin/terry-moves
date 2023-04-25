@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-export type ActionType = 'move' | 'appear' | 'disappear' | '3d rise' | '3d ocillating' | '3d move' | '3d camera move' | '3d camera closer' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'move' | 'appear' | 'disappear' | '3d rise' | '3d ocillating' | '3d move' | '3d camera move' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -26,7 +26,7 @@ export interface ThreeDUnitAction extends BaseAction {
 }
 
 export interface OneDimensionalAction extends BaseAction {
-  actionType: '3d camera closer';
+  actionType: 'camera zoom in';
   distance: number;
 }
 

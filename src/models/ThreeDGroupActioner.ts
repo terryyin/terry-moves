@@ -79,7 +79,7 @@ export default class ThreeDGroupActioner {
 
   private getCameraDistanceD(): number {
     switch(this.action.actionType) {
-      case '3d camera closer':
+      case 'camera zoom in':
         return this.effectCalculator.interpolateSpring([0, this.action.distance]);
       default:
         return 0;

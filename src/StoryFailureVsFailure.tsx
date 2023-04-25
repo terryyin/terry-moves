@@ -32,7 +32,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 			{ actor: "blue background", actionType: "disappear", duration: 5 },
 			{ actor: "starship", actionType: "3d move", duration: 5, distances: [0, 20, 0] },
 			{ actor: "starship", actionType: "3d camera move", duration: 6, distances: [0, 5, 0] },
-			{ actor: "starship", actionType: "3d camera closer", duration: 6, distance: -20 },
+			{ actor: "starship", actionType: "camera zoom in", duration: 6, distance: -20 },
 	]},
 	{ leadingBlank: 0, duration: 1.5, text: "", actions: [
 			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: 240 },
