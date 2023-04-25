@@ -128,7 +128,8 @@ export default class LazyTransitions {
       frame,
       fps
     );
+    if(current.spring) return effectCalculator.interpolateSpring(outputRange);
     return effectCalculator.interpolateDuration(outputRange);
- }
+  }
 
 }

@@ -99,10 +99,12 @@ export default class ThreeDGroupActioner {
 		const vector: [number, number, number] = toVector3(action.distances);
 
 		result.setTranslateXInterpolation({
+      spring: true,
 			inputRange: this.effectCalculator.frameRange,
 			outputRange: [0, vector[0]],
 		});
 		result.setTranslateYInterpolation({
+      spring: true,
 			inputRange: this.effectCalculator.frameRange,
 			outputRange: [0, vector[1]],
 		});
