@@ -36,21 +36,21 @@ export default class AnimationContextWrapper {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .getStyle(this.adjustedFrame);
+      .getStyle(this.adjustedFrame, this.script.fps);
   }
 
   getShadowStyleOf(actor: string): CSSProperties | undefined {
     return this.getActioner(actor)
       .map(effectCalculator => new DivShadowActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .getStylePresence(this.adjustedFrame);
+      .getStylePresence(this.adjustedFrame, this.script.fps);
   }
 
   get3DGroupAttributes(actor: string): ThreeGroupAttributesOld {
     return this.getActioner(actor)
       .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue)
-      .get3DGroupAttributes(this.adjustedFrame);
+      .get3DGroupAttributes(this.adjustedFrame, this.script.fps);
   }
 
   private isSubtitleWithFlashBack(subtitle: Subtitle): subtitle is SubtitleWithFlashBack {

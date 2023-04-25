@@ -32,8 +32,8 @@ class ThreeGroupAttributes {
     this.lazyTransitions = new LazyTransitions();
   }
 
-  get3DGroupAttributes(adjustedFrame: number): ThreeGroupAttributesOld {
-    return combineOld(this.old, this.lazyTransitions.get3DGroupAttributes(adjustedFrame));
+  get3DGroupAttributes(adjustedFrame: number, fps: number): ThreeGroupAttributesOld {
+    return combineOld(this.old, this.lazyTransitions.get3DGroupAttributes(adjustedFrame, fps));
   }
 }
 

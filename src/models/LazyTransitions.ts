@@ -1,9 +1,10 @@
 import { ThreeGroupAttributesOld } from './ThreeDGroupActioner';
-import {interpolate} from 'remotion'
 import { CSSProperties } from 'react';
 import * as THREE from 'three';
+import EffectCalculator from './EffectCalculator';
 
 type InterpolateRanges = {
+  spring?: boolean;
   inputRange: number[];
   outputRange: number[];
 }
@@ -49,11 +50,11 @@ export default class LazyTransitions {
     return combinedStyle;
   }
 
-  getStyle(frame: number): CSSProperties {
-    const opacity = this.getInterpolate(frame,    'opacity');
-    const scale = this.getInterpolate(frame,      'scale');
-    const translateX = this.getInterpolate(frame, 'translateX');
-    const translateY = this.getInterpolate(frame, 'translateY');
+  getStyle(frame: number, fps: number): CSSProperties {
+    const opacity = this.getInterpolate(frame, fps,    'opacity');
+    const scale = this.getInterpolate(frame, fps,      'scale');
+    const translateX = this.getInterpolate(frame, fps, 'translateX');
+    const translateY = this.getInterpolate(frame, fps, 'translateY');
     const transforms: string[] = [];
 
     if (scale !== undefined) {
@@ -81,11 +82,11 @@ export default class LazyTransitions {
     return result;
   }
 
-  get3DGroupAttributes(frame: number): ThreeGroupAttributesOld {
+  get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributesOld {
     // Const opacity = this.getInterpolate(frame,    'opacity');
-    const scale = this.getInterpolate(frame,      'scale');
-    const translateX = this.getInterpolate(frame, 'translateX');
-    const translateY = this.getInterpolate(frame, 'translateY');
+    const scale = this.getInterpolate(frame, fps,      'scale');
+    const translateX = this.getInterpolate(frame, fps, 'translateX');
+    const translateY = this.getInterpolate(frame, fps, 'translateY');
  
     const result: ThreeGroupAttributesOld = {
       scale: scale ?? 1,
@@ -97,8 +98,8 @@ export default class LazyTransitions {
     return result;
   }
 
-  getStylePresence(frame: number): CSSProperties | undefined {
-    const style = this.getStyle(frame);
+  getStylePresence(frame: number, fps: number): CSSProperties | undefined {
+    const style = this.getStyle(frame, fps);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { opacity, transform, transformOrigin, ...rest } = style;
     if(Object.keys(rest).length !== 0) return style;
@@ -106,7 +107,7 @@ export default class LazyTransitions {
     return style;
   }
 
-  private getInterpolate (frame: number, field: InterpolateFields): number | undefined {
+  private getInterpolate (frame: number, fps: number, field: InterpolateFields): number | undefined {
     const interpolateRanges = this.interpolateRanges.get(field);
     if(!interpolateRanges || interpolateRanges.length === 0) return undefined;
     let prev: InterpolateRanges | undefined;
@@ -121,10 +122,13 @@ export default class LazyTransitions {
     if(prev) {
       outputRange[0] = prev.outputRange[prev.outputRange.length - 1];
     }
-    return interpolate(frame, current.inputRange, outputRange, {
-      extrapolateLeft: "clamp",
-      extrapolateRight: "clamp",
-    })
-}
+    const effectCalculator: EffectCalculator = new EffectCalculator(
+      (current.inputRange[current.inputRange.length - 1] - current.inputRange[0]) / fps,
+      current.inputRange[0] /fps,
+      frame,
+      fps
+    );
+    return effectCalculator.interpolateDuration(outputRange);
+ }
 
 }
