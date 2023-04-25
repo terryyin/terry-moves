@@ -6,26 +6,6 @@ type InterpolateRanges = {
   outputRange: number[];
 }
 
-const getInterpolate = (frame: number, interpolateRanges?: InterpolateRanges[]): number | undefined => {
-  if(!interpolateRanges || interpolateRanges.length === 0) return undefined;
-  let prev: InterpolateRanges | undefined;
-  let current = interpolateRanges[0];
-  for(let i = 1; i < interpolateRanges.length; i++) {
-    if(frame >= interpolateRanges[i].inputRange[0]) {
-      prev = current;
-      current = interpolateRanges[i];
-    }
-  }
-  const outputRange = [...current.outputRange];
-  if(prev) {
-    outputRange[0] = prev.outputRange[prev.outputRange.length - 1];
-  }
-  return interpolate(frame, current.inputRange, outputRange, {
-    extrapolateLeft: "clamp",
-    extrapolateRight: "clamp",
-  });
-}
-
 type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX';
 export default class LazyTransitions {
   private interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
@@ -67,10 +47,10 @@ export default class LazyTransitions {
   }
 
   getStyle(frame: number): CSSProperties {
-    const opacity = getInterpolate(frame, this.interpolateRanges.get('opacity'));
-    const scale = getInterpolate(frame, this.interpolateRanges.get('scale'));
-    const translateX = getInterpolate(frame, this.interpolateRanges.get('translateX'));
-    const translateY = getInterpolate(frame, this.interpolateRanges.get('translateY'));
+    const opacity = this.getInterpolate(frame,    'opacity');
+    const scale = this.getInterpolate(frame,      'scale');
+    const translateX = this.getInterpolate(frame, 'translateX');
+    const translateY = this.getInterpolate(frame, 'translateY');
     const transforms: string[] = [];
 
     if (scale !== undefined) {
@@ -106,4 +86,26 @@ export default class LazyTransitions {
     if (opacity === undefined || Number(opacity) === 1 || Number(opacity) < 0.01) return undefined;
     return style;
   }
+
+  private getInterpolate (frame: number, field: InterpolateFields): number | undefined {
+    const interpolateRanges = this.interpolateRanges.get(field);
+    if(!interpolateRanges || interpolateRanges.length === 0) return undefined;
+    let prev: InterpolateRanges | undefined;
+    let current = interpolateRanges[0];
+    for(let i = 1; i < interpolateRanges.length; i++) {
+      if(frame >= interpolateRanges[i].inputRange[0]) {
+        prev = current;
+        current = interpolateRanges[i];
+      }
+    }
+    const outputRange = [...current.outputRange];
+    if(prev) {
+      outputRange[0] = prev.outputRange[prev.outputRange.length - 1];
+    }
+    return interpolate(frame, current.inputRange, outputRange, {
+      extrapolateLeft: "clamp",
+      extrapolateRight: "clamp",
+    })
+}
+
 }
