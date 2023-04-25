@@ -6,7 +6,8 @@ import React from 'react';
 import AnimationContextWrapper from '../models/AnimationContextWrapper';
 import { Script } from "../models/Script";
 
-export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React.ReactNode}> = (({subtitles, id, children}) => {
+export const Story: React.FC<{id: string, subtitles: Subtitle[], width?: number, height?: number, children: React.ReactNode}> = (({
+  subtitles, id, width, height, children}) => {
   const globalFps = 30;
   const script = new Script(subtitles, globalFps);
   const InnerStory = autonomousComponent(({frame}) => {
@@ -24,7 +25,7 @@ export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React
     component={ InnerStory }
     durationInFrames={script.getTotalFrame()}
     fps={globalFps}
-    width={720}
-    height={720}
+    width={width ?? 1024}
+    height={height ?? 720}
     />
 });
