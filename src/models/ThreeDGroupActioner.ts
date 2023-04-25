@@ -13,6 +13,16 @@ export type ThreeGroupAttributesOld = {
   cameraDistanceD: number;
 }
 
+const combineOld = (prev: ThreeGroupAttributesOld, current: ThreeGroupAttributesOld): ThreeGroupAttributesOld =>{
+  return {
+    scale: prev.scale * current.scale,
+    position: prev.position.clone().add(current.position),
+    rotation: new THREE.Euler(prev.rotation.x + current.rotation.x, prev.rotation.y + current.rotation.y, prev.rotation.z + current.rotation.z),
+    lookAtYd: current.lookAtYd + prev.lookAtYd,
+    cameraDistanceD: current.cameraDistanceD + prev.cameraDistanceD,
+  }
+};
+
 class ThreeGroupAttributes {
   lazyTransitions: LazyTransitions;
   old: ThreeGroupAttributesOld;
@@ -23,7 +33,7 @@ class ThreeGroupAttributes {
   }
 
   get3DGroupAttributes(adjustedFrame: number): ThreeGroupAttributesOld {
-    return this.old;
+    return combineOld(this.old, this.lazyTransitions.get3DGroupAttributes(adjustedFrame));
   }
 }
 
@@ -46,19 +56,9 @@ export default class ThreeDGroupActioner {
 
   combine(prev: ThreeGroupAttributes): ThreeGroupAttributes {
     const current = this.get3DGroupAttributes();
-    const result = new ThreeGroupAttributes(this.combineOld(prev.old, current.old));
+    const result = new ThreeGroupAttributes(combineOld(prev.old, current.old));
     result.lazyTransitions.combine(prev.lazyTransitions).combine(current.lazyTransitions);
     return result;
-  }
-
-  combineOld(prev: ThreeGroupAttributesOld, current: ThreeGroupAttributesOld): ThreeGroupAttributesOld {
-    return {
-      scale: prev.scale * current.scale,
-      position: prev.position.clone().add(current.position),
-      rotation: new THREE.Euler(prev.rotation.x + current.rotation.x, prev.rotation.y + current.rotation.y, prev.rotation.z + current.rotation.z),
-      lookAtYd: current.lookAtYd + prev.lookAtYd,
-      cameraDistanceD: current.cameraDistanceD + prev.cameraDistanceD,
-    }
   }
 
   private get3DGroupAttributes(): ThreeGroupAttributes {

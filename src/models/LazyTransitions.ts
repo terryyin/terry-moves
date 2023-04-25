@@ -1,7 +1,7 @@
 import { ThreeGroupAttributesOld } from './ThreeDGroupActioner';
 import {interpolate} from 'remotion'
 import { CSSProperties } from 'react';
-import THREE from 'three';
+import * as THREE from 'three';
 
 type InterpolateRanges = {
   inputRange: number[];
