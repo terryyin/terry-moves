@@ -2,22 +2,23 @@ import {interpolate} from 'remotion'
 import {spring} from 'remotion'
 import { BaseAction } from './Subtitles';
 
-export default class EffectCalculator {
+export type EffectCalculatorAndAction = {
   action: BaseAction;
+  effectCalculator: EffectCalculator;
+}
+
+export default class EffectCalculator {
+  durationInFrames: number;
   startFrame: number;
   frame: number;
   fps: number;
 
 
-  constructor(action: BaseAction, startTime: number, frame: number, fps: number) {
-    this.action = action;
+  constructor(duration: number, startTime: number, frame: number, fps: number) {
     this.startFrame = startTime * fps;
     this.frame = frame;
     this.fps = fps;
-  }
-
-  get durationInFrames(): number {
-    return this.action.duration * this.fps;
+    this.durationInFrames = duration * fps;
   }
 
   get endFrame(): number {

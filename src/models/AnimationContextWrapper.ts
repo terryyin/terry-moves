@@ -2,7 +2,7 @@ import { SubtitleWithFlashBack } from './Subtitles';
 import { CSSProperties } from 'react';
 import { Action, Subtitle } from '@/models/Subtitles';
 import DivActioner from './DivActioner';
-import EffectCalculator from './EffectCalculator';
+import { EffectCalculatorAndAction } from './EffectCalculator';
 import ThreeDGroupActioner, { ThreeGroupAttributesOld } from './ThreeDGroupActioner';
 import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
@@ -26,7 +26,7 @@ export default class AnimationContextWrapper {
 
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
     const result = this.getActioner(actor)
-      .map(effectCalculator => new GLBAnimationActioner(effectCalculator.action as Action, effectCalculator))
+      .map(effectCalculator => new GLBAnimationActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), { ...GLBAnimationActioner.defaultValue});
     result.time = result.time ?? this.adjustedFrame / this.script.fps;
     return result;
@@ -34,21 +34,21 @@ export default class AnimationContextWrapper {
 
   getStyleOf(actor: string): CSSProperties {
     return this.getActioner(actor)
-      .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator))
+      .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
       .getStyle(this.adjustedFrame);
   }
 
   getShadowStyleOf(actor: string): CSSProperties | undefined {
     return this.getActioner(actor)
-      .map(effectCalculator => new DivShadowActioner(effectCalculator.action as Action, effectCalculator))
+      .map(effectCalculator => new DivShadowActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
       .getStylePresence(this.adjustedFrame);
   }
 
   get3DGroupAttributes(actor: string): ThreeGroupAttributesOld {
     return this.getActioner(actor)
-      .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator))
+      .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue)
       .get3DGroupAttributes(this.adjustedFrame);
   }
@@ -57,7 +57,7 @@ export default class AnimationContextWrapper {
     return subtitle && (subtitle as SubtitleWithFlashBack).flashBack !== undefined;
   }
 
-  private getActioner(actor: string): EffectCalculator[] {
+  private getActioner(actor: string): EffectCalculatorAndAction[] {
     return this.script.getActioner(actor, this.adjustedFrame);
   }
 

@@ -1,5 +1,5 @@
 import {Subtitle, SubtitleWithAction} from '../models/Subtitles';
-import EffectCalculator from './EffectCalculator';
+import EffectCalculator, { EffectCalculatorAndAction } from './EffectCalculator';
 
 export class Script {
 	private subtitles: Subtitle[];
@@ -19,7 +19,7 @@ export class Script {
 		);
 	}
 
-	getActioner(actor: string, frame: number): EffectCalculator[] {
+	getActioner(actor: string, frame: number): EffectCalculatorAndAction[] {
 		return this.subtitles
 			.map((subtitle, index) => {
 				if (!this.isSubtitleWithAction(subtitle)) return [];
@@ -27,7 +27,10 @@ export class Script {
 					.filter((action) => action.actor === actor)
 					.map((action) => {
 						const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0;
-						return new EffectCalculator(action, startTime, frame, this.fps);
+						return {
+							action,
+							effectCalculator: new EffectCalculator(action.duration, startTime, frame, this.fps),
+						};
 					});
 			})
 			.flat();
