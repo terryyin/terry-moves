@@ -3,7 +3,7 @@ import { CSSProperties } from 'react';
 import { Action, Subtitle } from '@/models/Subtitles';
 import DivActioner from './DivActioner';
 import EffectCalculator from './EffectCalculator';
-import ThreeDGroupActioner, { ThreeGroupAttributes } from './ThreeDGroupActioner';
+import ThreeDGroupActioner, { ThreeGroupAttributesOld } from './ThreeDGroupActioner';
 import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
@@ -46,10 +46,11 @@ export default class AnimationContextWrapper {
       .getStylePresence(this.adjustedFrame);
   }
 
-  get3DGroupAttributes(actor: string): ThreeGroupAttributes {
+  get3DGroupAttributes(actor: string): ThreeGroupAttributesOld {
     return this.getActioner(actor)
       .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator))
-      .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue);
+      .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue)
+      .get3DGroupAttributes(this.adjustedFrame);
   }
 
   private isSubtitleWithFlashBack(subtitle: Subtitle): subtitle is SubtitleWithFlashBack {

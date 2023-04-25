@@ -5,8 +5,7 @@ import EffectCalculator from './EffectCalculator';
 import { toVector3 } from './DivActioner';
 import LazyTransitions from './LazyTransitions';
 
-export type ThreeGroupAttributes = {
-  lazyTransitions: LazyTransitions;
+export type ThreeGroupAttributesOld = {
   scale: number;
   position: THREE.Vector3;
   rotation: THREE.Euler;
@@ -14,18 +13,31 @@ export type ThreeGroupAttributes = {
   cameraDistanceD: number;
 }
 
+class ThreeGroupAttributes {
+  lazyTransitions: LazyTransitions;
+  old: ThreeGroupAttributesOld;
+
+  constructor(old: ThreeGroupAttributesOld) {
+    this.old = old;
+    this.lazyTransitions = new LazyTransitions();
+  }
+
+  get3DGroupAttributes(adjustedFrame: number): ThreeGroupAttributesOld {
+    return this.old;
+  }
+}
+
 export default class ThreeDGroupActioner {
   action: Action;
   effectCalculator: EffectCalculator;
 
-  static defaultValue: ThreeGroupAttributes = {
-    lazyTransitions: new LazyTransitions(),
+  static defaultValue: ThreeGroupAttributes = new ThreeGroupAttributes({
     scale: 1,
     position: new THREE.Vector3(0, 0, 0),
     rotation: new THREE.Euler(0, 0, 0),
     lookAtYd: 0,
     cameraDistanceD: 0,
-  };
+  });
 
   constructor(action: Action, effectCalculator: EffectCalculator) {
     this.effectCalculator = effectCalculator;
@@ -34,8 +46,13 @@ export default class ThreeDGroupActioner {
 
   combine(prev: ThreeGroupAttributes): ThreeGroupAttributes {
     const current = this.get3DGroupAttributes();
+    const result = new ThreeGroupAttributes(this.combineOld(prev.old, current.old));
+    result.lazyTransitions.combine(prev.lazyTransitions).combine(current.lazyTransitions);
+    return result;
+  }
+
+  combineOld(prev: ThreeGroupAttributesOld, current: ThreeGroupAttributesOld): ThreeGroupAttributesOld {
     return {
-      lazyTransitions: new LazyTransitions(),
       scale: prev.scale * current.scale,
       position: prev.position.clone().add(current.position),
       rotation: new THREE.Euler(prev.rotation.x + current.rotation.x, prev.rotation.y + current.rotation.y, prev.rotation.z + current.rotation.z),
@@ -51,14 +68,14 @@ export default class ThreeDGroupActioner {
     const lookAtYd = this.getLookAtYd();
     const cameraDistanceD = this.getCameraDistanceD();
 
-    return {
-      lazyTransitions: new LazyTransitions(),
+    const result = new ThreeGroupAttributes({
       position: new THREE.Vector3(0, translateY, 0),
       scale,
       rotation: new THREE.Euler(0, rotateY, 0),
       lookAtYd,
       cameraDistanceD,
-    }
+    });
+    return result;
   }
  
 
