@@ -11,7 +11,7 @@ export class Script {
 	}
 
 	getTotalFrame() {
-		return (
+		return Math.floor(
 			this.subtitles.reduce(
 				(prev, curr) => prev + curr.leadingBlank + curr.duration,
 				0

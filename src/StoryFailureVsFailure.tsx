@@ -16,7 +16,7 @@ import { Story } from './video_components/Story';
 import { ProblemDomain } from './parts/ProblemDomain';
 
 const storyFailureVsFailureSubtitles: Subtitle[] = [
-	{ leadingBlank: 0, duration: 2, scale: 1.5, position: 'center', text: [
+	{ leadingBlank: 0, duration: 3, scale: 1.5, position: 'center', text: [
 			"Learning by Failures",
 			"vs",
 			"Learning from Failures",
@@ -34,23 +34,47 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 			{ actor: "starship", actionType: "3d camera closer", duration: 6, distance: -20 },
 	]},
 	{ leadingBlank: 0, duration: 1.5, text: "", actions: [
-			{ actor: "explosion", actionType: "3d animation start", duration: 1, speed: 1 },
+			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: 240 },
+			{ actor: "stage", actionType: "scale", duration: 2, outputRange: [1, 0.5] },
 	]},
 
-	{ leadingBlank: 0.5, duration: 2.5, text: "Repeated failures alone", actions: [
-			{ actor: "stage", actionType: "scale", duration: 2, outputRange: [100, 50] },
-			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: 240 },
-			{ actor: "problem domain", actionType: "appear", duration: 2 },
+	{ leadingBlank: 0.5, duration: 1.5, text: "Repeated failures alone", actions: [
+			{ actor: "problem domain", actionType: "appear", duration: 1 },
+	]},
+
+	{ leadingBlank: 0.2, duration: 1, text: "Repeated failures alone", actions: [
+			{ actor: "stage", actionType: "move", duration: 0.1, distances: [-700, 0, 0] },
+			{ actor: "explosion", actionType: "3d animation start", duration: 1, speed: 1 },
+	]},
+	{ leadingBlank: 0, duration: 0.9, text: "Repeated failures alone", actions: [
+			{ actor: "stage", actionType: "move", duration: 0.1, distances: [-710, 200, 0] },
+			{ actor: "explosion", actionType: "3d animation start", duration: 0.9, speed: 1.1 },
+	]},
+	{ leadingBlank: 0, duration: 0.8, text: "Repeated failures alone", actions: [
+			{ actor: "stage", actionType: "move", duration: 0.1, distances: [-630, 150, 0] },
+			{ actor: "explosion", actionType: "3d animation start", duration: 0.8, speed: 1.2 },
+	]},
+	{ leadingBlank: 0, duration: 0.7, text: "Repeated failures alone", actions: [
+			{ actor: "stage", actionType: "move", duration: 0.1, distances: [-650, 200, 0] },
+			{ actor: "explosion", actionType: "3d animation start", duration: 0.7, speed: 1.3 },
+	]},
+
+
+	{ leadingBlank: 0, duration: 2, text: "do not necessarily lead to success.", actions: [
+			{ actor: "problem domain", actionType: "scale", duration: 2, outputRange: [6, 1]},
 	]},
 	{ leadingBlank: 0, duration: 3, text: "do not necessarily lead to success.", actions: [
-			{ actor: "problem domain", actionType: "scale", duration: 2, outputRange: [600, 100]},
+			{ actor: "problem domain", actionType: "scale", duration: 2, outputRange: [6, 1]},
+			{ actor: "success", actionType: "appear", duration: 2 },
 	]},
+
+
 
 
 	{ leadingBlank: 0.5, duration: 3, text: "Learning from the failure", actions: [
 			{ actor: "problem domain", actionType: "disappear", duration: 2 },
-			// { actor: "stage", actionType: "scale", duration: 2, outputRange: [0.5, 1] },
-			// { actor: "stage", actionType: "move", duration: 2, unit: [50, -50] },
+			{ actor: "stage", actionType: "scale", duration: 2, outputRange: [0.5, 1] },
+			{ actor: "stage", actionType: "move", duration: 2, distances: [0, 0] },
 			{ actor: "explosion", actionType: "3d animation reverse", duration: 1, speed: 1, percentage: 50, pauseAtEnd: true },
 	]},
 	{ leadingBlank: 0, duration: 3, text: "is more valuable than merely experiencing them.", actions: [
@@ -65,7 +89,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 			{ actor: "team", actionType: "appear", duration: 1 },
 	]},
 	{ leadingBlank: 0, duration: 2, text: "In conclusion,", actions: []},
-	{ leadingBlank: 0, duration: 5, text: "read the error message!", scale: 3, position: 'center', actions: []},
+	{ leadingBlank: 0, duration: 5, text: "read the error message!", scale: 2.5, position: 'center', actions: []},
 ];
 
 export const StoryFailureVsFailure: React.FC = () => {
@@ -77,6 +101,11 @@ export const StoryFailureVsFailure: React.FC = () => {
 			</AnimationEffect>
 			<AbsoluteFill style={{ left: '10%', top: '2%', width: '70%', height: '100%'}}>
 				<AnimationEffect actor="problem domain">
+						<AnimationEffect actor="success">
+					<AbsoluteFill style={{ left: '80%', top: '45%', width: '10%', height: '10%'}}>
+						<span style={{fontSize: "38px", fontWeight: "bolder", color: "#228800"}}>SUCCESS</span>
+					</AbsoluteFill>
+						</AnimationEffect>
 					<ProblemDomain />
 				</AnimationEffect>
 			</AbsoluteFill>
@@ -101,7 +130,7 @@ export const StoryFailureVsFailure: React.FC = () => {
 			</AnimationEffect>
 			<Subtitles scale={2} />
     </AbsoluteFill>
-    <AbsoluteFill style={{ left: '86%', top: '9%', width: '10%', height: '20%'}}>
+    <AbsoluteFill style={{ left: '80%', top: '5%', width: '10%', height: '20%'}}>
 			<span style={{fontSize: '28px'}}>terry@</span>
 		</AbsoluteFill>
     <AbsoluteFill style={{ left: '90%', top: '2%', width: '10%', height: '20%'}}>

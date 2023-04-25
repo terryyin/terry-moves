@@ -7,8 +7,8 @@ describe('AnimationContext', () => {
 			{sec: 0, expectPlaying: "scale(0.5) translateX(0px) translateY(0px)",  },
 			{sec: 1, expectPlaying: "scale(0.5) translateX(0px) translateY(0px)",   },
 			{sec: 1.1, expectPlaying: "scale(0.55) translateX(0.05px) translateY(0.1px)", },
-			{sec: 2.1, expectPlaying: "scale(1) translateX(0.45px) translateY(0.9px)",},
-			{sec: 3.1, expectPlaying: "scale(1.1) translateX(0.1px) translateY(0.2px)",},
+			{sec: 2.1, expectPlaying: "scale(1) translateX(0.5px) translateY(1px)",},
+			{sec: 3.1, expectPlaying: "scale(1.1) translateX(0.55px) translateY(1.1px)",},
 		].forEach(({sec, expectPlaying, }) => {
 			test(`test sec: ${sec}`, () => {
 				const animationContext = makeMe.animationContext

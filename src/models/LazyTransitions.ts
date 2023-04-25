@@ -1,4 +1,4 @@
-import { InterpolateRanges, combineInterpolates } from './combine_interpolates';
+import { InterpolateRanges } from './combine_interpolates';
 import {interpolate} from 'remotion'
 import { CSSProperties } from 'react';
 
@@ -7,48 +7,66 @@ type TransformProperties = {
   translateY?: number;
 };
 
-const getInterpolate = (frame: number, interpolateRanges?: InterpolateRanges): number | undefined => {
-
-  return  interpolateRanges && interpolateRanges.inputRange.length > 0
-      ? interpolate(frame, interpolateRanges.inputRange, interpolateRanges.outputRange, {
-          extrapolateLeft: "clamp",
-          extrapolateRight: "clamp",
-        })
-      : undefined;
+const getInterpolate = (frame: number, interpolateRanges?: InterpolateRanges[]): number | undefined => {
+  if(!interpolateRanges || interpolateRanges.length === 0) return undefined;
+  let prev: InterpolateRanges | undefined;
+  let current = interpolateRanges[0];
+  for(let i = 1; i < interpolateRanges.length; i++) {
+    if(frame >= interpolateRanges[i].inputRange[0]) {
+      prev = current;
+      current = interpolateRanges[i];
+    }
+  }
+  const outputRange = [...current.outputRange];
+  if(prev) {
+    outputRange[0] = prev.outputRange[prev.outputRange.length - 1];
+  }
+  return interpolate(frame, current.inputRange, outputRange, {
+    extrapolateLeft: "clamp",
+    extrapolateRight: "clamp",
+  });
 }
 
 type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX';
 export default class LazyTransitions {
-  private interpolateRanges: Map<InterpolateFields, InterpolateRanges> = new Map();
+  private interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
   private transformProperties: TransformProperties;
 
   constructor(transformProperties: TransformProperties) {
     this.transformProperties = transformProperties;
   }
 
+  private setInterpolation(key: InterpolateFields, interpolateRange: InterpolateRanges): void {
+    if(!this.interpolateRanges.get(key)) {
+      this.interpolateRanges.set(key, []);
+    };
+    const array = this.interpolateRanges.get(key);
+    if(array) {
+      array.push(interpolateRange);
+    }
+  }
+
   setOpacityInterpolation(interpolateRanges: InterpolateRanges): void {
-    this.interpolateRanges.set('opacity', interpolateRanges);
+    this.setInterpolation('opacity', interpolateRanges);
   }
 
   setScaleInterpolation(interpolateRanges: InterpolateRanges) {
-    this.interpolateRanges.set('scale', interpolateRanges);
+    this.setInterpolation('scale', interpolateRanges);
   }
 
   setTranslateXInterpolation(interpolateRanges: InterpolateRanges) {
-    this.interpolateRanges.set('translateX', interpolateRanges);
+    this.setInterpolation('translateX', interpolateRanges);
   }
 
   setTranslateYInterpolation(interpolateRanges: InterpolateRanges) {
-    this.interpolateRanges.set('translateY', interpolateRanges);
+    this.setInterpolation('translateY', interpolateRanges);
   }
 
   combine(prev: LazyTransitions): LazyTransitions {
     const combinedStyle = new LazyTransitions(combineTransformProperties(this.transformProperties));
     (['opacity', 'scale', 'translateY', 'translateX'] as InterpolateFields[]).forEach((key) => {
-      const combined = combineInterpolates(this.interpolateRanges.get(key), prev.interpolateRanges.get(key));
-      if(combined) {
-        combinedStyle.interpolateRanges.set(key, combined);
-      }
+      const combined = [...prev.interpolateRanges.get(key) || [], ...this.interpolateRanges.get(key) || []];
+      combinedStyle.interpolateRanges.set(key, combined);
     });
 
     return combinedStyle;

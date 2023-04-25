@@ -24,7 +24,7 @@ export const Story: React.FC<{id: string, subtitles: Subtitle[], children: React
     component={ InnerStory }
     durationInFrames={script.getTotalFrame()}
     fps={globalFps}
-    width={1280}
+    width={720}
     height={720}
     />
 });
