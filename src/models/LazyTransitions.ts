@@ -22,7 +22,7 @@ interface InterpolateRangesNonOcillate extends InterpolateRangesBase {
 
 type InterpolateRanges = InterpolateRangesNonOcillate | InterpolateRangesOcillate;
 
-export type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX' | 'translateZ';
+export type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX' | 'translateZ' | 'cameraDistanceD';
 
 export default class LazyTransitions {
   interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
@@ -39,7 +39,7 @@ export default class LazyTransitions {
 
   combine(prev: LazyTransitions): LazyTransitions {
     const combinedStyle = new LazyTransitions();
-    (['opacity', 'scale', 'translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key) => {
+    (['opacity', 'scale', 'translateX', 'translateY', 'translateZ', 'cameraDistanceD'] as InterpolateFields[]).forEach((key) => {
       const combined = [...prev.interpolateRanges.get(key) || [], ...this.interpolateRanges.get(key) || []];
       combinedStyle.interpolateRanges.set(key, combined);
     });
@@ -81,6 +81,7 @@ export default class LazyTransitions {
   get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributesOld {
     // Const opacity = this.getInterpolate(frame,    'opacity');
     const scale = this.getMultiplyingInterpolate(frame, fps,      'scale');
+    const cameraDistanceD = this.getAddingInterpolate(frame, fps, 'cameraDistanceD');
     
     const position = [0, 0, 0];
     (['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key, index) => {
@@ -95,7 +96,7 @@ export default class LazyTransitions {
       position: new THREE.Vector3(position[0], position[1], position[2]),
       rotation: new THREE.Euler(0, 0, 0),
       lookAtYd: 0,
-      cameraDistanceD: 0,
+      cameraDistanceD: cameraDistanceD ?? 0,
     };
     return result;
   }

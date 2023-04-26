@@ -59,14 +59,13 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
   private get3DGroupAttributes(): ThreeGroupAttributes {
     const rotateY = this.getThreeRotateY();
     const lookAtYd = this.getLookAtYd();
-    const cameraDistanceD = this.getCameraDistanceD();
 
     const result = new ThreeGroupAttributes({
       position: new THREE.Vector3(0, 0, 0),
       scale: 1,
       rotation: new THREE.Euler(0, rotateY, 0),
       lookAtYd,
-      cameraDistanceD,
+      cameraDistanceD: 0,
     });
     if(this.action.actionType === 'move') {
       result.lazyTransitions = this.move([0, 0, 0], this.action.absolutePosition);
@@ -78,17 +77,17 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
     if(this.action.actionType === 'ocillate') {
       result.lazyTransitions = this.ocillate(this.action.delta);
     }
+    if(this.action.actionType === 'camera zoom in'){
+      result.lazyTransitions =  this.cameraZoomIn(this.action.distance);
+    }
 
     return result;
   }
 
-  private getCameraDistanceD(): number {
-    switch(this.action.actionType) {
-      case 'camera zoom in':
-        return this.effectCalculator.interpolateSpring([0, this.action.distance]);
-      default:
-        return 0;
-    }
+  protected cameraZoomIn(distance: number): LazyTransitions {
+    const result = new LazyTransitions();
+    result.setInterpolation('cameraDistanceD', {interpolateType: 'spring', inputRange: this.effectCalculator.frameRange, outputRange: [0, distance]});
+    return result;
   }
 
   private getLookAtYd(): number {
