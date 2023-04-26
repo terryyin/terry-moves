@@ -14,10 +14,10 @@ const AnimationEffect: React.FC<StageProps> = ({ actor, style, children }) => {
 
   return (
     <>
-    <div id={actor} style={{ ...(style || {}), position: 'absolute', width: '100%', height:'100%', ...effectStyle}}>
+    <div id={actor} style={{position: 'absolute', width: '100%', height:'100%',  ...(style || {}), ...effectStyle}}>
       {children}
     </div>
-    { shadowEffectStyle && <div style={{ ...(style || {}), position: 'absolute', width: '100%', height: '100%', ...shadowEffectStyle}} >
+    { shadowEffectStyle && <div style={{ position: 'absolute', width: '100%', height: '100%', ...(style || {}),  ...shadowEffectStyle}} >
       {children}
       </div> }
     </>

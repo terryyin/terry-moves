@@ -17,6 +17,7 @@ import { OddeLogoInner } from './parts/OddeLogoInner';
 import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 import { Story } from './video_components/Story';
 import { ProblemDomain } from './parts/ProblemDomain';
+import { TypingText } from './video_components/TypingText';
 
 const subtitles: Subtitle[] = [
 	{
@@ -24,7 +25,7 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "Welcome to our video on why boolean parameters are bad.",
 			actions: [
-					{ actor: "title", actionType: "appear", duration: 1 },
+					{ actor: "second title", actionType: "type", duration: 2, text: "Seeking for High Cohesion, Loose Coupling Design" },
 			],
 	},
 	{
@@ -150,14 +151,15 @@ export const StoryBooleanParameters: React.FC = () => {
 			fontFamily: 'Roboto, sans-serif',
     }}>Why Boolean Parameters Are Bad</span>
 
-			<span style={{
-				paddingTop: '20px',
+			<TypingText actor="second title" style={{
+				position: 'relative',
+				paddingTop: '40px',
 				paddingLeft: '10px',
 				display: 'block',
       fontSize: '30px',
 			color: 'white',
 			fontFamily: 'Roboto, sans-serif',
-    }}>Seeking for High Cohesion, Loose Coupling Design</span>
+    }}/>
 
 		</AbsoluteFill>
     <AbsoluteFill style={{ left: '80%', top: '5%', width: '10%', height: '20%'}}>

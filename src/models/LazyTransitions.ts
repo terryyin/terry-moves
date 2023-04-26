@@ -29,7 +29,7 @@ interface InterpolateRangesNonOcillate extends InterpolateRangesBase {
 
 type InterpolateRanges = InterpolateRangesNonOcillate | InterpolateRangesOcillate;
 
-export type InterpolateFields = 'rotationX' | 'rotationY' | 'rotationZ' | 'cameraLookAtX' | 'cameraLookAtY' | 'cameraLookAtY' | 'opacity' | 'scale' | 'translateY' | 'translateX' | 'translateZ' | 'cameraDistanceD';
+export type InterpolateFields = 'textReveal' | 'rotationX' | 'rotationY' | 'rotationZ' | 'cameraLookAtX' | 'cameraLookAtY' | 'cameraLookAtY' | 'opacity' | 'scale' | 'translateY' | 'translateX' | 'translateZ' | 'cameraDistanceD';
 
 export default class LazyTransitions {
   interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();

@@ -20,6 +20,8 @@ export default class DivActioner extends DivBaseActioner {
 
 	protected getStyle(): LazyTransitions {
 		switch (this.action.actionType) {
+			case 'type':
+				return this.type();
 			case 'scale':
 				return this.scale(this.action.outputRange);
 			case 'move':
@@ -47,6 +49,16 @@ export default class DivActioner extends DivBaseActioner {
 					`Unknown action type for div ${this.action.actionType}`
 				);
 		}
+	}
+
+	private type(): LazyTransitions {
+			const result = new LazyTransitions();
+		result.setInterpolation('textReveal', {
+			interpolateType: 'linear',
+			inputRange: this.effectCalculator.frameRange,
+			outputRange: [0, 1],
+		});
+		return result;
 	}
 
 	private getAppearStyle(outputRange: number[]): LazyTransitions {
