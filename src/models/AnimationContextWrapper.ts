@@ -3,10 +3,10 @@ import { CSSProperties } from 'react';
 import { Action, Subtitle } from '@/models/Subtitles';
 import DivActioner from './DivActioner';
 import { EffectCalculatorAndAction } from './EffectCalculator';
-import ThreeDGroupActioner, { ThreeGroupAttributesOld } from './ThreeDGroupActioner';
 import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
+import { ThreeGroupAttributesOld } from './LazyTransitions';
 
 
 export default class AnimationContextWrapper {
@@ -48,8 +48,8 @@ export default class AnimationContextWrapper {
 
   get3DGroupAttributes(actor: string): ThreeGroupAttributesOld {
     return this.getActioner(actor)
-      .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
-      .reduce((prev, curr) => curr.combine1(prev), ThreeDGroupActioner.defaultValue)
+      .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
+      .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
       .get3DGroupAttributes(this.adjustedFrame, this.script.fps);
   }
 

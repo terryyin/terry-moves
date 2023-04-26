@@ -1,7 +1,14 @@
-import { ThreeGroupAttributesOld } from './ThreeDGroupActioner';
 import { CSSProperties } from 'react';
 import * as THREE from 'three';
 import EffectCalculator from './EffectCalculator';
+
+export type ThreeGroupAttributesOld = {
+  scale: number;
+  position: THREE.Vector3;
+  rotation: THREE.Euler;
+  lookAtD: THREE.Vector3;
+  cameraDistanceD: number;
+}
 
 type InterpolateType = 'linear' | 'spring' | 'ocillate';
 

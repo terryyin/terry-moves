@@ -30,6 +30,18 @@ export default class DivActioner extends DivBaseActioner {
 				return this.getAppearStyle([1, 0]);
 			case 'glow':
 				return DivActioner.defaultValue;
+			case 'rotate and rise':
+				return this.scale([0, 1])
+					.combine(this.move([0, -this.action.distance, 0], [0, 0, 0]))
+					.combine(this.rotateFrom([0, -360, 0]));
+			case 'ocillate':
+				return this.ocillate(this.action.delta);
+			case 'camera zoom in':
+				return  this.cameraZoomIn(this.action.distance);
+			case 'camera look at':
+				return  this.cameraLookAt(this.action.absolutePosition);
+			case '3d rotate':
+				return  this.rotate(this.action.totalRotation);
 			default:
 				throw new Error(
 					`Unknown action type for div ${this.action.actionType}`
