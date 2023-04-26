@@ -14,6 +14,7 @@ import { Story } from './video_components/Story';
 import { ProblemDomain } from './parts/ProblemDomain';
 import { TypingText } from './video_components/TypingText';
 import { Blaster } from './parts/Blaster';
+import { GroupInitialState } from './video_components/GroupInitialState';
 
 const subtitles: Subtitle[] = [
 	{
@@ -22,6 +23,7 @@ const subtitles: Subtitle[] = [
 			text: "",
 			actions: [
 					{ actor: "second title", actionType: "type", duration: 3, text: "Seeking for High Cohesion, Loose Coupling Design" },
+			  { actor: "blaster assembly", actionType: "ocillate", duration: 1000,  delta: [0, 0.02, 0]},
 			],
 	},
 	{
@@ -39,7 +41,9 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "gun.action(true); and gun.action(false);",
 			actions: [
-			  { actor: "blaster", actionType: "3d animation start", duration: 1, speed: 1, pauseAtEnd: true, freezeBeforeStart: true },
+			  { actor: "blaster", actionType: "3d animation start", duration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
+			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.4,  totalRotation: [0, 0, -30]},
+			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
 					// { actor: "example1", actionType: "highlight", duration: 2 },
 			],
 	},
@@ -121,13 +125,15 @@ export const StoryBooleanParameters: React.FC = () => {
           <ThreeDFrame >
 						<directionalLight
 							castShadow
-							position={[50, 100, 50]}
+							position={[10, 20, 15]}
 							intensity={15}
 							color={0xffffff}
 						/>	
-            <ThreeAnimationEffect actor="blaster1" cameraDistance={8} lookAtY={0} cameraY={0}>
-              <Blaster actor="blaster"/>
+						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 4, 0]} scale={1}>
+            <ThreeAnimationEffect actor="blaster assembly" cameraDistance={8} lookAtY={0} cameraY={0}>
+								<Blaster actor="blaster"/>
             </ThreeAnimationEffect>
+						</GroupInitialState>
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>

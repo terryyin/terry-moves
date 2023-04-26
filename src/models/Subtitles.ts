@@ -5,6 +5,7 @@ export interface BaseAction {
   actor: string;
   actionType: ActionType;
   duration: number;
+  offset?: number;
 }
 
 export interface ScaleAction extends BaseAction {
