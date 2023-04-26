@@ -1,4 +1,5 @@
-import { Action, ThreeDUnitAction } from '@/models/Subtitles';
+import { Vector2, Vector3 } from '@react-three/fiber';
+import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
 import LazyTransitions from './LazyTransitions';
 import { toVector3 } from './DivActioner';
@@ -18,9 +19,9 @@ export default abstract class DivBaseActioner {
 
   protected abstract getStyle(): LazyTransitions;
 
-	protected move(action: ThreeDUnitAction): LazyTransitions {
+	protected move(distances: number | Vector2 | Vector3): LazyTransitions {
 		const result = new LazyTransitions();
-		const vector: [number, number, number] = toVector3(action.distances);
+		const vector: [number, number, number] = toVector3(distances);
 
 		result.setTranslateXInterpolation({
       spring: true,

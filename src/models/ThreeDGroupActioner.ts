@@ -71,7 +71,7 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
       cameraDistanceD,
     });
     if(this.action.actionType === '3d move') {
-      result.lazyTransitions = this.move(this.action);
+      result.lazyTransitions = this.move(this.action.distances);
     }
 
     return result;
