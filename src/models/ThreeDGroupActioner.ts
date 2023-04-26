@@ -10,56 +10,41 @@ export type ThreeGroupAttributesOld = {
   cameraDistanceD: number;
 }
 
-class ThreeGroupAttributes {
-  lazyTransitions: LazyTransitions;
-
-  constructor() {
-    this.lazyTransitions = new LazyTransitions();
-  }
-
-  get3DGroupAttributes(adjustedFrame: number, fps: number): ThreeGroupAttributesOld {
-    return this.lazyTransitions.get3DGroupAttributes(adjustedFrame, fps);
-  }
-}
-
 export default class ThreeDGroupActioner extends DivBaseActioner {
-  static defaultValue: ThreeGroupAttributes = new ThreeGroupAttributes();
+  static defaultValue: LazyTransitions = new LazyTransitions();
 
   protected getStyle(): LazyTransitions {
     throw new Error('Method not implemented.');
   }
 
-  combine1(prev: ThreeGroupAttributes): ThreeGroupAttributes {
+  combine1(prev: LazyTransitions): LazyTransitions {
     const current = this.get3DGroupAttributes();
-    const result = new ThreeGroupAttributes();
-    result.lazyTransitions = (current.lazyTransitions.combine(prev.lazyTransitions));
-    return result;
+    return current.combine(prev);
   }
 
-  private get3DGroupAttributes(): ThreeGroupAttributes {
-    const result = new ThreeGroupAttributes();
+  private get3DGroupAttributes(): LazyTransitions {
     if(this.action.actionType === 'move') {
-      result.lazyTransitions = this.move([0, 0, 0], this.action.absolutePosition);
+      return this.move([0, 0, 0], this.action.absolutePosition);
     }
     if(this.action.actionType === 'rotate and rise') {
-      result.lazyTransitions = this.scale([0, 1])
+      return this.scale([0, 1])
         .combine(this.move([0, -this.action.distance, 0], [0, 0, 0]))
         .combine(this.rotateFrom([0, -360, 0]));
     }
     if(this.action.actionType === 'ocillate') {
-      result.lazyTransitions = this.ocillate(this.action.delta);
+      return this.ocillate(this.action.delta);
     }
     if(this.action.actionType === 'camera zoom in'){
-      result.lazyTransitions =  this.cameraZoomIn(this.action.distance);
+      return  this.cameraZoomIn(this.action.distance);
     }
     if(this.action.actionType === 'camera look at'){
-      result.lazyTransitions =  this.cameraLookAt(this.action.absolutePosition);
+      return  this.cameraLookAt(this.action.absolutePosition);
     }
     if(this.action.actionType === '3d rotate'){
-      result.lazyTransitions =  this.rotate(this.action.totalRotation);
+      return  this.rotate(this.action.totalRotation);
     }
 
-    return result;
+    return new LazyTransitions();
   }
 
 }
