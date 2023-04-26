@@ -3,14 +3,14 @@ import React, {useEffect} from 'react';
 import { useAnimationContext } from '../hooks/useAnimationContext';
 
 export const ThreeAnimationEffect: React.FC<{
-	id: string,
+	actor: string,
 	cameraDistance: number,
 	lookAtY?: number
 	cameraY?: number
   children: React.ReactNode;
-}> = ({id, cameraDistance, lookAtY, cameraY, children, }) => {
+}> = ({actor, cameraDistance, lookAtY, cameraY, children, }) => {
 	const animationContextWrapper = useAnimationContext();
-	const { scale, position, rotation, lookAtD, cameraDistanceD } = animationContextWrapper.get3DGroupAttributes(id);
+	const { scale, position, rotation, lookAtD, cameraDistanceD } = animationContextWrapper.get3DGroupAttributes(actor);
 
 
 	// Place a camera and set the distance to the object.

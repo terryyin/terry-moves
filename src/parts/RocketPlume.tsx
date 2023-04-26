@@ -12,7 +12,6 @@ export const RocketPlume: React.FC<{
   scale: number,
   actor: string,
 }> = ({position, scale, actor}) => {
-
   return (
     <GroupInitialState rotation={[Math.PI, 0, 0]} position={position} scale={scale}>
       <AnimatedGlb url={url} actor={actor} />

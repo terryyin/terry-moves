@@ -119,7 +119,7 @@ export const StoryFailureVsFailure: React.FC = () => {
 							intensity={200}
 							color={0xffffff}
 						/>	
-            <ThreeAnimationEffect id="starship" cameraDistance={30} lookAtY={16} cameraY={10}>
+            <ThreeAnimationEffect actor="starship" cameraDistance={30} lookAtY={16} cameraY={10}>
               <Starship/>
               <StarshipPlume/>
               <GroupInitialState position={[0, 0, 0]} scale={0.2} >

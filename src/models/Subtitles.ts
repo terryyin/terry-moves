@@ -48,6 +48,7 @@ export interface ThreeDAnimationAction extends BaseAction {
   speed: number;
   percentage?: number;
   pauseAtEnd?: boolean;
+  freezeBeforeStart?: boolean;
 }
 
 export type Action = ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;

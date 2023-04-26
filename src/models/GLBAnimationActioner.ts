@@ -64,6 +64,10 @@ export default class GLBAnimationActioner {
     if (this.effectCalculator.isAfter() && action.pauseAtEnd) {
       return action.duration * percentage / 100 * action.speed;
     }
+
+    if (action.freezeBeforeStart) {
+      return 0;
+    }
   }
 
 }

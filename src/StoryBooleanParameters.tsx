@@ -5,18 +5,15 @@ import { Subtitle } from './models/Subtitles';
 import { AbsoluteFill } from 'remotion';
 import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
-import { Starship } from './parts/Starship';
 import { ThreeDFrame } from './video_components/ThreeDFrame';
 import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
-import { StarshipPlume } from './parts/StarshipPlume';
-import { Explosion } from './parts/Explosion';
-import { GroupInitialState } from './video_components/GroupInitialState';
 import { OddeLogo } from './parts/OddeLogo';
 import { OddeLogoInner } from './parts/OddeLogoInner';
 import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 import { Story } from './video_components/Story';
 import { ProblemDomain } from './parts/ProblemDomain';
 import { TypingText } from './video_components/TypingText';
+import { Blaster } from './parts/Blaster';
 
 const subtitles: Subtitle[] = [
 	{
@@ -42,6 +39,7 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "gun.action(true); and gun.action(false);",
 			actions: [
+			  { actor: "blaster", actionType: "3d animation start", duration: 1, speed: 1, pauseAtEnd: true, freezeBeforeStart: true },
 					// { actor: "example1", actionType: "highlight", duration: 2 },
 			],
 	},
@@ -124,15 +122,11 @@ export const StoryBooleanParameters: React.FC = () => {
 						<directionalLight
 							castShadow
 							position={[50, 100, 50]}
-							intensity={200}
+							intensity={15}
 							color={0xffffff}
 						/>	
-            <ThreeAnimationEffect id="starship" cameraDistance={30} lookAtY={16} cameraY={10}>
-              <Starship/>
-              <StarshipPlume/>
-              <GroupInitialState position={[0, 0, 0]} scale={0.2} >
-                <Explosion actor="explosion" />
-							</GroupInitialState>
+            <ThreeAnimationEffect actor="blaster1" cameraDistance={8} lookAtY={0} cameraY={0}>
+              <Blaster actor="blaster"/>
             </ThreeAnimationEffect>
           </ThreeDFrame>
       </AbsoluteFill>
