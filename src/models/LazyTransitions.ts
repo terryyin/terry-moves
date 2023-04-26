@@ -128,13 +128,14 @@ export default class LazyTransitions {
     const interpolateRanges = this.interpolateRanges.get(field);
     const result: number[] = []
     if(!interpolateRanges || interpolateRanges.length === 0) return result;
-    let prev: InterpolateRangesNonOcillate | undefined;
+    let prev: number | undefined;
     let current = interpolateRanges[0];
     for(let i = 0; i < interpolateRanges.length; i++) {
       if(frame >= interpolateRanges[i].inputRange[0]) {
-        const prevAny = interpolateRanges[i - 1];
-        if(i > 0 && prevAny.interpolateType !== 'ocillate') prev = prevAny;
         current = interpolateRanges[i];
+        const prevAny = interpolateRanges[i - 1];
+        if(i > 0 && frame >= prevAny.inputRange[prevAny.inputRange.length - 1] 
+          && prevAny.interpolateType !== 'ocillate') prev = prevAny.outputRange[prevAny.outputRange.length - 1];
         if(frame < current.inputRange[current.inputRange.length - 1]) {
           result.push(this.getInterpolateValue(frame, fps, prev, current));
         }
@@ -147,7 +148,7 @@ export default class LazyTransitions {
     return result;
   }
 
-  private getInterpolateValue (frame: number, fps: number, prev: InterpolateRangesNonOcillate | undefined, current: InterpolateRanges): number {
+  private getInterpolateValue (frame: number, fps: number, prev: number | undefined, current: InterpolateRanges): number {
     const effectCalculator: EffectCalculator = new EffectCalculator(
       (current.inputRange[current.inputRange.length - 1] - current.inputRange[0]) / fps,
       current.inputRange[0] /fps,
@@ -156,12 +157,13 @@ export default class LazyTransitions {
     );
 
     if(current.interpolateType === 'ocillate') {
-		  return -Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * current.distance;
+		  const result = -Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * current.distance;
+      return result + (prev ?? 0);
     }
 
     const outputRange = [...current.outputRange];
     if(prev) {
-      outputRange[0] = prev.outputRange[prev.outputRange.length - 1];
+      outputRange[0] = prev;
     }
 
     if(current.interpolateType === 'spring') return effectCalculator.interpolateSpring(outputRange);

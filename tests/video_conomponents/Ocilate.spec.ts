@@ -41,6 +41,7 @@ describe('AnimationContext', () => {
 			{sec: 1, expectPosition: [0, 0, 0],   },
 			{sec: 1.2, expectPosition: [-0.4759874630812576, -1.902113032590307, -2.8531695488854605],   },
 			{sec: 2, expectPosition: [0.9969808363488774, 0, 0],   },
+			{sec: 2.5, expectPosition: [0.9999201252394067, 0, 0],   },
 		].forEach(({sec, expectPosition, }) => {
 			test(`test sec: ${sec}`, () => {
 				const animationContext = makeMe.animationContext
@@ -72,4 +73,42 @@ describe('AnimationContext', () => {
 			});
 		});
 	});
+
+	describe('moving with occillating', () => {
+		[
+			{sec: 0, expectX:  0,  },
+			{sec: 1, expectX: 0,   },
+			{sec: 1.2, expectX: -0.4759874630812576,   },
+			{sec: 2, expectX: 1.0000000000000002,   },
+			{sec: 2.1, expectX: 1.0000000000000002,   },
+		].forEach(({sec, expectX, }) => {
+			test(`test sec: ${sec}`, () => {
+				const animationContext = makeMe.animationContext
+					.withSubtitle({
+						leadingBlank: 1,
+						duration: 1,
+						text: 'First subtitle.',
+						actions: [
+              {
+								actor: 'under-test',
+								actionType: 'move',
+								duration: 1,
+								absolutePosition: [1, 0, 0],
+							},
+							{
+								actor: 'under-test',
+								actionType: 'ocillate',
+								duration: 1,
+								delta: [1, 2, 3],
+							},							
+						],
+					})
+					.seconds(sec)
+					.please();
+				const result = animationContext.get3DGroupAttributes('under-test');
+				expect(result.position.x).toBe(expectX);
+			});
+		});
+	});
+
 });

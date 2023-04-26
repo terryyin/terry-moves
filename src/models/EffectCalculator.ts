@@ -30,7 +30,7 @@ export default class EffectCalculator {
   }
 
   timeWithIn(): number {
-    return Math.max(0, (this.frame - this.startFrame) / this.fps);
+    return Math.min(this.durationInFrames / this.fps, Math.max(0, (this.frame - this.startFrame) / this.fps));
   }
 
   isAfter(): boolean {
