@@ -133,6 +133,10 @@ export default class LazyTransitions {
     return style;
   }
 
+  getTextReveal(adjustedFrame: number, fps: number): { textPart: string; } {
+    return { textPart:`${adjustedFrame}, ${fps}, 'text')}` };
+  }
+
   private getAddingInterpolate(frame: number, fps: number, field: InterpolateFields): number | undefined {
     return this.reduceInterpolate(frame, fps, field, (a, b) => a + b, 0);
   }
