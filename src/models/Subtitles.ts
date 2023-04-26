@@ -9,7 +9,7 @@ export interface BaseAction {
 
 export interface ScaleAction extends BaseAction {
   actionType: 'scale';
-  outputRange: number[];
+  outputRange: [number, number];
 }
 
 export interface AppearAction extends BaseAction {
