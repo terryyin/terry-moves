@@ -64,6 +64,10 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "class Gun { action(isLoad) { this.fire(); if(isLoad) this.load(); }}",
 			actions: [
+			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.2, totalRotation: [-60, 45, 30]},
+			  { actor: "blaster fire", actionType: "3d animation start", duration: 1, speed: 2, offset: 1 },
+			  { actor: "blaster assembly", actionType: "move", duration: 0.2, absolutePosition: [0.5, 0, 0], offset: 1},
+			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 1.4},
 					// { actor: "example2", actionType: "highlight", duration: 2 },
 			],
 	},
@@ -137,7 +141,7 @@ export const StoryBooleanParameters: React.FC = () => {
             <ThreeAnimationEffect actor="blaster assembly" cameraDistance={8} lookAtY={0} cameraY={0}>
 								<Blaster actor="blaster"/>
 								<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
-								<RocketPlume actor="blaster fire" position={[0, -3, -0.8]} scale={1.8}/>
+								<RocketPlume actor="blaster fire" position={[-0.6, -3, 0.3]} scale={1.8}/>
 								</GroupInitialState>
             </ThreeAnimationEffect>
 						</GroupInitialState>
