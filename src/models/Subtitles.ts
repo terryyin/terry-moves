@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-export type ActionType = 'move' | 'appear' | 'disappear' | 'rotate and rise' | '3d ocillating' | '3d camera move' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'ocillate' | '3d camera move' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -17,7 +17,7 @@ export interface AppearAction extends BaseAction {
 }
 
 export interface ThreeDUnitAction extends BaseAction {
-  actionType: 'move' | '3d camera move' | '3d ocillating';
+  actionType: 'move' | '3d camera move' | 'ocillate';
   distances: number | Vector2 | Vector3;
 }
 

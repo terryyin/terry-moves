@@ -75,7 +75,7 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
     if(this.action.actionType === 'rotate and rise') {
       result.lazyTransitions = this.move([0, -this.action.distance, 0], [0, 0, 0]);
     }
-    if(this.action.actionType === '3d ocillating') {
+    if(this.action.actionType === 'ocillate') {
       result.lazyTransitions = this.ocillate(this.action.distances);
     }
 
