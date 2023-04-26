@@ -15,6 +15,7 @@ import { ProblemDomain } from './parts/ProblemDomain';
 import { TypingText } from './video_components/TypingText';
 import { Blaster } from './parts/Blaster';
 import { GroupInitialState } from './video_components/GroupInitialState';
+import { RocketPlume } from './parts/RocketPlume';
 
 const subtitles: Subtitle[] = [
 	{
@@ -52,6 +53,9 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "The implementation might look like this:",
 			actions: [
+			  { actor: "blaster fire", actionType: "3d animation start", duration: 1, speed: 2 },
+			  { actor: "blaster assembly", actionType: "move", duration: 0.2, absolutePosition: [0.5, 0, 0]},
+			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.4},
 					{ actor: "example2", actionType: "appear", duration: 1 },
 			],
 	},
@@ -109,7 +113,7 @@ const subtitles: Subtitle[] = [
 export const StoryBooleanParameters: React.FC = () => {
   return (
 		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={subtitles}  >
-    <AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: 'Roboto, sans-serif', }}>
+    <AbsoluteFill style={{ backgroundColor: '#220011', fontFamily: 'Roboto, sans-serif', }}>
 			<AbsoluteFill style={{ left: '10%', top: '2%', width: '70%', height: '100%'}}>
 				<AnimationEffect actor="problem domain">
 						<AnimationEffect actor="success">
@@ -132,6 +136,9 @@ export const StoryBooleanParameters: React.FC = () => {
 						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 4, 0]} scale={1}>
             <ThreeAnimationEffect actor="blaster assembly" cameraDistance={8} lookAtY={0} cameraY={0}>
 								<Blaster actor="blaster"/>
+								<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
+								<RocketPlume actor="blaster fire" position={[0, -3, -0.8]} scale={1.8}/>
+								</GroupInitialState>
             </ThreeAnimationEffect>
 						</GroupInitialState>
           </ThreeDFrame>
