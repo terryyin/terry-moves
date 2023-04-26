@@ -30,6 +30,23 @@ export default abstract class DivBaseActioner {
 				outputRange: [from[index], vector[index]],
 			});
 		});
+
 		return result;
 	}
+
+	protected ocillate(distances: number | Vector3 | Vector2): LazyTransitions {
+		const result = new LazyTransitions();
+		const vector: [number, number, number] = toVector3(distances);
+
+		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key, index) => {
+			result.setInterpolation(key, {
+				ocillate: true,
+				inputRange: this.effectCalculator.frameRange,
+				outputRange: [0, vector[index]],
+			});
+		});
+		return result;
+	}
+
+
 }

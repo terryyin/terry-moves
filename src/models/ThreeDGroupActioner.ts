@@ -1,4 +1,4 @@
-import { ThreeDRotateAction, ThreeDUnitAction } from './Subtitles';
+import { ThreeDRotateAction } from './Subtitles';
 import * as THREE from 'three';
 import { toVector3 } from './DivActioner';
 import LazyTransitions from './LazyTransitions';
@@ -57,14 +57,13 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
   }
 
   private get3DGroupAttributes(): ThreeGroupAttributes {
-    const translateY = this.getThreeTranslateY();
     const rotateY = this.getThreeRotateY();
     const scale = this.getThreeScale();
     const lookAtYd = this.getLookAtYd();
     const cameraDistanceD = this.getCameraDistanceD();
 
     const result = new ThreeGroupAttributes({
-      position: new THREE.Vector3(0, translateY, 0),
+      position: new THREE.Vector3(0, 0, 0),
       scale,
       rotation: new THREE.Euler(0, rotateY, 0),
       lookAtYd,
@@ -76,24 +75,11 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
     if(this.action.actionType === 'rotate and rise') {
       result.lazyTransitions = this.move([0, -this.action.distance, 0], [0, 0, 0]);
     }
+    if(this.action.actionType === '3d ocillating') {
+      result.lazyTransitions = this.ocillate(this.action.distances);
+    }
 
     return result;
-  }
-
-  private getThreeTranslateY(): number {
-    switch(this.action.actionType) {
-      case '3d ocillating':
-        return this.getOcillatingY(this.action as ThreeDUnitAction);
-      default:
-        return 0;
-    }
-  }
-
-  private getOcillatingY(action: ThreeDUnitAction): number {
-    if (!this.effectCalculator.withInDuration()) {
-      return 0;
-    }
-    return -Math.sin(this.effectCalculator.timeWithIn() * Math.PI * 2) * toVector3(action.distances)[1];
   }
 
   private getCameraDistanceD(): number {

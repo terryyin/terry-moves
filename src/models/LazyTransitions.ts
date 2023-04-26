@@ -5,6 +5,7 @@ import EffectCalculator from './EffectCalculator';
 
 type InterpolateRanges = {
   spring?: boolean;
+  ocillate?: boolean;
   inputRange: number[];
   outputRange: number[];
 }
@@ -117,6 +118,12 @@ export default class LazyTransitions {
       frame,
       fps
     );
+
+    if(current.ocillate) {
+      console.log("asdfadfa")
+		  return -Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * outputRange[1];
+    }
+
     if(current.spring) return effectCalculator.interpolateSpring(outputRange);
     return effectCalculator.interpolateDuration(outputRange);
   }
