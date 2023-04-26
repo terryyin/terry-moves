@@ -6,9 +6,9 @@ describe('AnimationContext', () => {
 		[
 			{sec: 0, expectPlaying: "scale(0.5) translateX(0px) translateY(0px)",  },
 			{sec: 1, expectPlaying: "scale(0.5) translateX(0px) translateY(0px)",   },
-			{sec: 1.1, expectPlaying: "scale(0.55) translateX(0.05px) translateY(0.1px)", },
-			{sec: 2.1, expectPlaying: "scale(1) translateX(0.5px) translateY(1px)",},
-			{sec: 3.1, expectPlaying: "scale(1.1) translateX(0.55px) translateY(1.1px)",},
+			{sec: 1.1, expectPlaying: "scale(0.55) translateX(0.0956039322945006px) translateY(0.1912078645890012px)", },
+			{sec: 2.1, expectPlaying: "scale(1) translateX(0.49926140793203216px) translateY(0.9985228158640643px)",},
+			{sec: 3.1, expectPlaying: "scale(1.1) translateX(0.5956039322945006px) translateY(1.1912078645890012px)",},
 		].forEach(({sec, expectPlaying, }) => {
 			test(`test sec: ${sec}`, () => {
 				const animationContext = makeMe.animationContext

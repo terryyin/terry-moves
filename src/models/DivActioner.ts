@@ -1,4 +1,4 @@
-import {ScaleAction, ThreeDUnitAction} from './Subtitles';
+import { ScaleAction } from './Subtitles';
 import LazyTransitions from './LazyTransitions';
 import DivBaseActioner from './DivBaseActioner';
 import { Vector2, Vector3 } from '@react-three/fiber';
@@ -43,21 +43,6 @@ export default class DivActioner extends DivBaseActioner {
 		result.setOpacityInterpolation({
 			inputRange: this.effectCalculator.frameRange,
 			outputRange,
-		});
-		return result;
-	}
-
-	private move(action: ThreeDUnitAction): LazyTransitions {
-		const result = new LazyTransitions();
-		const vector: [number, number, number] = toVector3(action.distances);
-
-		result.setTranslateXInterpolation({
-			inputRange: this.effectCalculator.frameRange,
-			outputRange: [0, vector[0]],
-		});
-		result.setTranslateYInterpolation({
-			inputRange: this.effectCalculator.frameRange,
-			outputRange: [0, vector[1]],
 		});
 		return result;
 	}

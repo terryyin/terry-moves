@@ -89,23 +89,6 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
     }
   }
 
-	private move(action: ThreeDUnitAction): LazyTransitions {
-		const result = new LazyTransitions();
-		const vector: [number, number, number] = toVector3(action.distances);
-
-		result.setTranslateXInterpolation({
-      spring: true,
-			inputRange: this.effectCalculator.frameRange,
-			outputRange: [0, vector[0]],
-		});
-		result.setTranslateYInterpolation({
-      spring: true,
-			inputRange: this.effectCalculator.frameRange,
-			outputRange: [0, vector[1]],
-		});
-		return result;
-	}
-
   private getOcillatingY(action: ThreeDUnitAction): number {
     if (!this.effectCalculator.withInDuration()) {
       return 0;
