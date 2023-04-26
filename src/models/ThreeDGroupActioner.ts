@@ -10,38 +10,20 @@ export type ThreeGroupAttributesOld = {
   cameraDistanceD: number;
 }
 
-const combineOld = (prev: ThreeGroupAttributesOld, current: ThreeGroupAttributesOld): ThreeGroupAttributesOld =>{
-  return {
-    scale: prev.scale * current.scale,
-    position: prev.position.clone().add(current.position),
-    rotation: new THREE.Euler(prev.rotation.x + current.rotation.x, prev.rotation.y + current.rotation.y, prev.rotation.z + current.rotation.z),
-    lookAtD: prev.lookAtD.clone().add(current.lookAtD),
-    cameraDistanceD: current.cameraDistanceD + prev.cameraDistanceD,
-  }
-};
-
 class ThreeGroupAttributes {
   lazyTransitions: LazyTransitions;
-  old: ThreeGroupAttributesOld;
 
-  constructor(old: ThreeGroupAttributesOld) {
-    this.old = old;
+  constructor() {
     this.lazyTransitions = new LazyTransitions();
   }
 
   get3DGroupAttributes(adjustedFrame: number, fps: number): ThreeGroupAttributesOld {
-    return combineOld(this.old, this.lazyTransitions.get3DGroupAttributes(adjustedFrame, fps));
+    return this.lazyTransitions.get3DGroupAttributes(adjustedFrame, fps);
   }
 }
 
 export default class ThreeDGroupActioner extends DivBaseActioner {
-  static defaultValue: ThreeGroupAttributes = new ThreeGroupAttributes({
-    scale: 1,
-    position: new THREE.Vector3(0, 0, 0),
-    rotation: new THREE.Euler(0, 0, 0),
-    lookAtD: new THREE.Vector3(0, 0, 0),
-    cameraDistanceD: 0,
-  });
+  static defaultValue: ThreeGroupAttributes = new ThreeGroupAttributes();
 
   protected getStyle(): LazyTransitions {
     throw new Error('Method not implemented.');
@@ -49,19 +31,13 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
 
   combine1(prev: ThreeGroupAttributes): ThreeGroupAttributes {
     const current = this.get3DGroupAttributes();
-    const result = new ThreeGroupAttributes(combineOld(prev.old, current.old));
+    const result = new ThreeGroupAttributes();
     result.lazyTransitions = (current.lazyTransitions.combine(prev.lazyTransitions));
     return result;
   }
 
   private get3DGroupAttributes(): ThreeGroupAttributes {
-    const result = new ThreeGroupAttributes({
-      position: new THREE.Vector3(0, 0, 0),
-      scale: 1,
-      rotation: new THREE.Euler(0, 0, 0),
-      lookAtD: new THREE.Vector3(0, 0, 0),
-      cameraDistanceD: 0,
-    });
+    const result = new ThreeGroupAttributes();
     if(this.action.actionType === 'move') {
       result.lazyTransitions = this.move([0, 0, 0], this.action.absolutePosition);
     }
