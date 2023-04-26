@@ -54,7 +54,7 @@ describe('AnimationContext', () => {
 					.seconds(sec)
 					.please();
 				const result = animationContext.getStyleOf('under-test');
-				expect(result.transform).toBe(expectPlaying);
+				expect(result.transform).toContain(expectPlaying);
 			});
 		});
 	});

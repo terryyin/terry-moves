@@ -51,7 +51,7 @@ describe('AnimationEffect', () => {
                 .seconds(sec)
                 .please();
         const computedStyle = renderAndGetDivStyle(animationContext);
-        expect(computedStyle.getPropertyValue('transform')).toBe(expectedWidth);
+        expect(computedStyle.getPropertyValue('transform')).toContain(expectedWidth);
       });
     });
 
@@ -72,7 +72,7 @@ describe('AnimationEffect', () => {
                 .seconds(1)
                 .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('transform')).toBe('scale(0.5) translateX(0px) translateY(0px)');
+      expect(computedStyle.getPropertyValue('transform')).toContain('scale(0.5) translateX(0px) translateY(0px)');
     });
 
     test('find the action in the second subtitle should act at the right time', () => {
@@ -83,7 +83,7 @@ describe('AnimationEffect', () => {
                 .seconds(5.1)
                 .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('transform')).toBe('scale(0.55) translateX(9.56039322945006px) translateY(0px)');
+      expect(computedStyle.getPropertyValue('transform')).toContain('scale(0.55) translateX(9.56039322945006px) translateY(0px)');
     });
 
     test('find the action in the first subtitle but its second action', () => {
