@@ -22,7 +22,7 @@ interface InterpolateRangesNonOcillate extends InterpolateRangesBase {
 
 type InterpolateRanges = InterpolateRangesNonOcillate | InterpolateRangesOcillate;
 
-export type InterpolateFields = 'cameraLookAtX' | 'cameraLookAtY' | 'cameraLookAtY' | 'opacity' | 'scale' | 'translateY' | 'translateX' | 'translateZ' | 'cameraDistanceD';
+export type InterpolateFields = 'rotationX' | 'rotationY' | 'rotationZ' | 'cameraLookAtX' | 'cameraLookAtY' | 'cameraLookAtY' | 'opacity' | 'scale' | 'translateY' | 'translateX' | 'translateZ' | 'cameraDistanceD';
 
 export default class LazyTransitions {
   interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
@@ -39,7 +39,7 @@ export default class LazyTransitions {
 
   combine(prev: LazyTransitions): LazyTransitions {
     const combinedStyle = new LazyTransitions();
-    (['cameraLookAtX', 'cameraLookAtY', 'cameraLookAtY', 'opacity', 'scale', 'translateX', 'translateY', 'translateZ', 'cameraDistanceD'] as InterpolateFields[]).forEach((key) => {
+    (['rotationX', 'rotationY', 'rotationZ', 'cameraLookAtX', 'cameraLookAtY', 'cameraLookAtY', 'opacity', 'scale', 'translateX', 'translateY', 'translateZ', 'cameraDistanceD'] as InterpolateFields[]).forEach((key) => {
       const combined = [...prev.interpolateRanges.get(key) || [], ...this.interpolateRanges.get(key) || []];
       combinedStyle.interpolateRanges.set(key, combined);
     });
@@ -99,10 +99,18 @@ export default class LazyTransitions {
       }
     });
 
+    const rotation = [0, 0, 0];
+    (['rotationX', 'rotationY', 'rotationZ'] as InterpolateFields[]).forEach((key, index) => {
+      const translate = this.getAddingInterpolate(frame, fps, key);
+      if (translate !== undefined) {
+        rotation[index] = translate;
+      }
+    });
+
     const result: ThreeGroupAttributesOld = {
       scale: scale ?? 1,
       position: new THREE.Vector3(position[0], position[1], position[2]),
-      rotation: new THREE.Euler(0, 0, 0),
+      rotation: new THREE.Euler(rotation[0], rotation[1], rotation[2]),
       lookAtD: new THREE.Vector3(cameraLookAt[0], cameraLookAt[1], cameraLookAt[2]),
       cameraDistanceD: cameraDistanceD ?? 0,
     };
