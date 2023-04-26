@@ -1,6 +1,9 @@
 import './global.css';
 
+
 import React from 'react';
+import {Highlight, themes} from 'prism-react-renderer';
+
 import { Subtitle } from './models/Subtitles';
 import { AbsoluteFill } from 'remotion';
 import { Subtitles } from './video_components/Subtitles';
@@ -11,7 +14,6 @@ import { OddeLogo } from './parts/OddeLogo';
 import { OddeLogoInner } from './parts/OddeLogoInner';
 import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 import { Story } from './video_components/Story';
-import { ProblemDomain } from './parts/ProblemDomain';
 import { TypingText } from './video_components/TypingText';
 import { Blaster } from './parts/Blaster';
 import { GroupInitialState } from './video_components/GroupInitialState';
@@ -113,21 +115,26 @@ const subtitles: Subtitle[] = [
 	},
 ];
 
+const codeString = `class Gun {
+  action(isLoad) {
+    if(isLoad) {
+      this.load();
+    }
+    this.fire();
+  }
+
+  fire() {
+    // ...
+  }
+  private load() {
+    // ...
+  }
+}`;
 
 export const StoryBooleanParameters: React.FC = () => {
   return (
 		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={subtitles}  >
     <AbsoluteFill style={{ backgroundColor: '#220011', fontFamily: 'Roboto, sans-serif', }}>
-			<AbsoluteFill style={{ left: '10%', top: '2%', width: '70%', height: '100%'}}>
-				<AnimationEffect actor="problem domain">
-						<AnimationEffect actor="success">
-					<AbsoluteFill style={{ left: '75%', top: '45%', width: '10%', height: '10%'}}>
-						<span style={{fontSize: "30px", fontWeight: "bolder", color: "#228800"}}>SUCCESS</span>
-					</AbsoluteFill>
-						</AnimationEffect>
-					<ProblemDomain />
-				</AnimationEffect>
-			</AbsoluteFill>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
           <ThreeDFrame >
@@ -148,6 +155,21 @@ export const StoryBooleanParameters: React.FC = () => {
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
+    <AnimationEffect actor="callee" style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}>
+		<Highlight code={codeString.trim()} language="javascript" theme={themes.vsDark}>
+        {({ className, style, tokens, getLineProps, getTokenProps }) => (
+          <pre className={className} style={{fontSize: "1.4rem", ...style}}>
+            {tokens.map((line, i) => (
+              <div {...getLineProps({ line, key: i })}>
+                {line.map((token, key) => (
+                  <span {...getTokenProps({ token, key })} />
+                ))}
+              </div>
+            ))}
+          </pre>
+        )}
+      </Highlight>
+		</AnimationEffect>
     <AnimationEffect actor="subtitles" >
 			<Subtitles scale={1.5} />
 			</AnimationEffect>
