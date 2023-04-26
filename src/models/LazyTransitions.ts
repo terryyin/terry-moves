@@ -46,7 +46,7 @@ export default class LazyTransitions {
 
   combine(prev: LazyTransitions): LazyTransitions {
     const combinedStyle = new LazyTransitions();
-    (['rotationX', 'rotationY', 'rotationZ', 'cameraLookAtX', 'cameraLookAtY', 'cameraLookAtY', 'opacity', 'scale', 'translateX', 'translateY', 'translateZ', 'cameraDistanceD'] as InterpolateFields[]).forEach((key) => {
+    (['textReveal', 'rotationX', 'rotationY', 'rotationZ', 'cameraLookAtX', 'cameraLookAtY', 'cameraLookAtY', 'opacity', 'scale', 'translateX', 'translateY', 'translateZ', 'cameraDistanceD'] as InterpolateFields[]).forEach((key) => {
       const combined = [...prev.interpolateRanges.get(key) || [], ...this.interpolateRanges.get(key) || []];
       combinedStyle.interpolateRanges.set(key, combined);
     });
@@ -133,8 +133,8 @@ export default class LazyTransitions {
     return style;
   }
 
-  getTextReveal(adjustedFrame: number, fps: number): { textPart: string; } {
-    return { textPart:`${adjustedFrame}, ${fps}, 'text')}` };
+  getTextReveal(adjustedFrame: number, fps: number): { progress: number; } {
+    return { progress: this.getAddingInterpolate(adjustedFrame, fps, 'textReveal') ?? 0 };
   }
 
   private getAddingInterpolate(frame: number, fps: number, field: InterpolateFields): number | undefined {
