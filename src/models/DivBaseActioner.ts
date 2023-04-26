@@ -76,9 +76,17 @@ export default abstract class DivBaseActioner {
   }
 
 	protected rotate(rotation: [number, number, number]): LazyTransitions {
+		return this.rotateFromTo([0, 0, 0], rotation);
+	}
+
+	protected rotateFrom(rotation: [number, number, number]): LazyTransitions {
+		return this.rotateFromTo(rotation, [0, 0, 0]);
+	}
+
+	private rotateFromTo(from: [number, number, number], to: [number, number, number]): LazyTransitions {
     const result = new LazyTransitions();
 		(['rotationX', 'rotationY', 'rotationZ'] as InterpolateFields[]).forEach((key, index) => {
-      result.setInterpolation(key, {interpolateType: 'linear', inputRange: this.effectCalculator.frameRange, outputRange: [0, Math.PI * rotation[index]/180]});
+      result.setInterpolation(key, {interpolateType: 'spring', inputRange: this.effectCalculator.frameRange, outputRange: [Math.PI * from[index]/180, Math.PI * to[index]/180]});
 		});
     return result;
 	}
