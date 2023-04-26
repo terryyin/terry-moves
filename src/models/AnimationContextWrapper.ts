@@ -53,7 +53,7 @@ export default class AnimationContextWrapper {
       .get3DGroupAttributes(this.adjustedFrame, this.script.fps);
   }
 
-  getTextReveal(actor: string): { progress: number; } {
+  getTextReveal(actor: string): TextReveal {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)

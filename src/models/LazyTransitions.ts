@@ -2,6 +2,11 @@ import { CSSProperties } from 'react';
 import * as THREE from 'three';
 import EffectCalculator from './EffectCalculator';
 
+export type TextReveal = {
+  progress: number;
+  cursorShow: boolean;
+};
+
 export type ThreeGroupAttributesOld = {
   scale: number;
   position: THREE.Vector3;
@@ -133,8 +138,11 @@ export default class LazyTransitions {
     return style;
   }
 
-  getTextReveal(adjustedFrame: number, fps: number): { progress: number; } {
-    return { progress: this.getAddingInterpolate(adjustedFrame, fps, 'textReveal') ?? 0 };
+  getTextReveal(adjustedFrame: number, fps: number): TextReveal {
+    return {
+      progress: this.getAddingInterpolate(adjustedFrame, fps, 'textReveal') ?? 0,
+      cursorShow: adjustedFrame / fps % 1 < 0.5,
+    };
   }
 
   private getAddingInterpolate(frame: number, fps: number, field: InterpolateFields): number | undefined {

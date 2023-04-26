@@ -56,7 +56,7 @@ export default class DivActioner extends DivBaseActioner {
 		result.setInterpolation('textReveal', {
 			interpolateType: 'linear',
 			inputRange: this.effectCalculator.frameRange,
-			outputRange: [0, 1],
+			outputRange: [0, 1.05],
 		});
 		return result;
 	}

@@ -25,7 +25,7 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "Welcome to our video on why boolean parameters are bad.",
 			actions: [
-					{ actor: "second title", actionType: "type", duration: 2, text: "Seeking for High Cohesion, Loose Coupling Design" },
+					{ actor: "second title", actionType: "type", duration: 3, text: "Seeking for High Cohesion, Loose Coupling Design" },
 			],
 	},
 	{
