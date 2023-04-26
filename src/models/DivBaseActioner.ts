@@ -19,19 +19,19 @@ export default abstract class DivBaseActioner {
 
   protected abstract getStyle(): LazyTransitions;
 
-	protected move(distances: number | Vector2 | Vector3): LazyTransitions {
+	protected move(from: [number, number, number], distances: number | Vector2 | Vector3): LazyTransitions {
 		const result = new LazyTransitions();
 		const vector: [number, number, number] = toVector3(distances);
 
 		result.setTranslateXInterpolation({
       spring: true,
 			inputRange: this.effectCalculator.frameRange,
-			outputRange: [0, vector[0]],
+			outputRange: [from[0], vector[0]],
 		});
 		result.setTranslateYInterpolation({
       spring: true,
 			inputRange: this.effectCalculator.frameRange,
-			outputRange: [0, vector[1]],
+			outputRange: [from[1], vector[1]],
 		});
 		return result;
 	}

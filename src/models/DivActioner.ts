@@ -24,7 +24,7 @@ export default class DivActioner extends DivBaseActioner {
 			case 'scale':
 				return this.getScaleStyle(this.action);
 			case 'move':
-				return this.move(this.action.distances);
+				return this.move([0, 0, 0], this.action.distances);
 			case 'appear':
 				return this.getAppearStyle([0, 1]);
 			case 'disappear':

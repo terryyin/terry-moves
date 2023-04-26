@@ -71,12 +71,14 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
       cameraDistanceD,
     });
     if(this.action.actionType === '3d move') {
-      result.lazyTransitions = this.move(this.action.distances);
+      result.lazyTransitions = this.move([0, 0, 0], this.action.distances);
     }
+    // If(this.action.actionType === 'rotate and rise') {
+    //   result.lazyTransitions = this.move(this.action.distances);
+    // }
 
     return result;
   }
- 
 
   private getThreeTranslateY(): number {
     switch(this.action.actionType) {
