@@ -120,7 +120,6 @@ export default class LazyTransitions {
     );
 
     if(current.ocillate) {
-      console.log("asdfadfa")
 		  return -Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * outputRange[1];
     }
 
