@@ -1,6 +1,5 @@
 import { ThreeDRotateAction } from './Subtitles';
 import * as THREE from 'three';
-import { toVector3 } from './DivActioner';
 import LazyTransitions from './LazyTransitions';
 import DivBaseActioner from './DivBaseActioner';
 
@@ -8,7 +7,7 @@ export type ThreeGroupAttributesOld = {
   scale: number;
   position: THREE.Vector3;
   rotation: THREE.Euler;
-  lookAtYd: number;
+  lookAtD: THREE.Vector3;
   cameraDistanceD: number;
 }
 
@@ -17,7 +16,7 @@ const combineOld = (prev: ThreeGroupAttributesOld, current: ThreeGroupAttributes
     scale: prev.scale * current.scale,
     position: prev.position.clone().add(current.position),
     rotation: new THREE.Euler(prev.rotation.x + current.rotation.x, prev.rotation.y + current.rotation.y, prev.rotation.z + current.rotation.z),
-    lookAtYd: current.lookAtYd + prev.lookAtYd,
+    lookAtD: prev.lookAtD.clone().add(current.lookAtD),
     cameraDistanceD: current.cameraDistanceD + prev.cameraDistanceD,
   }
 };
@@ -41,7 +40,7 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
     scale: 1,
     position: new THREE.Vector3(0, 0, 0),
     rotation: new THREE.Euler(0, 0, 0),
-    lookAtYd: 0,
+    lookAtD: new THREE.Vector3(0, 0, 0),
     cameraDistanceD: 0,
   });
 
@@ -58,13 +57,12 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
 
   private get3DGroupAttributes(): ThreeGroupAttributes {
     const rotateY = this.getThreeRotateY();
-    const lookAtYd = this.getLookAtYd();
 
     const result = new ThreeGroupAttributes({
       position: new THREE.Vector3(0, 0, 0),
       scale: 1,
       rotation: new THREE.Euler(0, rotateY, 0),
-      lookAtYd,
+      lookAtD: new THREE.Vector3(0, 0, 0),
       cameraDistanceD: 0,
     });
     if(this.action.actionType === 'move') {
@@ -80,23 +78,11 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
     if(this.action.actionType === 'camera zoom in'){
       result.lazyTransitions =  this.cameraZoomIn(this.action.distance);
     }
-
-    return result;
-  }
-
-  protected cameraZoomIn(distance: number): LazyTransitions {
-    const result = new LazyTransitions();
-    result.setInterpolation('cameraDistanceD', {interpolateType: 'spring', inputRange: this.effectCalculator.frameRange, outputRange: [0, distance]});
-    return result;
-  }
-
-  private getLookAtYd(): number {
-    switch(this.action.actionType) {
-      case '3d camera move':
-        return this.effectCalculator.interpolateSpring([0, toVector3(this.action.absolutePosition)[1]]);
-      default:
-        return 0;
+    if(this.action.actionType === 'camera look at'){
+      result.lazyTransitions =  this.cameraLookAt(this.action.absolutePosition);
     }
+
+    return result;
   }
 
   private getThreeRotateY(): number {
