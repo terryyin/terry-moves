@@ -68,12 +68,18 @@ export default class LazyTransitions {
   get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributesOld {
     // Const opacity = this.getInterpolate(frame,    'opacity');
     const scale = this.getInterpolate(frame, fps,      'scale');
-    const translateX = this.getInterpolate(frame, fps, 'translateX');
-    const translateY = this.getInterpolate(frame, fps, 'translateY');
- 
+    
+    const position = [0, 0, 0];
+    (['translateX', 'translateY', 'tranlateZ'] as InterpolateFields[]).forEach((key, index) => {
+      const translate = this.getInterpolate(frame, fps, key);
+      if (translate !== undefined) {
+        position[index] = translate;
+      }
+    });
+
     const result: ThreeGroupAttributesOld = {
       scale: scale ?? 1,
-      position: new THREE.Vector3(translateX ?? 0, translateY ?? 0, 0),
+      position: new THREE.Vector3(position[0], position[1], position[2]),
       rotation: new THREE.Euler(0, 0, 0),
       lookAtYd: 0,
       cameraDistanceD: 0,
