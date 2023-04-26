@@ -56,7 +56,7 @@ export default class DivActioner extends DivBaseActioner {
 		result.setInterpolation('textReveal', {
 			interpolateType: 'linear',
 			inputRange: this.effectCalculator.frameRange,
-			outputRange: [0, 1.07],
+			outputRange: [0, 1.2], // 1.3 is a hack to simulate escape in vim.
 		});
 		return result;
 	}
