@@ -22,7 +22,7 @@ const subtitles: Subtitle[] = [
 	] },
 	{ leadingBlank: 1, duration: 3, text: 'Software products often play a', actions:[
 		{ actor: 'product', actionType: 'rotate and rise', duration: 1, distance: 4 },
-		{ actor: 'product', actionType: '3d rotate', duration: 4, totalRotation: 360 + 30 },
+		{ actor: 'product', actionType: '3d rotate', duration: 4, totalRotation: [0, 360 + 30, 0] },
 	] },
 	{ leadingBlank: 0, duration: 4, text: 'crucial role in providing services.', actions: [
 	]},
