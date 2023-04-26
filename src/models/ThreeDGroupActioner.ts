@@ -70,13 +70,13 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
       cameraDistanceD,
     });
     if(this.action.actionType === 'move') {
-      result.lazyTransitions = this.move([0, 0, 0], this.action.distances);
+      result.lazyTransitions = this.move([0, 0, 0], this.action.absolutePosition);
     }
     if(this.action.actionType === 'rotate and rise') {
       result.lazyTransitions = this.move([0, -this.action.distance, 0], [0, 0, 0]);
     }
     if(this.action.actionType === 'ocillate') {
-      result.lazyTransitions = this.ocillate(this.action.distances);
+      result.lazyTransitions = this.ocillate(this.action.delta);
     }
 
     return result;
@@ -94,7 +94,7 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
   private getLookAtYd(): number {
     switch(this.action.actionType) {
       case '3d camera move':
-        return this.effectCalculator.interpolateSpring([0, toVector3(this.action.distances)[1]]);
+        return this.effectCalculator.interpolateSpring([0, toVector3(this.action.absolutePosition)[1]]);
       default:
         return 0;
     }

@@ -16,9 +16,14 @@ export interface AppearAction extends BaseAction {
   actionType: 'appear' | 'disappear' | 'glow';
 }
 
-export interface ThreeDUnitAction extends BaseAction {
-  actionType: 'move' | '3d camera move' | 'ocillate';
-  distances: number | Vector2 | Vector3;
+export interface AbsolutePositionAction extends BaseAction {
+  actionType: 'move' | '3d camera move';
+  absolutePosition: number | Vector2 | Vector3;
+}
+
+export interface RelativePositionAction extends BaseAction {
+  actionType: 'ocillate';
+  delta: number | Vector2 | Vector3;
 }
 
 export interface OneDimensionalAction extends BaseAction {
@@ -31,7 +36,7 @@ export interface ThreeDRotateAction extends BaseAction {
   totalRotation: number;
 }
 
-export type ThreeDAction = ThreeDRotateAction | ThreeDUnitAction | OneDimensionalAction;
+export type ThreeDAction = ThreeDRotateAction | AbsolutePositionAction | OneDimensionalAction;
 
 export interface ThreeDAnimationAction extends BaseAction {
   actionType: '3d animation start' | '3d animation reverse';
@@ -40,7 +45,7 @@ export interface ThreeDAnimationAction extends BaseAction {
   pauseAtEnd?: boolean;
 }
 
-export type Action = ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction;
+export type Action = ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
 
 export type FlashBack = {
   duration: number;

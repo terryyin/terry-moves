@@ -27,7 +27,7 @@ describe('AnimationEffect', () => {
     const subtitleWithAction: Subtitle = 
       { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
         { actor: "under-test", actionType: 'scale', duration: 1, outputRange: [0.5, 1] },
-        { actor: "under-test", actionType: 'move', duration: 1, distances: 50 },
+        { actor: "under-test", actionType: 'move', duration: 1, absolutePosition: 50 },
       ] };
 
     test('default value when no action specified', () => {
