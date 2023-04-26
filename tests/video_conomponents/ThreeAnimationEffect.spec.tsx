@@ -144,7 +144,7 @@ describe('ThreeAnimationEffect', () => {
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { actor: "under-test", actionType: '3d move', duration: 1, distances: [0, 3, 0] },
         ] };
-      test.only(`3d effect, test id: ${tid}`, () => {
+      test(`3d effect, test id: ${tid}`, () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)

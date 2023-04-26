@@ -1,9 +1,8 @@
 import { ThreeDRotateAction, ThreeDUnitAction } from './Subtitles';
 import * as THREE from 'three';
-import { Action } from '@/models/Subtitles';
-import EffectCalculator from './EffectCalculator';
 import { toVector3 } from './DivActioner';
 import LazyTransitions from './LazyTransitions';
+import DivBaseActioner from './DivBaseActioner';
 
 export type ThreeGroupAttributesOld = {
   scale: number;
@@ -37,10 +36,7 @@ class ThreeGroupAttributes {
   }
 }
 
-export default class ThreeDGroupActioner {
-  action: Action;
-  effectCalculator: EffectCalculator;
-
+export default class ThreeDGroupActioner extends DivBaseActioner {
   static defaultValue: ThreeGroupAttributes = new ThreeGroupAttributes({
     scale: 1,
     position: new THREE.Vector3(0, 0, 0),
@@ -49,12 +45,11 @@ export default class ThreeDGroupActioner {
     cameraDistanceD: 0,
   });
 
-  constructor(action: Action, effectCalculator: EffectCalculator) {
-    this.effectCalculator = effectCalculator;
-    this.action = action;
+  protected getStyle(): LazyTransitions {
+    throw new Error('Method not implemented.');
   }
 
-  combine(prev: ThreeGroupAttributes): ThreeGroupAttributes {
+  combine1(prev: ThreeGroupAttributes): ThreeGroupAttributes {
     const current = this.get3DGroupAttributes();
     const result = new ThreeGroupAttributes(combineOld(prev.old, current.old));
     result.lazyTransitions = (prev.lazyTransitions.combine(current.lazyTransitions));

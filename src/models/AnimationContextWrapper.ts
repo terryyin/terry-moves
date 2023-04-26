@@ -49,7 +49,7 @@ export default class AnimationContextWrapper {
   get3DGroupAttributes(actor: string): ThreeGroupAttributesOld {
     return this.getActioner(actor)
       .map(effectCalculator => new ThreeDGroupActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
-      .reduce((prev, curr) => curr.combine(prev), ThreeDGroupActioner.defaultValue)
+      .reduce((prev, curr) => curr.combine1(prev), ThreeDGroupActioner.defaultValue)
       .get3DGroupAttributes(this.adjustedFrame, this.script.fps);
   }
 
