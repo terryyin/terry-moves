@@ -1,9 +1,8 @@
 import './global.css';
 
-import {Audio} from 'remotion'
 import React from 'react';
 import { Subtitle } from './models/Subtitles';
-import { AbsoluteFill, staticFile } from 'remotion';
+import { AbsoluteFill } from 'remotion';
 import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
 import { Starship } from './parts/Starship';
@@ -23,7 +22,7 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 4,
-			text: "Welcome to our video on why boolean parameters are bad.",
+			text: "",
 			actions: [
 					{ actor: "second title", actionType: "type", duration: 3, text: "Seeking for High Cohesion, Loose Coupling Design" },
 			],
@@ -33,6 +32,8 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "Let's look at an example of a function with a boolean parameter:",
 			actions: [
+					{ actor: "title", actionType: "disappear", duration: 1 },
+					{ actor: "subtitles", actionType: "appear", duration: 1 },
 					{ actor: "example1", actionType: "appear", duration: 1 },
 			],
 	},
@@ -106,7 +107,6 @@ const subtitles: Subtitle[] = [
 export const StoryBooleanParameters: React.FC = () => {
   return (
 		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={subtitles}  >
-		<Audio src={staticFile("assets/audios/output.mp3")} />
     <AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: 'Roboto, sans-serif', }}>
 			<AbsoluteFill style={{ left: '10%', top: '2%', width: '70%', height: '100%'}}>
 				<AnimationEffect actor="problem domain">
@@ -137,19 +137,20 @@ export const StoryBooleanParameters: React.FC = () => {
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
-			<Subtitles scale={2} />
+    <AnimationEffect actor="subtitles" >
+			<Subtitles scale={1.5} />
+			</AnimationEffect>
     </AbsoluteFill>
-    <AbsoluteFill style={{ fontFamily: 'Roboto, sans-serif', left: '0%', top: '40%', width: '100%', height: '40%', backgroundColor: 'rgba(0, 114, 160, 0.8)'}}>
-
+    <AnimationEffect actor="title" style={{ fontFamily: 'Roboto, sans-serif', left: '0%', top: '40%', width: '100%', height: '40%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }} >
 			<span style={{
 				paddingTop: '20px',
 				paddingLeft: '10px',
 				display: 'block',
-      fontSize: '38px',
+      fontSize: '36px',
 			color: 'white',
       fontWeight: 'bold',
 			fontFamily: 'Roboto, sans-serif',
-    }}>Why Boolean Parameters Are Bad</span>
+    }}>Why Are Boolean Parameters Bad?</span>
 
 			<TypingText actor="second title" style={{
 				position: 'relative',
@@ -158,10 +159,10 @@ export const StoryBooleanParameters: React.FC = () => {
 				display: 'block',
       fontSize: '30px',
 			color: 'white',
-			fontFamily: 'Roboto, sans-serif',
-    }} text="Seeking for High Cohesion, Loose Coupling Design"/>
+			fontFamily: 'IBM Plex Mono',
+    }} text="And High Cohesion, Loose Coupling"/>
 
-		</AbsoluteFill>
+		</AnimationEffect>
     <AbsoluteFill style={{ left: '80%', top: '5%', width: '10%', height: '20%'}}>
 			<span style={{fontSize: '28px'}}>terry@</span>
 		</AbsoluteFill>

@@ -141,7 +141,7 @@ export default class LazyTransitions {
   getTextReveal(adjustedFrame: number, fps: number): TextReveal {
     return {
       progress: this.getAddingInterpolate(adjustedFrame, fps, 'textReveal') ?? 0,
-      cursorShow: adjustedFrame / fps % 1 < 0.5,
+      cursorShow: adjustedFrame / fps - Math.floor(adjustedFrame / fps) <= 0.5,
     };
   }
 

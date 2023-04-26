@@ -6,7 +6,7 @@ import { EffectCalculatorAndAction } from './EffectCalculator';
 import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
-import { ThreeGroupAttributesOld } from './LazyTransitions';
+import { TextReveal, ThreeGroupAttributesOld } from './LazyTransitions';
 
 
 export default class AnimationContextWrapper {
