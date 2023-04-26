@@ -1,7 +1,7 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
-import LazyTransitions from './LazyTransitions';
+import LazyTransitions, { InterpolateFields } from './LazyTransitions';
 import { toVector3 } from './DivActioner';
 
 export default abstract class DivBaseActioner {
@@ -23,17 +23,13 @@ export default abstract class DivBaseActioner {
 		const result = new LazyTransitions();
 		const vector: [number, number, number] = toVector3(distances);
 
-		result.setInterpolation('translateX', {
-      spring: true,
-			inputRange: this.effectCalculator.frameRange,
-			outputRange: [from[0], vector[0]],
-		});
-		result.setInterpolation('translateY', {
-      spring: true,
-			inputRange: this.effectCalculator.frameRange,
-			outputRange: [from[1], vector[1]],
+		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key, index) => {
+			result.setInterpolation(key, {
+				spring: true,
+				inputRange: this.effectCalculator.frameRange,
+				outputRange: [from[index], vector[index]],
+			});
 		});
 		return result;
 	}
-
 }

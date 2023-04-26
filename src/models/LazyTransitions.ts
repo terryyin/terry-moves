@@ -9,7 +9,7 @@ type InterpolateRanges = {
   outputRange: number[];
 }
 
-type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX' | 'tranlateZ';
+export type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX' | 'tranlateZ';
 
 export default class LazyTransitions {
   interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
