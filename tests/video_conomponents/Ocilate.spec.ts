@@ -39,7 +39,7 @@ describe('AnimationContext', () => {
 		[
 			{sec: 0, expectPosition:  [0, 0, 0],  },
 			{sec: 1, expectPosition: [0, 0, 0],   },
-			{sec: 1.2, expectPosition: [0.4750690532138959, 0, 0],   },
+			{sec: 1.2, expectPosition: [-0.4759874630812576, -1.902113032590307, -2.8531695488854605],   },
 			{sec: 2, expectPosition: [0.9969808363488774, 0, 0],   },
 		].forEach(({sec, expectPosition, }) => {
 			test(`test sec: ${sec}`, () => {

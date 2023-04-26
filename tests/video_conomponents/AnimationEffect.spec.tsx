@@ -158,7 +158,7 @@ describe('AnimationEffect', () => {
 
   describe('appear and disappear overlapped', () => {
     [
-      { sec: 5.1, expectedOpacity: '0.9666666666666667' },
+      { sec: 5.1, expectedOpacity: '0.7926666666666666' },
       { sec: 8.1, expectedOpacity: '0' },
     ].forEach(({sec, expectedOpacity}) => {
       test(`appear, then disappear at sec ${sec}`, () => {

@@ -15,12 +15,12 @@ interface InterpolateRangesOcillate extends InterpolateRangesBase {
   distance: number;
 }
 
-interface InterpolateRangesLinear extends InterpolateRangesBase {
+interface InterpolateRangesNonOcillate extends InterpolateRangesBase {
   interpolateType: 'linear' | 'spring';
   outputRange: number[];
 }
 
-type InterpolateRanges = InterpolateRangesLinear | InterpolateRangesOcillate;
+type InterpolateRanges = InterpolateRangesNonOcillate | InterpolateRangesOcillate;
 
 export type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX' | 'translateZ';
 
@@ -48,8 +48,8 @@ export default class LazyTransitions {
   }
 
   getStyle(frame: number, fps: number): CSSProperties {
-    const opacity = this.getInterpolate(frame, fps,    'opacity');
-    const scale = this.getInterpolate(frame, fps,      'scale');
+    const opacity = this.getMultiplyingInterpolate(frame, fps,    'opacity');
+    const scale = this.getMultiplyingInterpolate(frame, fps,      'scale');
     const transforms: string[] = [];
 
     if (scale !== undefined) {
@@ -57,7 +57,7 @@ export default class LazyTransitions {
     }
     
     (['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key) => {
-      const translate = this.getInterpolate(frame, fps, key);
+      const translate = this.getAddingInterpolate(frame, fps, key);
       if (translate !== undefined) {
         transforms.push(`${key}(${translate}px)`);
       }
@@ -80,11 +80,11 @@ export default class LazyTransitions {
 
   get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributesOld {
     // Const opacity = this.getInterpolate(frame,    'opacity');
-    const scale = this.getInterpolate(frame, fps,      'scale');
+    const scale = this.getMultiplyingInterpolate(frame, fps,      'scale');
     
     const position = [0, 0, 0];
     (['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key, index) => {
-      const translate = this.getInterpolate(frame, fps, key);
+      const translate = this.getAddingInterpolate(frame, fps, key);
       if (translate !== undefined) {
         position[index] = translate;
       }
@@ -109,29 +109,45 @@ export default class LazyTransitions {
     return style;
   }
 
-  private getInterpolate (frame: number, fps: number, field: InterpolateFields): number | undefined {
-    const values = this.getInterpolate1(frame, fps, field);
-    if(values.length === 0) return undefined;
-    return values[0];
+  private getAddingInterpolate(frame: number, fps: number, field: InterpolateFields): number | undefined {
+    return this.reduceInterpolate(frame, fps, field, (a, b) => a + b, 0);
   }
 
-  private getInterpolate1 (frame: number, fps: number, field: InterpolateFields): number[] {
+  private getMultiplyingInterpolate(frame: number, fps: number, field: InterpolateFields): number | undefined {
+    return this.reduceInterpolate(frame, fps, field, (a, b) => a * b, 1);
+  }
+
+  // eslint-disable-next-line max-params
+  private reduceInterpolate(frame: number, fps: number, field: InterpolateFields, oper: (a: number, b: number)=>number, defaultValue: number): number | undefined {
+    const values = this.getInterpolateValues(frame, fps, field);
+    if(values.length === 0) return undefined;
+    return values.reduce(oper, defaultValue);
+  }
+
+  private getInterpolateValues (frame: number, fps: number, field: InterpolateFields): number[] {
     const interpolateRanges = this.interpolateRanges.get(field);
     const result: number[] = []
     if(!interpolateRanges || interpolateRanges.length === 0) return result;
-    let prev: InterpolateRanges | undefined;
+    let prev: InterpolateRangesNonOcillate | undefined;
     let current = interpolateRanges[0];
-    for(let i = 1; i < interpolateRanges.length; i++) {
+    for(let i = 0; i < interpolateRanges.length; i++) {
       if(frame >= interpolateRanges[i].inputRange[0]) {
-        prev = current;
+        const prevAny = interpolateRanges[i - 1];
+        if(i > 0 && prevAny.interpolateType !== 'ocillate') prev = prevAny;
         current = interpolateRanges[i];
+        if(frame < current.inputRange[current.inputRange.length - 1]) {
+          result.push(this.getInterpolateValue(frame, fps, prev, current));
+        }
       }
     }
+    if (result.length === 0) {
+      result.push(this.getInterpolateValue(frame, fps, prev, current));
+    }
 
-    return [this.getInterpolate2(frame, fps, prev, current)];
+    return result;
   }
 
-  private getInterpolate2 (frame: number, fps: number, prev: InterpolateRanges | undefined, current: InterpolateRanges): number {
+  private getInterpolateValue (frame: number, fps: number, prev: InterpolateRangesNonOcillate | undefined, current: InterpolateRanges): number {
     const effectCalculator: EffectCalculator = new EffectCalculator(
       (current.inputRange[current.inputRange.length - 1] - current.inputRange[0]) / fps,
       current.inputRange[0] /fps,
@@ -144,7 +160,7 @@ export default class LazyTransitions {
     }
 
     const outputRange = [...current.outputRange];
-    if(prev && prev.interpolateType !== 'ocillate') {
+    if(prev) {
       outputRange[0] = prev.outputRange[prev.outputRange.length - 1];
     }
 
