@@ -26,7 +26,7 @@ export default class LazyTransitions {
 
   combine(prev: LazyTransitions): LazyTransitions {
     const combinedStyle = new LazyTransitions();
-    (['opacity', 'scale', 'translateY', 'translateX'] as InterpolateFields[]).forEach((key) => {
+    (['opacity', 'scale', 'translateX', 'translateY', 'tranlateZ'] as InterpolateFields[]).forEach((key) => {
       const combined = [...prev.interpolateRanges.get(key) || [], ...this.interpolateRanges.get(key) || []];
       combinedStyle.interpolateRanges.set(key, combined);
     });
@@ -37,19 +37,18 @@ export default class LazyTransitions {
   getStyle(frame: number, fps: number): CSSProperties {
     const opacity = this.getInterpolate(frame, fps,    'opacity');
     const scale = this.getInterpolate(frame, fps,      'scale');
-    const translateX = this.getInterpolate(frame, fps, 'translateX');
-    const translateY = this.getInterpolate(frame, fps, 'translateY');
     const transforms: string[] = [];
 
     if (scale !== undefined) {
       transforms.push(`scale(${scale})`);
     }
-    if (translateX !== undefined) {
-      transforms.push(`translateX(${translateX}px)`);
-    }
-    if (translateY !== undefined) {
-      transforms.push(`translateY(${translateY}px)`);
-    }
+    
+    (['translateX', 'translateY', 'tranlateZ'] as InterpolateFields[]).forEach((key) => {
+      const translate = this.getInterpolate(frame, fps, key);
+      if (translate !== undefined) {
+        transforms.push(`${key}(${translate}px)`);
+      }
+    });
 
     const result: CSSProperties = {};
 
