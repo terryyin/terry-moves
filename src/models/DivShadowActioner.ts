@@ -16,8 +16,8 @@ export default class DivActioner extends DivBaseActioner{
 
   private getGrow(): LazyTransitions {
     const result = new LazyTransitions();
-    result.setInterpolation('opacity', {inputRange: this.effectCalculator.frameRange, outputRange: [1, 0]});
-    result.setInterpolation('scale', {inputRange: this.effectCalculator.frameRange, outputRange: [1, 1.2]});
+    result.setInterpolation('opacity', {interpolateType: 'linear', inputRange: this.effectCalculator.frameRange, outputRange: [1, 0]});
+    result.setInterpolation('scale', {interpolateType: 'linear', inputRange: this.effectCalculator.frameRange, outputRange: [1, 1.2]});
     return result;
   }
 

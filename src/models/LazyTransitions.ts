@@ -3,12 +3,24 @@ import { CSSProperties } from 'react';
 import * as THREE from 'three';
 import EffectCalculator from './EffectCalculator';
 
-type InterpolateRanges = {
-  spring?: boolean;
-  ocillate?: boolean;
+type InterpolateType = 'linear' | 'spring' | 'ocillate';
+
+type InterpolateRangesBase = {
+  interpolateType: InterpolateType;
   inputRange: number[];
+}
+
+interface InterpolateRangesOcillate extends InterpolateRangesBase {
+  interpolateType: 'ocillate';
+  distance: number;
+}
+
+interface InterpolateRangesLinear extends InterpolateRangesBase {
+  interpolateType: 'linear' | 'spring';
   outputRange: number[];
 }
+
+type InterpolateRanges = InterpolateRangesLinear | InterpolateRangesOcillate;
 
 export type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX' | 'translateZ';
 
@@ -108,10 +120,7 @@ export default class LazyTransitions {
         current = interpolateRanges[i];
       }
     }
-    const outputRange = [...current.outputRange];
-    if(prev) {
-      outputRange[0] = prev.outputRange[prev.outputRange.length - 1];
-    }
+
     const effectCalculator: EffectCalculator = new EffectCalculator(
       (current.inputRange[current.inputRange.length - 1] - current.inputRange[0]) / fps,
       current.inputRange[0] /fps,
@@ -119,11 +128,16 @@ export default class LazyTransitions {
       fps
     );
 
-    if(current.ocillate) {
-		  return -Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * outputRange[1];
+    if(current.interpolateType === 'ocillate') {
+		  return -Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * current.distance;
     }
 
-    if(current.spring) return effectCalculator.interpolateSpring(outputRange);
+    const outputRange = [...current.outputRange];
+    if(prev && prev.interpolateType !== 'ocillate') {
+      outputRange[0] = prev.outputRange[prev.outputRange.length - 1];
+    }
+
+    if(current.interpolateType === 'spring') return effectCalculator.interpolateSpring(outputRange);
     return effectCalculator.interpolateDuration(outputRange);
   }
 

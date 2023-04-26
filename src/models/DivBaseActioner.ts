@@ -25,7 +25,7 @@ export default abstract class DivBaseActioner {
 
 		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key, index) => {
 			result.setInterpolation(key, {
-				spring: true,
+				interpolateType: 'spring',
 				inputRange: this.effectCalculator.frameRange,
 				outputRange: [from[index], vector[index]],
 			});
@@ -40,9 +40,9 @@ export default abstract class DivBaseActioner {
 
 		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key, index) => {
 			result.setInterpolation(key, {
-				ocillate: true,
+				interpolateType: 'ocillate',
 				inputRange: this.effectCalculator.frameRange,
-				outputRange: [0, vector[index]],
+				distance: vector[index],
 			});
 		});
 		return result;

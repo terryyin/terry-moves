@@ -41,6 +41,7 @@ export default class DivActioner extends DivBaseActioner {
 	private getAppearStyle(outputRange: number[]): LazyTransitions {
 		const result = new LazyTransitions();
 		result.setInterpolation('opacity', {
+			interpolateType: 'linear',
 			inputRange: this.effectCalculator.frameRange,
 			outputRange,
 		});
@@ -52,6 +53,7 @@ export default class DivActioner extends DivBaseActioner {
 		result.setInterpolation(
 			'scale',
 			{
+				interpolateType: 'linear',
 				inputRange: this.effectCalculator.frameRange,
 				outputRange: action.outputRange,
 			});
