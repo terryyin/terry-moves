@@ -73,17 +73,15 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
     if(this.action.actionType === '3d move') {
       result.lazyTransitions = this.move([0, 0, 0], this.action.distances);
     }
-    // If(this.action.actionType === 'rotate and rise') {
-    //   result.lazyTransitions = this.move(this.action.distances);
-    // }
+    if(this.action.actionType === 'rotate and rise') {
+      result.lazyTransitions = this.move([0, -this.action.distance, 0], [0, 0, 0]);
+    }
 
     return result;
   }
 
   private getThreeTranslateY(): number {
     switch(this.action.actionType) {
-      case 'rotate and rise':
-        return this.effectCalculator.interpolateSpring([-this.action.distance, 0]);
       case '3d ocillating':
         return this.getOcillatingY(this.action as ThreeDUnitAction);
       default:
