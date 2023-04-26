@@ -31,7 +31,7 @@ describe('Flash back', () => {
 
     [
       { sec: 0.5, expectedWidth: 'scale(0.5)' },
-      { sec: 1.1, expectedWidth: 'scale(0.525)' },
+      { sec: 1.1, expectedWidth: 'scale(0.5307759677750525)' },
       { sec: 1.6, expectedWidth: 'scale(0.5)' },
     ].forEach(({sec, expectedWidth}) => {
       test(`test for sec ${sec}`, () => {

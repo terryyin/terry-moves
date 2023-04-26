@@ -48,5 +48,17 @@ export default abstract class DivBaseActioner {
 		return result;
 	}
 
+	protected scale(outputRange: number[]): LazyTransitions {
+		const result = new LazyTransitions();
+		result.setInterpolation(
+			'scale',
+			{
+				interpolateType: 'spring',
+				inputRange: this.effectCalculator.frameRange,
+				outputRange,
+			});
+		return result;
+	}
+
 
 }

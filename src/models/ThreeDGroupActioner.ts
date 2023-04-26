@@ -58,13 +58,12 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
 
   private get3DGroupAttributes(): ThreeGroupAttributes {
     const rotateY = this.getThreeRotateY();
-    const scale = this.getThreeScale();
     const lookAtYd = this.getLookAtYd();
     const cameraDistanceD = this.getCameraDistanceD();
 
     const result = new ThreeGroupAttributes({
       position: new THREE.Vector3(0, 0, 0),
-      scale,
+      scale: 1,
       rotation: new THREE.Euler(0, rotateY, 0),
       lookAtYd,
       cameraDistanceD,
@@ -73,7 +72,8 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
       result.lazyTransitions = this.move([0, 0, 0], this.action.absolutePosition);
     }
     if(this.action.actionType === 'rotate and rise') {
-      result.lazyTransitions = this.move([0, -this.action.distance, 0], [0, 0, 0]);
+      result.lazyTransitions = this.scale([0, 1])
+        .combine(this.move([0, -this.action.distance, 0], [0, 0, 0]));
     }
     if(this.action.actionType === 'ocillate') {
       result.lazyTransitions = this.ocillate(this.action.delta);
@@ -108,15 +108,6 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
         return this.effectCalculator.interpolateDuration([0, Math.PI * (this.action as ThreeDRotateAction).totalRotation / 180]);
       default:
         return 0;
-    }
-  }
-
-  private getThreeScale(): number {
-    switch(this.action.actionType) {
-      case 'rotate and rise':
-        return this.effectCalculator.getSpring();
-      default:
-        return 1;
     }
   }
 }

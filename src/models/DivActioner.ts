@@ -1,4 +1,3 @@
-import { ScaleAction } from './Subtitles';
 import LazyTransitions from './LazyTransitions';
 import DivBaseActioner from './DivBaseActioner';
 import { Vector2, Vector3 } from '@react-three/fiber';
@@ -22,7 +21,7 @@ export default class DivActioner extends DivBaseActioner {
 	protected getStyle(): LazyTransitions {
 		switch (this.action.actionType) {
 			case 'scale':
-				return this.getScaleStyle(this.action);
+				return this.scale(this.action.outputRange);
 			case 'move':
 				return this.move([0, 0, 0], this.action.absolutePosition);
 			case 'appear':
@@ -48,15 +47,4 @@ export default class DivActioner extends DivBaseActioner {
 		return result;
 	}
 
-	private getScaleStyle(action: ScaleAction): LazyTransitions {
-		const result = new LazyTransitions();
-		result.setInterpolation(
-			'scale',
-			{
-				interpolateType: 'linear',
-				inputRange: this.effectCalculator.frameRange,
-				outputRange: action.outputRange,
-			});
-		return result;
-	}
 }
