@@ -110,8 +110,15 @@ export default class LazyTransitions {
   }
 
   private getInterpolate (frame: number, fps: number, field: InterpolateFields): number | undefined {
+    const values = this.getInterpolate1(frame, fps, field);
+    if(values.length === 0) return undefined;
+    return values[0];
+  }
+
+  private getInterpolate1 (frame: number, fps: number, field: InterpolateFields): number[] {
     const interpolateRanges = this.interpolateRanges.get(field);
-    if(!interpolateRanges || interpolateRanges.length === 0) return undefined;
+    const result: number[] = []
+    if(!interpolateRanges || interpolateRanges.length === 0) return result;
     let prev: InterpolateRanges | undefined;
     let current = interpolateRanges[0];
     for(let i = 1; i < interpolateRanges.length; i++) {
@@ -121,6 +128,10 @@ export default class LazyTransitions {
       }
     }
 
+    return [this.getInterpolate2(frame, fps, prev, current)];
+  }
+
+  private getInterpolate2 (frame: number, fps: number, prev: InterpolateRanges | undefined, current: InterpolateRanges): number {
     const effectCalculator: EffectCalculator = new EffectCalculator(
       (current.inputRange[current.inputRange.length - 1] - current.inputRange[0]) / fps,
       current.inputRange[0] /fps,
@@ -140,5 +151,4 @@ export default class LazyTransitions {
     if(current.interpolateType === 'spring') return effectCalculator.interpolateSpring(outputRange);
     return effectCalculator.interpolateDuration(outputRange);
   }
-
 }
