@@ -159,7 +159,7 @@ export const StoryBooleanParameters: React.FC = () => {
       fontSize: '30px',
 			color: 'white',
 			fontFamily: 'Roboto, sans-serif',
-    }}/>
+    }} text="Seeking for High Cohesion, Loose Coupling Design"/>
 
 		</AbsoluteFill>
     <AbsoluteFill style={{ left: '80%', top: '5%', width: '10%', height: '20%'}}>
