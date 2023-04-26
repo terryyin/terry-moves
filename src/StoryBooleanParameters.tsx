@@ -38,7 +38,7 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "gun.action(true); and gun.action(false);",
 			actions: [
-					{ actor: "example1", actionType: "highlight", duration: 2 },
+					// { actor: "example1", actionType: "highlight", duration: 2 },
 			],
 	},
 	{
@@ -54,7 +54,7 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "class Gun { action(isLoad) { this.fire(); if(isLoad) this.load(); }}",
 			actions: [
-					{ actor: "example2", actionType: "highlight", duration: 2 },
+					// { actor: "example2", actionType: "highlight", duration: 2 },
 			],
 	},
 	{
@@ -70,7 +70,7 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "Change the functions to gun.fire() and gun.load().",
 			actions: [
-					{ actor: "refactor", actionType: "highlight", duration: 2 },
+					// { actor: "refactor", actionType: "highlight", duration: 2 },
 			],
 	},
 	{
