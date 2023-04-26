@@ -40,7 +40,7 @@ export default class DivActioner extends DivBaseActioner {
 
 	private getAppearStyle(outputRange: number[]): LazyTransitions {
 		const result = new LazyTransitions();
-		result.setOpacityInterpolation({
+		result.setInterpolation('opacity', {
 			inputRange: this.effectCalculator.frameRange,
 			outputRange,
 		});
@@ -49,10 +49,12 @@ export default class DivActioner extends DivBaseActioner {
 
 	private getScaleStyle(action: ScaleAction): LazyTransitions {
 		const result = new LazyTransitions();
-		result.setScaleInterpolation({
-			inputRange: this.effectCalculator.frameRange,
-			outputRange: action.outputRange,
-		});
+		result.setInterpolation(
+			'scale',
+			{
+				inputRange: this.effectCalculator.frameRange,
+				outputRange: action.outputRange,
+			});
 		return result;
 	}
 }

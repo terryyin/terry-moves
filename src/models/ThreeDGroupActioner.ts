@@ -70,7 +70,7 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
       lookAtYd,
       cameraDistanceD,
     });
-    if(this.action.actionType === '3d move') {
+    if(this.action.actionType === 'move') {
       result.lazyTransitions = this.move([0, 0, 0], this.action.distances);
     }
     if(this.action.actionType === 'rotate and rise') {

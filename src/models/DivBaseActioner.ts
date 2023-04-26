@@ -23,12 +23,12 @@ export default abstract class DivBaseActioner {
 		const result = new LazyTransitions();
 		const vector: [number, number, number] = toVector3(distances);
 
-		result.setTranslateXInterpolation({
+		result.setInterpolation('translateX', {
       spring: true,
 			inputRange: this.effectCalculator.frameRange,
 			outputRange: [from[0], vector[0]],
 		});
-		result.setTranslateYInterpolation({
+		result.setInterpolation('translateY', {
       spring: true,
 			inputRange: this.effectCalculator.frameRange,
 			outputRange: [from[1], vector[1]],

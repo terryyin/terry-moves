@@ -30,7 +30,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 	]},
 	{ leadingBlank: 0, duration: 5, text: "Software developers also have different attitudes towards failures.", actions: [
 			{ actor: "blue background", actionType: "disappear", duration: 5 },
-			{ actor: "starship", actionType: "3d move", duration: 5, distances: [0, 20, 0] },
+			{ actor: "starship", actionType: "move", duration: 5, distances: [0, 20, 0] },
 			{ actor: "starship", actionType: "3d camera move", duration: 6, distances: [0, 5, 0] },
 			{ actor: "starship", actionType: "camera zoom in", duration: 6, distance: -20 },
 	]},

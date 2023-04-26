@@ -9,12 +9,12 @@ type InterpolateRanges = {
   outputRange: number[];
 }
 
-type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX';
+type InterpolateFields = 'opacity' | 'scale' | 'translateY' | 'translateX' | 'tranlateZ';
 
 export default class LazyTransitions {
   interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
 
-  private setInterpolation(key: InterpolateFields, interpolateRange: InterpolateRanges): void {
+  setInterpolation(key: InterpolateFields, interpolateRange: InterpolateRanges): void {
     if(!this.interpolateRanges.get(key)) {
       this.interpolateRanges.set(key, []);
     };
@@ -22,22 +22,6 @@ export default class LazyTransitions {
     if(array) {
       array.push(interpolateRange);
     }
-  }
-
-  setOpacityInterpolation(interpolateRanges: InterpolateRanges): void {
-    this.setInterpolation('opacity', interpolateRanges);
-  }
-
-  setScaleInterpolation(interpolateRanges: InterpolateRanges) {
-    this.setInterpolation('scale', interpolateRanges);
-  }
-
-  setTranslateXInterpolation(interpolateRanges: InterpolateRanges) {
-    this.setInterpolation('translateX', interpolateRanges);
-  }
-
-  setTranslateYInterpolation(interpolateRanges: InterpolateRanges) {
-    this.setInterpolation('translateY', interpolateRanges);
   }
 
   combine(prev: LazyTransitions): LazyTransitions {
