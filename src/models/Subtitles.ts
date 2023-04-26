@@ -33,7 +33,7 @@ export interface OneDimensionalAction extends BaseAction {
 
 export interface ThreeDRotateAction extends BaseAction {
   actionType: '3d rotate';
-  totalRotation: number;
+  totalRotation: [number, number, number];
 }
 
 export type ThreeDAction = ThreeDRotateAction | AbsolutePositionAction | OneDimensionalAction;

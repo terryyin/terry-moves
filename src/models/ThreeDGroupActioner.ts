@@ -81,6 +81,9 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
     if(this.action.actionType === 'camera look at'){
       result.lazyTransitions =  this.cameraLookAt(this.action.absolutePosition);
     }
+    if(this.action.actionType === '3d rotate'){
+      result.lazyTransitions =  this.rotate(this.action.totalRotation);
+    }
 
     return result;
   }
@@ -89,8 +92,6 @@ export default class ThreeDGroupActioner extends DivBaseActioner {
     switch(this.action.actionType) {
       case 'rotate and rise':
         return this.effectCalculator.interpolateSpring([-Math.PI * 2, 0]);
-      case '3d rotate':
-        return this.effectCalculator.interpolateDuration([0, Math.PI * (this.action as ThreeDRotateAction).totalRotation / 180]);
       default:
         return 0;
     }
