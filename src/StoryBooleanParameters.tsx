@@ -146,6 +146,40 @@ const subtitles: Subtitle[] = [
 	},
 
 	{
+			leadingBlank: 1,
+			duration: 6,
+			text: "I've been inventing countering logics in the callee and callers to keep myself busy.",
+			actions: [
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 5,
+			text: "Say, now Caller 1 need to tell how much to load.",
+			actions: [
+				// { actor: "caller 1", actionType: "replace text", duration: 3, line: 2, match: 'true', value: '1000'},
+				// { actor: "caller 1", actionType: "highlight token", duration: 3, token: '1000', style: 'zipped underline'},
+				// { actor: "callee", actionType: "replace text", duration: 3, line: 2, match: 'isLoad', value: 'loadAmount'},
+				// { actor: "callee", actionType: "replace text", duration: 3, line: 3, match: 'isLoad', value: 'loadAmount > 0'},
+				// { actor: "callee", actionType: "insert text", duration: 3, line: 4, column: 10, value: 'loadAmount'},
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 6,
+			text: "So we changed the API to take a parameter 'loadAmount'.",
+			actions: [
+				// { actor: "callee", actionType: "replace text", duration: 3, line: 2, match: 'isLoad', value: 'loadAmount'},
+				// { actor: "callee", actionType: "replace text", duration: 3, line: 3, match: 'isLoad', value: 'loadAmount > 0'},
+				// { actor: "callee", actionType: "insert text", duration: 3, line: 4, column: 10, value: 'loadAmount'},
+				// { actor: "callee", actionType: "insert text", duration: 3, line: 10, column: 10, value: 'loadAmount'},
+			],
+	},
+
+
+	{
 			leadingBlank: 0,
 			duration: 4,
 			text: "gun.action(true); and gun.action(false);",
