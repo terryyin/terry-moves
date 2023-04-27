@@ -21,10 +21,18 @@ import { CodeHighlight } from './video_components/CodeHighlight';
 
 const fireActions: Action[] =
 [
-			  { actor: "blaster fire", actionType: "3d animation start", duration: 1, speed: 2 },
+			  { actor: "blaster fire", actionType: "3d animation start", duration: 2, speed: 2 },
 			  { actor: "blaster assembly", actionType: "move", duration: 0.1, absolutePosition: [0.5, 0, 0]},
 			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.2},
 ];
+
+const loadActions: Action[] =
+[
+			  { actor: "blaster", actionType: "3d animation start", duration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
+			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.4,  totalRotation: [0, 0, -30]},
+			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
+];
+
 const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
@@ -45,6 +53,7 @@ const subtitles: Subtitle[] = [
 					{ actor: "callee", actionType: "appear", duration: 1 },
 			],
 	},
+
 	{
 			leadingBlank: 0,
 			duration: 4,
@@ -52,18 +61,28 @@ const subtitles: Subtitle[] = [
 			actions: [
 				...fireActions,
 				{ actor: "caller 2", actionType: "appear", duration: 0.2},
-				{ actor: "caller 2", actionType: "highlight lines", duration: 1, lines: [2]},
+				{ actor: "caller 2", actionType: "highlight lines", duration: 3, lines: [2]},
+				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [6, 10]},
 			],
 	},
+
+	{
+			leadingBlank: 0,
+			duration: 4,
+			text: "But if you load first,",
+			actions: [
+				...loadActions,
+				{ actor: "caller 1", actionType: "appear", duration: 0.2},
+				{ actor: "caller 1", actionType: "highlight lines", duration: 3, lines: [2]},
+				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [4, 14]},
+			],
+	},
+
 	{
 			leadingBlank: 0,
 			duration: 4,
 			text: "gun.action(true); and gun.action(false);",
-			actions: [
-			  { actor: "blaster", actionType: "3d animation start", duration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
-			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.4,  totalRotation: [0, 0, -30]},
-			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
-			],
+			actions: [],
 	},
 	{
 			leadingBlank: 1,
@@ -127,7 +146,7 @@ const subtitles: Subtitle[] = [
 	},
 ];
 
-const codeString = `class Gun {
+const codeString = `class Blaster {
   action(isLoad) {
     if(isLoad) {
       this.load();
@@ -138,10 +157,15 @@ const codeString = `class Gun {
   fire() {
     // ...
   }
+
   private load() {
     // ...
   }
 }`;
+
+const caller1 = `  // Caller 1
+  blaster.action(true);
+	`;
 
 const caller2 = `  // Caller 2
   blaster.action(false);
@@ -171,6 +195,7 @@ export const StoryBooleanParameters: React.FC = () => {
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
+		<CodeHighlight actor="caller 1" codeString={caller1} style={{ left: '5%', top: '30%', width: '40%', height: '20%', backgroundColor: "black"}}/>
 		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '53%', width: '40%', height: '20%', backgroundColor: "black"}}/>
 		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}/>
     <AnimationEffect actor="subtitles" >
