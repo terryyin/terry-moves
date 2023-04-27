@@ -36,7 +36,7 @@ const loadActions: Action[] =
 const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
-			duration: 4,
+			duration: 5,
 			text: "",
 			actions: [
 					{ actor: "second title", actionType: "type", duration: 3, text: "Seeking for High Cohesion, Loose Coupling Design" },
@@ -44,9 +44,9 @@ const subtitles: Subtitle[] = [
 			],
 	},
 	{
-			leadingBlank: 0,
+			leadingBlank: 1,
 			duration: 4,
-			text: "A Blaster is a powerful tool.",
+			text: "In my game program, a Blaster is a powerful tool.",
 			actions: [
 					{ actor: "title", actionType: "disappear", duration: 1 },
 					{ actor: "subtitles", actionType: "appear", duration: 1 },
@@ -56,7 +56,7 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 4,
+			duration: 5,
 			text: "You can fire it whenever you want.",
 			actions: [
 				...fireActions,
@@ -69,7 +69,7 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 4,
-			text: "But if you load first,",
+			text: "But if you load it first,",
 			actions: [
 				...loadActions,
 				{ actor: "caller 1", actionType: "appear", duration: 0.2},
@@ -89,6 +89,20 @@ const subtitles: Subtitle[] = [
 				{ actor: "caller 1", actionType: "appear", duration: 0.2},
 				{ actor: "caller 1", actionType: "highlight lines", duration: 3, lines: [2]},
 				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [4, 6, 10, 14]},
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 4,
+			text: "The function 'action' is call from many places.",
+			actions: [
+				...fireActions,
+				{ actor: "caller 3", actionType: "appear", duration: 0.2},
+				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'action'},
+				{ actor: "caller 2", actionType: "highlight token", duration: 3, token: 'action'},
+				{ actor: "caller 3", actionType: "highlight token", duration: 3, token: 'action'},
+				{ actor: "callee", actionType: "highlight token", duration: 3, token: 'action'},
 			],
 	},
 
@@ -185,6 +199,10 @@ const caller2 = `  // Caller 2
   blaster.action(false);
 	`;
 
+const caller3 = `  // Caller 3
+  blaster.action(true);
+	`;
+
 export const StoryBooleanParameters: React.FC = () => {
   return (
 		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={subtitles}  >
@@ -211,7 +229,8 @@ export const StoryBooleanParameters: React.FC = () => {
       </AbsoluteFill>
 			</AnimationEffect>
 		<CodeHighlight actor="caller 1" codeString={caller1} style={{ left: '5%', top: '30%', width: '40%', height: '20%', backgroundColor: "black"}}/>
-		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '53%', width: '40%', height: '20%', backgroundColor: "black"}}/>
+		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '52%', width: '40%', height: '20%', backgroundColor: "black"}}/>
+		<CodeHighlight actor="caller 3" codeString={caller3} style={{ left: '5%', top: '74%', width: '40%', height: '20%', backgroundColor: "black"}}/>
 		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}/>
     <AnimationEffect actor="subtitles" >
 			<Subtitles scale={1.2} />
@@ -226,7 +245,7 @@ export const StoryBooleanParameters: React.FC = () => {
 			color: 'white',
       fontWeight: 'bold',
 			fontFamily: 'Roboto, sans-serif',
-    }}>Why Are Boolean Parameters Bad?</span>
+    }}>Why Is My Boolean Parameter Bad?</span>
 
 			<TypingText actor="second title" style={{
 				position: 'relative',
