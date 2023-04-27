@@ -2,7 +2,6 @@ import './global.css';
 
 
 import React from 'react';
-import {Highlight, themes} from 'prism-react-renderer';
 
 import { Subtitle } from './models/Subtitles';
 import { AbsoluteFill } from 'remotion';
@@ -18,6 +17,7 @@ import { TypingText } from './video_components/TypingText';
 import { Blaster } from './parts/Blaster';
 import { GroupInitialState } from './video_components/GroupInitialState';
 import { RocketPlume } from './parts/RocketPlume';
+import { CodeHighlight } from './video_components/CodeHighlight';
 
 const subtitles: Subtitle[] = [
 	{
@@ -37,6 +37,7 @@ const subtitles: Subtitle[] = [
 					{ actor: "title", actionType: "disappear", duration: 1 },
 					{ actor: "subtitles", actionType: "appear", duration: 1 },
 					{ actor: "example1", actionType: "appear", duration: 1 },
+					{ actor: "callee", actionType: "appear", duration: 1 },
 			],
 	},
 	{
@@ -155,23 +156,9 @@ export const StoryBooleanParameters: React.FC = () => {
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
-    <AnimationEffect actor="callee" style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}>
-		<Highlight code={codeString.trim()} language="javascript" theme={themes.vsDark}>
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className={className} style={{fontSize: "1.4rem", ...style}}>
-            {tokens.map((line, i) => (
-              <div {...getLineProps({ line, key: i })}>
-                {line.map((token, key) => (
-                  <span {...getTokenProps({ token, key })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
-		</AnimationEffect>
+		<CodeHighlight actor="callee" codeString={codeString.trim()} style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}/>
     <AnimationEffect actor="subtitles" >
-			<Subtitles scale={1.5} />
+			<Subtitles scale={1.2} />
 			</AnimationEffect>
     </AbsoluteFill>
     <AnimationEffect actor="title" style={{ fontFamily: 'Roboto, sans-serif', left: '0%', top: '40%', width: '100%', height: '40%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }} >

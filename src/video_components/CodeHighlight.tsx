@@ -1,19 +1,26 @@
 import { CSSProperties } from "react";
-import { useAnimationContext } from "../hooks/useAnimationContext";
+import {Highlight, themes} from 'prism-react-renderer';
 import AnimationEffect from "./AnimationEffect";
 
-export const TypingText: React.FC<{actor: string, text: string, style?: CSSProperties}> = ({actor, style, text}) => {
-  const { progress, cursorShow } = useAnimationContext().getTextReveal(actor);
-  const wholeTextPart = text.substring(0, Math.floor(text.length * progress));
-  const escaped = progress > 1.12;
-  const cursor = escaped ? text[text.length - 1] : '|';
-  const textPart = escaped ? text.substring(0, text.length - 1) : wholeTextPart;
-  const cursorStyle = escaped ? (cursorShow ? {filter: 'invert(1)', backgroundColor: "#888"} : {}) : {opacity: cursorShow ? 1 : 0};
+export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties}> = ({actor, style, codeString}) => {
+  // Const { progress } = useAnimationContext().getTextReveal(actor);
 
   return (
 			<AnimationEffect actor={actor} style={{...style}}>
-        {textPart}
-        <span style={{...cursorStyle}}>{cursor}</span>
+        <Highlight code={codeString.trim()} language="javascript" theme={themes.vsDark}>
+            {({ className, style, tokens, getLineProps, getTokenProps }) => (
+              <pre className={className} style={{fontSize: "1.4rem", ...style}}>
+                {tokens.map((line, i) => (
+                  <div {...getLineProps({ line, key: i })}>
+                    {line.map((token, key) => (
+                      <span {...getTokenProps({ token, key })} />
+                    ))}
+                  </div>
+                ))}
+              </pre>
+            )}
+          </Highlight>
+      
       </AnimationEffect>
   );
 };
