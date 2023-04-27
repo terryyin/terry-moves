@@ -90,7 +90,7 @@ export default class CodeActioner {
   replaceText(action: ReplaceTextAction): LazyCodeTransformation {
     const result = new LazyCodeTransformation();
     if(this.effectCalculator.withInDuration() || this.effectCalculator.isAfter()) {
-      result.addTextRepacement(action.line, action.match, action.replacement, this.effectCalculator.interpolateDuration([0, 1.3]));
+      result.addTextRepacement(action.line, action.match, action.replacement, this.effectCalculator.interpolateDuration([0, 1]));
     }
     return result;
   }

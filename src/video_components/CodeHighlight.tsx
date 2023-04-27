@@ -5,7 +5,7 @@ import { useAnimationContext } from "../hooks/useAnimationContext";
 import { HighlightStyle } from "@/models/Subtitles";
 
 export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties}> = ({actor, style, codeString}) => {
-  const { highlights, textReplacements } = useAnimationContext().getCodeTransfomation(actor);
+  const { highlights, textReplacements, showCursor } = useAnimationContext().getCodeTransfomation(actor);
 
   const replace = (currentText: string): string => {
     const lines = currentText.split('\n');
@@ -15,7 +15,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
   
       if (lines[line - 1]) {
         const partialLength = Math.ceil(newText.length * progress);
-        const partialReplacement = newText.slice(0, partialLength);
+        const partialReplacement = newText.slice(0, partialLength) + (showCursor && progress < 1 ? '|' : '');
         lines[line - 1] = lines[line - 1].replace(match, partialReplacement);
       }
     });
