@@ -22,8 +22,8 @@ import { CodeHighlight } from './video_components/CodeHighlight';
 const fireActions: Action[] =
 [
 			  { actor: "blaster fire", actionType: "3d animation start", duration: 1, speed: 2 },
-			  { actor: "blaster assembly", actionType: "move", duration: 0.2, absolutePosition: [0.5, 0, 0]},
-			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.4},
+			  { actor: "blaster assembly", actionType: "move", duration: 0.1, absolutePosition: [0.5, 0, 0]},
+			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.2},
 ];
 const subtitles: Subtitle[] = [
 	{
@@ -50,7 +50,8 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "You can fire whenever you want.",
 			actions: [
-				...fireActions
+				...fireActions,
+				{ actor: "caller 2", actionType: "appear", duration: 0.2},
 			],
 	},
 	{
@@ -141,6 +142,10 @@ const codeString = `class Gun {
   }
 }`;
 
+const caller2 = `  // Caller 2
+  blaster.action(false);
+	`;
+
 export const StoryBooleanParameters: React.FC = () => {
   return (
 		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={subtitles}  >
@@ -165,7 +170,8 @@ export const StoryBooleanParameters: React.FC = () => {
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
-		<CodeHighlight actor="callee" codeString={codeString.trim()} style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}/>
+		<CodeHighlight actor="callee" codeString={caller2} style={{ left: '5%', top: '53%', width: '40%', height: '20%', backgroundColor: "black"}}/>
+		<CodeHighlight actor="caller 2" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}/>
     <AnimationEffect actor="subtitles" >
 			<Subtitles scale={1.2} />
 			</AnimationEffect>
