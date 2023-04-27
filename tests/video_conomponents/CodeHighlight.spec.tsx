@@ -150,15 +150,15 @@ describe('CodeHighlight', () => {
   describe('insert text', () => {
     [
       { sec: 0.5, expectedLineText: '      this.load();' },
-      { sec: 1.1, expectedLineText: '      this.load();' },
-      { sec: 1.6, expectedLineText: '      this.load();' },
-      { sec: 3.1, expectedLineText: '      this.load();' },
+      { sec: 1.1, expectedLineText: '      this.load(l|);' },
+      { sec: 1.6, expectedLineText: '      this.load(loadAm);' },
+      { sec: 3.1, expectedLineText: '      this.load(loadAmount);' },
     ].forEach(({sec, expectedLineText}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'insert text', duration: 1, line: 4, column: 10, text: 'loadAmount' }
+                  { actor: 'under-test', actionType: 'insert text', duration: 1, line: 4, column: 16, text: 'loadAmount' }
                 ]})
                 .seconds(sec)
                 .please();
