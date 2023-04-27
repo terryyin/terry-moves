@@ -3,7 +3,7 @@ import './global.css';
 
 import React from 'react';
 
-import { Subtitle } from './models/Subtitles';
+import { Action, Subtitle } from './models/Subtitles';
 import { AbsoluteFill } from 'remotion';
 import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
@@ -19,6 +19,12 @@ import { GroupInitialState } from './video_components/GroupInitialState';
 import { RocketPlume } from './parts/RocketPlume';
 import { CodeHighlight } from './video_components/CodeHighlight';
 
+const fireActions: Action[] =
+[
+			  { actor: "blaster fire", actionType: "3d animation start", duration: 1, speed: 2 },
+			  { actor: "blaster assembly", actionType: "move", duration: 0.2, absolutePosition: [0.5, 0, 0]},
+			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.4},
+];
 const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
@@ -32,12 +38,19 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 0,
 			duration: 4,
-			text: "Let's look at an example of a function with a boolean parameter:",
+			text: "A Blaster is a powerful tool.",
 			actions: [
 					{ actor: "title", actionType: "disappear", duration: 1 },
 					{ actor: "subtitles", actionType: "appear", duration: 1 },
-					{ actor: "example1", actionType: "appear", duration: 1 },
 					{ actor: "callee", actionType: "appear", duration: 1 },
+			],
+	},
+	{
+			leadingBlank: 0,
+			duration: 4,
+			text: "You can fire whenever you want.",
+			actions: [
+				...fireActions
 			],
 	},
 	{
@@ -48,7 +61,6 @@ const subtitles: Subtitle[] = [
 			  { actor: "blaster", actionType: "3d animation start", duration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
 			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.4,  totalRotation: [0, 0, -30]},
 			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
-					// { actor: "example1", actionType: "highlight", duration: 2 },
 			],
 	},
 	{
@@ -56,10 +68,7 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "The implementation might look like this:",
 			actions: [
-			  { actor: "blaster fire", actionType: "3d animation start", duration: 1, speed: 2 },
-			  { actor: "blaster assembly", actionType: "move", duration: 0.2, absolutePosition: [0.5, 0, 0]},
-			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.4},
-					{ actor: "example2", actionType: "appear", duration: 1 },
+				...fireActions
 			],
 	},
 	{
