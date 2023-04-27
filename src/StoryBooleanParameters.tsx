@@ -73,7 +73,8 @@ const subtitles: Subtitle[] = [
 			actions: [
 				...loadActions,
 				{ actor: "caller 1", actionType: "appear", duration: 0.2},
-				{ actor: "caller 1", actionType: "highlight lines", duration: 3, lines: [2]},
+				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'true'},
+				{ actor: "callee", actionType: "highlight token", duration: 3, token: 'isLoad'},
 				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [4, 14]},
 			],
 	},

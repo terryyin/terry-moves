@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-export type ActionType = 'type' | 'highlight lines' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'type' | 'highlight lines' | 'highlight token' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -25,6 +25,11 @@ export interface TextAction extends BaseAction {
 export interface HighlightLinesAction extends BaseAction {
   actionType: 'highlight lines';
   lines: number[];
+}
+
+export interface HighlightTokenAction extends BaseAction {
+  actionType: 'highlight token';
+  token: string;
 }
 
 export interface AbsolutePositionAction extends BaseAction {
@@ -57,7 +62,9 @@ export interface ThreeDAnimationAction extends BaseAction {
   freezeBeforeStart?: boolean;
 }
 
-export type Action = TextAction | HighlightLinesAction | ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
+type CodeAction = HighlightLinesAction | HighlightTokenAction;
+
+export type Action = TextAction | CodeAction | ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
 
 export type FlashBack = {
   duration: number;

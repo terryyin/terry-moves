@@ -4,8 +4,9 @@ import AnimationEffect from "./AnimationEffect";
 import { useAnimationContext } from "../hooks/useAnimationContext";
 
 export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties}> = ({actor, style, codeString}) => {
-  const { highlightLines } = useAnimationContext().getCodeTransfomation(actor);
+  const { highlightLines, highlightTokens } = useAnimationContext().getCodeTransfomation(actor);
   const lineNumberSet = new Set(highlightLines);
+  const tokenSet = new Set(highlightTokens);
 
 
 
@@ -24,9 +25,17 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
                     };
                   }
                   return <div {...lineProps}>
-                    {line.map((token, key) => (
-                      <span {...getTokenProps({ token, key })} />
-                    ))}
+                    {line.map((token, key) => {
+                      const tokenProps = getTokenProps({ token, key });
+
+                      if (tokenSet.has(token.content)) {
+                        tokenProps.style = {
+                          ...tokenProps.style,
+                          backgroundColor: 'red',
+                        };
+                      }
+                      return <span {...tokenProps} />
+                    })}
                   </div>;
                 })}
               </pre>

@@ -37,6 +37,9 @@ describe('CodeHighlight', () => {
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const styleOfLine = (div: HTMLDivElement, line: number) => window.getComputedStyle(div.querySelector(`.prism-code>:nth-child(${line})`)!);
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const tokenElement = (div: HTMLDivElement, line: number, token: number): HTMLSpanElement => div.querySelector(`.prism-code>:nth-child(${line})>:nth-child(${token})`)!
+
   describe('highlight lines', () => {
     [
       { sec: 0.1, expectedColor: '' },
@@ -59,4 +62,27 @@ describe('CodeHighlight', () => {
       });
     });
   });
+
+  describe('highlight token', () => {
+    [
+      { sec: 0.1, expectedColor: '' },
+      { sec: 1.1, expectedColor: 'red' },
+      { sec: 3.1, expectedColor: '' },
+    ].forEach(({sec, expectedColor}) => {
+      test(` at sec ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                  { actor: 'under-test', actionType: 'highlight token', duration: 1, token: "isLoad" }
+                ]})
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        const token = tokenElement(div, 2, 4);
+        expect(token.textContent).toBe('isLoad');
+        expect(token.style.backgroundColor).toBe(expectedColor);
+      });
+    });
+  });
+
 });
