@@ -5,23 +5,34 @@ import { useAnimationContext } from "../hooks/useAnimationContext";
 import { HighlightStyle } from "@/models/Subtitles";
 
 export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties}> = ({actor, style, codeString}) => {
-  const { highlights, textReplacements, showCursor } = useAnimationContext().getCodeTransfomation(actor);
+  const { highlights, textEdits, showCursor } = useAnimationContext().getCodeTransfomation(actor);
 
-  const replace = (currentText: string): string => {
+  const edit = (currentText: string): string => {
     const lines = currentText.split('\n');
-  
-    textReplacements.forEach((replacement) => {
-      const { line, match, replacement: newText, progress } = replacement;
-  
-      if (lines[line - 1]) {
-        const partialLength = Math.ceil(newText.length * progress);
-        const partialReplacement = newText.slice(0, partialLength) + (showCursor && progress < 1 ? '|' : '');
-        lines[line - 1] = lines[line - 1].replace(match, partialReplacement);
-      }
-    });
-  
-    return lines.join('\n');
-  }
+
+  textEdits.forEach((edit) => {
+    const { line, progress, text } = edit;
+    const currentLine = lines[line - 1];
+
+    if (!currentLine) return;
+
+    const partialLength = Math.ceil(text.length * progress);
+    const partialText = text.slice(0, partialLength) + (showCursor && partialLength < text.length ? '|' : '');
+
+    if ('match' in edit) {
+      const { match } = edit;
+      lines[line - 1] = currentLine.replace(match, partialText);
+    } else if ('column' in edit) {
+      const { column } = edit;
+      lines[line - 1] =
+        currentLine.slice(0, column) +
+        partialText +
+        currentLine.slice(column);
+    }
+  });
+
+  return lines.join('\n');
+}
 
   const lineHighlightStyle = (line: number): HighlightStyle[] => {
     const result: HighlightStyle[] = [];
@@ -60,7 +71,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
     }, {} as CSSProperties);
   }
 
-  const currentCode = replace(codeString);
+  const currentCode = edit(codeString);
   const lineStyle = (line: number): CSSProperties => highLightStylesToCSS(lineHighlightStyle(line));
   const tokenStyle = (token: string): CSSProperties => highLightStylesToCSS(tokenHighlightStyle(token));
     

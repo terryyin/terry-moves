@@ -159,7 +159,7 @@ const subtitles: Subtitle[] = [
 			text: "Say, now Caller 1 need to tell how much to load.",
 			actions: [
 				{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '1000'},
-				{ actor: "caller 1", actionType: "highlight token", duration: 4, token: '1000', style: 'wavy underline'},
+				{ actor: "caller 1", actionType: "highlight token", duration: 6.9, token: '1000', style: 'wavy underline'},
 			],
 	},
 
@@ -169,9 +169,11 @@ const subtitles: Subtitle[] = [
 			text: "So we changed the API to take a parameter 'loadAmount'.",
 			actions: [
 				{ actor: "callee", actionType: "replace text", duration: 1, line: 2, match: 'isLoad', replacement: 'loadAmount'},
+				{ actor: "caller 2", actionType: "highlight token", duration: 20, token: 'false', style: 'wavy underline', offset: 1},
+				{ actor: "caller 3", actionType: "highlight token", duration: 20, token: 'true', style: 'wavy underline', offset: 1},
 				{ actor: "callee", actionType: "replace text", duration: 1.5, line: 3, match: 'isLoad', replacement: 'loadAmount > 0', offset: 1.2},
-				{ actor: "callee", actionType: "insert text", duration: 3, line: 4, column: 10, text: 'loadAmount'},
-				// { actor: "callee", actionType: "insert text", duration: 3, line: 10, column: 10, replacement: 'loadAmount'},
+				{ actor: "callee", actionType: "insert text", duration: 1, line: 4, column: 16, text: 'loadAmount', offset: 2.9},
+				{ actor: "callee", actionType: "insert text", duration: 1, line: 13, column: 15, text: 'loadAmount', offset: 4.1},
 			],
 	},
 

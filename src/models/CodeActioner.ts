@@ -1,4 +1,4 @@
-import { Action, HighlightStyle, ReplaceTextAction } from '@/models/Subtitles';
+import { Action, HighlightStyle, InsertTextAction, ReplaceTextAction } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
 
 interface HighlightBase {
@@ -15,26 +15,36 @@ interface HighlightTokens extends HighlightBase {
 
 type Highlight = HighlightLines | HighlightTokens;
 
-interface TextReplacement {
-  line: number; match: string; replacement: string; progress: number;
+interface TextEditBase {
+  line: number; progress: number; text: string;
 }
+
+interface TextReplacement extends TextEditBase {
+  match: string;
+}
+
+interface TextInsertion extends TextEditBase {
+  column: number;
+}
+
+type TextEdit = TextReplacement | TextInsertion;
 
 export type CodeTransformation = {
   highlights: Highlight[];
-  textReplacements: TextReplacement[];
+  textEdits: TextEdit[];
   showCursor: boolean;
 }
 
 
 export class LazyCodeTransformation {
   highlights: Highlight[] = [];
-  textReplacements: TextReplacement[] = [];
+  textEdits: TextEdit[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getCodeTransfomation(adjustedFrame: number, fps: number): CodeTransformation {
     return {
       highlights: this.highlights,
-      textReplacements: this.textReplacements,
+      textEdits: this.textEdits,
       showCursor: Math.floor(adjustedFrame / fps * 2) % 2 === 0,
     }
   }
@@ -42,12 +52,16 @@ export class LazyCodeTransformation {
   combine(prev: LazyCodeTransformation): LazyCodeTransformation {
     const result = new LazyCodeTransformation();
     result.highlights = [...prev.highlights, ...this.highlights];
-    result.textReplacements = [...prev.textReplacements, ...this.textReplacements];
+    result.textEdits = [...prev.textEdits, ...this.textEdits];
     return result;
   }
 
-  addTextRepacement(line: number, match: string, replacement: string, progress: number) {
-    this.textReplacements.push({line, match, replacement, progress});
+  addTextInsert(line: number, column: number, text: string, progress: number) {
+    this.textEdits.push({line, column, text, progress});
+  }
+
+  addTextRepacement(line: number, match: string, text: string, progress: number) {
+    this.textEdits.push({line, match, text, progress});
   }
 
   highlightToken(token: string, style: HighlightStyle) {
@@ -82,9 +96,19 @@ export default class CodeActioner {
         return  this.highlightToken(this.action.token, this.action.style ?? 'red background');
       case 'replace text':
         return  this.replaceText(this.action);
+      case 'insert text':
+        return  this.insertText(this.action);
       default:
         return new LazyCodeTransformation();
     }
+  }
+
+  insertText(action: InsertTextAction): LazyCodeTransformation {
+    const result = new LazyCodeTransformation();
+    if(this.effectCalculator.withInDuration() || this.effectCalculator.isAfter()) {
+      result.addTextInsert(action.line, action.column, action.text, this.effectCalculator.interpolateDuration([0, 1]));
+    }
+    return result;
   }
 
   replaceText(action: ReplaceTextAction): LazyCodeTransformation {
