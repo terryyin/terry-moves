@@ -7,7 +7,7 @@ export type TextReveal = {
 	cursorShow: boolean;
 };
 
-export type ThreeGroupAttributesOld = {
+export type ThreeGroupAttributes = {
 	scale: number;
 	position: THREE.Vector3;
 	rotation: THREE.Euler;
@@ -103,31 +103,28 @@ export default class LazyTransitions {
 	}
 
 	getStyle(frame: number, fps: number): CSSProperties {
-		const opacity = this.getMultiplyingInterpolate(frame, fps, 'opacity');
-		const scale = this.getMultiplyingInterpolate(frame, fps, 'scale');
+		const threeDTransforms = this.get3DGroupAttributes(frame, fps);
 		const transforms: string[] = [];
 
-		if (scale !== undefined) {
-			transforms.push(`scale(${scale})`);
-		}
+		transforms.push(`scale(${threeDTransforms.scale})`);
 
 		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach(
-			(key) => {
-				const translate = this.getAddingInterpolate(frame, fps, key);
+			(key, index) => {
+				const translate = threeDTransforms.position.getComponent(index);
 				if (translate !== undefined) {
 					transforms.push(`${key}(${translate}px)`);
 				}
 			}
 		);
 
-		const result: CSSProperties = {};
+		const result: CSSProperties = {transformOrigin: 'center'};
+		result.transformOrigin = 'center';
 
 		if (transforms.length > 0) {
 			result.transform = transforms.join(' ');
-			if (scale !== undefined) {
-				result.transformOrigin = 'center';
-			}
 		}
+
+		const opacity = this.getMultiplyingInterpolate(frame, fps, 'opacity');
 		if (opacity !== undefined) {
 			result.opacity = opacity;
 		}
@@ -135,7 +132,7 @@ export default class LazyTransitions {
 		return result;
 	}
 
-	get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributesOld {
+	get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributes {
 		// Const opacity = this.getInterpolate(frame,    'opacity');
 		const scale = this.getMultiplyingInterpolate(frame, fps, 'scale');
 		const cameraDistanceD = this.getAddingInterpolate(
@@ -184,7 +181,7 @@ export default class LazyTransitions {
 			}
 		);
 
-		const result: ThreeGroupAttributesOld = {
+		const result: ThreeGroupAttributes = {
 			scale: scale ?? 1,
 			position: new THREE.Vector3(position[0] + oscillation[0], position[1] + oscillation[1], position[2] + oscillation[2]),
 			rotation: new THREE.Euler(rotation[0], rotation[1], rotation[2]),

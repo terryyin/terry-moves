@@ -48,7 +48,7 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 0,
 			duration: 4,
-			text: "You can fire whenever you want.",
+			text: "You can fire it whenever you want.",
 			actions: [
 				...fireActions,
 				{ actor: "caller 2", actionType: "appear", duration: 0.2},

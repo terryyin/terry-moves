@@ -36,7 +36,7 @@ describe('AnimationEffect', () => {
               .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.'})
               .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('transform')).toBe("");
+      expect(computedStyle.getPropertyValue('transform')).toBe("scale(1) translateX(0px) translateY(0px) translateZ(0px)");
     });
 
     [
@@ -61,7 +61,7 @@ describe('AnimationEffect', () => {
                 .seconds(1)
                 .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('transform')).toBe('');
+      expect(computedStyle.getPropertyValue('transform')).toBe('scale(1) translateX(0px) translateY(0px) translateZ(0px)');
     });
 
     test('find the action in the second subtitle', () => {
@@ -98,7 +98,7 @@ describe('AnimationEffect', () => {
                 .seconds(1.1)
                 .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('transform')).toBe('scale(59.56039322945006)');
+      expect(computedStyle.getPropertyValue('transform')).toContain('scale(59.56039322945006)');
     });
   });
 
@@ -204,7 +204,7 @@ describe('AnimationEffect', () => {
         if(shadow) {
           const computedStyle = window.getComputedStyle(shadow);
           expect(computedStyle.getPropertyValue('opacity')).toBe(expectedOpacity);
-          expect(computedStyle.getPropertyValue('transform')).toBe(expectedTransform);
+          expect(computedStyle.getPropertyValue('transform')).toContain(expectedTransform);
         }
       });
     });

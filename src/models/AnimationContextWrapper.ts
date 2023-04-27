@@ -6,7 +6,7 @@ import { EffectCalculatorAndAction } from './EffectCalculator';
 import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
-import { TextReveal, ThreeGroupAttributesOld } from './LazyTransitions';
+import { TextReveal, ThreeGroupAttributes } from './LazyTransitions';
 
 
 export default class AnimationContextWrapper {
@@ -46,7 +46,7 @@ export default class AnimationContextWrapper {
       .getStylePresence(this.adjustedFrame, this.script.fps);
   }
 
-  get3DGroupAttributes(actor: string): ThreeGroupAttributesOld {
+  get3DGroupAttributes(actor: string): ThreeGroupAttributes {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)

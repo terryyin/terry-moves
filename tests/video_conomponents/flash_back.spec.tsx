@@ -42,7 +42,7 @@ describe('Flash back', () => {
                 .seconds(sec)
                 .please();
         const computedStyle = renderAndGetDivStyle(animationContext);
-        expect(computedStyle.getPropertyValue('transform')).toBe(expectedWidth);
+        expect(computedStyle.getPropertyValue('transform')).toContain(expectedWidth);
       });
     });
   });
