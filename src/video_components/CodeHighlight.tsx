@@ -14,7 +14,6 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
       const { line, match, replacement: newText, progress } = replacement;
   
       if (lines[line - 1]) {
-        console.log(replacement, lines[line - 1])
         const partialLength = Math.ceil(newText.length * progress);
         const partialReplacement = newText.slice(0, partialLength);
         lines[line - 1] = lines[line - 1].replace(match, partialReplacement);

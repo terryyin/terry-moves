@@ -128,7 +128,9 @@ describe('CodeHighlight', () => {
 
   describe('replacing text', () => {
     [
+      { sec: 0.5, expectedLineText: '  action(isLoad) {' },
       { sec: 1.1, expectedLineText: '  action(lo) {' },
+      { sec: 3.1, expectedLineText: '  action(loadAmount) {' },
     ].forEach(({sec, expectedLineText}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe
