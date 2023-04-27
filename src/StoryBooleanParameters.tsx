@@ -55,7 +55,7 @@ const subtitles: Subtitle[] = [
 	},
 
 	{
-			leadingBlank: 0,
+			leadingBlank: 1,
 			duration: 4,
 			text: "You can fire it whenever you want.",
 			actions: [
@@ -67,7 +67,7 @@ const subtitles: Subtitle[] = [
 	},
 
 	{
-			leadingBlank: 0,
+			leadingBlank: 1,
 			duration: 4,
 			text: "But if you load first,",
 			actions: [
@@ -76,6 +76,19 @@ const subtitles: Subtitle[] = [
 				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'true'},
 				{ actor: "callee", actionType: "highlight token", duration: 3, token: 'isLoad'},
 				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [4, 14]},
+			],
+	},
+
+	{
+			leadingBlank: 0,
+			duration: 4,
+			text: "you can fire more powerful shots.",
+			actions: [
+				...fireActions,
+			  { actor: "blaster powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
+				{ actor: "caller 1", actionType: "appear", duration: 0.2},
+				{ actor: "caller 1", actionType: "highlight lines", duration: 3, lines: [2]},
+				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [4, 6, 10, 14]},
 			],
 	},
 
@@ -190,6 +203,7 @@ export const StoryBooleanParameters: React.FC = () => {
 								<Blaster actor="blaster"/>
 								<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
 								<RocketPlume actor="blaster fire" position={[-0.6, -3, 0.3]} scale={1.8}/>
+								<RocketPlume actor="blaster powerful fire" position={[-0.6, -3, 0.3]} scale={4}/>
 								</GroupInitialState>
             </ThreeAnimationEffect>
 						</GroupInitialState>
