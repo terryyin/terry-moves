@@ -80,7 +80,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
 			<AnimationEffect actor={actor} style={{...style}}>
         <Highlight code={currentCode} language="javascript" theme={themes.vsDark}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
-              <pre className={className} style={{fontSize: "1.25rem", ...style}}>
+              <pre className={className} style={{fontSize: "1.25rem", marginTop: 0, ...style}}>
                 {tokens.map((line, i) => {
                   const lineProps = getLineProps({ line, key: i });
 

@@ -1,5 +1,7 @@
 import styled from 'styled-components'
 import React from 'react';
+import AnimationEffect from "./AnimationEffect";
+import { useAnimationContext } from '../hooks/useAnimationContext';
 
 const HealthBarContainer = styled.div`
   position: relative;
@@ -20,11 +22,16 @@ const BackgroundBar = styled.div`
 `;
 
 interface HealthBarProps {
+  actor: string;
   percentage?: number;
   leftSide?: boolean;
+  style?: React.CSSProperties;
 }
 
-const HealthBar: React.FC<HealthBarProps> = ({ percentage, leftSide }) => {
+const HealthBar: React.FC<HealthBarProps> = ({ actor, percentage, leftSide, style }) => {
+  const {position} = useAnimationContext().get3DGroupAttributes(actor);
+  const hackedProgress = position.z;
+
   const HealthBarStyled = styled.div`
     position: absolute;
     top: 0;
@@ -32,9 +39,9 @@ const HealthBar: React.FC<HealthBarProps> = ({ percentage, leftSide }) => {
     height: 100%;
     background-color: #00ff00;
     border-radius: 3px;
-    ${percentage === undefined ? `  background-image: repeating-linear-gradient(
+    ${hackedProgress === 0 ? `  background-image: repeating-linear-gradient(
       ${leftSide ? '' : '-'}45deg,
-      rgba(255, 255, 255, 0.7),
+      rgba(255, 0, 0, 0.7),
       rgba(255, 255, 255, 0.7) 10px,
       transparent 10px,
       transparent 20px
@@ -42,12 +49,14 @@ const HealthBar: React.FC<HealthBarProps> = ({ percentage, leftSide }) => {
   `;
 
   return (
-    <HealthBarContainer>
-      <BackgroundBar />
-      <HealthBarStyled
-        style={{ width: `${Math.max(0, Math.min(100, percentage ?? 100))}%` }}
-        />
-    </HealthBarContainer>
+    <AnimationEffect actor={actor} style={style}>
+      <HealthBarContainer>
+        <BackgroundBar />
+        <HealthBarStyled
+          style={{ width: `${Math.max(0, Math.min(100, hackedProgress ===0 ? 100 : hackedProgress))}%` }}
+          />
+      </HealthBarContainer>
+    </AnimationEffect>
   );
 };
 

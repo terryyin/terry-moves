@@ -152,6 +152,8 @@ const subtitles: Subtitle[] = [
 			duration: 6,
 			text: "I've been inventing countering logics in the callee and callers to keep myself busy.",
 			actions: [
+				{ actor: "loose coupling health bar", actionType: "move", duration: 0.2, absolutePosition: [0, 0, 100]},
+				{ actor: "loose coupling health bar", actionType: "move", duration: 1, absolutePosition: [0, 0, 50], offset: 0.5},
 			],
 	},
 
@@ -207,6 +209,7 @@ const subtitles: Subtitle[] = [
 		duration: 6,
 		text: "The boolean parameter makes the callers and callee tightly coupled.",
 		actions: [
+			{ actor: "loose coupling health bar", actionType: "move", duration: 1, absolutePosition: [0, 0, 10], offset: 0},
 			{ actor: 'caller 2 callout1', actionType: 'disappear', duration: 0.5},
 			{ actor: 'caller 3 callout1', actionType: 'disappear', duration: 0.5},
 		],
@@ -239,7 +242,9 @@ const subtitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 5,
 			text: "This reduces complexity and dependencies, resulting in lower coupling.",
-			actions: [],
+			actions: [
+				{ actor: "loose coupling health bar", actionType: "move", duration: 1, absolutePosition: [0, 0, 90], offset: 0},
+			],
 	},
 
 
@@ -338,7 +343,7 @@ const caller3 = `  // Caller 3
 export const StoryBooleanParameters: React.FC = () => {
   return (
 		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={subtitles}  >
-    <AbsoluteFill style={{ backgroundColor: '#220011', fontFamily: 'Roboto, sans-serif', }}>
+    <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
           <ThreeDFrame >
@@ -348,7 +353,7 @@ export const StoryBooleanParameters: React.FC = () => {
 							intensity={15}
 							color={0xffffff}
 						/>	
-						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 4, 0]} scale={1}>
+						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 3.5, 0]} scale={1}>
             <ThreeAnimationEffect actor="blaster assembly" cameraDistance={8} lookAtY={0} cameraY={0}>
 								<Blaster actor="blaster"/>
 								<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
@@ -360,10 +365,10 @@ export const StoryBooleanParameters: React.FC = () => {
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
-		<CodeHighlight actor="caller 1" codeString={caller1} style={{ left: '5%', top: '30%', width: '40%', height: '20%', backgroundColor: "black"}}/>
-		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '52%', width: '40%', height: '20%', backgroundColor: "black"}}/>
-		<CodeHighlight actor="caller 3" codeString={caller3} style={{ left: '5%', top: '74%', width: '40%', height: '20%', backgroundColor: "black"}}/>
-		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}/>
+		<CodeHighlight actor="caller 1" codeString={caller1} style={{ left: '5%', top: '30%', width: '40%', height: '20%', }}/>
+		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '50%', width: '40%', height: '20%', }}/>
+		<CodeHighlight actor="caller 3" codeString={caller3} style={{ left: '5%', top: '70%', width: '40%', height: '20%', }}/>
+		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', }}/>
 
 		<CalloutCloud actor='caller 1 callout1' style={{top: '10%', left: "2%"}} tailShift={-70} tailHeightPx={100}>
 			<span style={{ fontSize: '30px', margin: 0 }} > 🤔 Can we pass the load amount to action()? 💡  </span>
@@ -405,11 +410,15 @@ export const StoryBooleanParameters: React.FC = () => {
     }} text="Seeking High Cohesion, Loose Coupling"/>
 
 		</AnimationEffect>
-    <AbsoluteFill style={{ left: '10%', top: '2.4%', width: '40%', height: '3%'}}>
-		<HealthBar leftSide percentage={undefined}/>
+    <AbsoluteFill style={{ left: '0%',  top: '0.5%', width: '10%', height: '10%'}}>
+			<span style={{fontFamily: 'sans-serif', fontSize: '15px', color: "#408fdd", textAlign: 'center'}}>Loose<br/>Coupling</span>
 		</AbsoluteFill>
+    <AbsoluteFill style={{ left: '90%',  top: '0.5%', width: '10%', height: '10%'}}>
+			<span style={{fontFamily: 'sans-serif', fontSize: '15px', color: "#ff8e00", textAlign: 'center'}}>high<br/>Cohesion</span>
+		</AbsoluteFill>
+		<HealthBar leftSide actor="loose coupling health bar" percentage={undefined} style={{ left: '10%', top: '2.4%', width: '40%', height: '3%'}}/>
     <AbsoluteFill style={{ left: '50%', top: '2.4%', width: '40%', height: '3%'}}>
-		<HealthBar percentage={75} />
+		<HealthBar actor="high cohesion health bar" percentage={75} />
 		</AbsoluteFill>
     <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '6%', width: '10%', height: '10%'}}>
 			<span style={{fontSize: '24px'}}>terry@</span>
