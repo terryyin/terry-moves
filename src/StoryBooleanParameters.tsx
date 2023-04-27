@@ -97,12 +97,51 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "The function 'action' is call from many places.",
 			actions: [
-				...fireActions,
 				{ actor: "caller 3", actionType: "appear", duration: 0.2},
 				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'action'},
 				{ actor: "caller 2", actionType: "highlight token", duration: 3, token: 'action'},
 				{ actor: "caller 3", actionType: "highlight token", duration: 3, token: 'action'},
 				{ actor: "callee", actionType: "highlight token", duration: 3, token: 'action'},
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 4,
+			text: "A boolean parameter reduces the number of API calls the users have to remember.",
+			actions: [
+				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'true'},
+				{ actor: "caller 2", actionType: "highlight token", duration: 3, token: 'false'},
+				{ actor: "caller 3", actionType: "highlight token", duration: 3, token: 'true'},
+				{ actor: "callee", actionType: "highlight token", duration: 3, token: 'isLoad'},
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 4,
+			text: "So, what's the problem?",
+			actions: [
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 4,
+			text: "As we can see, every user know exactly what they want.",
+			actions: [
+				{ actor: "caller 1", actionType: "highlight token", duration: 7, token: 'true'},
+				{ actor: "caller 2", actionType: "highlight token", duration: 7, token: 'false'},
+				{ actor: "caller 3", actionType: "highlight token", duration: 7, token: 'true'},
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 4,
+			text: "It means the condition 'isLoad' in 'action' is redundant.",
+			actions: [
+				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [3, 5]},
 			],
 	},
 
