@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-export type ActionType = 'type' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'type' | 'highlight lines' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -22,6 +22,11 @@ export interface TextAction extends BaseAction {
   text: string;
 }
 
+export interface HighlightLinesAction extends BaseAction {
+  actionType: 'highlight lines';
+  lines: number[];
+}
+
 export interface AbsolutePositionAction extends BaseAction {
   actionType: 'move' | 'camera look at';
   absolutePosition: number | Vector2 | Vector3;
@@ -42,7 +47,7 @@ export interface ThreeDRotateAction extends BaseAction {
   totalRotation: [number, number, number];
 }
 
-export type ThreeDAction = TextAction | ThreeDRotateAction | AbsolutePositionAction | OneDimensionalAction;
+export type ThreeDAction = ThreeDRotateAction | AbsolutePositionAction | OneDimensionalAction;
 
 export interface ThreeDAnimationAction extends BaseAction {
   actionType: '3d animation start' | '3d animation reverse';
@@ -52,7 +57,7 @@ export interface ThreeDAnimationAction extends BaseAction {
   freezeBeforeStart?: boolean;
 }
 
-export type Action = ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
+export type Action = TextAction | HighlightLinesAction | ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
 
 export type FlashBack = {
   duration: number;

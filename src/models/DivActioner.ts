@@ -45,9 +45,7 @@ export default class DivActioner extends DivBaseActioner {
 			case '3d rotate':
 				return  this.rotate(this.action.totalRotation);
 			default:
-				throw new Error(
-					`Unknown action type for div ${this.action.actionType}`
-				);
+				return new LazyTransitions();
 		}
 	}
 

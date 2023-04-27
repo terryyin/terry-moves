@@ -52,6 +52,7 @@ const subtitles: Subtitle[] = [
 			actions: [
 				...fireActions,
 				{ actor: "caller 2", actionType: "appear", duration: 0.2},
+				{ actor: "caller 2", actionType: "highlight lines", duration: 1, lines: [2]},
 			],
 	},
 	{
@@ -170,8 +171,8 @@ export const StoryBooleanParameters: React.FC = () => {
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
-		<CodeHighlight actor="callee" codeString={caller2} style={{ left: '5%', top: '53%', width: '40%', height: '20%', backgroundColor: "black"}}/>
-		<CodeHighlight actor="caller 2" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}/>
+		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '53%', width: '40%', height: '20%', backgroundColor: "black"}}/>
+		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}/>
     <AnimationEffect actor="subtitles" >
 			<Subtitles scale={1.2} />
 			</AnimationEffect>
