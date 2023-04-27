@@ -19,6 +19,7 @@ import { GroupInitialState } from './video_components/GroupInitialState';
 import { RocketPlume } from './parts/RocketPlume';
 import { CodeHighlight } from './video_components/CodeHighlight';
 import { CalloutCloud } from './video_components/CalloutCloud';
+import HealthBar from './video_components/HealthBar';
 
 const fireActions: Action[] =
 [
@@ -404,10 +405,16 @@ export const StoryBooleanParameters: React.FC = () => {
     }} text="Seeking High Cohesion, Loose Coupling"/>
 
 		</AnimationEffect>
-    <AbsoluteFill style={{ left: '80%', top: '5%', width: '10%', height: '20%'}}>
-			<span style={{fontSize: '28px'}}>terry@</span>
+    <AbsoluteFill style={{ left: '10%', top: '2.4%', width: '40%', height: '3%'}}>
+		<HealthBar leftSide percentage={undefined}/>
 		</AbsoluteFill>
-    <AbsoluteFill style={{ left: '90%', top: '2%', width: '10%', height: '20%'}}>
+    <AbsoluteFill style={{ left: '50%', top: '2.4%', width: '40%', height: '3%'}}>
+		<HealthBar percentage={75} />
+		</AbsoluteFill>
+    <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '6%', width: '10%', height: '10%'}}>
+			<span style={{fontSize: '24px'}}>terry@</span>
+		</AbsoluteFill>
+    <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '-2%', width: '12%', height: '20%'}}>
 			<OddeLogo />
 			<FlipCoin speed={2} interval={4} shift={1} >
 			  <OddeLogoInner />
