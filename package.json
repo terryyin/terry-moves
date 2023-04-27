@@ -4,7 +4,7 @@
 	"description": "A React Three Fiber Project",
 	"scripts": {
 		"start": "remotion preview",
-		"build": "remotion render --timeout=60000 StoryProductDeveloper out/video.mp4",
+		"build": "remotion render --timeout=60000 StoryBooleanParameters out/video.mp4",
 		"upgrade": "remotion upgrade",
 		"test": "npx jest && eslint src --ext ts,tsx,js,jsx && tsc"
 	},
@@ -16,10 +16,12 @@
 		"@remotion/cli": "^3.0.0",
 		"@remotion/media-utils": "^3.0.0",
 		"@remotion/three": "^3.0.0",
+		"@types/styled-components": "^5.1.26",
 		"prism-react-renderer": "^2.0.3",
 		"react": "^18.0.0",
 		"react-dom": "^18.0.0",
 		"remotion": "^3.0.0",
+		"styled-components": "^5.3.10",
 		"three": "^0.145.0"
 	},
 	"devDependencies": {

@@ -18,6 +18,7 @@ import { Blaster } from './parts/Blaster';
 import { GroupInitialState } from './video_components/GroupInitialState';
 import { RocketPlume } from './parts/RocketPlume';
 import { CodeHighlight } from './video_components/CodeHighlight';
+import { CalloutCloud } from './video_components/CalloutCloud';
 
 const fireActions: Action[] =
 [
@@ -39,14 +40,14 @@ const subtitles: Subtitle[] = [
 			duration: 5,
 			text: "",
 			actions: [
-					{ actor: "second title", actionType: "type", duration: 3, text: "Seeking for High Cohesion, Loose Coupling Design" },
+					{ actor: "second title", actionType: "type", duration: 3, text: "Seeking High Cohesion, Loose Coupling Design" },
 			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
 			],
 	},
 	{
 			leadingBlank: 1,
-			duration: 4,
-			text: "In my game program, a Blaster is a powerful tool.",
+			duration: 4.5,
+			text: "In my game program, there's a powerful tool called a Blaster.",
 			actions: [
 					{ actor: "title", actionType: "disappear", duration: 1 },
 					{ actor: "subtitles", actionType: "appear", duration: 1 },
@@ -56,8 +57,8 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 5,
-			text: "You can fire it whenever you want.",
+			duration: 4,
+			text: "You can fire the Blaster whenever you want.",
 			actions: [
 				...fireActions,
 				{ actor: "caller 2", actionType: "appear", duration: 0.2},
@@ -69,7 +70,7 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 4,
-			text: "But if you load it first,",
+			text: "But if you load it first, ",
 			actions: [
 				...loadActions,
 				{ actor: "caller 1", actionType: "appear", duration: 0.2},
@@ -95,7 +96,7 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 4,
-			text: "The function 'action' is call from many places.",
+			text: "The function action() is called from many places in the code.",
 			actions: [
 				{ actor: "caller 3", actionType: "appear", duration: 0.2},
 				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'action'},
@@ -107,20 +108,20 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 4,
-			text: "A boolean parameter reduces the number of API calls the users have to remember.",
+			duration: 7,
+			text: "Using a boolean parameter reduces the number of API calls users have to remember.",
 			actions: [
-				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'true'},
-				{ actor: "caller 2", actionType: "highlight token", duration: 3, token: 'false'},
-				{ actor: "caller 3", actionType: "highlight token", duration: 3, token: 'true'},
-				{ actor: "callee", actionType: "highlight token", duration: 3, token: 'isLoad'},
+				{ actor: "caller 1", actionType: "highlight token", duration: 7, token: 'true'},
+				{ actor: "caller 2", actionType: "highlight token", duration: 7, token: 'false'},
+				{ actor: "caller 3", actionType: "highlight token", duration: 7, token: 'true'},
+				{ actor: "callee", actionType: "highlight token", duration: 7, token: 'isLoad'},
 			],
 	},
 
 	{
 			leadingBlank: 1,
 			duration: 4,
-			text: "So, what's the problem?",
+			text: "So, what's the problem with using a boolean parameter?",
 			actions: [
 			],
 	},
@@ -128,7 +129,7 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 4,
-			text: "As we can see, every user know exactly what they want.",
+			text: "As we can see, every caller knows exactly what they want.",
 			actions: [
 				{ actor: "caller 1", actionType: "highlight token", duration: 7, token: 'true'},
 				{ actor: "caller 2", actionType: "highlight token", duration: 7, token: 'false'},
@@ -138,10 +139,10 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 4,
-			text: "It means the condition 'isLoad' in 'action' is redundant.",
+			duration: 5,
+			text: "It means the condition 'isLoad' in the 'action' function is redundant.",
 			actions: [
-				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [3, 5]},
+				{ actor: "callee", actionType: "highlight lines", duration: 5, lines: [3, 5]},
 			],
 	},
 
@@ -155,9 +156,10 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 5,
-			text: "Say, now Caller 1 need to tell how much to load.",
+			duration: 8,
+			text: "Say, now Caller 1 is propsing an interface change.",
 			actions: [
+				{ actor: 'caller 1 callout1', actionType: 'appear', duration: 0.5},
 				{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '1000'},
 				{ actor: "caller 1", actionType: "highlight token", duration: 6.9, token: '1000', style: 'wavy underline'},
 			],
@@ -168,6 +170,7 @@ const subtitles: Subtitle[] = [
 			duration: 6,
 			text: "So we changed the API to take a parameter 'loadAmount'.",
 			actions: [
+				{ actor: 'callee callout1', actionType: 'appear', duration: 0.5},
 				{ actor: "callee", actionType: "replace text", duration: 1, line: 2, match: 'isLoad', replacement: 'loadAmount'},
 				{ actor: "caller 2", actionType: "highlight token", duration: 20, token: 'false', style: 'wavy underline', offset: 1},
 				{ actor: "caller 3", actionType: "highlight token", duration: 20, token: 'true', style: 'wavy underline', offset: 1},
@@ -177,25 +180,112 @@ const subtitles: Subtitle[] = [
 			],
 	},
 
+	{
+		leadingBlank: 1,
+		duration: 6,
+		text: "Caller 3 is happy with the new API.",
+		actions: [
+			{ actor: 'caller 1 callout1', actionType: 'disappear', duration: 1.5},
+			{ actor: 'caller 3 callout1', actionType: 'appear', duration: 0.5},
+			{ actor: "caller 3", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '9999999'},
+		],
+	},
+
+	{
+		leadingBlank: 1,
+		duration: 6,
+		text: "But Caller 2 is confused about why they are involved in this change.",
+		actions: [
+			{ actor: 'callee callout1', actionType: 'disappear', duration: 1.5},
+			{ actor: 'caller 2 callout1', actionType: 'appear', duration: 0.5},
+		],
+	},
+
+	{
+		leadingBlank: 1,
+		duration: 6,
+		text: "The boolean parameter makes the callers and callee tightly coupled.",
+		actions: [
+			{ actor: 'caller 2 callout1', actionType: 'disappear', duration: 0.5},
+			{ actor: 'caller 3 callout1', actionType: 'disappear', duration: 0.5},
+		],
+	},
+
+	{
+		leadingBlank: 1,
+		duration: 6,
+		text: [
+			"This tight coupling:",
+			"* introduces unnecessary complexity.",
+			"* makes changes harder.",
+			"* complicates collaboration.",
+		],
+		scale: 1.3,
+		position: 'center',
+		
+		actions: [
+		],
+	},
 
 	{
 			leadingBlank: 0,
-			duration: 4,
-			text: "gun.action(true); and gun.action(false);",
+			duration: 5,
+			text: "Just let callers call the methods they want.",
 			actions: [],
 	},
-	{
-			leadingBlank: 1,
-			duration: 4,
-			text: "The implementation might look like this:",
-			actions: [
-				...fireActions
-			],
-	},
+
 	{
 			leadingBlank: 0,
-			duration: 4,
-			text: "class Gun { action(isLoad) { this.fire(); if(isLoad) this.load(); }}",
+			duration: 5,
+			text: "This reduces complexity and dependencies, resulting in lower coupling.",
+			actions: [],
+	},
+
+
+	{
+			leadingBlank: 1,
+			duration: 7,
+			text: "However, there's a pitfall that might bring more significant problems than maintaining tight coupling.",
+			actions: [
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 5,
+			text: "After load, the Blaster must be fired. Otherwise, it will explode.",
+			actions: [
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 5,
+			text: "Well, no worries. Our current code is doing exactly that.",
+			actions: [
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 5,
+			text: "High cohesion means the things that belong together are together.",
+			actions: [
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 5,
+			text: "Future changes will be error-prone due to the lack of cohesion.",
+			actions: [
+			],
+	},
+
+	{
+			leadingBlank: 0,
+			duration: 5,
+			text: "Make the code cohesive.",
 			actions: [
 			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.2, totalRotation: [-60, 45, 30]},
 			  { actor: "blaster fire", actionType: "3d animation start", duration: 1, speed: 2, offset: 1 },
@@ -204,42 +294,11 @@ const subtitles: Subtitle[] = [
 					// { actor: "example2", actionType: "highlight", duration: 2 },
 			],
 	},
+
 	{
 			leadingBlank: 1,
 			duration: 4,
-			text: "We can refactor the code to improve coupling and cohesion.",
-			actions: [
-					{ actor: "refactor", actionType: "appear", duration: 1 },
-			],
-	},
-	{
-			leadingBlank: 0,
-			duration: 4,
-			text: "Change the functions to gun.fire() and gun.load().",
-			actions: [
-					// { actor: "refactor", actionType: "highlight", duration: 2 },
-			],
-	},
-	{
-			leadingBlank: 1,
-			duration: 4,
-			text: "This reduces complexity and dependencies, resulting in lower coupling.",
-			actions: [
-					{ actor: "benefits", actionType: "appear", duration: 1 },
-			],
-	},
-	{
-			leadingBlank: 1,
-			duration: 4,
-			text: "Keep in mind that high cohesion and loose coupling are essential for good design.",
-			actions: [
-					{ actor: "conclusion", actionType: "appear", duration: 1 },
-			],
-	},
-	{
-			leadingBlank: 1,
-			duration: 4,
-			text: "In conclusion, avoid boolean parameters and use meaningful names.",
+			text: "In conclusion, avoid boolean parameters, use meaningful names, and aim for high cohesion and loose coupling in design.",
 			actions: [
 					{ actor: "final-thoughts", actionType: "appear", duration: 1 },
 			],
@@ -304,6 +363,21 @@ export const StoryBooleanParameters: React.FC = () => {
 		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '52%', width: '40%', height: '20%', backgroundColor: "black"}}/>
 		<CodeHighlight actor="caller 3" codeString={caller3} style={{ left: '5%', top: '74%', width: '40%', height: '20%', backgroundColor: "black"}}/>
 		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', backgroundColor: "black"}}/>
+
+		<CalloutCloud actor='caller 1 callout1' style={{top: '10%', left: "2%"}} tailShift={-70} tailHeightPx={100}>
+			<span style={{ fontSize: '30px', margin: 0 }} > 🤔 Can we pass the load amount to action()? 💡  </span>
+		</CalloutCloud>
+		<CalloutCloud actor='callee callout1' style={{top: '21%', left: "20%"}} tailShift={20}>
+			<span style={{ fontSize: '30px', margin: 0 }} > Absolutely! Let's update the interface. 🛠️  </span>
+		</CalloutCloud>
+		<CalloutCloud actor='caller 3 callout1' style={{top: '66%', left: "5%"}} tailShift={-20}>
+			<span style={{ fontSize: '30px', margin: 0 }} > Woohoo! 🎉 Just what I needed! </span>
+		</CalloutCloud>
+		<CalloutCloud actor='caller 2 callout1' style={{top: '43%', left: "1%"}} tailShift={-40}>
+			<span style={{ fontSize: '30px', margin: 0 , backgroundColor: "#ffaaaa"}} > 😠 What?! Why change it? What amount? 🚫  </span>
+		</CalloutCloud>
+
+
     <AnimationEffect actor="subtitles" >
 			<Subtitles scale={1.2} />
 			</AnimationEffect>
@@ -327,7 +401,7 @@ export const StoryBooleanParameters: React.FC = () => {
       fontSize: '30px',
 			color: 'white',
 			fontFamily: 'IBM Plex Mono',
-    }} text="And High Cohesion, Loose Coupling"/>
+    }} text="Seeking High Cohesion, Loose Coupling"/>
 
 		</AnimationEffect>
     <AbsoluteFill style={{ left: '80%', top: '5%', width: '10%', height: '20%'}}>
