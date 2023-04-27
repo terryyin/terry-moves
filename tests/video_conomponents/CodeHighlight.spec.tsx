@@ -129,8 +129,8 @@ describe('CodeHighlight', () => {
   describe('replacing text', () => {
     [
       { sec: 0.5, expectedLineText: '  action(isLoad) {' },
-      { sec: 1.1, expectedLineText: '  action(lo) {' },
-      { sec: 1.6, expectedLineText: '  action(loadAmou) {' },
+      { sec: 1.1, expectedLineText: '  action(l|) {' },
+      { sec: 1.6, expectedLineText: '  action(loadAm) {' },
       { sec: 3.1, expectedLineText: '  action(loadAmount) {' },
     ].forEach(({sec, expectedLineText}) => {
       test(` at sec ${sec}`, () => {
@@ -143,6 +143,27 @@ describe('CodeHighlight', () => {
                 .please();
         const div = renderAndGetDiv(animationContext);
         expect(divOfLine(div, 2).textContent).toBe(expectedLineText);
+      });
+    });
+  });
+
+  describe('insert text', () => {
+    [
+      { sec: 0.5, expectedLineText: '      this.load();' },
+      { sec: 1.1, expectedLineText: '      this.load();' },
+      { sec: 1.6, expectedLineText: '      this.load();' },
+      { sec: 3.1, expectedLineText: '      this.load();' },
+    ].forEach(({sec, expectedLineText}) => {
+      test(` at sec ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                  { actor: 'under-test', actionType: 'insert text', duration: 1, line: 4, column: 10, text: 'loadAmount' }
+                ]})
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        expect(divOfLine(div, 4).textContent).toBe(expectedLineText);
       });
     });
   });

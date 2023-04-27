@@ -170,7 +170,7 @@ const subtitles: Subtitle[] = [
 			actions: [
 				{ actor: "callee", actionType: "replace text", duration: 1, line: 2, match: 'isLoad', replacement: 'loadAmount'},
 				{ actor: "callee", actionType: "replace text", duration: 1.5, line: 3, match: 'isLoad', replacement: 'loadAmount > 0', offset: 1.2},
-				// { actor: "callee", actionType: "insert text", duration: 3, line: 4, column: 10, replacement: 'loadAmount'},
+				{ actor: "callee", actionType: "insert text", duration: 3, line: 4, column: 10, text: 'loadAmount'},
 				// { actor: "callee", actionType: "insert text", duration: 3, line: 10, column: 10, replacement: 'loadAmount'},
 			],
 	},
