@@ -36,8 +36,8 @@ export default class DivActioner extends DivBaseActioner {
 				return this.scale([0, 1])
 					.combine(this.move([0, -this.action.distance, 0], [0, 0, 0]))
 					.combine(this.rotateFrom([0, -360, 0]));
-			case 'ocillate':
-				return this.ocillate(this.action.delta);
+			case 'oscillate':
+				return this.oscillate(this.action.delta);
 			case 'camera zoom in':
 				return  this.cameraZoomIn(this.action.distance);
 			case 'camera look at':

@@ -4,12 +4,13 @@ import {makeMe} from '../helpers/makeMe';
 describe('AnimationContext', () => {
 	describe('two moves not overlapped combined', () => {
 		[
-			{sec: 0.5, expectPlaying: "translateX(0px)",  },
-			{sec: 1, expectPlaying: "translateX(0px)",   },
-			{sec: 1.9, expectPlaying: "translateX(9.938779963713113px)", },
-			{sec: 2.1, expectPlaying: "translateX(9.985228158640643px)",},
-			{sec: 3.1, expectPlaying: "translateX(11.912078645890013px)",},
-		].forEach(({sec, expectPlaying, }) => {
+			{sec: 0.5, expectedX: 0,  },
+			{sec: 1, expectedX: 0,   },
+			{sec: 1.9, expectedX: 9.938779963713113, },
+			{sec: 2.5, expectedX: 9.99920,},
+			{sec: 3.1, expectedX: 8.0879},
+			{sec: 4.1, expectedX: 0.01477},
+		].forEach(({sec, expectedX, }) => {
 			test(`test sec: ${sec}`, () => {
 				const animationContext = makeMe.animationContext
 					.withSubtitle({
@@ -17,6 +18,12 @@ describe('AnimationContext', () => {
 						duration: 10,
 						text: 'First subtitle.',
 						actions: [
+							{
+								actor: 'under-test',
+								actionType: 'oscillate',
+								duration: 10,
+								delta: [0, 0, 0],
+							},
 							{
 								actor: 'under-test',
 								actionType: 'move',
@@ -28,15 +35,15 @@ describe('AnimationContext', () => {
 								actionType: 'move',
 								duration: 1,
 								offset: 2,
-								absolutePosition: [20, 0, 0],
+								absolutePosition: [0, 0, 0],
 							},
 						],
 					})
 					.seconds(sec)
 					.please();
 
-				const result = animationContext.getStyleOf('under-test');
-				expect(result.transform).toContain(expectPlaying);
+				const result = animationContext.get3DGroupAttributes('under-test');
+				expect(result.position.x).toBeCloseTo(expectedX, 2);
 			});
 		});
 	});

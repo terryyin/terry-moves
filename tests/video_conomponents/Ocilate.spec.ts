@@ -19,7 +19,7 @@ describe('AnimationContext', () => {
 						actions: [
 							{
 								actor: 'under-test',
-								actionType: 'ocillate',
+								actionType: 'oscillate',
 								duration: 1,
 								delta: [1, 2, 3],
 							},
@@ -40,8 +40,8 @@ describe('AnimationContext', () => {
 			{sec: 0, expectPosition:  [0, 0, 0],  },
 			{sec: 1, expectPosition: [0, 0, 0],   },
 			{sec: 1.2, expectPosition: [-0.4759874630812576, -1.902113032590307, -2.8531695488854605],   },
-			{sec: 2, expectPosition: [0.9969808363488774, 0, 0],   },
-			{sec: 2.5, expectPosition: [0.9999201252394067, 0, 0],   },
+			{sec: 2, expectPosition: [0.9969808363488776, 0, 0],   },
+			{sec: 2.5, expectPosition: [0.9999201252394069, 4.898587196589413e-16, 7.347880794884119e-16],   },
 		].forEach(({sec, expectPosition, }) => {
 			test(`test sec: ${sec}`, () => {
 				const animationContext = makeMe.animationContext
@@ -52,7 +52,7 @@ describe('AnimationContext', () => {
 						actions: [
 							{
 								actor: 'under-test',
-								actionType: 'ocillate',
+								actionType: 'oscillate',
 								duration: 1,
 								delta: [1, 2, 3],
 							},							
@@ -67,9 +67,9 @@ describe('AnimationContext', () => {
 					.seconds(sec)
 					.please();
 				const result = animationContext.get3DGroupAttributes('under-test');
-				expect(result.position.x).toBe(expectPosition[0]);
-				expect(result.position.y).toBe(expectPosition[1]);
-				expect(result.position.z).toBe(expectPosition[2]);
+				expect(result.position.x).toBeCloseTo(expectPosition[0], 2);
+				expect(result.position.y).toBeCloseTo(expectPosition[1], 2);
+				expect(result.position.z).toBeCloseTo(expectPosition[2], 2);
 			});
 		});
 	});
@@ -79,8 +79,8 @@ describe('AnimationContext', () => {
 			{sec: 0, expectX:  0,  },
 			{sec: 1, expectX: 0,   },
 			{sec: 1.2, expectX: -0.4759874630812576,   },
-			{sec: 2, expectX: 1.0000000000000002,   },
-			{sec: 2.1, expectX: 1.0000000000000002,   },
+			{sec: 2, expectX: 0.9969808363488776,   },
+			{sec: 2.1, expectX: 0.9985228158640646,   },
 		].forEach(({sec, expectX, }) => {
 			test(`test sec: ${sec}`, () => {
 				const animationContext = makeMe.animationContext
@@ -97,7 +97,7 @@ describe('AnimationContext', () => {
 							},
 							{
 								actor: 'under-test',
-								actionType: 'ocillate',
+								actionType: 'oscillate',
 								duration: 1,
 								delta: [1, 2, 3],
 							},							

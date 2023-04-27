@@ -34,13 +34,13 @@ export default abstract class DivBaseActioner {
 		return result;
 	}
 
-	protected ocillate(distances: number | Vector3 | Vector2): LazyTransitions {
+	protected oscillate(distances: number | Vector3 | Vector2): LazyTransitions {
 		const result = new LazyTransitions();
 		const vector: [number, number, number] = toVector3(distances);
 
-		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key, index) => {
+		(['oscillateX', 'oscillateY', 'oscillateZ'] as InterpolateFields[]).forEach((key, index) => {
 			result.setInterpolation(key, {
-				interpolateType: 'ocillate',
+				interpolateType: 'oscillate',
 				inputRange: this.effectCalculator.frameRange,
 				distance: vector[index],
 			});
