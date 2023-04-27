@@ -5,7 +5,24 @@ import { useAnimationContext } from "../hooks/useAnimationContext";
 import { HighlightStyle } from "@/models/Subtitles";
 
 export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties}> = ({actor, style, codeString}) => {
-  const { highlights } = useAnimationContext().getCodeTransfomation(actor);
+  const { highlights, textReplacements } = useAnimationContext().getCodeTransfomation(actor);
+
+  const replace = (currentText: string): string => {
+    const lines = currentText.split('\n');
+  
+    textReplacements.forEach((replacement) => {
+      const { line, match, replacement: newText, progress } = replacement;
+  
+      if (lines[line - 1]) {
+        console.log(replacement, lines[line - 1])
+        const partialLength = Math.ceil(newText.length * progress);
+        const partialReplacement = newText.slice(0, partialLength);
+        lines[line - 1] = lines[line - 1].replace(match, partialReplacement);
+      }
+    });
+  
+    return lines.join('\n');
+  }
 
   const lineHighlightStyle = (line: number): HighlightStyle[] => {
     const result: HighlightStyle[] = [];
@@ -44,13 +61,14 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
     }, {} as CSSProperties);
   }
 
+  const currentCode = replace(codeString);
   const lineStyle = (line: number): CSSProperties => highLightStylesToCSS(lineHighlightStyle(line));
   const tokenStyle = (token: string): CSSProperties => highLightStylesToCSS(tokenHighlightStyle(token));
     
 
   return (
 			<AnimationEffect actor={actor} style={{...style}}>
-        <Highlight code={codeString} language="javascript" theme={themes.vsDark}>
+        <Highlight code={currentCode} language="javascript" theme={themes.vsDark}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
               <pre className={className} style={{fontSize: "1.25rem", ...style}}>
                 {tokens.map((line, i) => {

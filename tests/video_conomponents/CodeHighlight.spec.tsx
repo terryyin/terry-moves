@@ -35,7 +35,9 @@ describe('CodeHighlight', () => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const styleOfLine = (div: HTMLDivElement, line: number) => window.getComputedStyle(div.querySelector(`.prism-code>:nth-child(${line})`)!);
+  const divOfLine = (div: HTMLDivElement, line: number) => div.querySelector(`.prism-code>:nth-child(${line})`)!;
+
+  const styleOfLine = (div: HTMLDivElement, line: number) => window.getComputedStyle(divOfLine(div, line));
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const tokenElement = (div: HTMLDivElement, line: number, token: number): HTMLSpanElement => div.querySelector(`.prism-code>:nth-child(${line})>:nth-child(${token})`)!
@@ -120,6 +122,24 @@ describe('CodeHighlight', () => {
                 .please();
         const div = renderAndGetDiv(animationContext);
         expect(styleOfLine(div, 1).textDecoration).toBe(expectedDecoration);
+      });
+    });
+  });
+
+  describe('replacing text', () => {
+    [
+      { sec: 1.1, expectedLineText: '  action(lo) {' },
+    ].forEach(({sec, expectedLineText}) => {
+      test(` at sec ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                  { actor: 'under-test', actionType: 'replace text', duration: 1, line: 2, match: 'isLoad', replacement: 'loadAmount' }
+                ]})
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        expect(divOfLine(div, 2).textContent).toBe(expectedLineText);
       });
     });
   });

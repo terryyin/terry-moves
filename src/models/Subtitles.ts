@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-export type ActionType = 'type' | 'highlight lines' | 'highlight token' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'type' | 'highlight lines' | 'highlight token' | 'replace text' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -36,6 +36,15 @@ export interface HighlightTokenAction extends BaseAction {
   style? : HighlightStyle
 }
 
+export interface ReplaceTextAction extends BaseAction {
+  actionType: 'replace text';
+  line: number;
+  match: string;
+  replacement: string;
+}
+
+type CodeAction = HighlightLinesAction | HighlightTokenAction | ReplaceTextAction;
+
 export interface AbsolutePositionAction extends BaseAction {
   actionType: 'move' | 'camera look at';
   absolutePosition: number | Vector2 | Vector3;
@@ -65,8 +74,6 @@ export interface ThreeDAnimationAction extends BaseAction {
   pauseAtEnd?: boolean;
   freezeBeforeStart?: boolean;
 }
-
-type CodeAction = HighlightLinesAction | HighlightTokenAction;
 
 export type Action = TextAction | CodeAction | ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
 

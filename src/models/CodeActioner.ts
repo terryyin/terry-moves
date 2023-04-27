@@ -1,4 +1,4 @@
-import { Action, HighlightStyle } from '@/models/Subtitles';
+import { Action, HighlightStyle, ReplaceTextAction } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
 
 interface HighlightBase {
@@ -15,26 +15,39 @@ interface HighlightTokens extends HighlightBase {
 
 type Highlight = HighlightLines | HighlightTokens;
 
+interface TextReplacement {
+  line: number; match: string; replacement: string; progress: number;
+}
 
 export type CodeTransformation = {
   highlights: Highlight[];
+  textReplacements: TextReplacement[];
+  showCursor: boolean;
 }
 
 
 export class LazyCodeTransformation {
   highlights: Highlight[] = [];
+  textReplacements: TextReplacement[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getCodeTransfomation(adjustedFrame: number, fps: number): CodeTransformation {
     return {
       highlights: this.highlights,
+      textReplacements: this.textReplacements,
+      showCursor: Math.floor(adjustedFrame / fps * 2) % 2 === 0,
     }
   }
 
   combine(prev: LazyCodeTransformation): LazyCodeTransformation {
     const result = new LazyCodeTransformation();
     result.highlights = [...prev.highlights, ...this.highlights];
+    result.textReplacements = [...prev.textReplacements, ...this.textReplacements];
     return result;
+  }
+
+  addTextRepacement(line: number, match: string, replacement: string, progress: number) {
+    this.textReplacements.push({line, match, replacement, progress});
   }
 
   highlightToken(token: string, style: HighlightStyle) {
@@ -67,9 +80,17 @@ export default class CodeActioner {
         return  this.highlightLines(this.action.lines, this.action.style ?? 'red background');
       case 'highlight token':
         return  this.highlightToken(this.action.token, this.action.style ?? 'red background');
+      case 'replace text':
+        return  this.replaceText(this.action);
       default:
         return new LazyCodeTransformation();
     }
+  }
+
+  replaceText(action: ReplaceTextAction): LazyCodeTransformation {
+    const result = new LazyCodeTransformation();
+    result.addTextRepacement(action.line, action.match, action.replacement, this.effectCalculator.interpolateDuration([0, 1.3]));
+    return result;
   }
 
   highlightToken(token: string, style: HighlightStyle): LazyCodeTransformation {

@@ -158,8 +158,8 @@ const subtitles: Subtitle[] = [
 			duration: 5,
 			text: "Say, now Caller 1 need to tell how much to load.",
 			actions: [
-				// { actor: "caller 1", actionType: "replace text", duration: 3, line: 2, match: 'true', value: '1000'},
-				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'true', style: 'wavy underline'},
+				{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '1000'},
+				{ actor: "caller 1", actionType: "highlight token", duration: 4, token: '1000', style: 'wavy underline'},
 				// { actor: "callee", actionType: "replace text", duration: 3, line: 2, match: 'isLoad', value: 'loadAmount'},
 				// { actor: "callee", actionType: "replace text", duration: 3, line: 3, match: 'isLoad', value: 'loadAmount > 0'},
 				// { actor: "callee", actionType: "insert text", duration: 3, line: 4, column: 10, value: 'loadAmount'},
