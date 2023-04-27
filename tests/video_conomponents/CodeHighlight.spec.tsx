@@ -34,11 +34,14 @@ describe('CodeHighlight', () => {
     return div;
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+  const styleOfLine = (div: HTMLDivElement, line: number) => window.getComputedStyle(div.querySelector(`.prism-code>:nth-child(${line})`)!);
+
   describe('highlight lines', () => {
     [
       { sec: 0.1, expectedColor: '' },
       { sec: 1.1, expectedColor: 'red' },
-      { sec: 2.1, expectedColor: '' },
+      { sec: 3.1, expectedColor: '' },
     ].forEach(({sec, expectedColor}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe
@@ -46,12 +49,13 @@ describe('CodeHighlight', () => {
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
                   { actor: 'under-test', actionType: 'highlight lines', duration: 1, lines: [1, 3, 4] }
                 ]})
+                .seconds(sec)
                 .please();
         const div = renderAndGetDiv(animationContext);
-        console.debug(div)
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        const style = window.getComputedStyle(div.querySelector('.prism-code>:nth-child(4)')!);
-        expect(style.backgroundColor).toBe(expectedColor);
+        expect(styleOfLine(div, 1).backgroundColor).toBe(expectedColor);
+        expect(styleOfLine(div, 2).backgroundColor).toBe('');
+        expect(styleOfLine(div, 3).backgroundColor).toBe(expectedColor);
+        expect(styleOfLine(div, 4).backgroundColor).toBe(expectedColor);
       });
     });
   });

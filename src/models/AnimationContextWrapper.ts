@@ -7,6 +7,7 @@ import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
 import { TextReveal, ThreeGroupAttributes } from './LazyTransitions';
+import CodeActioner, { CodeTransformation } from './CodeActioner';
 
 
 export default class AnimationContextWrapper {
@@ -58,6 +59,13 @@ export default class AnimationContextWrapper {
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
       .getTextReveal(this.adjustedFrame, this.script.fps);
+  }
+
+  getCodeTransfomation(actor: string): CodeTransformation {
+     return this.getActioner(actor)
+      .map(effectCalculator => new CodeActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
+      .reduce((prev, curr) => curr.combine(prev), CodeActioner.defaultValue)
+      .getCodeTransfomation(this.adjustedFrame, this.script.fps);
   }
 
   private isSubtitleWithFlashBack(subtitle: Subtitle): subtitle is SubtitleWithFlashBack {
