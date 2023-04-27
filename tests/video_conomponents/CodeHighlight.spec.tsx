@@ -85,4 +85,43 @@ describe('CodeHighlight', () => {
     });
   });
 
+  describe('highlight token with style', () => {
+    [
+      { sec: 1.1, expectedDecoration: 'underline wavy red' },
+    ].forEach(({sec, expectedDecoration}) => {
+      test(` at sec ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                  { actor: 'under-test', actionType: 'highlight token', duration: 1, token: "isLoad", style: 'wavy underline' }
+                ]})
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        const token = tokenElement(div, 2, 4);
+        expect(token.textContent).toBe('isLoad');
+        expect(token.style.backgroundColor).toBe('');
+        expect(token.style.textDecoration).toBe(expectedDecoration);
+      });
+    });
+  });
+
+  describe('highlight line with style', () => {
+    [
+      { sec: 1.1, expectedDecoration: 'underline wavy red' },
+    ].forEach(({sec, expectedDecoration}) => {
+      test(` at sec ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                  { actor: 'under-test', actionType: 'highlight lines', duration: 1, lines: [1], style: 'wavy underline' }
+                ]})
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        expect(styleOfLine(div, 1).textDecoration).toBe(expectedDecoration);
+      });
+    });
+  });
+
 });

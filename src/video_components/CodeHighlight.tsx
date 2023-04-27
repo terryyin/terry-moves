@@ -2,13 +2,51 @@ import { CSSProperties } from "react";
 import {Highlight, themes} from 'prism-react-renderer';
 import AnimationEffect from "./AnimationEffect";
 import { useAnimationContext } from "../hooks/useAnimationContext";
+import { HighlightStyle } from "@/models/Subtitles";
 
 export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties}> = ({actor, style, codeString}) => {
-  const { highlightLines, highlightTokens } = useAnimationContext().getCodeTransfomation(actor);
-  const lineNumberSet = new Set(highlightLines);
-  const tokenSet = new Set(highlightTokens);
+  const { highlights } = useAnimationContext().getCodeTransfomation(actor);
 
+  const lineHighlightStyle = (line: number): HighlightStyle[] => {
+    const result: HighlightStyle[] = [];
 
+    highlights.forEach((highlight) => {
+      if ('lines' in highlight && highlight.lines.includes(line)) {
+        result.push(highlight.style);
+      }
+    });
+
+    return result;
+}
+
+  const tokenHighlightStyle = (token: string): HighlightStyle[] => {
+    const result: HighlightStyle[] = [];
+
+    highlights.forEach((highlight) => {
+      if ('tokens' in highlight && highlight.tokens.includes(token)) {
+        result.push(highlight.style);
+      }
+    });
+
+    return result;
+  }
+
+  const highLightStylesToCSS = (styles: HighlightStyle[]): CSSProperties => {
+    return styles.reduce((acc, style) => {
+      switch (style) {
+        case 'red background':
+          return {...acc, background: 'red'};
+        case 'wavy underline':
+          return {...acc, textDecoration: 'underline wavy red'};
+        default:
+          return acc;
+      }
+    }, {} as CSSProperties);
+  }
+
+  const lineStyle = (line: number): CSSProperties => highLightStylesToCSS(lineHighlightStyle(line));
+  const tokenStyle = (token: string): CSSProperties => highLightStylesToCSS(tokenHighlightStyle(token));
+    
 
   return (
 			<AnimationEffect actor={actor} style={{...style}}>
@@ -18,22 +56,18 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
                 {tokens.map((line, i) => {
                   const lineProps = getLineProps({ line, key: i });
 
-                  if (lineNumberSet.has(i + 1)) {
-                    lineProps.style = {
+                  lineProps.style = {
                       ...lineProps.style,
-                      backgroundColor: 'red',
+                      ...lineStyle(i + 1),
                     };
-                  }
                   return <div {...lineProps}>
                     {line.map((token, key) => {
                       const tokenProps = getTokenProps({ token, key });
 
-                      if (tokenSet.has(token.content)) {
-                        tokenProps.style = {
-                          ...tokenProps.style,
-                          backgroundColor: 'red',
-                        };
-                      }
+                      tokenProps.style = {
+                        ...tokenProps.style,
+                        ...tokenStyle(token.content),
+                      };
                       return <span {...tokenProps} />
                     })}
                   </div>;

@@ -22,14 +22,18 @@ export interface TextAction extends BaseAction {
   text: string;
 }
 
+export type HighlightStyle = 'wavy underline' | 'red background';
+
 export interface HighlightLinesAction extends BaseAction {
   actionType: 'highlight lines';
   lines: number[];
+  style? : HighlightStyle
 }
 
 export interface HighlightTokenAction extends BaseAction {
   actionType: 'highlight token';
   token: string;
+  style? : HighlightStyle
 }
 
 export interface AbsolutePositionAction extends BaseAction {
