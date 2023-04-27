@@ -31,8 +31,8 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 5, text: "Software developers also have different attitudes towards failures.", actions: [
 			{ actor: "blue background", actionType: "disappear", duration: 5 },
 			{ actor: "starship", actionType: "move", duration: 5, absolutePosition: [0, 20, 0] },
-			{ actor: "starship", actionType: "camera look at", duration: 6, absolutePosition: [0, 5, 0] },
-			{ actor: "starship", actionType: "camera zoom in", duration: 6, distance: -20 },
+			{ actor: "camera", actionType: "camera look at", duration: 6, absolutePosition: [0, 5, 0] },
+			{ actor: "camera", actionType: "move", duration: 6, absolutePosition: [0, 0, -20] },
 	]},
 	{ leadingBlank: 0, duration: 1.5, text: "", actions: [
 			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: [0, 240, 0] },
@@ -112,14 +112,14 @@ export const StoryFailureVsFailure: React.FC = () => {
 			</AbsoluteFill>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-          <ThreeDFrame >
+          <ThreeDFrame  cameraDistance={30} lookAtY={16} cameraY={10}>
 						<directionalLight
 							castShadow
 							position={[50, 100, 50]}
 							intensity={200}
 							color={0xffffff}
 						/>	
-            <ThreeAnimationEffect actor="starship" cameraDistance={30} lookAtY={16} cameraY={10}>
+            <ThreeAnimationEffect actor="starship">
               <Starship/>
               <StarshipPlume/>
               <GroupInitialState position={[0, 0, 0]} scale={0.2} >

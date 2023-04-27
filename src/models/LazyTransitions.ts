@@ -12,7 +12,6 @@ export type ThreeGroupAttributes = {
 	position: THREE.Vector3;
 	rotation: THREE.Euler;
 	lookAtD: THREE.Vector3;
-	cameraDistanceD: number;
 };
 
 type InterpolateType = 'linear' | 'spring' | 'oscillate';
@@ -51,8 +50,7 @@ export type InterpolateFields =
 	| 'scale'
 	| 'translateY'
 	| 'translateX'
-	| 'translateZ'
-	| 'cameraDistanceD';
+	| 'translateZ';
 
 export default class LazyTransitions {
 	interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
@@ -89,7 +87,6 @@ export default class LazyTransitions {
 				'translateX',
 				'translateY',
 				'translateZ',
-				'cameraDistanceD',
 			] as InterpolateFields[]
 		).forEach((key) => {
 			const combined = [
@@ -135,11 +132,6 @@ export default class LazyTransitions {
 	get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributes {
 		// Const opacity = this.getInterpolate(frame,    'opacity');
 		const scale = this.getMultiplyingInterpolate(frame, fps, 'scale');
-		const cameraDistanceD = this.getAddingInterpolate(
-			frame,
-			fps,
-			'cameraDistanceD'
-		);
 
 		const position = [0, 0, 0];
 		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach(
@@ -190,7 +182,6 @@ export default class LazyTransitions {
 				cameraLookAt[1],
 				cameraLookAt[2]
 			),
-			cameraDistanceD: cameraDistanceD ?? 0,
 		};
 		return result;
 	}

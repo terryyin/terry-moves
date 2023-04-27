@@ -2,6 +2,7 @@ import {ThreeCanvas } from '@remotion/three';
 import React from 'react';
 import {AbsoluteFill } from 'remotion';
 import useParentSize from '../hooks/useParentSize';
+import { UnderCamera } from './UnderCamera';
 
 const container: React.CSSProperties = {
 	width: '100%',
@@ -10,8 +11,11 @@ const container: React.CSSProperties = {
 };
 
 export const ThreeDFrame: React.FC<{
+	cameraY?: number,
+	cameraDistance: number,
+	lookAtY?: number,
   children: React.ReactNode;
-}> = ({children}) => {
+}> = ({cameraY, cameraDistance, lookAtY, children}) => {
 	const {ref, size} = useParentSize();
 
 	return (
@@ -19,7 +23,9 @@ export const ThreeDFrame: React.FC<{
 				<ThreeCanvas linear width={size.width} height={size.height} >
 					<ambientLight intensity={1.5} color={0xffffff} />
 					<pointLight position={[10, 10, 0]} />
-					{children}
+					<UnderCamera cameraY={cameraY} cameraDistance={cameraDistance} lookAtY={lookAtY}>
+					  {children}
+					</UnderCamera>
 				</ThreeCanvas>
 		</AbsoluteFill>
 	);

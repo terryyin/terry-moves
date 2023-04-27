@@ -346,7 +346,7 @@ export const StoryBooleanParameters: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-          <ThreeDFrame >
+          <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
 						<directionalLight
 							castShadow
 							position={[10, 20, 15]}
@@ -354,7 +354,7 @@ export const StoryBooleanParameters: React.FC = () => {
 							color={0xffffff}
 						/>	
 						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 3.5, 0]} scale={1}>
-            <ThreeAnimationEffect actor="blaster assembly" cameraDistance={8} lookAtY={0} cameraY={0}>
+            <ThreeAnimationEffect actor="blaster assembly" >
 								<Blaster actor="blaster"/>
 								<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
 								<RocketPlume actor="blaster fire" position={[-0.6, -3, 0.3]} scale={1.8}/>
@@ -416,9 +416,9 @@ export const StoryBooleanParameters: React.FC = () => {
     <AbsoluteFill style={{ left: '90%',  top: '0.5%', width: '10%', height: '10%'}}>
 			<span style={{fontFamily: 'sans-serif', fontSize: '15px', color: "#ff8e00", textAlign: 'center'}}>high<br/>Cohesion</span>
 		</AbsoluteFill>
-		<HealthBar leftSide actor="loose coupling health bar" percentage={undefined} style={{ left: '10%', top: '2.4%', width: '40%', height: '3%'}}/>
+		<HealthBar leftSide actor="loose coupling health bar" style={{ left: '10%', top: '2.4%', width: '40%', height: '3%'}}/>
     <AbsoluteFill style={{ left: '50%', top: '2.4%', width: '40%', height: '3%'}}>
-		<HealthBar actor="high cohesion health bar" percentage={75} />
+		<HealthBar actor="high cohesion health bar" />
 		</AbsoluteFill>
     <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '6%', width: '10%', height: '10%'}}>
 			<span style={{fontSize: '24px'}}>terry@</span>

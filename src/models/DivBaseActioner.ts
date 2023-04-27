@@ -60,12 +60,6 @@ export default abstract class DivBaseActioner {
 		return result;
 	}
 
-  protected cameraZoomIn(distance: number): LazyTransitions {
-    const result = new LazyTransitions();
-    result.setInterpolation('cameraDistanceD', {interpolateType: 'spring', inputRange: this.effectCalculator.frameRange, outputRange: [0, distance]});
-    return result;
-  }
-
   protected cameraLookAt(position: number | Vector3 | Vector2): LazyTransitions {
     const result = new LazyTransitions();
 

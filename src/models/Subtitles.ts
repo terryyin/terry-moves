@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-export type ActionType = 'type' | 'highlight lines' | 'highlight token' | 'replace text' | 'insert text' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | 'camera zoom in' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'type' | 'highlight lines' | 'highlight token' | 'replace text' | 'insert text' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -63,7 +63,7 @@ export interface RelativePositionAction extends BaseAction {
 }
 
 export interface OneDimensionalAction extends BaseAction {
-  actionType: 'camera zoom in' | 'rotate and rise';
+  actionType: | 'rotate and rise';
   distance: number;
 }
 

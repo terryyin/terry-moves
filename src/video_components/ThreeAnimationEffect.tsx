@@ -1,27 +1,14 @@
-import {Euler, useThree} from '@react-three/fiber';
-import React, {useEffect} from 'react';
+import {Euler } from '@react-three/fiber';
+import React  from 'react';
 import { useAnimationContext } from '../hooks/useAnimationContext';
 
 export const ThreeAnimationEffect: React.FC<{
 	actor: string,
-	cameraDistance: number,
-	lookAtY?: number
-	cameraY?: number
   children: React.ReactNode;
-}> = ({actor, cameraDistance, lookAtY, cameraY, children, }) => {
+}> = ({actor, children, }) => {
+
 	const animationContextWrapper = useAnimationContext();
-	const { scale, position, rotation, lookAtD, cameraDistanceD } = animationContextWrapper.get3DGroupAttributes(actor);
-
-
-	// Place a camera and set the distance to the object.
-	// Then make it look at the object.
-	const camera = useThree((state) => state.camera);
-	useEffect(() => {
-		camera.position.set(0, cameraY || -0, cameraDistance + cameraDistanceD);
-		camera.near = 0.2;
-		camera.far = Math.max(5000, cameraDistance * 2);
-		camera.lookAt(0, (lookAtY || 0) + lookAtD.y, 0);
-	}, [camera, cameraDistance, lookAtY , cameraY, lookAtD, cameraDistanceD]);
+	const { scale, position, rotation } = animationContextWrapper.get3DGroupAttributes(actor);
 
 
 	return (

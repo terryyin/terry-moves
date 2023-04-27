@@ -23,12 +23,11 @@ const BackgroundBar = styled.div`
 
 interface HealthBarProps {
   actor: string;
-  percentage?: number;
   leftSide?: boolean;
   style?: React.CSSProperties;
 }
 
-const HealthBar: React.FC<HealthBarProps> = ({ actor, percentage, leftSide, style }) => {
+const HealthBar: React.FC<HealthBarProps> = ({ actor, leftSide, style }) => {
   const {position} = useAnimationContext().get3DGroupAttributes(actor);
   const hackedProgress = position.z;
 
