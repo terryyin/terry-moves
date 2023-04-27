@@ -160,9 +160,6 @@ const subtitles: Subtitle[] = [
 			actions: [
 				{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '1000'},
 				{ actor: "caller 1", actionType: "highlight token", duration: 4, token: '1000', style: 'wavy underline'},
-				// { actor: "callee", actionType: "replace text", duration: 3, line: 2, match: 'isLoad', value: 'loadAmount'},
-				// { actor: "callee", actionType: "replace text", duration: 3, line: 3, match: 'isLoad', value: 'loadAmount > 0'},
-				// { actor: "callee", actionType: "insert text", duration: 3, line: 4, column: 10, value: 'loadAmount'},
 			],
 	},
 
@@ -171,10 +168,10 @@ const subtitles: Subtitle[] = [
 			duration: 6,
 			text: "So we changed the API to take a parameter 'loadAmount'.",
 			actions: [
-				// { actor: "callee", actionType: "replace text", duration: 3, line: 2, match: 'isLoad', value: 'loadAmount'},
-				// { actor: "callee", actionType: "replace text", duration: 3, line: 3, match: 'isLoad', value: 'loadAmount > 0'},
-				// { actor: "callee", actionType: "insert text", duration: 3, line: 4, column: 10, value: 'loadAmount'},
-				// { actor: "callee", actionType: "insert text", duration: 3, line: 10, column: 10, value: 'loadAmount'},
+				{ actor: "callee", actionType: "replace text", duration: 1, line: 2, match: 'isLoad', replacement: 'loadAmount'},
+				{ actor: "callee", actionType: "replace text", duration: 1.5, line: 3, match: 'isLoad', replacement: 'loadAmount > 0', offset: 1.2},
+				// { actor: "callee", actionType: "insert text", duration: 3, line: 4, column: 10, replacement: 'loadAmount'},
+				// { actor: "callee", actionType: "insert text", duration: 3, line: 10, column: 10, replacement: 'loadAmount'},
 			],
 	},
 
