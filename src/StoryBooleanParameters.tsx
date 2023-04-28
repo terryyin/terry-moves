@@ -369,9 +369,9 @@ export const StoryBooleanParameters: React.FC = () => {
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
-		<CodeHighlight actor="caller 1" codeString={caller1} style={{ left: '5%', top: '30%', width: '40%', height: '20%', }}/>
-		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '50%', width: '40%', height: '20%', }}/>
-		<CodeHighlight actor="caller 3" codeString={caller3} style={{ left: '5%', top: '70%', width: '40%', height: '20%', }}/>
+		<CodeHighlight actor="caller 1" codeString={caller1} style={{ left: '5%', top: '32%', width: '40%', height: '20%', }}/>
+		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '52%', width: '40%', height: '20%', }}/>
+		<CodeHighlight actor="caller 3" codeString={caller3} style={{ left: '5%', top: '74%', width: '40%', height: '20%', }}/>
 		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', }}/>
 
 		<CalloutCloud actor='caller 1 callout1' style={{top: '10%', left: "2%"}} tailShift={-70} tailHeightPx={100}>
@@ -380,10 +380,10 @@ export const StoryBooleanParameters: React.FC = () => {
 		<CalloutCloud actor='callee callout1' style={{top: '21%', left: "20%"}} tailShift={20}>
 			<span style={{ fontSize: '30px', margin: 0 }} > Absolutely! Let's update the interface. 🛠️  </span>
 		</CalloutCloud>
-		<CalloutCloud actor='caller 3 callout1' style={{top: '66%', left: "5%"}} tailShift={-20}>
+		<CalloutCloud actor='caller 3 callout1' style={{top: '63%', left: "5%"}} tailShift={-20}>
 			<span style={{ fontSize: '30px', margin: 0 }} > Woohoo! 🎉 Just what I needed! </span>
 		</CalloutCloud>
-		<CalloutCloud actor='caller 2 callout1' style={{top: '43%', left: "1%"}} tailShift={-40}>
+		<CalloutCloud actor='caller 2 callout1' style={{top: '41%', left: "4%"}} tailShift={-40}>
 			<span style={{ fontSize: '30px', margin: 0 , backgroundColor: "#ffaaaa"}} > 😠 What?! Why change it? What amount? 🚫  </span>
 		</CalloutCloud>
 
