@@ -69,7 +69,7 @@ describe('ThreeAnimationEffect', () => {
     ].forEach(({tid, sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: 'rotate and rise', duration: 1, distance: 4 },
+          { actor: "under-test", actionType: 'rotate and rise', duration: 1, value: 4 },
         ] };
       test(`3d effect, test id: ${tid}`, () => {
         const animationContext: AnimationContextWrapper = makeMe
@@ -117,7 +117,7 @@ describe('ThreeAnimationEffect', () => {
     ].forEach(({tid, sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: 'rotate and rise', duration: 1, distance: 4 },
+          { actor: "under-test", actionType: 'rotate and rise', duration: 1, value: 4 },
           { actor: "under-test", actionType: '3d rotate', duration: 1, totalRotation: [0, 360, 0] },
         ] };
       test(`3d effect, test id: ${tid}`, () => {

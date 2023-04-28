@@ -384,8 +384,8 @@ export const StoryBooleanParameters: React.FC = () => {
 		</CalloutCloud>
 
 
-    <AnimationEffect actor="subtitles" >
-			<Subtitles scale={1.2} />
+    <AnimationEffect actor="subtitles">
+			<Subtitles scale={1} />
 			</AnimationEffect>
     </AbsoluteFill>
     <AnimationEffect actor="title" style={{ fontFamily: 'Roboto, sans-serif', left: '0%', top: '40%', width: '100%', height: '40%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }} >
@@ -407,7 +407,7 @@ export const StoryBooleanParameters: React.FC = () => {
       fontSize: '30px',
 			color: 'white',
 			fontFamily: 'IBM Plex Mono',
-    }} text="Seeking High Cohesion, Loose Coupling"/>
+    }} text="Seeking High Cohesion, Loose Coupling design"/>
 
 		</AnimationEffect>
     <AbsoluteFill style={{ left: '0%',  top: '0.5%', width: '10%', height: '10%'}}>

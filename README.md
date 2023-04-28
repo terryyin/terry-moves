@@ -1,3 +1,5 @@
+Congratuations! Now you've discovered how Terry moves.
+
 # Special actors
 
 ## 'camera' actor

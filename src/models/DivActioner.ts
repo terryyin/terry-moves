@@ -34,7 +34,7 @@ export default class DivActioner extends DivBaseActioner {
 				return DivActioner.defaultValue;
 			case 'rotate and rise':
 				return this.scale([0, 1])
-					.combine(this.move([0, -this.action.distance, 0], [0, 0, 0]))
+					.combine(this.move([0, -this.action.value, 0], [0, 0, 0]))
 					.combine(this.rotateFrom([0, -360, 0]));
 			case 'oscillate':
 				return this.oscillate(this.action.delta);
