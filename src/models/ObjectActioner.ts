@@ -1,6 +1,7 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-import LazyTransitions, { InterpolateFields, InterpolateRangesLinear, InterpolateRangesOscillate, InterpolateRangesSpring } from './LazyTransitions';
+import LazyTransitions, { InterpolateFields } from './LazyTransitions';
 import BaseActioner from './BaseActioner';
+import { InterpolateRangesLinear, InterpolateRangesSpring, InterpolateRangesOscillate } from './InterpolateRanges';
 
 const toVector3 = (value: number | Vector2 | Vector3): [number, number, number] => {
   if (typeof value === 'number') {

@@ -1,5 +1,6 @@
-import LazyTransitions, { InterpolateRangesLinear } from './LazyTransitions';
+import LazyTransitions from './LazyTransitions';
 import BaseActioner from './BaseActioner';
+import { InterpolateRangesLinear } from './InterpolateRanges';
 
 export default class GeneralValueActioner extends BaseActioner {
 	static defaultValue: LazyTransitions = new LazyTransitions();
