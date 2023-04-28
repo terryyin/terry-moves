@@ -6,7 +6,8 @@ import { EffectCalculatorAndAction } from './EffectCalculator';
 import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
-import { TextReveal, ThreeGroupAttributes } from './LazyTransitions';
+import { TextReveal } from './LazyTransitions';
+import { ThreeGroupAttributes } from "./ThreeGroupAttributes";
 import CodeActioner, { CodeTransformation } from './CodeActioner';
 import GeneralActioner from './GeneralActioner';
 
