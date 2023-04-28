@@ -9,7 +9,7 @@ export const UnderCamera: React.FC<{
   children: React.ReactNode;
 }> = ({cameraY, cameraDistance, lookAtY, children}) => {
 	const animationContextWrapper = useAnimationContext();
-	const { position, lookAtD } = animationContextWrapper.get3DGroupAttributes("camera");
+	const { position, lookAtD } = animationContextWrapper.get3DObjectStateOf("camera");
 
 
 	// Place a camera and set the distance to the object.

@@ -27,7 +27,7 @@ describe('AnimationContext', () => {
 					})
 					.seconds(sec)
 					.please();
-				const result = animationContext.get3DGroupAttributes('under-test');
+				const result = animationContext.get3DObjectStateOf('under-test');
 				expect(result.position.x).toBe(expectPosition[0]);
 				expect(result.position.y).toBe(expectPosition[1]);
 				expect(result.position.z).toBe(expectPosition[2]);
@@ -66,7 +66,7 @@ describe('AnimationContext', () => {
 					})
 					.seconds(sec)
 					.please();
-				const result = animationContext.get3DGroupAttributes('under-test');
+				const result = animationContext.get3DObjectStateOf('under-test');
 				expect(result.position.x).toBeCloseTo(expectPosition[0], 2);
 				expect(result.position.y).toBeCloseTo(expectPosition[1], 2);
 				expect(result.position.z).toBeCloseTo(expectPosition[2], 2);
@@ -105,7 +105,7 @@ describe('AnimationContext', () => {
 					})
 					.seconds(sec)
 					.please();
-				const result = animationContext.get3DGroupAttributes('under-test');
+				const result = animationContext.get3DObjectStateOf('under-test');
 				expect(result.position.x).toBe(expectX);
 			});
 		});

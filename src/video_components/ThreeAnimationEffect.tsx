@@ -8,7 +8,7 @@ export const ThreeAnimationEffect: React.FC<{
 }> = ({actor, children, }) => {
 
 	const animationContextWrapper = useAnimationContext();
-	const { scale, position, rotation } = animationContextWrapper.get3DGroupAttributes(actor);
+	const { scale, position, rotation } = animationContextWrapper.get3DObjectStateOf(actor);
 
 
 	return (

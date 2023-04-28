@@ -35,12 +35,15 @@ export default class AnimationContextWrapper {
     return result;
   }
 
-  getStyleOf(actor: string): CSSProperties {
+  get3DObjectStateOf(actor: string): ThreeDObjectState {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .get3DObjedctState(this.adjustedFrame, this.script.fps)
-      .toStyle();
+      .get3DObjedctState(this.adjustedFrame, this.script.fps);
+  }
+
+  getStyleOf(actor: string): CSSProperties {
+    return this.get3DObjectStateOf(actor).toStyle();
   }
 
   getShadowStyleOf(actor: string): CSSProperties | undefined {
@@ -49,13 +52,6 @@ export default class AnimationContextWrapper {
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
       .get3DObjedctState(this.adjustedFrame, this.script.fps)
       .getStylePresence();
-  }
-
-  get3DGroupAttributes(actor: string): ThreeDObjectState {
-    return this.getActioner(actor)
-      .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
-      .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .get3DObjedctState(this.adjustedFrame, this.script.fps);
   }
 
   getTextReveal(actor: string): TextReveal {

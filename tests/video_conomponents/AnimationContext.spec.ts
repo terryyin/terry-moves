@@ -42,7 +42,7 @@ describe('AnimationContext', () => {
 					.seconds(sec)
 					.please();
 
-				const result = animationContext.get3DGroupAttributes('under-test');
+				const result = animationContext.get3DObjectStateOf('under-test');
 				expect(result.position.x).toBeCloseTo(expectedX, 2);
 			});
 		});
