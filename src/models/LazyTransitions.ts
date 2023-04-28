@@ -95,7 +95,7 @@ export default class LazyTransitions {
 
 	getStyle(frame: number, fps: number): CSSProperties {
 		const threeDTransforms = this.get3DGroupAttributes(frame, fps);
-		return threeDTransforms.toStyle(threeDTransforms);
+		return threeDTransforms.toStyle();
 	}
 
 
@@ -158,7 +158,7 @@ export default class LazyTransitions {
 
 	getStylePresence(frame: number, fps: number): CSSProperties | undefined {
 		const threeDTransforms = this.get3DGroupAttributes(frame, fps);
-		const style = threeDTransforms.toStyle(threeDTransforms);
+		const style = threeDTransforms.toStyle();
 
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const {opacity, transform, transformOrigin, ...rest} = style;

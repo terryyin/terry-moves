@@ -16,13 +16,13 @@ export class ThreeGroupAttributes {
 		this.lookAtD = new THREE.Vector3();
 	}
 
-	toStyle(threeDTransforms: ThreeGroupAttributes): CSSProperties {
+	toStyle(): CSSProperties {
 		const transforms: string[] = [];
 
-		transforms.push(`scale(${threeDTransforms.scale})`);
+		transforms.push(`scale(${this.scale})`);
 
 		['translateX', 'translateY', 'translateZ'].forEach((key, index) => {
-			const translate = threeDTransforms.position.getComponent(index);
+			const translate = this.position.getComponent(index);
 			if (translate !== undefined) {
 				transforms.push(`${key}(${translate}px)`);
 			}
@@ -35,7 +35,7 @@ export class ThreeGroupAttributes {
 			result.transform = transforms.join(' ');
 		}
 
-		result.opacity = threeDTransforms.opacity;
+		result.opacity = this.opacity;
 
 		return result;
 	}
