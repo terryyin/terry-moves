@@ -25,7 +25,8 @@ export type InterpolateFields =
 	| 'translateX'
 	| 'translateZ';
 
-type InterpolatesOfField = InterpolateRanges[];
+type InterpolatesOfField = { ranges: InterpolateRanges[] };
+
 export default class LazyTransitions {
 	interpolateRanges: Map<InterpolateFields, InterpolatesOfField> = new Map();
 
@@ -34,11 +35,11 @@ export default class LazyTransitions {
 		interpolateRange: InterpolateRanges
 	): void {
 		if (!this.interpolateRanges.get(key)) {
-			this.interpolateRanges.set(key, []);
+			this.interpolateRanges.set(key, {ranges: []});
 		}
 		const array = this.interpolateRanges.get(key);
 		if (array) {
-			array.push(interpolateRange);
+			array.ranges.push(interpolateRange);
 		}
 	}
 
@@ -64,10 +65,10 @@ export default class LazyTransitions {
 				'translateZ',
 			] as InterpolateFields[]
 		).forEach((key) => {
-			const combined = [
-				...(prev.interpolateRanges.get(key) || []),
-				...(this.interpolateRanges.get(key) || []),
-			];
+			const combined = {
+				ranges: [...(prev.interpolateRanges.get(key)?.ranges || []),
+				...(this.interpolateRanges.get(key)?.ranges || []), ]
+			};
 			combinedStyle.interpolateRanges.set(key, combined);
 		});
 
@@ -185,16 +186,16 @@ export default class LazyTransitions {
 	private getInterpolateValues1(
 		frame: number,
 		fps: number,
-		interpolateRanges: InterpolateRanges[],
+		interpolateRanges: InterpolatesOfField,
 	): number[] {
 		const result: number[] = [];
-		if (interpolateRanges.length === 0) return [];
+		if (interpolateRanges.ranges.length === 0) return [];
 		let prev: number | undefined;
-		let current = interpolateRanges[0];
-		for (let i = 0; i < interpolateRanges.length; i++) {
-			if (frame >= interpolateRanges[i].inputRange[0]) {
-				current = interpolateRanges[i];
-				const prevAny = interpolateRanges[i - 1];
+		let current = interpolateRanges.ranges[0];
+		for (let i = 0; i < interpolateRanges.ranges.length; i++) {
+			if (frame >= interpolateRanges.ranges[i].inputRange[0]) {
+				current = interpolateRanges.ranges[i];
+				const prevAny = interpolateRanges.ranges[i - 1];
 				if (i > 0) {
 				  prev = prevAny.asPreviousValue(prev, frame)
 				}
