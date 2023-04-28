@@ -8,6 +8,7 @@ export type TextReveal = {
 };
 
 export type ThreeGroupAttributes = {
+	opacity: number;
 	scale: number;
 	position: THREE.Vector3;
 	rotation: THREE.Euler;
@@ -121,17 +122,14 @@ export default class LazyTransitions {
 			result.transform = transforms.join(' ');
 		}
 
-		const opacity = this.getMultiplyingInterpolate(frame, fps, 'opacity');
-		if (opacity !== undefined) {
-			result.opacity = opacity;
-		}
+   	result.opacity = threeDTransforms.opacity;
 
 		return result;
 	}
 
 	get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributes {
-		// Const opacity = this.getInterpolate(frame,    'opacity');
 		const scale = this.getMultiplyingInterpolate(frame, fps, 'scale');
+		const opacity = this.getMultiplyingInterpolate(frame, fps, 'opacity');
 
 		const position = [0, 0, 0];
 		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach(
@@ -174,6 +172,7 @@ export default class LazyTransitions {
 		);
 
 		const result: ThreeGroupAttributes = {
+			opacity: opacity ?? 1,
 			scale: scale ?? 1,
 			position: new THREE.Vector3(position[0] + oscillation[0], position[1] + oscillation[1], position[2] + oscillation[2]),
 			rotation: new THREE.Euler(rotation[0], rotation[1], rotation[2]),
