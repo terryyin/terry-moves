@@ -28,26 +28,7 @@ export type InterpolateFields =
 
 ;
 
-export default class LazyTransitions {
-	interpolateRanges: Map<InterpolateFields, InterpolatesOfField> = new Map();
-
-	setInterpolation(
-		key: InterpolateFields,
-		interpolateRange: InterpolateRanges
-	): void {
-		if (!this.interpolateRanges.get(key)) {
-			this.interpolateRanges.set(key, new InterpolatesOfField());
-		}
-		const field = this.interpolateRanges.get(key);
-		if (field) {
-			field.add(interpolateRange);
-		}
-	}
-
-	combine(prev: LazyTransitions): LazyTransitions {
-		const combinedStyle = new LazyTransitions();
-		(
-			[
+const allFields =	[
 				'glow',
 				'textReveal',
 				'rotationX',
@@ -64,8 +45,34 @@ export default class LazyTransitions {
 				'translateX',
 				'translateY',
 				'translateZ',
-			] as InterpolateFields[]
-		).forEach((key) => {
+			] as InterpolateFields[];
+
+export default class LazyTransitions {
+	interpolateRanges: Map<InterpolateFields, InterpolatesOfField>;
+
+	constructor() {
+		this.interpolateRanges = new Map();
+		allFields.forEach((key) => {
+			this.interpolateRanges.set(key, new InterpolatesOfField());
+		});
+	}
+
+	setInterpolation(
+		key: InterpolateFields,
+		interpolateRange: InterpolateRanges
+	): void {
+		if (!this.interpolateRanges.get(key)) {
+			this.interpolateRanges.set(key, new InterpolatesOfField());
+		}
+		const field = this.interpolateRanges.get(key);
+		if (field) {
+			field.add(interpolateRange);
+		}
+	}
+
+	combine(prev: LazyTransitions): LazyTransitions {
+		const combinedStyle = new LazyTransitions();
+		allFields.forEach((key) => {
 			const combined = new InterpolatesOfField()
 				.combine(this.interpolateRanges.get(key))
 				.combine(prev.interpolateRanges.get(key));
