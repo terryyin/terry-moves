@@ -1,4 +1,4 @@
-import LazyTransitions from './LazyTransitions';
+import LazyTransitions, { InterpolateRangesLinear } from './LazyTransitions';
 import BaseActioner from './BaseActioner';
 
 export default class GeneralValueActioner extends BaseActioner {
@@ -15,11 +15,8 @@ export default class GeneralValueActioner extends BaseActioner {
 
 	private additiveValueChange(outputRange: [number, number]): LazyTransitions {
 			const result = new LazyTransitions();
-		result.setInterpolation('translateZ', {
-			interpolateType: 'linear',
-			inputRange: this.effectCalculator.frameRange,
-			outputRange,
-		});
+		result.setInterpolation('translateZ', 
+    new InterpolateRangesLinear(this.effectCalculator.frameRange, outputRange));
 		return result;
 	}
 

@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-import LazyTransitions, { InterpolateFields } from './LazyTransitions';
+import LazyTransitions, { InterpolateFields, InterpolateRangesLinear, InterpolateRangesOscillate, InterpolateRangesSpring } from './LazyTransitions';
 import BaseActioner from './BaseActioner';
 
 const toVector3 = (value: number | Vector2 | Vector3): [number, number, number] => {
@@ -49,27 +49,22 @@ export default class ObjectActioner extends BaseActioner {
 
   private glow(): LazyTransitions {
     const result = new LazyTransitions();
-    result.setInterpolation('glow', {interpolateType: 'linear', inputRange: this.effectCalculator.frameRange, outputRange: [0, 1]});
+    result.setInterpolation('glow', 
+		new InterpolateRangesLinear(this.effectCalculator.frameRange, [0, 1]));
     return result;
   }
 
 	private type(): LazyTransitions {
 			const result = new LazyTransitions();
-		result.setInterpolation('textReveal', {
-			interpolateType: 'linear',
-			inputRange: this.effectCalculator.frameRange,
-			outputRange: [0, 1.2], // 1.3 is a hack to simulate escape in vim.
-		});
+		result.setInterpolation('textReveal', 
+		new InterpolateRangesLinear(this.effectCalculator.frameRange, [0, 1.2])); // 1.3 is a hack to simulate escape in vim.
 		return result;
 	}
 
 	private getAppearStyle(outputRange: number[]): LazyTransitions {
 		const result = new LazyTransitions();
-		result.setInterpolation('opacity', {
-			interpolateType: 'linear',
-			inputRange: this.effectCalculator.frameRange,
-			outputRange,
-		});
+		result.setInterpolation('opacity', 
+		new InterpolateRangesLinear(this.effectCalculator.frameRange, outputRange));
 		return result;
 	}
 
@@ -78,11 +73,9 @@ export default class ObjectActioner extends BaseActioner {
 		const vector: [number, number, number] = toVector3(distances);
 
 		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key, index) => {
-			result.setInterpolation(key, {
-				interpolateType: 'spring',
-				inputRange: this.effectCalculator.frameRange,
-				outputRange: [from[index], vector[index]],
-			});
+			result.setInterpolation(key,
+				new InterpolateRangesSpring(this.effectCalculator.frameRange, [from[index], vector[index]]),
+			);
 		});
 
 		return result;
@@ -93,11 +86,11 @@ export default class ObjectActioner extends BaseActioner {
 		const vector: [number, number, number] = toVector3(distances);
 
 		(['oscillateX', 'oscillateY', 'oscillateZ'] as InterpolateFields[]).forEach((key, index) => {
-			result.setInterpolation(key, {
-				interpolateType: 'oscillate',
-				inputRange: this.effectCalculator.frameRange,
-				distance: vector[index],
-			});
+			result.setInterpolation(key, 
+				new InterpolateRangesOscillate(
+				this.effectCalculator.frameRange,
+				vector[index],
+			));
 		});
 		return result;
 	}
@@ -106,11 +99,8 @@ export default class ObjectActioner extends BaseActioner {
 		const result = new LazyTransitions();
 		result.setInterpolation(
 			'scale',
-			{
-				interpolateType: 'spring',
-				inputRange: this.effectCalculator.frameRange,
-				outputRange,
-			});
+			new InterpolateRangesSpring(this.effectCalculator.frameRange, outputRange),
+		);
 		return result;
 	}
 
@@ -118,7 +108,7 @@ export default class ObjectActioner extends BaseActioner {
     const result = new LazyTransitions();
 
 		(['cameraLookAtX', 'cameraLookAtY', 'cameraLookAtZ'] as InterpolateFields[]).forEach((key, index) => {
-      result.setInterpolation(key, {interpolateType: 'spring', inputRange: this.effectCalculator.frameRange, outputRange: [0, toVector3(position)[index]]});
+      result.setInterpolation(key, new InterpolateRangesSpring(this.effectCalculator.frameRange, [0, toVector3(position)[index]]));
 		});
     return result;
   }
@@ -134,7 +124,7 @@ export default class ObjectActioner extends BaseActioner {
 	private rotateFromTo(from: [number, number, number], to: [number, number, number]): LazyTransitions {
     const result = new LazyTransitions();
 		(['rotationX', 'rotationY', 'rotationZ'] as InterpolateFields[]).forEach((key, index) => {
-      result.setInterpolation(key, {interpolateType: 'spring', inputRange: this.effectCalculator.frameRange, outputRange: [Math.PI * from[index]/180, Math.PI * to[index]/180]});
+      result.setInterpolation(key, new InterpolateRangesSpring(this.effectCalculator.frameRange, [Math.PI * from[index]/180, Math.PI * to[index]/180]));
 		});
     return result;
 	}

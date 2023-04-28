@@ -1,6 +1,7 @@
 import * as THREE from 'three';
 import EffectCalculator from './EffectCalculator';
-import { ThreeDObjectState } from './ThreeDObjectState';
+import {ThreeDObjectState} from './ThreeDObjectState';
+
 
 export type TextReveal = {
 	progress: number;
@@ -9,24 +10,83 @@ export type TextReveal = {
 
 type InterpolateType = 'linear' | 'spring' | 'oscillate';
 
-type InterpolateRangesBase = {
-	interpolateType: InterpolateType;
-	inputRange: number[];
+abstract class InterpolateRangesBase {
+	abstract interpolateType: InterpolateType;
+	abstract inputRange: number[];
+
 };
 
-interface InterpolateRangesOscillate extends InterpolateRangesBase {
-	interpolateType: 'oscillate';
+export class InterpolateRangesOscillate extends InterpolateRangesBase {
+  inputRange: number[];
+	interpolateType: 'oscillate' = "oscillate";
 	distance: number;
+
+	constructor(inputRange: number[], distance: number) {
+		super();
+		this.inputRange = inputRange;
+		this.distance = distance;
+	}
 }
 
-interface InterpolateRangesNonOscillate extends InterpolateRangesBase {
-	interpolateType: 'linear' | 'spring';
+export class InterpolateRangesSpring extends InterpolateRangesBase {
+	interpolateType: 'spring' = "spring";
 	outputRange: number[];
+  inputRange: number[];
+
+	constructor(inputRange: number[], outputRange: number[]) {
+		super();
+		this.inputRange = inputRange;
+		this.outputRange = outputRange;
+	}
+}
+
+export class InterpolateRangesLinear extends InterpolateRangesBase {
+  inputRange: number[];
+	interpolateType: 'linear' = "linear";
+	outputRange: number[];
+
+	constructor(inputRange: number[], outputRange: number[]) {
+		super();
+		this.inputRange = inputRange;
+		this.outputRange = outputRange;
+	}
 }
 
 type InterpolateRanges =
-	| InterpolateRangesNonOscillate
-	| InterpolateRangesOscillate;
+	| InterpolateRangesSpring
+	| InterpolateRangesOscillate
+	| InterpolateRangesLinear;
+
+function getInterpolateValue(
+	frame: number,
+	fps: number,
+	prev: number | undefined,
+	current: InterpolateRanges
+): number {
+	const effectCalculator: EffectCalculator = new EffectCalculator(
+		(current.inputRange[current.inputRange.length - 1] -
+			current.inputRange[0]) /
+			fps,
+		current.inputRange[0] / fps,
+		frame,
+		fps
+	);
+
+	if (current.interpolateType === 'oscillate') {
+		const result =
+			-Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * current.distance;
+		return result + (prev ?? 0);
+	}
+
+	const outputRange = [...current.outputRange];
+	if (prev) {
+		outputRange[0] = prev;
+	}
+
+	if (current.interpolateType === 'spring')
+		return effectCalculator.interpolateSpring(outputRange);
+	return effectCalculator.interpolateDuration(outputRange);
+}
 
 export type InterpolateFields =
 	| 'glow'
@@ -71,9 +131,9 @@ export default class LazyTransitions {
 				'rotationX',
 				'rotationY',
 				'rotationZ',
-        'oscillateX',
-        'oscillateY',
-        'oscillateZ',
+				'oscillateX',
+				'oscillateY',
+				'oscillateZ',
 				'cameraLookAtX',
 				'cameraLookAtY',
 				'cameraLookAtY',
@@ -119,7 +179,11 @@ export default class LazyTransitions {
 				}
 			}
 		);
-		result.position = new THREE.Vector3(position[0] + oscillation[0], position[1] + oscillation[1], position[2] + oscillation[2]);
+		result.position = new THREE.Vector3(
+			position[0] + oscillation[0],
+			position[1] + oscillation[1],
+			position[2] + oscillation[2]
+		);
 
 		const cameraLookAt = [0, 0, 0];
 		(
@@ -132,11 +196,10 @@ export default class LazyTransitions {
 		});
 
 		result.lookAtD = new THREE.Vector3(
-				cameraLookAt[0],
-				cameraLookAt[1],
-				cameraLookAt[2]
-			);
-
+			cameraLookAt[0],
+			cameraLookAt[1],
+			cameraLookAt[2]
+		);
 
 		const rotation = [0, 0, 0];
 		(['rotationX', 'rotationY', 'rotationZ'] as InterpolateFields[]).forEach(
@@ -210,46 +273,14 @@ export default class LazyTransitions {
 				)
 					prev = prevAny.outputRange[prevAny.outputRange.length - 1];
 				if (frame < current.inputRange[current.inputRange.length - 1]) {
-					result.push(this.getInterpolateValue(frame, fps, prev, current));
+					result.push(getInterpolateValue(frame, fps, prev, current));
 				}
 			}
 		}
 		if (result.length === 0) {
-			result.push(this.getInterpolateValue(frame, fps, prev, current));
+			result.push(getInterpolateValue(frame, fps, prev, current));
 		}
 
 		return result;
-	}
-
-	private getInterpolateValue(
-		frame: number,
-		fps: number,
-		prev: number | undefined,
-		current: InterpolateRanges
-	): number {
-		const effectCalculator: EffectCalculator = new EffectCalculator(
-			(current.inputRange[current.inputRange.length - 1] -
-				current.inputRange[0]) /
-				fps,
-			current.inputRange[0] / fps,
-			frame,
-			fps
-		);
-
-		if (current.interpolateType === 'oscillate') {
-			const result =
-				-Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) *
-				current.distance;
-			return result + (prev ?? 0);
-		}
-
-		const outputRange = [...current.outputRange];
-		if (prev) {
-			outputRange[0] = prev;
-		}
-
-		if (current.interpolateType === 'spring')
-			return effectCalculator.interpolateSpring(outputRange);
-		return effectCalculator.interpolateDuration(outputRange);
 	}
 }
