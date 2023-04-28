@@ -52,7 +52,7 @@ const subtitles: Subtitle[] = [
 			duration: 5,
 			text: "",
 			actions: [
-					{ actor: "second title", actionType: "type", duration: 3, text: "Seeking High Cohesion, Loose Coupling Design" },
+					{ actor: "second title", actionType: "type", duration: 3 },
 			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
 			],
 	},

@@ -19,7 +19,6 @@ export interface AppearAction extends BaseAction {
 
 export interface TextAction extends BaseAction {
   actionType: 'type';
-  text: string;
 }
 
 export type HighlightStyle = 'wavy underline' | 'red background';
