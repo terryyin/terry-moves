@@ -25,8 +25,9 @@ export type InterpolateFields =
 	| 'translateX'
 	| 'translateZ';
 
+type InterpolatesOfField = InterpolateRanges[];
 export default class LazyTransitions {
-	interpolateRanges: Map<InterpolateFields, InterpolateRanges[]> = new Map();
+	interpolateRanges: Map<InterpolateFields, InterpolatesOfField> = new Map();
 
 	setInterpolation(
 		key: InterpolateFields,
@@ -177,8 +178,17 @@ export default class LazyTransitions {
 		field: InterpolateFields
 	): number[] {
 		const interpolateRanges = this.interpolateRanges.get(field);
+		if (!interpolateRanges) return [];
+		return this.getInterpolateValues1(frame, fps, interpolateRanges);
+	}
+
+	private getInterpolateValues1(
+		frame: number,
+		fps: number,
+		interpolateRanges: InterpolateRanges[],
+	): number[] {
 		const result: number[] = [];
-		if (!interpolateRanges || interpolateRanges.length === 0) return result;
+		if (interpolateRanges.length === 0) return [];
 		let prev: number | undefined;
 		let current = interpolateRanges[0];
 		for (let i = 0; i < interpolateRanges.length; i++) {
@@ -196,7 +206,7 @@ export default class LazyTransitions {
 		if (result.length === 0) {
 			result.push(current.getInterpolateValue(frame, fps, prev));
 		}
-
 		return result;
 	}
+
 }
