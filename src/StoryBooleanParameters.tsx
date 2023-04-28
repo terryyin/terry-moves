@@ -81,7 +81,7 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 4,
+			duration: 3,
 			text: "But if you load it first, ",
 			actions: [
 				...loadActions,
@@ -139,7 +139,7 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 4,
+			duration: 5,
 			text: "As we can see, every caller knows exactly what they want.",
 			actions: [
 				{ actor: "caller 1", actionType: "highlight token", duration: 7, token: 'true'},
@@ -227,7 +227,7 @@ const subtitles: Subtitle[] = [
 
 	{
 		leadingBlank: 1,
-		duration: 10,
+		duration: 11,
 		text: "This tight coupling introduces unnecessary complexity, makes changes harder and complicates collaboration.",
 		
 		actions: [
@@ -240,7 +240,7 @@ const subtitles: Subtitle[] = [
 	},
 
 	{
-			leadingBlank: 0,
+			leadingBlank: 1,
 			duration: 6,
 			text: "Just let callers call the methods they want.",
 			actions: [
@@ -255,7 +255,7 @@ const subtitles: Subtitle[] = [
 	},
 
 	{
-			leadingBlank: 0,
+			leadingBlank: 1,
 			duration: 5,
 			text: "This reduces complexity and dependencies, resulting in lower coupling.",
 			actions: [
@@ -274,7 +274,7 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 5,
+			duration: 4,
 			text: "After load, the Blaster must be fired.",
 			actions: [
 				...loadActions,
@@ -327,14 +327,6 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 5,
-			text: "Future changes will be error-prone due to the lack of cohesion.",
-			actions: [
-			],
-	},
-
-	{
-			leadingBlank: 0,
-			duration: 5,
 			text: "Say caller 1 found a bug caused by the now more powerful loaded fire.",
 			actions: [
 			],
@@ -346,7 +338,9 @@ const subtitles: Subtitle[] = [
 			text: "After load, the blaster should be reaimed before fire,",
 			actions: [
 				...loadActions,
-			  { actor: "blaster assembly", actionType: "3d rotate", duration: 2, totalRotation: [-60, 45, 30], offset: 3},
+			  { actor: "caller 1", actionType: "insert text", duration: 2, line: 2, column: 20, text: "\n  blaster.reAim();", offset: 1},
+			  { actor: "caller 1", actionType: "highlight token", duration: 4, token: "reAim", offset: 1},
+			  { actor: "blaster assembly", actionType: "3d rotate", duration: 2, totalRotation: [-60, 45, 30], offset: 4},
 			],
 	},
 
@@ -361,8 +355,69 @@ const subtitles: Subtitle[] = [
 	},
 
 	{
-			leadingBlank: 1,
+			leadingBlank: 0,
+			duration: 5,
+			text: "Caller 1 fixed the bug.",
+			actions: [
+			  { actor: "caller 1 callout2", actionType: "appear", duration: 1, offset: 0},
+			],
+	},
+
+	{
+			leadingBlank: 0,
+			duration: 6,
+			text: "However, caller 3 is still buggy, but the code start to diverse.",
+			actions: [
+				...loadedFireActions,
+			  { actor: "blaster more powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
+			  { actor: "caller 3", actionType: "highlight lines", duration: 4, lines: [2, 3], offset: 1},
+			  { actor: "caller 3 callout2", actionType: "appear", duration: 1, offset: 3},
+			],
+	},
+
+	{
+			leadingBlank: 0,
 			duration: 4,
+			text: "Again, it shows my code is not cohesive",
+			actions: [
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 10, offset: 0.2},
+			],
+	},
+
+	{
+			leadingBlank: 0,
+			duration: 10,
+			text: "Due to the lack of cohesion, my code lost important domain concepts and the future changes will become error-prone.",
+			actions: [
+				{ actor: "mask", actionType: "appear", duration: 0.2},
+				{ actor: "learning from low cohesion", actionType: "appear", duration: 0.5, offset: 0.2},
+				{ actor: "mask", actionType: "disappear", duration: 1, offset: 10},
+				{ actor: "learning from low cohesion", actionType: "disappear", duration: 0.5, offset: 10},
+			],
+	},
+
+	{
+			leadingBlank: 0,
+			duration: 8,
+			text: "The bug would have been avoided if I kept my code more cohesive.",
+			actions: [
+			  { actor: "caller 3 callout2", actionType: "disappear", duration: 0.5, offset: 0},
+			  { actor: "caller 1 callout2", actionType: "disappear", duration: 0.5, offset: 0},
+			  { actor: "callee", actionType: "insert text", duration: 2, line: 4, column: 10, text: "\n\n  loadedFire(loadAmount) {\n    this.load(loadAmout);\n    this.fire();\n  };", offset: 1},
+			  { actor: "callee", actionType: "insert text", duration: 0.5, line: 11, column: 2, text: "private ", offset: 3.5},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 30, offset: 3.5},
+			  { actor: "caller 1", actionType: "delete lines", duration: 0.5, fromLine: 2, count: 3, offset: 4.5},
+			  { actor: "caller 1", actionType: "insert text", duration: 0.5, line: 1, column: 13, text: "\n  blaster.loadedFire(1000);", offset: 5.1},
+			  { actor: "caller 3", actionType: "delete lines", duration: 0.5, fromLine: 2, count: 3, offset: 4.5},
+			  { actor: "caller 3", actionType: "insert text", duration: 0.5, line: 1, column: 13, text: "\n  blaster.loadedFire(999999);\n", offset: 5.1},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 70, offset: 5.5},
+			  { actor: "callee", actionType: "insert text", duration: 1, line: 7, column: 25, text: "\n    this.reAim();", offset: 5.5},
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 12,
 			text: "In conclusion, avoid boolean parameters, use meaningful names, and aim for high cohesion and loose coupling in design.",
 			actions: [
 					{ actor: "final-thoughts", actionType: "appear", duration: 1 },
@@ -405,6 +460,11 @@ const learningCoupling = `## This tight coupling:
 * makes changes harder.
 * complicates collaboration.`;
 
+const learningCohesion = `## This low cohesion:
+
+* ignores immportant domain concepts.
+* makes future changes error-prone.`;
+
 const announceBoardStyle: CSSProperties = { 
 				paddingTop: '20px',
 				paddingLeft: '10px',
@@ -433,6 +493,7 @@ export const StoryBooleanParameters: React.FC = () => {
 								<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
 									<RocketPlume actor="blaster fire" position={[-0.6, -3, 0.3]} scale={1.8}/>
 									<RocketPlume actor="blaster powerful fire" position={[-0.6, -3, 0.3]} scale={4}/>
+									<RocketPlume actor="blaster more powerful fire" position={[-0.6, -3, 0.3]} scale={8}/>
 								</GroupInitialState>
             </ThreeAnimationEffect>
 						</GroupInitialState>
@@ -447,20 +508,31 @@ export const StoryBooleanParameters: React.FC = () => {
 		<CalloutCloud actor='caller 1 callout1' style={{top: '10%', left: "2%"}} tailShift={-70} tailHeightPx={100}>
 			<span style={{ fontSize: '30px', margin: 0 }} > 🤔 Can we pass the load amount to action()? 💡  </span>
 		</CalloutCloud>
+		<CalloutCloud actor='caller 1 callout2' style={{top: '25%', left: "10%"}} tailShift={-70} tailHeightPx={20}>
+			<span style={{ fontSize: '30px', margin: 0 }} > 🎉🎉🎉 Yeah! Ticket closed! 🎉🎉🎉 </span>
+		</CalloutCloud>
 		<CalloutCloud actor='callee callout1' style={{top: '21%', left: "20%"}} tailShift={20}>
 			<span style={{ fontSize: '30px', margin: 0 }} > Absolutely! Let's update the interface. 🛠️  </span>
 		</CalloutCloud>
 		<CalloutCloud actor='caller 3 callout1' style={{top: '63%', left: "5%"}} tailShift={-20}>
 			<span style={{ fontSize: '30px', margin: 0 }} > Woohoo! 🎉 Just what I needed! </span>
 		</CalloutCloud>
+		<CalloutCloud actor='caller 3 callout2' style={{top: '63%', left: "30%"}} tailShift={-20}>
+			<span style={{ fontSize: '30px', margin: 0, backgroundColor: "#ffaaaa"}} >Oops. SORRY!!!!!!!! </span>
+		</CalloutCloud>
 		<CalloutCloud actor='caller 2 callout1' style={{top: '41%', left: "4%"}} tailShift={-40}>
 			<span style={{ fontSize: '30px', margin: 0 , backgroundColor: "#ffaaaa"}} > 😠 What?! Why change it? What amount? 🚫  </span>
 		</CalloutCloud>
 
     <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.7)"}}/>
+
     <Markdown actor="learning from tight coupling" style={announceBoardStyle}
 			md={learningCoupling}
 		 />
+    <Markdown actor="learning from low cohesion" style={announceBoardStyle}
+			md={learningCohesion}
+		 />
+
 
     <AnimationEffect actor="subtitles">
 			<Subtitles scale={1} />
