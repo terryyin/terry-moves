@@ -1,7 +1,21 @@
-import LazyTransitions from './LazyTransitions';
-import DivBaseActioner from './DivBaseActioner';
+import { Vector2, Vector3 } from '@react-three/fiber';
+import LazyTransitions, { InterpolateFields } from './LazyTransitions';
+import BaseActioner from './BaseActioner';
 
-export default class DivActioner extends DivBaseActioner {
+const toVector3 = (value: number | Vector2 | Vector3): [number, number, number] => {
+  if (typeof value === 'number') {
+    return [value, 0, 0];
+  }
+  if (value.length === 2) {
+    return [...value, 0];
+  }
+  if (value.length === 3) {
+    return [...value];
+  }
+  throw new Error('Unsupported input type');
+}
+
+export default class DivActioner extends BaseActioner {
 	static defaultValue: LazyTransitions = new LazyTransitions();
 
 	protected getStyle(): LazyTransitions {
@@ -57,6 +71,72 @@ export default class DivActioner extends DivBaseActioner {
 			outputRange,
 		});
 		return result;
+	}
+
+	private move(from: [number, number, number], distances: number | Vector2 | Vector3): LazyTransitions {
+		const result = new LazyTransitions();
+		const vector: [number, number, number] = toVector3(distances);
+
+		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach((key, index) => {
+			result.setInterpolation(key, {
+				interpolateType: 'spring',
+				inputRange: this.effectCalculator.frameRange,
+				outputRange: [from[index], vector[index]],
+			});
+		});
+
+		return result;
+	}
+
+	private oscillate(distances: number | Vector3 | Vector2): LazyTransitions {
+		const result = new LazyTransitions();
+		const vector: [number, number, number] = toVector3(distances);
+
+		(['oscillateX', 'oscillateY', 'oscillateZ'] as InterpolateFields[]).forEach((key, index) => {
+			result.setInterpolation(key, {
+				interpolateType: 'oscillate',
+				inputRange: this.effectCalculator.frameRange,
+				distance: vector[index],
+			});
+		});
+		return result;
+	}
+
+	private scale(outputRange: number[]): LazyTransitions {
+		const result = new LazyTransitions();
+		result.setInterpolation(
+			'scale',
+			{
+				interpolateType: 'spring',
+				inputRange: this.effectCalculator.frameRange,
+				outputRange,
+			});
+		return result;
+	}
+
+  private cameraLookAt(position: number | Vector3 | Vector2): LazyTransitions {
+    const result = new LazyTransitions();
+
+		(['cameraLookAtX', 'cameraLookAtY', 'cameraLookAtZ'] as InterpolateFields[]).forEach((key, index) => {
+      result.setInterpolation(key, {interpolateType: 'spring', inputRange: this.effectCalculator.frameRange, outputRange: [0, toVector3(position)[index]]});
+		});
+    return result;
+  }
+
+	private rotate(rotation: [number, number, number]): LazyTransitions {
+		return this.rotateFromTo([0, 0, 0], rotation);
+	}
+
+	private rotateFrom(rotation: [number, number, number]): LazyTransitions {
+		return this.rotateFromTo(rotation, [0, 0, 0]);
+	}
+
+	private rotateFromTo(from: [number, number, number], to: [number, number, number]): LazyTransitions {
+    const result = new LazyTransitions();
+		(['rotationX', 'rotationY', 'rotationZ'] as InterpolateFields[]).forEach((key, index) => {
+      result.setInterpolation(key, {interpolateType: 'spring', inputRange: this.effectCalculator.frameRange, outputRange: [Math.PI * from[index]/180, Math.PI * to[index]/180]});
+		});
+    return result;
 	}
 
 }

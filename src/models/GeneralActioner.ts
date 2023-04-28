@@ -1,7 +1,7 @@
 import LazyTransitions from './LazyTransitions';
-import DivBaseActioner from './DivBaseActioner';
+import BaseActioner from './BaseActioner';
 
-export default class GeneralValueActioner extends DivBaseActioner {
+export default class GeneralValueActioner extends BaseActioner {
 	static defaultValue: LazyTransitions = new LazyTransitions();
 
 	protected getStyle(): LazyTransitions {
