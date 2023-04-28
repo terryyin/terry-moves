@@ -1,5 +1,4 @@
 import { SubtitleWithFlashBack } from './Subtitles';
-import { CSSProperties } from 'react';
 import { Action, Subtitle } from '@/models/Subtitles';
 import DivActioner from './DivActioner';
 import { EffectCalculatorAndAction } from './EffectCalculator';
@@ -39,10 +38,6 @@ export default class AnimationContextWrapper {
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
       .get3DObjedctState(this.adjustedFrame, this.script.fps);
-  }
-
-  getStyleOf(actor: string): CSSProperties {
-    return this.get3DObjectStateOf(actor).toStyle();
   }
 
   getTextReveal(actor: string): TextReveal {

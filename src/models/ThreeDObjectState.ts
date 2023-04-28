@@ -42,24 +42,11 @@ export class ThreeDObjectState {
 		return result;
 	}
 
-	toShadowStyle(): CSSProperties | undefined {
+	toShadowStyle(): CSSProperties {
 		const result: CSSProperties = {};
 		result.opacity = 1 - this.glow;
 		result.transform = `scale(${1 + this.glow * 0.2})`;
-		return this.getStylePresence(result);
-	}
-
-	getStylePresence(style: CSSProperties): CSSProperties | undefined {
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const {opacity, transform, transformOrigin, ...rest} = style;
-		if (Object.keys(rest).length !== 0) return style;
-		if (
-			opacity === undefined ||
-			Number(opacity) === 1 ||
-			Number(opacity) < 0.01
-		)
-			return undefined;
-		return style;
+		return result;
 	}
 
 }

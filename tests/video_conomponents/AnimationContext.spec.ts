@@ -99,7 +99,7 @@ describe('AnimationContext', () => {
 					})
 					.seconds(sec)
 					.please();
-				const result = animationContext.getStyleOf('under-test');
+				const result = animationContext.get3DObjectStateOf('under-test').toStyle();
 				expect(result.transform).toContain(expectPlaying);
 			});
 		});
