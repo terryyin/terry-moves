@@ -25,7 +25,9 @@ export type InterpolateFields =
 	| 'translateX'
 	| 'translateZ';
 
-type InterpolatesOfField = { ranges: InterpolateRanges[] };
+class InterpolatesOfField {
+	 ranges: InterpolateRanges[] = [];
+};
 
 export default class LazyTransitions {
 	interpolateRanges: Map<InterpolateFields, InterpolatesOfField> = new Map();
@@ -35,7 +37,7 @@ export default class LazyTransitions {
 		interpolateRange: InterpolateRanges
 	): void {
 		if (!this.interpolateRanges.get(key)) {
-			this.interpolateRanges.set(key, {ranges: []});
+			this.interpolateRanges.set(key, new InterpolatesOfField());
 		}
 		const array = this.interpolateRanges.get(key);
 		if (array) {
@@ -65,10 +67,9 @@ export default class LazyTransitions {
 				'translateZ',
 			] as InterpolateFields[]
 		).forEach((key) => {
-			const combined = {
-				ranges: [...(prev.interpolateRanges.get(key)?.ranges || []),
-				...(this.interpolateRanges.get(key)?.ranges || []), ]
-			};
+			const combined = new InterpolatesOfField();
+			combined.ranges = [...(prev.interpolateRanges.get(key)?.ranges || []),
+				...(this.interpolateRanges.get(key)?.ranges || []), ];
 			combinedStyle.interpolateRanges.set(key, combined);
 		});
 
