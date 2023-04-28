@@ -20,6 +20,7 @@ import { RocketPlume } from './parts/RocketPlume';
 import { CodeHighlight } from './video_components/CodeHighlight';
 import { CalloutCloud } from './video_components/CalloutCloud';
 import HealthBar from './video_components/HealthBar';
+import { LightSource } from './video_components/LightSource';
 
 const fireActions: Action[] =
 [
@@ -31,6 +32,7 @@ const fireActions: Action[] =
 const loadActions: Action[] =
 [
 			  { actor: "blaster", actionType: "3d animation start", duration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
+			  { actor: "blaster temperature", actionType: "additive value change to", duration: 1.2, value: 50 },
 			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.4,  totalRotation: [0, 0, -30]},
 			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
 ];
@@ -87,6 +89,7 @@ const subtitles: Subtitle[] = [
 			text: "you can fire more powerful shots.",
 			actions: [
 				...fireActions,
+			  { actor: "blaster temperature", actionType: "additive value change to", duration: 2, value: 0 },
 			  { actor: "blaster powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
 				{ actor: "caller 1", actionType: "appear", duration: 0.2},
 				{ actor: "caller 1", actionType: "highlight lines", duration: 3, lines: [2]},
@@ -353,6 +356,7 @@ export const StoryBooleanParameters: React.FC = () => {
 							intensity={15}
 							color={0xffffff}
 						/>	
+						<LightSource actor="blaster temperature" position={[0, 0, 15]} color="#ff0000" />
 						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 3.5, 0]} scale={1}>
             <ThreeAnimationEffect actor="blaster assembly" >
 								<Blaster actor="blaster"/>
