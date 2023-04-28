@@ -1,7 +1,7 @@
 import './global.css';
 
 
-import React from 'react';
+import React, { CSSProperties } from 'react';
 
 import { Action, Subtitle } from './models/Subtitles';
 import { AbsoluteFill } from 'remotion';
@@ -21,6 +21,7 @@ import { CodeHighlight } from './video_components/CodeHighlight';
 import { CalloutCloud } from './video_components/CalloutCloud';
 import HealthBar from './video_components/HealthBar';
 import { LightSource } from './video_components/LightSource';
+import { Markdown } from './video_components/Markdown';
 
 const fireActions: Action[] =
 [
@@ -220,17 +221,15 @@ const subtitles: Subtitle[] = [
 
 	{
 		leadingBlank: 1,
-		duration: 6,
-		text: [
-			"This tight coupling:",
-			"* introduces unnecessary complexity.",
-			"* makes changes harder.",
-			"* complicates collaboration.",
-		],
-		scale: 1.3,
-		position: 'center',
+		duration: 10,
+		text: "This tight coupling introduces unnecessary complexity, makes changes harder and complicates collaboration.",
 		
 		actions: [
+			{ actor: "mask", actionType: "appear", duration: 0.2},
+			{ actor: 'learning from tight coupling', actionType: 'appear', duration: 0.5},
+			{ actor: "mask", actionType: "disappear", duration: 1, offset: 10},
+			{ actor: 'learning from tight coupling', actionType: 'disappear', duration: 0.5, offset: 10},
+
 		],
 	},
 
@@ -343,6 +342,17 @@ const caller3 = `  // Caller 3
   blaster.action(true);
 	`;
 
+const learningCoupling = `## This tight coupling:
+
+* introduces unnecessary complexity.
+* makes changes harder.
+* complicates collaboration.`;
+
+const announceBoardStyle: CSSProperties = { 
+				paddingTop: '20px',
+				paddingLeft: '10px',
+	fontFamily: 'Roboto, sans-serif', left: '0%', top: '40%', width: '100%', height: '40%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
+
 export const StoryBooleanParameters: React.FC = () => {
   return (
 		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={subtitles}  >
@@ -387,15 +397,17 @@ export const StoryBooleanParameters: React.FC = () => {
 			<span style={{ fontSize: '30px', margin: 0 , backgroundColor: "#ffaaaa"}} > 😠 What?! Why change it? What amount? 🚫  </span>
 		</CalloutCloud>
 
+    <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.7)"}}/>
+    <Markdown actor="learning from tight coupling" style={announceBoardStyle}
+			md={learningCoupling}
+		 />
 
     <AnimationEffect actor="subtitles">
 			<Subtitles scale={1} />
-			</AnimationEffect>
+		</AnimationEffect>
     </AbsoluteFill>
-    <AnimationEffect actor="title" style={{ fontFamily: 'Roboto, sans-serif', left: '0%', top: '40%', width: '100%', height: '40%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }} >
+    <AnimationEffect actor="title" style={announceBoardStyle} >
 			<span style={{
-				paddingTop: '20px',
-				paddingLeft: '10px',
 				display: 'block',
       fontSize: '36px',
 			color: 'white',

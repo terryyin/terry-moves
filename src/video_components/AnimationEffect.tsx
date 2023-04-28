@@ -16,7 +16,7 @@ function getStylePresence(style: CSSProperties): CSSProperties | undefined {
 
 interface StageProps {
   actor: string;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   style?: CSSProperties;
 }
 
