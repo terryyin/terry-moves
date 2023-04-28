@@ -156,7 +156,7 @@ export default class LazyTransitions {
 		fps: number,
 		field: InterpolateFields
 	): number | undefined {
-		return this.reduceInterpolate(frame, fps, field, (a, b) => a + b, 0);
+		return this.reduceInterpolate(frame, fps, field);
 	}
 
 	private getMultiplyingInterpolate(
@@ -164,7 +164,7 @@ export default class LazyTransitions {
 		fps: number,
 		field: InterpolateFields
 	): number | undefined {
-		return this.reduceInterpolate(frame, fps, field, (a, b) => a * b, 1);
+		return this.reduceInterpolate(frame, fps, field);
 	}
 
 	// eslint-disable-next-line max-params
@@ -172,12 +172,12 @@ export default class LazyTransitions {
 		frame: number,
 		fps: number,
 		field: InterpolateFields,
-		oper: (a: number, b: number) => number,
-		defaultValue: number
 	): number | undefined {
 		const interpolateRanges = this.sureGetField(field);
+		const defaultValue = interpolateRanges.type === 'additive' ? 0 : 1;
 		const values = interpolateRanges.getInterpolateValues(frame, fps);
 		if (values.length === 0) return undefined;
+		const oper = interpolateRanges.type === 'additive' ? (a: number, b: number) => a+b : (a: number, b: number) => a*b;
 		return values.reduce(oper, defaultValue);
 	}
 }
