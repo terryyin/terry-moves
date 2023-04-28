@@ -2,7 +2,6 @@ import * as THREE from 'three';
 import EffectCalculator from './EffectCalculator';
 import {ThreeDObjectState} from './ThreeDObjectState';
 
-
 export type TextReveal = {
 	progress: number;
 	cursorShow: boolean;
@@ -14,11 +13,27 @@ abstract class InterpolateRangesBase {
 	abstract interpolateType: InterpolateType;
 	abstract inputRange: number[];
 
-};
+	protected abstract xxx(effectCalculator: EffectCalculator, prev?: number): number;
+
+	getInterpolateValue(
+		frame: number,
+		fps: number,
+		prev: number | undefined
+	): number {
+		const effectCalculator: EffectCalculator = new EffectCalculator(
+			(this.inputRange[this.inputRange.length - 1] - this.inputRange[0]) / fps,
+			this.inputRange[0] / fps,
+			frame,
+			fps
+		);
+
+		return this.xxx(effectCalculator, prev);
+	}
+}
 
 export class InterpolateRangesOscillate extends InterpolateRangesBase {
-  inputRange: number[];
-	interpolateType: 'oscillate' = "oscillate";
+	inputRange: number[];
+	interpolateType: 'oscillate' = 'oscillate';
 	distance: number;
 
 	constructor(inputRange: number[], distance: number) {
@@ -26,29 +41,53 @@ export class InterpolateRangesOscillate extends InterpolateRangesBase {
 		this.inputRange = inputRange;
 		this.distance = distance;
 	}
+
+	protected xxx(effectCalculator: EffectCalculator, prev?: number) {
+		const result =
+			-Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * this.distance;
+		return result + (prev ?? 0);
+	}
 }
 
 export class InterpolateRangesSpring extends InterpolateRangesBase {
-	interpolateType: 'spring' = "spring";
+	interpolateType: 'spring' = 'spring';
 	outputRange: number[];
-  inputRange: number[];
+	inputRange: number[];
 
 	constructor(inputRange: number[], outputRange: number[]) {
 		super();
 		this.inputRange = inputRange;
 		this.outputRange = outputRange;
 	}
+
+	protected xxx(effectCalculator: EffectCalculator, prev?: number) {
+		const outputRange = [...this.outputRange];
+		if (prev) {
+			outputRange[0] = prev;
+		}
+
+		return effectCalculator.interpolateSpring(outputRange);
+	}
 }
 
 export class InterpolateRangesLinear extends InterpolateRangesBase {
-  inputRange: number[];
-	interpolateType: 'linear' = "linear";
+	inputRange: number[];
+	interpolateType: 'linear' = 'linear';
 	outputRange: number[];
 
 	constructor(inputRange: number[], outputRange: number[]) {
 		super();
 		this.inputRange = inputRange;
 		this.outputRange = outputRange;
+	}
+
+	protected xxx(effectCalculator: EffectCalculator, prev?: number) {
+		const outputRange = [...this.outputRange];
+		if (prev) {
+			outputRange[0] = prev;
+		}
+
+		return effectCalculator.interpolateDuration(outputRange);
 	}
 }
 
@@ -56,37 +95,6 @@ type InterpolateRanges =
 	| InterpolateRangesSpring
 	| InterpolateRangesOscillate
 	| InterpolateRangesLinear;
-
-function getInterpolateValue(
-	frame: number,
-	fps: number,
-	prev: number | undefined,
-	current: InterpolateRanges
-): number {
-	const effectCalculator: EffectCalculator = new EffectCalculator(
-		(current.inputRange[current.inputRange.length - 1] -
-			current.inputRange[0]) /
-			fps,
-		current.inputRange[0] / fps,
-		frame,
-		fps
-	);
-
-	if (current.interpolateType === 'oscillate') {
-		const result =
-			-Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * current.distance;
-		return result + (prev ?? 0);
-	}
-
-	const outputRange = [...current.outputRange];
-	if (prev) {
-		outputRange[0] = prev;
-	}
-
-	if (current.interpolateType === 'spring')
-		return effectCalculator.interpolateSpring(outputRange);
-	return effectCalculator.interpolateDuration(outputRange);
-}
 
 export type InterpolateFields =
 	| 'glow'
@@ -273,12 +281,12 @@ export default class LazyTransitions {
 				)
 					prev = prevAny.outputRange[prevAny.outputRange.length - 1];
 				if (frame < current.inputRange[current.inputRange.length - 1]) {
-					result.push(getInterpolateValue(frame, fps, prev, current));
+					result.push(current.getInterpolateValue(frame, fps, prev));
 				}
 			}
 		}
 		if (result.length === 0) {
-			result.push(getInterpolateValue(frame, fps, prev, current));
+			result.push(current.getInterpolateValue(frame, fps, prev));
 		}
 
 		return result;
