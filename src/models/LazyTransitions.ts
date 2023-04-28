@@ -158,18 +158,7 @@ export default class LazyTransitions {
 
 	getStylePresence(frame: number, fps: number): CSSProperties | undefined {
 		const threeDTransforms = this.get3DGroupAttributes(frame, fps);
-		const style = threeDTransforms.toStyle();
-
-		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		const {opacity, transform, transformOrigin, ...rest} = style;
-		if (Object.keys(rest).length !== 0) return style;
-		if (
-			opacity === undefined ||
-			Number(opacity) === 1 ||
-			Number(opacity) < 0.01
-		)
-			return undefined;
-		return style;
+		return threeDTransforms.getStylePresence();
 	}
 
 	getTextReveal(adjustedFrame: number, fps: number): TextReveal {
