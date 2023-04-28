@@ -13,8 +13,6 @@ abstract class InterpolateRangesBase {
 	abstract interpolateType: InterpolateType;
 	abstract inputRange: number[];
 
-	protected abstract xxx(effectCalculator: EffectCalculator, prev?: number): number;
-
 	getInterpolateValue(
 		frame: number,
 		fps: number,
@@ -29,6 +27,12 @@ abstract class InterpolateRangesBase {
 
 		return this.xxx(effectCalculator, prev);
 	}
+
+	abstract asPreviousValue(prev: number | undefined, frame: number): number | undefined;
+	protected abstract xxx(effectCalculator: EffectCalculator, prev?: number): number;
+
+
+
 }
 
 export class InterpolateRangesOscillate extends InterpolateRangesBase {
@@ -40,6 +44,11 @@ export class InterpolateRangesOscillate extends InterpolateRangesBase {
 		super();
 		this.inputRange = inputRange;
 		this.distance = distance;
+	}
+
+	// eslint-disable-next-line @typescript-eslint/no-unused-vars
+	asPreviousValue(prev: number | undefined, frame: number): number | undefined {
+		return prev;
 	}
 
 	protected xxx(effectCalculator: EffectCalculator, prev?: number) {
@@ -68,12 +77,18 @@ export class InterpolateRangesSpring extends InterpolateRangesBase {
 
 		return effectCalculator.interpolateSpring(outputRange);
 	}
+
+	asPreviousValue(prev: number | undefined, frame: number): number | undefined {
+		if (frame >= this.inputRange[this.inputRange.length - 1])
+			return this.outputRange[this.outputRange.length - 1];
+		return prev;
+	}
 }
 
 export class InterpolateRangesLinear extends InterpolateRangesBase {
 	inputRange: number[];
 	interpolateType: 'linear' = 'linear';
-	outputRange: number[];
+	private outputRange: number[];
 
 	constructor(inputRange: number[], outputRange: number[]) {
 		super();
@@ -88,6 +103,12 @@ export class InterpolateRangesLinear extends InterpolateRangesBase {
 		}
 
 		return effectCalculator.interpolateDuration(outputRange);
+	}
+
+	asPreviousValue(prev: number | undefined, frame: number): number | undefined {
+		if (frame >= this.inputRange[this.inputRange.length - 1])
+		  return this.outputRange[this.outputRange.length - 1];
+		return prev;
 	}
 }
 
@@ -274,12 +295,9 @@ export default class LazyTransitions {
 			if (frame >= interpolateRanges[i].inputRange[0]) {
 				current = interpolateRanges[i];
 				const prevAny = interpolateRanges[i - 1];
-				if (
-					i > 0 &&
-					frame >= prevAny.inputRange[prevAny.inputRange.length - 1] &&
-					prevAny.interpolateType !== 'oscillate'
-				)
-					prev = prevAny.outputRange[prevAny.outputRange.length - 1];
+				if (i > 0) {
+				  prev = prevAny.asPreviousValue(prev, frame)
+				}
 				if (frame < current.inputRange[current.inputRange.length - 1]) {
 					result.push(current.getInterpolateValue(frame, fps, prev));
 				}
