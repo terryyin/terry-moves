@@ -19,7 +19,7 @@ export type InterpolateFields =
 	| 'oscillateZ'
 	| 'cameraLookAtX'
 	| 'cameraLookAtY'
-	| 'cameraLookAtY'
+	| 'cameraLookAtZ'
 	| 'opacity'
 	| 'scale'
 	| 'translateY'
@@ -37,7 +37,7 @@ const allFields = [
 	{name: 'oscillateZ', type: 'additive'},
 	{name: 'cameraLookAtX', type: 'additive'},
 	{name: 'cameraLookAtY', type: 'additive'},
-	{name: 'cameraLookAtY', type: 'additive'},
+	{name: 'cameraLookAtZ', type: 'additive'},
 	{name: 'opacity', type: 'multiplitive'},
 	{name: 'scale', type: 'multiplitive'},
 	{name: 'translateX', type: 'additive'},
@@ -75,7 +75,7 @@ export default class LazyTransitions {
 		const combinedStyle = new LazyTransitions();
 		allFields.forEach(({name}) => {
 			const combined = this.sureGetField(name)
-				.combine(prev.interpolateRanges.get(name));
+				.combine(prev.sureGetField(name));
 			combinedStyle.interpolateRanges.set(name, combined);
 		});
 
@@ -175,8 +175,7 @@ export default class LazyTransitions {
 		oper: (a: number, b: number) => number,
 		defaultValue: number
 	): number | undefined {
-		const interpolateRanges = this.interpolateRanges.get(field);
-		if (!interpolateRanges) return defaultValue;
+		const interpolateRanges = this.sureGetField(field);
 		const values = interpolateRanges.getInterpolateValues(frame, fps);
 		if (values.length === 0) return undefined;
 		return values.reduce(oper, defaultValue);
