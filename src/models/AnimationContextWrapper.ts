@@ -35,14 +35,14 @@ export default class AnimationContextWrapper {
 
   get3DObjectStateOf(actor: string): ThreeDObjectState {
     return this.getActioner(actor)
-      .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
+      .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
       .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
       .get3DObjedctState(this.adjustedFrame, this.script.fps);
   }
 
   getTextReveal(actor: string): TextReveal {
     return this.getActioner(actor)
-      .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
+      .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
       .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
       .getTextReveal(this.adjustedFrame, this.script.fps);
   }
@@ -56,7 +56,7 @@ export default class AnimationContextWrapper {
 
   getGeneralValue(actor: string): ThreeDObjectState {
      return this.getActioner(actor)
-      .map(effectCalculator => new GeneralActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
+      .map(effectCalculator => new GeneralActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
       .reduce((prev, curr) => curr.combine(prev), GeneralActioner.defaultValue)
       .get3DObjedctState(this.adjustedFrame, this.script.fps);
   }
