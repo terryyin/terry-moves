@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import EffectCalculator from './EffectCalculator';
-import { ThreeGroupAttributes } from './ThreeGroupAttributes';
+import { ThreeGroupAttributes as ThreeDObjectState } from './ThreeGroupAttributes';
 
 export type TextReveal = {
 	progress: number;
@@ -92,8 +92,8 @@ export default class LazyTransitions {
 		return combinedStyle;
 	}
 
-	get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributes {
-		const result = new ThreeGroupAttributes();
+	get3DObjedctState(frame: number, fps: number): ThreeDObjectState {
+		const result = new ThreeDObjectState();
 		result.scale = this.getMultiplyingInterpolate(frame, fps, 'scale') ?? 1;
 		result.opacity = this.getMultiplyingInterpolate(frame, fps, 'opacity') ?? 1;
 

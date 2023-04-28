@@ -39,7 +39,7 @@ export default class AnimationContextWrapper {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .get3DGroupAttributes(this.adjustedFrame, this.script.fps)
+      .get3DObjedctState(this.adjustedFrame, this.script.fps)
       .toStyle();
   }
 
@@ -47,7 +47,7 @@ export default class AnimationContextWrapper {
     return this.getActioner(actor)
       .map(effectCalculator => new DivShadowActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .get3DGroupAttributes(this.adjustedFrame, this.script.fps)
+      .get3DObjedctState(this.adjustedFrame, this.script.fps)
       .getStylePresence();
   }
 
@@ -55,7 +55,7 @@ export default class AnimationContextWrapper {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .get3DGroupAttributes(this.adjustedFrame, this.script.fps);
+      .get3DObjedctState(this.adjustedFrame, this.script.fps);
   }
 
   getTextReveal(actor: string): TextReveal {
@@ -76,7 +76,7 @@ export default class AnimationContextWrapper {
      return this.getActioner(actor)
       .map(effectCalculator => new GeneralActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), GeneralActioner.defaultValue)
-      .get3DGroupAttributes(this.adjustedFrame, this.script.fps);
+      .get3DObjedctState(this.adjustedFrame, this.script.fps);
   }
 
   private isSubtitleWithFlashBack(subtitle: Subtitle): subtitle is SubtitleWithFlashBack {
