@@ -22,12 +22,20 @@ import { CalloutCloud } from './video_components/CalloutCloud';
 import HealthBar from './video_components/HealthBar';
 import { LightSource } from './video_components/LightSource';
 import { Markdown } from './video_components/Markdown';
+import { Explosion } from './parts/Explosion';
 
 const fireActions: Action[] =
 [
 			  { actor: "blaster fire", actionType: "3d animation start", duration: 2, speed: 2 },
 			  { actor: "blaster assembly", actionType: "move", duration: 0.1, absolutePosition: [0.5, 0, 0]},
 			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.2},
+];
+
+const loadedFireActions: Action[] =
+[
+				...fireActions,
+			  { actor: "blaster temperature", actionType: "additive value change to", duration: 2, value: 0 },
+			  { actor: "blaster powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
 ];
 
 const loadActions: Action[] =
@@ -89,9 +97,7 @@ const subtitles: Subtitle[] = [
 			duration: 4,
 			text: "you can fire more powerful shots.",
 			actions: [
-				...fireActions,
-			  { actor: "blaster temperature", actionType: "additive value change to", duration: 2, value: 0 },
-			  { actor: "blaster powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
+				...loadedFireActions,
 				{ actor: "caller 1", actionType: "appear", duration: 0.2},
 				{ actor: "caller 1", actionType: "highlight lines", duration: 3, lines: [2]},
 				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [4, 6, 10, 14]},
@@ -278,10 +284,14 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 5,
+			duration: 6,
 			text: "Otherwise, it will explode.",
 			actions: [
-			  { actor: "caller 3", actionType: "replace text", duration: 1, line: 3, replacement: "  this.survey();", offset: 4},
+			  { actor: "blaster temperature", actionType: "additive value change to", duration: 4, value: 1000, offset: 0},
+			  { actor: "caller 3", actionType: "replace text", duration: 1, line: 3, replacement: "  this.survey();", offset: 0},
+			  { actor: "caller 3", actionType: "highlight lines", duration: 3, lines: [3], offset: 2},
+			  { actor: "blaster explosion", actionType: "3d animation start", duration: 1, speed: 1, offset: 4},
+			  { actor: "blaster temperature", actionType: "additive value change to", duration: 2, value: 0, offset: 4},
 			],
 	},
 
@@ -290,6 +300,9 @@ const subtitles: Subtitle[] = [
 			duration: 5,
 			text: "Well, no worries. Our current code is doing exactly that.",
 			actions: [
+			  { actor: "caller 3", actionType: "replace text", duration: 1, line: 3, replacement: "  this.fire();", offset: 0},
+			  { actor: "caller 1", actionType: "highlight lines", duration: 3, lines: [2, 3], offset: 1},
+			  { actor: "caller 3", actionType: "highlight lines", duration: 3, lines: [2, 3], offset: 1},
 			],
 	},
 
@@ -304,6 +317,16 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 5,
+			text: "My code doesn't seem to have that. And it makes the cohesion low.",
+			actions: [
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 100, offset: 0.1},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 50, offset: 0.2},
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 5,
 			text: "Future changes will be error-prone due to the lack of cohesion.",
 			actions: [
 			],
@@ -312,13 +335,28 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 0,
 			duration: 5,
-			text: "Make the code cohesive.",
+			text: "Say caller 1 found a bug caused by the now more powerful loaded fire.",
 			actions: [
-			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.2, totalRotation: [-60, 45, 30]},
-			  { actor: "blaster fire", actionType: "3d animation start", duration: 1, speed: 2, offset: 1 },
-			  { actor: "blaster assembly", actionType: "move", duration: 0.2, absolutePosition: [0.5, 0, 0], offset: 1},
-			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 1.4},
-					// { actor: "example2", actionType: "highlight", duration: 2 },
+			],
+	},
+
+	{
+			leadingBlank: 0,
+			duration: 5,
+			text: "After load, the blaster should be reaimed before fire,",
+			actions: [
+				...loadActions,
+			  { actor: "blaster assembly", actionType: "3d rotate", duration: 2, totalRotation: [-60, 45, 30], offset: 3},
+			],
+	},
+
+	{
+			leadingBlank: 0,
+			duration: 5,
+			text: "so not to hurt teammates.",
+			actions: [
+				...loadedFireActions,
+			  { actor: "blaster assembly", actionType: "3d rotate", duration: 2, totalRotation: [0, 0, 0], offset: 4},
 			],
 	},
 
@@ -386,12 +424,15 @@ export const StoryBooleanParameters: React.FC = () => {
 							color={0xffffff}
 						/>	
 						<LightSource actor="blaster temperature" position={[0, 0, 15]} color="#ff0000" />
+						<GroupInitialState rotation={[0, Math.PI * 3 / 2, 0]} position={[-5, 0, 0]} scale={0.15}>
+							<Explosion actor="blaster explosion" />
+						</GroupInitialState>
 						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 3.5, 0]} scale={1}>
             <ThreeAnimationEffect actor="blaster assembly" >
 								<Blaster actor="blaster"/>
 								<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
-								<RocketPlume actor="blaster fire" position={[-0.6, -3, 0.3]} scale={1.8}/>
-								<RocketPlume actor="blaster powerful fire" position={[-0.6, -3, 0.3]} scale={4}/>
+									<RocketPlume actor="blaster fire" position={[-0.6, -3, 0.3]} scale={1.8}/>
+									<RocketPlume actor="blaster powerful fire" position={[-0.6, -3, 0.3]} scale={4}/>
 								</GroupInitialState>
             </ThreeAnimationEffect>
 						</GroupInitialState>
