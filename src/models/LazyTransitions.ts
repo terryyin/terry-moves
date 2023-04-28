@@ -50,29 +50,31 @@ export default class LazyTransitions {
 
 	constructor() {
 		this.interpolateRanges = new Map();
-		allFields.forEach(({name}) => {
-			this.interpolateRanges.set(name, new InterpolatesOfField());
+		allFields.forEach(({name, type}) => {
+			this.interpolateRanges.set(name, new InterpolatesOfField(type));
 		});
+	}
+
+	private sureGetField(key: InterpolateFields): InterpolatesOfField {
+		const field = this.interpolateRanges.get(key);
+		if (!field) {
+			throw new Error(`Unknown interpolation field ${key}`);
+		}
+		return field;
 	}
 
 	setInterpolation(
 		key: InterpolateFields,
 		interpolateRange: InterpolateRanges
 	): void {
-		if (!this.interpolateRanges.get(key)) {
-			this.interpolateRanges.set(key, new InterpolatesOfField());
-		}
-		const field = this.interpolateRanges.get(key);
-		if (field) {
-			field.add(interpolateRange);
-		}
+		const field = this.sureGetField(key);
+		field.add(interpolateRange);
 	}
 
 	combine(prev: LazyTransitions): LazyTransitions {
 		const combinedStyle = new LazyTransitions();
 		allFields.forEach(({name}) => {
-			const combined = new InterpolatesOfField()
-				.combine(this.interpolateRanges.get(name))
+			const combined = this.sureGetField(name)
 				.combine(prev.interpolateRanges.get(name));
 			combinedStyle.interpolateRanges.set(name, combined);
 		});
