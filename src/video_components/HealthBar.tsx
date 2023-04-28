@@ -36,8 +36,7 @@ const HealthBarStyled = styled.div`
 `;
 
 const HealthBar: React.FC<HealthBarProps> = ({ actor, leftSide, style }) => {
-  const {position} = useAnimationContext().getGeneralValue(actor);
-  const hackedProgress = position.z;
+  const hackedProgress = useAnimationContext().getGeneralValue(actor);
 
   const additionalStyle: CSSProperties = {
     [leftSide ? 'right': 'left']: 0,
@@ -55,7 +54,7 @@ const HealthBar: React.FC<HealthBarProps> = ({ actor, leftSide, style }) => {
       <HealthBarContainer>
         <BackgroundBar />
         <HealthBarStyled
-          style={{...additionalStyle, width: `${Math.max(0, Math.min(100, hackedProgress ===0 ? 100 : hackedProgress))}%` }}
+          style={{...additionalStyle, width: `${Math.max(0, Math.min(100, hackedProgress ===0 ? 100 : hackedProgress ?? 0))}%` }}
           />
       </HealthBarContainer>
     </AnimationEffect>

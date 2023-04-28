@@ -54,11 +54,11 @@ export default class AnimationContextWrapper {
       .getCodeTransfomation(this.adjustedFrame, this.script.fps);
   }
 
-  getGeneralValue(actor: string): ThreeDObjectState {
+  getGeneralValue(actor: string): number | undefined {
      return this.getActioner(actor)
       .map(effectCalculator => new GeneralActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
       .reduce((prev, curr) => curr.combine(prev), GeneralActioner.defaultValue)
-      .get3DObjedctState(this.adjustedFrame, this.script.fps);
+      .getGeneralValue(this.adjustedFrame, this.script.fps);
   }
 
   private isSubtitleWithFlashBack(subtitle: Subtitle): subtitle is SubtitleWithFlashBack {

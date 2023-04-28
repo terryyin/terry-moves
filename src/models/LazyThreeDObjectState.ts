@@ -52,7 +52,7 @@ export default class LazyThreeDObjectState {
 		key: InterpolateFields,
 		interpolateRange: InterpolateRanges
 	): void {
-		this.lazyState.setInterpolation1(key, interpolateRange);
+		this.lazyState.setInterpolation(key, interpolateRange);
 	}
 
 	reduceInterpolate(

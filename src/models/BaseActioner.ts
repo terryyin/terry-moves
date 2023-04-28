@@ -1,7 +1,10 @@
 import { Action } from '@/models/Subtitles';
-import LazyThreeDObjectState from './LazyThreeDObjectState';
 
-export default abstract class BaseActioner {
+interface Combinable<T> {
+  combine(prev: T): T;
+}
+
+export default abstract class BaseActioner<T extends Combinable<T>> {
   action: Action;
   frameRange: [number, number];
 
@@ -10,9 +13,9 @@ export default abstract class BaseActioner {
     this.action = action;
   }
 
-  combine(prev: LazyThreeDObjectState): LazyThreeDObjectState {
+  combine(prev: T): T {
     return this.getStyle().combine(prev);
   }
 
-  protected abstract getStyle(): LazyThreeDObjectState;
+  protected abstract getStyle(): T;
 }

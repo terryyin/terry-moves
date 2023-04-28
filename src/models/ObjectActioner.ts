@@ -22,7 +22,7 @@ const toVector3 = (
 	throw new Error('Unsupported input type');
 };
 
-export default class ObjectActioner extends BaseActioner {
+export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> {
 	static defaultValue: LazyThreeDObjectState = new LazyThreeDObjectState();
 
 	protected getStyle(): LazyThreeDObjectState {
