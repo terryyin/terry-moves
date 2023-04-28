@@ -7,10 +7,7 @@ export type TextReveal = {
 	cursorShow: boolean;
 };
 
-type InterpolateType = 'linear' | 'spring' | 'oscillate';
-
-abstract class InterpolateRangesBase {
-	abstract interpolateType: InterpolateType;
+abstract class InterpolateRanges {
 	abstract inputRange: number[];
 
 	getInterpolateValue(
@@ -25,19 +22,18 @@ abstract class InterpolateRangesBase {
 			fps
 		);
 
-		return this.xxx(effectCalculator, prev);
+		return this.calculate(effectCalculator, prev);
 	}
 
 	abstract asPreviousValue(prev: number | undefined, frame: number): number | undefined;
-	protected abstract xxx(effectCalculator: EffectCalculator, prev?: number): number;
+	protected abstract calculate(effectCalculator: EffectCalculator, prev?: number): number;
 
 
 
 }
 
-export class InterpolateRangesOscillate extends InterpolateRangesBase {
+export class InterpolateRangesOscillate extends InterpolateRanges {
 	inputRange: number[];
-	interpolateType: 'oscillate' = 'oscillate';
 	distance: number;
 
 	constructor(inputRange: number[], distance: number) {
@@ -51,15 +47,14 @@ export class InterpolateRangesOscillate extends InterpolateRangesBase {
 		return prev;
 	}
 
-	protected xxx(effectCalculator: EffectCalculator, prev?: number) {
+	protected calculate(effectCalculator: EffectCalculator, prev?: number) {
 		const result =
 			-Math.sin(effectCalculator.timeWithIn() * Math.PI * 2) * this.distance;
 		return result + (prev ?? 0);
 	}
 }
 
-export class InterpolateRangesSpring extends InterpolateRangesBase {
-	interpolateType: 'spring' = 'spring';
+export class InterpolateRangesSpring extends InterpolateRanges {
 	outputRange: number[];
 	inputRange: number[];
 
@@ -69,7 +64,7 @@ export class InterpolateRangesSpring extends InterpolateRangesBase {
 		this.outputRange = outputRange;
 	}
 
-	protected xxx(effectCalculator: EffectCalculator, prev?: number) {
+	protected calculate(effectCalculator: EffectCalculator, prev?: number) {
 		const outputRange = [...this.outputRange];
 		if (prev) {
 			outputRange[0] = prev;
@@ -85,9 +80,8 @@ export class InterpolateRangesSpring extends InterpolateRangesBase {
 	}
 }
 
-export class InterpolateRangesLinear extends InterpolateRangesBase {
+export class InterpolateRangesLinear extends InterpolateRanges {
 	inputRange: number[];
-	interpolateType: 'linear' = 'linear';
 	private outputRange: number[];
 
 	constructor(inputRange: number[], outputRange: number[]) {
@@ -96,7 +90,7 @@ export class InterpolateRangesLinear extends InterpolateRangesBase {
 		this.outputRange = outputRange;
 	}
 
-	protected xxx(effectCalculator: EffectCalculator, prev?: number) {
+	protected calculate(effectCalculator: EffectCalculator, prev?: number) {
 		const outputRange = [...this.outputRange];
 		if (prev) {
 			outputRange[0] = prev;
@@ -111,11 +105,6 @@ export class InterpolateRangesLinear extends InterpolateRangesBase {
 		return prev;
 	}
 }
-
-type InterpolateRanges =
-	| InterpolateRangesSpring
-	| InterpolateRangesOscillate
-	| InterpolateRangesLinear;
 
 export type InterpolateFields =
 	| 'glow'
