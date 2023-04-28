@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {ThreeDObjectState} from './ThreeDObjectState';
 import {InterpolateRanges} from './InterpolateRanges';
-import {InterpolatesOfField} from './InterpolatesOfField';
+import { LazyState } from './LazyState';
 
 export type TextReveal = {
 	progress: number;
@@ -45,67 +45,28 @@ const allFields = [
 	{name: 'translateZ', type: 'additive'},
 ] as {name: InterpolateFields; type: 'additive' | 'multiplitive'}[];
 
-class LazyState {
-	protected interpolateRanges: Map<InterpolateFields, InterpolatesOfField>;
-
-	constructor(allFields: {name: InterpolateFields; type: 'additive' | 'multiplitive'}[]) {
-		this.interpolateRanges = new Map();
-		allFields.forEach(({name, type}) => {
-			this.interpolateRanges.set(name, new InterpolatesOfField(type));
-		});
-	}
-
-	private sureGetField(key: InterpolateFields): InterpolatesOfField {
-		const field = this.interpolateRanges.get(key);
-		if (!field) {
-			throw new Error(`Unknown interpolation field ${key}`);
-		}
-		return field;
-	}
-
-	protected setInterpolation1(
-		key: InterpolateFields,
-		interpolateRange: InterpolateRanges
-	): void {
-		const field = this.sureGetField(key);
-		field.add(interpolateRange);
-	}
-
-
-	combine1(prev: LazyThreeDObjectState): LazyThreeDObjectState {
-		const combinedStyle = new LazyThreeDObjectState();
-		this.interpolateRanges.forEach((interpolateRange, key) => {
-			const combined = interpolateRange.combine(prev.sureGetField(key));
-			combinedStyle.interpolateRanges.set(key, combined);
-		});
-
-		return combinedStyle;
-	}
-
-	protected reduceInterpolate(
-		frame: number,
-		fps: number,
-		field: InterpolateFields,
-	): number | undefined {
-		return this.sureGetField(field).reduceInterpolate(frame, fps);
-	}
-
-};
-
-export default class LazyThreeDObjectState extends LazyState {
-	constructor() {
-		super(allFields);
-	}
+export default class LazyThreeDObjectState {
+	private lazyState: LazyState = new LazyState(allFields);
 
 	setInterpolation(
 		key: InterpolateFields,
 		interpolateRange: InterpolateRanges
 	): void {
-		this.setInterpolation1(key, interpolateRange);
+		this.lazyState.setInterpolation1(key, interpolateRange);
+	}
+
+	reduceInterpolate(
+		frame: number,
+		fps: number,
+		field: InterpolateFields,
+	): number | undefined {
+		return this.lazyState.reduceInterpolate(frame, fps, field);
 	}
 
 	combine(prev: LazyThreeDObjectState): LazyThreeDObjectState {
-		return this.combine1(prev);
+		const result = new LazyThreeDObjectState();
+		this.lazyState.combineInto(prev.lazyState, result.lazyState);
+		return result;
 	}
 
 
