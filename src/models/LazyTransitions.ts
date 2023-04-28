@@ -29,6 +29,7 @@ type InterpolateRanges =
 	| InterpolateRangesOscillate;
 
 export type InterpolateFields =
+	| 'glow'
 	| 'textReveal'
 	| 'rotationX'
 	| 'rotationY'
@@ -65,6 +66,7 @@ export default class LazyTransitions {
 		const combinedStyle = new LazyTransitions();
 		(
 			[
+				'glow',
 				'textReveal',
 				'rotationX',
 				'rotationY',
