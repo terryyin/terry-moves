@@ -15,7 +15,7 @@ const toVector3 = (value: number | Vector2 | Vector3): [number, number, number] 
   throw new Error('Unsupported input type');
 }
 
-export default class DivActioner extends BaseActioner {
+export default class ObjectActioner extends BaseActioner {
 	static defaultValue: LazyTransitions = new LazyTransitions();
 
 	protected getStyle(): LazyTransitions {

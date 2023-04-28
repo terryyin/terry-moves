@@ -1,6 +1,6 @@
 import { SubtitleWithFlashBack } from './Subtitles';
 import { Action, Subtitle } from '@/models/Subtitles';
-import DivActioner from './DivActioner';
+import ObjectActioner from './ObjectActioner';
 import { EffectCalculatorAndAction } from './EffectCalculator';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
@@ -35,15 +35,15 @@ export default class AnimationContextWrapper {
 
   get3DObjectStateOf(actor: string): ThreeDObjectState {
     return this.getActioner(actor)
-      .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
-      .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
+      .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
+      .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
       .get3DObjedctState(this.adjustedFrame, this.script.fps);
   }
 
   getTextReveal(actor: string): TextReveal {
     return this.getActioner(actor)
-      .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
-      .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
+      .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
+      .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
       .getTextReveal(this.adjustedFrame, this.script.fps);
   }
 
