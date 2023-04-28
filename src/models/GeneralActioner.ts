@@ -17,7 +17,7 @@ export default class GeneralValueActioner extends BaseActioner {
 	private additiveValueChange(outputRange: [number, number]): LazyTransitions {
 			const result = new LazyTransitions();
 		result.setInterpolation('translateZ', 
-    new InterpolateRangesLinear(this.effectCalculator.frameRange, outputRange));
+    new InterpolateRangesLinear(this.frameRange, outputRange));
 		return result;
 	}
 

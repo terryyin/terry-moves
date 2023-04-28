@@ -4,10 +4,10 @@ import LazyTransitions from './LazyTransitions';
 
 export default abstract class BaseActioner {
   action: Action;
-  effectCalculator: EffectCalculator;
+  frameRange: [number, number];
 
   constructor(action: Action, effectCalculator: EffectCalculator) {
-    this.effectCalculator = effectCalculator;
+    this.frameRange = effectCalculator.frameRange;
     this.action = action;
   }
 
