@@ -72,7 +72,7 @@ class LazyState {
 	}
 
 
-	combine(prev: LazyThreeDObjectState): LazyThreeDObjectState {
+	combine1(prev: LazyThreeDObjectState): LazyThreeDObjectState {
 		const combinedStyle = new LazyThreeDObjectState();
 		this.interpolateRanges.forEach((interpolateRange, key) => {
 			const combined = interpolateRange.combine(prev.sureGetField(key));
@@ -102,6 +102,10 @@ export default class LazyThreeDObjectState extends LazyState {
 		interpolateRange: InterpolateRanges
 	): void {
 		this.setInterpolation1(key, interpolateRange);
+	}
+
+	combine(prev: LazyThreeDObjectState): LazyThreeDObjectState {
+		return this.combine1(prev);
 	}
 
 
