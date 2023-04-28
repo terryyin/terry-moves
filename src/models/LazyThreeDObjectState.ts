@@ -45,14 +45,20 @@ const allFields = [
 	{name: 'translateZ', type: 'additive'},
 ] as {name: InterpolateFields; type: 'additive' | 'multiplitive'}[];
 
-export default class LazyThreeDObjectState {
-	interpolateRanges: Map<InterpolateFields, InterpolatesOfField>;
+class LazyState {
+	protected interpolateRanges: Map<InterpolateFields, InterpolatesOfField>;
 
-	constructor() {
+	constructor(allFields: {name: InterpolateFields; type: 'additive' | 'multiplitive'}[]) {
 		this.interpolateRanges = new Map();
 		allFields.forEach(({name, type}) => {
 			this.interpolateRanges.set(name, new InterpolatesOfField(type));
 		});
+	}
+};
+
+export default class LazyThreeDObjectState extends LazyState {
+	constructor() {
+		super(allFields);
 	}
 
 	private sureGetField(key: InterpolateFields): InterpolatesOfField {
@@ -73,10 +79,9 @@ export default class LazyThreeDObjectState {
 
 	combine(prev: LazyThreeDObjectState): LazyThreeDObjectState {
 		const combinedStyle = new LazyThreeDObjectState();
-		allFields.forEach(({name}) => {
-			const combined = this.sureGetField(name)
-				.combine(prev.sureGetField(name));
-			combinedStyle.interpolateRanges.set(name, combined);
+		this.interpolateRanges.forEach((interpolateRange, key) => {
+			const combined = interpolateRange.combine(prev.sureGetField(key));
+			combinedStyle.interpolateRanges.set(key, combined);
 		});
 
 		return combinedStyle;
