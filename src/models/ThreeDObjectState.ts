@@ -45,7 +45,7 @@ export class ThreeDObjectState {
 	toShadowStyle(): CSSProperties | undefined {
 		const result: CSSProperties = {};
 		result.opacity = 1 - this.glow;
-		result.scale = 1 + this.glow * 0.2;
+		result.transform = `scale(${1 + this.glow * 0.2})`;
 		return this.getStylePresence(result);
 	}
 

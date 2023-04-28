@@ -188,7 +188,7 @@ describe('AnimationEffect', () => {
       { sec: 1.1, shadowExist: true, expectedOpacity: '0.9', expectedTransform: 'scale(1.02)' },
       { sec: 5.1, shadowExist: false, expectedOpacity: undefined },
     ].forEach(({sec, shadowExist, expectedOpacity, expectedTransform}) => {
-      test(`appear, then disappear at sec ${sec}`, () => {
+      test(`glow at sec ${sec}`, () => {
         const subtitle: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
           { actor: "under-test", actionType: 'glow', duration: 1 },
