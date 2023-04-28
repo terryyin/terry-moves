@@ -2,19 +2,18 @@ import { CSSProperties } from "react";
 import {Highlight, themes} from 'prism-react-renderer';
 import AnimationEffect from "./AnimationEffect";
 import { useAnimationContext } from "../hooks/useAnimationContext";
-import { HighlightStyle } from "@/models/Subtitles";
+import { HighlightStyle } from "../models/Subtitles";
+import { TextEdit } from "../models/CodeActioner";
 
 export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties}> = ({actor, style, codeString}) => {
   const { highlights, textEdits, showCursor } = useAnimationContext().getCodeTransfomation(actor);
 
-  const edit = (currentText: string): string => {
-    const lines = currentText.split('\n');
-
-  textEdits.forEach((edit) => {
+  const singleEdit =(edit: TextEdit, original: string): string => {
+    const lines = original.split('\n');
     const { line, progress, text } = edit;
     const currentLine = lines[line - 1];
 
-    if (!currentLine) return;
+    if (!currentLine) return '';
 
     const partialLength = Math.ceil(text.length * progress);
     const partialText = text.slice(0, partialLength) + (showCursor && partialLength < text.length ? '|' : '');
@@ -32,9 +31,11 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
       const { count, } = edit;
       lines.splice(line - 1, Math.ceil(count * progress));
     }
-  });
+    return lines.join('\n');
+  };
 
-  return lines.join('\n');
+  const edit = (currentText: string): string => {
+  return textEdits.reduce((prev, e) => singleEdit(e, prev), currentText);
 }
 
   const lineHighlightStyle = (line: number): HighlightStyle[] => {

@@ -31,7 +31,7 @@ interface LineDeletion extends TextEditBase {
   count: number;
 }
 
-type TextEdit = TextReplacement | TextInsertion | LineDeletion;
+export type TextEdit = TextReplacement | TextInsertion | LineDeletion;
 
 export type CodeTransformation = {
   highlights: Highlight[];

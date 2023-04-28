@@ -269,9 +269,19 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 5,
-			text: "After load, the Blaster must be fired. Otherwise, it will explode.",
+			text: "After load, the Blaster must be fired.",
 			actions: [
-				...loadActions
+				...loadActions,
+			  { actor: "caller 3", actionType: "highlight lines", duration: 5, lines: [2], offset: 0},
+			],
+	},
+
+	{
+			leadingBlank: 1,
+			duration: 5,
+			text: "Otherwise, it will explode.",
+			actions: [
+			  { actor: "caller 3", actionType: "replace text", duration: 1, line: 3, replacement: "  this.survey();", offset: 4},
 			],
 	},
 
