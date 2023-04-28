@@ -96,6 +96,7 @@ export default class LazyTransitions {
 
 	get3DObjedctState(frame: number, fps: number): ThreeDObjectState {
 		const result = new ThreeDObjectState();
+		result.glow = this.getAddingInterpolate(frame, fps, 'glow') ?? 0;
 		result.scale = this.getMultiplyingInterpolate(frame, fps, 'scale') ?? 1;
 		result.opacity = this.getMultiplyingInterpolate(frame, fps, 'opacity') ?? 1;
 

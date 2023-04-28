@@ -2,6 +2,7 @@ import {CSSProperties} from 'react';
 import * as THREE from 'three';
 
 export class ThreeDObjectState {
+	glow: number;
 	opacity: number;
 	scale: number;
 	position: THREE.Vector3;
@@ -9,6 +10,7 @@ export class ThreeDObjectState {
 	lookAtD: THREE.Vector3;
 
 	constructor() {
+		this.glow = 0;
 		this.opacity = 1;
 		this.scale = 1;
 		this.position = new THREE.Vector3();
