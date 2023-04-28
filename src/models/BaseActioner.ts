@@ -1,5 +1,5 @@
 import { Action } from '@/models/Subtitles';
-import LazyTransitions from './LazyTransitions';
+import LazyThreeDObjectState from './LazyThreeDObjectState';
 
 export default abstract class BaseActioner {
   action: Action;
@@ -10,9 +10,9 @@ export default abstract class BaseActioner {
     this.action = action;
   }
 
-  combine(prev: LazyTransitions): LazyTransitions {
+  combine(prev: LazyThreeDObjectState): LazyThreeDObjectState {
     return this.getStyle().combine(prev);
   }
 
-  protected abstract getStyle(): LazyTransitions;
+  protected abstract getStyle(): LazyThreeDObjectState;
 }

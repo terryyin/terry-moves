@@ -45,7 +45,7 @@ const allFields = [
 	{name: 'translateZ', type: 'additive'},
 ] as {name: InterpolateFields; type: 'additive' | 'multiplitive'}[];
 
-export default class LazyTransitions {
+export default class LazyThreeDObjectState {
 	interpolateRanges: Map<InterpolateFields, InterpolatesOfField>;
 
 	constructor() {
@@ -71,8 +71,8 @@ export default class LazyTransitions {
 		field.add(interpolateRange);
 	}
 
-	combine(prev: LazyTransitions): LazyTransitions {
-		const combinedStyle = new LazyTransitions();
+	combine(prev: LazyThreeDObjectState): LazyThreeDObjectState {
+		const combinedStyle = new LazyThreeDObjectState();
 		allFields.forEach(({name}) => {
 			const combined = this.sureGetField(name)
 				.combine(prev.sureGetField(name));

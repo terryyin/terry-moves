@@ -4,7 +4,7 @@ import ObjectActioner from './ObjectActioner';
 import { EffectCalculatorAndAction } from './EffectCalculator';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
-import { TextReveal } from './LazyTransitions';
+import { TextReveal } from './LazyThreeDObjectState';
 import { ThreeDObjectState } from "./ThreeDObjectState";
 import CodeActioner, { CodeTransformation } from './CodeActioner';
 import GeneralActioner from './GeneralActioner';

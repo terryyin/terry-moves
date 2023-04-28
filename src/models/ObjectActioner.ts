@@ -1,5 +1,5 @@
 import {Vector2, Vector3} from '@react-three/fiber';
-import LazyTransitions, {InterpolateFields} from './LazyTransitions';
+import LazyThreeDObjectState, {InterpolateFields} from './LazyThreeDObjectState';
 import BaseActioner from './BaseActioner';
 import {
 	InterpolateRangesLinear,
@@ -23,9 +23,9 @@ const toVector3 = (
 };
 
 export default class ObjectActioner extends BaseActioner {
-	static defaultValue: LazyTransitions = new LazyTransitions();
+	static defaultValue: LazyThreeDObjectState = new LazyThreeDObjectState();
 
-	protected getStyle(): LazyTransitions {
+	protected getStyle(): LazyThreeDObjectState {
 		switch (this.action.actionType) {
 			case 'type':
 				return this.type();
@@ -50,12 +50,12 @@ export default class ObjectActioner extends BaseActioner {
 			case '3d rotate':
 				return this.rotate(this.action.totalRotation);
 			default:
-				return new LazyTransitions();
+				return new LazyThreeDObjectState();
 		}
 	}
 
-	private glow(): LazyTransitions {
-		const result = new LazyTransitions();
+	private glow(): LazyThreeDObjectState {
+		const result = new LazyThreeDObjectState();
 		result.setInterpolation(
 			'glow',
 			new InterpolateRangesLinear(this.frameRange, [0, 1])
@@ -63,8 +63,8 @@ export default class ObjectActioner extends BaseActioner {
 		return result;
 	}
 
-	private type(): LazyTransitions {
-		const result = new LazyTransitions();
+	private type(): LazyThreeDObjectState {
+		const result = new LazyThreeDObjectState();
 		result.setInterpolation(
 			'textReveal',
 			new InterpolateRangesLinear(this.frameRange, [0, 1.2])
@@ -72,8 +72,8 @@ export default class ObjectActioner extends BaseActioner {
 		return result;
 	}
 
-	private getAppearStyle(outputRange: number[]): LazyTransitions {
-		const result = new LazyTransitions();
+	private getAppearStyle(outputRange: number[]): LazyThreeDObjectState {
+		const result = new LazyThreeDObjectState();
 		result.setInterpolation(
 			'opacity',
 			new InterpolateRangesLinear(this.frameRange, outputRange)
@@ -84,8 +84,8 @@ export default class ObjectActioner extends BaseActioner {
 	private move(
 		from: [number, number, number],
 		distances: number | Vector2 | Vector3
-	): LazyTransitions {
-		const result = new LazyTransitions();
+	): LazyThreeDObjectState {
+		const result = new LazyThreeDObjectState();
 		const vector: [number, number, number] = toVector3(distances);
 
 		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach(
@@ -103,8 +103,8 @@ export default class ObjectActioner extends BaseActioner {
 		return result;
 	}
 
-	private oscillate(distances: number | Vector3 | Vector2): LazyTransitions {
-		const result = new LazyTransitions();
+	private oscillate(distances: number | Vector3 | Vector2): LazyThreeDObjectState {
+		const result = new LazyThreeDObjectState();
 		const vector: [number, number, number] = toVector3(distances);
 
 		(['oscillateX', 'oscillateY', 'oscillateZ'] as InterpolateFields[]).forEach(
@@ -121,8 +121,8 @@ export default class ObjectActioner extends BaseActioner {
 		return result;
 	}
 
-	private scale(outputRange: number[]): LazyTransitions {
-		const result = new LazyTransitions();
+	private scale(outputRange: number[]): LazyThreeDObjectState {
+		const result = new LazyThreeDObjectState();
 		result.setInterpolation(
 			'scale',
 			new InterpolateRangesSpring(this.frameRange, outputRange)
@@ -130,8 +130,8 @@ export default class ObjectActioner extends BaseActioner {
 		return result;
 	}
 
-	private cameraLookAt(position: number | Vector3 | Vector2): LazyTransitions {
-		const result = new LazyTransitions();
+	private cameraLookAt(position: number | Vector3 | Vector2): LazyThreeDObjectState {
+		const result = new LazyThreeDObjectState();
 
 		(
 			['cameraLookAtX', 'cameraLookAtY', 'cameraLookAtZ'] as InterpolateFields[]
@@ -147,19 +147,19 @@ export default class ObjectActioner extends BaseActioner {
 		return result;
 	}
 
-	private rotate(rotation: [number, number, number]): LazyTransitions {
+	private rotate(rotation: [number, number, number]): LazyThreeDObjectState {
 		return this.rotateFromTo([0, 0, 0], rotation);
 	}
 
-	private rotateFrom(rotation: [number, number, number]): LazyTransitions {
+	private rotateFrom(rotation: [number, number, number]): LazyThreeDObjectState {
 		return this.rotateFromTo(rotation, [0, 0, 0]);
 	}
 
 	private rotateFromTo(
 		from: [number, number, number],
 		to: [number, number, number]
-	): LazyTransitions {
-		const result = new LazyTransitions();
+	): LazyThreeDObjectState {
+		const result = new LazyThreeDObjectState();
 		(['rotationX', 'rotationY', 'rotationZ'] as InterpolateFields[]).forEach(
 			(key, index) => {
 				result.setInterpolation(
