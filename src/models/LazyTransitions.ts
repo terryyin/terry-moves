@@ -168,19 +168,10 @@ export default class LazyTransitions {
 		oper: (a: number, b: number) => number,
 		defaultValue: number
 	): number | undefined {
-		const values = this.getInterpolateValues(frame, fps, field);
+		const interpolateRanges = this.interpolateRanges.get(field);
+		if (!interpolateRanges) return defaultValue;
+		const values = interpolateRanges.getInterpolateValues(frame, fps);
 		if (values.length === 0) return undefined;
 		return values.reduce(oper, defaultValue);
 	}
-
-	private getInterpolateValues(
-		frame: number,
-		fps: number,
-		field: InterpolateFields
-	): number[] {
-		const interpolateRanges = this.interpolateRanges.get(field);
-		if (!interpolateRanges) return [];
-		return interpolateRanges.getInterpolateValues(frame, fps);
-	}
-
 }
