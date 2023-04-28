@@ -54,12 +54,6 @@ class LazyState {
 			this.interpolateRanges.set(name, new InterpolatesOfField(type));
 		});
 	}
-};
-
-export default class LazyThreeDObjectState extends LazyState {
-	constructor() {
-		super(allFields);
-	}
 
 	private sureGetField(key: InterpolateFields): InterpolatesOfField {
 		const field = this.interpolateRanges.get(key);
@@ -69,13 +63,14 @@ export default class LazyThreeDObjectState extends LazyState {
 		return field;
 	}
 
-	setInterpolation(
+	protected setInterpolation1(
 		key: InterpolateFields,
 		interpolateRange: InterpolateRanges
 	): void {
 		const field = this.sureGetField(key);
 		field.add(interpolateRange);
 	}
+
 
 	combine(prev: LazyThreeDObjectState): LazyThreeDObjectState {
 		const combinedStyle = new LazyThreeDObjectState();
@@ -86,6 +81,29 @@ export default class LazyThreeDObjectState extends LazyState {
 
 		return combinedStyle;
 	}
+
+	protected reduceInterpolate(
+		frame: number,
+		fps: number,
+		field: InterpolateFields,
+	): number | undefined {
+		return this.sureGetField(field).reduceInterpolate(frame, fps);
+	}
+
+};
+
+export default class LazyThreeDObjectState extends LazyState {
+	constructor() {
+		super(allFields);
+	}
+
+	setInterpolation(
+		key: InterpolateFields,
+		interpolateRange: InterpolateRanges
+	): void {
+		this.setInterpolation1(key, interpolateRange);
+	}
+
 
 	get3DObjedctState(frame: number, fps: number): ThreeDObjectState {
 		const result = new ThreeDObjectState();
@@ -156,16 +174,4 @@ export default class LazyThreeDObjectState extends LazyState {
 		};
 	}
 
-	private reduceInterpolate(
-		frame: number,
-		fps: number,
-		field: InterpolateFields,
-	): number | undefined {
-		const interpolateRanges = this.sureGetField(field);
-		const defaultValue = interpolateRanges.type === 'additive' ? 0 : 1;
-		const values = interpolateRanges.getInterpolateValues(frame, fps);
-		if (values.length === 0) return undefined;
-		const oper = interpolateRanges.type === 'additive' ? (a: number, b: number) => a+b : (a: number, b: number) => a*b;
-		return values.reduce(oper, defaultValue);
-	}
 }

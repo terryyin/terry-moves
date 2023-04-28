@@ -2,7 +2,7 @@ import {InterpolateRanges} from './InterpolateRanges';
 
 export class InterpolatesOfField {
 	private ranges: InterpolateRanges[] = [];
-	type: 'additive' | 'multiplitive';
+	private type: 'additive' | 'multiplitive';
 
   constructor(type: 'additive' | 'multiplitive') {
     this.type = type;
@@ -18,7 +18,18 @@ export class InterpolatesOfField {
 		return result;
 	}
 
-	getInterpolateValues(frame: number, fps: number): number[] {
+	public reduceInterpolate(
+		frame: number,
+		fps: number,
+	): number | undefined {
+		const defaultValue = this.type === 'additive' ? 0 : 1;
+		const values = this.getInterpolateValues(frame, fps);
+		if (values.length === 0) return undefined;
+		const oper = this.type === 'additive' ? (a: number, b: number) => a+b : (a: number, b: number) => a*b;
+		return values.reduce(oper, defaultValue);
+	}
+
+	private getInterpolateValues(frame: number, fps: number): number[] {
 		const result: number[] = [];
 		if (this.ranges.length === 0) return [];
 		let prev: number | undefined;
