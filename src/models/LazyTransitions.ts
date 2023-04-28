@@ -31,6 +31,12 @@ class InterpolatesOfField {
 	add(interpolateRange: InterpolateRanges) {
 		this.ranges.push(interpolateRange);
 	}
+
+	combine(prev: InterpolatesOfField | undefined): InterpolatesOfField {
+		const result = new InterpolatesOfField();
+		result.ranges = [...(prev?.ranges || []), ...this.ranges, ];
+		return result;
+	}
 };
 
 export default class LazyTransitions {
@@ -71,9 +77,9 @@ export default class LazyTransitions {
 				'translateZ',
 			] as InterpolateFields[]
 		).forEach((key) => {
-			const combined = new InterpolatesOfField();
-			combined.ranges = [...(prev.interpolateRanges.get(key)?.ranges || []),
-				...(this.interpolateRanges.get(key)?.ranges || []), ];
+			const combined = new InterpolatesOfField()
+				.combine(this.interpolateRanges.get(key))
+				.combine(prev.interpolateRanges.get(key));
 			combinedStyle.interpolateRanges.set(key, combined);
 		});
 
