@@ -1,7 +1,7 @@
 import * as THREE from 'three';
 import {ThreeDObjectState} from './ThreeDObjectState';
-import { InterpolateRanges } from './InterpolateRanges';
-import { InterpolatesOfField } from './InterpolatesOfField';
+import {InterpolateRanges} from './InterpolateRanges';
+import {InterpolatesOfField} from './InterpolatesOfField';
 
 export type TextReveal = {
 	progress: number;
@@ -26,34 +26,32 @@ export type InterpolateFields =
 	| 'translateX'
 	| 'translateZ';
 
-;
-
-const allFields =	[
-				'glow',
-				'textReveal',
-				'rotationX',
-				'rotationY',
-				'rotationZ',
-				'oscillateX',
-				'oscillateY',
-				'oscillateZ',
-				'cameraLookAtX',
-				'cameraLookAtY',
-				'cameraLookAtY',
-				'opacity',
-				'scale',
-				'translateX',
-				'translateY',
-				'translateZ',
-			] as InterpolateFields[];
+const allFields = [
+	{name: 'glow', type: 'additive'},
+	{name: 'textReveal', type: 'additive'},
+	{name: 'rotationX', type: 'additive'},
+	{name: 'rotationY', type: 'additive'},
+	{name: 'rotationZ', type: 'additive'},
+	{name: 'oscillateX', type: 'additive'},
+	{name: 'oscillateY', type: 'additive'},
+	{name: 'oscillateZ', type: 'additive'},
+	{name: 'cameraLookAtX', type: 'additive'},
+	{name: 'cameraLookAtY', type: 'additive'},
+	{name: 'cameraLookAtY', type: 'additive'},
+	{name: 'opacity', type: 'multiplitive'},
+	{name: 'scale', type: 'multiplitive'},
+	{name: 'translateX', type: 'additive'},
+	{name: 'translateY', type: 'additive'},
+	{name: 'translateZ', type: 'additive'},
+] as {name: InterpolateFields; type: 'additive' | 'multiplitive'}[];
 
 export default class LazyTransitions {
 	interpolateRanges: Map<InterpolateFields, InterpolatesOfField>;
 
 	constructor() {
 		this.interpolateRanges = new Map();
-		allFields.forEach((key) => {
-			this.interpolateRanges.set(key, new InterpolatesOfField());
+		allFields.forEach(({name}) => {
+			this.interpolateRanges.set(name, new InterpolatesOfField());
 		});
 	}
 
@@ -72,11 +70,11 @@ export default class LazyTransitions {
 
 	combine(prev: LazyTransitions): LazyTransitions {
 		const combinedStyle = new LazyTransitions();
-		allFields.forEach((key) => {
+		allFields.forEach(({name}) => {
 			const combined = new InterpolatesOfField()
-				.combine(this.interpolateRanges.get(key))
-				.combine(prev.interpolateRanges.get(key));
-			combinedStyle.interpolateRanges.set(key, combined);
+				.combine(this.interpolateRanges.get(name))
+				.combine(prev.interpolateRanges.get(name));
+			combinedStyle.interpolateRanges.set(name, combined);
 		});
 
 		return combinedStyle;
