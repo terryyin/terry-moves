@@ -21,13 +21,16 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
 
     if ('match' in edit) {
       const { match } = edit;
-      lines[line - 1] = currentLine.replace(match, partialText);
+      lines[line - 1] = currentLine.replace(match ?? /.*/, partialText);
     } else if ('column' in edit) {
       const { column } = edit;
       lines[line - 1] =
         currentLine.slice(0, column) +
         partialText +
         currentLine.slice(column);
+    } else if ('count' in edit) {
+      const { count, } = edit;
+      lines.splice(line - 1, Math.ceil(count * progress));
     }
   });
 

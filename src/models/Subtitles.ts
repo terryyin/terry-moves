@@ -1,5 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
-export type ActionType = 'additive value change to' | 'type' | 'highlight lines' | 'highlight token' | 'replace text' | 'insert text' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'additive value change to' | 'type' | 'highlight lines' | 'delete lines' | 'highlight token' | 'replace text' | 'insert text' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -30,6 +30,12 @@ export interface HighlightLinesAction extends BaseAction {
   style? : HighlightStyle
 }
 
+export interface DeleteLinesAction extends BaseAction {
+  actionType: 'delete lines';
+  fromLine: number;
+  count: number;
+}
+
 export interface HighlightTokenAction extends BaseAction {
   actionType: 'highlight token';
   token: string;
@@ -39,7 +45,7 @@ export interface HighlightTokenAction extends BaseAction {
 export interface ReplaceTextAction extends BaseAction {
   actionType: 'replace text';
   line: number;
-  match: string;
+  match?: string;
   replacement: string;
 }
 
@@ -50,7 +56,7 @@ export interface InsertTextAction extends BaseAction {
   text: string;
 }
 
-type CodeAction = HighlightLinesAction | HighlightTokenAction | ReplaceTextAction | InsertTextAction;
+type CodeAction = DeleteLinesAction | HighlightLinesAction | HighlightTokenAction | ReplaceTextAction | InsertTextAction;
 
 export interface AbsolutePositionAction extends BaseAction {
   actionType: 'move' | 'camera look at';

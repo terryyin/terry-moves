@@ -147,6 +147,27 @@ describe('CodeHighlight', () => {
     });
   });
 
+  describe('replacing the whole line when match is empty', () => {
+    [
+      { sec: 0.5, expectedLineText: '  action(isLoad) {' },
+      { sec: 1.1, expectedLineText: 'l|' },
+      { sec: 1.6, expectedLineText: 'loadAm' },
+      { sec: 3.1, expectedLineText: 'loadAmount' },
+    ].forEach(({sec, expectedLineText}) => {
+      test(` at sec ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                  { actor: 'under-test', actionType: 'replace text', duration: 1, line: 2, replacement: 'loadAmount' }
+                ]})
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        expect(divOfLine(div, 2).textContent).toBe(expectedLineText);
+      });
+    });
+  });
+
   describe('insert text', () => {
     [
       { sec: 0.5, expectedLineText: '      this.load();' },
@@ -164,6 +185,27 @@ describe('CodeHighlight', () => {
                 .please();
         const div = renderAndGetDiv(animationContext);
         expect(divOfLine(div, 4).textContent).toBe(expectedLineText);
+      });
+    });
+  });
+
+  describe('highlight lines', () => {
+    [
+      { sec: 0.1, expectedText: "    if(isLoad) {" },
+      { sec: 1.2, expectedText: "      this.load();", },
+      { sec: 3.1, expectedText: "  }", },
+    ].forEach(({sec, expectedText, }) => {
+      test(` at sec ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                  { actor: 'under-test', actionType: 'delete lines', duration: 1, fromLine: 2, count: 4 }
+                ]})
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        expect(divOfLine(div, 1).textContent).toBe("class Gun {");
+        expect(divOfLine(div, 3).textContent).toBe(expectedText);
       });
     });
   });

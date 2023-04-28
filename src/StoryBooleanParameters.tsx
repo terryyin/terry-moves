@@ -235,9 +235,17 @@ const subtitles: Subtitle[] = [
 
 	{
 			leadingBlank: 0,
-			duration: 5,
+			duration: 6,
 			text: "Just let callers call the methods they want.",
-			actions: [],
+			actions: [
+			{ actor: "callee", actionType: "replace text", duration: 1, line: 13, match: " private", replacement: ""},
+			{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.load(1000);\n  blaster.fire();", offset: 1},
+			{ actor: "caller 2", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.fire();", offset: 2.5},
+			{ actor: "caller 3", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.load(999999990);\n  blaster.fire();", offset: 4},
+			{ actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [2, 3, 4, 5, 6, 7], offset: 5.5},
+			{ actor: "callee", actionType: "delete lines", duration: 1, fromLine: 2, count: 7, offset: 6},
+
+			],
 	},
 
 	{
@@ -263,6 +271,7 @@ const subtitles: Subtitle[] = [
 			duration: 5,
 			text: "After load, the Blaster must be fired. Otherwise, it will explode.",
 			actions: [
+				...loadActions
 			],
 	},
 

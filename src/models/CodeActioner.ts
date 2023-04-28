@@ -20,14 +20,18 @@ interface TextEditBase {
 }
 
 interface TextReplacement extends TextEditBase {
-  match: string;
+  match?: string;
 }
 
 interface TextInsertion extends TextEditBase {
   column: number;
 }
 
-type TextEdit = TextReplacement | TextInsertion;
+interface LineDeletion extends TextEditBase {
+  count: number;
+}
+
+type TextEdit = TextReplacement | TextInsertion | LineDeletion;
 
 export type CodeTransformation = {
   highlights: Highlight[];
@@ -60,7 +64,11 @@ export class LazyCodeTransformation {
     this.textEdits.push({line, column, text, progress});
   }
 
-  addTextRepacement(line: number, match: string, text: string, progress: number) {
+  addDeleteLines(fromLine: number, count: number, progress: number) {
+    this.textEdits.push({line: fromLine, count, progress, text: ''});
+  }
+
+  addTextRepacement(line: number, match: string | undefined, text: string, progress: number) {
     this.textEdits.push({line, match, text, progress});
   }
 
@@ -92,6 +100,8 @@ export default class CodeActioner {
     switch(this.action.actionType) {
       case 'highlight lines':
         return  this.highlightLines(this.action.lines, this.action.style ?? 'red background');
+      case 'delete lines':
+        return  this.deleteLines(this.action.fromLine, this.action.count);
       case 'highlight token':
         return  this.highlightToken(this.action.token, this.action.style ?? 'red background');
       case 'replace text':
@@ -130,4 +140,11 @@ export default class CodeActioner {
     if(this.effectCalculator.withInDuration()) result.highlightLines(lines, style);
     return result;
   }
+
+  deleteLines(fromLine: number, count: number): LazyCodeTransformation {
+    const result = new LazyCodeTransformation();
+    if(this.effectCalculator.withInDuration() || this.effectCalculator.isAfter()) result.addDeleteLines(fromLine, count, this.effectCalculator.interpolateDuration([0, 1]));
+    return result;
+  }
+
 }
