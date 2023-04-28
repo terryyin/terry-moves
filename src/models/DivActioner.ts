@@ -17,7 +17,7 @@ export default class DivActioner extends DivBaseActioner {
 			case 'disappear':
 				return this.getAppearStyle([1, 0]);
 			case 'glow':
-				return DivActioner.defaultValue;
+				return this.glow();
 			case 'rotate and rise':
 				return this.scale([0, 1])
 					.combine(this.move([0, -this.action.value, 0], [0, 0, 0]))
@@ -32,6 +32,12 @@ export default class DivActioner extends DivBaseActioner {
 				return new LazyTransitions();
 		}
 	}
+
+  private glow(): LazyTransitions {
+    const result = new LazyTransitions();
+    result.setInterpolation('glow', {interpolateType: 'linear', inputRange: this.effectCalculator.frameRange, outputRange: [0, 1]});
+    return result;
+  }
 
 	private type(): LazyTransitions {
 			const result = new LazyTransitions();

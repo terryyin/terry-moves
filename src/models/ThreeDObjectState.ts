@@ -42,9 +42,14 @@ export class ThreeDObjectState {
 		return result;
 	}
 
-	getStylePresence(): CSSProperties | undefined {
-		const style = this.toStyle();
+	toShadowStyle(): CSSProperties | undefined {
+		const result: CSSProperties = {};
+		result.opacity = 1 - this.glow;
+		result.scale = 1 + this.glow * 0.2;
+		return this.getStylePresence(result);
+	}
 
+	getStylePresence(style: CSSProperties): CSSProperties | undefined {
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
 		const {opacity, transform, transformOrigin, ...rest} = style;
 		if (Object.keys(rest).length !== 0) return style;

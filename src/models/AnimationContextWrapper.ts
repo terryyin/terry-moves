@@ -3,7 +3,6 @@ import { CSSProperties } from 'react';
 import { Action, Subtitle } from '@/models/Subtitles';
 import DivActioner from './DivActioner';
 import { EffectCalculatorAndAction } from './EffectCalculator';
-import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
 import { TextReveal } from './LazyTransitions';
@@ -44,14 +43,6 @@ export default class AnimationContextWrapper {
 
   getStyleOf(actor: string): CSSProperties {
     return this.get3DObjectStateOf(actor).toStyle();
-  }
-
-  getShadowStyleOf(actor: string): CSSProperties | undefined {
-    return this.getActioner(actor)
-      .map(effectCalculator => new DivShadowActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
-      .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .get3DObjedctState(this.adjustedFrame, this.script.fps)
-      .getStylePresence();
   }
 
   getTextReveal(actor: string): TextReveal {

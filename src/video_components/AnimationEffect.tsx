@@ -9,8 +9,9 @@ interface StageProps {
 
 const AnimationEffect: React.FC<StageProps> = ({ actor, style, children }) => {
   const animationContextWrapper = useAnimationContext();
-  const effectStyle: CSSProperties = animationContextWrapper.getStyleOf(actor);
-  const shadowEffectStyle: CSSProperties | undefined = animationContextWrapper.getShadowStyleOf(actor);
+  const threeDObjectState = animationContextWrapper.get3DObjectStateOf(actor);
+  const effectStyle: CSSProperties = threeDObjectState.toStyle();
+  const shadowEffectStyle: CSSProperties | undefined = threeDObjectState.toShadowStyle();
 
   return (
     <>
