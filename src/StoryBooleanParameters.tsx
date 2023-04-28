@@ -152,8 +152,8 @@ const subtitles: Subtitle[] = [
 			duration: 6,
 			text: "I've been inventing countering logics in the callee and callers to keep myself busy.",
 			actions: [
-				{ actor: "loose coupling health bar", actionType: "move", duration: 0.2, absolutePosition: [0, 0, 100]},
-				{ actor: "loose coupling health bar", actionType: "move", duration: 1, absolutePosition: [0, 0, 50], offset: 0.5},
+				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 0.1, value: 100},
+				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 50, offset: 0.5},
 			],
 	},
 
@@ -209,7 +209,7 @@ const subtitles: Subtitle[] = [
 		duration: 6,
 		text: "The boolean parameter makes the callers and callee tightly coupled.",
 		actions: [
-			{ actor: "loose coupling health bar", actionType: "move", duration: 1, absolutePosition: [0, 0, 10], offset: 0},
+			{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 10},
 			{ actor: 'caller 2 callout1', actionType: 'disappear', duration: 0.5},
 			{ actor: 'caller 3 callout1', actionType: 'disappear', duration: 0.5},
 		],
@@ -243,7 +243,7 @@ const subtitles: Subtitle[] = [
 			duration: 5,
 			text: "This reduces complexity and dependencies, resulting in lower coupling.",
 			actions: [
-				{ actor: "loose coupling health bar", actionType: "move", duration: 1, absolutePosition: [0, 0, 90], offset: 0},
+				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 90, offset: 0},
 			],
 	},
 

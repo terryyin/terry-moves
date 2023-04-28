@@ -2,7 +2,19 @@ import { Vector2, Vector3 } from '@react-three/fiber';
 import { Action } from '@/models/Subtitles';
 import EffectCalculator from './EffectCalculator';
 import LazyTransitions, { InterpolateFields } from './LazyTransitions';
-import { toVector3 } from './DivActioner';
+
+const toVector3 = (value: number | Vector2 | Vector3): [number, number, number] => {
+  if (typeof value === 'number') {
+    return [value, 0, 0];
+  }
+  if (value.length === 2) {
+    return [...value, 0];
+  }
+  if (value.length === 3) {
+    return [...value];
+  }
+  throw new Error('Unsupported input type');
+}
 
 export default abstract class DivBaseActioner {
   action: Action;

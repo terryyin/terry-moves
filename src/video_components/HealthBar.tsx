@@ -28,7 +28,7 @@ interface HealthBarProps {
 }
 
 const HealthBar: React.FC<HealthBarProps> = ({ actor, leftSide, style }) => {
-  const {position} = useAnimationContext().get3DGroupAttributes(actor);
+  const {position} = useAnimationContext().getGeneralValue(actor);
   const hackedProgress = position.z;
 
   const HealthBarStyled = styled.div`

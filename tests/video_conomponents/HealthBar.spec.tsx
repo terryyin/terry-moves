@@ -23,15 +23,15 @@ describe('HealthBar', () => {
 
   describe('value change', () => {
     [
-      { sec: 0.1, expectedValue: '' },
-      { sec: 1.1, expectedValue: 'red' },
-      { sec: 3.1, expectedValue: '' },
+      { sec: 0.1, expectedValue: '100%' },
+      { sec: 1.1, expectedValue: '7%' },
+      { sec: 3.1, expectedValue: '70%' },
     ].forEach(({sec, expectedValue}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'additive value change to', duration: 1, value: 1 }
+                  { actor: 'under-test', actionType: 'additive value change to', duration: 1, value: 70 }
                 ]})
                 .seconds(sec)
                 .please();

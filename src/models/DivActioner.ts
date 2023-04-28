@@ -1,19 +1,5 @@
 import LazyTransitions from './LazyTransitions';
 import DivBaseActioner from './DivBaseActioner';
-import { Vector2, Vector3 } from '@react-three/fiber';
-
-export const toVector3 = (value: number | Vector2 | Vector3): [number, number, number] => {
-  if (typeof value === 'number') {
-    return [value, 0, 0];
-  }
-  if (value.length === 2) {
-    return [...value, 0];
-  }
-  if (value.length === 3) {
-    return [...value];
-  }
-  throw new Error('Unsupported input type');
-}
 
 export default class DivActioner extends DivBaseActioner {
 	static defaultValue: LazyTransitions = new LazyTransitions();
