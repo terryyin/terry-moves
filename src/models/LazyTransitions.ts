@@ -27,6 +27,10 @@ export type InterpolateFields =
 
 class InterpolatesOfField {
 	 ranges: InterpolateRanges[] = [];
+
+	add(interpolateRange: InterpolateRanges) {
+		this.ranges.push(interpolateRange);
+	}
 };
 
 export default class LazyTransitions {
@@ -39,9 +43,9 @@ export default class LazyTransitions {
 		if (!this.interpolateRanges.get(key)) {
 			this.interpolateRanges.set(key, new InterpolatesOfField());
 		}
-		const array = this.interpolateRanges.get(key);
-		if (array) {
-			array.ranges.push(interpolateRange);
+		const field = this.interpolateRanges.get(key);
+		if (field) {
+			field.add(interpolateRange);
 		}
 	}
 
