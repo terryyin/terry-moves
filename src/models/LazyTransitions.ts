@@ -7,12 +7,46 @@ export type TextReveal = {
 	cursorShow: boolean;
 };
 
-export type ThreeGroupAttributes = {
+export class ThreeGroupAttributes  {
 	opacity: number;
 	scale: number;
 	position: THREE.Vector3;
 	rotation: THREE.Euler;
 	lookAtD: THREE.Vector3;
+
+	constructor() {
+		this.opacity = 1;
+		this.scale = 1;
+		this.position = new THREE.Vector3();
+		this.rotation = new THREE.Euler();
+		this.lookAtD = new THREE.Vector3();
+	}
+
+	 toStyle(threeDTransforms: ThreeGroupAttributes): CSSProperties {
+		const transforms: string[] = [];
+
+		transforms.push(`scale(${threeDTransforms.scale})`);
+
+		['translateX', 'translateY', 'translateZ'].forEach(
+			(key, index) => {
+				const translate = threeDTransforms.position.getComponent(index);
+				if (translate !== undefined) {
+					transforms.push(`${key}(${translate}px)`);
+				}
+			}
+		);
+
+		const result: CSSProperties = {transformOrigin: 'center'};
+		result.transformOrigin = 'center';
+
+		if (transforms.length > 0) {
+			result.transform = transforms.join(' ');
+		}
+
+   	result.opacity = threeDTransforms.opacity;
+
+		return result;
+	}
 };
 
 type InterpolateType = 'linear' | 'spring' | 'oscillate';
@@ -102,34 +136,14 @@ export default class LazyTransitions {
 
 	getStyle(frame: number, fps: number): CSSProperties {
 		const threeDTransforms = this.get3DGroupAttributes(frame, fps);
-		const transforms: string[] = [];
-
-		transforms.push(`scale(${threeDTransforms.scale})`);
-
-		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach(
-			(key, index) => {
-				const translate = threeDTransforms.position.getComponent(index);
-				if (translate !== undefined) {
-					transforms.push(`${key}(${translate}px)`);
-				}
-			}
-		);
-
-		const result: CSSProperties = {transformOrigin: 'center'};
-		result.transformOrigin = 'center';
-
-		if (transforms.length > 0) {
-			result.transform = transforms.join(' ');
-		}
-
-   	result.opacity = threeDTransforms.opacity;
-
-		return result;
+		return threeDTransforms.toStyle(threeDTransforms);
 	}
 
+
 	get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributes {
-		const scale = this.getMultiplyingInterpolate(frame, fps, 'scale');
-		const opacity = this.getMultiplyingInterpolate(frame, fps, 'opacity');
+		const result = new ThreeGroupAttributes();
+		result.scale = this.getMultiplyingInterpolate(frame, fps, 'scale') ?? 1;
+		result.opacity = this.getMultiplyingInterpolate(frame, fps, 'opacity') ?? 1;
 
 		const position = [0, 0, 0];
 		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach(
@@ -150,6 +164,7 @@ export default class LazyTransitions {
 				}
 			}
 		);
+		result.position = new THREE.Vector3(position[0] + oscillation[0], position[1] + oscillation[1], position[2] + oscillation[2]);
 
 		const cameraLookAt = [0, 0, 0];
 		(
@@ -161,6 +176,13 @@ export default class LazyTransitions {
 			}
 		});
 
+		result.lookAtD = new THREE.Vector3(
+				cameraLookAt[0],
+				cameraLookAt[1],
+				cameraLookAt[2]
+			);
+
+
 		const rotation = [0, 0, 0];
 		(['rotationX', 'rotationY', 'rotationZ'] as InterpolateFields[]).forEach(
 			(key, index) => {
@@ -170,18 +192,8 @@ export default class LazyTransitions {
 				}
 			}
 		);
+		result.rotation = new THREE.Euler(rotation[0], rotation[1], rotation[2]);
 
-		const result: ThreeGroupAttributes = {
-			opacity: opacity ?? 1,
-			scale: scale ?? 1,
-			position: new THREE.Vector3(position[0] + oscillation[0], position[1] + oscillation[1], position[2] + oscillation[2]),
-			rotation: new THREE.Euler(rotation[0], rotation[1], rotation[2]),
-			lookAtD: new THREE.Vector3(
-				cameraLookAt[0],
-				cameraLookAt[1],
-				cameraLookAt[2]
-			),
-		};
 		return result;
 	}
 
