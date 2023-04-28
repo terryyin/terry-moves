@@ -418,7 +418,7 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 12,
-			text: "In conclusion, avoid boolean parameters, use meaningful names, and aim for high cohesion and loose coupling in design.",
+			text: "In conclusion, avoid boolean parameters, use meaningful names, and aim for high cohesion and loose coupling in design",
 			actions: [
 					{ actor: "final-thoughts", actionType: "appear", duration: 1 },
 			],
@@ -469,6 +469,8 @@ const announceBoardStyle: CSSProperties = {
 				paddingTop: '20px',
 				paddingLeft: '10px',
 	fontFamily: 'Roboto, sans-serif', left: '0%', top: '40%', width: '100%', height: '40%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
+
+// Console.log(subtitles.map((s, i) => `${i}: ${s.text}`).join('\n'));
 
 export const StoryBooleanParameters: React.FC = () => {
   return (
