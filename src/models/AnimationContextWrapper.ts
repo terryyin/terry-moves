@@ -7,7 +7,7 @@ import DivShadowActioner from './DivShadowActioner';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
 import { TextReveal } from './LazyTransitions';
-import { ThreeGroupAttributes } from "./ThreeGroupAttributes";
+import { ThreeDObjectState } from "./ThreeDObjectState";
 import CodeActioner, { CodeTransformation } from './CodeActioner';
 import GeneralActioner from './GeneralActioner';
 
@@ -51,7 +51,7 @@ export default class AnimationContextWrapper {
       .getStylePresence();
   }
 
-  get3DGroupAttributes(actor: string): ThreeGroupAttributes {
+  get3DGroupAttributes(actor: string): ThreeDObjectState {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
@@ -72,7 +72,7 @@ export default class AnimationContextWrapper {
       .getCodeTransfomation(this.adjustedFrame, this.script.fps);
   }
 
-  getGeneralValue(actor: string): ThreeGroupAttributes {
+  getGeneralValue(actor: string): ThreeDObjectState {
      return this.getActioner(actor)
       .map(effectCalculator => new GeneralActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), GeneralActioner.defaultValue)

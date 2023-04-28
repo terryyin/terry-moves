@@ -1,7 +1,7 @@
 import {CSSProperties} from 'react';
 import * as THREE from 'three';
 
-export class ThreeGroupAttributes {
+export class ThreeDObjectState {
 	opacity: number;
 	scale: number;
 	position: THREE.Vector3;

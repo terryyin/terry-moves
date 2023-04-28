@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import EffectCalculator from './EffectCalculator';
-import { ThreeGroupAttributes as ThreeDObjectState } from './ThreeGroupAttributes';
+import { ThreeDObjectState } from './ThreeDObjectState';
 
 export type TextReveal = {
 	progress: number;
