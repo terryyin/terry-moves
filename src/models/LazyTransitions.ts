@@ -26,7 +26,7 @@ export type InterpolateFields =
 	| 'translateZ';
 
 class InterpolatesOfField {
-	 ranges: InterpolateRanges[] = [];
+	private ranges: InterpolateRanges[] = [];
 
 	add(interpolateRange: InterpolateRanges) {
 		this.ranges.push(interpolateRange);
@@ -37,6 +37,33 @@ class InterpolatesOfField {
 		result.ranges = [...(prev?.ranges || []), ...this.ranges, ];
 		return result;
 	}
+
+	getInterpolateValues(
+		frame: number,
+		fps: number,
+	): number[] {
+		const result: number[] = [];
+		if (this.ranges.length === 0) return [];
+		let prev: number | undefined;
+		let current = this.ranges[0];
+		for (let i = 0; i < this.ranges.length; i++) {
+			if (frame >= this.ranges[i].inputRange[0]) {
+				current = this.ranges[i];
+				const prevAny = this.ranges[i - 1];
+				if (i > 0) {
+				  prev = prevAny.asPreviousValue(prev, frame)
+				}
+				if (frame < current.inputRange[current.inputRange.length - 1]) {
+					result.push(current.getInterpolateValue(frame, fps, prev));
+				}
+			}
+		}
+		if (result.length === 0) {
+			result.push(current.getInterpolateValue(frame, fps, prev));
+		}
+		return result;
+	}
+
 };
 
 export default class LazyTransitions {
@@ -191,34 +218,7 @@ export default class LazyTransitions {
 	): number[] {
 		const interpolateRanges = this.interpolateRanges.get(field);
 		if (!interpolateRanges) return [];
-		return this.getInterpolateValues1(frame, fps, interpolateRanges);
-	}
-
-	private getInterpolateValues1(
-		frame: number,
-		fps: number,
-		interpolateRanges: InterpolatesOfField,
-	): number[] {
-		const result: number[] = [];
-		if (interpolateRanges.ranges.length === 0) return [];
-		let prev: number | undefined;
-		let current = interpolateRanges.ranges[0];
-		for (let i = 0; i < interpolateRanges.ranges.length; i++) {
-			if (frame >= interpolateRanges.ranges[i].inputRange[0]) {
-				current = interpolateRanges.ranges[i];
-				const prevAny = interpolateRanges.ranges[i - 1];
-				if (i > 0) {
-				  prev = prevAny.asPreviousValue(prev, frame)
-				}
-				if (frame < current.inputRange[current.inputRange.length - 1]) {
-					result.push(current.getInterpolateValue(frame, fps, prev));
-				}
-			}
-		}
-		if (result.length === 0) {
-			result.push(current.getInterpolateValue(frame, fps, prev));
-		}
-		return result;
+		return interpolateRanges.getInterpolateValues(frame, fps);
 	}
 
 }
