@@ -39,14 +39,16 @@ export default class AnimationContextWrapper {
     return this.getActioner(actor)
       .map(effectCalculator => new DivActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .getStyle(this.adjustedFrame, this.script.fps);
+      .get3DGroupAttributes(this.adjustedFrame, this.script.fps)
+      .toStyle();
   }
 
   getShadowStyleOf(actor: string): CSSProperties | undefined {
     return this.getActioner(actor)
       .map(effectCalculator => new DivShadowActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), DivActioner.defaultValue)
-      .getStylePresence(this.adjustedFrame, this.script.fps);
+      .get3DGroupAttributes(this.adjustedFrame, this.script.fps)
+      .getStylePresence();
   }
 
   get3DGroupAttributes(actor: string): ThreeGroupAttributes {

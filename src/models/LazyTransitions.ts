@@ -1,4 +1,3 @@
-import {CSSProperties} from 'react';
 import * as THREE from 'three';
 import EffectCalculator from './EffectCalculator';
 import { ThreeGroupAttributes } from './ThreeGroupAttributes';
@@ -93,12 +92,6 @@ export default class LazyTransitions {
 		return combinedStyle;
 	}
 
-	getStyle(frame: number, fps: number): CSSProperties {
-		const threeDTransforms = this.get3DGroupAttributes(frame, fps);
-		return threeDTransforms.toStyle();
-	}
-
-
 	get3DGroupAttributes(frame: number, fps: number): ThreeGroupAttributes {
 		const result = new ThreeGroupAttributes();
 		result.scale = this.getMultiplyingInterpolate(frame, fps, 'scale') ?? 1;
@@ -154,11 +147,6 @@ export default class LazyTransitions {
 		result.rotation = new THREE.Euler(rotation[0], rotation[1], rotation[2]);
 
 		return result;
-	}
-
-	getStylePresence(frame: number, fps: number): CSSProperties | undefined {
-		const threeDTransforms = this.get3DGroupAttributes(frame, fps);
-		return threeDTransforms.getStylePresence();
 	}
 
 	getTextReveal(adjustedFrame: number, fps: number): TextReveal {
