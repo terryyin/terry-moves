@@ -1,3 +1,5 @@
+import {staticFile} from 'remotion'
+import {Audio} from 'remotion'
 import './global.css';
 
 
@@ -34,6 +36,7 @@ const fireActions: Action[] =
 const loadedFireActions: Action[] =
 [
 				...fireActions,
+			  { actor: "blaster", actionType: "3d animation reverse", duration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
 			  { actor: "blaster temperature", actionType: "additive value change to", duration: 2, value: 0 },
 			  { actor: "blaster powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
 ];
@@ -50,7 +53,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 5,
-			text: "",
+			text: "Hello, welcome to the Oh My Bad Boolean Series.",
 			actions: [
 					{ actor: "second title", actionType: "type", duration: 3 },
 			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
@@ -107,7 +110,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 4,
-			text: "The function action() is called from many places in the code.",
+			text: "The function 'action' is called from many places in the code.",
 			actions: [
 				{ actor: "caller 3", actionType: "appear", duration: 0.2},
 				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'action'},
@@ -151,7 +154,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 5,
-			text: "It means the condition 'isLoad' in the 'action' function is redundant.",
+			text: "It means the condition 'is Load' in the 'action' function is redundant.",
 			actions: [
 				{ actor: "callee", actionType: "highlight lines", duration: 5, lines: [3, 5]},
 			],
@@ -170,7 +173,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 8,
-			text: "Say, now Caller 1 is propsing an interface change.",
+			text: "Say, now Caller 1 is proposing an interface change.",
 			actions: [
 				{ actor: 'caller 1 callout1', actionType: 'appear', duration: 0.5},
 				{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '1000'},
@@ -181,7 +184,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 6,
-			text: "So we changed the API to take a parameter 'loadAmount'.",
+			text: "So we changed the API to take a parameter 'load Amount'.",
 			actions: [
 				{ actor: 'callee callout1', actionType: 'appear', duration: 0.5},
 				{ actor: "callee", actionType: "replace text", duration: 1, line: 2, match: 'isLoad', replacement: 'loadAmount'},
@@ -316,7 +319,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 5,
+			duration: 6,
 			text: "My code doesn't seem to have that. And it makes the cohesion low.",
 			actions: [
 				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 100, offset: 0.1},
@@ -347,7 +350,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 	{
 			leadingBlank: 0,
 			duration: 5,
-			text: "so as not to hurt teammates",
+			text: "so as not to hurt teammates.",
 			actions: [
 				...loadedFireActions,
 			  { actor: "blaster assembly", actionType: "3d rotate", duration: 2, totalRotation: [0, 0, 0], offset: 4},
@@ -364,21 +367,31 @@ export const booleanParametersSutitles: Subtitle[] = [
 	},
 
 	{
-			leadingBlank: 0,
-			duration: 6,
-			text: "However, caller 3 is still buggy, but the code start to diverse.",
+			leadingBlank: 1,
+			duration: 4,
+			text: "However, caller 3 is still buggy,",
 			actions: [
-				...loadedFireActions,
-			  { actor: "blaster more powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
-			  { actor: "caller 3", actionType: "highlight lines", duration: 4, lines: [2, 3], offset: 1},
-			  { actor: "caller 3 callout2", actionType: "appear", duration: 1, offset: 3},
+				...loadActions,
+			  { actor: "caller 3", actionType: "highlight lines", duration: 7, lines: [2, 3], offset: 0},
 			],
 	},
 
 	{
 			leadingBlank: 0,
 			duration: 4,
-			text: "Again, it shows my code is not cohesive",
+			text: "but the code start to diverse.",
+			actions: [
+				...loadedFireActions,
+			  { actor: "blaster more powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
+			  { actor: "teammate callout", actionType: "appear", duration: 0.2, offset: 1},
+			  { actor: "caller 3 callout2", actionType: "appear", duration: 0.5, offset: 3},
+			],
+	},
+
+	{
+			leadingBlank: 0,
+			duration: 4,
+			text: "Again, it shows my code is not cohesive.",
 			actions: [
 				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 10, offset: 0.2},
 			],
@@ -401,6 +414,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			duration: 8,
 			text: "The bug would have been avoided if I kept my code more cohesive.",
 			actions: [
+			  { actor: "teammate callout", actionType: "disappear", duration: 0.5, offset: 0},
 			  { actor: "caller 3 callout2", actionType: "disappear", duration: 0.5, offset: 0},
 			  { actor: "caller 1 callout2", actionType: "disappear", duration: 0.5, offset: 0},
 			  { actor: "callee", actionType: "insert text", duration: 2, line: 4, column: 10, text: "\n\n  loadedFire(loadAmount) {\n    this.load(loadAmount);\n    this.fire();\n  };", offset: 1},
@@ -475,6 +489,7 @@ const announceBoardStyle: CSSProperties = {
 export const StoryBooleanParameters: React.FC = () => {
   return (
 		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={booleanParametersSutitles}  >
+		<Audio src={staticFile("assets/audios/boolean1.mp3")} />
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
@@ -524,6 +539,9 @@ export const StoryBooleanParameters: React.FC = () => {
 		</CalloutCloud>
 		<CalloutCloud actor='caller 2 callout1' style={{top: '41%', left: "4%"}} tailShift={-40}>
 			<span style={{ fontSize: '30px', margin: 0 , backgroundColor: "#ffaaaa"}} > 😠 What?! Why change it? What amount? 🚫  </span>
+		</CalloutCloud>
+		<CalloutCloud actor='teammate callout' style={{top: '13%', left: "calc(100% - 180px)"}} tailShift={110}>
+			<span style={{ fontSize: '30px', margin: 0 , backgroundColor: "#ffaaaa"}} > Ouch! Hey!  </span>
 		</CalloutCloud>
 
     <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.7)"}}/>

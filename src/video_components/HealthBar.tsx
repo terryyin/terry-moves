@@ -7,8 +7,8 @@ const HealthBarContainer = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  border: 2px solid #000;
-  border-radius: 5px;
+  border: 2px solid #fad052;
+  border-radius: 8px;
 `;
 
 const BackgroundBar = styled.div`
@@ -17,8 +17,18 @@ const BackgroundBar = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: #8b0000;
-  border-radius: 3px;
+  background-color: #403c3d;
+  border-radius: 6px;
+`;
+
+const ShadowBar = styled.div`
+  position: absolute;
+  top: 0%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background-color: rgba(0,0,0,0.2);
+  border-radius: 6px;
 `;
 
 interface HealthBarProps {
@@ -31,8 +41,8 @@ const HealthBarStyled = styled.div`
   position: absolute;
   top: 0;
   height: 100%;
-  background-color: #00ff00;
-  border-radius: 3px;
+  background-color: #fad052;
+  border-radius: 6px;
 `;
 
 const HealthBar: React.FC<HealthBarProps> = ({ actor, leftSide, style }) => {
@@ -53,6 +63,7 @@ const HealthBar: React.FC<HealthBarProps> = ({ actor, leftSide, style }) => {
     <AnimationEffect actor={actor} style={style}>
       <HealthBarContainer>
         <BackgroundBar />
+        <ShadowBar />
         <HealthBarStyled
           style={{...additionalStyle, width: `${Math.max(0, Math.min(100, hackedProgress ===0 ? 100 : hackedProgress ?? 0))}%` }}
           />
