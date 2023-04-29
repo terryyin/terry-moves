@@ -45,7 +45,7 @@ describe('CodeHighlight', () => {
   describe('highlight lines', () => {
     [
       { sec: 0.1, expectedColor: '' },
-      { sec: 1.1, expectedColor: 'red' },
+      { sec: 1.1, expectedColor: 'rgba(0, 0, 0, 0.8)' },
       { sec: 3.1, expectedColor: '' },
     ].forEach(({sec, expectedColor}) => {
       test(` at sec ${sec}`, () => {
@@ -68,7 +68,7 @@ describe('CodeHighlight', () => {
   describe('highlight token', () => {
     [
       { sec: 0.1, expectedColor: '' },
-      { sec: 1.1, expectedColor: 'red' },
+      { sec: 1.1, expectedColor: 'rgba(0, 0, 0, 0.8)' },
       { sec: 3.1, expectedColor: '' },
     ].forEach(({sec, expectedColor}) => {
       test(` at sec ${sec}`, () => {

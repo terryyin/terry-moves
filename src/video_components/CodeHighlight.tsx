@@ -66,7 +66,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
     return styles.reduce((acc, style) => {
       switch (style) {
         case 'red background':
-          return {...acc, background: 'red'};
+          return {...acc, background: 'rgba(0, 0, 0, 0.8)', filter: 'invert(1)'};
         case 'wavy underline':
           return {...acc, textDecoration: 'underline wavy red'};
         default:

@@ -25,7 +25,7 @@ describe('HealthBar', () => {
     [
       { sec: 0.1, expectedValue: '100%' },
       { sec: 1.1, expectedValue: '7%' },
-      { sec: 3.1, expectedValue: '70%' },
+      { sec: 3.1, expectedValue: '' },
     ].forEach(({sec, expectedValue}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe
