@@ -4,7 +4,7 @@ import EffectCalculator from './EffectCalculator';
 export type GLBAnimationAttributes = {
   playing: boolean;
   time?: number;
-  loopOnce: boolean;
+  pauseAtTime?: number,
 }
 
 export default class GLBAnimationActioner {
@@ -13,7 +13,6 @@ export default class GLBAnimationActioner {
 
   static defaultValue: GLBAnimationAttributes = {
     playing: true,
-    loopOnce: false,
   };
 
   constructor(action: Action, effectCalculator: EffectCalculator) {
@@ -23,10 +22,12 @@ export default class GLBAnimationActioner {
 
   combine(prev: GLBAnimationAttributes): GLBAnimationAttributes {
     const current = this.getCurrentValue();
+    const pauseAtTime = current.time === undefined ? current.pauseAtTime ?? prev.pauseAtTime : undefined;
+    const time = current.time ?? prev.time ?? pauseAtTime;
     return {
-      playing: current.time!==undefined ||  prev.time !== undefined,
-      time: current.time ?? prev.time,
-      loopOnce: current.loopOnce,
+      playing: time !== undefined,
+      time,
+      pauseAtTime,
     }
   }
 
@@ -51,7 +52,7 @@ export default class GLBAnimationActioner {
     return { 
       playing: true,
       time: this.getAnimationTime(action),
-      loopOnce: false,
+      pauseAtTime: action.freezeBeforeStart && this.effectCalculator.isBefore() ? 0 : undefined,
     }
   }
 
@@ -65,9 +66,6 @@ export default class GLBAnimationActioner {
       return action.duration * percentage / 100 * action.speed;
     }
 
-    if (action.freezeBeforeStart) {
-      return undefined;
-    }
   }
 
 }

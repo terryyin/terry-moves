@@ -52,7 +52,6 @@ export const booleanParametersSutitles: Subtitle[] = [
 			duration: 5,
 			text: "",
 			actions: [
-			  { actor: "blaster", actionType: "3d animation reverse", duration: 0.1, speed: 3, pauseAtEnd: true, freezeBeforeStart: true, offset: -1},
 					{ actor: "second title", actionType: "type", duration: 3 },
 			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
 			],

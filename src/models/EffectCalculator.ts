@@ -37,6 +37,10 @@ export default class EffectCalculator {
     return this.frame > this.endFrame;
   }
 
+  isBefore(): boolean {
+    return this.frame < this.startFrame;
+  }
+
   withInDuration(): boolean {
     return this.frame >= this.startFrame && !this.isAfter();
   }
