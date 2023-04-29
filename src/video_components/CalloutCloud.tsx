@@ -27,14 +27,18 @@ interface CalloutCloudProps {
 }
 
 export const CalloutCloud: React.FC<CalloutCloudProps> = ({ actor, style, tailShift, tailHeightPx, children }) => {
+  const poly = tailShift < 0 ?
+    `${-tailShift/2}% 0%, 0% 100%, ${100 + tailShift / 2}% 0%`
+    : `${tailShift/2}% 0%, 100% 100%, ${100 - tailShift / 2}% 0%`
   const Tail = styled.div`
     position: relative;
-    width: 16px;
+    top: -1px;
+    width: calc(16px + ${Math.abs(tailShift/2)}%);
     height: ${tailHeightPx ?? 16}px;
     background-color: white;
-    clip-path: polygon(0% 0%, ${ tailShift < 0 ? "0% 100%, 100% 0%" : "100% 0%, 100% 100%"});
-    margin-left: ${tailShift}%;
-    box-shadow: 3px -3px 6px rgba(0, 0, 0, 0.16), 3px -3px 6px rgba(0, 0, 0, 0.23);
+    clip-path: polygon(${poly});
+    margin-left: ${tailShift/2}%;
+    box-shadow: 3px 3px 6px rgba(0, 0, 0, 0.16), 3px 3px 6px rgba(0, 0, 0, 0.23);
     z-index: 1000;
   `;
 

@@ -543,7 +543,7 @@ export const StoryBooleanParameters: React.FC = () => {
     <AnimationEffect actor="title" style={announceBoardStyle} >
 			<span style={{
 				display: 'block',
-				paddingTop: '40px',
+				paddingTop: '30px',
       fontSize: '36px',
 			color: 'white',
       fontWeight: 'bold',
@@ -552,12 +552,16 @@ export const StoryBooleanParameters: React.FC = () => {
 
 			<TypingText actor="second title" style={{
 				position: 'relative',
-				paddingTop: '40px',
+				paddingTop: '35px',
 				display: 'block',
       fontSize: '30px',
 			color: 'white',
 			fontFamily: 'IBM Plex Mono',
     }} text="Seeking High Cohesion, Loose Coupling design"/>
+
+    <AbsoluteFill style={{ top: '85%', left: "82%", height: '10%'}}>
+			<span style={{fontFamily: 'Roboto, sans-serif',fontSize: '20px', color: "white"}}>terry@Odd-e</span>
+		</AbsoluteFill>
 
 		</AnimationEffect>
     <AbsoluteFill style={{ left: '0%',  top: '0.5%', width: '10%', height: '10%'}}>
@@ -569,9 +573,6 @@ export const StoryBooleanParameters: React.FC = () => {
 		<HealthBar leftSide actor="loose coupling health bar" style={{ left: '10%', top: '2.4%', width: '40%', height: '3%'}}/>
     <AbsoluteFill style={{ left: '50%', top: '2.4%', width: '40%', height: '3%'}}>
 		<HealthBar actor="high cohesion health bar" />
-		</AbsoluteFill>
-    <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '6%', width: '10%', height: '10%'}}>
-			<span style={{fontSize: '24px'}}>terry@</span>
 		</AbsoluteFill>
     <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '-2%', width: '12%', height: '20%'}}>
 			<OddeLogo />
