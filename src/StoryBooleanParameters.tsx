@@ -5,7 +5,6 @@ import React, { CSSProperties } from 'react';
 
 import { Action, Subtitle } from './models/Subtitles';
 import { AbsoluteFill } from 'remotion';
-import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
 import { ThreeDFrame } from './video_components/ThreeDFrame';
 import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
@@ -23,6 +22,7 @@ import HealthBar from './video_components/HealthBar';
 import { LightSource } from './video_components/LightSource';
 import { Markdown } from './video_components/Markdown';
 import { Explosion } from './parts/Explosion';
+import { Subtitles } from './video_components/Subtitles';
 
 const fireActions: Action[] =
 [
@@ -46,12 +46,13 @@ const loadActions: Action[] =
 			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
 ];
 
-const subtitles: Subtitle[] = [
+export const booleanParametersSutitles: Subtitle[] = [
 	{
 			leadingBlank: 1,
 			duration: 5,
 			text: "",
 			actions: [
+			  { actor: "blaster", actionType: "3d animation reverse", duration: 0.1, speed: 3, pauseAtEnd: true, freezeBeforeStart: true, offset: -1},
 					{ actor: "second title", actionType: "type", duration: 3 },
 			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
 			],
@@ -174,7 +175,7 @@ const subtitles: Subtitle[] = [
 			actions: [
 				{ actor: 'caller 1 callout1', actionType: 'appear', duration: 0.5},
 				{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '1000'},
-				{ actor: "caller 1", actionType: "highlight token", duration: 6.9, token: '1000', style: 'wavy underline'},
+				{ actor: "caller 1", actionType: "highlight token", duration: 8.9, token: '1000', style: 'wavy underline'},
 			],
 	},
 
@@ -335,7 +336,7 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 0,
 			duration: 5,
-			text: "After load, the blaster should be reaimed before fire,",
+			text: "After loading, the blaster should be re-aimed before fire,",
 			actions: [
 				...loadActions,
 			  { actor: "caller 1", actionType: "insert text", duration: 2, line: 2, column: 20, text: "\n  blaster.reAim();", offset: 1},
@@ -347,7 +348,7 @@ const subtitles: Subtitle[] = [
 	{
 			leadingBlank: 0,
 			duration: 5,
-			text: "so not to hurt teammates.",
+			text: "so as not to hurt teammates",
 			actions: [
 				...loadedFireActions,
 			  { actor: "blaster assembly", actionType: "3d rotate", duration: 2, totalRotation: [0, 0, 0], offset: 4},
@@ -403,7 +404,7 @@ const subtitles: Subtitle[] = [
 			actions: [
 			  { actor: "caller 3 callout2", actionType: "disappear", duration: 0.5, offset: 0},
 			  { actor: "caller 1 callout2", actionType: "disappear", duration: 0.5, offset: 0},
-			  { actor: "callee", actionType: "insert text", duration: 2, line: 4, column: 10, text: "\n\n  loadedFire(loadAmount) {\n    this.load(loadAmout);\n    this.fire();\n  };", offset: 1},
+			  { actor: "callee", actionType: "insert text", duration: 2, line: 4, column: 10, text: "\n\n  loadedFire(loadAmount) {\n    this.load(loadAmount);\n    this.fire();\n  };", offset: 1},
 			  { actor: "callee", actionType: "insert text", duration: 0.5, line: 11, column: 2, text: "private ", offset: 3.5},
 				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 30, offset: 3.5},
 			  { actor: "caller 1", actionType: "delete lines", duration: 0.5, fromLine: 2, count: 3, offset: 4.5},
@@ -474,7 +475,7 @@ const announceBoardStyle: CSSProperties = {
 
 export const StoryBooleanParameters: React.FC = () => {
   return (
-		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={subtitles}  >
+		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={booleanParametersSutitles}  >
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
@@ -543,6 +544,7 @@ export const StoryBooleanParameters: React.FC = () => {
     <AnimationEffect actor="title" style={announceBoardStyle} >
 			<span style={{
 				display: 'block',
+				paddingTop: '40px',
       fontSize: '36px',
 			color: 'white',
       fontWeight: 'bold',
@@ -552,7 +554,6 @@ export const StoryBooleanParameters: React.FC = () => {
 			<TypingText actor="second title" style={{
 				position: 'relative',
 				paddingTop: '40px',
-				paddingLeft: '10px',
 				display: 'block',
       fontSize: '30px',
 			color: 'white',

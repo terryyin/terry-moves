@@ -24,7 +24,7 @@ export const AnimatedGlb: React.FC<{
         action?.play();
       }
     });
-  }, [actions, time]);
+  }, [actions, time, playing]);
 
 
   useFrame(() => {

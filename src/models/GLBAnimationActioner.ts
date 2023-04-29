@@ -49,9 +49,9 @@ export default class GLBAnimationActioner {
 
   private getAnimationAttributes(action: ThreeDAnimationAction): GLBAnimationAttributes {
     return { 
-      playing: this.effectCalculator.withInDuration(),
+      playing: true,
       time: this.getAnimationTime(action),
-      loopOnce: true,
+      loopOnce: false,
     }
   }
 
@@ -66,7 +66,7 @@ export default class GLBAnimationActioner {
     }
 
     if (action.freezeBeforeStart) {
-      return 0;
+      return undefined;
     }
   }
 
