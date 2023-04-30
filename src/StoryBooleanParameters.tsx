@@ -55,8 +55,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			duration: 5,
 			text: "Hello, welcome to the Oh My Bad Boolean Series.",
 			actions: [
-					{ actor: "second title", actionType: "type", duration: 3 },
+				{ actor: "second title", actionType: "type", duration: 3 },
 			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
+				{ actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
 			],
 	},
 	{
@@ -65,7 +66,6 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "In my game program, there's a powerful tool called a Blaster.",
 			actions: [
 					{ actor: "title", actionType: "disappear", duration: 1 },
-					{ actor: "subtitles", actionType: "appear", duration: 1 },
 					{ actor: "callee", actionType: "appear", duration: 1 },
 			],
 	},
@@ -203,7 +203,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 		actions: [
 			{ actor: 'caller 1 callout1', actionType: 'disappear', duration: 1.5},
 			{ actor: 'caller 3 callout1', actionType: 'appear', duration: 0.5},
-			{ actor: "caller 3", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '9999999'},
+			{ actor: "caller 3", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '999999'},
 		],
 	},
 
@@ -250,7 +250,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			{ actor: "callee", actionType: "replace text", duration: 1, line: 13, match: " private", replacement: ""},
 			{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.load(1000);\n  blaster.fire();", offset: 1},
 			{ actor: "caller 2", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.fire();", offset: 2.5},
-			{ actor: "caller 3", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.load(999999990);\n  blaster.fire();", offset: 4},
+			{ actor: "caller 3", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.load(999999);\n  blaster.fire();", offset: 4},
 			{ actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [2, 3, 4, 5, 6, 7], offset: 5.5},
 			{ actor: "callee", actionType: "delete lines", duration: 1, fromLine: 2, count: 7, offset: 6},
 
@@ -303,9 +303,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			duration: 5,
 			text: "Well, no worries. Our current code is doing exactly that.",
 			actions: [
-			  { actor: "caller 3", actionType: "replace text", duration: 1, line: 3, replacement: "  this.fire();", offset: 0},
-			  { actor: "caller 1", actionType: "highlight lines", duration: 3, lines: [2, 3], offset: 1},
-			  { actor: "caller 3", actionType: "highlight lines", duration: 3, lines: [2, 3], offset: 1},
+			  { actor: "caller 3", actionType: "replace text", duration: 1, line: 3, replacement: "  blaster.fire();", offset: 0},
+			  { actor: "caller 1", actionType: "highlight lines", duration: 10, lines: [2, 3], offset: 1},
+			  { actor: "caller 3", actionType: "highlight lines", duration: 10, lines: [2, 3], offset: 1},
 			],
 	},
 
