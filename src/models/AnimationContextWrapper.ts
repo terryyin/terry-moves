@@ -1,4 +1,4 @@
-import { SubtitleWithFlashBack } from './Subtitles';
+import { ActionType, SubtitleWithFlashBack } from './Subtitles';
 import { Action, Subtitle } from '@/models/Subtitles';
 import ObjectActioner from './ObjectActioner';
 import { EffectCalculatorAndAction } from './EffectCalculator';
@@ -8,6 +8,7 @@ import { TextReveal } from './LazyThreeDObjectState';
 import { ThreeDObjectState } from "./ThreeDObjectState";
 import CodeActioner, { CodeTransformation } from './CodeActioner';
 import GeneralActioner from './GeneralActioner';
+import ConnectorsActioner, { ConnectorStates } from './ConnectorsActioner';
 
 
 export default class AnimationContextWrapper {
@@ -26,7 +27,7 @@ export default class AnimationContextWrapper {
   }
 
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
-    const result = this.getActioner(actor)
+    const result = this.getActionOfActor(actor)
       .map(effectCalculator => new GLBAnimationActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), { ...GLBAnimationActioner.defaultValue});
     result.time = result.time ?? this.adjustedFrame / this.script.fps;
@@ -34,39 +35,50 @@ export default class AnimationContextWrapper {
   }
 
   get3DObjectStateOf(actor: string): ThreeDObjectState {
-    return this.getActioner(actor)
+    return this.getActionOfActor(actor)
       .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
       .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
       .get3DObjedctState(this.adjustedFrame, this.script.fps);
   }
 
   getTextReveal(actor: string): TextReveal {
-    return this.getActioner(actor)
+    return this.getActionOfActor(actor)
       .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
       .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
       .getTextReveal(this.adjustedFrame, this.script.fps);
   }
 
   getCodeTransfomation(actor: string): CodeTransformation {
-     return this.getActioner(actor)
+     return this.getActionOfActor(actor)
       .map(effectCalculator => new CodeActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), CodeActioner.defaultValue)
       .getCodeTransfomation(this.adjustedFrame, this.script.fps);
   }
 
   getGeneralValue(actor: string): number | undefined {
-     return this.getActioner(actor)
+     return this.getActionOfActor(actor)
       .map(effectCalculator => new GeneralActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
       .reduce((prev, curr) => curr.combine(prev), GeneralActioner.defaultValue)
       .getGeneralValue(this.adjustedFrame, this.script.fps);
+  }
+
+  getConnectors(): ConnectorStates {
+     return this.getActionByType("connect to")
+      .map(effectCalculator => new ConnectorsActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
+      .reduce((prev, curr) => curr.combine(prev), ConnectorsActioner.defaultValue)
+      .getConnectors(this.adjustedFrame, this.script.fps);
   }
 
   private isSubtitleWithFlashBack(subtitle: Subtitle): subtitle is SubtitleWithFlashBack {
     return subtitle && (subtitle as SubtitleWithFlashBack).flashBack !== undefined;
   }
 
-  private getActioner(actor: string): EffectCalculatorAndAction[] {
-    return this.script.getActioner(actor, this.adjustedFrame);
+  private getActionOfActor(actor: string): EffectCalculatorAndAction[] {
+    return this.script.getActions(actor, this.adjustedFrame);
+  }
+
+  private getActionByType(actionType: ActionType): EffectCalculatorAndAction[] {
+    return this.script.getActionsByType(actionType, this.adjustedFrame);
   }
 
   private get adjustedFrame(): number {

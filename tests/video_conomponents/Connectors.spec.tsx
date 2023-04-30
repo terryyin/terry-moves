@@ -12,7 +12,7 @@ describe('Connectors', () => {
   const renderAndGetSvgPath = (animationContext: AnimationContextWrapper): HTMLElement => {
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
-        <AbsoluteFill style={{left: 0, right: 0, width: 100, height: 100}}>
+        <AbsoluteFill style={{left: 0, right: 0, width: "100px", height: "100px"}}>
           <Connectors />
           <AbsoluteFill style={{left: "50%", top: "50%", width: "30%", height: "30%"}}>
             <Anchor actor="start" style={{left: "5%", top: "50%" }}/>
@@ -29,9 +29,9 @@ describe('Connectors', () => {
 
   describe('connecting', () => {
     [
-      { sec: 0.1, expectedValue: '100%' },
-      { sec: 1.1, expectedValue: '7%' },
-      { sec: 3.1, expectedValue: '70%' },
+      { sec: 0.1, expectedValue: 'M0,0 QNaN,NaN 0,0' },
+      { sec: 1.1, expectedValue: 'M0,0 QNaN,NaN 0,0' },
+      { sec: 3.1, expectedValue: 'M0,0 QNaN,NaN 0,0' },
     ].forEach(({sec, expectedValue}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe

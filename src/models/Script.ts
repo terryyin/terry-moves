@@ -1,4 +1,4 @@
-import {Subtitle, SubtitleWithAction} from '../models/Subtitles';
+import {Action, ActionType, Subtitle, SubtitleWithAction} from '../models/Subtitles';
 import EffectCalculator, { EffectCalculatorAndAction } from './EffectCalculator';
 
 export class Script {
@@ -19,12 +19,20 @@ export class Script {
 		);
 	}
 
-	getActioner(actor: string, frame: number): EffectCalculatorAndAction[] {
+	getActions(actor: string, frame: number): EffectCalculatorAndAction[] {
+		return this.getActionsBy(frame, (action) => action.actor === actor)
+	}
+
+	getActionsByType(actionType: ActionType, frame: number): EffectCalculatorAndAction[] {
+		return this.getActionsBy(frame, (action) => action.actionType === actionType)
+	}
+
+	private getActionsBy(frame: number, matcher: (action: Action)=>boolean): EffectCalculatorAndAction[] {
 		return this.subtitles
 			.map((subtitle, index) => {
 				if (!this.isSubtitleWithAction(subtitle)) return [];
 				return subtitle.actions
-					.filter((action) => action.actor === actor)
+					.filter(matcher)
 					.map((action) => {
 						const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0;
 						return {

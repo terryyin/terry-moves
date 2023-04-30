@@ -1,5 +1,27 @@
 import React, { useEffect, useRef } from "react";
 
+function approximateQuadraticCurveLength(p0: {x: number, y: number}, p1: {x: number, y: number}, p2: {x: number, y: number}, segments = 10) {
+  let length = 0;
+  let prevX = p0.x;
+  let prevY = p0.y;
+
+  for (let i = 1; i <= segments; i++) {
+    const t = i / segments;
+    const x = (1 - t)**2 * p0.x + 2 * (1 - t) * t * p1.x + t * t * p2.x;
+    const y = (1 - t)**2 * p0.y + 2 * (1 - t) * t * p1.y + t * t * p2.y;
+
+    const dx = x - prevX;
+    const dy = y - prevY;
+
+    length += Math.sqrt(dx * dx + dy * dy);
+
+    prevX = x;
+    prevY = y;
+  }
+
+  return length;
+}
+
 interface ConnectorProps {
   parentRef: React.RefObject<HTMLDivElement>;
   e1: string;
@@ -72,7 +94,13 @@ export const Connector: React.FC<ConnectorProps> = ({
         `M${e1Pos.x},${e1Pos.y} Q${controlPoint.x},${controlPoint.y} ${e2Pos.x},${e2Pos.y}`
       );
 
-      const pathLength = path.getTotalLength();
+      const p0 = { x: e1Pos.x, y: e1Pos.y };
+      const p1 = { x: controlPoint.x, y: controlPoint.y };
+      const p2 = { x: e2Pos.x, y: e2Pos.y };
+    
+      // Approximate the path length
+      const pathLength = approximateQuadraticCurveLength(p0, p1, p2);
+
 
       const trimStart = radius1;
       const trimEnd = pathLength - radius2;
