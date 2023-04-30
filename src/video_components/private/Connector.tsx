@@ -110,8 +110,6 @@ export const Connector: React.FC<ConnectorProps> = ({
         height="100%"
         style={{ position: "absolute", top: 0, left: 0, pointerEvents: "none" }}
       >
-
-
       <path
         ref={svgPath}
         fill="none"

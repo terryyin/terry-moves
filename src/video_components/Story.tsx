@@ -4,6 +4,7 @@ import { Subtitle } from '../models/Subtitles';
 import autonomousComponent from './autonomousComponent';
 import React from 'react';
 import AnimationContextWrapper from '../models/AnimationContextWrapper';
+import { Connectors } from './private/Connectors';
 import { Script } from "../models/Script";
 
 export const Story: React.FC<{id: string, subtitles: Subtitle[], width?: number, height?: number, children: React.ReactNode}> = (({
@@ -16,6 +17,7 @@ export const Story: React.FC<{id: string, subtitles: Subtitle[], width?: number,
     return (
       <AnimationContextProvider value={animationContextWrapper}>
         {children}
+		    <Connectors />
       </AnimationContextProvider>
     );
   });
