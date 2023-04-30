@@ -25,7 +25,8 @@ import { LightSource } from './video_components/LightSource';
 import { Markdown } from './video_components/Markdown';
 import { Explosion } from './parts/Explosion';
 import { Subtitles } from './video_components/Subtitles';
-import { Connector } from './video_components/Connector';
+import { Anchor } from './video_components/Anchor';
+import { Connectors } from './video_components/Connectors';
 
 const fireActions: Action[] =
 [
@@ -518,10 +519,16 @@ export const StoryBooleanParameters: React.FC = () => {
           </ThreeDFrame>
       </AbsoluteFill>
 			</AnimationEffect>
-		<CodeHighlight actor="caller 1" codeString={caller1} style={{ left: '5%', top: '32%', width: '40%', height: '20%', }}/>
+		<CodeHighlight actor="caller 1" codeString={caller1} style={{ left: '5%', top: '32%', width: '40%', height: '20%', }}>
+			<Anchor actor="a1"/>
+		</CodeHighlight>
 		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '52%', width: '40%', height: '20%', }}/>
-		<CodeHighlight actor="caller 3" codeString={caller3} style={{ left: '5%', top: '74%', width: '40%', height: '20%', }}/>
-		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', }}/>
+		<CodeHighlight actor="caller 3" codeString={caller3} style={{ left: '5%', top: '74%', width: '40%', height: '20%', }}>
+			<Anchor actor="a3"/>
+		</CodeHighlight>
+		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', }}>
+			<Anchor actor="anchor-callee"/>
+		</CodeHighlight>
 
 		<CalloutCloud actor='caller 1 callout1' style={{top: '10%', left: "2%"}} tailShift={-70} tailHeightPx={100}>
 			<span style={{ fontSize: '30px', margin: 0 }} > 🤔 Can we pass the load amount to action()? 💡  </span>
@@ -599,7 +606,7 @@ export const StoryBooleanParameters: React.FC = () => {
 			  <OddeLogoInner />
 			</FlipCoin>
 		</AbsoluteFill>
-		<Connector e1="title" e2="callee" bentLevel={-50} radius1={10} radius2={0} />
+		<Connectors />
 		</Story>
   );
 };

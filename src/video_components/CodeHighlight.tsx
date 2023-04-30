@@ -1,11 +1,11 @@
-import { CSSProperties } from "react";
+import React, { CSSProperties } from "react";
 import {Highlight, themes} from 'prism-react-renderer';
 import AnimationEffect from "./AnimationEffect";
 import { useAnimationContext } from "../hooks/useAnimationContext";
 import { HighlightStyle } from "../models/Subtitles";
 import { TextEdit } from "../models/CodeActioner";
 
-export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties}> = ({actor, style, codeString}) => {
+export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties, children?: React.ReactNode}> = ({actor, style, codeString, children}) => {
   const { highlights, textEdits, showCursor } = useAnimationContext().getCodeTransfomation(actor);
 
   const singleEdit =(edit: TextEdit, original: string): string => {
@@ -82,6 +82,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
 
   return (
 			<AnimationEffect actor={actor} style={{...style}}>
+        {children}
         <Highlight code={currentCode} language="javascript" theme={themes.vsDark}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
               <pre className={className} style={{fontSize: "1.25rem", marginTop: 0, ...style}}>
@@ -107,7 +108,6 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
               </pre>
             )}
           </Highlight>
-      
       </AnimationEffect>
   );
 };

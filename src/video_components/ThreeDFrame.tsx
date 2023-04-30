@@ -16,11 +16,11 @@ export const ThreeDFrame: React.FC<{
 	lookAtY?: number,
   children: React.ReactNode;
 }> = ({cameraY, cameraDistance, lookAtY, children}) => {
-	const {ref, size} = useParentSize();
+	const {ref, metrics} = useParentSize();
 
 	return (
 		<AbsoluteFill ref={ref} style={container} >
-				<ThreeCanvas linear width={size.width} height={size.height} >
+				<ThreeCanvas linear width={metrics.width} height={metrics.height} >
 					<ambientLight intensity={1.5} color={0xffffff} />
 					<pointLight position={[10, 10, 0]} />
 					<UnderCamera cameraY={cameraY} cameraDistance={cameraDistance} lookAtY={lookAtY}>
