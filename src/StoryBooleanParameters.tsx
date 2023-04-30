@@ -158,7 +158,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "It means the condition 'is Load' in the 'action' function is redundant.",
 			actions: [
 				{ actor: "callee", actionType: "highlight lines", duration: 5, lines: [3, 5]},
-				{ actor: "a1", actionType: "connect to", duration: 0.5, target: "anchor-callee"},
+				{ actor: "a1", actionType: "connect to", duration: 0.5, target: "anchor-callee", bentLevel: 100},
 			],
 	},
 

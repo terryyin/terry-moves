@@ -12,7 +12,7 @@ export const Connectors: React.FC = () => {
 		<AbsoluteFill  ref={ref}>
       {
         connectors.map((connector, index) => {
-          return <Connector key={index} e1={connector.source} e2={connector.target} parentRef={ref} bentLevel={0} radius1={0} radius2={0} />
+          return <Connector key={index} e1={connector.action.actor} e2={connector.action.target} parentRef={ref} bentLevel={connector.action.bentLevel} radius1={connector.action.radiusSource ?? 0} radius2={connector.action.radiusTarget ?? 0} />
         })
       }
     </AbsoluteFill>

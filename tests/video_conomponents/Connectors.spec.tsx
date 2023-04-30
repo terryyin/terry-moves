@@ -37,7 +37,7 @@ describe('Connectors', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'start', actionType: 'connect to', duration: 1, target: 'end' }
+                  { actor: 'start', actionType: 'connect to', duration: 1, target: 'end', bentLevel: 0 }
                 ]})
                 .seconds(sec)
                 .please();

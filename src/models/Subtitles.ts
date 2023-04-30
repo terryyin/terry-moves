@@ -90,6 +90,9 @@ export interface ThreeDAnimationAction extends BaseAction {
 export interface ConnectAction extends BaseAction {
   actionType: 'connect to';
   target: string;
+  bentLevel: number;
+  radiusSource?: number;
+  radiusTarget?: number;
 }
 
 export type Action = ConnectAction | TextAction | CodeAction | ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;

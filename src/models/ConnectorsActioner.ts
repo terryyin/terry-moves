@@ -1,8 +1,8 @@
 import BaseActioner from './BaseActioner';
+import { ConnectAction } from './Subtitles';
 
 interface Connector {
-	source: string;
-	target: string;
+	action: ConnectAction,
 	frameRange: [number, number];
 }
 
@@ -31,15 +31,15 @@ export default class ConnectorsActioner extends BaseActioner<LazyConnectorsState
 	protected getStyle(): LazyConnectorsState {
 		switch (this.action.actionType) {
 			case 'connect to':
-				return this.additiveValueChange(this.action.actor,  this.action.target);
+				return this.additiveValueChange(this.action);
 			default:
 				return new LazyConnectorsState();
 		}
 	}
 
-	private additiveValueChange(source: string, target: string): LazyConnectorsState {
+	private additiveValueChange(action: ConnectAction): LazyConnectorsState {
 		const result = new LazyConnectorsState();
-		result.connectors.connectors = [{source, target, frameRange: this.frameRange}];
+		result.connectors.connectors = [{action, frameRange: this.frameRange}];
 		return result;
 	}
 }
