@@ -39,17 +39,16 @@ export const Connector: React.FC<ConnectorProps> = ({
   radius1,
   radius2,
 }) => {
+
   const svgPath = useRef<SVGPathElement>(null);
-  const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => {
     const updateLine = () => {
       const parent = parentRef.current;
-      const svgElm = svgRef.current;
       const e1 = document.getElementById(e1Id) as HTMLDivElement;
       const e2 = document.getElementById(e2Id) as HTMLDivElement;
       const path = svgPath.current;
-      if (!e1 || !e2 || !path || !parent || !svgElm) return;
+      if (!e1 || !e2 || !path || !parent) return;
 
       const parentRect = parent.getBoundingClientRect();
       const e1Rect = e1.getBoundingClientRect();
@@ -88,7 +87,6 @@ export const Connector: React.FC<ConnectorProps> = ({
         y: middlePoint.y + perpY * bentLevel,
       };
     
-      svgElm.setAttribute("viewBox", `${parentRect.left} ${parentRect.top} ${parentRect.width} ${parentRect.height}`)
       path.setAttribute(
         "d",
         `M${e1Pos.x},${e1Pos.y} Q${controlPoint.x},${controlPoint.y} ${e2Pos.x},${e2Pos.y}`
@@ -121,25 +119,6 @@ export const Connector: React.FC<ConnectorProps> = ({
 
   return (
 
-      <svg
-        ref={svgRef}
-        width="100%"
-        height="100%"
-        style={{ position: "absolute", top: 0, left: 0, pointerEvents: "none" }}
-      >
-
-        <defs>
-        <marker
-          id="arrowhead"
-          markerWidth="5"
-          markerHeight="7"
-          refX="4"
-          refY="3.5"
-          orient="auto"
-        >
-          <polygon points="0 0, 5 3.5, 0 7" fill="#88a"/>
-        </marker>
-      </defs>
       <path
         ref={svgPath}
         fill="none"
@@ -152,6 +131,6 @@ export const Connector: React.FC<ConnectorProps> = ({
           animation: 'dash 1.5s linear infinite',
         }}
       />
-      </svg>
+
   );
 };
