@@ -58,7 +58,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			actions: [
 				{ actor: "second title", actionType: "type", duration: 3 },
 			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
-				{ actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
+				// { actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
 			],
 	},
 	{

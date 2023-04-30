@@ -107,7 +107,7 @@ export const Connector: React.FC<ConnectorProps> = ({
 
       const startOffset = trimStart + (trimEnd - trimStart) * (1 - 1);
 
-      path.style.strokeDasharray = `${trimEnd - startOffset} ${pathLength}`;
+      // Path.style.strokeDasharray = `${trimEnd - startOffset} ${pathLength}`;
       path.style.strokeDashoffset = startOffset.toString();
     };
 
@@ -126,12 +126,29 @@ export const Connector: React.FC<ConnectorProps> = ({
         height="100%"
         style={{ position: "absolute", top: 0, left: 0, pointerEvents: "none" }}
       >
+        <defs>
+        <marker
+          id="arrowhead"
+          markerWidth="5"
+          markerHeight="7"
+          refX="4"
+          refY="3.5"
+          orient="auto"
+        >
+          <polygon points="0 0, 5 3.5, 0 7" fill="#88a"/>
+        </marker>
+      </defs>
       <path
         ref={svgPath}
         fill="none"
-        stroke="red"
+        stroke="#88a"
         strokeWidth="2"
+        strokeDasharray="5"
         strokeLinecap="round"
+        markerEnd="url(#arrowhead)"
+        style={{
+          animation: 'dash 1.5s linear infinite',
+        }}
       />
       </svg>
   );
