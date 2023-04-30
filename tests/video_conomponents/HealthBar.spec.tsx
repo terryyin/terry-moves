@@ -19,13 +19,13 @@ describe('HealthBar', () => {
   };
 
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const divOfHealthBar = (div: HTMLDivElement): HTMLDivElement => div.querySelector(`div>:nth-child(${2})`)!;
+  const divOfHealthBar = (div: HTMLDivElement): HTMLDivElement => div.querySelector(`div>:nth-child(${3})`)!;
 
   describe('value change', () => {
     [
       { sec: 0.1, expectedValue: '100%' },
       { sec: 1.1, expectedValue: '7%' },
-      { sec: 3.1, expectedValue: '' },
+      { sec: 3.1, expectedValue: '70%' },
     ].forEach(({sec, expectedValue}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe
