@@ -8,7 +8,7 @@ export const Connectors: React.FC = () => {
 
 	return (
 		<AbsoluteFill  ref={ref}>
-      <Connector e2="anchor-callee" e1="a3" parentRef={ref} bentLevel={0} radius1={0} radius2={0} />
+      <Connector e2="a1" e1="a3" parentRef={ref} bentLevel={300} radius1={0} radius2={0} />
     </AbsoluteFill>
 	);
 };

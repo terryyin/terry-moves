@@ -35,8 +35,6 @@ export const Connector: React.FC<ConnectorProps> = ({
       const e1Rect = e1.getBoundingClientRect();
       const e2Rect = e2.getBoundingClientRect();
 
-      console.log(parentRect)
-
       const e1Pos = {
         x: e1Rect.left + e1Rect.width / 2 - parentRect.left,
         y: e1Rect.top + e1Rect.height / 2 - parentRect.top,
@@ -47,15 +45,33 @@ export const Connector: React.FC<ConnectorProps> = ({
         y: e2Rect.top + e2Rect.height / 2 - parentRect.top,
       };
 
+      const dx = e2Pos.x - e1Pos.x;
+      const dy = e2Pos.y - e1Pos.y;
+      const distance = Math.sqrt(dx * dx + dy * dy);
+    
       const middlePoint = {
         x: (e1Pos.x + e2Pos.x) / 2,
-        y: (e1Pos.y + e2Pos.y) / 2 - bentLevel,
+        y: (e1Pos.y + e2Pos.y) / 2,
       };
-
+    
+      // Calculate the normalized direction vector
+      const dirX = dx / distance;
+      const dirY = dy / distance;
+    
+      // Calculate the perpendicular vector
+      const perpX = -dirY;
+      const perpY = dirX;
+    
+      // Calculate the control point using the perpendicular vector and bentLevel
+      const controlPoint = {
+        x: middlePoint.x + perpX * bentLevel,
+        y: middlePoint.y + perpY * bentLevel,
+      };
+    
       svgElm.setAttribute("viewBox", `0 0 ${parentRect.width} ${parentRect.height}`)
       path.setAttribute(
         "d",
-        `M${e1Pos.x},${e1Pos.y} Q${middlePoint.x},${middlePoint.y} ${e2Pos.x},${e2Pos.y}`
+        `M${e1Pos.x},${e1Pos.y} Q${controlPoint.x},${controlPoint.y} ${e2Pos.x},${e2Pos.y}`
       );
 
       const pathLength = path.getTotalLength();
