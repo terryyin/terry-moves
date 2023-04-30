@@ -25,6 +25,7 @@ import { LightSource } from './video_components/LightSource';
 import { Markdown } from './video_components/Markdown';
 import { Explosion } from './parts/Explosion';
 import { Subtitles } from './video_components/Subtitles';
+import { Connector } from './video_components/Connector';
 
 const fireActions: Action[] =
 [
@@ -598,6 +599,7 @@ export const StoryBooleanParameters: React.FC = () => {
 			  <OddeLogoInner />
 			</FlipCoin>
 		</AbsoluteFill>
+		<Connector e1="title" e2="callee" bentLevel={-50} radius1={10} radius2={0} />
 		</Story>
   );
 };
