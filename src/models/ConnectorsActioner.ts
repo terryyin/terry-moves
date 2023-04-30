@@ -3,6 +3,7 @@ import BaseActioner from './BaseActioner';
 interface Connector {
 	source: string;
 	target: string;
+	frameRange: [number, number];
 }
 
 export interface ConnectorStates {
@@ -20,7 +21,7 @@ class LazyConnectorsState {
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	getConnectors(adjustedFrame: number, fps: number): ConnectorStates {
-		return this.connectors;
+		return {connectors: this.connectors.connectors.filter((connector) => connector.frameRange[0] <= adjustedFrame && connector.frameRange[1] >= adjustedFrame)};
 	}
 }
 
@@ -38,7 +39,7 @@ export default class ConnectorsActioner extends BaseActioner<LazyConnectorsState
 
 	private additiveValueChange(source: string, target: string): LazyConnectorsState {
 		const result = new LazyConnectorsState();
-		result.connectors.connectors = [{source, target}];
+		result.connectors.connectors = [{source, target, frameRange: this.frameRange}];
 		return result;
 	}
 }

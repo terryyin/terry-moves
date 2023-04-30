@@ -29,9 +29,9 @@ describe('Connectors', () => {
 
   describe('connecting', () => {
     [
-      { sec: 0.1, expectedValue: 'M0,0 QNaN,NaN 0,0' },
+      { sec: 0.1, expectedValue: undefined},
       { sec: 1.1, expectedValue: 'M0,0 QNaN,NaN 0,0' },
-      { sec: 3.1, expectedValue: 'M0,0 QNaN,NaN 0,0' },
+      { sec: 3.1, expectedValue: undefined},
     ].forEach(({sec, expectedValue}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe
@@ -42,7 +42,7 @@ describe('Connectors', () => {
                 .seconds(sec)
                 .please();
         const path = renderAndGetSvgPath(animationContext);
-        expect(svgPath(path).getAttribute("d")).toBe(expectedValue);
+        expect(svgPath(path)?.getAttribute("d")).toBe(expectedValue);
       });
     });
   });
