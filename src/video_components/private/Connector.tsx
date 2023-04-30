@@ -56,13 +56,13 @@ export const Connector: React.FC<ConnectorProps> = ({
       const e2Rect = e2.getBoundingClientRect();
 
       const e1Pos = {
-        x: e1Rect.left + e1Rect.width / 2 - parentRect.left,
-        y: e1Rect.top + e1Rect.height / 2 - parentRect.top,
+        x: e1Rect.left + e1Rect.width / 2,
+        y: e1Rect.top + e1Rect.height / 2,
       };
 
       const e2Pos = {
-        x: e2Rect.left + e2Rect.width / 2 - parentRect.left,
-        y: e2Rect.top + e2Rect.height / 2 - parentRect.top,
+        x: e2Rect.left + e2Rect.width / 2,
+        y: e2Rect.top + e2Rect.height / 2,
       };
 
       const dx = e2Pos.x - e1Pos.x;
@@ -88,7 +88,7 @@ export const Connector: React.FC<ConnectorProps> = ({
         y: middlePoint.y + perpY * bentLevel,
       };
     
-      svgElm.setAttribute("viewBox", `0 0 ${parentRect.width} ${parentRect.height}`)
+      svgElm.setAttribute("viewBox", `${parentRect.left} ${parentRect.top} ${parentRect.width} ${parentRect.height}`)
       path.setAttribute(
         "d",
         `M${e1Pos.x},${e1Pos.y} Q${controlPoint.x},${controlPoint.y} ${e2Pos.x},${e2Pos.y}`
@@ -120,12 +120,14 @@ export const Connector: React.FC<ConnectorProps> = ({
   }, [e1Id, e2Id, bentLevel, radius1, radius2, parentRef]);
 
   return (
+
       <svg
         ref={svgRef}
         width="100%"
         height="100%"
         style={{ position: "absolute", top: 0, left: 0, pointerEvents: "none" }}
       >
+
         <defs>
         <marker
           id="arrowhead"
