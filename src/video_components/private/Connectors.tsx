@@ -53,7 +53,7 @@ export const Connectors: React.FC = () => {
         </defs>
         {
           connectors.map((connector, index) => {
-            return <Connector key={index} e1={connector.action.actor} e2={connector.action.target} parentRef={ref} bentLevel={connector.action.bentLevel} radius1={connector.action.radiusSource ?? 0} radius2={connector.action.radiusTarget ?? 0} />
+            return <Connector key={index} e1={connector.action.actor} e2={connector.action.target} bentLevel={connector.action.bentLevel} radius1={connector.action.radiusSource ?? 0} radius2={connector.action.radiusTarget ?? 0} />
           })
         }
       </svg>

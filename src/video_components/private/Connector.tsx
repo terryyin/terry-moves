@@ -23,7 +23,6 @@ function approximateQuadraticCurveLength(p0: {x: number, y: number}, p1: {x: num
 }
 
 interface ConnectorProps {
-  parentRef: React.RefObject<HTMLDivElement>;
   e1: string;
   e2: string;
   bentLevel: number;
@@ -32,7 +31,6 @@ interface ConnectorProps {
 }
 
 export const Connector: React.FC<ConnectorProps> = ({
-  parentRef,
   e1: e1Id,
   e2: e2Id,
   bentLevel,
@@ -44,13 +42,11 @@ export const Connector: React.FC<ConnectorProps> = ({
 
   useEffect(() => {
     const updateLine = () => {
-      const parent = parentRef.current;
       const e1 = document.getElementById(e1Id) as HTMLDivElement;
       const e2 = document.getElementById(e2Id) as HTMLDivElement;
       const path = svgPath.current;
       if (!e1 || !e2 || !path || !parent) return;
 
-      const parentRect = parent.getBoundingClientRect();
       const e1Rect = e1.getBoundingClientRect();
       const e2Rect = e2.getBoundingClientRect();
 
@@ -115,7 +111,7 @@ export const Connector: React.FC<ConnectorProps> = ({
     return () => {
       window.removeEventListener("resize", updateLine);
     };
-  }, [e1Id, e2Id, bentLevel, radius1, radius2, parentRef]);
+  }, [e1Id, e2Id, bentLevel, radius1, radius2]);
 
   return (
 
