@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from "react";
-import { useCurrentFrame, spring } from "remotion";
 
 interface ConnectorProps {
   parentRef: React.RefObject<HTMLDivElement>;
@@ -20,7 +19,6 @@ export const Connector: React.FC<ConnectorProps> = ({
 }) => {
   const svgPath = useRef<SVGPathElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
-  const frame = useCurrentFrame();
 
   useEffect(() => {
     const updateLine = () => {
@@ -75,21 +73,11 @@ export const Connector: React.FC<ConnectorProps> = ({
       );
 
       const pathLength = path.getTotalLength();
-      const revealPercentage = spring({
-        frame,
-        durationInFrames: 300,
-        fps: 30,
-        config: {
-          damping: 200,
-          stiffness: 150,
-          mass: 0.5,
-        },
-      });
 
       const trimStart = radius1;
       const trimEnd = pathLength - radius2;
 
-      const startOffset = trimStart + (trimEnd - trimStart) * (1 - revealPercentage);
+      const startOffset = trimStart + (trimEnd - trimStart) * (1 - 1);
 
       path.style.strokeDasharray = `${trimEnd - startOffset} ${pathLength}`;
       path.style.strokeDashoffset = startOffset.toString();
@@ -101,7 +89,7 @@ export const Connector: React.FC<ConnectorProps> = ({
     return () => {
       window.removeEventListener("resize", updateLine);
     };
-  }, [e1Id, e2Id, bentLevel, radius1, radius2, frame, parentRef]);
+  }, [e1Id, e2Id, bentLevel, radius1, radius2, parentRef]);
 
   return (
       <svg
