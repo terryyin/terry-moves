@@ -1,3 +1,4 @@
+import { ConnectorState } from "@/models/ConnectorsActioner";
 import React, { useEffect, useRef } from "react";
 
 function approximateQuadraticCurveLength(p0: {x: number, y: number}, p1: {x: number, y: number}, p2: {x: number, y: number}, segments = 10) {
@@ -23,27 +24,27 @@ function approximateQuadraticCurveLength(p0: {x: number, y: number}, p1: {x: num
 }
 
 interface ConnectorProps {
-  e1: string;
-  e2: string;
-  bentLevel: number;
-  radius1: number;
-  radius2: number;
+  connector: ConnectorState;
 }
 
 export const Connector: React.FC<ConnectorProps> = ({
-  e1: e1Id,
-  e2: e2Id,
-  bentLevel,
-  radius1,
-  radius2,
+  connector: {
+    action: {
+      actor,
+      target,
+      bentLevel,
+      radiusSource,
+      radiusTarget,
+    }
+  },
 }) => {
 
   const svgPath = useRef<SVGPathElement>(null);
 
   useEffect(() => {
     const updateLine = () => {
-      const e1 = document.getElementById(e1Id) as HTMLDivElement;
-      const e2 = document.getElementById(e2Id) as HTMLDivElement;
+      const e1 = document.getElementById(actor) as HTMLDivElement;
+      const e2 = document.getElementById(target) as HTMLDivElement;
       const path = svgPath.current;
       if (!e1 || !e2 || !path || !parent) return;
 
@@ -96,8 +97,8 @@ export const Connector: React.FC<ConnectorProps> = ({
       const pathLength = approximateQuadraticCurveLength(p0, p1, p2);
 
 
-      const trimStart = radius1;
-      const trimEnd = pathLength - radius2;
+      const trimStart = radiusSource ?? 0;
+      const trimEnd = pathLength - (radiusTarget ?? 0);
 
       const startOffset = trimStart + (trimEnd - trimStart) * (1 - 1);
 
@@ -111,7 +112,7 @@ export const Connector: React.FC<ConnectorProps> = ({
     return () => {
       window.removeEventListener("resize", updateLine);
     };
-  }, [e1Id, e2Id, bentLevel, radius1, radius2]);
+  }, [actor, target, bentLevel, radiusSource, radiusTarget]);
 
   return (
 
