@@ -58,7 +58,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			actions: [
 				{ actor: "second title", actionType: "type", duration: 3 },
 			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
-				// { actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
+				{ actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
 			],
 	},
 	{
@@ -118,6 +118,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 				{ actor: "caller 2", actionType: "highlight token", duration: 3, token: 'action'},
 				{ actor: "caller 3", actionType: "highlight token", duration: 3, token: 'action'},
 				{ actor: "callee", actionType: "highlight token", duration: 3, token: 'action'},
+				{ actor: "a1-action", actionType: "connect to", duration: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", duration: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", duration: 10, target: "callee-action", bentLevel: -30},
 			],
 	},
 
@@ -158,7 +161,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "It means the condition 'is Load' in the 'action' function is redundant.",
 			actions: [
 				{ actor: "callee", actionType: "highlight lines", duration: 5, lines: [3, 5]},
-				{ actor: "a1", actionType: "connect to", duration: 500, target: "anchor-callee", bentLevel: 100},
+				{ actor: "a1-param", actionType: "connect to", duration: 10, target: "callee-load", bentLevel: 30},
+				{ actor: "a2-param", actionType: "connect to", duration: 10, target: "callee-fire", bentLevel: 30},
+				{ actor: "a3-param", actionType: "connect to", duration: 10, target: "callee-load", bentLevel: 30},
 			],
 	},
 
@@ -227,6 +232,12 @@ export const booleanParametersSutitles: Subtitle[] = [
 			{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 10},
 			{ actor: 'caller 2 callout1', actionType: 'disappear', duration: 0.5},
 			{ actor: 'caller 3 callout1', actionType: 'disappear', duration: 0.5},
+				{ actor: "a1-action", actionType: "connect to", duration: 6, target: "callee-action", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", duration: 6, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", duration: 6, target: "callee-action", bentLevel: -30},
+				{ actor: "a1-param", actionType: "connect to", duration: 6, target: "callee-load", bentLevel: 30},
+				{ actor: "a2-param", actionType: "connect to", duration: 6, target: "callee-fire", bentLevel: 30},
+				{ actor: "a3-param", actionType: "connect to", duration: 6, target: "callee-load", bentLevel: 30},
 		],
 	},
 
@@ -326,6 +337,11 @@ export const booleanParametersSutitles: Subtitle[] = [
 			actions: [
 				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 100, offset: 0.1},
 				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 50, offset: 0.2},
+			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 1},
+			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 2},
+			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 3},
+			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 4},
+			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 5},
 			],
 	},
 
@@ -433,12 +449,35 @@ export const booleanParametersSutitles: Subtitle[] = [
 
 	{
 			leadingBlank: 1,
-			duration: 12,
-			text: "In conclusion, avoid boolean parameters, use meaningful names, and aim for high cohesion and loose coupling in design",
+			duration: 6,
+			text: "In conclusion, avoid boolean parameters, use meaningful names,",
 			actions: [
-					{ actor: "final-thoughts", actionType: "appear", duration: 1 },
+			  { actor: "callee", actionType: "highlight token", duration: 20, token: "loadedFire", offset: 1},
 			],
 	},
+
+	{
+			leadingBlank: 0,
+			duration: 4,
+			text: "and aim for high cohesion,",
+			actions: [
+			  { actor: "callee", actionType: "highlight lines", duration: 20, lines: [6, 7,8,9,10], offset: 1},
+			],
+	},
+
+	{
+			leadingBlank: 0,
+			duration: 10,
+			text: "and loose coupling.",
+			actions: [
+				{ actor: "a1-action", actionType: "connect to", duration: 20, target: "callee-loadedfire", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", duration: 20, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", duration: 20, target: "callee-loadedfire", bentLevel: -30},
+			],
+	},
+
+
+
 ];
 
 const codeString = `class Blaster {
@@ -520,14 +559,22 @@ export const StoryBooleanParameters: React.FC = () => {
       </AbsoluteFill>
 			</AnimationEffect>
 		<CodeHighlight actor="caller 1" codeString={caller1} style={{ left: '5%', top: '32%', width: '40%', height: '20%', }}>
-			<Anchor actor="a1"/>
+			<Anchor actor="a1-action" style={{left: "50%", top: "20px"}}/>
+			<Anchor actor="a1-param" style={{left: "78%", top: "35px"}}/>
 		</CodeHighlight>
-		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '52%', width: '40%', height: '20%', }}/>
+		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '52%', width: '40%', height: '20%', }}>
+			<Anchor actor="a2-action" style={{left: "50%", top: "20px"}}/>
+			<Anchor actor="a2-param" style={{left: "78%", top: "35px"}}/>
+		</CodeHighlight>
 		<CodeHighlight actor="caller 3" codeString={caller3} style={{ left: '5%', top: '74%', width: '40%', height: '20%', }}>
-			<Anchor actor="a3"/>
+			<Anchor actor="a3-action" style={{left: "50%", top: "20px"}}/>
+			<Anchor actor="a3-param" style={{left: "78%", top: "35px"}}/>
 		</CodeHighlight>
 		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', }}>
-			<Anchor actor="anchor-callee"/>
+			<Anchor actor="callee-action" style={{left: "15px", top: "25px"}}/>
+			<Anchor actor="callee-load" style={{left: "60px", top: "75px"}}/>
+			<Anchor actor="callee-fire" style={{left: "60px", top: "125px"}}/>
+			<Anchor actor="callee-loadedfire" style={{left: "15px", top: "120px"}}/>
 		</CodeHighlight>
 
 		<CalloutCloud actor='caller 1 callout1' style={{top: '10%', left: "2%"}} tailShift={-70} tailHeightPx={100}>

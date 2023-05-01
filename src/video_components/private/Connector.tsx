@@ -35,7 +35,8 @@ export const Connector: React.FC<ConnectorProps> = ({
       bentLevel,
       radiusSource,
       radiusTarget,
-    }
+    },
+    progress,
   },
 }) => {
 
@@ -100,9 +101,13 @@ export const Connector: React.FC<ConnectorProps> = ({
       const trimStart = radiusSource ?? 0;
       const trimEnd = pathLength - (radiusTarget ?? 0);
 
-      const startOffset = trimStart + (trimEnd - trimStart) * (1 - 1);
+      const startOffset = trimStart + (trimEnd - trimStart) * (1 - progress);
 
-      // Path.style.strokeDasharray = `${trimEnd - startOffset} ${pathLength}`;
+      if(progress < 1) {
+        path.style.strokeDasharray = `${trimEnd - startOffset} ${pathLength}`;
+      } else {
+        path.style.strokeDasharray = `5 5`;
+      }
       path.style.strokeDashoffset = startOffset.toString();
     };
 
@@ -112,7 +117,7 @@ export const Connector: React.FC<ConnectorProps> = ({
     return () => {
       window.removeEventListener("resize", updateLine);
     };
-  }, [actor, target, bentLevel, radiusSource, radiusTarget]);
+  }, [actor, target, bentLevel, radiusSource, radiusTarget, progress]);
 
   return (
 
@@ -124,9 +129,6 @@ export const Connector: React.FC<ConnectorProps> = ({
         strokeDasharray="5"
         strokeLinecap="round"
         markerEnd="url(#arrowhead)"
-        style={{
-          animation: 'dash 1.5s linear infinite',
-        }}
       />
 
   );
