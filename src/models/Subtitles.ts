@@ -107,6 +107,7 @@ interface SubtitleBasic {
   leadingBlank: number;
   duration: number;
   text: string | string[];
+  translations?: Record<string, string | string[]>;
   scale?: number;
   position?: 'center';
 }

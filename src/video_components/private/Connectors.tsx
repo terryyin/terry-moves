@@ -4,8 +4,11 @@ import React from 'react';
 import {AbsoluteFill } from 'remotion';
 import { Connector } from './Connector';
 import { useAnimationContext } from '../../hooks/useAnimationContext';
+import { BoundingClientRectOf } from '../../models/BoundingClientRectOf';
 
-export const Connectors: React.FC = () => {
+
+export const Connectors: React.FC<{boundingClientRectOf?: BoundingClientRectOf}> = ({boundingClientRectOf}) => {
+
   const { connectors } = useAnimationContext().getConnectors();
   const ref = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
@@ -16,7 +19,10 @@ export const Connectors: React.FC = () => {
       const svgElm = svgRef.current;
       if (!parent || !svgElm) return;
 
-      const parentRect = parent.getBoundingClientRect();
+      const boundingClientRectOfInUse: BoundingClientRectOf = boundingClientRectOf ||
+        ((element: HTMLElement) => element.getBoundingClientRect());
+
+      const parentRect = boundingClientRectOfInUse(parent);
 
       svgElm.setAttribute("viewBox", `${parentRect.left} ${parentRect.top} ${parentRect.width} ${parentRect.height}`)
 
@@ -28,11 +34,11 @@ export const Connectors: React.FC = () => {
     return () => {
       window.removeEventListener("resize", updateLine);
     };
-  }, [ref, svgRef]);
+  }, [boundingClientRectOf, ref, svgRef]);
 
 
 	return (
-		<AbsoluteFill  ref={ref}>
+		<AbsoluteFill ref={ref}>
         <svg
           ref={svgRef}
           width="100%"
@@ -53,7 +59,7 @@ export const Connectors: React.FC = () => {
         </defs>
         {
           connectors.map((connector, index) => {
-            return <Connector key={index} connector={connector} />
+            return <Connector key={index} connector={connector}  />
           })
         }
       </svg>
