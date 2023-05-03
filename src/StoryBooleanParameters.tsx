@@ -57,7 +57,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Hello, welcome to the Oh My Bad Boolean Series.",
 			translations: {zhCN: "大家好，欢迎来到《我的布尔值的坏习惯》系列。"},
 			actions: [
-				{ actor: "second title", actionType: "type", endingTimeAdjustment: 3 },
+				{ actor: "second title", actionType: "key in", endingTimeAdjustment: 3 },
 			  { actor: "blaster assembly", actionType: "oscillate", endingTimeAdjustment: 1000,  delta: [0, 0.02, 0]},
 				// { actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
 			],

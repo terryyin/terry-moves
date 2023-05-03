@@ -27,7 +27,7 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 
 	protected getStyle(): LazyThreeDObjectState {
 		switch (this.action.actionType) {
-			case 'type':
+			case 'key in':
 				return this.type();
 			case 'scale':
 				return this.scale(this.action.outputRange);
