@@ -19,6 +19,11 @@ export interface StartAndEndAction extends BaseAction {
   startDuration: number;
 }
 
+export interface StartAndEndActionMisused extends BaseAction {
+  startDuration: number;
+}
+
+
 export interface ScaleAction extends InterimAction {
   actionType: 'scale';
   outputRange: [number, number];
@@ -32,38 +37,38 @@ export interface AppearAction extends StartAndEndAction {
   actionType: 'appear' | 'disappear';
 }
 
-export interface TextAction extends StartAndEndAction {
+export interface TextAction extends StartAndEndActionMisused {
   actionType: 'type';
 }
 
 export type HighlightStyle = 'wavy underline' | 'red background';
 
-export interface HighlightLinesAction extends StartAndEndAction {
+export interface HighlightLinesAction extends StartAndEndActionMisused {
   actionType: 'highlight lines';
   lines: number[];
   style? : HighlightStyle
 }
 
-export interface DeleteLinesAction extends StartAndEndAction {
+export interface DeleteLinesAction extends StartAndEndActionMisused {
   actionType: 'delete lines';
   fromLine: number;
   count: number;
 }
 
-export interface HighlightTokenAction extends StartAndEndAction {
+export interface HighlightTokenAction extends StartAndEndActionMisused {
   actionType: 'highlight token';
   token: string;
   style? : HighlightStyle
 }
 
-export interface ReplaceTextAction extends StartAndEndAction {
+export interface ReplaceTextAction extends StartAndEndActionMisused {
   actionType: 'replace text';
   line: number;
   match?: string;
   replacement: string;
 }
 
-export interface InsertTextAction extends StartAndEndAction {
+export interface InsertTextAction extends StartAndEndActionMisused {
   actionType: 'insert text';
   line: number;
   column: number;
@@ -102,7 +107,7 @@ export interface ThreeDAnimationAction extends InterimAction {
   freezeBeforeStart?: boolean;
 }
 
-export interface ConnectAction extends StartAndEndAction {
+export interface ConnectAction extends StartAndEndActionMisused {
   actionType: 'connect to';
   target: string;
   bentLevel: number;
