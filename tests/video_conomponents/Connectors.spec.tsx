@@ -33,21 +33,21 @@ describe('Connectors', () => {
     
     beforeEach(() => {
       boundingClientRectStub = stubBoundingClientRect();
-      boundingClientRectStub.stub({ left: 0, top: 0, width: 100, height: 100 }, (e)=>Boolean(e.querySelector(`svg`)));
-      boundingClientRectStub.stub({ left: 5, top: 50, width: 1, height: 1 }, (e)=>Boolean(e.id ===`start`));
-      boundingClientRectStub.stub({ left: 10, top: 70, width: 1, height: 1 }, (e)=>Boolean(e.id ===`end`));
+      boundingClientRectStub.stub({ left: 10, top: 10, width: 100, height: 100 }, (e)=>Boolean(e.querySelector(`svg`)));
+      boundingClientRectStub.stub({ left: 15, top: 50, width: 1, height: 1 }, (e)=>Boolean(e.id ===`start`));
+      boundingClientRectStub.stub({ left: 20, top: 70, width: 1, height: 1 }, (e)=>Boolean(e.id ===`end`));
     });
 
     [
       { sec: 0.1, expectedValue: undefined},
-      { sec: 1.1, expectedValue: 'M0,0 QNaN,NaN 0,0' },
+      { sec: 1.1, expectedValue: 'M15.5,50.5 Q-11.104275004359955,67.77606875109 20.5,70.5' },
       { sec: 3.1, expectedValue: undefined},
     ].forEach(({sec, expectedValue}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'start', actionType: 'connect to', duration: 1, target: 'end', bentLevel: 0 }
+                  { actor: 'start', actionType: 'connect to', duration: 1, target: 'end', bentLevel: 30 }
                 ]})
                 .seconds(sec)
                 .please();

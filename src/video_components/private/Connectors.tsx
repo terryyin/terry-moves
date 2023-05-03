@@ -60,7 +60,7 @@ const ConnectorsInner: React.FC<{boundingClientRectOf: BoundingClientRectOf}> = 
         </defs>
         {
           connectors.map((connector, index) => {
-            return <Connector key={index} connector={connector}  />
+            return <Connector key={index} connector={connector} boundingClientRectOf={ boundingClientRectOf } />
           })
         }
       </svg>

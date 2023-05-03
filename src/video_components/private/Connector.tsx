@@ -1,5 +1,6 @@
 import { ConnectorState } from "@/models/ConnectorsActioner";
 import React, { useEffect, useRef } from "react";
+import { BoundingClientRectOf } from "../hoc/BoundingClientRectOf";
 
 function approximateQuadraticCurveLength(p0: {x: number, y: number}, p1: {x: number, y: number}, p2: {x: number, y: number}, segments = 10) {
   let length = 0;
@@ -25,6 +26,7 @@ function approximateQuadraticCurveLength(p0: {x: number, y: number}, p1: {x: num
 
 interface ConnectorProps {
   connector: ConnectorState;
+  boundingClientRectOf: BoundingClientRectOf,
 }
 
 export const Connector: React.FC<ConnectorProps> = ({
@@ -38,6 +40,7 @@ export const Connector: React.FC<ConnectorProps> = ({
     },
     progress,
   },
+  boundingClientRectOf,
 }) => {
 
   const svgPath = useRef<SVGPathElement>(null);
@@ -49,8 +52,8 @@ export const Connector: React.FC<ConnectorProps> = ({
       const path = svgPath.current;
       if (!e1 || !e2 || !path || !parent) return;
 
-      const e1Rect = e1.getBoundingClientRect();
-      const e2Rect = e2.getBoundingClientRect();
+      const e1Rect = boundingClientRectOf(e1);
+      const e2Rect = boundingClientRectOf(e2);
 
       const e1Pos = {
         x: e1Rect.left + e1Rect.width / 2,
@@ -117,7 +120,7 @@ export const Connector: React.FC<ConnectorProps> = ({
     return () => {
       window.removeEventListener("resize", updateLine);
     };
-  }, [actor, target, bentLevel, radiusSource, radiusTarget, progress]);
+  }, [actor, target, bentLevel, radiusSource, radiusTarget, progress, boundingClientRectOf]);
 
   return (
 
