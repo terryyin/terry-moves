@@ -62,11 +62,11 @@ export class LazyCodeTransformation {
     return result;
   }
 
-  addTextInsert(action: InsertTextAction, progress: number) {
+  addTextInsert(action: InsertTextAction, effectCalculator: EffectCalculator) {
     const insert: TextInsertion = {
-      line: action.line, column: action.column, text: action.text, progress,
-      cursor: false,
-      insertCursor: false,
+      line: action.line, column: action.column, text: action.text, progress: effectCalculator.interpolateDuration([0, 1]),
+      cursor: effectCalculator.blink(0.5, 0.3),
+      insertCursor: effectCalculator.withInStartDuration(0.5) || effectCalculator.withInEndDuration(0.5) || effectCalculator.withInDuration(),
     }
     this.textEdits.push(insert);
   }
@@ -123,7 +123,7 @@ export default class CodeActioner {
   insertText(action: InsertTextAction): LazyCodeTransformation {
     const result = new LazyCodeTransformation();
     if(this.effectCalculator.withInDuration() || this.effectCalculator.isAfter()) {
-      result.addTextInsert(action, this.effectCalculator.interpolateDuration([0, 1]));
+      result.addTextInsert(action, this.effectCalculator);
     }
     return result;
   }

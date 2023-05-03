@@ -57,6 +57,18 @@ export default class EffectCalculator {
     return this.frame >= this.persistStartFrame && !this.isAfter();
   }
 
+  withInStartDuration(ratio: number): boolean {
+    return this.frame < this.persistStartFrame && this.frame >= (this.persistStartFrame - this.startDuration * ratio * this.fps); 
+  }
+
+  withInEndDuration(ratio: number): boolean {
+    return this.frame > this.endFrame && this.frame >= (this.endFrame + this.endDuration * ratio * this.fps); 
+  }
+
+  blink(timeIntervalShow: number, timeIntervalHide: number): boolean {
+    return this.frame / this.fps % (timeIntervalShow + timeIntervalHide) < timeIntervalShow;
+  }
+
   private getSpring() {
     return spring({
       frame: this.frame - this.persistStartFrame,
