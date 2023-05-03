@@ -12,7 +12,11 @@ export interface InterimAction extends BaseAction {
   startDuration: number;
 }
 
-export interface StartAndEndAction extends BaseAction {
+export interface UntilAction extends BaseAction {
+  startDuration: number;
+}
+
+export interface StartAndEndAction extends UntilAction {
   startDuration: number;
 }
 
@@ -35,32 +39,32 @@ export interface TextAction extends StartAndEndAction {
 
 export type HighlightStyle = 'wavy underline' | 'red background';
 
-export interface HighlightLinesAction extends BaseAction {
+export interface HighlightLinesAction extends StartAndEndAction {
   actionType: 'highlight lines';
   lines: number[];
   style? : HighlightStyle
 }
 
-export interface DeleteLinesAction extends BaseAction {
+export interface DeleteLinesAction extends StartAndEndAction {
   actionType: 'delete lines';
   fromLine: number;
   count: number;
 }
 
-export interface HighlightTokenAction extends BaseAction {
+export interface HighlightTokenAction extends StartAndEndAction {
   actionType: 'highlight token';
   token: string;
   style? : HighlightStyle
 }
 
-export interface ReplaceTextAction extends BaseAction {
+export interface ReplaceTextAction extends StartAndEndAction {
   actionType: 'replace text';
   line: number;
   match?: string;
   replacement: string;
 }
 
-export interface InsertTextAction extends BaseAction {
+export interface InsertTextAction extends StartAndEndAction {
   actionType: 'insert text';
   line: number;
   column: number;
@@ -69,29 +73,29 @@ export interface InsertTextAction extends BaseAction {
 
 type CodeAction = DeleteLinesAction | HighlightLinesAction | HighlightTokenAction | ReplaceTextAction | InsertTextAction;
 
-export interface AbsolutePositionAction extends BaseAction {
+export interface AbsolutePositionAction extends InterimAction {
   actionType: 'move' | 'camera look at';
   absolutePosition: number | Vector2 | Vector3;
 }
 
-export interface RelativePositionAction extends BaseAction {
+export interface RelativePositionAction extends UntilAction {
   actionType: 'oscillate';
   delta: number | Vector2 | Vector3;
 }
 
-export interface OneDimensionalAction extends BaseAction {
+export interface OneDimensionalAction extends InterimAction {
   actionType: 'additive value change to' | 'rotate and rise';
   value: number;
 }
 
-export interface ThreeDRotateAction extends BaseAction {
+export interface ThreeDRotateAction extends UntilAction {
   actionType: '3d rotate';
   totalRotation: [number, number, number];
 }
 
 export type ThreeDAction = ThreeDRotateAction | AbsolutePositionAction | OneDimensionalAction;
 
-export interface ThreeDAnimationAction extends BaseAction {
+export interface ThreeDAnimationAction extends InterimAction {
   actionType: '3d animation start' | '3d animation reverse';
   speed: number;
   percentage?: number;
@@ -99,7 +103,7 @@ export interface ThreeDAnimationAction extends BaseAction {
   freezeBeforeStart?: boolean;
 }
 
-export interface ConnectAction extends BaseAction {
+export interface ConnectAction extends UntilAction {
   actionType: 'connect to';
   target: string;
   bentLevel: number;
