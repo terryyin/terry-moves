@@ -64,7 +64,7 @@ describe('Connectors', () => {
         { sec: 0.1, expectedValue: undefined},
         { sec: 1.1, expectedValue: 'M15.5,50.5 Q-11.104275004359955,67.77606875109 20.5,70.5' },
         { sec: 3.1, expectedValue: 'M15.5,50.5 Q-11.104275004359955,67.77606875109 20.5,70.5' },
-        { sec: 9.1, expectedValue: undefined},
+        { sec: 8.1, expectedValue: undefined},
       ].forEach(({sec, expectedValue}) => {
         test(` at sec ${sec}`, () => {
           const animationContext = makeMe

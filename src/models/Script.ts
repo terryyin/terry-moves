@@ -63,7 +63,7 @@ export class Script {
 		if(index === -1) {
 			throw new Error(`Subtitle with id ${subtitleId} not found`);
 		}
-		return this.getStartTimeOfSubtitle(index);
+		return this.getStartTimeOfSubtitle(index) - this.subtitles[index].leadingBlank;
 	}
 
 	private isSubtitleWithAction(
