@@ -4,7 +4,6 @@ export type ActionType = 'connect to' | 'additive value change to' | 'type' | 'h
 export interface BaseAction {
   actor: string;
   actionType: ActionType;
-  startDuration: number;
   offset?: number;
 }
 
