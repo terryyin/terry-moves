@@ -94,12 +94,14 @@ export default class AnimationContextWrapper {
     return this.frame;
   }
 
-  getCurrentSubtitleText() {
+  getCurrentSubtitleText(language?: string) {
     const subtitle = this.currentSubtitle;
     const endTime = this.currentSubtitleEndTime;
+    const translation = subtitle.translations && language ? subtitle.translations[language] : undefined;
+    const text = translation ?? subtitle.text;
     return {
       subtitle,
-      text: (!subtitle) || (this.frame > (endTime) * this.script.fps || this.frame < (endTime - subtitle.duration) * this.script.fps) ? '' : subtitle.text,
+      text: (!subtitle) || (this.frame > (endTime) * this.script.fps || this.frame < (endTime - subtitle.duration) * this.script.fps) ? '' : text,
     }
   }
 

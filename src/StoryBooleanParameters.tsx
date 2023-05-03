@@ -55,11 +55,11 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 5,
 			text: "Hello, welcome to the Oh My Bad Boolean Series.",
-			translations: {zhCN: "大家好，欢迎来到《布尔值的坏习惯》系列。"},
+			translations: {zhCN: "大家好，欢迎来到《我的布尔值的坏习惯》系列。"},
 			actions: [
 				{ actor: "second title", actionType: "type", duration: 3 },
 			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
-				{ actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
+				// { actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
 			],
 	},
 	{
@@ -181,7 +181,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 6,
 			text: "I've been inventing countering logics in the callee and callers to keep myself busy.",
-			translations: {zhCN: "搞了半天我一直在callee和调用者之间发明反向逻辑，让自己忙得不亦乐乎。"},
+			translations: {zhCN: "搞了半天我一直在调用者和被调用者之间发明反向逻辑，让自己忙得不亦乐乎。"},
 			actions: [
 				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 0.1, value: 100},
 				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 50, offset: 0.5},
@@ -485,7 +485,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 6,
 			text: "In conclusion, avoid boolean parameters, use meaningful names,",
-		translations: {zhCN: "总之，避免使用布尔参数，使用有意义的名称，"},
+		translations: {zhCN: "总之，建议你也慎用使用布尔参数，使用有意义的名称，"},
 			actions: [
 			  { actor: "callee", actionType: "highlight token", duration: 20, token: "loadedFire", offset: 1},
 			],
@@ -562,12 +562,10 @@ const announceBoardStyle: CSSProperties = {
 				paddingLeft: '10px',
 	fontFamily: 'Roboto, sans-serif', left: '0%', top: '40%', width: '100%', height: '40%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
 
-// Console.log(subtitles.map((s, i) => `${i}: ${s.text}`).join('\n'));
-
 export const StoryBooleanParameters: React.FC = () => {
   return (
 		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={booleanParametersSutitles}  >
-		<Audio src={staticFile("assets/audios/boolean1.mp3")} />
+		<Audio src={staticFile("assets/audios/boolean_cn.mp3")} />
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
@@ -647,7 +645,7 @@ export const StoryBooleanParameters: React.FC = () => {
 
 
     <AnimationEffect actor="subtitles">
-			<Subtitles scale={1} />
+			<Subtitles scale={1} language="zhCN"/>
 		</AnimationEffect>
     </AbsoluteFill>
     <AnimationEffect actor="title" style={announceBoardStyle} >
