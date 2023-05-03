@@ -7,6 +7,7 @@ import { Connectors } from '@/video_components/private/Connectors';
 import { AbsoluteFill } from 'remotion';
 import { Anchor } from '@/video_components/Anchor';
 import { stubBoundingClientRect, BoundingClientRectStubber } from '@/video_components/hoc/BoundingClientRectOf';
+import stringToValidHtmlId from '@/models/stringToValidHtmlId';
 
 describe('Connectors', () => {
 
@@ -16,8 +17,8 @@ describe('Connectors', () => {
         <AbsoluteFill style={{left: 0, right: 0, width: "100px", height: "100px"}}>
           <Connectors boundingClientRectOf={boundingClientRectOf}/>
           <AbsoluteFill style={{left: "50%", top: "50%", width: "30%", height: "30%"}}>
-            <Anchor actor="start" style={{left: "5%", top: "50%" }}/>
-            <Anchor actor="end" style={{left: "10%", top: "70%" }}/>
+            <Anchor actor="start point" style={{left: "5%", top: "50%" }}/>
+            <Anchor actor="end point" style={{left: "10%", top: "70%" }}/>
           </AbsoluteFill>
         </AbsoluteFill>
       </AnimationContextProvider>
@@ -34,8 +35,8 @@ describe('Connectors', () => {
     beforeEach(() => {
       boundingClientRectStub = stubBoundingClientRect();
       boundingClientRectStub.stub({ left: 10, top: 10, width: 100, height: 100 }, (e)=>Boolean(e.querySelector(`svg`)));
-      boundingClientRectStub.stub({ left: 15, top: 50, width: 1, height: 1 }, (e)=>Boolean(e.id ===`start`));
-      boundingClientRectStub.stub({ left: 20, top: 70, width: 1, height: 1 }, (e)=>Boolean(e.id ===`end`));
+      boundingClientRectStub.stub({ left: 15, top: 50, width: 1, height: 1 }, (e)=>Boolean(e.id ===stringToValidHtmlId(`start point`)));
+      boundingClientRectStub.stub({ left: 20, top: 70, width: 1, height: 1 }, (e)=>Boolean(e.id ===stringToValidHtmlId(`end point`)));
     });
 
     [
@@ -47,7 +48,7 @@ describe('Connectors', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'start', actionType: 'connect to', duration: 1, target: 'end', bentLevel: 30 }
+                  { actor: 'start point', actionType: 'connect to', duration: 1, target: 'end point', bentLevel: 30 }
                 ]})
                 .seconds(sec)
                 .please();

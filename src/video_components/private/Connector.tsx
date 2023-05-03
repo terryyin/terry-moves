@@ -1,6 +1,7 @@
 import { ConnectorState } from "@/models/ConnectorsActioner";
 import React, { useEffect, useRef } from "react";
 import { BoundingClientRectOf } from "../hoc/BoundingClientRectOf";
+import stringToValidHtmlId from "../../models/stringToValidHtmlId";
 
 function approximateQuadraticCurveLength(p0: {x: number, y: number}, p1: {x: number, y: number}, p2: {x: number, y: number}, segments = 10) {
   let length = 0;
@@ -47,8 +48,8 @@ export const Connector: React.FC<ConnectorProps> = ({
 
   useEffect(() => {
     const updateLine = () => {
-      const e1 = document.getElementById(actor) as HTMLDivElement;
-      const e2 = document.getElementById(target) as HTMLDivElement;
+      const e1 = document.getElementById(stringToValidHtmlId(actor)) as HTMLDivElement;
+      const e2 = document.getElementById(stringToValidHtmlId(target)) as HTMLDivElement;
       const path = svgPath.current;
       if (!e1 || !e2 || !path || !parent) return;
 

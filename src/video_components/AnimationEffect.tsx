@@ -1,5 +1,6 @@
 import React, { CSSProperties } from 'react';
 import { useAnimationContext } from "../hooks/useAnimationContext";
+import stringToValidHtmlId from '../models/stringToValidHtmlId';
 
 function getStylePresence(style: CSSProperties): CSSProperties | undefined {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -28,7 +29,7 @@ const AnimationEffect: React.FC<StageProps> = ({ actor, style, children }) => {
 
   return (
     <>
-    <div id={actor} style={{position: 'absolute', width: '100%', height:'100%',  ...(style || {}), ...effectStyle}}>
+    <div id={stringToValidHtmlId(actor)} style={{position: 'absolute', width: '100%', height:'100%',  ...(style || {}), ...effectStyle}}>
       {children}
     </div>
     { shadowEffectStyle && <div style={{ position: 'absolute', width: '100%', height: '100%', ...(style || {}),  ...shadowEffectStyle}} >
