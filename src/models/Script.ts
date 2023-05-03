@@ -38,7 +38,7 @@ export class Script {
 						const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0;
 						return {
 							action,
-							effectCalculator: createEffectCalculator(action, startTime, frame, this.fps),
+							effectCalculator: createEffectCalculator(action, startTime, frame, this),
 						};
 					});
 			})
@@ -56,6 +56,14 @@ export class Script {
 		}
 
 		return {subtitle, endTime};
+	}
+
+	getStartTimeOfSubtitleById(subtitleId: string): number {
+		const index = this.subtitles.findIndex((subtitle) => subtitle.id === subtitleId);
+		if(index === -1) {
+			throw new Error(`Subtitle with id ${subtitleId} not found`);
+		}
+		return this.getStartTimeOfSubtitle(index);
 	}
 
 	private isSubtitleWithAction(

@@ -14,7 +14,7 @@ export interface InterimAction extends BaseAction {
 
 interface PersistUntilSubtitleIdOption {
   persistUntilSubtitleId?: string;
-  endingTimeAdjustment: number;
+  endingTimeAdjustment?: number;
 }
 
 export type UntilAction = BaseAction & PersistUntilSubtitleIdOption;
