@@ -102,7 +102,7 @@ export interface ThreeDAnimationAction extends InterimAction {
   freezeBeforeStart?: boolean;
 }
 
-export interface ConnectAction extends UntilAction {
+export interface ConnectAction extends StartAndEndAction {
   actionType: 'connect to';
   target: string;
   bentLevel: number;
