@@ -14,7 +14,6 @@ import { OddeLogo } from './parts/OddeLogo';
 import { OddeLogoInner } from './parts/OddeLogoInner';
 import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 import { Story } from './video_components/Story';
-import { TypingText } from './video_components/TypingText';
 import { Blaster } from './parts/Blaster';
 import { GroupInitialState } from './video_components/GroupInitialState';
 import { RocketPlume } from './parts/RocketPlume';
@@ -57,7 +56,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Hello, welcome to the Oh My Bad Boolean Series.",
 			translations: {zhCN: "大家好，欢迎来到《我的布尔值的坏习惯》系列。"},
 			actions: [
-				{ actor: "second title", actionType: "key in", endingTimeAdjustment: 3 },
+				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "Seeking High Cohesion, Loose Coupling design" },
 			  { actor: "blaster assembly", actionType: "oscillate", endingTimeAdjustment: 1000,  delta: [0, 0.02, 0]},
 				// { actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
 			],
@@ -658,14 +657,14 @@ export const StoryBooleanParameters: React.FC = () => {
 			fontFamily: 'Roboto, sans-serif',
     }}>Why Is My Boolean Parameter Bad?</span>
 
-			<TypingText actor="second title" style={{
+			<CodeHighlight actor="second title" style={{
 				position: 'relative',
 				paddingTop: '35px',
 				display: 'block',
       fontSize: '30px',
 			color: 'white',
 			fontFamily: 'IBM Plex Mono',
-    }} text="Seeking High Cohesion, Loose Coupling design"/>
+    }} codeString=""/>
 
     <AbsoluteFill style={{ top: '85%', left: "82%", height: '10%'}}>
 			<span style={{fontFamily: 'Roboto, sans-serif',fontSize: '20px', color: "white"}}>terry@Odd-e</span>

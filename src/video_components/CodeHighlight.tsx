@@ -5,18 +5,21 @@ import { useAnimationContext } from "../hooks/useAnimationContext";
 import { HighlightStyle } from "../models/Subtitles";
 import { TextEdit } from "../models/CodeActioner";
 
-export const CodeHighlight: React.FC<{actor: string, codeString: string, style?: CSSProperties, children?: React.ReactNode}> = ({actor, style, codeString, children}) => {
+export const CodeHighlight: React.FC<{actor: string, codeString: string, language?: string, style?: CSSProperties, children?: React.ReactNode}> = ({actor, language, style, codeString, children}) => {
   const { highlights, textEdits, showCursor } = useAnimationContext().getCodeTransfomation(actor);
 
   const singleEdit =(edit: TextEdit, original: string): string => {
     const lines = original.split('\n');
     const { line, progress, text } = edit;
+    const partialLength = Math.ceil(text.length * progress);
+    const partialText = text.slice(0, partialLength) + (showCursor && partialLength < text.length ? '|' : '');
+
+    if (line >= lines.length) return original + "\n" + partialText;
+
     const currentLine = lines[line - 1];
 
     if (!currentLine) return '';
 
-    const partialLength = Math.ceil(text.length * progress);
-    const partialText = text.slice(0, partialLength) + (showCursor && partialLength < text.length ? '|' : '');
 
     if ('match' in edit) {
       const { match } = edit;
@@ -83,7 +86,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, style?:
   return (
 			<AnimationEffect actor={actor} style={{...style}}>
         {children}
-        <Highlight code={currentCode} language="javascript" theme={themes.vsDark}>
+        <Highlight code={currentCode} language={language || "javascript"} theme={themes.vsDark}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
               <pre className={className} style={{fontSize: "1.25rem", marginTop: 0, ...style}}>
                 {tokens.map((line, i) => {

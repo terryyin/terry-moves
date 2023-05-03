@@ -189,6 +189,24 @@ describe('CodeHighlight', () => {
     });
   });
 
+  describe('insert text before a line that doesnot exist will append', () => {
+    [
+      { sec: 3.1, expectedLineText: 'loadAmount' },
+    ].forEach(({sec, expectedLineText}) => {
+      test(` at sec ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                  { actor: 'under-test', actionType: 'insert text', endingTimeAdjustment: 1, line: 100, column: 16, text: 'loadAmount' }
+                ]})
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        expect(divOfLine(div, 16).textContent).toBe(expectedLineText);
+      });
+    });
+  });
+
   describe('highlight lines', () => {
     [
       { sec: 0.1, expectedText: "    if(isLoad) {" },
