@@ -8,16 +8,28 @@ export interface BaseAction {
   offset?: number;
 }
 
-export interface ScaleAction extends BaseAction {
+export interface InterimAction extends BaseAction {
+  startDuration: number;
+}
+
+export interface StartAndEndAction extends BaseAction {
+  startDuration: number;
+}
+
+export interface ScaleAction extends InterimAction {
   actionType: 'scale';
   outputRange: [number, number];
 }
 
-export interface AppearAction extends BaseAction {
-  actionType: 'appear' | 'disappear' | 'glow';
+export interface GlowAction extends InterimAction {
+  actionType: 'glow';
 }
 
-export interface TextAction extends BaseAction {
+export interface AppearAction extends StartAndEndAction {
+  actionType: 'appear' | 'disappear';
+}
+
+export interface TextAction extends StartAndEndAction {
   actionType: 'type';
 }
 
@@ -95,7 +107,7 @@ export interface ConnectAction extends BaseAction {
   radiusTarget?: number;
 }
 
-export type Action = ConnectAction | TextAction | CodeAction | ScaleAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
+export type Action = ConnectAction | TextAction | CodeAction | ScaleAction | GlowAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
 
 export type FlashBack = {
   duration: number;
