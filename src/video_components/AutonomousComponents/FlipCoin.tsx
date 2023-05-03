@@ -1,7 +1,7 @@
 import {AbsoluteFill, interpolate} from 'remotion'
 import {spring} from 'remotion'
 import React from 'react';
-import autonomousComponent, { AutonomousComponentProps } from '../autonomousComponent';
+import autonomousComponent, { AutonomousComponentProps } from '../hoc/autonomousComponent';
 
 interface CoinFlipProps extends AutonomousComponentProps {
   speed: number;

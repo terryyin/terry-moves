@@ -1,6 +1,6 @@
 import React from 'react';
 import { Img, staticFile} from 'remotion';
-import autonomousComponent, { AutonomousComponentProps } from '../video_components/autonomousComponent';
+import autonomousComponent, { AutonomousComponentProps } from '../video_components/hoc/autonomousComponent';
 
 const MoneyArrowInner: React.FC<AutonomousComponentProps> = ({frame}) => {
 

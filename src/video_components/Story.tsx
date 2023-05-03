@@ -1,7 +1,7 @@
 import {Composition} from 'remotion'
 import { AnimationContextProvider } from '../hooks/useAnimationContext';
 import { Subtitle } from '../models/Subtitles';
-import autonomousComponent from './autonomousComponent';
+import autonomousComponent from './hoc/autonomousComponent';
 import React from 'react';
 import AnimationContextWrapper from '../models/AnimationContextWrapper';
 import { Connectors } from './private/Connectors';
