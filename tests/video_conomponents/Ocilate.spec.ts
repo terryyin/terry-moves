@@ -20,7 +20,7 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'oscillate',
-								persistTime: 1,
+								endingTimeAdjustment: 1,
 								delta: [1, 2, 3],
 							},
 						],
@@ -53,7 +53,7 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'oscillate',
-								persistTime: 1,
+								endingTimeAdjustment: 1,
 								delta: [1, 2, 3],
 							},							
 							{
@@ -98,7 +98,7 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'oscillate',
-								persistTime: 1,
+								endingTimeAdjustment: 1,
 								delta: [1, 2, 3],
 							},							
 						],

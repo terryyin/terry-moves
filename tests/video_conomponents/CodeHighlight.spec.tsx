@@ -52,7 +52,7 @@ describe('CodeHighlight', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'highlight lines', persistTime: 1, lines: [1, 3, 4] }
+                  { actor: 'under-test', actionType: 'highlight lines', endingTimeAdjustment: 1, lines: [1, 3, 4] }
                 ]})
                 .seconds(sec)
                 .please();
@@ -75,7 +75,7 @@ describe('CodeHighlight', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'highlight token', persistTime: 1, token: "isLoad" }
+                  { actor: 'under-test', actionType: 'highlight token', endingTimeAdjustment: 1, token: "isLoad" }
                 ]})
                 .seconds(sec)
                 .please();
@@ -95,7 +95,7 @@ describe('CodeHighlight', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'highlight token', persistTime: 1, token: "isLoad", style: 'wavy underline' }
+                  { actor: 'under-test', actionType: 'highlight token', endingTimeAdjustment: 1, token: "isLoad", style: 'wavy underline' }
                 ]})
                 .seconds(sec)
                 .please();
@@ -116,7 +116,7 @@ describe('CodeHighlight', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'highlight lines', persistTime: 1, lines: [1], style: 'wavy underline' }
+                  { actor: 'under-test', actionType: 'highlight lines', endingTimeAdjustment: 1, lines: [1], style: 'wavy underline' }
                 ]})
                 .seconds(sec)
                 .please();
@@ -137,7 +137,7 @@ describe('CodeHighlight', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'replace text', persistTime: 1, line: 2, match: 'isLoad', replacement: 'loadAmount' }
+                  { actor: 'under-test', actionType: 'replace text', endingTimeAdjustment: 1, line: 2, match: 'isLoad', replacement: 'loadAmount' }
                 ]})
                 .seconds(sec)
                 .please();
@@ -158,7 +158,7 @@ describe('CodeHighlight', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'replace text', persistTime: 1, line: 2, replacement: 'loadAmount' }
+                  { actor: 'under-test', actionType: 'replace text', endingTimeAdjustment: 1, line: 2, replacement: 'loadAmount' }
                 ]})
                 .seconds(sec)
                 .please();
@@ -179,7 +179,7 @@ describe('CodeHighlight', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'insert text', persistTime: 1, line: 4, column: 16, text: 'loadAmount' }
+                  { actor: 'under-test', actionType: 'insert text', endingTimeAdjustment: 1, line: 4, column: 16, text: 'loadAmount' }
                 ]})
                 .seconds(sec)
                 .please();
@@ -199,7 +199,7 @@ describe('CodeHighlight', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'delete lines', persistTime: 1, fromLine: 2, count: 4 }
+                  { actor: 'under-test', actionType: 'delete lines', endingTimeAdjustment: 1, fromLine: 2, count: 4 }
                 ]})
                 .seconds(sec)
                 .please();

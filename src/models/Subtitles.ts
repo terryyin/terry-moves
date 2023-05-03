@@ -1,4 +1,5 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
+
 export type ActionType = 'connect to' | 'additive value change to' | 'type' | 'highlight lines' | 'delete lines' | 'highlight token' | 'replace text' | 'insert text' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
@@ -11,9 +12,12 @@ export interface InterimAction extends BaseAction {
   duration: number;
 }
 
-export interface UntilAction extends BaseAction {
-  persistTime: number;
+interface PersistUntilSubtitleIdOption {
+  persistUntilSubtitleId?: string;
+  endingTimeAdjustment: number;
 }
+
+export type UntilAction = BaseAction & PersistUntilSubtitleIdOption;
 
 export interface StartAndEndAction extends BaseAction {
   startDuration: number;

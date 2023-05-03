@@ -5,8 +5,8 @@ const getActionDuration = (action: Action): number => {
 	if ('duration' in action) {
 		return action.duration;
 	}
-	if ('persistTime' in action) {
-		return action.persistTime;
+	if ('endingTimeAdjustment' in action) {
+		return action.endingTimeAdjustment;
 	}
 	return action.startDuration;
 }

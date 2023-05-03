@@ -21,7 +21,7 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'oscillate',
-								persistTime: 10,
+								endingTimeAdjustment: 10,
 								delta: [0, 0, 0],
 							},
 							{
