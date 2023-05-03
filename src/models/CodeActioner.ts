@@ -24,6 +24,8 @@ interface TextReplacement extends TextEditBase {
 }
 
 interface TextInsertion extends TextEditBase {
+  cursor: boolean;
+  insertCursor: boolean;
   column: number;
 }
 
@@ -60,8 +62,13 @@ export class LazyCodeTransformation {
     return result;
   }
 
-  addTextInsert(line: number, column: number, text: string, progress: number) {
-    this.textEdits.push({line, column, text, progress});
+  addTextInsert(action: InsertTextAction, progress: number) {
+    const insert: TextInsertion = {
+      line: action.line, column: action.column, text: action.text, progress,
+      cursor: false,
+      insertCursor: false,
+    }
+    this.textEdits.push(insert);
   }
 
   addDeleteLines(fromLine: number, count: number, progress: number) {
@@ -116,7 +123,7 @@ export default class CodeActioner {
   insertText(action: InsertTextAction): LazyCodeTransformation {
     const result = new LazyCodeTransformation();
     if(this.effectCalculator.withInDuration() || this.effectCalculator.isAfter()) {
-      result.addTextInsert(action.line, action.column, action.text, this.effectCalculator.interpolateDuration([0, 1]));
+      result.addTextInsert(action, this.effectCalculator.interpolateDuration([0, 1]));
     }
     return result;
   }
