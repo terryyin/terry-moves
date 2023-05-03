@@ -5,9 +5,10 @@ import {AbsoluteFill } from 'remotion';
 import { Connector } from './Connector';
 import { useAnimationContext } from '../../hooks/useAnimationContext';
 import { BoundingClientRectOf } from '../hoc/BoundingClientRectOf';
+import withBoundingClientRect from '../hoc/withBoundingClientRect';
 
 
-export const Connectors: React.FC<{boundingClientRectOf?: BoundingClientRectOf}> = ({boundingClientRectOf}) => {
+const ConnectorsInner: React.FC<{boundingClientRectOf: BoundingClientRectOf}> = ({boundingClientRectOf}) => {
 
   const { connectors } = useAnimationContext().getConnectors();
   const ref = useRef<HTMLDivElement>(null);
@@ -66,3 +67,5 @@ export const Connectors: React.FC<{boundingClientRectOf?: BoundingClientRectOf}>
     </AbsoluteFill>
 	);
 };
+
+export const Connectors: React.FC<{boundingClientRectOf?: BoundingClientRectOf}> = withBoundingClientRect(ConnectorsInner);
