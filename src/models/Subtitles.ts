@@ -4,7 +4,7 @@ export type ActionType = 'connect to' | 'additive value change to' | 'type' | 'h
 export interface BaseAction {
   actor: string;
   actionType: ActionType;
-  duration: number;
+  startDuration: number;
   offset?: number;
 }
 
@@ -104,6 +104,7 @@ export type FlashBack = {
 };
 
 interface SubtitleBasic {
+  id?: string;
   leadingBlank: number;
   duration: number;
   text: string | string[];

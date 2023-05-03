@@ -37,7 +37,7 @@ export class Script {
 						const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0;
 						return {
 							action,
-							effectCalculator: new EffectCalculator(action.duration, startTime + (action.offset ?? 0), frame, this.fps),
+							effectCalculator: new EffectCalculator(action.startDuration, startTime + (action.offset ?? 0), frame, this.fps),
 						};
 					});
 			})

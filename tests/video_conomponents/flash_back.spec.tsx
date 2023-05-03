@@ -26,7 +26,7 @@ describe('Flash back', () => {
   describe('flash back', () => {
     const subtitleWithAction: Subtitle = 
       { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-        { actor: "under-test", actionType: 'scale', duration: 1, outputRange: [0.5, 1] },
+        { actor: "under-test", actionType: 'scale', startDuration: 1, outputRange: [0.5, 1] },
       ] };
 
     [

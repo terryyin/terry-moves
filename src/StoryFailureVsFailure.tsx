@@ -25,68 +25,68 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 	  flashBack: {from: 40, duration: 3, speed: 0.5} },
 
 	{ leadingBlank: 0.5, duration: 4, text: "SpaceX is celebrating their rocket explosion.", actions: [
-			{ actor: "starship", actionType: "rotate and rise", duration: 3, value: 4 },
-			{ actor: "starship", actionType: "oscillate", duration: 10, delta: [0, 0.1, 0] },
+			{ actor: "starship", actionType: "rotate and rise", startDuration: 3, value: 4 },
+			{ actor: "starship", actionType: "oscillate", startDuration: 10, delta: [0, 0.1, 0] },
 	]},
 	{ leadingBlank: 0, duration: 5, text: "Software developers also have different attitudes towards failures.", actions: [
-			{ actor: "blue background", actionType: "disappear", duration: 5 },
-			{ actor: "starship", actionType: "move", duration: 5, absolutePosition: [0, 20, 0] },
-			{ actor: "camera", actionType: "camera look at", duration: 6, absolutePosition: [0, 5, 0] },
-			{ actor: "camera", actionType: "move", duration: 6, absolutePosition: [0, 0, -20] },
+			{ actor: "blue background", actionType: "disappear", startDuration: 5 },
+			{ actor: "starship", actionType: "move", startDuration: 5, absolutePosition: [0, 20, 0] },
+			{ actor: "camera", actionType: "camera look at", startDuration: 6, absolutePosition: [0, 5, 0] },
+			{ actor: "camera", actionType: "move", startDuration: 6, absolutePosition: [0, 0, -20] },
 	]},
 	{ leadingBlank: 0, duration: 1.5, text: "", actions: [
-			{ actor: "starship", actionType: "3d rotate", duration: 20, totalRotation: [0, 240, 0] },
-			{ actor: "stage", actionType: "scale", duration: 2, outputRange: [1, 0.5] },
+			{ actor: "starship", actionType: "3d rotate", startDuration: 20, totalRotation: [0, 240, 0] },
+			{ actor: "stage", actionType: "scale", startDuration: 2, outputRange: [1, 0.5] },
 	]},
 
 	{ leadingBlank: 0.5, duration: 1.5, text: "Repeated failures alone", actions: [
-			{ actor: "problem domain", actionType: "appear", duration: 1 },
+			{ actor: "problem domain", actionType: "appear", startDuration: 1 },
 	]},
 
 	{ leadingBlank: 0.2, duration: 1, text: "Repeated failures alone", actions: [
-			{ actor: "stage", actionType: "move", duration: 0.1, absolutePosition: [-700, 0, 0] },
-			{ actor: "explosion", actionType: "3d animation start", duration: 1, speed: 1 },
+			{ actor: "stage", actionType: "move", startDuration: 0.1, absolutePosition: [-700, 0, 0] },
+			{ actor: "explosion", actionType: "3d animation start", startDuration: 1, speed: 1 },
 	]},
 	{ leadingBlank: 0, duration: 0.9, text: "Repeated failures alone", actions: [
-			{ actor: "stage", actionType: "move", duration: 0.1, absolutePosition: [-710, 200, 0] },
-			{ actor: "explosion", actionType: "3d animation start", duration: 0.9, speed: 1.1 },
+			{ actor: "stage", actionType: "move", startDuration: 0.1, absolutePosition: [-710, 200, 0] },
+			{ actor: "explosion", actionType: "3d animation start", startDuration: 0.9, speed: 1.1 },
 	]},
 	{ leadingBlank: 0, duration: 0.8, text: "Repeated failures alone", actions: [
-			{ actor: "stage", actionType: "move", duration: 0.1, absolutePosition: [-630, 150, 0] },
-			{ actor: "explosion", actionType: "3d animation start", duration: 0.8, speed: 1.2 },
+			{ actor: "stage", actionType: "move", startDuration: 0.1, absolutePosition: [-630, 150, 0] },
+			{ actor: "explosion", actionType: "3d animation start", startDuration: 0.8, speed: 1.2 },
 	]},
 	{ leadingBlank: 0, duration: 0.7, text: "Repeated failures alone", actions: [
-			{ actor: "stage", actionType: "move", duration: 0.1, absolutePosition: [-650, 200, 0] },
-			{ actor: "explosion", actionType: "3d animation start", duration: 0.7, speed: 1.3 },
+			{ actor: "stage", actionType: "move", startDuration: 0.1, absolutePosition: [-650, 200, 0] },
+			{ actor: "explosion", actionType: "3d animation start", startDuration: 0.7, speed: 1.3 },
 	]},
 
 
 	{ leadingBlank: 0, duration: 2, text: "do not necessarily lead to success.", actions: [
-			{ actor: "problem domain", actionType: "scale", duration: 2, outputRange: [6, 1.5]},
+			{ actor: "problem domain", actionType: "scale", startDuration: 2, outputRange: [6, 1.5]},
 	]},
 	{ leadingBlank: 0, duration: 3, text: "do not necessarily lead to success.", actions: [
-			{ actor: "success", actionType: "appear", duration: 2 },
+			{ actor: "success", actionType: "appear", startDuration: 2 },
 	]},
 
 
 
 
 	{ leadingBlank: 0.5, duration: 3, text: "Learning from the failure", actions: [
-			{ actor: "problem domain", actionType: "disappear", duration: 2 },
-			{ actor: "stage", actionType: "scale", duration: 2, outputRange: [0.5, 1] },
-			{ actor: "stage", actionType: "move", duration: 2, absolutePosition: [0, 0] },
-			{ actor: "explosion", actionType: "3d animation reverse", duration: 1, speed: 1, percentage: 50, pauseAtEnd: true },
+			{ actor: "problem domain", actionType: "disappear", startDuration: 2 },
+			{ actor: "stage", actionType: "scale", startDuration: 2, outputRange: [0.5, 1] },
+			{ actor: "stage", actionType: "move", startDuration: 2, absolutePosition: [0, 0] },
+			{ actor: "explosion", actionType: "3d animation reverse", startDuration: 1, speed: 1, percentage: 50, pauseAtEnd: true },
 	]},
 	{ leadingBlank: 0, duration: 4, text: "is more valuable than merely experiencing them.", actions: [
 	]},
 	{ leadingBlank: 0.5, duration: 4, text: "For software developers, error messages contain crucial information.", actions: [
-			{ actor: "error-msg", actionType: "appear", duration: 1 },
+			{ actor: "error-msg", actionType: "appear", startDuration: 1 },
 	]},
 	{ leadingBlank: 0, duration: 5, text: "Reading and understanding them makes sure you solve the right problem.", actions: [
-			{ actor: "success", actionType: "appear", duration: 1 },
+			{ actor: "success", actionType: "appear", startDuration: 1 },
 	]},
 	{ leadingBlank: 0.5, duration: 4, text: "Improving error messages benefits your peers.", actions: [
-			{ actor: "team", actionType: "appear", duration: 1 },
+			{ actor: "team", actionType: "appear", startDuration: 1 },
 	]},
 	{ leadingBlank: 0, duration: 2, text: "In conclusion,", actions: []},
 	{ leadingBlank: 0, duration: 5, text: "read the error message!", scale: 2.5, position: 'center', actions: []},

@@ -29,25 +29,25 @@ import { Anchor } from './video_components/Anchor';
 
 const fireActions: Action[] =
 [
-			  { actor: "blaster fire", actionType: "3d animation start", duration: 2, speed: 2 },
-			  { actor: "blaster assembly", actionType: "move", duration: 0.1, absolutePosition: [0.5, 0, 0]},
-			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.2},
+			  { actor: "blaster fire", actionType: "3d animation start", startDuration: 2, speed: 2 },
+			  { actor: "blaster assembly", actionType: "move", startDuration: 0.1, absolutePosition: [0.5, 0, 0]},
+			  { actor: "blaster assembly", actionType: "move", startDuration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.2},
 ];
 
 const loadedFireActions: Action[] =
 [
 				...fireActions,
-			  { actor: "blaster", actionType: "3d animation reverse", duration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
-			  { actor: "blaster temperature", actionType: "additive value change to", duration: 2, value: 0 },
-			  { actor: "blaster powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
+			  { actor: "blaster", actionType: "3d animation reverse", startDuration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
+			  { actor: "blaster temperature", actionType: "additive value change to", startDuration: 2, value: 0 },
+			  { actor: "blaster powerful fire", actionType: "3d animation start", startDuration: 3, speed: 2 },
 ];
 
 const loadActions: Action[] =
 [
-			  { actor: "blaster", actionType: "3d animation start", duration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
-			  { actor: "blaster temperature", actionType: "additive value change to", duration: 1.2, value: 50 },
-			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.4,  totalRotation: [0, 0, -30]},
-			  { actor: "blaster assembly", actionType: "3d rotate", duration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
+			  { actor: "blaster", actionType: "3d animation start", startDuration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
+			  { actor: "blaster temperature", actionType: "additive value change to", startDuration: 1.2, value: 50 },
+			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 0.4,  totalRotation: [0, 0, -30]},
+			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
 ];
 
 export const booleanParametersSutitles: Subtitle[] = [
@@ -57,8 +57,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Hello, welcome to the Oh My Bad Boolean Series.",
 			translations: {zhCN: "大家好，欢迎来到《我的布尔值的坏习惯》系列。"},
 			actions: [
-				{ actor: "second title", actionType: "type", duration: 3 },
-			  { actor: "blaster assembly", actionType: "oscillate", duration: 1000,  delta: [0, 0.02, 0]},
+				{ actor: "second title", actionType: "type", startDuration: 3 },
+			  { actor: "blaster assembly", actionType: "oscillate", startDuration: 1000,  delta: [0, 0.02, 0]},
 				// { actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
 			],
 	},
@@ -68,8 +68,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "In my game program, there's a powerful tool called a Blaster.",
 			translations: {zhCN: "在我的游戏程序中，有一个强大的工具叫做Blaster。"},
 			actions: [
-					{ actor: "title", actionType: "disappear", duration: 1 },
-					{ actor: "callee", actionType: "appear", duration: 1 },
+					{ actor: "title", actionType: "disappear", startDuration: 1 },
+					{ actor: "callee", actionType: "appear", startDuration: 1 },
 			],
 	},
 
@@ -80,9 +80,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			translations: {zhCN: "你可以随时发射Blaster。"},
 			actions: [
 				...fireActions,
-				{ actor: "caller 2", actionType: "appear", duration: 0.2},
-				{ actor: "caller 2", actionType: "highlight lines", duration: 3, lines: [2]},
-				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [6, 10]},
+				{ actor: "caller 2", actionType: "appear", startDuration: 0.2},
+				{ actor: "caller 2", actionType: "highlight lines", startDuration: 3, lines: [2]},
+				{ actor: "callee", actionType: "highlight lines", startDuration: 3, lines: [6, 10]},
 			],
 	},
 
@@ -93,10 +93,10 @@ export const booleanParametersSutitles: Subtitle[] = [
 			translations: {zhCN: "但如果你先加载它，"},
 			actions: [
 				...loadActions,
-				{ actor: "caller 1", actionType: "appear", duration: 0.2},
-				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'true'},
-				{ actor: "callee", actionType: "highlight token", duration: 3, token: 'isLoad'},
-				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [4, 14]},
+				{ actor: "caller 1", actionType: "appear", startDuration: 0.2},
+				{ actor: "caller 1", actionType: "highlight token", startDuration: 3, token: 'true'},
+				{ actor: "callee", actionType: "highlight token", startDuration: 3, token: 'isLoad'},
+				{ actor: "callee", actionType: "highlight lines", startDuration: 3, lines: [4, 14]},
 			],
 	},
 
@@ -107,9 +107,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			translations: {zhCN: "你就可以发射更强大的火力。"},
 			actions: [
 				...loadedFireActions,
-				{ actor: "caller 1", actionType: "appear", duration: 0.2},
-				{ actor: "caller 1", actionType: "highlight lines", duration: 3, lines: [2]},
-				{ actor: "callee", actionType: "highlight lines", duration: 3, lines: [4, 6, 10, 14]},
+				{ actor: "caller 1", actionType: "appear", startDuration: 0.2},
+				{ actor: "caller 1", actionType: "highlight lines", startDuration: 3, lines: [2]},
+				{ actor: "callee", actionType: "highlight lines", startDuration: 3, lines: [4, 6, 10, 14]},
 			],
 	},
 
@@ -119,14 +119,14 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "The function 'action' is called from many places in the code.",
 			translations: {zhCN: "函数'action'在代码的许多地方被调用。"},
 			actions: [
-				{ actor: "caller 3", actionType: "appear", duration: 0.2},
-				{ actor: "caller 1", actionType: "highlight token", duration: 3, token: 'action'},
-				{ actor: "caller 2", actionType: "highlight token", duration: 3, token: 'action'},
-				{ actor: "caller 3", actionType: "highlight token", duration: 3, token: 'action'},
-				{ actor: "callee", actionType: "highlight token", duration: 3, token: 'action'},
-				{ actor: "a1-action", actionType: "connect to", duration: 10, target: "callee-action", bentLevel: -30},
-				{ actor: "a2-action", actionType: "connect to", duration: 10, target: "callee-action", bentLevel: -30},
-				{ actor: "a3-action", actionType: "connect to", duration: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "caller 3", actionType: "appear", startDuration: 0.2},
+				{ actor: "caller 1", actionType: "highlight token", startDuration: 3, token: 'action'},
+				{ actor: "caller 2", actionType: "highlight token", startDuration: 3, token: 'action'},
+				{ actor: "caller 3", actionType: "highlight token", startDuration: 3, token: 'action'},
+				{ actor: "callee", actionType: "highlight token", startDuration: 3, token: 'action'},
+				{ actor: "a1-action", actionType: "connect to", startDuration: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", startDuration: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", startDuration: 10, target: "callee-action", bentLevel: -30},
 			],
 	},
 
@@ -136,10 +136,10 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Using a boolean parameter reduces the number of API calls users have to remember.",
 			translations: {zhCN: "使用布尔参数可以减少用户需要记住的API调用个数。"},
 			actions: [
-				{ actor: "caller 1", actionType: "highlight token", duration: 7, token: 'true'},
-				{ actor: "caller 2", actionType: "highlight token", duration: 7, token: 'false'},
-				{ actor: "caller 3", actionType: "highlight token", duration: 7, token: 'true'},
-				{ actor: "callee", actionType: "highlight token", duration: 7, token: 'isLoad'},
+				{ actor: "caller 1", actionType: "highlight token", startDuration: 7, token: 'true'},
+				{ actor: "caller 2", actionType: "highlight token", startDuration: 7, token: 'false'},
+				{ actor: "caller 3", actionType: "highlight token", startDuration: 7, token: 'true'},
+				{ actor: "callee", actionType: "highlight token", startDuration: 7, token: 'isLoad'},
 			],
 	},
 
@@ -158,9 +158,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "As we can see, every caller knows exactly what they want.",
 			translations: {zhCN: "正如我们所看到的，每个调用者都清楚地知道他们想要什么。"},
 			actions: [
-				{ actor: "caller 1", actionType: "highlight token", duration: 7, token: 'true'},
-				{ actor: "caller 2", actionType: "highlight token", duration: 7, token: 'false'},
-				{ actor: "caller 3", actionType: "highlight token", duration: 7, token: 'true'},
+				{ actor: "caller 1", actionType: "highlight token", startDuration: 7, token: 'true'},
+				{ actor: "caller 2", actionType: "highlight token", startDuration: 7, token: 'false'},
+				{ actor: "caller 3", actionType: "highlight token", startDuration: 7, token: 'true'},
 			],
 	},
 
@@ -170,10 +170,10 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "It means the condition 'is Load' in the 'action' function is redundant.",
 			translations: {zhCN: "这意味着'action'函数中的条件'is Load'是多余的。"},
 			actions: [
-				{ actor: "callee", actionType: "highlight lines", duration: 5, lines: [3, 5]},
-				{ actor: "a1-param", actionType: "connect to", duration: 10, target: "callee-load", bentLevel: 30},
-				{ actor: "a2-param", actionType: "connect to", duration: 10, target: "callee-fire", bentLevel: 30},
-				{ actor: "a3-param", actionType: "connect to", duration: 10, target: "callee-load", bentLevel: 30},
+				{ actor: "callee", actionType: "highlight lines", startDuration: 5, lines: [3, 5]},
+				{ actor: "a1-param", actionType: "connect to", startDuration: 10, target: "callee-load", bentLevel: 30},
+				{ actor: "a2-param", actionType: "connect to", startDuration: 10, target: "callee-fire", bentLevel: 30},
+				{ actor: "a3-param", actionType: "connect to", startDuration: 10, target: "callee-load", bentLevel: 30},
 			],
 	},
 
@@ -183,8 +183,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "I've been inventing countering logics in the callee and callers to keep myself busy.",
 			translations: {zhCN: "搞了半天我一直在调用者和被调用者之间发明反向逻辑，让自己忙得不亦乐乎。"},
 			actions: [
-				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 0.1, value: 100},
-				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 50, offset: 0.5},
+				{ actor: "loose coupling health bar", actionType: "additive value change to", startDuration: 0.1, value: 100},
+				{ actor: "loose coupling health bar", actionType: "additive value change to", startDuration: 1, value: 50, offset: 0.5},
 			],
 	},
 
@@ -194,9 +194,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Say, now Caller 1 is proposing an interface change.",
 			translations: {zhCN: "现在Caller 1提议了一个接口变更。"},
 			actions: [
-				{ actor: 'caller 1 callout1', actionType: 'appear', duration: 0.5},
-				{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '1000'},
-				{ actor: "caller 1", actionType: "highlight token", duration: 8.9, token: '1000', style: 'wavy underline'},
+				{ actor: 'caller 1 callout1', actionType: 'appear', startDuration: 0.5},
+				{ actor: "caller 1", actionType: "replace text", startDuration: 1, line: 2, match: 'true', replacement: '1000'},
+				{ actor: "caller 1", actionType: "highlight token", startDuration: 8.9, token: '1000', style: 'wavy underline'},
 			],
 	},
 
@@ -206,13 +206,13 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "So we changed the API to take a parameter 'load Amount'.",
 			translations: {zhCN: "因此，我们将API更改为采用'load Amount'参数。"},
 			actions: [
-				{ actor: 'callee callout1', actionType: 'appear', duration: 0.5},
-				{ actor: "callee", actionType: "replace text", duration: 1, line: 2, match: 'isLoad', replacement: 'loadAmount'},
-				{ actor: "caller 2", actionType: "highlight token", duration: 20, token: 'false', style: 'wavy underline', offset: 1},
-				{ actor: "caller 3", actionType: "highlight token", duration: 20, token: 'true', style: 'wavy underline', offset: 1},
-				{ actor: "callee", actionType: "replace text", duration: 1.5, line: 3, match: 'isLoad', replacement: 'loadAmount > 0', offset: 1.2},
-				{ actor: "callee", actionType: "insert text", duration: 1, line: 4, column: 16, text: 'loadAmount', offset: 2.9},
-				{ actor: "callee", actionType: "insert text", duration: 1, line: 13, column: 15, text: 'loadAmount', offset: 4.1},
+				{ actor: 'callee callout1', actionType: 'appear', startDuration: 0.5},
+				{ actor: "callee", actionType: "replace text", startDuration: 1, line: 2, match: 'isLoad', replacement: 'loadAmount'},
+				{ actor: "caller 2", actionType: "highlight token", startDuration: 20, token: 'false', style: 'wavy underline', offset: 1},
+				{ actor: "caller 3", actionType: "highlight token", startDuration: 20, token: 'true', style: 'wavy underline', offset: 1},
+				{ actor: "callee", actionType: "replace text", startDuration: 1.5, line: 3, match: 'isLoad', replacement: 'loadAmount > 0', offset: 1.2},
+				{ actor: "callee", actionType: "insert text", startDuration: 1, line: 4, column: 16, text: 'loadAmount', offset: 2.9},
+				{ actor: "callee", actionType: "insert text", startDuration: 1, line: 13, column: 15, text: 'loadAmount', offset: 4.1},
 			],
 	},
 
@@ -222,9 +222,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 		text: "Caller 3 is happy with the new API.",
 		translations: {zhCN: "Caller 3对新的API感到满意。"},
 		actions: [
-			{ actor: 'caller 1 callout1', actionType: 'disappear', duration: 1.5},
-			{ actor: 'caller 3 callout1', actionType: 'appear', duration: 0.5},
-			{ actor: "caller 3", actionType: "replace text", duration: 1, line: 2, match: 'true', replacement: '999999'},
+			{ actor: 'caller 1 callout1', actionType: 'disappear', startDuration: 1.5},
+			{ actor: 'caller 3 callout1', actionType: 'appear', startDuration: 0.5},
+			{ actor: "caller 3", actionType: "replace text", startDuration: 1, line: 2, match: 'true', replacement: '999999'},
 		],
 	},
 
@@ -234,8 +234,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 		text: "But Caller 2 is confused about why they are involved in this change.",
 		translations: {zhCN: "但Caller 2对于他们为什么要参与这个变更感到困惑。"},
 		actions: [
-			{ actor: 'callee callout1', actionType: 'disappear', duration: 1.5},
-			{ actor: 'caller 2 callout1', actionType: 'appear', duration: 0.5},
+			{ actor: 'callee callout1', actionType: 'disappear', startDuration: 1.5},
+			{ actor: 'caller 2 callout1', actionType: 'appear', startDuration: 0.5},
 		],
 	},
 
@@ -245,15 +245,15 @@ export const booleanParametersSutitles: Subtitle[] = [
 		text: "The boolean parameter makes the callers and callee tightly coupled.",
 		translations: {zhCN: "布尔参数使调用者和被调用者紧密耦合。"},
 		actions: [
-			{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 10},
-			{ actor: 'caller 2 callout1', actionType: 'disappear', duration: 0.5},
-			{ actor: 'caller 3 callout1', actionType: 'disappear', duration: 0.5},
-				{ actor: "a1-action", actionType: "connect to", duration: 6, target: "callee-action", bentLevel: -30},
-				{ actor: "a2-action", actionType: "connect to", duration: 6, target: "callee-action", bentLevel: -30},
-				{ actor: "a3-action", actionType: "connect to", duration: 6, target: "callee-action", bentLevel: -30},
-				{ actor: "a1-param", actionType: "connect to", duration: 6, target: "callee-load", bentLevel: 30},
-				{ actor: "a2-param", actionType: "connect to", duration: 6, target: "callee-fire", bentLevel: 30},
-				{ actor: "a3-param", actionType: "connect to", duration: 6, target: "callee-load", bentLevel: 30},
+			{ actor: "loose coupling health bar", actionType: "additive value change to", startDuration: 1, value: 10},
+			{ actor: 'caller 2 callout1', actionType: 'disappear', startDuration: 0.5},
+			{ actor: 'caller 3 callout1', actionType: 'disappear', startDuration: 0.5},
+				{ actor: "a1-action", actionType: "connect to", startDuration: 6, target: "callee-action", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", startDuration: 6, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", startDuration: 6, target: "callee-action", bentLevel: -30},
+				{ actor: "a1-param", actionType: "connect to", startDuration: 6, target: "callee-load", bentLevel: 30},
+				{ actor: "a2-param", actionType: "connect to", startDuration: 6, target: "callee-fire", bentLevel: 30},
+				{ actor: "a3-param", actionType: "connect to", startDuration: 6, target: "callee-load", bentLevel: 30},
 		],
 	},
 
@@ -264,10 +264,10 @@ export const booleanParametersSutitles: Subtitle[] = [
 		translations: {zhCN: "这种紧密耦合引入了不必要的复杂性，使更改变得更困难，也使协作变得复杂。"},
 		
 		actions: [
-			{ actor: "mask", actionType: "appear", duration: 0.2},
-			{ actor: 'learning from tight coupling', actionType: 'appear', duration: 0.5},
-			{ actor: "mask", actionType: "disappear", duration: 1, offset: 10},
-			{ actor: 'learning from tight coupling', actionType: 'disappear', duration: 0.5, offset: 10},
+			{ actor: "mask", actionType: "appear", startDuration: 0.2},
+			{ actor: 'learning from tight coupling', actionType: 'appear', startDuration: 0.5},
+			{ actor: "mask", actionType: "disappear", startDuration: 1, offset: 10},
+			{ actor: 'learning from tight coupling', actionType: 'disappear', startDuration: 0.5, offset: 10},
 
 		],
 	},
@@ -278,12 +278,12 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Just let callers call the methods they want.",
 		translations: {zhCN: "让调用者调用他们想要的方法就好了。"},
 			actions: [
-			{ actor: "callee", actionType: "replace text", duration: 1, line: 13, match: " private", replacement: ""},
-			{ actor: "caller 1", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.load(1000);\n  blaster.fire();", offset: 1},
-			{ actor: "caller 2", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.fire();", offset: 2.5},
-			{ actor: "caller 3", actionType: "replace text", duration: 1, line: 2, replacement: "  blaster.load(999999);\n  blaster.fire();", offset: 4},
-			{ actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [2, 3, 4, 5, 6, 7], offset: 5.5},
-			{ actor: "callee", actionType: "delete lines", duration: 1, fromLine: 2, count: 7, offset: 6},
+			{ actor: "callee", actionType: "replace text", startDuration: 1, line: 13, match: " private", replacement: ""},
+			{ actor: "caller 1", actionType: "replace text", startDuration: 1, line: 2, replacement: "  blaster.load(1000);\n  blaster.fire();", offset: 1},
+			{ actor: "caller 2", actionType: "replace text", startDuration: 1, line: 2, replacement: "  blaster.fire();", offset: 2.5},
+			{ actor: "caller 3", actionType: "replace text", startDuration: 1, line: 2, replacement: "  blaster.load(999999);\n  blaster.fire();", offset: 4},
+			{ actor: "callee", actionType: "highlight lines", startDuration: 0.5, lines: [2, 3, 4, 5, 6, 7], offset: 5.5},
+			{ actor: "callee", actionType: "delete lines", startDuration: 1, fromLine: 2, count: 7, offset: 6},
 
 			],
 	},
@@ -294,7 +294,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "This reduces complexity and dependencies, resulting in lower coupling.",
 		translations: {zhCN: "这将减少复杂性和依赖关系，从而降低耦合度。"},
 			actions: [
-				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 90, offset: 0},
+				{ actor: "loose coupling health bar", actionType: "additive value change to", startDuration: 1, value: 90, offset: 0},
 			],
 	},
 
@@ -315,7 +315,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 		translations: {zhCN: "在加载之后，必须发射Blaster。"},
 			actions: [
 				...loadActions,
-			  { actor: "caller 3", actionType: "highlight lines", duration: 5, lines: [2], offset: 0},
+			  { actor: "caller 3", actionType: "highlight lines", startDuration: 5, lines: [2], offset: 0},
 			],
 	},
 
@@ -325,11 +325,11 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Otherwise, it will explode.",
 		translations: {zhCN: "否则，它会爆炸。"},
 			actions: [
-			  { actor: "blaster temperature", actionType: "additive value change to", duration: 4, value: 1000, offset: 0},
-			  { actor: "caller 3", actionType: "replace text", duration: 1, line: 3, replacement: "  this.survey();", offset: 0},
-			  { actor: "caller 3", actionType: "highlight lines", duration: 3, lines: [3], offset: 2},
-			  { actor: "blaster explosion", actionType: "3d animation start", duration: 1, speed: 1, offset: 4},
-			  { actor: "blaster temperature", actionType: "additive value change to", duration: 2, value: 0, offset: 4},
+			  { actor: "blaster temperature", actionType: "additive value change to", startDuration: 4, value: 1000, offset: 0},
+			  { actor: "caller 3", actionType: "replace text", startDuration: 1, line: 3, replacement: "  this.survey();", offset: 0},
+			  { actor: "caller 3", actionType: "highlight lines", startDuration: 3, lines: [3], offset: 2},
+			  { actor: "blaster explosion", actionType: "3d animation start", startDuration: 1, speed: 1, offset: 4},
+			  { actor: "blaster temperature", actionType: "additive value change to", startDuration: 2, value: 0, offset: 4},
 			],
 	},
 
@@ -339,9 +339,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Well, no worries. Our current code is doing exactly that.",
 		translations: {zhCN: "好吧，别担心。我们现在的代码正是这么做的。"},
 			actions: [
-			  { actor: "caller 3", actionType: "replace text", duration: 1, line: 3, replacement: "  blaster.fire();", offset: 0},
-			  { actor: "caller 1", actionType: "highlight lines", duration: 10, lines: [2, 3], offset: 1},
-			  { actor: "caller 3", actionType: "highlight lines", duration: 10, lines: [2, 3], offset: 1},
+			  { actor: "caller 3", actionType: "replace text", startDuration: 1, line: 3, replacement: "  blaster.fire();", offset: 0},
+			  { actor: "caller 1", actionType: "highlight lines", startDuration: 10, lines: [2, 3], offset: 1},
+			  { actor: "caller 3", actionType: "highlight lines", startDuration: 10, lines: [2, 3], offset: 1},
 			],
 	},
 
@@ -360,13 +360,13 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "My code doesn't seem to have that. And it makes the cohesion low.",
 		translations: {zhCN: "我的代码似乎没有做到这一点。这导致内聚性较低。"},
 			actions: [
-				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 100, offset: 0.1},
-				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 50, offset: 0.2},
-			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 1},
-			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 2},
-			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 3},
-			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 4},
-			  { actor: "callee", actionType: "highlight lines", duration: 0.5, lines: [5], offset: 5},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 1, value: 100, offset: 0.1},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 2, value: 50, offset: 0.2},
+			  { actor: "callee", actionType: "highlight lines", startDuration: 0.5, lines: [5], offset: 1},
+			  { actor: "callee", actionType: "highlight lines", startDuration: 0.5, lines: [5], offset: 2},
+			  { actor: "callee", actionType: "highlight lines", startDuration: 0.5, lines: [5], offset: 3},
+			  { actor: "callee", actionType: "highlight lines", startDuration: 0.5, lines: [5], offset: 4},
+			  { actor: "callee", actionType: "highlight lines", startDuration: 0.5, lines: [5], offset: 5},
 			],
 	},
 
@@ -386,9 +386,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 		translations: {zhCN: "在发射之前，应该重新瞄准已加载的Blaster，"},
 			actions: [
 				...loadActions,
-			  { actor: "caller 1", actionType: "insert text", duration: 2, line: 2, column: 21, text: "\n  blaster.reAim();", offset: 1},
-			  { actor: "caller 1", actionType: "highlight token", duration: 4, token: "reAim", offset: 1},
-			  { actor: "blaster assembly", actionType: "3d rotate", duration: 2, totalRotation: [-60, 45, 30], offset: 4},
+			  { actor: "caller 1", actionType: "insert text", startDuration: 2, line: 2, column: 21, text: "\n  blaster.reAim();", offset: 1},
+			  { actor: "caller 1", actionType: "highlight token", startDuration: 4, token: "reAim", offset: 1},
+			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 2, totalRotation: [-60, 45, 30], offset: 4},
 			],
 	},
 
@@ -399,7 +399,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 		translations: {zhCN: "以免伤害到队友。"},
 			actions: [
 				...loadedFireActions,
-			  { actor: "blaster assembly", actionType: "3d rotate", duration: 2, totalRotation: [0, 0, 0], offset: 4},
+			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 2, totalRotation: [0, 0, 0], offset: 4},
 			],
 	},
 
@@ -409,7 +409,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Caller 1 fixed the bug.",
 		translations: {zhCN: "Caller 1修复了这个bug。"},
 			actions: [
-			  { actor: "caller 1 callout2", actionType: "appear", duration: 1, offset: 0},
+			  { actor: "caller 1 callout2", actionType: "appear", startDuration: 1, offset: 0},
 			],
 	},
 
@@ -420,7 +420,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 		translations: {zhCN: "然而，没人发现Caller 3仍然存在bug，"},
 			actions: [
 				...loadActions,
-			  { actor: "caller 3", actionType: "highlight lines", duration: 7, lines: [2, 3], offset: 0},
+			  { actor: "caller 3", actionType: "highlight lines", startDuration: 7, lines: [2, 3], offset: 0},
 			],
 	},
 
@@ -431,9 +431,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 		translations: {zhCN: "并且代码开始变得不同了。"},
 			actions: [
 				...loadedFireActions,
-			  { actor: "blaster more powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
-			  { actor: "teammate callout", actionType: "appear", duration: 0.2, offset: 1},
-			  { actor: "caller 3 callout2", actionType: "appear", duration: 0.5, offset: 3},
+			  { actor: "blaster more powerful fire", actionType: "3d animation start", startDuration: 3, speed: 2 },
+			  { actor: "teammate callout", actionType: "appear", startDuration: 0.2, offset: 1},
+			  { actor: "caller 3 callout2", actionType: "appear", startDuration: 0.5, offset: 3},
 			],
 	},
 
@@ -443,7 +443,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Again, it shows my code is not cohesive.",
 		translations: {zhCN: "再次表明，我的代码并不具有内聚性。"},
 			actions: [
-				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 10, offset: 0.2},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 2, value: 10, offset: 0.2},
 			],
 	},
 
@@ -453,10 +453,10 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Due to the lack of cohesion, my code lost important domain concepts and the future changes will become error-prone.",
 		translations: {zhCN: "由于缺乏内聚性，我的代码丢失了重要的领域概念，未来的更改将变得容易出错。"},
 			actions: [
-				{ actor: "mask", actionType: "appear", duration: 0.2},
-				{ actor: "learning from low cohesion", actionType: "appear", duration: 0.5, offset: 0.2},
-				{ actor: "mask", actionType: "disappear", duration: 1, offset: 10},
-				{ actor: "learning from low cohesion", actionType: "disappear", duration: 0.5, offset: 10},
+				{ actor: "mask", actionType: "appear", startDuration: 0.2},
+				{ actor: "learning from low cohesion", actionType: "appear", startDuration: 0.5, offset: 0.2},
+				{ actor: "mask", actionType: "disappear", startDuration: 1, offset: 10},
+				{ actor: "learning from low cohesion", actionType: "disappear", startDuration: 0.5, offset: 10},
 			],
 	},
 
@@ -466,18 +466,18 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "The bug would have been avoided if I kept my code more cohesive.",
 		translations: {zhCN: "如果我让我的代码更具内聚性，这个bug本可以避免的。"},
 			actions: [
-			  { actor: "teammate callout", actionType: "disappear", duration: 0.5, offset: 0},
-			  { actor: "caller 3 callout2", actionType: "disappear", duration: 0.5, offset: 0},
-			  { actor: "caller 1 callout2", actionType: "disappear", duration: 0.5, offset: 0},
-			  { actor: "callee", actionType: "insert text", duration: 2, line: 4, column: 10, text: "\n\n  loadedFire(loadAmount) {\n    this.load(loadAmount);\n    this.fire();\n  };", offset: 1},
-			  { actor: "callee", actionType: "insert text", duration: 0.5, line: 11, column: 2, text: "private ", offset: 3.5},
-				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 30, offset: 3.5},
-			  { actor: "caller 1", actionType: "delete lines", duration: 0.5, fromLine: 2, count: 3, offset: 4.5},
-			  { actor: "caller 1", actionType: "insert text", duration: 0.5, line: 1, column: 13, text: "\n  blaster.loadedFire(1000);", offset: 5.1},
-			  { actor: "caller 3", actionType: "delete lines", duration: 0.5, fromLine: 2, count: 3, offset: 4.5},
-			  { actor: "caller 3", actionType: "insert text", duration: 0.5, line: 1, column: 13, text: "\n  blaster.loadedFire(999999);\n", offset: 5.1},
-				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 70, offset: 5.5},
-			  { actor: "callee", actionType: "insert text", duration: 1, line: 7, column: 26, text: "\n    this.reAim();", offset: 5.5},
+			  { actor: "teammate callout", actionType: "disappear", startDuration: 0.5, offset: 0},
+			  { actor: "caller 3 callout2", actionType: "disappear", startDuration: 0.5, offset: 0},
+			  { actor: "caller 1 callout2", actionType: "disappear", startDuration: 0.5, offset: 0},
+			  { actor: "callee", actionType: "insert text", startDuration: 2, line: 4, column: 10, text: "\n\n  loadedFire(loadAmount) {\n    this.load(loadAmount);\n    this.fire();\n  };", offset: 1},
+			  { actor: "callee", actionType: "insert text", startDuration: 0.5, line: 11, column: 2, text: "private ", offset: 3.5},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 1, value: 30, offset: 3.5},
+			  { actor: "caller 1", actionType: "delete lines", startDuration: 0.5, fromLine: 2, count: 3, offset: 4.5},
+			  { actor: "caller 1", actionType: "insert text", startDuration: 0.5, line: 1, column: 13, text: "\n  blaster.loadedFire(1000);", offset: 5.1},
+			  { actor: "caller 3", actionType: "delete lines", startDuration: 0.5, fromLine: 2, count: 3, offset: 4.5},
+			  { actor: "caller 3", actionType: "insert text", startDuration: 0.5, line: 1, column: 13, text: "\n  blaster.loadedFire(999999);\n", offset: 5.1},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 2, value: 70, offset: 5.5},
+			  { actor: "callee", actionType: "insert text", startDuration: 1, line: 7, column: 26, text: "\n    this.reAim();", offset: 5.5},
 			],
 	},
 
@@ -487,7 +487,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "In conclusion, avoid boolean parameters, use meaningful names,",
 		translations: {zhCN: "总之，建议你也慎用使用布尔参数，使用有意义的名称，"},
 			actions: [
-			  { actor: "callee", actionType: "highlight token", duration: 20, token: "loadedFire", offset: 1},
+			  { actor: "callee", actionType: "highlight token", startDuration: 20, token: "loadedFire", offset: 1},
 			],
 	},
 
@@ -497,7 +497,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "and aim for high cohesion,",
 		translations: {zhCN: "并追求高内聚，"},
 			actions: [
-			  { actor: "callee", actionType: "highlight lines", duration: 20, lines: [6, 7,8,9,10], offset: 1},
+			  { actor: "callee", actionType: "highlight lines", startDuration: 20, lines: [6, 7,8,9,10], offset: 1},
 			],
 	},
 
@@ -507,9 +507,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "and loose coupling.",
 		translations: {zhCN: "以及松耦合。"},
 			actions: [
-				{ actor: "a1-action", actionType: "connect to", duration: 20, target: "callee-loadedfire", bentLevel: -30},
-				{ actor: "a2-action", actionType: "connect to", duration: 20, target: "callee-action", bentLevel: -30},
-				{ actor: "a3-action", actionType: "connect to", duration: 20, target: "callee-loadedfire", bentLevel: -30},
+				{ actor: "a1-action", actionType: "connect to", startDuration: 20, target: "callee-loadedfire", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", startDuration: 20, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", startDuration: 20, target: "callee-loadedfire", bentLevel: -30},
 			],
 	},
 

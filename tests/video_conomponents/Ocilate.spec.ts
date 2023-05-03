@@ -20,7 +20,7 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'oscillate',
-								duration: 1,
+								startDuration: 1,
 								delta: [1, 2, 3],
 							},
 						],
@@ -53,13 +53,13 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'oscillate',
-								duration: 1,
+								startDuration: 1,
 								delta: [1, 2, 3],
 							},							
 							{
 								actor: 'under-test',
 								actionType: 'move',
-								duration: 1,
+								startDuration: 1,
 								absolutePosition: [1, 0, 0],
 							},
 						],
@@ -92,13 +92,13 @@ describe('AnimationContext', () => {
               {
 								actor: 'under-test',
 								actionType: 'move',
-								duration: 1,
+								startDuration: 1,
 								absolutePosition: [1, 0, 0],
 							},
 							{
 								actor: 'under-test',
 								actionType: 'oscillate',
-								duration: 1,
+								startDuration: 1,
 								delta: [1, 2, 3],
 							},							
 						],

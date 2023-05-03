@@ -26,8 +26,8 @@ describe('AnimationEffect', () => {
   describe('scaleToUpperRight', () => {
     const subtitleWithAction: Subtitle = 
       { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-        { actor: "under-test", actionType: 'scale', duration: 1, outputRange: [0.5, 1] },
-        { actor: "under-test", actionType: 'move', duration: 1, absolutePosition: 50 },
+        { actor: "under-test", actionType: 'scale', startDuration: 1, outputRange: [0.5, 1] },
+        { actor: "under-test", actionType: 'move', startDuration: 1, absolutePosition: 50 },
       ] };
 
     test('default value when no action specified', () => {
@@ -89,8 +89,8 @@ describe('AnimationEffect', () => {
     test('find the action in the first subtitle but its second action', () => {
     const subtitleWithAction: Subtitle = 
       { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-        { actor: "other-object", actionType: 'scale', duration: 1, outputRange: [0, 1] },
-        { actor: "under-test", actionType: 'scale', duration: 1, outputRange: [50, 100] },
+        { actor: "other-object", actionType: 'scale', startDuration: 1, outputRange: [0, 1] },
+        { actor: "under-test", actionType: 'scale', startDuration: 1, outputRange: [50, 100] },
       ] };
       const animationContext = makeMe
                 .animationContext
@@ -113,7 +113,7 @@ describe('AnimationEffect', () => {
     ].forEach(({actionType, sec, expectedOpacity}) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: actionType as 'appear' | 'disappear', duration: 1 },
+          { actor: "under-test", actionType: actionType as 'appear' | 'disappear', startDuration: 1 },
         ] };
       test('displays the correct transformation', () => {
         const animationContext = makeMe
@@ -138,11 +138,11 @@ describe('AnimationEffect', () => {
       test(`appear, then disappear at sec ${sec}`, () => {
         const subtitleWithActionAppear: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: 'appear', duration: 1 },
+          { actor: "under-test", actionType: 'appear', startDuration: 1 },
         ] };
         const subtitleWithActionDisappear: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: 'disappear', duration: 1 },
+          { actor: "under-test", actionType: 'disappear', startDuration: 1 },
         ] };
         const animationContext = makeMe
                 .animationContext
@@ -164,11 +164,11 @@ describe('AnimationEffect', () => {
       test(`appear, then disappear at sec ${sec}`, () => {
         const subtitleWithActionAppear: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: 'appear', duration: 5 },
+          { actor: "under-test", actionType: 'appear', startDuration: 5 },
         ] };
         const subtitleWithActionDisappear: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: 'disappear', duration: 3 },
+          { actor: "under-test", actionType: 'disappear', startDuration: 3 },
         ] };
         const animationContext = makeMe
                 .animationContext
@@ -191,7 +191,7 @@ describe('AnimationEffect', () => {
       test(`glow at sec ${sec}`, () => {
         const subtitle: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: 'glow', duration: 1 },
+          { actor: "under-test", actionType: 'glow', startDuration: 1 },
         ] };
         const animationContext = makeMe
                 .animationContext
@@ -218,11 +218,11 @@ describe('AnimationEffect', () => {
       test(`appear, then disappear at sec ${sec}`, () => {
         const subtitleWithActionAppear: Subtitle = 
         { leadingBlank: 1, duration: 2, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: 'appear', duration: 1 },
+          { actor: "under-test", actionType: 'appear', startDuration: 1 },
         ] };
         const subtitleWithActionGlow: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: 'glow', duration: 1 },
+          { actor: "under-test", actionType: 'glow', startDuration: 1 },
         ] };
         const animationContext = makeMe
                 .animationContext
