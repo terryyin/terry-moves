@@ -14,7 +14,8 @@ export default class EffectCalculator {
   duration: number;
 
 
-  constructor(duration: number, startTime: number, frame: number, fps: number) {
+  // eslint-disable-next-line max-params
+  constructor(duration: number, startTime: number, startDuration: number, endDuration: number, frame: number, fps: number) {
     this.startFrame = startTime * fps;
     this.frame = frame;
     this.fps = fps;

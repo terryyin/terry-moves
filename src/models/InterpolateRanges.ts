@@ -11,6 +11,8 @@ export abstract class InterpolateRanges {
 		const effectCalculator: EffectCalculator = new EffectCalculator(
 			(this.inputRange[this.inputRange.length - 1] - this.inputRange[0]) / fps,
 			this.inputRange[0] / fps,
+			0,
+			0,
 			frame,
 			fps
 		);

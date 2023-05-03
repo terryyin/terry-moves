@@ -25,7 +25,21 @@ const getActionDuration = (action: Action, startTime: number, script: Script): n
 	return result ?? Number.MAX_SAFE_INTEGER;
 }
 
+const getStartDuration = (action: Action): number | undefined => {
+	if ('startDurationX' in action) {
+		return action.startDurationX;
+	}
+}
+
+const getEndDuration = (action: Action): number | undefined => {
+	if ('endDurationX' in action) {
+		return action.endDurationX;
+	}
+}
+
 export const createEffectCalculator = (action: Action, startTime: number, frame: number, script: Script): EffectCalculator => {
+	const startDuration = getStartDuration(action) ?? 0;
+	const endDuration = getEndDuration(action) ?? 0;
 	const duration = getActionDuration(action, startTime, script);
-	return new EffectCalculator(duration, startTime + (action.offset ?? 0), frame, script.fps);
+	return new EffectCalculator(duration, startTime + (action.offset ?? 0), startDuration, endDuration, frame, script.fps);
 }
