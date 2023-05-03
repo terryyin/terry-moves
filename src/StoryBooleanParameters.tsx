@@ -46,8 +46,8 @@ const loadActions: Action[] =
 [
 			  { actor: "blaster", actionType: "3d animation start", duration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
 			  { actor: "blaster temperature", actionType: "additive value change to", duration: 1.2, value: 50 },
-			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 0.4,  totalRotation: [0, 0, -30]},
-			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
+			  { actor: "blaster assembly", actionType: "3d rotate", persistTime: 0.4,  totalRotation: [0, 0, -30]},
+			  { actor: "blaster assembly", actionType: "3d rotate", persistTime: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
 ];
 
 export const booleanParametersSutitles: Subtitle[] = [
@@ -58,7 +58,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			translations: {zhCN: "大家好，欢迎来到《我的布尔值的坏习惯》系列。"},
 			actions: [
 				{ actor: "second title", actionType: "type", startDuration: 3 },
-			  { actor: "blaster assembly", actionType: "oscillate", startDuration: 1000,  delta: [0, 0.02, 0]},
+			  { actor: "blaster assembly", actionType: "oscillate", persistTime: 1000,  delta: [0, 0.02, 0]},
 				// { actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
 			],
 	},
@@ -124,9 +124,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 				{ actor: "caller 2", actionType: "highlight token", startDuration: 3, token: 'action'},
 				{ actor: "caller 3", actionType: "highlight token", startDuration: 3, token: 'action'},
 				{ actor: "callee", actionType: "highlight token", startDuration: 3, token: 'action'},
-				{ actor: "a1-action", actionType: "connect to", startDuration: 10, target: "callee-action", bentLevel: -30},
-				{ actor: "a2-action", actionType: "connect to", startDuration: 10, target: "callee-action", bentLevel: -30},
-				{ actor: "a3-action", actionType: "connect to", startDuration: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a1-action", actionType: "connect to", persistTime: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", persistTime: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", persistTime: 10, target: "callee-action", bentLevel: -30},
 			],
 	},
 
@@ -171,9 +171,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			translations: {zhCN: "这意味着'action'函数中的条件'is Load'是多余的。"},
 			actions: [
 				{ actor: "callee", actionType: "highlight lines", startDuration: 5, lines: [3, 5]},
-				{ actor: "a1-param", actionType: "connect to", startDuration: 10, target: "callee-load", bentLevel: 30},
-				{ actor: "a2-param", actionType: "connect to", startDuration: 10, target: "callee-fire", bentLevel: 30},
-				{ actor: "a3-param", actionType: "connect to", startDuration: 10, target: "callee-load", bentLevel: 30},
+				{ actor: "a1-param", actionType: "connect to", persistTime: 10, target: "callee-load", bentLevel: 30},
+				{ actor: "a2-param", actionType: "connect to", persistTime: 10, target: "callee-fire", bentLevel: 30},
+				{ actor: "a3-param", actionType: "connect to", persistTime: 10, target: "callee-load", bentLevel: 30},
 			],
 	},
 
@@ -248,12 +248,12 @@ export const booleanParametersSutitles: Subtitle[] = [
 			{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 10},
 			{ actor: 'caller 2 callout1', actionType: 'disappear', startDuration: 0.5},
 			{ actor: 'caller 3 callout1', actionType: 'disappear', startDuration: 0.5},
-				{ actor: "a1-action", actionType: "connect to", startDuration: 6, target: "callee-action", bentLevel: -30},
-				{ actor: "a2-action", actionType: "connect to", startDuration: 6, target: "callee-action", bentLevel: -30},
-				{ actor: "a3-action", actionType: "connect to", startDuration: 6, target: "callee-action", bentLevel: -30},
-				{ actor: "a1-param", actionType: "connect to", startDuration: 6, target: "callee-load", bentLevel: 30},
-				{ actor: "a2-param", actionType: "connect to", startDuration: 6, target: "callee-fire", bentLevel: 30},
-				{ actor: "a3-param", actionType: "connect to", startDuration: 6, target: "callee-load", bentLevel: 30},
+				{ actor: "a1-action", actionType: "connect to", persistTime: 6, target: "callee-action", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", persistTime: 6, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", persistTime: 6, target: "callee-action", bentLevel: -30},
+				{ actor: "a1-param", actionType: "connect to", persistTime: 6, target: "callee-load", bentLevel: 30},
+				{ actor: "a2-param", actionType: "connect to", persistTime: 6, target: "callee-fire", bentLevel: 30},
+				{ actor: "a3-param", actionType: "connect to", persistTime: 6, target: "callee-load", bentLevel: 30},
 		],
 	},
 
@@ -388,7 +388,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 				...loadActions,
 			  { actor: "caller 1", actionType: "insert text", startDuration: 2, line: 2, column: 21, text: "\n  blaster.reAim();", offset: 1},
 			  { actor: "caller 1", actionType: "highlight token", startDuration: 4, token: "reAim", offset: 1},
-			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 2, totalRotation: [-60, 45, 30], offset: 4},
+			  { actor: "blaster assembly", actionType: "3d rotate", persistTime: 2, totalRotation: [-60, 45, 30], offset: 4},
 			],
 	},
 
@@ -399,7 +399,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 		translations: {zhCN: "以免伤害到队友。"},
 			actions: [
 				...loadedFireActions,
-			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 2, totalRotation: [0, 0, 0], offset: 4},
+			  { actor: "blaster assembly", actionType: "3d rotate", persistTime: 2, totalRotation: [0, 0, 0], offset: 4},
 			],
 	},
 
@@ -507,9 +507,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "and loose coupling.",
 		translations: {zhCN: "以及松耦合。"},
 			actions: [
-				{ actor: "a1-action", actionType: "connect to", startDuration: 20, target: "callee-loadedfire", bentLevel: -30},
-				{ actor: "a2-action", actionType: "connect to", startDuration: 20, target: "callee-action", bentLevel: -30},
-				{ actor: "a3-action", actionType: "connect to", startDuration: 20, target: "callee-loadedfire", bentLevel: -30},
+				{ actor: "a1-action", actionType: "connect to", persistTime: 20, target: "callee-loadedfire", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", persistTime: 20, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", persistTime: 20, target: "callee-loadedfire", bentLevel: -30},
 			],
 	},
 

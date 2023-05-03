@@ -12,10 +12,10 @@ export interface InterimAction extends BaseAction {
 }
 
 export interface UntilAction extends BaseAction {
-  startDuration: number;
+  persistTime: number;
 }
 
-export interface StartAndEndAction extends UntilAction {
+export interface StartAndEndAction extends BaseAction {
   startDuration: number;
 }
 

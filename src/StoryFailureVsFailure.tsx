@@ -26,7 +26,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 
 	{ leadingBlank: 0.5, duration: 4, text: "SpaceX is celebrating their rocket explosion.", actions: [
 			{ actor: "starship", actionType: "rotate and rise", duration: 3, value: 4 },
-			{ actor: "starship", actionType: "oscillate", startDuration: 10, delta: [0, 0.1, 0] },
+			{ actor: "starship", actionType: "oscillate", persistTime: 10, delta: [0, 0.1, 0] },
 	]},
 	{ leadingBlank: 0, duration: 5, text: "Software developers also have different attitudes towards failures.", actions: [
 			{ actor: "blue background", actionType: "disappear", startDuration: 5 },
@@ -35,7 +35,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 			{ actor: "camera", actionType: "move", duration: 6, absolutePosition: [0, 0, -20] },
 	]},
 	{ leadingBlank: 0, duration: 1.5, text: "", actions: [
-			{ actor: "starship", actionType: "3d rotate", startDuration: 20, totalRotation: [0, 240, 0] },
+			{ actor: "starship", actionType: "3d rotate", persistTime: 20, totalRotation: [0, 240, 0] },
 			{ actor: "stage", actionType: "scale", duration: 2, outputRange: [1, 0.5] },
 	]},
 
