@@ -1,5 +1,5 @@
 import { Action, ThreeDAnimationAction } from '@/models/Subtitles';
-import EffectCalculator from './EffectCalculator';
+import EffectCalculator, { EffectCalculatorAndAction } from './EffectCalculator';
 
 export type GLBAnimationAttributes = {
   playing: boolean;
@@ -15,9 +15,9 @@ export default class GLBAnimationActioner {
     playing: true,
   };
 
-  constructor(action: Action, effectCalculator: EffectCalculator) {
-    this.effectCalculator = effectCalculator;
-    this.action = action;
+  constructor(effectCalculator: EffectCalculatorAndAction) {
+    this.effectCalculator = effectCalculator.effectCalculator;
+    this.action = effectCalculator.action;
   }
 
   combine(prev: GLBAnimationAttributes): GLBAnimationAttributes {

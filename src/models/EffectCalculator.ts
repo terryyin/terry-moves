@@ -1,10 +1,15 @@
 import {interpolate} from 'remotion'
 import {spring} from 'remotion'
-import { BaseAction } from './Subtitles';
+import { Action } from './Subtitles';
 
-export type EffectCalculatorAndAction = {
-  action: BaseAction;
+export class EffectCalculatorAndAction {
+  action: Action;
   effectCalculator: EffectCalculator;
+
+  constructor(action: Action, effectCalculator: EffectCalculator) {
+    this.action = action;
+    this.effectCalculator = effectCalculator;
+  }
 }
 
 export default class EffectCalculator {

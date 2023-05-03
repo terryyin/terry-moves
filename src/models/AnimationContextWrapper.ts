@@ -1,5 +1,5 @@
 import { ActionType, SubtitleWithFlashBack } from './Subtitles';
-import { Action, Subtitle } from '@/models/Subtitles';
+import { Subtitle } from '@/models/Subtitles';
 import ObjectActioner from './ObjectActioner';
 import { EffectCalculatorAndAction } from './EffectCalculator';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
@@ -28,7 +28,7 @@ export default class AnimationContextWrapper {
 
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
     const result = this.getActionOfActor(actor)
-      .map(effectCalculator => new GLBAnimationActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
+      .map(effectCalculator => new GLBAnimationActioner(effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), { ...GLBAnimationActioner.defaultValue});
     result.time = result.time ?? this.adjustedFrame / this.script.fps;
     return result;
@@ -36,35 +36,35 @@ export default class AnimationContextWrapper {
 
   get3DObjectStateOf(actor: string): ThreeDObjectState {
     return this.getActionOfActor(actor)
-      .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
+      .map(effectCalculator => new ObjectActioner(effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
       .get3DObjedctState(this.adjustedFrame, this.script.fps);
   }
 
   getTextReveal(actor: string): TextReveal {
     return this.getActionOfActor(actor)
-      .map(effectCalculator => new ObjectActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
+      .map(effectCalculator => new ObjectActioner(effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
       .getTextReveal(this.adjustedFrame, this.script.fps);
   }
 
   getCodeTransfomation(actor: string): CodeTransformation {
      return this.getActionOfActor(actor)
-      .map(effectCalculator => new CodeActioner(effectCalculator.action as Action, effectCalculator.effectCalculator))
+      .map(effectCalculator => new CodeActioner(effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), CodeActioner.defaultValue)
       .getCodeTransfomation(this.adjustedFrame, this.script.fps);
   }
 
   getGeneralValue(actor: string): number | undefined {
      return this.getActionOfActor(actor)
-      .map(effectCalculator => new GeneralActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
+      .map(effectCalculator => new GeneralActioner(effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), GeneralActioner.defaultValue)
       .getGeneralValue(this.adjustedFrame, this.script.fps);
   }
 
   getConnectors(): ConnectorStates {
      return this.getActionByType("connect to")
-      .map(effectCalculator => new ConnectorsActioner(effectCalculator.action as Action, effectCalculator.effectCalculator.frameRange))
+      .map(effectCalculator => new ConnectorsActioner(effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), ConnectorsActioner.defaultValue)
       .getConnectors(this.adjustedFrame, this.script.fps);
   }

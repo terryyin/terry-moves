@@ -36,10 +36,7 @@ export class Script {
 					.filter(matcher)
 					.map((action) => {
 						const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0;
-						return {
-							action,
-							effectCalculator: createEffectCalculator(action, startTime, frame, this),
-						};
+						return createEffectCalculator(action, startTime, frame, this);
 					});
 			})
 			.flat();

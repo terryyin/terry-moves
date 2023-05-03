@@ -1,4 +1,4 @@
-import EffectCalculator from "./EffectCalculator"
+import EffectCalculator, { EffectCalculatorAndAction } from "./EffectCalculator"
 import { Script } from "./Script";
 import { Action } from "./Subtitles";
 
@@ -37,9 +37,9 @@ const getEndDuration = (action: Action): number | undefined => {
 	}
 }
 
-export const createEffectCalculator = (action: Action, startTime: number, frame: number, script: Script): EffectCalculator => {
+export const createEffectCalculator = (action: Action, startTime: number, frame: number, script: Script): EffectCalculatorAndAction => {
 	const startDuration = getStartDuration(action) ?? 0;
 	const endDuration = getEndDuration(action) ?? 0;
 	const duration = getActionDuration(action, startTime, script);
-	return new EffectCalculator(duration, startTime + (action.offset ?? 0), startDuration, endDuration, frame, script.fps);
+	return new EffectCalculatorAndAction(action, new EffectCalculator(duration, startTime + (action.offset ?? 0), startDuration, endDuration, frame, script.fps));
 }

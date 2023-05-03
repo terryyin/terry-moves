@@ -1,3 +1,4 @@
+import { EffectCalculatorAndAction } from './EffectCalculator';
 import { Action } from '@/models/Subtitles';
 
 interface Combinable<T> {
@@ -8,9 +9,9 @@ export default abstract class BaseActioner<T extends Combinable<T>> {
   action: Action;
   frameRange: [number, number];
 
-  constructor(action: Action, frameRange: [number, number]) {
-    this.frameRange = frameRange;
-    this.action = action;
+  constructor(effectCalculator: EffectCalculatorAndAction) {
+    this.frameRange = effectCalculator.effectCalculator.frameRange;
+    this.action = effectCalculator.action;
   }
 
   combine(prev: T): T {

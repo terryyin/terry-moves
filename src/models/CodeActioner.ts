@@ -1,5 +1,5 @@
 import { Action, HighlightStyle, InsertTextAction, ReplaceTextAction } from '@/models/Subtitles';
-import EffectCalculator from './EffectCalculator';
+import EffectCalculator, { EffectCalculatorAndAction } from './EffectCalculator';
 
 interface HighlightBase {
   style: HighlightStyle;
@@ -45,6 +45,7 @@ export type CodeTransformation = {
 export class LazyCodeTransformation {
   highlights: Highlight[] = [];
   textEdits: TextEdit[] = [];
+  textInsertActions: InsertTextAction[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   getCodeTransfomation(adjustedFrame: number, fps: number): CodeTransformation {
@@ -59,10 +60,12 @@ export class LazyCodeTransformation {
     const result = new LazyCodeTransformation();
     result.highlights = [...prev.highlights, ...this.highlights];
     result.textEdits = [...prev.textEdits, ...this.textEdits];
+    result.textInsertActions = [...prev.textInsertActions, ...this.textInsertActions];
     return result;
   }
 
   addTextInsert(action: InsertTextAction, effectCalculator: EffectCalculator) {
+    this.textInsertActions.push(action);
     const insert: TextInsertion = {
       line: action.line, column: action.column, text: action.text, progress: effectCalculator.interpolateDuration([0, 1]),
       cursor: effectCalculator.blink(0.5, 0.3),
@@ -94,9 +97,9 @@ export default class CodeActioner {
 
   static defaultValue: LazyCodeTransformation = new LazyCodeTransformation();
 
-  constructor(action: Action, effectCalculator: EffectCalculator) {
-    this.effectCalculator = effectCalculator;
-    this.action = action;
+  constructor(effectCalculator: EffectCalculatorAndAction) {
+    this.effectCalculator = effectCalculator.effectCalculator;
+    this.action = effectCalculator.action;
   }
 
   combine(prev: LazyCodeTransformation): LazyCodeTransformation {
