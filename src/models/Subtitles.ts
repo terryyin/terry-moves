@@ -23,7 +23,10 @@ export interface StartAndEndAction extends BaseAction {
   startDuration: number;
 }
 
-export type StartAndEndActionMisused = UntilAction
+export interface StartAndEndActionMisused extends UntilAction {
+  startDurationX?: number;
+  endDurationX?: number;
+}
 
 
 export interface ScaleAction extends InterimAction {
