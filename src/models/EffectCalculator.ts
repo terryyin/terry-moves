@@ -50,16 +50,24 @@ export default class EffectCalculator {
     return Math.min(this.durationInFrames / this.fps, Math.max(0, (this.frame - this.persistStartFrame) / this.fps));
   }
 
-  isAfter(): boolean {
+  isAfterPersist(): boolean {
     return this.frame > this.endFrame;
+  }
+
+  isAfterWhole(): boolean {
+    return this.frame > this.endFrame + this.endDuration * this.fps;
   }
 
   isBefore(): boolean {
     return this.frame < this.persistStartFrame;
   }
 
-  withInDuration(): boolean {
-    return this.frame >= this.persistStartFrame && !this.isAfter();
+  withInPersistDuration(): boolean {
+    return this.frame >= this.persistStartFrame && !this.isAfterPersist();
+  }
+
+  withInWholeDuration(): boolean {
+    return this.frame >= this.persistStartFrame - this.startDuration * this.fps && !this.isAfterWhole();
   }
 
   withInStartDuration(ratio: number): boolean {
@@ -67,7 +75,7 @@ export default class EffectCalculator {
   }
 
   withInEndDuration(ratio: number): boolean {
-    return this.frame > this.endFrame && this.frame >= (this.endFrame + this.endDuration * ratio * this.fps); 
+    return this.frame > this.endFrame && this.frame <= (this.endFrame + this.endDuration * ratio * this.fps); 
   }
 
   blink(timeIntervalShow: number, timeIntervalHide: number): boolean {

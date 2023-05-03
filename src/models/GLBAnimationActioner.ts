@@ -58,11 +58,11 @@ export default class GLBAnimationActioner {
 
   private getAnimationTime(action: ThreeDAnimationAction): number | undefined {
     const percentage = action.percentage ?? 100;
-    if (this.effectCalculator.withInDuration()) {
+    if (this.effectCalculator.withInPersistDuration()) {
      return this.effectCalculator.timeWithIn() * percentage / 100 * action.speed
     }
 
-    if (this.effectCalculator.isAfter() && action.pauseAtEnd) {
+    if (this.effectCalculator.isAfterPersist() && action.pauseAtEnd) {
       return action.duration * percentage / 100 * action.speed;
     }
 

@@ -130,7 +130,7 @@ describe('CodeHighlight', () => {
     [
       { sec: 0.5, expectedLineText: '  action(isLoad) {' },
       { sec: 1.1, expectedLineText: '  action(l|) {' },
-      { sec: 1.6, expectedLineText: '  action(loadAm) {' },
+      { sec: 1.6, expectedLineText: '  action(loadAm|) {' },
       { sec: 3.1, expectedLineText: '  action(loadAmount) {' },
     ].forEach(({sec, expectedLineText}) => {
       test(` at sec ${sec}`, () => {
@@ -151,7 +151,7 @@ describe('CodeHighlight', () => {
     [
       { sec: 0.5, expectedLineText: '  action(isLoad) {' },
       { sec: 1.1, expectedLineText: 'l|' },
-      { sec: 1.6, expectedLineText: 'loadAm' },
+      { sec: 1.6, expectedLineText: 'loadAm|' },
       { sec: 3.1, expectedLineText: 'loadAmount' },
     ].forEach(({sec, expectedLineText}) => {
       test(` at sec ${sec}`, () => {
@@ -172,7 +172,7 @@ describe('CodeHighlight', () => {
     [
       { sec: 0.5, expectedLineText: '      this.load();' },
       { sec: 1.1, expectedLineText: '      this.load(l|);' },
-      { sec: 1.6, expectedLineText: '      this.load(loadAm);' },
+      { sec: 1.6, expectedLineText: '      this.load(loadAm|);' },
       { sec: 3.1, expectedLineText: '      this.load(loadAmount);' },
     ].forEach(({sec, expectedLineText}) => {
       test(` at sec ${sec}`, () => {
@@ -193,7 +193,7 @@ describe('CodeHighlight', () => {
     [
       { sec: 0.5, expectedLineText: '      this.load();' },
       { sec: 1.1, expectedLineText: '      this.load();' },
-      { sec: 4, expectedLineText: '      this.load(loadA|);' },
+      { sec: 4, expectedLineText: '      this.load(loadA);' },
       { sec: 6.1, expectedLineText: '      this.load(loadAmount);' },
     ].forEach(({sec, expectedLineText}) => {
       test(` at sec ${sec}`, () => {
