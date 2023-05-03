@@ -45,7 +45,7 @@ export default class GLBAnimationActioner {
   private getReverseAnimationAttributes(action: ThreeDAnimationAction): GLBAnimationAttributes {
     const {time, ...rest} = this.getAnimationAttributes(action);
     if(time === undefined) return { ...rest}
-    return { ...rest, time: this.effectCalculator.duration - time}
+    return { ...rest, time: this.effectCalculator.PersisitDuration - time}
   }
 
   private getAnimationAttributes(action: ThreeDAnimationAction): GLBAnimationAttributes {

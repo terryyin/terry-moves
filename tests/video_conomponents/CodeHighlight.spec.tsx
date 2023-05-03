@@ -189,6 +189,27 @@ describe('CodeHighlight', () => {
     });
   });
 
+  describe('insert text with start and end duration', () => {
+    [
+      { sec: 0.5, expectedLineText: '      this.load();' },
+      { sec: 1.1, expectedLineText: '      this.load();' },
+      { sec: 4, expectedLineText: '      this.load(loadA|);' },
+      { sec: 6.1, expectedLineText: '      this.load(loadAmount);' },
+    ].forEach(({sec, expectedLineText}) => {
+      test(` at sec ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                  { actor: 'under-test', actionType: 'insert text', endingTimeAdjustment: 5, line: 4, column: 16, text: 'loadAmount', startDurationX: 1, endDurationX: 1, }
+                ]})
+                .seconds(sec)
+                .please();
+        const div = renderAndGetDiv(animationContext);
+        expect(divOfLine(div, 4).textContent).toBe(expectedLineText);
+      });
+    });
+  });
+
   describe('insert text before a line that doesnot exist will append', () => {
     [
       { sec: 3.1, expectedLineText: 'loadAmount' },

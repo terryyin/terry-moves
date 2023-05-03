@@ -8,34 +8,41 @@ export type EffectCalculatorAndAction = {
 }
 
 export default class EffectCalculator {
-  startFrame: number;
+  persistStartFrame: number;
   frame: number;
   fps: number;
-  duration: number;
+  PersisitDuration: number;
+  startDuration: number;
+  endDuration: number;
 
 
   // eslint-disable-next-line max-params
   constructor(duration: number, startTime: number, startDuration: number, endDuration: number, frame: number, fps: number) {
-    this.startFrame = startTime * fps;
+    this.startDuration = startDuration;
+    this.endDuration = endDuration;
+    this.persistStartFrame = (startTime + startDuration) * fps;
     this.frame = frame;
     this.fps = fps;
-    this.duration = duration;
+    this.PersisitDuration = duration - startDuration - endDuration;
+    if(this.persistStartFrame < 0) {
+      throw new Error('persistStartFrame < 0');
+    }
   }
 
   get durationInFrames(): number {
-    return this.duration * this.fps;
+    return this.PersisitDuration * this.fps;
   }
 
   get endFrame(): number {
-    return this.startFrame + this.durationInFrames;
+    return this.persistStartFrame + this.durationInFrames + (this.startDuration) * this.fps;
   }
 
   get frameRange(): [number, number] {
-    return [this.startFrame, this.endFrame];
+    return [this.persistStartFrame, this.endFrame];
   }
 
   timeWithIn(): number {
-    return Math.min(this.durationInFrames / this.fps, Math.max(0, (this.frame - this.startFrame) / this.fps));
+    return Math.min(this.durationInFrames / this.fps, Math.max(0, (this.frame - this.persistStartFrame) / this.fps));
   }
 
   isAfter(): boolean {
@@ -43,16 +50,16 @@ export default class EffectCalculator {
   }
 
   isBefore(): boolean {
-    return this.frame < this.startFrame;
+    return this.frame < this.persistStartFrame;
   }
 
   withInDuration(): boolean {
-    return this.frame >= this.startFrame && !this.isAfter();
+    return this.frame >= this.persistStartFrame && !this.isAfter();
   }
 
-  getSpring() {
+  private getSpring() {
     return spring({
-      frame: this.frame - this.startFrame,
+      frame: this.frame - this.persistStartFrame,
       fps: this.fps,
       durationInFrames: this.durationInFrames,
       config: {
