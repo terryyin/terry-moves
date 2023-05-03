@@ -4,7 +4,7 @@ import React from 'react';
 import {AbsoluteFill } from 'remotion';
 import { Connector } from './Connector';
 import { useAnimationContext } from '../../hooks/useAnimationContext';
-import { BoundingClientRectOf } from '../../models/BoundingClientRectOf';
+import { BoundingClientRectOf } from '../hoc/BoundingClientRectOf';
 
 
 export const Connectors: React.FC<{boundingClientRectOf?: BoundingClientRectOf}> = ({boundingClientRectOf}) => {
