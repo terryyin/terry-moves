@@ -82,5 +82,24 @@ describe('Connectors', () => {
       });
     });
 
+    describe('connecting without end', () => {
+      [
+        { sec: 0.1, expectedValue: undefined},
+        { sec: 100, expectedValue: 'M15.5,50.5 Q-11.104275004359955,67.77606875109 20.5,70.5' },
+      ].forEach(({sec, expectedValue}) => {
+        test(` at sec ${sec}`, () => {
+          const animationContext = makeMe
+                  .animationContext
+                  .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                    { actor: 'start point', actionType: 'connect to', target: 'end point', bentLevel: 30 }
+                  ]})
+                  .seconds(sec)
+                  .please();
+          const path = renderAndGetSvgPath(animationContext, boundingClientRectStub);
+          expect(svgPath(path)?.getAttribute("d")).toBe(expectedValue);
+        });
+      });
+    });
+
   });
 });

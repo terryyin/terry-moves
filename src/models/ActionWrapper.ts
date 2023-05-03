@@ -10,15 +10,19 @@ const getActionDuration = (action: Action, startTime: number, script: Script): n
 	  return action.startDuration;
 	}
 
-	let result = 0;
+	let result: number | undefined;
+
 	if(action.persistUntilSubtitleId) {
 	  result = script.getStartTimeOfSubtitleById(action.persistUntilSubtitleId) - startTime;
 	}
 
 	if(action.endingTimeAdjustment !== undefined) {
+		if (result === undefined) {
+			result = 0;
+		}
 		result += action.endingTimeAdjustment;
 	}
-	return result;
+	return result ?? Number.MAX_SAFE_INTEGER;
 }
 
 export const createEffectCalculator = (action: Action, startTime: number, frame: number, script: Script): EffectCalculator => {
