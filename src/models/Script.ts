@@ -1,5 +1,6 @@
 import {Action, ActionType, Subtitle, SubtitleWithAction} from '../models/Subtitles';
-import EffectCalculator, { EffectCalculatorAndAction } from './EffectCalculator';
+import { createEffectCalculator } from './ActionWrapper';
+import { EffectCalculatorAndAction } from './EffectCalculator';
 
 export class Script {
 	private subtitles: Subtitle[];
@@ -37,7 +38,7 @@ export class Script {
 						const startTime = subtitle ? this.getStartTimeOfSubtitle(index) : 0;
 						return {
 							action,
-							effectCalculator: new EffectCalculator(action.startDuration, startTime + (action.offset ?? 0), frame, this.fps),
+							effectCalculator: createEffectCalculator(action, startTime, frame, this.fps),
 						};
 					});
 			})

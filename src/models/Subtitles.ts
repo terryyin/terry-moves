@@ -8,7 +8,7 @@ export interface BaseAction {
 }
 
 export interface InterimAction extends BaseAction {
-  startDuration: number;
+  duration: number;
 }
 
 export interface UntilAction extends BaseAction {

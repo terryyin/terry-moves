@@ -29,23 +29,23 @@ import { Anchor } from './video_components/Anchor';
 
 const fireActions: Action[] =
 [
-			  { actor: "blaster fire", actionType: "3d animation start", startDuration: 2, speed: 2 },
-			  { actor: "blaster assembly", actionType: "move", startDuration: 0.1, absolutePosition: [0.5, 0, 0]},
-			  { actor: "blaster assembly", actionType: "move", startDuration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.2},
+			  { actor: "blaster fire", actionType: "3d animation start", duration: 2, speed: 2 },
+			  { actor: "blaster assembly", actionType: "move", duration: 0.1, absolutePosition: [0.5, 0, 0]},
+			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.2},
 ];
 
 const loadedFireActions: Action[] =
 [
 				...fireActions,
-			  { actor: "blaster", actionType: "3d animation reverse", startDuration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
-			  { actor: "blaster temperature", actionType: "additive value change to", startDuration: 2, value: 0 },
-			  { actor: "blaster powerful fire", actionType: "3d animation start", startDuration: 3, speed: 2 },
+			  { actor: "blaster", actionType: "3d animation reverse", duration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
+			  { actor: "blaster temperature", actionType: "additive value change to", duration: 2, value: 0 },
+			  { actor: "blaster powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
 ];
 
 const loadActions: Action[] =
 [
-			  { actor: "blaster", actionType: "3d animation start", startDuration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
-			  { actor: "blaster temperature", actionType: "additive value change to", startDuration: 1.2, value: 50 },
+			  { actor: "blaster", actionType: "3d animation start", duration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
+			  { actor: "blaster temperature", actionType: "additive value change to", duration: 1.2, value: 50 },
 			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 0.4,  totalRotation: [0, 0, -30]},
 			  { actor: "blaster assembly", actionType: "3d rotate", startDuration: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
 ];
@@ -183,8 +183,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "I've been inventing countering logics in the callee and callers to keep myself busy.",
 			translations: {zhCN: "搞了半天我一直在调用者和被调用者之间发明反向逻辑，让自己忙得不亦乐乎。"},
 			actions: [
-				{ actor: "loose coupling health bar", actionType: "additive value change to", startDuration: 0.1, value: 100},
-				{ actor: "loose coupling health bar", actionType: "additive value change to", startDuration: 1, value: 50, offset: 0.5},
+				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 0.1, value: 100},
+				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 50, offset: 0.5},
 			],
 	},
 
@@ -245,7 +245,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 		text: "The boolean parameter makes the callers and callee tightly coupled.",
 		translations: {zhCN: "布尔参数使调用者和被调用者紧密耦合。"},
 		actions: [
-			{ actor: "loose coupling health bar", actionType: "additive value change to", startDuration: 1, value: 10},
+			{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 10},
 			{ actor: 'caller 2 callout1', actionType: 'disappear', startDuration: 0.5},
 			{ actor: 'caller 3 callout1', actionType: 'disappear', startDuration: 0.5},
 				{ actor: "a1-action", actionType: "connect to", startDuration: 6, target: "callee-action", bentLevel: -30},
@@ -294,7 +294,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "This reduces complexity and dependencies, resulting in lower coupling.",
 		translations: {zhCN: "这将减少复杂性和依赖关系，从而降低耦合度。"},
 			actions: [
-				{ actor: "loose coupling health bar", actionType: "additive value change to", startDuration: 1, value: 90, offset: 0},
+				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 90, offset: 0},
 			],
 	},
 
@@ -325,11 +325,11 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Otherwise, it will explode.",
 		translations: {zhCN: "否则，它会爆炸。"},
 			actions: [
-			  { actor: "blaster temperature", actionType: "additive value change to", startDuration: 4, value: 1000, offset: 0},
+			  { actor: "blaster temperature", actionType: "additive value change to", duration: 4, value: 1000, offset: 0},
 			  { actor: "caller 3", actionType: "replace text", startDuration: 1, line: 3, replacement: "  this.survey();", offset: 0},
 			  { actor: "caller 3", actionType: "highlight lines", startDuration: 3, lines: [3], offset: 2},
-			  { actor: "blaster explosion", actionType: "3d animation start", startDuration: 1, speed: 1, offset: 4},
-			  { actor: "blaster temperature", actionType: "additive value change to", startDuration: 2, value: 0, offset: 4},
+			  { actor: "blaster explosion", actionType: "3d animation start", duration: 1, speed: 1, offset: 4},
+			  { actor: "blaster temperature", actionType: "additive value change to", duration: 2, value: 0, offset: 4},
 			],
 	},
 
@@ -360,8 +360,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "My code doesn't seem to have that. And it makes the cohesion low.",
 		translations: {zhCN: "我的代码似乎没有做到这一点。这导致内聚性较低。"},
 			actions: [
-				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 1, value: 100, offset: 0.1},
-				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 2, value: 50, offset: 0.2},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 100, offset: 0.1},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 50, offset: 0.2},
 			  { actor: "callee", actionType: "highlight lines", startDuration: 0.5, lines: [5], offset: 1},
 			  { actor: "callee", actionType: "highlight lines", startDuration: 0.5, lines: [5], offset: 2},
 			  { actor: "callee", actionType: "highlight lines", startDuration: 0.5, lines: [5], offset: 3},
@@ -431,7 +431,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 		translations: {zhCN: "并且代码开始变得不同了。"},
 			actions: [
 				...loadedFireActions,
-			  { actor: "blaster more powerful fire", actionType: "3d animation start", startDuration: 3, speed: 2 },
+			  { actor: "blaster more powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
 			  { actor: "teammate callout", actionType: "appear", startDuration: 0.2, offset: 1},
 			  { actor: "caller 3 callout2", actionType: "appear", startDuration: 0.5, offset: 3},
 			],
@@ -443,7 +443,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			text: "Again, it shows my code is not cohesive.",
 		translations: {zhCN: "再次表明，我的代码并不具有内聚性。"},
 			actions: [
-				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 2, value: 10, offset: 0.2},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 10, offset: 0.2},
 			],
 	},
 
@@ -471,12 +471,12 @@ export const booleanParametersSutitles: Subtitle[] = [
 			  { actor: "caller 1 callout2", actionType: "disappear", startDuration: 0.5, offset: 0},
 			  { actor: "callee", actionType: "insert text", startDuration: 2, line: 4, column: 10, text: "\n\n  loadedFire(loadAmount) {\n    this.load(loadAmount);\n    this.fire();\n  };", offset: 1},
 			  { actor: "callee", actionType: "insert text", startDuration: 0.5, line: 11, column: 2, text: "private ", offset: 3.5},
-				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 1, value: 30, offset: 3.5},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 30, offset: 3.5},
 			  { actor: "caller 1", actionType: "delete lines", startDuration: 0.5, fromLine: 2, count: 3, offset: 4.5},
 			  { actor: "caller 1", actionType: "insert text", startDuration: 0.5, line: 1, column: 13, text: "\n  blaster.loadedFire(1000);", offset: 5.1},
 			  { actor: "caller 3", actionType: "delete lines", startDuration: 0.5, fromLine: 2, count: 3, offset: 4.5},
 			  { actor: "caller 3", actionType: "insert text", startDuration: 0.5, line: 1, column: 13, text: "\n  blaster.loadedFire(999999);\n", offset: 5.1},
-				{ actor: "high cohesion health bar", actionType: "additive value change to", startDuration: 2, value: 70, offset: 5.5},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 70, offset: 5.5},
 			  { actor: "callee", actionType: "insert text", startDuration: 1, line: 7, column: 26, text: "\n    this.reAim();", offset: 5.5},
 			],
 	},

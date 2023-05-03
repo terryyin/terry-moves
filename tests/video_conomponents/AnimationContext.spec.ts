@@ -27,13 +27,13 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'move',
-								startDuration: 1,
+								duration: 1,
 								absolutePosition: [10, 0, 0],
 							},
 							{
 								actor: 'under-test',
 								actionType: 'move',
-								startDuration: 1,
+								duration: 1,
 								offset: 2,
 								absolutePosition: [0, 0, 0],
 							},
@@ -66,13 +66,13 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'scale',
-								startDuration: 1,
+								duration: 1,
 								outputRange: [0.5, 1],
 							},
 							{
 								actor: 'under-test',
 								actionType: 'move',
-								startDuration: 1,
+								duration: 1,
 								absolutePosition: [0.5, 1],
 							},
 						],
@@ -85,13 +85,13 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'scale',
-								startDuration: 1,
+								duration: 1,
 								outputRange: [1, 2],
 							},
 							{
 								actor: 'under-test',
 								actionType: 'move',
-								startDuration: 1,
+								duration: 1,
 								absolutePosition: [1, 2],
 							},
 	

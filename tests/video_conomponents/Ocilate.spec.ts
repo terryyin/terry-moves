@@ -59,7 +59,7 @@ describe('AnimationContext', () => {
 							{
 								actor: 'under-test',
 								actionType: 'move',
-								startDuration: 1,
+								duration: 1,
 								absolutePosition: [1, 0, 0],
 							},
 						],
@@ -92,7 +92,7 @@ describe('AnimationContext', () => {
               {
 								actor: 'under-test',
 								actionType: 'move',
-								startDuration: 1,
+								duration: 1,
 								absolutePosition: [1, 0, 0],
 							},
 							{

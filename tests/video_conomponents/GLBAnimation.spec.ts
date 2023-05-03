@@ -22,7 +22,7 @@ describe('ThreeAnimationEffect', () => {
     ].forEach(({sec, expectPlaying, expectTime, }) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: '3d animation start', startDuration: 1, speed: 2 },
+          { actor: "under-test", actionType: '3d animation start', duration: 1, speed: 2 },
         ] };
       test(`test sec: ${sec}`, () => {
         const animationContext = makeMe
@@ -46,8 +46,8 @@ describe('ThreeAnimationEffect', () => {
     ].forEach(({sec, expectPlaying, expectTime, }) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 30, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: '3d animation start', startDuration: 1, speed: 2, freezeBeforeStart: true, pauseAtEnd: true },
-          { actor: "under-test", actionType: '3d animation start', startDuration: 1, speed: 2, freezeBeforeStart: true, pauseAtEnd: true, offset: 10 },
+          { actor: "under-test", actionType: '3d animation start', duration: 1, speed: 2, freezeBeforeStart: true, pauseAtEnd: true },
+          { actor: "under-test", actionType: '3d animation start', duration: 1, speed: 2, freezeBeforeStart: true, pauseAtEnd: true, offset: 10 },
         ] };
       test(`test sec: ${sec}`, () => {
         const animationContext = makeMe

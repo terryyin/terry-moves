@@ -31,7 +31,7 @@ describe('HealthBar', () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-                  { actor: 'under-test', actionType: 'additive value change to', startDuration: 1, value: 70 }
+                  { actor: 'under-test', actionType: 'additive value change to', duration: 1, value: 70 }
                 ]})
                 .seconds(sec)
                 .please();

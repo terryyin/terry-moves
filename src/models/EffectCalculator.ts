@@ -8,17 +8,21 @@ export type EffectCalculatorAndAction = {
 }
 
 export default class EffectCalculator {
-  durationInFrames: number;
   startFrame: number;
   frame: number;
   fps: number;
+  duration: number;
 
 
   constructor(duration: number, startTime: number, frame: number, fps: number) {
     this.startFrame = startTime * fps;
     this.frame = frame;
     this.fps = fps;
-    this.durationInFrames = duration * fps;
+    this.duration = duration;
+  }
+
+  get durationInFrames(): number {
+    return this.duration * this.fps;
   }
 
   get endFrame(): number {

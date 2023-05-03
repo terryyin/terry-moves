@@ -45,7 +45,7 @@ export default class GLBAnimationActioner {
   private getReverseAnimationAttributes(action: ThreeDAnimationAction): GLBAnimationAttributes {
     const {time, ...rest} = this.getAnimationAttributes(action);
     if(time === undefined) return { ...rest}
-    return { ...rest, time: this.action.startDuration - time}
+    return { ...rest, time: this.effectCalculator.duration - time}
   }
 
   private getAnimationAttributes(action: ThreeDAnimationAction): GLBAnimationAttributes {
@@ -63,7 +63,7 @@ export default class GLBAnimationActioner {
     }
 
     if (this.effectCalculator.isAfter() && action.pauseAtEnd) {
-      return action.startDuration * percentage / 100 * action.speed;
+      return action.duration * percentage / 100 * action.speed;
     }
 
   }
