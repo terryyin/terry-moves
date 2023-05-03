@@ -20,7 +20,7 @@ export interface StartAndEndAction extends BaseAction {
 }
 
 export interface StartAndEndActionMisused extends BaseAction {
-  startDuration: number;
+  persistTime: number;
 }
 
 
