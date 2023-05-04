@@ -110,7 +110,6 @@ describe('Connectors', () => {
         { sec: 3.1, expectedStrokeDasharray: '5 5' },
       ].forEach(({sec, expectedStrokeDasharray}) => {
         test(` at sec ${sec}`, () => {
-          console.log("sec", sec)
           const animationContext = makeMe
                   .animationContext
                   .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
