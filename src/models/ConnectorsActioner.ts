@@ -22,11 +22,11 @@ class LazyConnectorsState {
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	getConnectors(adjustedFrame: number, fps: number): ConnectorStates {
-		const appearInSec = 1;
 		return {
 			connectors: this.connectors.connectors
 				.filter((connector) => connector.frameRange[0] <= adjustedFrame && connector.frameRange[1] >= adjustedFrame)
 				.map((connector) => {
+					const appearInSec = connector.action.startDurationX ?? 0;
 					if (adjustedFrame < connector.frameRange[0] + appearInSec * fps) {
 						const startProgress = (adjustedFrame - connector.frameRange[0]) / (appearInSec * fps);
 						return {...connector, startProgress};

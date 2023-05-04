@@ -101,5 +101,26 @@ describe('Connectors', () => {
       });
     });
 
+    describe('connecting with startDuration', () => {
+      [
+        { sec: 0.1, expectedStrokeDasharray: undefined},
+        { sec: 0.2, expectedStrokeDasharray: undefined},
+        { sec: 1.1, expectedStrokeDasharray: undefined},
+        { sec: 100, expectedStrokeDasharray: '5' },
+      ].forEach(({sec, expectedStrokeDasharray}) => {
+        test(` at sec ${sec}`, () => {
+          const animationContext = makeMe
+                  .animationContext
+                  .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+                    { actor: 'start point', actionType: 'connect to', target: 'end point', bentLevel: 30, startDurationX: 1 }
+                  ]})
+                  .seconds(sec)
+                  .please();
+          const path = renderAndGetSvgPath(animationContext, boundingClientRectStub);
+          expect(svgPath(path)?.getAttribute("stroke-dasharray")).toBe(expectedStrokeDasharray);
+        });
+      });
+    });
+
   });
 });
