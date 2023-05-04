@@ -27,8 +27,6 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 
 	protected getStyle(): LazyThreeDObjectState {
 		switch (this.action.actionType) {
-			case 'key in':
-				return this.type();
 			case 'scale':
 				return this.scale(this.action.outputRange);
 			case 'move':
@@ -60,15 +58,6 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 			'glow',
 			new InterpolateRangesLinear(this.frameRange, [0, 1])
 		);
-		return result;
-	}
-
-	private type(): LazyThreeDObjectState {
-		const result = new LazyThreeDObjectState();
-		result.setInterpolation(
-			'textReveal',
-			new InterpolateRangesLinear(this.frameRange, [0, 1.2])
-		); // 1.3 is a hack to simulate escape in vim.
 		return result;
 	}
 

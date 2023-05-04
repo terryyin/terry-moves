@@ -4,7 +4,6 @@ import ObjectActioner from './ObjectActioner';
 import { EffectCalculatorAndAction } from './EffectCalculator';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
-import { TextReveal } from './LazyThreeDObjectState';
 import { ThreeDObjectState } from "./ThreeDObjectState";
 import CodeActioner, { CodeTransformation } from './CodeActioner';
 import GeneralActioner from './GeneralActioner';
@@ -39,13 +38,6 @@ export default class AnimationContextWrapper {
       .map(effectCalculator => new ObjectActioner(effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
       .get3DObjedctState(this.adjustedFrame, this.script.fps);
-  }
-
-  getTextReveal(actor: string): TextReveal {
-    return this.getActionOfActor(actor)
-      .map(effectCalculator => new ObjectActioner(effectCalculator))
-      .reduce((prev, curr) => curr.combine(prev), ObjectActioner.defaultValue)
-      .getTextReveal(this.adjustedFrame, this.script.fps);
   }
 
   getCodeTransfomation(actor: string): CodeTransformation {

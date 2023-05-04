@@ -10,7 +10,6 @@ export type TextReveal = {
 
 export type InterpolateFields =
 	| 'glow'
-	| 'textReveal'
 	| 'rotationX'
 	| 'rotationY'
 	| 'rotationZ'
@@ -28,7 +27,6 @@ export type InterpolateFields =
 
 const allFields = [
 	{name: 'glow', type: 'additive'},
-	{name: 'textReveal', type: 'additive'},
 	{name: 'rotationX', type: 'additive'},
 	{name: 'rotationY', type: 'additive'},
 	{name: 'rotationZ', type: 'additive'},
@@ -129,14 +127,6 @@ export default class LazyThreeDObjectState {
 		result.rotation = new THREE.Euler(rotation[0], rotation[1], rotation[2]);
 
 		return result;
-	}
-
-	getTextReveal(adjustedFrame: number, fps: number): TextReveal {
-		return {
-			progress:
-				this.reduceInterpolate(adjustedFrame, fps, 'textReveal') ?? 0,
-			cursorShow: adjustedFrame / fps - Math.floor(adjustedFrame / fps) <= 0.5,
-		};
 	}
 
 }

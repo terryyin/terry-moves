@@ -1,6 +1,6 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
 
-export type ActionType = 'connect to' | 'additive value change to' | 'key in' | 'highlight lines' | 'delete lines' | 'highlight token' | 'replace text' | 'insert text' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'connect to' | 'additive value change to' | 'highlight lines' | 'delete lines' | 'highlight token' | 'replace text' | 'insert text' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -40,10 +40,6 @@ export interface GlowAction extends InterimAction {
 
 export interface AppearAction extends StartAndEndAction {
   actionType: 'appear' | 'disappear';
-}
-
-export interface TextAction extends StartAndEndActionMisused {
-  actionType: 'key in';
 }
 
 export type HighlightStyle = 'wavy underline' | 'red background';
@@ -120,7 +116,7 @@ export interface ConnectAction extends StartAndEndActionMisused {
   radiusTarget?: number;
 }
 
-export type Action = ConnectAction | TextAction | CodeAction | ScaleAction | GlowAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
+export type Action = ConnectAction | CodeAction | ScaleAction | GlowAction | AppearAction | ThreeDAction | ThreeDAnimationAction | RelativePositionAction;
 
 export type FlashBack = {
   duration: number;
