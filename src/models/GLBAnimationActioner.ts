@@ -52,7 +52,7 @@ export default class GLBAnimationActioner {
     return { 
       playing: true,
       time: this.getAnimationTime(action),
-      pauseAtTime: action.freezeBeforeStart && this.effectCalculator.isBefore() ? 0 : undefined,
+      pauseAtTime: action.freezeBeforeStart && this.effectCalculator.isBeforePersist() ? 0 : undefined,
     }
   }
 

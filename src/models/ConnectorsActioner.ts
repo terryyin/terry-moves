@@ -1,4 +1,5 @@
 import BaseActioner from './BaseActioner';
+import EffectCalculator, { EffectCalculatorAndAction } from './EffectCalculator';
 import { ConnectAction } from './Subtitles';
 
 export interface ConnectorState {
@@ -22,22 +23,18 @@ class LazyConnectorsState {
 
 	// eslint-disable-next-line @typescript-eslint/no-unused-vars
 	getConnectors(adjustedFrame: number, fps: number): ConnectorStates {
-		return {
-			connectors: this.connectors.connectors
-				.filter((connector) => connector.frameRange[0] <= adjustedFrame + (connector.action.startDurationX ?? 0) * fps  && connector.frameRange[1] >= adjustedFrame)
-				.map((connector) => {
-					const appearInSec = connector.action.startDurationX ?? 0;
-					if (adjustedFrame < connector.frameRange[0]) {
-						const startProgress = (adjustedFrame - connector.frameRange[0] - appearInSec * fps) / (appearInSec * fps);
-						return {...connector, startProgress};
-					}
-					return { ...connector, startProgress: 1};
-				})
-		};
+		return this.connectors;
 	}
 }
 
 export default class ConnectorsActioner extends BaseActioner<LazyConnectorsState> {
+  effectCalculator: EffectCalculator;
+
+  constructor(effectCalculator: EffectCalculatorAndAction) {
+		super(effectCalculator)
+    this.effectCalculator = effectCalculator.effectCalculator;
+  }
+
 	static defaultValue: LazyConnectorsState = new LazyConnectorsState();
 
 	protected getState(): LazyConnectorsState {
@@ -51,7 +48,9 @@ export default class ConnectorsActioner extends BaseActioner<LazyConnectorsState
 
 	private additiveValueChange(action: ConnectAction): LazyConnectorsState {
 		const result = new LazyConnectorsState();
-		result.connectors.connectors = [{action, frameRange: this.frameRange, startProgress: 0}];
+		if(this.effectCalculator.withInWholeDuration()) {
+		  result.connectors.connectors = [{action, frameRange: this.frameRange, startProgress: this.effectCalculator.startProgress()}];
+		}
 		return result;
 	}
 }

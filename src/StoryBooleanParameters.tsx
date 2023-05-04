@@ -123,9 +123,9 @@ export const booleanParametersSutitles: Subtitle[] = [
 				{ actor: "caller 2", actionType: "highlight token", endingTimeAdjustment: 3, token: 'action'},
 				{ actor: "caller 3", actionType: "highlight token", endingTimeAdjustment: 3, token: 'action'},
 				{ actor: "callee", actionType: "highlight token", endingTimeAdjustment: 3, token: 'action'},
-				{ actor: "a1-action", actionType: "connect to", endingTimeAdjustment: 10, target: "callee-action", bentLevel: -30},
-				{ actor: "a2-action", actionType: "connect to", endingTimeAdjustment: 10, target: "callee-action", bentLevel: -30},
-				{ actor: "a3-action", actionType: "connect to", endingTimeAdjustment: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a1-action", actionType: "connect to", startDurationX: 1, endingTimeAdjustment: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a2-action", actionType: "connect to", startDurationX: 1, endingTimeAdjustment: 10, target: "callee-action", bentLevel: -30},
+				{ actor: "a3-action", actionType: "connect to", startDurationX: 1, endingTimeAdjustment: 10, target: "callee-action", bentLevel: -30},
 			],
 	},
 

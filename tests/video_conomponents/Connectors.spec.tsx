@@ -104,8 +104,8 @@ describe('Connectors', () => {
     describe('connecting with startDuration', () => {
       [
         { sec: 0.1, expectedStrokeDasharray: undefined},
-        { sec: 1.1, expectedStrokeDasharray: "-72.13443430388207 37.965491738885305"},
-        { sec: 1.2, expectedStrokeDasharray: "-68.33788512999354 37.965491738885305"},
+        { sec: 1.1, expectedStrokeDasharray: "3.796549173888529 37.965491738885305"},
+        { sec: 1.2, expectedStrokeDasharray: "7.593098347777058 37.965491738885305"},
         { sec: 2.1, expectedStrokeDasharray: '5 5' },
         { sec: 3.1, expectedStrokeDasharray: '5 5' },
       ].forEach(({sec, expectedStrokeDasharray}) => {

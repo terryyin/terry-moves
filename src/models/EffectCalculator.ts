@@ -58,8 +58,12 @@ export default class EffectCalculator {
     return this.frame > this.endFrame + this.endDuration * this.fps;
   }
 
-  isBefore(): boolean {
+  isBeforePersist(): boolean {
     return this.frame < this.persistStartFrame;
+  }
+
+  isBeforeWhole(): boolean {
+    return this.frame < this.persistStartFrame - this.startDuration * this.fps;
   }
 
   withInPersistDuration(): boolean {
@@ -81,6 +85,11 @@ export default class EffectCalculator {
   blink(timeIntervalShow: number, timeIntervalHide: number): boolean {
     if(!this.withInWholeDuration()) return false;
     return this.frame / this.fps % (timeIntervalShow + timeIntervalHide) < timeIntervalShow;
+  }
+
+  startProgress(): number {
+    if(this.isBeforeWhole()) return 0;
+    return 1 - Math.max(0, (this.persistStartFrame - this.frame) / (this.startDuration * this.fps));
   }
 
   private getSpring() {
