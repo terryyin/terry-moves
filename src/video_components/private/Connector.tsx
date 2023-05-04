@@ -39,7 +39,7 @@ export const Connector: React.FC<ConnectorProps> = ({
       radiusSource,
       radiusTarget,
     },
-    progress,
+    startProgress,
   },
   boundingClientRectOf,
 }) => {
@@ -105,9 +105,9 @@ export const Connector: React.FC<ConnectorProps> = ({
       const trimStart = radiusSource ?? 0;
       const trimEnd = pathLength - (radiusTarget ?? 0);
 
-      const startOffset = trimStart + (trimEnd - trimStart) * (1 - progress);
+      const startOffset = trimStart + (trimEnd - trimStart) * (1 - startProgress);
 
-      if(progress < 1) {
+      if(startProgress < 1) {
         path.style.strokeDasharray = `${trimEnd - startOffset} ${pathLength}`;
       } else {
         path.style.strokeDasharray = `5 5`;
@@ -121,7 +121,7 @@ export const Connector: React.FC<ConnectorProps> = ({
     return () => {
       window.removeEventListener("resize", updateLine);
     };
-  }, [actor, target, bentLevel, radiusSource, radiusTarget, progress, boundingClientRectOf]);
+  }, [actor, target, bentLevel, radiusSource, radiusTarget, startProgress, boundingClientRectOf]);
 
   return (
 

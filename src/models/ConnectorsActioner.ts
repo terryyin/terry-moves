@@ -4,7 +4,7 @@ import { ConnectAction } from './Subtitles';
 export interface ConnectorState {
 	action: ConnectAction,
 	frameRange: [number, number];
-	progress: number;
+	startProgress: number;
 }
 
 export interface ConnectorStates {
@@ -28,10 +28,10 @@ class LazyConnectorsState {
 				.filter((connector) => connector.frameRange[0] <= adjustedFrame && connector.frameRange[1] >= adjustedFrame)
 				.map((connector) => {
 					if (adjustedFrame < connector.frameRange[0] + appearInSec * fps) {
-						const progress = (adjustedFrame - connector.frameRange[0]) / (appearInSec * fps);
-						return {...connector, progress};
+						const startProgress = (adjustedFrame - connector.frameRange[0]) / (appearInSec * fps);
+						return {...connector, startProgress};
 					}
-					return { ...connector, progress: 1};
+					return { ...connector, startProgress: 1};
 				})
 		};
 	}
@@ -51,7 +51,7 @@ export default class ConnectorsActioner extends BaseActioner<LazyConnectorsState
 
 	private additiveValueChange(action: ConnectAction): LazyConnectorsState {
 		const result = new LazyConnectorsState();
-		result.connectors.connectors = [{action, frameRange: this.frameRange, progress: 0}];
+		result.connectors.connectors = [{action, frameRange: this.frameRange, startProgress: 0}];
 		return result;
 	}
 }
