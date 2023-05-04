@@ -79,6 +79,7 @@ export default class EffectCalculator {
   }
 
   blink(timeIntervalShow: number, timeIntervalHide: number): boolean {
+    if(!this.withInWholeDuration()) return false;
     return this.frame / this.fps % (timeIntervalShow + timeIntervalHide) < timeIntervalShow;
   }
 

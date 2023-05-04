@@ -149,13 +149,13 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, languag
                           const afterCursor = token.content.slice(cursorColumn - contentBeforeCursor.length);
       
                           return (
-                            <React.Fragment key={key}>
+                            <>
                               <span {...tokenProps} style={{ ...tokenProps.style }}>{insertCursor ? beforeCursor : beforeCursor.slice(0, beforeCursor.length - 1)}</span>
                               {insertCursor ? (<InsertCursor />) : (
                               <BlockedCursor style={{ color: tokenProps.style.backgroundColor, backgroundColor: tokenProps.style.color }} >{beforeCursor.at(beforeCursor.length -1) || ' '}</BlockedCursor>
                               )}
                               <span {...tokenProps} style={{ ...tokenProps.style }}>{afterCursor}</span>
-                            </React.Fragment>
+                            </>
                           );
                         }
                       }

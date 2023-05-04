@@ -89,7 +89,7 @@ export class LazyCodeTransformation {
     const insert = {
       ...edit,
       progress: effectCalculator.interpolateDuration([0, 1]),
-      cursor: effectCalculator.blink(0.3, 0.3),
+      cursor: effectCalculator.blink(0.4, 0.4),
       insertCursor: effectCalculator.withInStartDuration(0.5) || effectCalculator.withInEndDuration(0.5) || effectCalculator.withInPersistDuration(),
     }
     this.textEdits.push(insert as TextEdit);
