@@ -24,11 +24,11 @@ class LazyConnectorsState {
 	getConnectors(adjustedFrame: number, fps: number): ConnectorStates {
 		return {
 			connectors: this.connectors.connectors
-				.filter((connector) => connector.frameRange[0] <= adjustedFrame && connector.frameRange[1] >= adjustedFrame)
+				.filter((connector) => connector.frameRange[0] <= adjustedFrame + 30 && connector.frameRange[1] >= adjustedFrame)
 				.map((connector) => {
 					const appearInSec = connector.action.startDurationX ?? 0;
-					if (adjustedFrame < connector.frameRange[0] + appearInSec * fps) {
-						const startProgress = (adjustedFrame - connector.frameRange[0]) / (appearInSec * fps);
+					if (adjustedFrame < connector.frameRange[0]) {
+						const startProgress = (adjustedFrame - connector.frameRange[0] - appearInSec * fps) / (appearInSec * fps);
 						return {...connector, startProgress};
 					}
 					return { ...connector, startProgress: 1};

@@ -130,7 +130,6 @@ export const Connector: React.FC<ConnectorProps> = ({
         fill="none"
         stroke="#88a"
         strokeWidth="2"
-        strokeDasharray="5"
         strokeLinecap="round"
         markerEnd="url(#arrowhead)"
       />
