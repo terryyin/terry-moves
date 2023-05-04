@@ -15,8 +15,8 @@ export default abstract class BaseActioner<T extends Combinable<T>> {
   }
 
   combine(prev: T): T {
-    return this.getStyle().combine(prev);
+    return this.getState().combine(prev);
   }
 
-  protected abstract getStyle(): T;
+  protected abstract getState(): T;
 }

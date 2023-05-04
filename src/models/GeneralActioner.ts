@@ -21,7 +21,7 @@ class LazyGeneralState {
 export default class GeneralValueActioner extends BaseActioner<LazyGeneralState> {
 	static defaultValue: LazyGeneralState = new LazyGeneralState();
 
-	protected getStyle(): LazyGeneralState {
+	protected getState(): LazyGeneralState {
 		switch (this.action.actionType) {
 			case 'additive value change to':
 				return this.additiveValueChange([0, this.action.value]);

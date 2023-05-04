@@ -25,7 +25,7 @@ const toVector3 = (
 export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> {
 	static defaultValue: LazyThreeDObjectState = new LazyThreeDObjectState();
 
-	protected getStyle(): LazyThreeDObjectState {
+	protected getState(): LazyThreeDObjectState {
 		switch (this.action.actionType) {
 			case 'scale':
 				return this.scale(this.action.outputRange);

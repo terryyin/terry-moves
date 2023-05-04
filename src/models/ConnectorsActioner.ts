@@ -40,7 +40,7 @@ class LazyConnectorsState {
 export default class ConnectorsActioner extends BaseActioner<LazyConnectorsState> {
 	static defaultValue: LazyConnectorsState = new LazyConnectorsState();
 
-	protected getStyle(): LazyConnectorsState {
+	protected getState(): LazyConnectorsState {
 		switch (this.action.actionType) {
 			case 'connect to':
 				return this.additiveValueChange(this.action);
