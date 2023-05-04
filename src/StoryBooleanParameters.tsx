@@ -664,7 +664,7 @@ export const StoryBooleanParameters: React.FC = () => {
       fontSize: '30px',
 			color: 'white',
 			fontFamily: 'IBM Plex Mono',
-    }} codeString=""/>
+    }} language="html" codeString=""/>
 
     <AbsoluteFill style={{ top: '85%', left: "82%", height: '10%'}}>
 			<span style={{fontFamily: 'Roboto, sans-serif',fontSize: '20px', color: "white"}}>terry@Odd-e</span>

@@ -6,7 +6,9 @@ import { useAnimationContext } from "../hooks/useAnimationContext";
 import { HighlightStyle } from "../models/Subtitles";
 import { TextEdit } from "../models/CodeActioner";
 
-const InsertCursor = styled.span`
+const InsertCursor = styled.span.attrs({
+  className: 'insert-cursor',
+})`
   display: inline-block;
   width: 0;
   height: 0.9em;
@@ -15,7 +17,9 @@ const InsertCursor = styled.span`
   border-right: 2px solid white; /* Set cursor width and color */
 `;
 
-const BlockedCursor = styled.span`
+const BlockedCursor = styled.span.attrs({
+  className: 'blocked-cursor',
+})`
 display: inline-block;
 filter: invert(1);
 width: 1ch; /* Set the width to one character */
@@ -119,7 +123,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, languag
   return (
 			<AnimationEffect actor={actor} style={{...style}}>
         {children}
-        <Highlight code={currentCode} language={language || "javascript"} theme={themes.vsDark}>
+        <Highlight code={currentCode} language={language || "tsx"} theme={themes.vsDark}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
               <pre className={className} style={{fontSize: "1.25rem", marginTop: 0, ...style}}>
                 {
