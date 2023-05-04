@@ -122,7 +122,8 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, languag
         <Highlight code={currentCode} language={language || "javascript"} theme={themes.vsDark}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
               <pre className={className} style={{fontSize: "1.25rem", marginTop: 0, ...style}}>
-                {tokens.map((line, i) => {
+                {
+                tokens.map((line, i) => {
                   const lineProps = getLineProps({ line, key: i });
 
                   lineProps.style = {
@@ -149,13 +150,13 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, languag
                           const afterCursor = token.content.slice(cursorColumn - contentBeforeCursor.length);
       
                           return (
-                            <>
-                              <span {...tokenProps} style={{ ...tokenProps.style }}>{insertCursor ? beforeCursor : beforeCursor.slice(0, beforeCursor.length - 1)}</span>
-                              {insertCursor ? (<InsertCursor />) : (
-                              <BlockedCursor style={{ color: tokenProps.style.backgroundColor, backgroundColor: tokenProps.style.color }} >{beforeCursor.at(beforeCursor.length -1) || ' '}</BlockedCursor>
+                            <React.Fragment key={key}>
+                              <span {...tokenProps} key={`${key}-beforeCursor`} style={{ ...tokenProps.style }}>{insertCursor ? beforeCursor : beforeCursor.slice(0, beforeCursor.length - 1)}</span>
+                              {insertCursor ? (<InsertCursor key={`${key}-cursor`} />) : (
+                              <BlockedCursor key={`${key}-cursor`} style={{ color: tokenProps.style.backgroundColor, backgroundColor: tokenProps.style.color }} >{beforeCursor.at(beforeCursor.length -1) || ' '}</BlockedCursor>
                               )}
-                              <span {...tokenProps} style={{ ...tokenProps.style }}>{afterCursor}</span>
-                            </>
+                              <span {...tokenProps} key={`${i}-afterCursor`}  style={{ ...tokenProps.style }}>{afterCursor}</span>
+                            </React.Fragment>
                           );
                         }
                       }
