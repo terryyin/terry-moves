@@ -29,8 +29,7 @@ import { Anchor } from './video_components/Anchor';
 const fireActions: Action[] =
 [
 			  { actor: "blaster fire", actionType: "3d animation start", duration: 2, speed: 2 },
-			  { actor: "blaster assembly", actionType: "move", duration: 0.1, absolutePosition: [0.5, 0, 0]},
-			  { actor: "blaster assembly", actionType: "move", duration: 0.4,  absolutePosition: [0, 0, 0], offset: 0.2},
+			  { actor: "blaster assembly", actionType: "move and return", startDuration: 0.1, endDuration: 0.4, endingTimeAdjustment: 0.6, absolutePosition: [0.5, 0, 0]},
 ];
 
 const loadedFireActions: Action[] =
