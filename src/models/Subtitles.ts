@@ -1,6 +1,6 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
 
-export type ActionType = 'connect to' | 'additive value change to' | 'highlight lines' | 'delete lines' | 'highlight token' | 'replace text' | 'insert text' | 'move and return' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'connect to' | 'additive value change to' | 'highlight lines' | 'delete lines' | 'highlight token' | 'replace text' | 'insert text' | 'move and return' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | '3d rotate and back' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -98,7 +98,12 @@ export interface ThreeDRotateAction extends UntilAction {
   totalRotation: [number, number, number];
 }
 
-export type ThreeDAction = ThreeDRotateAction | MoveAndReturnAction | AbsolutePositionAction | OneDimensionalAction;
+export interface ThreeDRotateAndBackAction extends StartAndEndAction {
+  actionType: '3d rotate and back';
+  totalRotation: [number, number, number];
+}
+
+export type ThreeDAction = ThreeDRotateAction | ThreeDRotateAndBackAction | MoveAndReturnAction | AbsolutePositionAction | OneDimensionalAction;
 
 export interface ThreeDAnimationAction extends InterimAction {
   actionType: '3d animation start' | '3d animation reverse';

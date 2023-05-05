@@ -56,6 +56,8 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 				return this.cameraLookAt(this.action.absolutePosition);
 			case '3d rotate':
 				return this.rotate(this.action.totalRotation);
+			case '3d rotate and back':
+				return this.rotateAndBack(this.action.totalRotation);
 			default:
 				return new LazyThreeDObjectState();
 		}
@@ -178,14 +180,23 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 	}
 
 	private rotate(rotation: [number, number, number]): LazyThreeDObjectState {
-		return this.rotateFromTo([0, 0, 0], rotation);
+		return this.rotateFromTo(this.frameRange, [0, 0, 0], rotation);
+	}
+
+	private rotateAndBack(
+		rotation: [number, number, number]
+	): LazyThreeDObjectState {
+		return this.rotateFromTo(this.effectCalculator.endFrameRange, rotation, [0, 0, 0]).combine(
+			this.rotateFromTo(this.effectCalculator.startFrameRange, [0, 0, 0], rotation)
+		)
 	}
 
 	private rotateFrom(rotation: [number, number, number]): LazyThreeDObjectState {
-		return this.rotateFromTo(rotation, [0, 0, 0]);
+		return this.rotateFromTo(this.frameRange, rotation, [0, 0, 0]);
 	}
 
 	private rotateFromTo(
+		inputRange: [number, number],
 		from: [number, number, number],
 		to: [number, number, number]
 	): LazyThreeDObjectState {
@@ -194,7 +205,7 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 			(key, index) => {
 				result.setInterpolation(
 					key,
-					new InterpolateRangesSpring(this.frameRange, [
+					new InterpolateRangesSpring(inputRange, [
 						(Math.PI * from[index]) / 180,
 						(Math.PI * to[index]) / 180,
 					])
@@ -203,4 +214,5 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 		);
 		return result;
 	}
+
 }

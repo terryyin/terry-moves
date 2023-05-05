@@ -109,6 +109,31 @@ describe('ThreeAnimationEffect', () => {
     });
   });
 
+  describe('3d rotate and back', () => {
+    [
+      {sec: 0,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
+      {sec: 1,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
+      {sec: 1.1, expectScale: '1', expectRotateY: '0.600697222701398', expectTransY: '0' },
+      {sec: 10.1, expectScale: '1', expectRotateY: '2.540895430888395', expectTransY: '0' },
+    ].forEach(({sec, expectScale, expectRotateY, expectTransY}) => {
+      const subtitleWithAction: Subtitle = 
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+          { actor: "under-test", actionType: '3d rotate and back', startDuration: 1, endDuration: 1, endingTimeAdjustment: 10, totalRotation: [0, 180, 0] },
+        ] };
+      test(`3d effect, test sec: ${sec}`, () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle(subtitleWithAction)
+                .seconds(sec)
+                .please();
+        const group = renderAndGetGroup(animationContext);
+        expect(group).toHaveAttribute('position', `0,${expectTransY},0`);
+        expect(group).toHaveAttribute('rotation', `0,${expectRotateY},0,XYZ`);
+        expect(group).toHaveAttribute('scale', `${expectScale}`);
+      });
+    });
+  });
+
   describe('3d effects multiply', () => {
     [
       {tid: "1", sec: 0,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
