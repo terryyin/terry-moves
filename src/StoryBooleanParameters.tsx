@@ -44,8 +44,7 @@ const loadActions: Action[] =
 [
 			  { actor: "blaster", actionType: "3d animation start", duration: 1.2, speed: 3, pauseAtEnd: true, freezeBeforeStart: true },
 			  { actor: "blaster temperature", actionType: "additive value change to", duration: 1.2, value: 50 },
-			  { actor: "blaster assembly", actionType: "3d rotate", endingTimeAdjustment: 0.4,  totalRotation: [0, 0, -30]},
-			  { actor: "blaster assembly", actionType: "3d rotate", endingTimeAdjustment: 0.8,  totalRotation: [0, 0, 0], offset: 0.4},
+			  { actor: "blaster assembly", actionType: "3d rotate and back", startDuration: 0.4, endDuration: 0.8, endingTimeAdjustment: 1.2,  totalRotation: [0, 0, -30]},
 ];
 
 export const booleanParametersSutitles: Subtitle[] = [
