@@ -20,15 +20,9 @@ interface PersistUntilSubtitleIdOption {
 export type UntilAction = BaseAction & PersistUntilSubtitleIdOption;
 
 export interface StartAndEndAction extends UntilAction {
-  startDuration: number;
-  endDuration?: number;
-}
-
-interface StartAndEndActionMisused extends UntilAction {
   startDuration?: number;
   endDuration?: number;
 }
-
 
 export interface ScaleAction extends InterimAction {
   actionType: 'scale';
@@ -45,32 +39,32 @@ export interface AppearAction extends StartAndEndAction {
 
 export type HighlightStyle = 'wavy underline' | 'red background';
 
-export interface HighlightLinesAction extends StartAndEndActionMisused {
+export interface HighlightLinesAction extends StartAndEndAction {
   actionType: 'highlight lines';
   lines: number[];
   style? : HighlightStyle
 }
 
-export interface DeleteLinesAction extends StartAndEndActionMisused {
+export interface DeleteLinesAction extends StartAndEndAction {
   actionType: 'delete lines';
   fromLine: number;
   count: number;
 }
 
-export interface HighlightTokenAction extends StartAndEndActionMisused {
+export interface HighlightTokenAction extends StartAndEndAction {
   actionType: 'highlight token';
   token: string;
   style? : HighlightStyle
 }
 
-export interface ReplaceTextAction extends StartAndEndActionMisused {
+export interface ReplaceTextAction extends StartAndEndAction {
   actionType: 'replace text';
   line: number;
   match?: string;
   replacement: string;
 }
 
-export interface InsertTextAction extends StartAndEndActionMisused {
+export interface InsertTextAction extends StartAndEndAction {
   actionType: 'insert text';
   line: number;
   column: number;
@@ -109,7 +103,7 @@ export interface ThreeDAnimationAction extends InterimAction {
   freezeBeforeStart?: boolean;
 }
 
-export interface ConnectAction extends StartAndEndActionMisused {
+export interface ConnectAction extends StartAndEndAction {
   actionType: 'connect to';
   target: string;
   bentLevel: number;
