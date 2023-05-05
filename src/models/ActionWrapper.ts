@@ -32,8 +32,8 @@ const getStartDuration = (action: Action): number | undefined => {
 }
 
 const getEndDuration = (action: Action): number | undefined => {
-	if ('endDurationX' in action) {
-		return action.endDurationX;
+	if ('endDuration' in action) {
+		return action.endDuration;
 	}
 }
 

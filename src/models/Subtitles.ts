@@ -25,7 +25,7 @@ export interface StartAndEndAction extends BaseAction {
 
 export interface StartAndEndActionMisused extends UntilAction {
   startDurationX?: number;
-  endDurationX?: number;
+  endDuration?: number;
 }
 
 
