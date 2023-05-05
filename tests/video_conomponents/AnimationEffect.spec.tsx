@@ -104,18 +104,16 @@ describe('AnimationEffect', () => {
 
   describe('appear for a duration', () => {
     [
-      { actionType: 'appear', sec: 0, expectedOpacity: '0' },
-      { actionType: 'appear', sec: 1, expectedOpacity: '0' },
-      { actionType: 'appear', sec: 1.1, expectedOpacity: '0.1' },
-      { actionType: 'disappear', sec: 0, expectedOpacity: '1' },
-      { actionType: 'disappear', sec: 1, expectedOpacity: '1' },
-      { actionType: 'disappear', sec: 1.1, expectedOpacity: '0.9' },
-    ].forEach(({actionType, sec, expectedOpacity}) => {
+      { sec: 1, expectedOpacity: '0' },
+      { sec: 1.1, expectedOpacity: '0.1' },
+      { sec: 2.1, expectedOpacity: '1' },
+      { sec: 42.1, expectedOpacity: '0' },
+    ].forEach(({sec, expectedOpacity}) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
-          { actor: "under-test", actionType: actionType as 'appear' | 'disappear', startDuration: 1 },
+          { actor: "under-test", actionType: 'appear', startDuration: 1, endingTimeAdjustment: 3 },
         ] };
-      test('displays the correct transformation', () => {
+      test(`displays the correct transformation at sec ${sec}`, () => {
         const animationContext = makeMe
                 .animationContext
                 .withSubtitle(subtitleWithAction)

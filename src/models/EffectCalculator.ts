@@ -50,6 +50,10 @@ export default class EffectCalculator {
     return [this.persistStartFrame - this.startDuration * this.fps, this.persistStartFrame];
   }
 
+  get endFrameRange(): [number, number] {
+    return [this.endFrame, this.endFrame + this.endDuration * this.fps];
+  }
+
   timeWithIn(): number {
     return Math.min(this.durationInFrames / this.fps, Math.max(0, (this.frame - this.persistStartFrame) / this.fps));
   }
@@ -115,6 +119,7 @@ export default class EffectCalculator {
   }
 
   interpolateDuration(outputRange: number[]): number {
+    if(this.persistFrameRange[0] === this.persistFrameRange[1]) return outputRange[1];
     return interpolate(this.frame, this.persistFrameRange, outputRange, {
       extrapolateLeft: 'clamp',
       extrapolateRight: 'clamp',

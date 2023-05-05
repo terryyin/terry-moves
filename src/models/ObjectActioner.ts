@@ -74,6 +74,10 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 			'opacity',
 			new InterpolateRangesLinear(this.effectCalculator.startFrameRange, outputRange)
 		);
+		result.setInterpolation(
+			'opacity',
+			new InterpolateRangesLinear(this.effectCalculator.endFrameRange, outputRange.slice().reverse())
+		);
 		return result;
 	}
 
