@@ -102,6 +102,31 @@ describe('AnimationEffect', () => {
     });
   });
 
+  describe('appear for a duration', () => {
+    [
+      { actionType: 'appear', sec: 0, expectedOpacity: '0' },
+      { actionType: 'appear', sec: 1, expectedOpacity: '0' },
+      { actionType: 'appear', sec: 1.1, expectedOpacity: '0.1' },
+      { actionType: 'disappear', sec: 0, expectedOpacity: '1' },
+      { actionType: 'disappear', sec: 1, expectedOpacity: '1' },
+      { actionType: 'disappear', sec: 1.1, expectedOpacity: '0.9' },
+    ].forEach(({actionType, sec, expectedOpacity}) => {
+      const subtitleWithAction: Subtitle = 
+        { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
+          { actor: "under-test", actionType: actionType as 'appear' | 'disappear', startDuration: 1 },
+        ] };
+      test('displays the correct transformation', () => {
+        const animationContext = makeMe
+                .animationContext
+                .withSubtitle(subtitleWithAction)
+                .seconds(sec)
+                .please();
+        const computedStyle = renderAndGetDivStyle(animationContext);
+        expect(computedStyle.getPropertyValue('opacity')).toBe(expectedOpacity);
+      });
+    });
+  });
+
   describe('appear and disappear', () => {
     [
       { actionType: 'appear', sec: 0, expectedOpacity: '0' },

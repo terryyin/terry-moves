@@ -19,12 +19,12 @@ interface PersistUntilSubtitleIdOption {
 
 export type UntilAction = BaseAction & PersistUntilSubtitleIdOption;
 
-export interface StartAndEndAction extends BaseAction {
+export interface StartAndEndAction extends UntilAction {
   startDuration: number;
 }
 
 export interface StartAndEndActionMisused extends UntilAction {
-  startDurationX?: number;
+  startDuration?: number;
   endDuration?: number;
 }
 

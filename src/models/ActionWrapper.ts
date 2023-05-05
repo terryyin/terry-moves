@@ -6,9 +6,6 @@ const getActionDuration = (action: Action, startTime: number, script: Script): n
 	if ('duration' in action) {
 		return action.duration;
 	}
-	if ('startDuration' in action) {
-	  return action.startDuration;
-	}
 
 	let result: number | undefined;
 
@@ -28,9 +25,6 @@ const getActionDuration = (action: Action, startTime: number, script: Script): n
 const getStartDuration = (action: Action): number | undefined => {
 	if ('startDuration' in action) {
 		return action.startDuration;
-	}
-	if ('startDurationX' in action) {
-		return action.startDurationX;
 	}
 }
 
