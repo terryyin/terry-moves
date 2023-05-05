@@ -39,7 +39,7 @@ export default class EffectCalculator {
   }
 
   get endFrame(): number {
-    return this.persistStartFrame + this.durationInFrames + (this.startDuration) * this.fps;
+    return this.persistStartFrame + this.durationInFrames;
   }
 
   get persistFrameRange(): [number, number] {

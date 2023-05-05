@@ -38,6 +38,8 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 				return this.scale(this.action.outputRange);
 			case 'move':
 				return this.move([0, 0, 0], this.action.absolutePosition);
+			case 'move and return':
+				return this.moveAndReturn(this.action.absolutePosition);
 			case 'appear':
 				return this.getAppearStyle([0, 1]);
 			case 'disappear':
@@ -102,6 +104,34 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 
 		return result;
 	}
+
+	private moveAndReturn(
+		distances: number | Vector2 | Vector3
+	): LazyThreeDObjectState {
+		const result = new LazyThreeDObjectState();
+		const vector: [number, number, number] = toVector3(distances);
+		(['translateX', 'translateY', 'translateZ'] as InterpolateFields[]).forEach(
+			(key, index) => {
+				result.setInterpolation(
+					key,
+					new InterpolateRangesSpring(this.effectCalculator.startFrameRange, [
+						0,
+						vector[index],
+					])
+				);
+				result.setInterpolation(
+					key,
+					new InterpolateRangesSpring(this.effectCalculator.endFrameRange, [
+						vector[index],
+						0,
+					])
+				);
+			}
+		);
+		return result;
+	}
+
+
 
 	private oscillate(distances: number | Vector3 | Vector2): LazyThreeDObjectState {
 		const result = new LazyThreeDObjectState();

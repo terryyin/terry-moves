@@ -193,7 +193,7 @@ describe('CodeHighlight', () => {
     [
       { sec: 0.5, expectedLineText: '      this.load();' },
       { sec: 1.1, expectedLineText: '      this.load( );' },
-      { sec: 4, expectedLineText: '      this.load(loadA);' },
+      { sec: 4, expectedLineText: '      this.load(loadAmo);' },
       { sec: 6.1, expectedLineText: '      this.load(loadAmount);' },
     ].forEach(({sec, expectedLineText}) => {
       test(` at sec ${sec}`, () => {

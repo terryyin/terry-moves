@@ -105,4 +105,39 @@ describe('AnimationContext', () => {
 		});
 	});
 
+	describe('move and return', () => {
+		[
+			{sec: 0, expectPlaying: "translateX(0px) translateY(0px)",  },
+			{sec: 1, expectPlaying: "translateX(0px) translateY(0px)",   },
+			{sec: 1.1, expectPlaying: "translateX(0.0956039322945006px) translateY(0.1912078645890012px)", },
+			{sec: 2.1, expectPlaying: "translateX(0.49926140793203216px) translateY(0.9985228158640643px)",},
+			{sec: 3.1, expectPlaying: "translateX(0.49999954996871px) translateY(0.99999909993742px) translateZ(0px)",},
+			{sec: 10.5, expectPlaying: "translateX(0.04578909722183544px) translateY(0.09157819444367088px)",},
+		].forEach(({sec, expectPlaying, }) => {
+			test(`test sec: ${sec}`, () => {
+				const animationContext = makeMe.animationContext
+					.withSubtitle({
+						leadingBlank: 1,
+						duration: 1,
+						text: 'First subtitle.',
+						actions: [
+							{
+								actor: 'under-test',
+								actionType: 'move and return',
+								startDuration: 1,
+								endDuration: 1,
+								endingTimeAdjustment: 10,
+								absolutePosition: [0.5, 1],
+							},
+						],
+					})
+					.seconds(sec)
+					.please();
+				const result = animationContext.get3DObjectStateOf('under-test').toStyle();
+				expect(result.transform).toContain(expectPlaying);
+			});
+		});
+	});
+
+	
 });

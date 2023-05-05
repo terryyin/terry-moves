@@ -1,6 +1,6 @@
 import { Vector2, Vector3 } from '@react-three/fiber';
 
-export type ActionType = 'connect to' | 'additive value change to' | 'highlight lines' | 'delete lines' | 'highlight token' | 'replace text' | 'insert text' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
+export type ActionType = 'connect to' | 'additive value change to' | 'highlight lines' | 'delete lines' | 'highlight token' | 'replace text' | 'insert text' | 'move and return' | 'move' | 'appear' | 'disappear' | 'rotate and rise' | 'oscillate' | 'camera look at' | '3d rotate' | 'glow' | '3d animation start' | '3d animation reverse' | 'scale';
 
 export interface BaseAction {
   actor: string;
@@ -78,6 +78,11 @@ export interface AbsolutePositionAction extends InterimAction {
   absolutePosition: number | Vector2 | Vector3;
 }
 
+export interface MoveAndReturnAction extends StartAndEndAction {
+  actionType: 'move and return';
+  absolutePosition: number | Vector2 | Vector3;
+}
+
 export interface RelativePositionAction extends UntilAction {
   actionType: 'oscillate';
   delta: number | Vector2 | Vector3;
@@ -93,7 +98,7 @@ export interface ThreeDRotateAction extends UntilAction {
   totalRotation: [number, number, number];
 }
 
-export type ThreeDAction = ThreeDRotateAction | AbsolutePositionAction | OneDimensionalAction;
+export type ThreeDAction = ThreeDRotateAction | MoveAndReturnAction | AbsolutePositionAction | OneDimensionalAction;
 
 export interface ThreeDAnimationAction extends InterimAction {
   actionType: '3d animation start' | '3d animation reverse';
