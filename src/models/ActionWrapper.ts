@@ -26,6 +26,9 @@ const getActionDuration = (action: Action, startTime: number, script: Script): n
 }
 
 const getStartDuration = (action: Action): number | undefined => {
+	if ('startDuration' in action) {
+		return action.startDuration;
+	}
 	if ('startDurationX' in action) {
 		return action.startDurationX;
 	}

@@ -10,7 +10,7 @@ export default abstract class BaseActioner<T extends Combinable<T>> {
   frameRange: [number, number];
 
   constructor(effectCalculator: EffectCalculatorAndAction) {
-    this.frameRange = effectCalculator.effectCalculator.frameRange;
+    this.frameRange = effectCalculator.effectCalculator.persistFrameRange;
     this.action = effectCalculator.action;
   }
 

@@ -6,6 +6,7 @@ import {
 	InterpolateRangesSpring,
 	InterpolateRangesOscillate,
 } from './InterpolateRanges';
+import EffectCalculator, { EffectCalculatorAndAction } from './EffectCalculator';
 
 const toVector3 = (
 	value: number | Vector2 | Vector3
@@ -24,6 +25,12 @@ const toVector3 = (
 
 export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> {
 	static defaultValue: LazyThreeDObjectState = new LazyThreeDObjectState();
+  effectCalculator: EffectCalculator;
+
+  constructor(effectCalculator: EffectCalculatorAndAction) {
+		super(effectCalculator);
+    this.effectCalculator = effectCalculator.effectCalculator;
+  }
 
 	protected getState(): LazyThreeDObjectState {
 		switch (this.action.actionType) {
@@ -65,7 +72,7 @@ export default class ObjectActioner extends BaseActioner<LazyThreeDObjectState> 
 		const result = new LazyThreeDObjectState();
 		result.setInterpolation(
 			'opacity',
-			new InterpolateRangesLinear(this.frameRange, outputRange)
+			new InterpolateRangesLinear(this.effectCalculator.startFrameRange, outputRange)
 		);
 		return result;
 	}
