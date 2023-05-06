@@ -22,6 +22,7 @@ import { Markdown } from './video_components/Markdown';
 import { Subtitles } from './video_components/Subtitles';
 import { Anchor } from './video_components/Anchor';
 import { fireActions } from './stories/booleans/common';
+import { ThinkingEmoji } from './parts/ThinkingEmoji';
 
 export const booleanReturnsSutitles: Subtitle[] = [
 		{ leadingBlank: 0, duration: 3, text: "Welcome back to the Oh My Bad Boolean Series!", actions:[
@@ -30,25 +31,35 @@ export const booleanReturnsSutitles: Subtitle[] = [
 		] },
 		{ leadingBlank: 1, duration: 4, text: "Today's question: Why Are My Boolean Return Values Sometimes Bad?", actions:[
 		] },
-		{ leadingBlank: 1, duration: 4, text: "And real my STYLE with my code", actions:[
-				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "and real my STYLE with my code", startDuration: 1, endDuration: 1 },
+		{ leadingBlank: 1, duration: 4, text: "And reveal my STYLE with my code", actions:[
+				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "and reveal my STYLE with my code", startDuration: 1, endDuration: 1 },
 		] },
 		{ leadingBlank: 1, duration: 5, text: "Oops, sorry, not 'my STYLE'. Should be 'Intention'.", actions:[
 				{ actor: "second title", actionType: "replace text", endingTimeAdjustment: 4, line: 1, match: "my STYLE", replacement: "intention", startDuration: 0, endDuration: 2 },
 				{ actor: "title", actionType: "disappear", startDuration: 1, offset: 5 },
 		] },
 		{ leadingBlank: 1, duration: 3, text: "You might recall the Blaster from my previous episode.", actions:[
+			  { actor: "blaster", actionType: "3d animation reverse", duration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
 		] },
-		{ leadingBlank: 1, duration: 4, text: "You could fire it anytime,", actions:[
+		{ leadingBlank: 1, duration: 4, text: "You could fire it anytime.", actions:[
 				...fireActions,
 		] },
-		{ leadingBlank: 0, duration: 4, text: "as long as you have ammo!", actions:[
+		{ leadingBlank: 0, duration: 4, text: "The Blaster's fire function returned a boolean value, which was confusing. ", actions:[
+				{ actor: "callee", actionType: "insert text", endingTimeAdjustment: 3, line: 2, column: 2, text: "Boolean ", startDuration: 1, endDuration: 1 },
+			  { actor: "thinker", actionType: "rotate and rise", duration: 4, value: 3, offset: 4 },
 		] },
-		{ leadingBlank: 1, duration: 4, text: "The Blaster's fire function returned a boolean value, which was confusing. What did it mean? Shot successful? No ammo left?", actions:[] },
-		{ leadingBlank: 1, duration: 4, text: "This forced actions on callers, like writing a log. When failing to fire is a surprise, the function should throw an exception.", actions:[] },
+		{ leadingBlank: 1, duration: 4, text: "What did it mean? Shot successful? No ammo left?", actions:[
+
+		] },
+		{ leadingBlank: 1, duration: 4, text: "This forced actions on callers, like writing a log. When failing to fire is a surprise, the function should throw an exception.", actions:[
+			  { actor: "thinker", actionType: "disappear", startDuration: 1 },
+
+		] },
 		{ leadingBlank: 1, duration: 4, text: "Avoiding forced actions on callers improves code readability. For checking ammo, add a separate hasAmmo function.", actions:[] },
-		{ leadingBlank: 1, duration: 4, text: "This follows the Command-Query Separation principle, leading to cleaner, more maintainable code.", actions:[] },
-		{ leadingBlank: 1, duration: 4, text: "Now, let's discuss functions returning an internal state, leading to losing domain concepts and violating Tell, Don't Ask.", actions:[] },
+		{ leadingBlank: 1, duration: 4, text: "This follows the Command-Query Separation principle, leading to cleaner, more maintainable code.", actions:[
+				{ actor: "learning from not return", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "envy" },
+		] },
+		{ id: "envy", leadingBlank: 1, duration: 4, text: "Now, let's discuss functions returning an internal state, leading to losing domain concepts and violating Tell, Don't Ask.", actions:[] },
 		{ leadingBlank: 1, duration: 4, text: "The Blaster has a getSafetyStatus function, making callers responsible for safety. This can lead to feature envy, code duplication, and loss of domain concepts.", actions:[] },
 		{ leadingBlank: 1, duration: 4, text: "Instead, use ensureSafetyOn and ensureSafetyOff methods. This way, callers don't handle the internal state, preserving domain concepts and making the code more modular.", actions:[] },
 		{ leadingBlank: 1, duration: 4, text: "Direct mapping from the problem domain to the solution domain is often preferred, but exceptions exist.", actions:[] },
@@ -58,41 +69,17 @@ export const booleanReturnsSutitles: Subtitle[] = [
 ];
 
 const codeString = `class Blaster {
-  action(isLoad) {
-    if(isLoad) {
-      this.load();
-    }
-    this.fire();
-  }
-
   fire() {
     // ...
   }
 
-  private load() {
-    // ...
-  }
 }`;
 
-const caller1 = `  // Caller 1
-  blaster.action(true);
+const caller = `  // Caller
+  blaster.fire();
 	`;
 
-const caller2 = `  // Caller 2
-  blaster.action(false);
-	`;
-
-const caller3 = `  // Caller 3
-  blaster.action(true);
-	`;
-
-const learningCoupling = `## This tight coupling:
-
-* introduces unnecessary complexity.
-* makes changes harder.
-* complicates collaboration.`;
-
-const learningCohesion = `## This low cohesion:
+const learningFromException = `## This low cohesion:
 
 * ignores immportant domain concepts.
 * makes future changes error-prone.`;
@@ -106,45 +93,41 @@ export const StoryBooleanReturns: React.FC = () => {
   return (
 		<Story id="StoryBooleanReturns" width={720} height={720} subtitles={booleanReturnsSutitles}  >
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
+			<CodeHighlight actor="caller" codeString={caller} style={{ left: '5%', top: '52%', width: '40%', height: '20%', }}>
+				<Anchor actor="a2-action" style={{left: "50%", top: "20px"}}/>
+				<Anchor actor="a2-param" style={{left: "78%", top: "35px"}}/>
+			</CodeHighlight>
+			<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', }}>
+				<Anchor actor="callee-action" style={{left: "15px", top: "25px"}}/>
+				<Anchor actor="callee-load" style={{left: "60px", top: "75px"}}/>
+				<Anchor actor="callee-fire" style={{left: "60px", top: "125px"}}/>
+				<Anchor actor="callee-loadedfire" style={{left: "15px", top: "120px"}}/>
+			</CodeHighlight>
+
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
           <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
-						<directionalLight
-							castShadow
-							position={[10, 20, 15]}
-							intensity={15}
-							color={0xffffff}
-						/>	
+						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
 						<LightSource actor="blaster temperature" position={[0, 0, 15]} color="#ff0000" />
 						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 3.5, 0]} scale={1}>
             <ThreeAnimationEffect actor="blaster assembly" >
 								<Blaster actor="blaster"/>
 								<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
 									<RocketPlume actor="blaster fire" position={[-0.6, -3, 0.3]} scale={1.8}/>
-									<RocketPlume actor="blaster powerful fire" position={[-0.6, -3, 0.3]} scale={4}/>
-									<RocketPlume actor="blaster more powerful fire" position={[-0.6, -3, 0.3]} scale={8}/>
 								</GroupInitialState>
             </ThreeAnimationEffect>
 						</GroupInitialState>
+						<ThreeAnimationEffect actor="thinker">
+							<GroupInitialState rotation={[0, 0, 0]} position={[-3, -3, 0]} scale={1}>
+							<ThinkingEmoji/>
+							</GroupInitialState>
+						</ThreeAnimationEffect>
           </ThreeDFrame>
       </AbsoluteFill>
-			</AnimationEffect>
-		<CodeHighlight actor="caller 2" codeString={caller2} style={{ left: '5%', top: '52%', width: '40%', height: '20%', }}>
-			<Anchor actor="a2-action" style={{left: "50%", top: "20px"}}/>
-			<Anchor actor="a2-param" style={{left: "78%", top: "35px"}}/>
-		</CodeHighlight>
-		<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', }}>
-			<Anchor actor="callee-action" style={{left: "15px", top: "25px"}}/>
-			<Anchor actor="callee-load" style={{left: "60px", top: "75px"}}/>
-			<Anchor actor="callee-fire" style={{left: "60px", top: "125px"}}/>
-			<Anchor actor="callee-loadedfire" style={{left: "15px", top: "120px"}}/>
-		</CodeHighlight>
+		</AnimationEffect>
 
-    <Markdown actor="learning from tight coupling" style={announceBoardStyle}
-			md={learningCoupling}
-		 />
-    <Markdown actor="learning from low cohesion" style={announceBoardStyle}
-			md={learningCohesion}
+    <Markdown actor="learning from not return" style={announceBoardStyle}
+			md={learningFromException}
 		 />
 
 
