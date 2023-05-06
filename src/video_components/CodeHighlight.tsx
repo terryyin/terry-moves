@@ -50,7 +50,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, languag
       cursorLine += partialText.split('\n').length - 1;
       cursorColumn = partialText.length - partialText.lastIndexOf('\n') - 1;
 
-      if (line >= lines.length) {
+      if (line > lines.length) {
         lines.push(partialText);
       }
       else {
@@ -58,6 +58,9 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, languag
 
         if ('match' in edit) {
           const { match } = edit;
+          if(partialText.split("\n").length === 1) {
+            cursorColumn += currentLine.indexOf(match ?? '');
+          }
           lines[line - 1] = currentLine.replace(match ?? /.*/, partialText);
         } else if ('column' in edit) {
           const { column } = edit;
