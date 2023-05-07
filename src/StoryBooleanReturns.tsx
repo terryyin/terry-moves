@@ -28,6 +28,7 @@ import { Explosion } from './parts/Explosion';
 export const booleanReturnsSutitles: Subtitle[] = [
 		{ leadingBlank: 0, duration: 3, text: "Welcome back to the Oh My Bad Boolean Series!", actions:[
 			  { actor: "blaster assembly", actionType: "oscillate", delta: [0, 0.02, 0]},
+				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 0, value: 100},
 
 		] },
 		{ leadingBlank: 1, duration: 4, text: "Why Are My Boolean Return Values Sometimes Bad?", actions:[
@@ -51,12 +52,16 @@ export const booleanReturnsSutitles: Subtitle[] = [
 			  { actor: "thinker", actionType: "rotate and rise", duration: 4, value: 3, offset: 4 },
 		] },
 		{ leadingBlank: 1, duration: 4, text: "What did it mean? Shot successful? It exploded? No ammo left?", actions:[
+				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 1, value: 50, offset: 2},
 			  { actor: "blaster explosion", actionType: "3d animation start", duration: 1, speed: 1, offset: 2},
 
 		] },
 		{ leadingBlank: 1, duration: 4, text: "This forced actions on callers, like writing a log.", actions:[
-				{ actor: "caller", actionType: "insert text", endingTimeAdjustment: 1, line: 2, column: 2, text: "if(", startDuration: 1, endDuration: 0 },
-				{ actor: "caller", actionType: "replace text", endingTimeAdjustment: 3, line: 2, match: ";", replacement: "){\n    log(\"Somebody should look at this.\");\n  }", startDuration: 1, endDuration: 1, offset: 2 },
+				{ actor: "caller", actionType: "insert text", endingTimeAdjustment: 1, line: 4, column: 2, text: "if(", startDuration: 1, endDuration: 0 },
+				{ actor: "caller", actionType: "replace text", endingTimeAdjustment: 3, line: 4, match: ";", replacement: "){\n    log(\"Somebody should look at this.\");\n  }", startDuration: 1, endDuration: 1, offset: 2 },
+		] },
+		{ leadingBlank: 1, duration: 4, text: "It makes the caller code also lose its focus.", actions:[
+				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 1, value: 10, offset: 1},
 		] },
 		{ leadingBlank: 2, duration: 4, text: "Potential problems with a boolean problem: the meaning might not be clear and it force the caller to do something and disrupt the main logic flow", actions:[
 				{ actor: "learning from not return", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "envy" },
@@ -84,8 +89,12 @@ const codeString = `class Blaster {
 
 }`;
 
-const caller = `  // Caller
-  blaster.fire();
+const caller = `// Caller
+popUpAttack() {
+  this.popUp();
+  this.blaster.fire();
+  this.hide();
+}
 	`;
 
 const learningFromException = `## This low cohesion:
@@ -101,15 +110,8 @@ const announceBoardStyle: CSSProperties = {
 export const StoryBooleanReturns: React.FC = () => {
   return (
 		<Story id="StoryBooleanReturns" width={720} height={720} subtitles={booleanReturnsSutitles}  >
+
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
-			<CodeHighlight actor="caller" codeString={caller} style={{ left: '5%', top: '40%', width: '60%', height: '20%', }}>
-				<Anchor actor="caller-fire" style={{left: "195px", top: "30px"}}/>
-				<Anchor actor="a2-param" style={{left: "78%", top: "35px"}}/>
-			</CodeHighlight>
-			<CodeHighlight actor="callee" codeString={codeString} style={{ left: '35%', top: '65%', width: '60%', height: '50%', }}>
-				<Anchor actor="callee-fire" style={{left: "150px", top: "25px"}}/>
-				<Anchor actor="callee-loadedfire" style={{left: "15px", top: "120px"}}/>
-			</CodeHighlight>
 
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
@@ -127,14 +129,29 @@ export const StoryBooleanReturns: React.FC = () => {
 								</GroupInitialState>
             </ThreeAnimationEffect>
 						</GroupInitialState>
+          </ThreeDFrame>
+				</AbsoluteFill>
+			</AnimationEffect>
+
+			<CodeHighlight actor="caller" codeString={caller} style={{ left: '5%', top: '35%', width: '60%', height: '20%', }}>
+				<Anchor actor="caller-fire" style={{left: "245px", top: "80px"}}/>
+			</CodeHighlight>
+			<CodeHighlight actor="callee" codeString={codeString} style={{ left: '35%', top: '65%', width: '60%', height: '50%', }}>
+				<Anchor actor="callee-fire" style={{left: "150px", top: "25px"}}/>
+			</CodeHighlight>
+
+      <AnimationEffect actor="stage">
+				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
+          <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
+						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
 						<ThreeAnimationEffect actor="thinker">
 							<GroupInitialState rotation={[0, -0.5, 0]} position={[2.5, -2.5, 0]} scale={1}>
 							<ThinkingEmoji/>
 							</GroupInitialState>
 						</ThreeAnimationEffect>
           </ThreeDFrame>
-      </AbsoluteFill>
-		</AnimationEffect>
+				</AbsoluteFill>
+			</AnimationEffect>
 
     <Markdown actor="learning from not return" style={announceBoardStyle}
 			md={learningFromException}
@@ -170,12 +187,12 @@ export const StoryBooleanReturns: React.FC = () => {
 
 		</AnimationEffect>
     <AbsoluteFill style={{ left: '0%',  top: '0.5%', width: '10%', height: '10%'}}>
-			<span style={{fontFamily: 'sans-serif', fontSize: '15px', color: "#408fdd", textAlign: 'center'}}>Loose<br/>Coupling</span>
+			<span style={{fontFamily: 'sans-serif', fontSize: '15px', color: "#408fdd", textAlign: 'center'}}>Clear<br/>Intention</span>
 		</AbsoluteFill>
     <AbsoluteFill style={{ left: '90%',  top: '0.5%', width: '10%', height: '10%'}}>
 			<span style={{fontFamily: 'sans-serif', fontSize: '15px', color: "#ff8e00", textAlign: 'center'}}>high<br/>Cohesion</span>
 		</AbsoluteFill>
-		<HealthBar leftSide actor="loose coupling health bar" style={{ left: '10%', top: '2.4%', width: '40%', height: '3%'}}/>
+		<HealthBar leftSide actor="clear intention health bar" style={{ left: '10%', top: '2.4%', width: '40%', height: '3%'}}/>
     <AbsoluteFill style={{ left: '50%', top: '2.4%', width: '40%', height: '3%'}}>
 		<HealthBar actor="high cohesion health bar" />
 		</AbsoluteFill>
