@@ -23,13 +23,14 @@ import { Subtitles } from './video_components/Subtitles';
 import { Anchor } from './video_components/Anchor';
 import { fireActions } from './stories/booleans/common';
 import { ThinkingEmoji } from './parts/ThinkingEmoji';
+import { Explosion } from './parts/Explosion';
 
 export const booleanReturnsSutitles: Subtitle[] = [
 		{ leadingBlank: 0, duration: 3, text: "Welcome back to the Oh My Bad Boolean Series!", actions:[
 			  { actor: "blaster assembly", actionType: "oscillate", delta: [0, 0.02, 0]},
 
 		] },
-		{ leadingBlank: 1, duration: 4, text: "Today's question: Why Are My Boolean Return Values Sometimes Bad?", actions:[
+		{ leadingBlank: 1, duration: 4, text: "Why Are My Boolean Return Values Sometimes Bad?", actions:[
 		] },
 		{ leadingBlank: 1, duration: 4, text: "And reveal my STYLE with my code", actions:[
 				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "and reveal my STYLE with my code", startDuration: 1, endDuration: 1 },
@@ -38,26 +39,34 @@ export const booleanReturnsSutitles: Subtitle[] = [
 				{ actor: "second title", actionType: "replace text", endingTimeAdjustment: 4, line: 1, match: "my STYLE", replacement: "intention", startDuration: 0, endDuration: 2 },
 				{ actor: "title", actionType: "disappear", startDuration: 1, offset: 5 },
 		] },
-		{ leadingBlank: 1, duration: 3, text: "You might recall the Blaster from my previous episode.", actions:[
+		{ leadingBlank: 1, duration: 3, text: "Remeber my Blaster?", actions:[
 			  { actor: "blaster", actionType: "3d animation reverse", duration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
 		] },
 		{ leadingBlank: 1, duration: 4, text: "You could fire it anytime.", actions:[
 				...fireActions,
+				{ actor: "caller-fire", actionType: "connect to",  startDuration: 1, target: "callee-fire", bentLevel: -100},
 		] },
-		{ leadingBlank: 0, duration: 4, text: "The Blaster's fire function returned a boolean value, which was confusing. ", actions:[
+		{ leadingBlank: 0, duration: 4, text: "to my surprise, the Blaster's fire function returned a boolean value. ", actions:[
 				{ actor: "callee", actionType: "insert text", endingTimeAdjustment: 3, line: 2, column: 2, text: "Boolean ", startDuration: 1, endDuration: 1 },
 			  { actor: "thinker", actionType: "rotate and rise", duration: 4, value: 3, offset: 4 },
 		] },
-		{ leadingBlank: 1, duration: 4, text: "What did it mean? Shot successful? No ammo left?", actions:[
+		{ leadingBlank: 1, duration: 4, text: "What did it mean? Shot successful? It exploded? No ammo left?", actions:[
+			  { actor: "blaster explosion", actionType: "3d animation start", duration: 1, speed: 1, offset: 2},
 
 		] },
-		{ leadingBlank: 1, duration: 4, text: "This forced actions on callers, like writing a log. When failing to fire is a surprise, the function should throw an exception.", actions:[
-			  { actor: "thinker", actionType: "disappear", startDuration: 1 },
-
+		{ leadingBlank: 1, duration: 4, text: "This forced actions on callers, like writing a log.", actions:[
+				{ actor: "caller", actionType: "insert text", endingTimeAdjustment: 1, line: 2, column: 2, text: "if(", startDuration: 1, endDuration: 0 },
+				{ actor: "caller", actionType: "replace text", endingTimeAdjustment: 3, line: 2, match: ";", replacement: "){\n    log(\"Somebody should look at this.\");\n  }", startDuration: 1, endDuration: 1, offset: 2 },
 		] },
-		{ leadingBlank: 1, duration: 4, text: "Avoiding forced actions on callers improves code readability. For checking ammo, add a separate hasAmmo function.", actions:[] },
-		{ leadingBlank: 1, duration: 4, text: "This follows the Command-Query Separation principle, leading to cleaner, more maintainable code.", actions:[
+		{ leadingBlank: 2, duration: 4, text: "Potential problems with a boolean problem: the meaning might not be clear and it force the caller to do something and disrupt the main logic flow", actions:[
 				{ actor: "learning from not return", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "envy" },
+		] },
+		{ leadingBlank: 1, duration: 4, text: "Avoiding forced actions on callers improves code readability. For checking ammo, add a separate hasAmmo function.", actions:[
+			  { actor: "thinker", actionType: "disappear", startDuration: 1 },
+		] },
+		{ leadingBlank: 1, duration: 4, text: "When failing to fire is a surprise, the function should throw an exception.", actions:[
+		] },
+		{ leadingBlank: 1, duration: 4, text: "This follows the Command-Query Separation principle, leading to cleaner, more maintainable code.", actions:[
 		] },
 		{ id: "envy", leadingBlank: 1, duration: 4, text: "Now, let's discuss functions returning an internal state, leading to losing domain concepts and violating Tell, Don't Ask.", actions:[] },
 		{ leadingBlank: 1, duration: 4, text: "The Blaster has a getSafetyStatus function, making callers responsible for safety. This can lead to feature envy, code duplication, and loss of domain concepts.", actions:[] },
@@ -93,14 +102,12 @@ export const StoryBooleanReturns: React.FC = () => {
   return (
 		<Story id="StoryBooleanReturns" width={720} height={720} subtitles={booleanReturnsSutitles}  >
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
-			<CodeHighlight actor="caller" codeString={caller} style={{ left: '5%', top: '52%', width: '40%', height: '20%', }}>
-				<Anchor actor="a2-action" style={{left: "50%", top: "20px"}}/>
+			<CodeHighlight actor="caller" codeString={caller} style={{ left: '5%', top: '40%', width: '60%', height: '20%', }}>
+				<Anchor actor="caller-fire" style={{left: "195px", top: "30px"}}/>
 				<Anchor actor="a2-param" style={{left: "78%", top: "35px"}}/>
 			</CodeHighlight>
-			<CodeHighlight actor="callee" codeString={codeString} style={{ left: '55%', top: '30%', width: '40%', height: '50%', }}>
-				<Anchor actor="callee-action" style={{left: "15px", top: "25px"}}/>
-				<Anchor actor="callee-load" style={{left: "60px", top: "75px"}}/>
-				<Anchor actor="callee-fire" style={{left: "60px", top: "125px"}}/>
+			<CodeHighlight actor="callee" codeString={codeString} style={{ left: '35%', top: '65%', width: '60%', height: '50%', }}>
+				<Anchor actor="callee-fire" style={{left: "150px", top: "25px"}}/>
 				<Anchor actor="callee-loadedfire" style={{left: "15px", top: "120px"}}/>
 			</CodeHighlight>
 
@@ -109,6 +116,9 @@ export const StoryBooleanReturns: React.FC = () => {
           <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
 						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
 						<LightSource actor="blaster temperature" position={[0, 0, 15]} color="#ff0000" />
+						<GroupInitialState rotation={[0, Math.PI * 3 / 2, 0]} position={[-5, 0, 0]} scale={0.15}>
+							<Explosion actor="blaster explosion" />
+						</GroupInitialState>
 						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 3.5, 0]} scale={1}>
             <ThreeAnimationEffect actor="blaster assembly" >
 								<Blaster actor="blaster"/>
@@ -118,7 +128,7 @@ export const StoryBooleanReturns: React.FC = () => {
             </ThreeAnimationEffect>
 						</GroupInitialState>
 						<ThreeAnimationEffect actor="thinker">
-							<GroupInitialState rotation={[0, 0, 0]} position={[-3, -3, 0]} scale={1}>
+							<GroupInitialState rotation={[0, -0.5, 0]} position={[2.5, -2.5, 0]} scale={1}>
 							<ThinkingEmoji/>
 							</GroupInitialState>
 						</ThreeAnimationEffect>
