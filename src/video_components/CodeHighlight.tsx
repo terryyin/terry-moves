@@ -30,7 +30,8 @@ border-right: none; /* Remove the border */
 
 type CurrentEdit = { text: string, cursorLine: number, cursorColumn: number, cursor?: boolean, insertCursor?: boolean };
 
-export const CodeHighlight: React.FC<{actor: string, codeString: string, language?: string, style?: CSSProperties, children?: React.ReactNode}> = ({actor, language, style, codeString, children}) => {
+export const CodeHighlight: React.FC<{actor: string, codeString: string, language?: string, style?: CSSProperties, preStyle?: CSSProperties, children?: React.ReactNode}> = ({
+  actor, language, style, preStyle, codeString, children}) => {
   const { highlights, textEdits } = useAnimationContext().getCodeTransfomation(actor);
 
   const singleEdit =(edit: TextEdit, original: string): CurrentEdit => {
@@ -128,7 +129,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, languag
         {children}
         <Highlight code={currentCode} language={language || "tsx"} theme={themes.vsDark}>
             {({ className, style, tokens, getLineProps, getTokenProps }) => (
-              <pre className={className} style={{fontSize: "1.25rem", marginTop: 0, ...style}}>
+              <pre className={className} style={{fontSize: "1.25rem", marginTop: 0, ...style, ...preStyle}}>
                 {
                 tokens.map((line, i) => {
                   const lineProps = getLineProps({ line, key: i });

@@ -17,13 +17,13 @@ import { GroupInitialState } from './video_components/GroupInitialState';
 import { RocketPlume } from './parts/RocketPlume';
 import { CodeHighlight } from './video_components/CodeHighlight';
 import HealthBar from './video_components/HealthBar';
-import { LightSource } from './video_components/LightSource';
 import { Markdown } from './video_components/Markdown';
 import { Subtitles } from './video_components/Subtitles';
 import { Anchor } from './video_components/Anchor';
 import { fireActions } from './stories/booleans/common';
 import { ThinkingEmoji } from './parts/ThinkingEmoji';
 import { Explosion } from './parts/Explosion';
+import { Helmet } from './parts/Helmet';
 
 export const booleanReturnsSutitles: Subtitle[] = [
 		{ leadingBlank: 0, duration: 3, text: "Welcome back to the Oh My Bad Boolean Series!", actions:[
@@ -114,29 +114,33 @@ export const StoryBooleanReturns: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
 
       <AnimationEffect actor="stage">
-				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
+				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%', zIndex:2000}}>
           <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
 						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
-						<LightSource actor="blaster temperature" position={[0, 0, 15]} color="#ff0000" />
-						<GroupInitialState rotation={[0, Math.PI * 3 / 2, 0]} position={[-5, 0, 0]} scale={0.15}>
+						<GroupInitialState rotation={[0, Math.PI * 3 / 2, 0]} position={[-0, 0, 0]} scale={0.15}>
 							<Explosion actor="blaster explosion" />
 						</GroupInitialState>
-						<GroupInitialState rotation={[0, Math.PI, 0]} position={[-3, 3.5, 0]} scale={1}>
-            <ThreeAnimationEffect actor="blaster assembly" >
-								<Blaster actor="blaster"/>
-								<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
-									<RocketPlume actor="blaster fire" position={[-0.6, -3, 0.3]} scale={1.8}/>
-								</GroupInitialState>
-            </ThreeAnimationEffect>
+						<GroupInitialState rotation={[0.7, Math.PI * 1.3, 0]} position={[1, 2.5, 0]} scale={1}>
+							<ThreeAnimationEffect actor="blaster assembly" >
+									<Blaster actor="blaster"/>
+									<GroupInitialState rotation={[0, 0, Math.PI * 3 / 2]} position={[0, 0, 0]} scale={1}>
+										<RocketPlume actor="blaster fire" position={[-0.6, -3, 0.3]} scale={1.8}/>
+									</GroupInitialState>
+							</ThreeAnimationEffect>
 						</GroupInitialState>
+						<ThreeAnimationEffect actor="helmet">
+							<GroupInitialState rotation={[0, -0.5, 0]} position={[-1.5, 1, 0]} scale={0.05}>
+							<Helmet />
+							</GroupInitialState>
+						</ThreeAnimationEffect>
           </ThreeDFrame>
 				</AbsoluteFill>
 			</AnimationEffect>
 
-			<CodeHighlight actor="caller" codeString={caller} style={{ left: '5%', top: '35%', width: '60%', height: '20%', }}>
+			<CodeHighlight actor="caller" codeString={caller} style={{ left: '5%', top: '35%', width: '60%', height: '20%', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}}>
 				<Anchor actor="caller-fire" style={{left: "245px", top: "80px"}}/>
 			</CodeHighlight>
-			<CodeHighlight actor="callee" codeString={codeString} style={{ left: '35%', top: '65%', width: '60%', height: '50%', }}>
+			<CodeHighlight actor="callee" codeString={codeString} style={{ left: '35%', top: '65%', width: '60%', height: '50%', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}}>
 				<Anchor actor="callee-fire" style={{left: "150px", top: "25px"}}/>
 			</CodeHighlight>
 

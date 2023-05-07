@@ -123,6 +123,7 @@ export const StoryFailureVsFailure: React.FC = () => {
               <Starship/>
               <StarshipPlume/>
               <GroupInitialState position={[0, 0, 0]} scale={0.2} >
+								<ambientLight intensity={20} color={0xff0000} />
                 <Explosion actor="explosion" />
 							</GroupInitialState>
             </ThreeAnimationEffect>

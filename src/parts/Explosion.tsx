@@ -11,7 +11,6 @@ export const Explosion: React.FC<{
 }> = ({ actor }) => {
   return (
     <>
-    <ambientLight intensity={20} color={0xff0000} />
     <AnimatedGlb url={url} actor={actor}/>
     </>
   );
