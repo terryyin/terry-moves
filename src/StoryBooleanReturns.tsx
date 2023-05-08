@@ -1,4 +1,5 @@
-import './global.css';
+import {staticFile} from 'remotion'
+import {Img} from 'remotion'
 
 
 import React, { CSSProperties } from 'react';
@@ -41,110 +42,132 @@ export const booleanReturnsSutitles: Subtitle[] = [
 			  { actor: "soldier", actionType: "disappear"},
 			  { actor: "blaster assembly", actionType: "oscillate", delta: [0, 0.02, 0]},
 				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 0, value: 100},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 0, value: 0},
 				{ actor: "helmet position", actionType: "move", duration: 0, absolutePosition: [0, -3.1, 0] },
 				{ actor: "helmet", actionType: "3d rotate", endingTimeAdjustment: 0, totalRotation: [-60, 20, 0] },
 				{ actor: "blaster assembly", actionType: "move", duration: 0, absolutePosition: [10, -16, 0], offset: 0.5 },
 			  { actor: "mask", actionType: "appear", startDuration: 0.2, persistUntilSubtitleId: "intro to blaster"},
 
 		] },
-		{ leadingBlank: 1, duration: 4, text: "Why Are My Boolean Return Values Sometimes Bad?", actions:[
+		{ leadingBlank: 1, duration: 4, text: "Today's question: Why Are My Boolean Return Values Sometimes Bad?", actions:[
 		] },
-		{ leadingBlank: 1, duration: 4, text: "And reveal my STYLE with my code", actions:[
-				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "and reveal my STYLE with my code", startDuration: 1, endDuration: 1 },
+		{ leadingBlank: 1, duration: 3, text: "And how can we make our code reveal my STYLE.", actions:[
+				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "and make our code reveal my STYLE", startDuration: 1, endDuration: 1 },
 		] },
-		{ leadingBlank: 1, duration: 5, text: "Oops, sorry, not 'my STYLE'. Should be 'Intention'.", actions:[
-				{ actor: "second title", actionType: "replace text", endingTimeAdjustment: 4, line: 1, match: "my STYLE", replacement: "intention", startDuration: 0, endDuration: 2 },
+		{ leadingBlank: 1, duration: 5, text: "Oops, sorry, not 'my STYLE'. Should be 'its true intention'.", actions:[
+				{ actor: "second title", actionType: "replace text", endingTimeAdjustment: 4, line: 1, match: "my STYLE", replacement: "its true intention", startDuration: 0, endDuration: 2 },
 				{ actor: "title", actionType: "disappear", startDuration: 1, offset: 5 },
 		] },
-		{ id: "intro to blaster" ,leadingBlank: 1, duration: 3, text: "Remeber my Blaster?", actions:[
+		{ id: "intro to blaster" ,leadingBlank: 1, duration: 3, text: "Remeber the Blaster in my game program?", actions:[
 			  { actor: "blaster", actionType: "3d animation reverse", duration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
 		] },
-		{ leadingBlank: 1, duration: 4, text: "You can pop up,", actions:[
+		{ leadingBlank: 1, duration: 2, text: "You can pop up,", actions:[
+			{ actor: "caller", actionType: "highlight lines", endingTimeAdjustment: 2, lines: [3]},
 			...popupActios,
 		] },
-		{ leadingBlank: 1, duration: 4, text: "and fire,", actions:[
+		{ leadingBlank: 0, duration: 2, text: "and fire,", actions:[
+			  { actor: "caller", actionType: "highlight lines", endingTimeAdjustment: 3, lines: [4]},
 				...fireActions,
 				{ actor: "caller-fire", actionType: "connect to",  startDuration: 1, target: "callee-fire", bentLevel: -100, endingTimeAdjustment: 5},
 		] },
-		{ leadingBlank: 1, duration: 4, text: "then hide.", actions:[
+		{ leadingBlank: 0, duration: 4, text: "then quickly hide again like a sneaky ninjia.", actions:[
+			  { actor: "caller", actionType: "highlight lines", endingTimeAdjustment: 3, lines: [5]},
 			  ...hideActions
 		] },
-		{ leadingBlank: 0, duration: 4, text: "to my surprise, the Blaster's fire function returned a boolean value. ", actions:[
+		{ leadingBlank: 0, duration: 3, text: "It's called a pop up attack.", actions:[
+		] },
+		{ leadingBlank: 1, duration: 5, text: "But wait, the Blaster's fire function returned a boolean value? What's up with that?", actions:[
 				{ actor: "callee", actionType: "insert text", endingTimeAdjustment: 3, line: 2, column: 2, text: "Boolean ", startDuration: 1, endDuration: 1 },
 			  { actor: "thinker", actionType: "rotate and rise", duration: 4, value: 3, offset: 4 },
 		] },
-		{ leadingBlank: 1, duration: 4, text: "What did it mean? Shot successful? It exploded? No ammo left?", actions:[
+		{ leadingBlank: 1, duration: 6, text: "Does it mean the shot was successful? It exploded? No ammo left?	", actions:[
 			  ...popupActios,
-				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 1, value: 50, offset: 2},
-			  { actor: "blaster explosion", actionType: "3d animation start", duration: 1, speed: 1, offset: 2},
-
+			  { actor: "callee", actionType: "highlight lines", endingTimeAdjustment: 6, lines: [2]},
+			  { actor: "blaster explosion", actionType: "3d animation start", duration: 1, speed: 1, offset: 3},
 		] },
-		{ leadingBlank: 1, duration: 4, text: "This forced actions on callers, like writing a log.", actions:[
+		{ leadingBlank: 1, duration: 5, text: "Talk about a mystery wrapped in an enigma!	What is its intention?", actions:[
+				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 2, value: 50, offset: 1},
+		] },
+		{ leadingBlank: 1, duration: 5, text: "This forced actions on callers, like writing a log.", actions:[
 				{ actor: "caller", actionType: "insert text", endingTimeAdjustment: 1, line: 4, column: 2, text: "if(", startDuration: 1, endDuration: 0 },
 				{ actor: "caller", actionType: "replace text", endingTimeAdjustment: 3, line: 4, match: ";", replacement: "){\n    log(\"Somebody should look at this.\");\n  }", startDuration: 1, endDuration: 1, offset: 2 },
 		] },
-		{ leadingBlank: 1, duration: 4, text: "It makes the caller code also lose its focus.", actions:[
+		{ leadingBlank: 0, duration: 4, text: "and distracts from the main logic flow.", actions:[
 				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 1, value: 10, offset: 1},
 		] },
-		{ leadingBlank: 2, duration: 7, text: "Potential problems with a boolean return value: the meaning might not be clear and it force the caller to do something and disrupt the main logic flow", actions:[
+		{ leadingBlank: 2, duration: 9, text: "Potential problems with a boolean return value: the meaning might not be clear and it force the caller to do something and disrupt the main logic flow", actions:[
 			  { actor: "thinker", actionType: "disappear", startDuration: 1 },
 			  { actor: "mask", actionType: "appear", startDuration: 0.2, persistUntilSubtitleId: "solution1"},
 				{ actor: "learning from not return", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "solution1" },
 			  ...hideActions,
 		] },
-		{ id: "solution1", leadingBlank: 1, duration: 4, text: "You don't have to return anything if there's no meaningful thing to return.", actions:[
-			{ actor: "callee", actionType: "replace text", endingTimeAdjustment: 3, line: 2, match: "Boolean", replacement: "void", startDuration: 1, endDuration: 1 },
+		{ id: "solution1", leadingBlank: 1, duration: 5, text: "Let's fix this. You don't have to return anything if there's no meaningful thing to return.", actions:[
+			{ actor: "callee", actionType: "replace text", endingTimeAdjustment: 3, line: 2, match: "Boolean", replacement: "void", startDuration: 1, endDuration: 1, offset: 2 },
 		] },
 		{ id: "solution1", leadingBlank: 1, duration: 5, text: "When failing to fire is a surprise, the function should throw an exception.", actions:[
 				{ actor: "callee", actionType: "insert text", endingTimeAdjustment: 4, line: 3, column: 20, text: "\n    throw new Error('...');", startDuration: 1, endDuration: 1, offset: 2 },
 		] },
-		{ leadingBlank: 1, duration: 4, text: "So that caller can choose where to handle the exceptional sitution", actions:[
+		{ leadingBlank: 1, duration: 4, text: "Now callers can choose where to handle the exceptional situation.", actions:[
 		] },
-		{ leadingBlank: 1, duration: 4, text: "Some programming languages, like Go, choose to handle exceptional cases more explicitly.", actions:[
+		{ leadingBlank: 1, duration: 6, text: "Some languages, like Go, prefer a more explicit approach for error situations.", actions:[
 		] },
-		{ leadingBlank: 1, duration: 4, text: "But the idea is the same - separate expceional situation and the main logic.", actions:[
+		{ leadingBlank: 1, duration: 5, text: "The idea stays the same - separate exceptional situations from the main logic.", actions:[
 		] },
-		{ leadingBlank: 1, duration: 4, text: "Avoiding forced actions on callers improves code readability. For checking ammo, add a separate hasAmmo function.", actions:[
-		] },
-		{ leadingBlank: 1, duration: 4, text: "This follows the Command-Query Separation principle, leading to cleaner, more maintainable code.", actions:[
+		{ leadingBlank: 1, duration: 5, text: "Avoiding forced actions on callers improves code readability.", actions:[
+			  { actor: "caller", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 4, count: 3, offset: 1},
+				{ actor: "caller", actionType: "insert text", endingTimeAdjustment: 1, line: 4, column: 2, text: "this.blaster.fire();\n  ", startDuration: 1, endDuration: 0 },
+				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 1, value: 100, offset: 3},
 		] },
 
-		{ leadingBlank: 1, duration: 4, text: "Now, let's look at another example.", actions:[
+		{ leadingBlank: 1, duration: 4, text: "Now, let's look at another example with the Blaster's safety feature.", actions:[
 			{ actor: "caller", actionType: "disappear" },
 			{ actor: "soldier", actionType: "appear"},
 			{ actor: "callee", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 3, count: 2},
 		] },
 
-		{ leadingBlank: 1, duration: 5, text: "The Blaster has a isSafetyOn function, and you can set the safety on or off as well.", actions:[
+		{ leadingBlank: 1, duration: 6, text: "The Blaster has a isSafetyOn function, and you can set the safety on or off as well.", actions:[
 			{ actor: "callee", actionType: "move", duration: 1, absolutePosition: [-240, 80, 0] },
 			{ actor: "callee", actionType: "insert text", endingTimeAdjustment: 4, line: 4, column: 0, text: "  Boolean isSafetyOn() {...}\n  void setSafetyOff(fingerprint) {...}", startDuration: 1, endDuration: 0 },
 		] },
 
-		{ leadingBlank: 1, duration: 4, text: "The soldier need to check if the safety is on. And if so, switch it off.", actions:[
+		{ leadingBlank: 1, duration: 5, text: "The soldier need to check if the safety is on. And if so, switch it off.", actions:[
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, -6, -1] },
 			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [6, -8, 0] },
 			{ actor: "soldier", actionType: "insert text", endingTimeAdjustment: 4, line: 2, column: 30, text: "\n  if(this.blaster.isSafetyOn()) {\n    this.blaster.setSefetyOff(this.fingerprint);\n  }", startDuration: 1, endDuration: 0, offset: 1 },
 		] },
 
-		{ leadingBlank: 1, duration: 5, text: "As you might have seen, the Soldier class LIKES the feature of their Blaster a lot.", actions:[
-				{ actor: "soldier", actionType: "highlight token", endingTimeAdjustment: 4, token: 'blaster', offset: 1},
+		{ leadingBlank: 1, duration: 6, text: "The Soldier class LIKES the feature of their Blaster a lot, and is too focused on the Blaster's feature.", actions:[
+				{ actor: "soldier", actionType: "highlight token", endingTimeAdjustment: 7, token: 'blaster', offset: 1},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 0.1, value: 100, offset: 2},
 		] },
 
-		{ leadingBlank: 1, duration: 3, text: "This is called a Feature Envy.", actions:[
+		{ leadingBlank: 1, duration: 3, text: "Which make the Blaster code less cohesive.", actions:[
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 50, offset: 1},
+		] },
+
+		{ leadingBlank: 1, duration: 3, text: "and blurs Soldier's intention.", actions:[
+				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 1, value: 60, offset: 1},
+		] },
+
+		{ leadingBlank: 1, duration: 5, text: "This is called a Feature Envy.", actions:[
 			{ actor: "camera", actionType: "camera look at", duration: 1, absolutePosition: [0, 0, 0] },
 			{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [0, 0, 0] },
+			{ actor: "feature envy", actionType: "appear", startDuration: 1, endDuration: 1, endingTimeAdjustment: 5 },
 		] },
 
-		{ leadingBlank: 1, duration: 11, text: "We could etract part of it to a method of the Solider class first.", actions:[
-				{ actor: "soldier", actionType: "highlight lines", endingTimeAdjustment: 4, lines: [3, 4, 5]},
+		{ leadingBlank: 1, duration: 8, text: "We could extract part of it to a method of the Solider class first.", actions:[
+				{ actor: "soldier", actionType: "highlight lines", endingTimeAdjustment: 5, lines: [3, 4, 5]},
 			  { actor: "soldier", actionType: "insert text", endingTimeAdjustment: 3, line: 9, column: 30, text: "\nvoid ensureSafetyOff(fingerprint) {\n  if(this.blaster.isSafetyOn()) {\n    this.blaster.setSefetyOff(fingerprint);\n  }\n}", startDuration: 1, endDuration: 0, offset: 1 },
-			  { actor: "soldier", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 3, count: 3, offset: 8},
-			  { actor: "soldier", actionType: "insert text", endingTimeAdjustment: 1, line: 3, column: 0, text: "  this.endsureSafetyOff(this.fingerprint);\n", offset: 9},
+				{ actor: "soldier-extract-start", actionType: "connect to",  startDuration: 1, target: "soldier-extract-end", bentLevel: 150, endingTimeAdjustment: 3, offset: 2},
+			  { actor: "soldier", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 3, count: 3, offset: 5},
+			  { actor: "soldier", actionType: "insert text", endingTimeAdjustment: 1, line: 3, column: 0, text: "  this.endsureSafetyOff(this.fingerprint);\n", offset: 6},
 		] },
 
 		{ leadingBlank: 1, duration: 5, text: "Then move the new method to the Blaster class to stop the Feature Envy.", actions:[
+				{ actor: "soldier-extract-end", actionType: "connect to",  startDuration: 1, target: "callee-fire", bentLevel: 50, endingTimeAdjustment: 5, offset: 2},
 				{ actor: "soldier", actionType: "highlight lines", endingTimeAdjustment: 4, lines: [8, 9, 10,11,12]},
 			  { actor: "callee", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 30, text: "\n  void ensureSafetyOff(fingerprint) {\n    if(this.isSafetyOn()) {\n      this.setSefetyOff(fingerprint);\n    }\n  }", startDuration: 1, endDuration: 0, offset: 1 },
+			  { actor: "soldier", actionType: "insert text", endingTimeAdjustment: 1, line: 3, column: 6, text: ".blaster", offset: 4},
 		] },
 
 		{ leadingBlank: 1, duration: 5, text: "Before we finish the move, you might have noticed that the method just becomes slimmer.", actions:[
@@ -153,20 +176,27 @@ export const booleanReturnsSutitles: Subtitle[] = [
 		] },
 
 		{ leadingBlank: 1, duration: 5, text: "This is because now the operation of the data is closer to the source of the data.", actions:[
-			  { actor: "soldier", actionType: "insert text", endingTimeAdjustment: 1, line: 3, column: 6, text: ".blaster", offset: 1},
 			  { actor: "soldier", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 8, count: 5, offset: 3},
 		] },
 
 		{ leadingBlank: 1, duration: 5, text: "This Feature Envy problem is not unique to boolean return values.", actions:[
+				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 1, value: 90},
+				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 80, offset: 1},
 		] },
 
-		{ leadingBlank: 1, duration: 5, text: "But I feel a boolean return value is more likely to leak internal state, leading to lower cohesion.", actions:[
+		{ leadingBlank: 1, duration: 6, text: "But I feel a boolean return value is more likely to leak internal state, leading to lower cohesion.", actions:[
 		] },
 
-		{ leadingBlank: 1, duration: 10, text: "In conclusion, boolean return values are not inherently bad, but be cautious with ambiguous boolean return values. Use meaningful return values, follow Tell, Don't Ask, and adhere to Command-Query Separation.", actions:[
+		{ leadingBlank: 1, duration: 5, text: "In conclusion, boolean return values are not inherently bad", actions:[
 			  { actor: "mask", actionType: "appear", startDuration: 0.2, endingTimeAdjustment: 100},
 				{ actor: "conclusion", actionType: "appear", startDuration: 1 },
 		] },
+
+		{ leadingBlank: 0, duration: 10, text: "but be cautious with the ambiguous ones. Use meaningful return values, follow Tell, Don't Ask, and adhere to Command-Query Separation.", actions:[
+		] },
+		{ leadingBlank: 0, duration: 10, text: "Thanks for watching. I still have one more Oh My Bad Boolean episode to share. As always, happy coding!", actions:[
+		] },
+
 ];
 
 const codeString = `class Blaster {
@@ -240,6 +270,8 @@ export const StoryBooleanReturns: React.FC = () => {
 				<Anchor actor="caller-fire" style={{left: "245px", top: "80px"}}/>
 			</CodeHighlight>
 			<CodeHighlight actor="soldier" codeString={caller} style={{ left: '20%', top: '10%', width: '80%', height: '20%', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}}>
+				<Anchor actor="soldier-extract-start" style={{left: "6px", top: "80px"}}/>
+				<Anchor actor="soldier-extract-end" style={{left: "6px", top: "250px"}}/>
 				<Anchor actor="soldier-left" style={{left: "26px", top: "220px"}}/>
 				<Anchor actor="soldier-right" style={{left: "515px", top: "220px"}}/>
 			</CodeHighlight>
@@ -254,7 +286,7 @@ export const StoryBooleanReturns: React.FC = () => {
           <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
 						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
 						<ThreeAnimationEffect actor="thinker">
-							<GroupInitialState rotation={[0, -0.5, 0]} position={[2.5, -2.5, 0]} scale={1}>
+							<GroupInitialState rotation={[0, -0.5, 0]} position={[2.8, -0.5, 0]} scale={1}>
 							<ThinkingEmoji/>
 							</GroupInitialState>
 						</ThreeAnimationEffect>
@@ -271,6 +303,9 @@ export const StoryBooleanReturns: React.FC = () => {
 			md={conclusion}
 		 />
 
+    <AnimationEffect actor="feature envy" style={{ top: "15%"}}>
+			<Img src={staticFile('assets/feature-envy.jpeg')} width="100%"/>
+		</AnimationEffect>
 
 
     <AnimationEffect actor="subtitles">
