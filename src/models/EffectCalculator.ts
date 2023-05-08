@@ -101,6 +101,7 @@ export default class EffectCalculator {
   }
 
   private getSpring() {
+    if(this.durationInFrames === 0) return 1;
     return spring({
       frame: this.frame - this.persistStartFrame,
       fps: this.fps,
