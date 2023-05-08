@@ -33,16 +33,18 @@ const popupActios: Action[] = [
 const hideActions: Action[] = [
 				{ actor: "helmet position", actionType: "move", duration: 0.5, absolutePosition: [0, -3.1, 0] },
 				{ actor: "helmet", actionType: "3d rotate", endingTimeAdjustment: 0.5, totalRotation: [-60, 20, 0], offset: 0.3 },
-				{ actor: "blaster assembly", actionType: "move", duration: 0.5, absolutePosition: [10, -16, 0] },
+				{ actor: "blaster assembly", actionType: "move", duration: 0.5, absolutePosition: [5, -10, -4] },
 		];
 export const booleanReturnsSutitles: Subtitle[] = [
 		{ leadingBlank: 0, duration: 3, text: "Welcome back to the Oh My Bad Boolean Series!", actions:[
 			  { actor: "caller", actionType: "appear" },
+			  { actor: "soldier", actionType: "disappear"},
 			  { actor: "blaster assembly", actionType: "oscillate", delta: [0, 0.02, 0]},
 				{ actor: "clear intention health bar", actionType: "additive value change to", duration: 0, value: 100},
 				{ actor: "helmet position", actionType: "move", duration: 0, absolutePosition: [0, -3.1, 0] },
 				{ actor: "helmet", actionType: "3d rotate", endingTimeAdjustment: 0, totalRotation: [-60, 20, 0] },
 				{ actor: "blaster assembly", actionType: "move", duration: 0, absolutePosition: [10, -16, 0], offset: 0.5 },
+			  { actor: "mask", actionType: "appear", startDuration: 0.2, persistUntilSubtitleId: "intro to blaster"},
 
 		] },
 		{ leadingBlank: 1, duration: 4, text: "Why Are My Boolean Return Values Sometimes Bad?", actions:[
@@ -54,7 +56,7 @@ export const booleanReturnsSutitles: Subtitle[] = [
 				{ actor: "second title", actionType: "replace text", endingTimeAdjustment: 4, line: 1, match: "my STYLE", replacement: "intention", startDuration: 0, endDuration: 2 },
 				{ actor: "title", actionType: "disappear", startDuration: 1, offset: 5 },
 		] },
-		{ leadingBlank: 1, duration: 3, text: "Remeber my Blaster?", actions:[
+		{ id: "intro to blaster" ,leadingBlank: 1, duration: 3, text: "Remeber my Blaster?", actions:[
 			  { actor: "blaster", actionType: "3d animation reverse", duration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
 		] },
 		{ leadingBlank: 1, duration: 4, text: "You can pop up,", actions:[
@@ -62,7 +64,7 @@ export const booleanReturnsSutitles: Subtitle[] = [
 		] },
 		{ leadingBlank: 1, duration: 4, text: "and fire,", actions:[
 				...fireActions,
-				{ actor: "caller-fire", actionType: "connect to",  startDuration: 1, target: "callee-fire", bentLevel: -100},
+				{ actor: "caller-fire", actionType: "connect to",  startDuration: 1, target: "callee-fire", bentLevel: -100, endingTimeAdjustment: 5},
 		] },
 		{ leadingBlank: 1, duration: 4, text: "then hide.", actions:[
 			  ...hideActions
@@ -86,9 +88,15 @@ export const booleanReturnsSutitles: Subtitle[] = [
 		] },
 		{ leadingBlank: 2, duration: 7, text: "Potential problems with a boolean return value: the meaning might not be clear and it force the caller to do something and disrupt the main logic flow", actions:[
 			  { actor: "thinker", actionType: "disappear", startDuration: 1 },
+			  { actor: "mask", actionType: "appear", startDuration: 0.2, persistUntilSubtitleId: "solution1"},
 				{ actor: "learning from not return", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "solution1" },
+			  ...hideActions,
 		] },
-		{ id: "solution1", leadingBlank: 1, duration: 4, text: "When failing to fire is a surprise, the function should throw an exception.", actions:[
+		{ id: "solution1", leadingBlank: 1, duration: 4, text: "You don't have to return anything if there's no meaningful thing to return.", actions:[
+			{ actor: "callee", actionType: "replace text", endingTimeAdjustment: 3, line: 2, match: "Boolean", replacement: "void", startDuration: 1, endDuration: 1 },
+		] },
+		{ id: "solution1", leadingBlank: 1, duration: 5, text: "When failing to fire is a surprise, the function should throw an exception.", actions:[
+				{ actor: "callee", actionType: "insert text", endingTimeAdjustment: 4, line: 3, column: 20, text: "\n    throw new Error('...');", startDuration: 1, endDuration: 1, offset: 2 },
 		] },
 		{ leadingBlank: 1, duration: 4, text: "So that caller can choose where to handle the exceptional sitution", actions:[
 		] },
@@ -100,17 +108,65 @@ export const booleanReturnsSutitles: Subtitle[] = [
 		] },
 		{ leadingBlank: 1, duration: 4, text: "This follows the Command-Query Separation principle, leading to cleaner, more maintainable code.", actions:[
 		] },
-		{ id: "envy", leadingBlank: 1, duration: 4, text: "Now, let's discuss functions returning an internal state, leading to losing domain concepts and violating Tell, Don't Ask.", actions:[] },
-		{ leadingBlank: 1, duration: 4, text: "The Blaster has a getSafetyStatus function, making callers responsible for safety. This can lead to feature envy, code duplication, and loss of domain concepts.", actions:[
+
+		{ leadingBlank: 1, duration: 4, text: "Now, let's look at another example.", actions:[
 			{ actor: "caller", actionType: "disappear" },
-			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 0] },
-			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [8, -2, -2] },
+			{ actor: "soldier", actionType: "appear"},
+			{ actor: "callee", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 3, count: 2},
 		] },
-		{ leadingBlank: 1, duration: 4, text: "Instead, use ensureSafetyOn and ensureSafetyOff methods. This way, callers don't handle the internal state, preserving domain concepts and making the code more modular.", actions:[] },
-		{ leadingBlank: 1, duration: 4, text: "Direct mapping from the problem domain to the solution domain is often preferred, but exceptions exist.", actions:[] },
-		{ leadingBlank: 1, duration: 4, text: "In conclusion, be cautious with ambiguous boolean return values. Use meaningful return values, follow Tell, Don't Ask, and adhere to Command-Query Separation.", actions:[] },
-		{ leadingBlank: 1, duration: 4, text: "This will lead to cleaner, more maintainable code and fewer headaches for you, the developer!", actions:[] },
-		{ leadingBlank: 1, duration: 4, text: "Remember, boolean return values aren't inherently evil, but can contribute to ambiguity and other issues.", actions:[] },
+
+		{ leadingBlank: 1, duration: 5, text: "The Blaster has a isSafetyOn function, and you can set the safety on or off as well.", actions:[
+			{ actor: "callee", actionType: "move", duration: 1, absolutePosition: [-240, 80, 0] },
+			{ actor: "callee", actionType: "insert text", endingTimeAdjustment: 4, line: 4, column: 0, text: "  Boolean isSafetyOn() {...}\n  void setSafetyOff(fingerprint) {...}", startDuration: 1, endDuration: 0 },
+		] },
+
+		{ leadingBlank: 1, duration: 4, text: "The soldier need to check if the safety is on. And if so, switch it off.", actions:[
+			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, -6, -1] },
+			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [6, -8, 0] },
+			{ actor: "soldier", actionType: "insert text", endingTimeAdjustment: 4, line: 2, column: 30, text: "\n  if(this.blaster.isSafetyOn()) {\n    this.blaster.setSefetyOff(this.fingerprint);\n  }", startDuration: 1, endDuration: 0, offset: 1 },
+		] },
+
+		{ leadingBlank: 1, duration: 5, text: "As you might have seen, the Soldier class LIKES the feature of their Blaster a lot.", actions:[
+				{ actor: "soldier", actionType: "highlight token", endingTimeAdjustment: 4, token: 'blaster', offset: 1},
+		] },
+
+		{ leadingBlank: 1, duration: 3, text: "This is called a Feature Envy.", actions:[
+			{ actor: "camera", actionType: "camera look at", duration: 1, absolutePosition: [0, 0, 0] },
+			{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [0, 0, 0] },
+		] },
+
+		{ leadingBlank: 1, duration: 11, text: "We could etract part of it to a method of the Solider class first.", actions:[
+				{ actor: "soldier", actionType: "highlight lines", endingTimeAdjustment: 4, lines: [3, 4, 5]},
+			  { actor: "soldier", actionType: "insert text", endingTimeAdjustment: 3, line: 9, column: 30, text: "\nvoid ensureSafetyOff(fingerprint) {\n  if(this.blaster.isSafetyOn()) {\n    this.blaster.setSefetyOff(fingerprint);\n  }\n}", startDuration: 1, endDuration: 0, offset: 1 },
+			  { actor: "soldier", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 3, count: 3, offset: 8},
+			  { actor: "soldier", actionType: "insert text", endingTimeAdjustment: 1, line: 3, column: 0, text: "  this.endsureSafetyOff(this.fingerprint);\n", offset: 9},
+		] },
+
+		{ leadingBlank: 1, duration: 5, text: "Then move the new method to the Blaster class to stop the Feature Envy.", actions:[
+				{ actor: "soldier", actionType: "highlight lines", endingTimeAdjustment: 4, lines: [8, 9, 10,11,12]},
+			  { actor: "callee", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 30, text: "\n  void ensureSafetyOff(fingerprint) {\n    if(this.isSafetyOn()) {\n      this.setSefetyOff(fingerprint);\n    }\n  }", startDuration: 1, endDuration: 0, offset: 1 },
+		] },
+
+		{ leadingBlank: 1, duration: 5, text: "Before we finish the move, you might have noticed that the method just becomes slimmer.", actions:[
+				{ actor: "soldier-left", actionType: "connect to",  startDuration: 1, target: "callee-left", bentLevel: 0, endingTimeAdjustment: 5, offset: 2},
+				{ actor: "soldier-right", actionType: "connect to",  startDuration: 1, target: "callee-right", bentLevel: 0, endingTimeAdjustment: 5, offset: 2},
+		] },
+
+		{ leadingBlank: 1, duration: 5, text: "This is because now the operation of the data is closer to the source of the data.", actions:[
+			  { actor: "soldier", actionType: "insert text", endingTimeAdjustment: 1, line: 3, column: 6, text: ".blaster", offset: 1},
+			  { actor: "soldier", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 8, count: 5, offset: 3},
+		] },
+
+		{ leadingBlank: 1, duration: 5, text: "This Feature Envy problem is not unique to boolean return values.", actions:[
+		] },
+
+		{ leadingBlank: 1, duration: 5, text: "But I feel a boolean return value is more likely to leak internal state, leading to lower cohesion.", actions:[
+		] },
+
+		{ leadingBlank: 1, duration: 10, text: "In conclusion, boolean return values are not inherently bad, but be cautious with ambiguous boolean return values. Use meaningful return values, follow Tell, Don't Ask, and adhere to Command-Query Separation.", actions:[
+			  { actor: "mask", actionType: "appear", startDuration: 0.2, endingTimeAdjustment: 100},
+				{ actor: "conclusion", actionType: "appear", startDuration: 1 },
+		] },
 ];
 
 const codeString = `class Blaster {
@@ -120,7 +176,7 @@ const codeString = `class Blaster {
 
 }`;
 
-const caller = `// Caller
+const caller = `// class Soldier
 popUpAttack() {
   this.popUp();
   this.blaster.fire();
@@ -133,10 +189,20 @@ const learningFromException = `## This boolean return value:
 * The meaning is unclear.
 * Also makes the caller lose focus.`;
 
+const conclusion = `## Conclusion
+
+* Boolean return values are not inherently bad.
+* Be cautious with ambiguous boolean return values.
+* Look for Feature Envy. Avoid leaking internal state.
+* Good principles:
+	* Command-Query Separation (CQS)
+	* Tell, Don't Ask
+`;
+
 const announceBoardStyle: CSSProperties = { 
 				paddingTop: '20px',
 				paddingLeft: '10px',
-	fontFamily: 'Roboto, sans-serif', left: '0%', top: '40%', width: '100%', height: '40%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
+	fontFamily: 'Roboto, sans-serif', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
 
 export const StoryBooleanReturns: React.FC = () => {
   return (
@@ -173,8 +239,14 @@ export const StoryBooleanReturns: React.FC = () => {
 			<CodeHighlight actor="caller" codeString={caller} style={{ left: '5%', top: '15%', width: '60%', height: '20%', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}}>
 				<Anchor actor="caller-fire" style={{left: "245px", top: "80px"}}/>
 			</CodeHighlight>
-			<CodeHighlight actor="callee" codeString={codeString} style={{ left: '35%', top: '45%', width: '60%', height: '50%', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}}>
+			<CodeHighlight actor="soldier" codeString={caller} style={{ left: '20%', top: '10%', width: '80%', height: '20%', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}}>
+				<Anchor actor="soldier-left" style={{left: "26px", top: "220px"}}/>
+				<Anchor actor="soldier-right" style={{left: "515px", top: "220px"}}/>
+			</CodeHighlight>
+			<CodeHighlight actor="callee" codeString={codeString} style={{ left: '35%', top: '45%', width: '50%', height: '50%', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}}>
 				<Anchor actor="callee-fire" style={{left: "150px", top: "25px"}}/>
+				<Anchor actor="callee-left" style={{left: "50px", top: "75px"}}/>
+				<Anchor actor="callee-right" style={{left: "430px", top: "75px"}}/>
 			</CodeHighlight>
 
       <AnimationEffect actor="stage">
@@ -190,9 +262,15 @@ export const StoryBooleanReturns: React.FC = () => {
 				</AbsoluteFill>
 			</AnimationEffect>
 
+    <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.7)"}}/>
     <Markdown actor="learning from not return" style={announceBoardStyle}
 			md={learningFromException}
 		 />
+
+    <Markdown actor="conclusion" style={{...announceBoardStyle, top: "15%", height: "60%", paddingTop: "20p"}}
+			md={conclusion}
+		 />
+
 
 
     <AnimationEffect actor="subtitles">
