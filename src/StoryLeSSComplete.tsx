@@ -20,13 +20,14 @@ export const booleanReturnsSutitles: Subtitle[] = [
 ];
 
 
+
 const StaticLineAndArrow: React.FC = () => {
 
 	const startPoint = new THREE.Vector3(0.3, -0.5, -6);
-  const endPoint = new THREE.Vector3(0.5, -2.1, 0);
+  const endPoint = new THREE.Vector3(0.7, -2.3, 0.3);
 
   // Create a curved line
-  const curve = new THREE.CatmullRomCurve3([startPoint, new THREE.Vector3(1.3, -1, 1), new THREE.Vector3(1, -2.5, 0), endPoint]);
+  const curve = new THREE.CatmullRomCurve3([startPoint, new THREE.Vector3(1.3, -1, 1), new THREE.Vector3(1, -2.4, 0.5), endPoint]);
   const tubeRadius = 0.1;
   const tubeGeometry = new THREE.TubeGeometry(curve, 50, tubeRadius, 8, false);
   const tubeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
@@ -34,7 +35,7 @@ const StaticLineAndArrow: React.FC = () => {
 
   // Calculate arrow properties
   const arrowDirection = curve.getTangentAt(1); // Get the tangent at the end of the curve
-  const arrowLength = startPoint.distanceTo(endPoint) * 0.2;
+  const arrowLength = startPoint.distanceTo(endPoint) * 0.1;
   const arrowColor = new THREE.Color(0xff0000);
 
   // Create arrowhead geometry (cone)
