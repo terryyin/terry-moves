@@ -23,14 +23,14 @@ export const booleanReturnsSutitles: Subtitle[] = [
 const StaticLineAndArrow: React.FC = () => {
 
 	const startPoint = new THREE.Vector3(0.3, -0.5, -6);
-  const endPoint = new THREE.Vector3(0, -2, 0);
-  const middlePoint = new THREE.Vector3(0, -5, -3); // Adjusted to bend in the desired direction
+  const endPoint = new THREE.Vector3(0.5, -2.1, 0);
 
   // Create a curved line
-  const curve = new THREE.CatmullRomCurve3([startPoint, middlePoint, endPoint]);
+  const curve = new THREE.CatmullRomCurve3([startPoint, new THREE.Vector3(1.3, -1, 1), new THREE.Vector3(1, -2.5, 0), endPoint]);
   const tubeRadius = 0.1;
   const tubeGeometry = new THREE.TubeGeometry(curve, 50, tubeRadius, 8, false);
   const tubeMaterial = new THREE.MeshBasicMaterial({ color: 0x0000ff });
+
 
   // Calculate arrow properties
   const arrowDirection = curve.getTangentAt(1); // Get the tangent at the end of the curve
@@ -47,7 +47,7 @@ const StaticLineAndArrow: React.FC = () => {
   const arrowHead = useRef<THREE.Mesh>(null);
 
 	useFrame(() => {
-    if (arrowHead.current) {
+		if (arrowHead.current) {
       arrowHead.current.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), arrowDirection.clone().normalize());
     }
   });
@@ -55,7 +55,7 @@ const StaticLineAndArrow: React.FC = () => {
   return (
 		<>
 		<mesh geometry={tubeGeometry} material={tubeMaterial} />
-		<mesh
+			<mesh
         ref={arrowHead}
         geometry={arrowHeadGeometry}
         material={new THREE.MeshBasicMaterial({ color: arrowColor })}
