@@ -1,3 +1,4 @@
+import {Audio} from 'remotion'
 import {staticFile} from 'remotion'
 import {Img} from 'remotion'
 
@@ -108,6 +109,8 @@ export const booleanReturnsSutitles: Subtitle[] = [
 				{ actor: "callee", actionType: "insert text", endingTimeAdjustment: 4, line: 3, column: 20, text: "\n    throw new Error('...');", startDuration: 1, endDuration: 1, offset: 2 },
 		] },
 		{ leadingBlank: 1, duration: 4, text: "Now callers can choose where to handle the exceptional situation.", actions:[
+		] },
+		{ leadingBlank: 1, duration: 4, text: "It's what we should do in test automation most of the time.", actions:[
 		] },
 		{ leadingBlank: 1, duration: 6, text: "Some languages, like Go, prefer a more explicit approach for error situations.", actions:[
 		] },
@@ -237,6 +240,7 @@ const announceBoardStyle: CSSProperties = {
 export const StoryBooleanReturns: React.FC = () => {
   return (
 		<Story id="StoryBooleanReturns" width={720} height={720} subtitles={booleanReturnsSutitles}  >
+		  <Audio src={staticFile("assets/audios/boolean2.mp3")} />
 
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
 

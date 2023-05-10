@@ -1,7 +1,7 @@
-import { booleanReturnsSutitles } from './StoryBooleanReturns';
+import { booleanParametersSutitles } from './StoryBooleanParameters';
 import { Subtitle } from "./models/Subtitles";
 
-function formatSubtitlesToSRT(subtitles: Subtitle[]): string {
+function formatSubtitlesToSRT(subtitles: Subtitle[], language: string | undefined): string {
   let output = "";
   let currentTime = 0;
 
@@ -12,12 +12,20 @@ function formatSubtitlesToSRT(subtitles: Subtitle[]): string {
     currentTime += subtitle.duration; // Add duration to current time
     const endTime = formatTime(currentTime);
 
-    const text = Array.isArray(subtitle.text) ? subtitle.text.join('\n') : subtitle.text;
+    const text = getTextOfSubtitle(subtitle, language);
 
     output += `${index + 1}\n${startTime} --> ${endTime}\n${text}\n\n`;
   });
 
   return output;
+}
+
+function getTextOfSubtitle(subtitle: Subtitle, language: string | undefined): string {
+  const text = language && subtitle?.translations ? subtitle.translations[language] : subtitle.text;
+  if (Array.isArray(text)) {
+    return text.join('\n');
+  }
+  return text;
 }
 
 function formatTime(seconds: number): string {
@@ -30,7 +38,7 @@ function formatTime(seconds: number): string {
 }
 
 
-const srtContent = formatSubtitlesToSRT(booleanReturnsSutitles)
+const srtContent = formatSubtitlesToSRT(booleanParametersSutitles, "zhCN")
 process.stdout.write(srtContent);
 
 

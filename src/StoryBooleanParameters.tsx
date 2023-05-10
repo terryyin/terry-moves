@@ -1,6 +1,5 @@
 import {staticFile} from 'remotion'
 import {Audio} from 'remotion'
-import './global.css';
 
 
 import React, { CSSProperties } from 'react';
@@ -32,7 +31,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 5,
 			text: "Hello, welcome to the Oh My Bad Boolean Series.",
-			translations: {zhCN: "大家好，欢迎来到《我的布尔值的坏习惯》系列。"},
+			translations: {zhCN: "大家好，欢迎来到《我的布尔值的坏习惯》系列。",
+		zhTW: "大家好，歡迎來到《我的布林值的壞習慣》系列。"},
 			actions: [
 				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "Seeking High Cohesion, Loose Coupling design", startDuration: 1, endDuration: 2 },
 			  { actor: "blaster assembly", actionType: "oscillate", delta: [0, 0.02, 0]},
@@ -43,7 +43,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 4.5,
 			text: "In my game program, there's a powerful tool called a Blaster.",
-			translations: {zhCN: "在我的游戏程序中，有一个强大的工具叫做Blaster。"},
+			translations: {zhCN: "在我的游戏程序中，有一个强大的工具叫做Blaster。",
+		zhTW: "在我的遊戲程式中，有一個強大的工具叫做Blaster。"},
 			actions: [
 					{ actor: "title", actionType: "disappear", startDuration: 1 },
 					{ actor: "callee", actionType: "appear", startDuration: 1 },
@@ -54,7 +55,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 4,
 			text: "You can fire the Blaster whenever you want.",
-			translations: {zhCN: "你可以随时发射Blaster。"},
+			translations: {zhCN: "你可以随时发射Blaster。",
+		zhTW: "你可以隨時發射Blaster。"},
 			actions: [
 				...fireActions,
 				{ actor: "caller 2", actionType: "appear", startDuration: 0.2},
@@ -67,7 +69,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 3,
 			text: "But if you load it first, ",
-			translations: {zhCN: "但如果你先加载它，"},
+			translations: {zhCN: "但如果你先加载它，",
+		zhTW: "但如果你先載入它，"},
 			actions: [
 				...loadActions,
 				{ actor: "caller 1", actionType: "appear", startDuration: 0.2},
@@ -81,7 +84,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 4,
 			text: "you can fire more powerful shots.",
-			translations: {zhCN: "你就可以发射更强大的火力。"},
+			translations: {zhCN: "你就可以发射更强大的火力。",
+		zhTW: "你就可以發射更強大的火力。"},
 			actions: [
 				...loadedFireActions,
 				{ actor: "caller 1", actionType: "appear", startDuration: 0.2},
@@ -94,7 +98,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 4,
 			text: "The function 'action' is called from many places in the code.",
-			translations: {zhCN: "函数'action'在代码的许多地方被调用。"},
+			translations: {zhCN: "函数'action'在代码的许多地方被调用。",
+		zhTW: "函數'action'在程式的許多地方被呼叫。"},
 			actions: [
 				{ actor: "caller 3", actionType: "appear", startDuration: 0.2},
 				{ actor: "caller 1", actionType: "highlight token", endingTimeAdjustment: 3, token: 'action'},
@@ -111,7 +116,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 7,
 			text: "Using a boolean parameter reduces the number of API calls users have to remember.",
-			translations: {zhCN: "使用布尔参数可以减少用户需要记住的API调用个数。"},
+			translations: {zhCN: "使用布尔参数可以减少用户需要记住的API调用个数。",
+		zhTW: "使用布林參數可以減少使用者需要記住的API呼叫個數。"},
 			actions: [
 				{ actor: "caller 1", actionType: "highlight token", endingTimeAdjustment: 7, token: 'true'},
 				{ actor: "caller 2", actionType: "highlight token", endingTimeAdjustment: 7, token: 'false'},
@@ -124,7 +130,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 4,
 			text: "So, what's the problem with using a boolean parameter?",
-			translations: {zhCN: "那么，使用布尔参数有什么问题呢？"},
+			translations: {zhCN: "那么，使用布尔参数有什么问题呢？",
+		zhTW: "那麼，使用布林參數有什麼問題呢？"},
 			actions: [
 			],
 	},
@@ -133,7 +140,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 5,
 			text: "As we can see, every caller knows exactly what they want.",
-			translations: {zhCN: "正如我们所看到的，每个调用者都清楚地知道他们想要什么。"},
+			translations: {zhCN: "正如我们所看到的，每个调用者都清楚地知道他们想要什么。",
+		zhTW: "正如我們所看到的，每個呼叫者都清楚地知道他們想要什麼。"},
 			actions: [
 				{ actor: "caller 1", actionType: "highlight token", endingTimeAdjustment: 7, token: 'true'},
 				{ actor: "caller 2", actionType: "highlight token", endingTimeAdjustment: 7, token: 'false'},
@@ -145,7 +153,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 5,
 			text: "It means the condition 'is Load' in the 'action' function is redundant.",
-			translations: {zhCN: "这意味着'action'函数中的条件'is Load'是多余的。"},
+			translations: {zhCN: "这意味着'action'函数中的条件'is Load'是多余的。",
+		zhTW: "這意味著'action'函數中的條件'is Load'是多餘的。"},
 			actions: [
 				{ actor: "callee", actionType: "highlight lines", endingTimeAdjustment: 5, lines: [3, 5]},
 				{ actor: "a1-param", actionType: "connect to", startDuration: 1, endingTimeAdjustment: 10, target: "callee-load", bentLevel: 30},
@@ -158,7 +167,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 6,
 			text: "I've been inventing countering logics in the callee and callers to keep myself busy.",
-			translations: {zhCN: "搞了半天我一直在调用者和被调用者之间发明反向逻辑，让自己忙得不亦乐乎。"},
+			translations: {zhCN: "搞了半天我一直在调用者和被调用者之间发明反向逻辑，让自己忙得不亦乐乎。",
+		zhTW: "搞了半天我一直在呼叫者和被呼叫者之間發明反向邏輯，讓自己忙得不亦樂乎。"},
 			actions: [
 				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 0.1, value: 100},
 				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 50, offset: 0.5},
@@ -169,7 +179,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 8,
 			text: "Say, now Caller 1 is proposing an interface change.",
-			translations: {zhCN: "现在Caller 1提议了一个接口变更。"},
+			translations: {zhCN: "现在Caller 1提议了一个接口变更。",
+		zhTW: "現在Caller 1提議了一個介面變更。"},
 			actions: [
 				{ actor: 'caller 1 callout1', actionType: 'appear', startDuration: 0.5},
 				{ actor: "caller 1", actionType: "replace text", endingTimeAdjustment: 1, line: 2, match: 'true', replacement: '1000'},
@@ -181,7 +192,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 6,
 			text: "So we changed the API to take a parameter 'load Amount'.",
-			translations: {zhCN: "因此，我们将API更改为采用'load Amount'参数。"},
+			translations: {zhCN: "因此，我们将API更改为采用'load Amount'参数。",
+		zhTW: "因此，我們將API更改為採用'load Amount'參數。"},
 			actions: [
 				{ actor: 'callee callout1', actionType: 'appear', startDuration: 0.5},
 				{ actor: "callee", actionType: "replace text", endingTimeAdjustment: 1, line: 2, match: 'isLoad', replacement: 'loadAmount'},
@@ -197,7 +209,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 		leadingBlank: 1,
 		duration: 6,
 		text: "Caller 3 is happy with the new API.",
-		translations: {zhCN: "Caller 3对新的API感到满意。"},
+		translations: {zhCN: "Caller 3对新的API感到满意。",
+			zhTW: "Caller 3對新的API感到滿意。"},
 		actions: [
 			{ actor: 'caller 1 callout1', actionType: 'disappear', startDuration: 1.5},
 			{ actor: 'caller 3 callout1', actionType: 'appear', startDuration: 0.5},
@@ -209,7 +222,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 		leadingBlank: 1,
 		duration: 6,
 		text: "But Caller 2 is confused about why they are involved in this change.",
-		translations: {zhCN: "但Caller 2对于他们为什么要参与这个变更感到困惑。"},
+		translations: {zhCN: "但Caller 2对于他们为什么要参与这个变更感到困惑。",
+			zhTW: "但Caller 2對於他們為什麼要參與這個變更感到困惑。"},
 		actions: [
 			{ actor: 'callee callout1', actionType: 'disappear', startDuration: 1.5},
 			{ actor: 'caller 2 callout1', actionType: 'appear', startDuration: 0.5},
@@ -220,7 +234,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 		leadingBlank: 1,
 		duration: 6,
 		text: "The boolean parameter makes the callers and callee tightly coupled.",
-		translations: {zhCN: "布尔参数使调用者和被调用者紧密耦合。"},
+		translations: {zhCN: "布尔参数使调用者和被调用者紧密耦合。",
+			zhTW: "布林參數使呼叫者和被呼叫者緊密耦合。"},
 		actions: [
 			{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 10},
 			{ actor: 'caller 2 callout1', actionType: 'disappear', startDuration: 0.5},
@@ -238,7 +253,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 		leadingBlank: 1,
 		duration: 11,
 		text: "This tight coupling introduces unnecessary complexity, makes changes harder and complicates collaboration.",
-		translations: {zhCN: "这种紧密耦合引入了不必要的复杂性，使更改变得更困难，也使协作变得复杂。"},
+		translations: {zhCN: "这种紧密耦合引入了不必要的复杂性，使更改变得更困难，也使协作变得复杂。",
+			zhTW: "這種緊密耦合引入了不必要的複雜性，使更改變得更困難，也使協作變得複雜。"},
 		
 		actions: [
 			{ actor: "mask", actionType: "appear", startDuration: 0.2},
@@ -253,7 +269,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 6,
 			text: "Just let callers call the methods they want.",
-		translations: {zhCN: "让调用者调用他们想要的方法就好了。"},
+		translations: {zhCN: "让调用者调用他们想要的方法就好了。",
+			zhTW: "讓呼叫者呼叫他們想要的方法就好了。"},	
 			actions: [
 			{ actor: "callee", actionType: "replace text", endingTimeAdjustment: 1, line: 13, match: " private", replacement: ""},
 			{ actor: "caller 1", actionType: "replace text", endingTimeAdjustment: 1, line: 2, replacement: "  blaster.load(1000);\n  blaster.fire();", offset: 1},
@@ -269,7 +286,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 5,
 			text: "This reduces complexity and dependencies, resulting in lower coupling.",
-		translations: {zhCN: "这将减少复杂性和依赖关系，从而降低耦合度。"},
+		translations: {zhCN: "这将减少复杂性和依赖关系，从而降低耦合度。",
+			zhTW: "這將減少複雜性和依賴關係，從而降低耦合度。"},
 			actions: [
 				{ actor: "loose coupling health bar", actionType: "additive value change to", duration: 1, value: 90, offset: 0},
 			],
@@ -280,7 +298,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 7,
 			text: "However, there's a pitfall that might bring more significant problems than maintaining tight coupling.",
-		translations: {zhCN: "然而，这里有一个陷阱，它可能带来比维持紧密耦合更严重的问题。"},
+		translations: {zhCN: "然而，这里有一个陷阱，它可能带来比维持紧密耦合更严重的问题。",
+			zhTW: "然而，這裡有一個陷阱，它可能帶來比維持緊密耦合更嚴重的問題。"},
 			actions: [
 			],
 	},
@@ -289,7 +308,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 4,
 			text: "After load, the Blaster must be fired.",
-		translations: {zhCN: "在加载之后，必须发射Blaster。"},
+		translations: {zhCN: "在加载之后，必须发射Blaster。",
+			zhTW: "在載入之後，必須發射Blaster。"},
 			actions: [
 				...loadActions,
 			  { actor: "caller 3", actionType: "highlight lines", endingTimeAdjustment: 5, lines: [2], offset: 0},
@@ -300,7 +320,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 6,
 			text: "Otherwise, it will explode.",
-		translations: {zhCN: "否则，它会爆炸。"},
+		translations: {zhCN: "否则，它会爆炸。",
+			zhTW: "否則，它會爆炸。"},
 			actions: [
 			  { actor: "blaster temperature", actionType: "additive value change to", duration: 4, value: 1000, offset: 0},
 			  { actor: "caller 3", actionType: "replace text", endingTimeAdjustment: 1, line: 3, replacement: "  this.survey();", offset: 0},
@@ -314,7 +335,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 5,
 			text: "Well, no worries. Our current code is doing exactly that.",
-		translations: {zhCN: "好吧，别担心。我们现在的代码正是这么做的。"},
+		translations: {zhCN: "好吧，别担心。我们现在的代码正是这么做的。",
+			zhTW: "好吧，別擔心。我們現在的程式碼正是這麼做的。"},
 			actions: [
 			  { actor: "caller 3", actionType: "replace text", endingTimeAdjustment: 1, line: 3, replacement: "  blaster.fire();", offset: 0},
 			  { actor: "caller 1", actionType: "highlight lines", endingTimeAdjustment: 10, lines: [2, 3], offset: 1},
@@ -326,7 +348,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 5,
 			text: "High cohesion means the things that belong together are together.",
-		translations: {zhCN: "高内聚意味着应该在一起的东西在一起。"},
+		translations: {zhCN: "高内聚意味着应该在一起的东西在一起。",
+			zhTW: "高內聚意味著應該在一起的東西在一起。"},
 			actions: [
 			],
 	},
@@ -335,7 +358,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 6,
 			text: "My code doesn't seem to have that. And it makes the cohesion low.",
-		translations: {zhCN: "我的代码似乎没有做到这一点。这导致内聚性较低。"},
+		translations: {zhCN: "我的代码似乎没有做到这一点。这导致内聚性较低。",
+			zhTW: "我的程式碼似乎沒有做到這一點。這導致內聚性較低。"},
 			actions: [
 				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 1, value: 100, offset: 0.1},
 				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 50, offset: 0.2},
@@ -351,7 +375,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 5,
 			text: "Say caller 1 found a bug caused by the now more powerful loaded fire.",
-		translations: {zhCN: "假设Caller 1发现了一个由于现在更强大的加载射击引起的bug。"},
+		translations: {zhCN: "假设Caller 1发现了一个由于现在更强大的加载射击引起的bug。",
+			zhTW: "假設Caller 1發現了一個由於現在更強大的載入射擊引起的bug。"},
 			actions: [
 			],
 	},
@@ -360,7 +385,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 5,
 			text: "After loading, the blaster should be re-aimed before fire,",
-		translations: {zhCN: "在发射之前，应该重新瞄准已加载的Blaster，"},
+		translations: {zhCN: "在发射之前，应该重新瞄准已加载的Blaster，",
+			zhTW: "在發射之前，應該重新瞄準已載入的Blaster，"},
 			actions: [
 				...loadActions,
 			  { actor: "caller 1", actionType: "insert text", endingTimeAdjustment: 2, line: 2, column: 21, text: "\n  blaster.reAim();", offset: 1},
@@ -373,7 +399,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 5,
 			text: "so as not to hurt teammates.",
-		translations: {zhCN: "以免伤害到队友。"},
+		translations: {zhCN: "以免伤害到队友。",
+			zhTW: "以免傷害到隊友。"},
 			actions: [
 				...loadedFireActions,
 			  { actor: "blaster assembly", actionType: "3d rotate", endingTimeAdjustment: 2, totalRotation: [0, 0, 0], offset: 4},
@@ -384,7 +411,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 5,
 			text: "Caller 1 fixed the bug.",
-		translations: {zhCN: "Caller 1修复了这个bug。"},
+		translations: {zhCN: "Caller 1修复了这个bug。",
+			zhTW: "Caller 1修復了這個bug。"},
 			actions: [
 			  { actor: "caller 1 callout2", actionType: "appear", startDuration: 1, offset: 0},
 			],
@@ -394,7 +422,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 4,
 			text: "However, caller 3 is still buggy,",
-		translations: {zhCN: "然而，没人发现Caller 3仍然存在bug，"},
+		translations: {zhCN: "然而，没人发现Caller 3仍然存在bug，",
+			zhTW: "然而，沒人發現Caller 3仍然存在bug，"},
 			actions: [
 				...loadActions,
 			  { actor: "caller 3", actionType: "highlight lines", endingTimeAdjustment: 7, lines: [2, 3], offset: 0},
@@ -405,7 +434,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 4,
 			text: "but the code start to diverse.",
-		translations: {zhCN: "并且代码开始变得不同了。"},
+		translations: {zhCN: "并且代码开始变得不同了。",
+			zhTW: "並且程式碼開始變得不同了。"},
 			actions: [
 				...loadedFireActions,
 			  { actor: "blaster more powerful fire", actionType: "3d animation start", duration: 3, speed: 2 },
@@ -418,7 +448,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 4,
 			text: "Again, it shows my code is not cohesive.",
-		translations: {zhCN: "再次表明，我的代码并不具有内聚性。"},
+		translations: {zhCN: "再次表明，我的代码并不具有内聚性。",
+			zhTW: "再次表明，我的程式碼並不具有內聚性。"},
 			actions: [
 				{ actor: "high cohesion health bar", actionType: "additive value change to", duration: 2, value: 10, offset: 0.2},
 			],
@@ -428,7 +459,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 10,
 			text: "Due to the lack of cohesion, my code lost important domain concepts and the future changes will become error-prone.",
-		translations: {zhCN: "由于缺乏内聚性，我的代码丢失了重要的领域概念，未来的更改将变得容易出错。"},
+		translations: {zhCN: "由于缺乏内聚性，我的代码丢失了重要的领域概念，未来的更改将变得容易出错。",
+			zhTW: "由於缺乏內聚性，我的程式碼丟失了重要的領域概念，未來的更改將變得容易出錯。"},
 			actions: [
 				{ actor: "mask", actionType: "appear", startDuration: 0.2},
 				{ actor: "learning from low cohesion", actionType: "appear", startDuration: 0.5, offset: 0.2},
@@ -441,7 +473,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 8,
 			text: "The bug would have been avoided if I kept my code more cohesive.",
-		translations: {zhCN: "如果我让我的代码更具内聚性，这个bug本可以避免的。"},
+		translations: {zhCN: "如果我让我的代码更具内聚性，这个bug本可以避免的。",
+			zhTW: "如果我讓我的程式碼更具內聚性，這個bug本可以避免的。"},
 			actions: [
 			  { actor: "teammate callout", actionType: "disappear", startDuration: 0.5, offset: 0},
 			  { actor: "caller 3 callout2", actionType: "disappear", startDuration: 0.5, offset: 0},
@@ -462,7 +495,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 1,
 			duration: 6,
 			text: "In conclusion, avoid boolean parameters, use meaningful names,",
-		translations: {zhCN: "总之，建议你也慎用使用布尔参数，使用有意义的名称，"},
+		translations: {zhCN: "总之，建议你也慎用使用布尔参数，使用有意义的名称，",
+			zhTW: "總之，建議你也慎用使用布林參數，使用有意義的名稱，"},
 			actions: [
 			  { actor: "callee", actionType: "highlight token", endingTimeAdjustment: 20, token: "loadedFire", offset: 1},
 			],
@@ -472,7 +506,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 4,
 			text: "and aim for high cohesion,",
-		translations: {zhCN: "并追求高内聚，"},
+		translations: {zhCN: "并追求高内聚，",
+			zhTW: "並追求高內聚，"},
 			actions: [
 			  { actor: "callee", actionType: "highlight lines", endingTimeAdjustment: 20, lines: [6, 7,8,9,10], offset: 1},
 			],
@@ -482,7 +517,8 @@ export const booleanParametersSutitles: Subtitle[] = [
 			leadingBlank: 0,
 			duration: 10,
 			text: "and loose coupling.",
-		translations: {zhCN: "以及松耦合。"},
+		translations: {zhCN: "以及松耦合。",
+			zhTW: "以及鬆耦合。"},
 			actions: [
 				{ actor: "a1-action", actionType: "connect to",  startDuration: 1,endingTimeAdjustment: 20, target: "callee-loadedfire", bentLevel: -30},
 				{ actor: "a2-action", actionType: "connect to",  startDuration: 1,endingTimeAdjustment: 20, target: "callee-action", bentLevel: -30},
@@ -622,7 +658,7 @@ export const StoryBooleanParameters: React.FC = () => {
 
 
     <AnimationEffect actor="subtitles">
-			<Subtitles scale={1} language="zhCN"/>
+			<Subtitles scale={1} language="zhTW"/>
 		</AnimationEffect>
     </AbsoluteFill>
     <AnimationEffect actor="title" style={announceBoardStyle} >
