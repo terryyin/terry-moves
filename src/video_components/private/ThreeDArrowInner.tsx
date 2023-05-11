@@ -47,7 +47,7 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
 
 
   // Calculate arrow properties
-  const arrowLength = tubeRadius * 5;
+  const arrowLength = tubeRadius * 4;
 
   // Create arrowhead geometry (cone)
   const arrowHeadRadius = tubeRadius * 2;
