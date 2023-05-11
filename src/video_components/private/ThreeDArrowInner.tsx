@@ -4,7 +4,8 @@ import React  from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
-function createPartialTubeGeometry(curve, percentage, radialSegments = 8, tubularSegments = 50, radius = 0.1) {
+// eslint-disable-next-line max-params
+function createPartialTubeGeometry(curve: THREE.CatmullRomCurve3, percentage: number, radialSegments = 8, tubularSegments = 50, radius = 0.1) {
   const segmentPercentage = Math.max(Math.min(percentage, 1), 0);
   const segmentCount = Math.round(tubularSegments * segmentPercentage);
 
@@ -35,62 +36,18 @@ function createPartialTubeGeometry(curve, percentage, radialSegments = 8, tubula
 
 
 
-// eslint-disable-next-line max-params
-function createPartialTubeGeometry1(curve: THREE.CatmullRomCurve3, percentage: number, radialSegments: number, tubularSegments: number, radius: number) {
-  const geometry = new THREE.BufferGeometry();
-  const vertices = [];
-  const indices = [];
-  const normals = [];
-  const uvs = [];
-
-  const segmentPercentage = Math.max(Math.min(percentage, 1), 0);
-  const segmentCount = Math.round(tubularSegments * segmentPercentage);
-
-  for (let i = 0; i <= segmentCount; i++) {
-    const u = i / tubularSegments;
-    const p1 = curve.getPointAt(u);
-    const p2 = curve.getTangentAt(u).normalize().cross(new THREE.Vector3(0, 1, 0)).multiplyScalar(radius);
-
-    for (let j = 0; j <= radialSegments; j++) {
-      const v = j / radialSegments;
-      const vertex = p1.clone().add(p2.clone().applyAxisAngle(curve.getTangentAt(u), (v * Math.PI * 2)));
-      vertices.push(vertex.x, vertex.y, vertex.z);
-      normals.push(p2.x, p2.y, p2.z);
-      uvs.push(i / tubularSegments, j / radialSegments);
-    }
-  }
-
-  for (let i = 0; i < segmentCount; i++) {
-    for (let j = 0; j < radialSegments; j++) {
-      const a = i * (radialSegments + 1) + j;
-      const b = a + radialSegments + 1;
-      indices.push(a, b, a + 1);
-      indices.push(b, b + 1, a + 1);
-    }
-  }
-
-  geometry.setIndex(indices);
-  geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
-  geometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
-  geometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
-
-  return geometry;
-}
-
-
-export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vector3[], color: THREE.Color}> = ({percentage, points, color}) => {
+export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vector3[], color: THREE.Color, emissive: THREE.Color, tubeRadius: number}> = ({percentage, points, color, emissive, tubeRadius}) => {
   // Create a curved line
   const curve = new THREE.CatmullRomCurve3(points);
-  const tubeRadius = 0.1;
 
   const tubeMaterial = new THREE.MeshStandardMaterial({ color,
-    emissive: new THREE.Color(0xff0000), 
-  emissiveIntensity: 0.1, // Adjust the intensity to control the glow amount
+    emissive,
+  emissiveIntensity: 0.3, // Adjust the intensity to control the glow amount
   side: THREE.DoubleSide  });
 
 
   // Calculate arrow properties
-  const arrowLength = 0.4;
+  const arrowLength = tubeRadius * 5;
 
   // Create arrowhead geometry (cone)
   const arrowHeadRadius = tubeRadius * 2;
@@ -103,7 +60,7 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
 
 	useFrame(() => {
     if (mesh.current) {
-			const newGeometry = createPartialTubeGeometry(curve, percentage, 8, 200, 0.1);
+			const newGeometry = createPartialTubeGeometry(curve, percentage, 8, 200, tubeRadius);
 			mesh.current.geometry.dispose();
 			mesh.current.geometry = newGeometry;
 
@@ -124,7 +81,11 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
 			(percentage !== 0 && <mesh
         ref={arrowHead}
         geometry={arrowHeadGeometry}
-        material={new THREE.MeshBasicMaterial({ color })}
+        material={new THREE.MeshStandardMaterial({
+           color,
+          emissive,
+        emissiveIntensity: 0.3, // Adjust the intensity to control the glow amount
+           })}
       />)
 
 		</>

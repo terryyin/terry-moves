@@ -3,6 +3,7 @@ import { StoryFailureVsFailure } from './StoryFailureVsFailure';
 import { StoryBooleanParameters } from './StoryBooleanParameters';
 import { StoryBooleanReturns } from './StoryBooleanReturns';
 import { StoryLeSSComplete } from './StoryLeSSComplete';
+import { StoryScalingScrum } from './StoryScalingScrum';
 
 export const RemotionRoot: React.FC = () => {
 	return (
@@ -11,6 +12,7 @@ export const RemotionRoot: React.FC = () => {
 			<StoryBooleanParameters />
 			<StoryBooleanReturns />
 			<StoryLeSSComplete />
+			<StoryScalingScrum />
 			<StoryProductDeveloper />
 		</>
 	);
