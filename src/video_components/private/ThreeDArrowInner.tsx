@@ -4,9 +4,39 @@ import React  from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
+function createPartialTubeGeometry(curve, percentage, radialSegments = 8, tubularSegments = 50, radius = 0.1) {
+  const segmentPercentage = Math.max(Math.min(percentage, 1), 0);
+  const segmentCount = Math.round(tubularSegments * segmentPercentage);
+
+  const fullTubeGeometry = new THREE.TubeGeometry(curve, tubularSegments, radius, radialSegments, false);
+
+  const vertices = fullTubeGeometry.getAttribute('position').array;
+  const normals = fullTubeGeometry.getAttribute('normal').array;
+  const uvs = fullTubeGeometry.getAttribute('uv').array;
+
+  const indices = [];
+  for (let i = 0; i < segmentCount; i++) {
+    for (let j = 0; j < radialSegments; j++) {
+      const a = i * (radialSegments + 1) + j;
+      const b = a + radialSegments + 1;
+      indices.push(a, b, a + 1);
+      indices.push(b, b + 1, a + 1);
+    }
+  }
+
+  const partialTubeGeometry = new THREE.BufferGeometry();
+  partialTubeGeometry.setIndex(indices);
+  partialTubeGeometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+  partialTubeGeometry.setAttribute('normal', new THREE.Float32BufferAttribute(normals, 3));
+  partialTubeGeometry.setAttribute('uv', new THREE.Float32BufferAttribute(uvs, 2));
+
+  return partialTubeGeometry;
+}
+
+
 
 // eslint-disable-next-line max-params
-function createPartialTubeGeometry(curve: THREE.CatmullRomCurve3, percentage: number, radialSegments: number, tubularSegments: number, radius: number) {
+function createPartialTubeGeometry1(curve: THREE.CatmullRomCurve3, percentage: number, radialSegments: number, tubularSegments: number, radius: number) {
   const geometry = new THREE.BufferGeometry();
   const vertices = [];
   const indices = [];
