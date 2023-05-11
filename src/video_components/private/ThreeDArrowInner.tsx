@@ -4,8 +4,9 @@ import React  from 'react';
 import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 
+
 // eslint-disable-next-line max-params
-function createPartialTubeGeometry(curve: THREE.CatmullRomCurve3, percentage: number, radialSegments = 8, tubularSegments = 50, radius = 0.1) {
+function createPartialTubeGeometry(curve: THREE.CatmullRomCurve3, percentage: number, radialSegments: number, tubularSegments: number, radius: number) {
   const geometry = new THREE.BufferGeometry();
   const vertices = [];
   const indices = [];
@@ -51,10 +52,11 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
   // Create a curved line
   const curve = new THREE.CatmullRomCurve3(points);
   const tubeRadius = 0.1;
-  // Const tubeGeometry = new THREE.TubeGeometry(curve, 50, tubeRadius, 8, false);
-	const tubeGeometry = createPartialTubeGeometry(curve, percentage, 8, 50, tubeRadius);
 
-  const tubeMaterial = new THREE.MeshStandardMaterial({ color });
+  const tubeMaterial = new THREE.MeshStandardMaterial({ color,
+    emissive: new THREE.Color(0xff0000), 
+  emissiveIntensity: 0.1, // Adjust the intensity to control the glow amount
+  side: THREE.DoubleSide  });
 
 
   // Calculate arrow properties
@@ -71,7 +73,7 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
 
 	useFrame(() => {
     if (mesh.current) {
-			const newGeometry = createPartialTubeGeometry(curve, percentage, 8, 50, 0.1);
+			const newGeometry = createPartialTubeGeometry(curve, percentage, 8, 200, 0.1);
 			mesh.current.geometry.dispose();
 			mesh.current.geometry = newGeometry;
 
@@ -88,7 +90,7 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
 	
   return (
 		<>
-		<mesh ref={mesh} geometry={tubeGeometry} material={tubeMaterial} />
+		<mesh ref={mesh} material={tubeMaterial} />
 			(percentage !== 0 && <mesh
         ref={arrowHead}
         geometry={arrowHeadGeometry}
