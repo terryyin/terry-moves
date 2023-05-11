@@ -26,7 +26,6 @@ function generateSpiralCirclePoints(
 }
 
 export const Scrum: React.FC<{actor: string, headActor: string}> = ({actor, headActor}) => {
-  useAnimationContext().getGeneralValue(actor) ?? 0;
   const headMove = useAnimationContext().getGeneralValue(headActor) ?? 0;
 
   const radius = 1;
@@ -40,6 +39,6 @@ export const Scrum: React.FC<{actor: string, headActor: string}> = ({actor, head
 
   const oneSprint = [new THREE.Vector3(-2.4, -radius, -1), ...spiralCirclePoints, new THREE.Vector3(1, -radius, 1.2), new THREE.Vector3(2, -radius + headMove, 1.4)]
   return (
-    <ThreeDArrow actor="arrow" tubeRadius={0.2} color={new THREE.Color(0x850000)} points={oneSprint}/>
+    <ThreeDArrow actor={actor} tubeRadius={0.2} color={new THREE.Color(0x850000)} points={oneSprint}/>
   );
 };

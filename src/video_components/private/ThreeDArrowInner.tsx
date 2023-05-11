@@ -78,7 +78,7 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
   return (
 		<>
 		<mesh ref={mesh} material={tubeMaterial} />
-			(percentage !== 0 && <mesh
+			{percentage !== 0 && <mesh
         ref={arrowHead}
         geometry={arrowHeadGeometry}
         material={new THREE.MeshStandardMaterial({
@@ -86,7 +86,7 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
           emissive,
         emissiveIntensity: 0.3, // Adjust the intensity to control the glow amount
            })}
-      />)
+      />}
 
 		</>
   );
