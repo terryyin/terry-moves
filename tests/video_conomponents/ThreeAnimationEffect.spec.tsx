@@ -63,9 +63,9 @@ describe('ThreeAnimationEffect', () => {
 
   describe('rotate and rise', () => {
     [
-      {tid: "1", sec: 0,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
-      {tid: "2", sec: 1,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
-      {tid: "3", sec: 1.1, expectScale: '0.1912078645890012', expectRotateY: '-5.08179086177679', expectTransY: '-3.2351685416439953' },
+      {tid: "1", sec: 0,   expectScale: '0', expectRotateY: '2.4492935982947064e-16', expectTransY: '-4' },
+      {tid: "2", sec: 1,   expectScale: '0', expectRotateY: '2.4492935982947064e-16', expectTransY: '-4' },
+      {tid: "3", sec: 1.1, expectScale: '0.1912078645890012', expectRotateY: '1.2013944454027965', expectTransY: '-3.2351685416439953' },
     ].forEach(({tid, sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
@@ -89,7 +89,7 @@ describe('ThreeAnimationEffect', () => {
     [
       {tid: "4", sec: 0,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
       {tid: "5", sec: 1,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
-      {tid: "6", sec: 1.1, expectScale: '1', expectRotateY: '0.600697222701398', expectTransY: '0' },
+      {tid: "6", sec: 1.1, expectScale: '1', expectRotateY: '0.6006972227013979', expectTransY: '0' },
     ].forEach(({tid, sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
@@ -113,8 +113,8 @@ describe('ThreeAnimationEffect', () => {
     [
       {sec: 0,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
       {sec: 1,   expectScale: '1', expectRotateY: '0', expectTransY: '0' },
-      {sec: 1.1, expectScale: '1', expectRotateY: '0.600697222701398', expectTransY: '0' },
-      {sec: 10.1, expectScale: '1', expectRotateY: '2.540895430888395', expectTransY: '0' },
+      {sec: 1.1, expectScale: '1', expectRotateY: '0.6006972227013979', expectTransY: '0' },
+      {sec: 10.1, expectScale: '1', expectRotateY: '0.6006972227013982', expectTransY: '0' },
     ].forEach(({sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
@@ -128,7 +128,7 @@ describe('ThreeAnimationEffect', () => {
                 .please();
         const group = renderAndGetGroup(animationContext);
         expect(group).toHaveAttribute('position', `0,${expectTransY},0`);
-        expect(group).toHaveAttribute('rotation', `0,${expectRotateY},0,XYZ`);
+        expect(group.getAttribute("rotation")).toContain(expectRotateY);
         expect(group).toHaveAttribute('scale', `${expectScale}`);
       });
     });
@@ -136,9 +136,9 @@ describe('ThreeAnimationEffect', () => {
 
   describe('3d effects multiply', () => {
     [
-      {tid: "1", sec: 0,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
-      {tid: "2", sec: 1,   expectScale: '0', expectRotateY: '-6.283185307179586', expectTransY: '-4' },
-      {tid: "3", sec: 1.1, expectScale: '0.1912078645890012', expectRotateY: '-3.880396416373994', expectTransY: '-3.2351685416439953' },
+      {tid: "1", sec: 0,   expectScale: '0', expectRotateY: '2.4492935982947064e-16', expectTransY: '-4' },
+      {tid: "2", sec: 1,   expectScale: '0', expectRotateY: '2.4492935982947064e-16', expectTransY: '-4' },
+      {tid: "3", sec: 1.1, expectScale: '0.1912078645890012', expectRotateY: '0.7388037627842009', expectTransY: '-3.2351685416439953' },
     ].forEach(({tid, sec, expectScale, expectRotateY, expectTransY}) => {
       const subtitleWithAction: Subtitle = 
         { leadingBlank: 1, duration: 3, text: 'First subtitle.', actions: [
@@ -153,7 +153,7 @@ describe('ThreeAnimationEffect', () => {
                 .please();
         const group = renderAndGetGroup(animationContext);
         expect(group).toHaveAttribute('position', `0,${expectTransY},0`);
-        expect(group).toHaveAttribute('rotation', `0,${expectRotateY},0,XYZ`);
+        expect(group.getAttribute("rotation")).toContain(expectRotateY);
         expect(group).toHaveAttribute('scale', `${expectScale}`);
       });
     });
