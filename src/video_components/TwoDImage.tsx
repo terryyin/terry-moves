@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextureLoader, MeshBasicMaterial, PlaneGeometry,  } from 'three';
+import { TextureLoader, PlaneGeometry, MeshStandardMaterial,  } from 'three';
 import { ThreeAnimationEffect } from './ThreeAnimationEffect';
 
 export const TwoDImage: React.FC<{
@@ -9,7 +9,7 @@ export const TwoDImage: React.FC<{
   scale?: number;
   url: string}> = ({actor, url, position, rotation, scale}) => {
 	const texture = new TextureLoader().load(url);
-  const material = new MeshBasicMaterial({ map: texture, transparent: true });
+  const material = new MeshStandardMaterial({ map: texture, transparent: true });
   const geometry = new PlaneGeometry(5, 5);
 
   return <ThreeAnimationEffect actor={actor} position={position} rotation={rotation} scale={scale}>

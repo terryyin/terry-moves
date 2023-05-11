@@ -5,6 +5,7 @@ import * as THREE from 'three';
 import { useFrame } from '@react-three/fiber';
 import { useAnimationContext } from '../hooks/useAnimationContext';
 
+// eslint-disable-next-line max-params
 function createPartialTubeGeometry(curve: THREE.CatmullRomCurve3, percentage: number, radialSegments = 8, tubularSegments = 50, radius = 0.1) {
   const geometry = new THREE.BufferGeometry();
   const vertices = [];
@@ -47,14 +48,11 @@ function createPartialTubeGeometry(curve: THREE.CatmullRomCurve3, percentage: nu
 }
 
 
-export const ThreeDArrow: React.FC<{actor: string}> = ({actor}) => {
+export const ThreeDArrow: React.FC<{actor: string, points: THREE.Vector3[]}> = ({actor, points}) => {
   const percentage = useAnimationContext().getGeneralValue(actor) ?? 0;
 
-	const startPoint = new THREE.Vector3(0.3, -0.5, -6);
-  const endPoint = new THREE.Vector3(0.8, -2.0, 0.3);
-
   // Create a curved line
-  const curve = new THREE.CatmullRomCurve3([startPoint, new THREE.Vector3(1.3, -1, 1), new THREE.Vector3(1, -2.4, 0.5), endPoint]);
+  const curve = new THREE.CatmullRomCurve3(points);
   const tubeRadius = 0.1;
   // Const tubeGeometry = new THREE.TubeGeometry(curve, 50, tubeRadius, 8, false);
 	const tubeGeometry = createPartialTubeGeometry(curve, percentage, 8, 50, tubeRadius);
