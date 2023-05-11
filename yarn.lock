@@ -918,6 +918,11 @@
     screen-space-reflections "2.5.0"
     three-stdlib "^2.21.10"
 
+"@react-three/test-renderer@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@react-three/test-renderer/-/test-renderer-8.1.2.tgz#85b8fde2249b7d3743e7fb6afaebe25873079182"
+  integrity sha512-1penh4ydTUXsWNtU6TpfxGebqx949GYDS0cwEWQH580/xkuKoXsnPTayKOcOxuhN+iaD2ySackNjxpQ1YolmZA==
+
 "@remotion/bundler@3.3.87":
   version "3.3.87"
   resolved "https://registry.yarnpkg.com/@remotion/bundler/-/bundler-3.3.87.tgz#7a5bdbc69b3be57ebde1c46713a79f46af09da19"
