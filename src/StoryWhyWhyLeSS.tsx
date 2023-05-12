@@ -60,7 +60,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	{ actor: "center", actionType: "connect to",  startDuration: 1, target: "adjust-direction", bentLevel: -100, endingTimeAdjustment: 3},
 	...empiricalActions,
 ]},
-{ leadingBlank: 1, duration: 9, text: `While this depiction still holds true, the term 'Scrum' has grown increasingly nebulous.`, actions: [
+{ leadingBlank: 1, duration: 10, text: `While this depiction still holds true, the term 'Scrum' has grown increasingly nebulous.`, actions: [
 		{ actor: 'scrum stage', actionType: 'scale', duration: 1, outputRange: [1, 0.4] },
 		{ actor: 'scrum stage', actionType: 'move', duration: 1, absolutePosition: [600, 600] },
 		{ actor: "wrong scrum 1", actionType: "additive value change to", duration: 2, value: 1},
@@ -86,11 +86,16 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'role18', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
 		{ actor: 'role19', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
 		{ actor: "camera", actionType: "camera look at", duration: 4, absolutePosition: [0, 3, 0], offset: 4 },
-		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 20, 0], offset: 7 },
+		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 20, 0], offset: 8 },
 		{ actor: 'where is scrum', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 3, offset: 8 },
 
 ]},
-{ leadingBlank: 1, duration: 5, text: 'The updated version underscores the essence of LeSS - prioritizing systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', actions: []},
+{ leadingBlank: 1, duration: 5, text: 'The updated version underscores the essence of LeSS - prioritizing systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', actions: [
+		{ actor: 'wrong scrum stage', actionType: 'scale', duration: 1, outputRange: [1, 0.3] },
+		{ actor: 'wrong scrum stage', actionType: 'move', duration: 1, absolutePosition: [-900, 900] },
+		{ actor: "camera", actionType: "camera look at", duration: 1, absolutePosition: [0, 0, 0] },
+		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [0, 0, 0] },
+]},
 { leadingBlank: 1, duration: 5, text: 'This essence is embodied in the principles of LeSS.', actions: []},
 { leadingBlank: 1, duration: 5, text: 'The revised "LeSS Complete Picture" visually represents the equilibrium between abstract principles and concrete practices.', actions: []},
 { leadingBlank: 1, duration: 5, text: 'The LeSS rules, serving as the minimal core structure, replace prescriptive frameworks. This emphasizes that LeSS is less about adhering to a rigid framework and more about abiding by minimal guiding rules.', actions: []},
