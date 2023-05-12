@@ -15,6 +15,7 @@ import * as THREE from 'three';
 import { GroupInitialState } from './video_components/GroupInitialState';
 import { BoxWithText } from './video_components/BoxWithText';
 import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
+import { CalloutCloud } from './video_components/CalloutCloud';
 
 export const whyWhyLeSSSubtitles: Subtitle[] = [
 { leadingBlank: 1, duration: 5, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', actions: [
@@ -86,6 +87,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'role19', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
 		{ actor: "camera", actionType: "camera look at", duration: 4, absolutePosition: [0, 3, 0], offset: 4 },
 		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 20, 0], offset: 7 },
+		{ actor: 'where is scrum', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 3, offset: 8 },
 
 ]},
 { leadingBlank: 1, duration: 5, text: 'The updated version underscores the essence of LeSS - prioritizing systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', actions: []},
@@ -209,6 +211,9 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 			<AnimationEffect actor="page" style={{ width: "80%", left: "10%", top: "10%" }}>
 				<Img src={staticFile('assets/less/why-less-page.png')} style={{ width: "100%" }}/>
 			</AnimationEffect>
+			<CalloutCloud actor='where is scrum' style={{top: '60%', left: "30%"}} tailShift={-60} tailHeightPx={20}>
+				<span style={{ fontSize: '30px', margin: 0 }} > 🤔 Hmm, where is Scrum?  </span>
+			</CalloutCloud>
 			<AbsoluteFill style={{ left: '83%', top: '4.6%', width: '10%', height: '20%'}}>
 				<span style={{fontSize: '20px', fontFamily: "Poppins, sans serif"}}>terry@</span>
 			</AbsoluteFill>
