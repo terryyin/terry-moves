@@ -13,6 +13,7 @@ import { Anchor } from './video_components/Anchor';
 import { Scrum } from './parts/Scrum';
 import * as THREE from 'three';
 import { GroupInitialState } from './video_components/GroupInitialState';
+import { BoxWithText } from './video_components/BoxWithText';
 
 export const whyWhyLeSSSubtitles: Subtitle[] = [
 { leadingBlank: 1, duration: 5, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', actions: [
@@ -99,6 +100,9 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 					</GroupInitialState>
 					<GroupInitialState position={[3, 0, 0]}>
 						<Scrum actor="wrong scrum 3" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
+					</GroupInitialState>
+					<GroupInitialState position={[0, 5, 0]}>
+						<BoxWithText actor="wrong scrum head" text="Team PO" />
 					</GroupInitialState>
 				</ThreeDFrame>
 			</AnimationEffect>
