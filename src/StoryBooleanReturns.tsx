@@ -54,6 +54,7 @@ export const booleanReturnsSutitles: Subtitle[] = [
 		] },
 		{ leadingBlank: 1, duration: 3, text: "And how can we make our code reveal my STYLE.", actions:[
 				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "and make our code reveal my STYLE", startDuration: 1, endDuration: 1 },
+				{ actor: "punk head", actionType: "rotate and rise", duration: 1, value: 5 },
 		] },
 		{ leadingBlank: 1, duration: 5, text: "Oops, sorry, not 'my STYLE'. Should be 'its true intention'.", actions:[
 				{ actor: "second title", actionType: "replace text", endingTimeAdjustment: 4, line: 1, match: "my STYLE", replacement: "its true intention", startDuration: 0, endDuration: 2 },
@@ -350,6 +351,10 @@ export const StoryBooleanReturns: React.FC = () => {
     <AbsoluteFill style={{ left: '50%', top: '2.4%', width: '40%', height: '3%'}}>
 		<HealthBar actor="high cohesion health bar" />
 		</AbsoluteFill>
+		<AnimationEffect actor="punk head" style={{ left: '50%', top: '60%', width: '20%', height: '40%'}}>
+			<Img src={staticFile("assets/punk-head.svg")} style={{position: 'absolute', width: '100%'}} />
+		</AnimationEffect>
+
     <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '-2%', width: '12%', height: '20%'}}>
 			<OddeLogo />
 			<FlipCoin speed={2} interval={4} shift={1} >

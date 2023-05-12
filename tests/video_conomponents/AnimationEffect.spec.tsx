@@ -36,7 +36,7 @@ describe('AnimationEffect', () => {
               .withSubtitle({ leadingBlank: 1, duration: 3, text: 'First subtitle.'})
               .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('transform')).toBe("scale(1) translateX(0px) translateY(0px) translateZ(0px)");
+      expect(computedStyle.getPropertyValue('transform')).toContain("scale(1) translateX(0px) translateY(0px) translateZ(0px)");
     });
 
     [
@@ -61,7 +61,7 @@ describe('AnimationEffect', () => {
                 .seconds(1)
                 .please();
       const computedStyle = renderAndGetDivStyle(animationContext);
-      expect(computedStyle.getPropertyValue('transform')).toBe('scale(1) translateX(0px) translateY(0px) translateZ(0px)');
+      expect(computedStyle.getPropertyValue('transform')).toContain('scale(1) translateX(0px) translateY(0px) translateZ(0px)');
     });
 
     test('find the action in the second subtitle', () => {

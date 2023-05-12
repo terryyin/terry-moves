@@ -30,6 +30,13 @@ export class ThreeDObjectState {
 			}
 		});
 
+		['rotatex', 'rotatey', 'rotatez'].forEach((key, index) => {
+			const rotate = this.rotation.toArray()[index];
+			if (rotate !== undefined) {
+				transforms.push(`${key}(${rotate}rad)`);
+			}
+		});
+
 		const result: CSSProperties = {transformOrigin: 'center'};
 		result.transformOrigin = 'center';
 
