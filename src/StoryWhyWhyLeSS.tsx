@@ -14,12 +14,33 @@ import { Scrum } from './parts/Scrum';
 import * as THREE from 'three';
 import { GroupInitialState } from './video_components/GroupInitialState';
 import { BoxWithText } from './video_components/BoxWithText';
+import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
 
 export const whyWhyLeSSSubtitles: Subtitle[] = [
 { leadingBlank: 1, duration: 5, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', actions: [
 	{ actor: "overview", actionType: "appear", endingTimeAdjustment: 0, endDuration: 2,  persistUntilSubtitleId: "letsdelve"},
 	{ actor: "overview", actionType: "scale", duration: 4, outputRange: [1, 6]},
 	{ actor: "overview", actionType: "move", duration: 4, absolutePosition: [0, 190, 0]},
+
+	{ actor: 'team PO1', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'team PO2', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'team PO3', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role4', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role5', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role6', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role7', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role8', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role9', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role10', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role11', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role12', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role13', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role14', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role15', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role16', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role17', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role18', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
+	{ actor: 'role19', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
 ]},
 { leadingBlank: 1, duration: 5, text: 'This update shifts focus from scaling Scrum to achieving organizational adaptiveness.', actions: []},
 { id: "letsdelve", leadingBlank: 1, duration: 3, text: `Let's delve into these changes.`, actions: [
@@ -38,12 +59,33 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	{ actor: "center", actionType: "connect to",  startDuration: 1, target: "adjust-direction", bentLevel: -100, endingTimeAdjustment: 3},
 	...empiricalActions,
 ]},
-{ leadingBlank: 1, duration: 5, text: `While this depiction still holds true, the term 'Scrum' has grown increasingly nebulous.`, actions: [
+{ leadingBlank: 1, duration: 9, text: `While this depiction still holds true, the term 'Scrum' has grown increasingly nebulous.`, actions: [
 		{ actor: 'scrum stage', actionType: 'scale', duration: 1, outputRange: [1, 0.4] },
 		{ actor: 'scrum stage', actionType: 'move', duration: 1, absolutePosition: [600, 600] },
 		{ actor: "wrong scrum 1", actionType: "additive value change to", duration: 2, value: 1},
 		{ actor: "wrong scrum 2", actionType: "additive value change to", duration: 2, value: 1},
 		{ actor: "wrong scrum 3", actionType: "additive value change to", duration: 2, value: 1},
+		{ actor: 'team PO1', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 3 },
+		{ actor: 'team PO2', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 3.5 },
+		{ actor: 'team PO3', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 4 },
+		{ actor: 'role4', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 4.4 },
+		{ actor: 'role5', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 4.8 },
+		{ actor: 'role6', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 5.1 },
+		{ actor: 'role7', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 5.4 },
+		{ actor: 'role8', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 5.7 },
+		{ actor: 'role9', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 5.9 },
+		{ actor: 'role10', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 6.1 },
+		{ actor: 'role11', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 6.3 },
+		{ actor: 'role12', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 6.4 },
+		{ actor: 'role13', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 6.5 },
+		{ actor: 'role14', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 6.55 },
+		{ actor: 'role15', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 6.6 },
+		{ actor: 'role16', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 6.63 },
+		{ actor: 'role17', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
+		{ actor: 'role18', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
+		{ actor: 'role19', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
+		{ actor: "camera", actionType: "camera look at", duration: 4, absolutePosition: [0, 3, 0], offset: 4 },
+		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 20, 0], offset: 7 },
 
 ]},
 { leadingBlank: 1, duration: 5, text: 'The updated version underscores the essence of LeSS - prioritizing systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', actions: []},
@@ -92,18 +134,72 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 				<ThreeDFrame cameraDistance={12} lookAtY={0} lookAtZ={0} cameraY={-1}>
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
-					<GroupInitialState position={[-3, 0, 0]}>
+					<GroupInitialState position={[-3, 1, -2]}>
 						<Scrum actor="wrong scrum 1" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
 					</GroupInitialState>
-					<GroupInitialState position={[0, 0, 0]}>
+					<GroupInitialState position={[0, 1, -2]}>
 						<Scrum actor="wrong scrum 2" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
 					</GroupInitialState>
-					<GroupInitialState position={[3, 0, 0]}>
+					<GroupInitialState position={[3, 1, -2]}>
 						<Scrum actor="wrong scrum 3" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
 					</GroupInitialState>
-					<GroupInitialState position={[0, 5, 0]}>
+					<ThreeAnimationEffect actor="team PO1" position={[-4, 5, 0]}>
 						<BoxWithText actor="wrong scrum head" text="Team PO" />
-					</GroupInitialState>
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="team PO2" position={[0, 5, 0]}>
+						<BoxWithText actor="wrong scrum head" text="Team PO" />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="team PO3" position={[4, 5, 0]}>
+						<BoxWithText actor="" text="Team PO" />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role4" position={[-5, 7, 0]}>
+						<BoxWithText actor="" text="BA" />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role5" position={[-1, 7, 0]}>
+						<BoxWithText actor="" text="QA" />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role6" position={[2.5, 7, 0]}>
+						<BoxWithText actor="" text="DevOps" />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role7" position={[5.9, 7, 0]}>
+						<BoxWithText actor="" text="Architect" />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role8" position={[-4.5, 9, 0]}>
+						<BoxWithText actor="" text={`Choo Choo\nConductor`} />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role9" position={[-1.0, 9, 0]}>
+						<BoxWithText actor="" text="Chief PO" />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role10" position={[2.8, 9, 0]}>
+						<BoxWithText actor="" text={`Project\nManger`} />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role11" position={[6, 9, 0]}>
+						<BoxWithText actor="" text={`Jira\nMaster`} />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role12" position={[-4, 11, 0]}>
+						<BoxWithText actor="" text={`Program\nManager`} />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role13" position={[0, 11, 0]}>
+						<BoxWithText actor="" text={`Chief\nScrumMaster`} />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role14" position={[3.5, 11, 0]}>
+						<BoxWithText actor="" text={`OOO\nManager`} />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role15" position={[-3.5, 13, 0]}>
+						<BoxWithText actor="" text={`XXX\nManager`} />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role16" position={[0.5, 13, 0]}>
+						<BoxWithText actor="" text={`Renamed\nManager`} />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role17" position={[5, 13, 0]}>
+						<BoxWithText actor="" text={`Status Quo\nManager`} />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role18" position={[-2, 15, 0]}>
+						<BoxWithText actor="" text="CTO" />
+					</ThreeAnimationEffect>
+					<ThreeAnimationEffect actor="role19" position={[2, 15, 0]}>
+						<BoxWithText actor="" text="CIO" />
+					</ThreeAnimationEffect>
 				</ThreeDFrame>
 			</AnimationEffect>
 	

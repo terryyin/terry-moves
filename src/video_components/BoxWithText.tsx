@@ -12,7 +12,7 @@ export const BoxWithText: React.FC<{actor: string, text: string}> = ({
         <meshStandardMaterial color="orange" />
       </Box>
       <Text color="#000" anchorX="center" anchorY="middle" position={[0, 0, 0.01]}
-      fontSize={0.7} 
+      fontSize={0.5} 
        matrixWorldAutoUpdate={undefined} getObjectsByProperty={undefined} getVertexPosition={undefined}      >
         {text}
       </Text>
