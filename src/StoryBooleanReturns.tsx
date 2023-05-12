@@ -59,6 +59,8 @@ export const booleanReturnsSutitles: Subtitle[] = [
 		{ leadingBlank: 1, duration: 5, text: "Oops, sorry, not 'my STYLE'. Should be 'its true intention'.", actions:[
 				{ actor: "second title", actionType: "replace text", endingTimeAdjustment: 4, line: 1, match: "my STYLE", replacement: "its true intention", startDuration: 0, endDuration: 2 },
 				{ actor: "title", actionType: "disappear", startDuration: 1, offset: 5 },
+				{ actor: "punk head", actionType: "move", duration: 2, absolutePosition: [-850,-1250,0] },
+				{ actor: "punk head", actionType: "scale", duration: 2, outputRange: [1,0.5] },
 		] },
 		{ id: "intro to blaster" ,leadingBlank: 1, duration: 3, text: "Remeber the Blaster in my game program?", actions:[
 			  { actor: "blaster", actionType: "3d animation reverse", duration: 2, speed: 4, pauseAtEnd: true, freezeBeforeStart: true },
@@ -111,7 +113,7 @@ export const booleanReturnsSutitles: Subtitle[] = [
 		] },
 		{ leadingBlank: 1, duration: 4, text: "Now callers can choose where to handle the exceptional situation.", actions:[
 		] },
-		{ leadingBlank: 1, duration: 4, text: "It's what we should do in test automation most of the time.", actions:[
+		{ leadingBlank: 1, duration: 4, text: "We should do this more often in test automation.", actions:[
 		] },
 		{ leadingBlank: 1, duration: 6, text: "Some languages, like Go, prefer a more explicit approach for error situations.", actions:[
 		] },
@@ -174,7 +176,7 @@ export const booleanReturnsSutitles: Subtitle[] = [
 			  { actor: "soldier", actionType: "insert text", endingTimeAdjustment: 1, line: 3, column: 6, text: ".blaster", offset: 4},
 		] },
 
-		{ leadingBlank: 1, duration: 5, text: "Before we finish the move, you might have noticed that the method just becomes slimmer.", actions:[
+		{ leadingBlank: 1, duration: 6, text: "Before we finish the move, you might have noticed that the method just becomes slimmer.", actions:[
 				{ actor: "soldier-left", actionType: "connect to",  startDuration: 1, target: "callee-left", bentLevel: 0, endingTimeAdjustment: 5, offset: 2},
 				{ actor: "soldier-right", actionType: "connect to",  startDuration: 1, target: "callee-right", bentLevel: 0, endingTimeAdjustment: 5, offset: 2},
 		] },
