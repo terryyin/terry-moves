@@ -31,7 +31,7 @@ function generateSpiralCirclePoints(
   return points;
 }
 
-export const Scrum: React.FC<{actor: string, headActor: string, bendingActor: string}> = ({actor, headActor, bendingActor}) => {
+export const Scrum: React.FC<{actor: string, headActor: string, bendingActor: string, rotationZ?: number, color?: THREE.Color}> = ({actor, headActor, bendingActor, rotationZ, color}) => {
   const headMove = useAnimationContext().getGeneralValue(headActor) ?? 0;
   const trueBending = useAnimationContext().getGeneralValue(bendingActor) ?? 0;
 
@@ -58,9 +58,11 @@ export const Scrum: React.FC<{actor: string, headActor: string, bendingActor: st
 
   return (
     <>
-    <ThreeDArrow actor={actor} tubeRadius={0.2} color={new THREE.Color(0x59788e)} points={oneSprint}/>
-    <GroupInitialState position={[1, 0 + trueBending, 0]} rotation={[0, 0, 0]} scale={1}>
-      <ThreeDArrow actor={actor} tubeRadius={0.1} color={new THREE.Color(0xed7117)} points={daily}/>
+    <GroupInitialState position={[0,0, 0]} rotation={[0, 0, rotationZ ?? 0]} scale={1}>
+      <ThreeDArrow actor={actor} tubeRadius={0.2} color={color ?? new THREE.Color(0x59788e)} points={oneSprint}/>
+      <GroupInitialState position={[1, 0 + trueBending, 0]} rotation={[0, 0, 0]} scale={1}>
+        <ThreeDArrow actor={actor} tubeRadius={0.1} color={color ?? new THREE.Color(0xed7117)} points={daily}/>
+      </GroupInitialState>
     </GroupInitialState>
     </>
   );

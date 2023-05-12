@@ -10,6 +10,9 @@ import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
 import { ScalableScrum, empiricalActions, growScrum1Actions, scaleScrumActions } from './stories/scrum';
 import { Anchor } from './video_components/Anchor';
+import { Scrum } from './parts/Scrum';
+import * as THREE from 'three';
+import { GroupInitialState } from './video_components/GroupInitialState';
 
 export const whyWhyLeSSSubtitles: Subtitle[] = [
 { leadingBlank: 1, duration: 5, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', actions: [
@@ -34,7 +37,14 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	{ actor: "center", actionType: "connect to",  startDuration: 1, target: "adjust-direction", bentLevel: -100, endingTimeAdjustment: 3},
 	...empiricalActions,
 ]},
-{ leadingBlank: 1, duration: 5, text: `While this depiction still holds true, the term 'Scrum' has grown increasingly nebulous.`, actions: []},
+{ leadingBlank: 1, duration: 5, text: `While this depiction still holds true, the term 'Scrum' has grown increasingly nebulous.`, actions: [
+		{ actor: 'scrum stage', actionType: 'scale', duration: 1, outputRange: [1, 0.4] },
+		{ actor: 'scrum stage', actionType: 'move', duration: 1, absolutePosition: [600, 600] },
+		{ actor: "wrong scrum 1", actionType: "additive value change to", duration: 2, value: 1},
+		{ actor: "wrong scrum 2", actionType: "additive value change to", duration: 2, value: 1},
+		{ actor: "wrong scrum 3", actionType: "additive value change to", duration: 2, value: 1},
+
+]},
 { leadingBlank: 1, duration: 5, text: 'The updated version underscores the essence of LeSS - prioritizing systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', actions: []},
 { leadingBlank: 1, duration: 5, text: 'This essence is embodied in the principles of LeSS.', actions: []},
 { leadingBlank: 1, duration: 5, text: 'The revised "LeSS Complete Picture" visually represents the equilibrium between abstract principles and concrete practices.', actions: []},
@@ -70,11 +80,29 @@ export const StoryWhyWhyLeSS: React.FC = () => {
     <AbsoluteFill style={{backgroundColor: "beige"}}>
 			<Anchor actor="center" style={{left: "50%", top: "45%"}}/>
 			<Anchor actor="adjust-direction" style={{left: "70%", top: "50%"}}/>
-			<ThreeDFrame cameraDistance={6} lookAtY={0} lookAtZ={0} cameraY={-1}>
-				<pointLight position={[10, 10, 10]} />
-				<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
-				<ScalableScrum />
-			</ThreeDFrame>
+			<AnimationEffect actor="scrum stage" style={{}}>
+				<ThreeDFrame cameraDistance={6} lookAtY={0} lookAtZ={0} cameraY={-1}>
+					<pointLight position={[10, 10, 10]} />
+					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
+					<ScalableScrum />
+				</ThreeDFrame>
+			</AnimationEffect>
+			<AnimationEffect actor="wrong scrum stage" style={{}}>
+				<ThreeDFrame cameraDistance={12} lookAtY={0} lookAtZ={0} cameraY={-1}>
+					<pointLight position={[10, 10, 10]} />
+					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
+					<GroupInitialState position={[-3, 0, 0]}>
+						<Scrum actor="wrong scrum 1" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
+					</GroupInitialState>
+					<GroupInitialState position={[0, 0, 0]}>
+						<Scrum actor="wrong scrum 2" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
+					</GroupInitialState>
+					<GroupInitialState position={[3, 0, 0]}>
+						<Scrum actor="wrong scrum 3" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
+					</GroupInitialState>
+				</ThreeDFrame>
+			</AnimationEffect>
+	
 			<AnimationEffect actor="overview" style={{ width: "100%", top: "30%" }}>
 				<Img src={staticFile('assets/less/LeSS-overview-diagram.png')} style={{ width: "100%" }}/>
 			</AnimationEffect>
