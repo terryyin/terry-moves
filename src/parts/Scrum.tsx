@@ -39,7 +39,7 @@ export const Scrum: React.FC<{actor: string, headActor: string, bendingActor: st
   const spiralCirclePoints = generateSpiralCirclePoints(
     radius,
     1,
-    100,
+    20,
     1,
     trueBending
   );
@@ -50,7 +50,7 @@ export const Scrum: React.FC<{actor: string, headActor: string, bendingActor: st
   const daily = generateSpiralCirclePoints(
     0.3,
     0,
-    100,
+    10,
     1,
     1.5
   );

@@ -60,7 +60,7 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
 
 	useFrame(() => {
     if (mesh.current) {
-			const newGeometry = createPartialTubeGeometry(curve, percentage, 8, 200, tubeRadius);
+			const newGeometry = createPartialTubeGeometry(curve, percentage, 8, 150, tubeRadius);
 			mesh.current.geometry.dispose();
 			mesh.current.geometry = newGeometry;
 

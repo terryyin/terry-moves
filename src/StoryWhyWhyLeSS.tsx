@@ -19,10 +19,12 @@ import { CalloutCloud } from './video_components/CalloutCloud';
 import { LeSSComplete } from './stories/LeSSComplete';
 
 export const whyWhyLeSSSubtitles: Subtitle[] = [
+	{ leadingBlank: 0, duration: 3, text: "Spot the Scrum!",
+	  flashBack: {from: 50, duration: 3, speed: 0.5} },
 { leadingBlank: 1, duration: 5, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', actions: [
 	{ actor: "overview", actionType: "appear", endingTimeAdjustment: 0, endDuration: 2,  persistUntilSubtitleId: "letsdelve"},
 	{ actor: "overview", actionType: "scale", duration: 4, outputRange: [1, 6]},
-	{ actor: "overview", actionType: "move", duration: 4, absolutePosition: [0, 190, 0]},
+	{ actor: "overview", actionType: "move", duration: 4, absolutePosition: [0, 170, 0]},
 
 	{ actor: 'team PO1', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
 	{ actor: 'team PO2', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
@@ -61,7 +63,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	{ actor: "center", actionType: "connect to",  startDuration: 1, target: "adjust-direction", bentLevel: -100, endingTimeAdjustment: 3},
 	...empiricalActions,
 ]},
-{ leadingBlank: 1, duration: 10, text: `While this depiction still holds true, the term 'Scrum' has grown increasingly nebulous.`, actions: [
+{ leadingBlank: 1, duration: 11, text: `While this depiction still holds true, the term 'Scrum' has grown increasingly nebulous.`, actions: [
 		{ actor: 'scrum stage', actionType: 'scale', duration: 1, outputRange: [1, 0.4] },
 		{ actor: 'scrum stage', actionType: 'move', duration: 1, absolutePosition: [600, 600] },
 		{ actor: "wrong scrum 1", actionType: "additive value change to", duration: 2, value: 1},
@@ -88,7 +90,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'role19', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
 		{ actor: "camera", actionType: "camera look at", duration: 4, absolutePosition: [0, 3, 0], offset: 4 },
 		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 20, 0], offset: 8 },
-		{ actor: 'where is scrum', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 3, offset: 8 },
+		{ actor: 'where is scrum', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 4, offset: 8 },
 
 ]},
 { leadingBlank: 1, duration: 8, text: 'The updated version underscores the essence of the original Scrum - prioritizing systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', actions: [
@@ -110,29 +112,25 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 0], offset: 0 },
 ]},
 { leadingBlank: 1, duration: 5, text: 'A new arrow pointing out from the principles at the core of the diagram has been introduced.', actions: [
-	
+			{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [-6, 0, -3] },
+			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
+			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 0.58, offset: 1 },
+			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 0], offset: 2 },
+			{ actor: "camera", actionType: "camera look at", duration: 2, absolutePosition: [0, 0, 0], offset: 3 },
+
 ]},
-{ leadingBlank: 1, duration: 5, text: 'This arrow signifies that principles guide experimentation and adoption.', actions: []},
 { leadingBlank: 1, duration: 5, text: 'The revised "LeSS Complete Picture" visually represents the equilibrium between abstract principles and concrete practices.', actions: []},
+{ leadingBlank: 1, duration: 5, text: 'This arrow signifies that principles guide experimentation and adoption.', actions: [
+			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [6, 0, -3] },
+			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 1},
+			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
+]},
 { leadingBlank: 1, duration: 5, text: `The latest version underscores that LeSS aims to amplify an organization's "adaptiveness," reverting to the original intent of agile development.`, actions: []},
 { leadingBlank: 1, duration: 5, text: 'This adaptiveness is defined as:', actions: []},
 { leadingBlank: 1, duration: 5, text: 'The capacity to change direction at a relatively low cost, primarily through discovery via frequent delivery, and...', actions: []},
 { leadingBlank: 1, duration: 5, text: 'Maximizing value delivered to customers and end-users.', actions: []},
 { leadingBlank: 1, duration: 5, text: 'Lastly, the updated article sheds light on the origins of LeSS, serving as a prime example of the principles-guided experiments.', actions: []},
 
-		{ leadingBlank: 0, duration: 4, text: "Principles that guide experimentation and adoption.", actions: [
-			{ actor: "scrum1", actionType: "additive value change to", duration: 4, value: 1},
-		]},
-		{ leadingBlank: 0, duration: 5, text: "Principles that guide experimentation and adoption.", actions: [
-			{ actor: "scrum2", actionType: "additive value change to", duration: 0.1, value: 1},
-			{ actor: "scrum3", actionType: "additive value change to", duration: 0.1, value: 1},
-			{ actor: "bending1", actionType: "additive value change to", duration: 3, value: 0},
-			{ actor: "bending2", actionType: "additive value change to", duration: 3, value: 0.44},
-			{ actor: "bending3", actionType: "additive value change to", duration: 3, value: 0.88},
-		]},
-		{ leadingBlank: 0, duration: 4, text: "Principles that guide experimentation and adoption.", actions: [
-			{ actor: "scrum head", actionType: "additive value change to", duration: 2, value: 0.4},
-		]},
 ];
 
 export const StoryWhyWhyLeSS: React.FC = () => {
