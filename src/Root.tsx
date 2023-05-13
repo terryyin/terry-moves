@@ -5,6 +5,7 @@ import { StoryBooleanReturns } from './StoryBooleanReturns';
 import { StoryLeSSComplete } from './StoryLeSSComplete';
 import { StoryScalingScrum } from './StoryScalingScrum';
 import { StoryWhyWhyLeSS } from './StoryWhyWhyLeSS';
+import { StoryTransparent } from './StoryTransparent';
 
 export const RemotionRoot: React.FC = () => {
 	return (
@@ -16,6 +17,7 @@ export const RemotionRoot: React.FC = () => {
 			<StoryScalingScrum />
 			<StoryWhyWhyLeSS />
 			<StoryProductDeveloper />
+			<StoryTransparent />
 		</>
 	);
 };

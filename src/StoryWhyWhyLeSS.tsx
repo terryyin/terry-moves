@@ -64,6 +64,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	...empiricalActions,
 ]},
 { leadingBlank: 1, duration: 11, text: `While this depiction still holds true, the term 'Scrum' has grown increasingly nebulous.`, actions: [
+		{ actor: 'logos', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 20, offset: 0 },
 		{ actor: 'scrum stage', actionType: 'scale', duration: 1, outputRange: [1, 0.4] },
 		{ actor: 'scrum stage', actionType: 'move', duration: 1, absolutePosition: [600, 600] },
 		{ actor: "wrong scrum 1", actionType: "additive value change to", duration: 2, value: 1},
@@ -130,6 +131,10 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 { leadingBlank: 1, duration: 5, text: 'The capacity to change direction at a relatively low cost, primarily through discovery via frequent delivery, and...', actions: []},
 { leadingBlank: 1, duration: 5, text: 'Maximizing value delivered to customers and end-users.', actions: []},
 { leadingBlank: 1, duration: 5, text: 'Lastly, the updated article sheds light on the origins of LeSS, serving as a prime example of the principles-guided experiments.', actions: []},
+{ leadingBlank: 1, duration: 5, text: 'Thanks for watching', actions: [
+		{ actor: 'logos', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 10, offset: 0 },
+
+]},
 
 ];
 
@@ -238,15 +243,20 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 			<CalloutCloud actor='where is scrum' style={{top: '60%', left: "30%"}} tailShift={-60} tailHeightPx={20}>
 				<span style={{ fontSize: '30px', margin: 0 }} > 🤔 Hmm, where is Scrum?  </span>
 			</CalloutCloud>
+			<AnimationEffect actor="logos">
 			<AbsoluteFill style={{ left: '83%', top: '4.6%', width: '10%', height: '20%'}}>
 				<span style={{fontSize: '20px', fontFamily: "Poppins, sans serif"}}>terry@</span>
 			</AbsoluteFill>
+			<AbsoluteFill style={{ left: '2%', top: '5%', width: '10%', height: '20%'}}>
+				<Img src={staticFile('assets/less/less-logo.svg')} style={{ width: "100%" }}/>
+			</AbsoluteFill>
 			<AbsoluteFill style={{ left: '90%', top: '2%', width: '10%', height: '20%'}}>
 				<OddeLogo />
-				<FlipCoin speed={2} interval={20} shift={1} >
+				<FlipCoin speed={2} interval={20} shift={0} >
 					<OddeLogoInner />
 				</FlipCoin>
 			</AbsoluteFill>
+			</AnimationEffect>
 			<AnimationEffect actor="subtitles">
 				<Subtitles scale={1} language="zhTW"/>
 			</AnimationEffect>
