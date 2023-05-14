@@ -17,6 +17,7 @@ import { BoxWithText } from './video_components/BoxWithText';
 import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
 import { CalloutCloud } from './video_components/CalloutCloud';
 import { LeSSComplete } from './stories/LeSSComplete';
+import { Adaptiveness } from './parts/Adaptiveness';
 
 export const whyWhyLeSSSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 3, text: "Spot the Scrum!",
@@ -99,7 +100,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'scrum stage', actionType: 'disappear', startDuration: 1 },
 		{ actor: "camera", actionType: "camera look at", duration: 1, absolutePosition: [0, 0, 0] },
 		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [0, 0, 0] },
-		{ actor: 'complete picture', actionType: 'appear', startDuration: 1 },
+		{ actor: 'complete picture', actionType: 'appear', startDuration: 1, endDuration: 1,  persistUntilSubtitleId: "adaptiveness" },
 ]},
 { leadingBlank: 1, duration: 5, text: 'This essence is embodied in the principles of LeSS.', actions: [
 		{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, -8], offset: -3 },
@@ -126,12 +127,40 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 1},
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
 ]},
-{ leadingBlank: 1, duration: 5, text: `The latest version underscores that LeSS aims to amplify an organization's "adaptiveness," reverting to the original intent of agile development.`, actions: []},
-{ leadingBlank: 1, duration: 5, text: 'This adaptiveness is defined as:', actions: []},
-{ leadingBlank: 1, duration: 5, text: 'The capacity to change direction at a relatively low cost, primarily through discovery via frequent delivery, and...', actions: []},
-{ leadingBlank: 1, duration: 5, text: 'Maximizing value delivered to customers and end-users.', actions: []},
-{ leadingBlank: 1, duration: 5, text: 'Lastly, the updated article sheds light on the origins of LeSS, serving as a prime example of the principles-guided experiments.', actions: []},
-{ leadingBlank: 1, duration: 5, text: 'Thanks for watching', actions: [
+{id: "adaptiveness", leadingBlank: 1, duration: 5, text: `The latest version underscores that LeSS aims to amplify an organization's "adaptiveness," reverting to the original intent of agile development.`, actions: [
+		{ actor: 'adaptiveness', actionType: 'appear', startDuration: 1},
+		{ actor: "adaptiveness", actionType: "3d rotate", endingTimeAdjustment: 3, totalRotation: [0, -45, 0], offset: 1 },
+		{ actor: "agility-text", actionType: "3d rotate", endingTimeAdjustment: 3, totalRotation: [-145, 0, 0], offset: 1 },
+
+]},
+{ leadingBlank: 1, duration: 3, text: 'This adaptiveness is defined as:', actions: [
+		{ actor: "adaptiveness", actionType: "move", duration: 2, absolutePosition: [0, 100, 0] },
+
+]},
+{ leadingBlank: 1, duration: 5, text: 'The capacity to change direction at a relatively low cost, primarily through discovery via frequent delivery, and...', actions: [
+		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 0] },
+		{ actor: "scrum stage", actionType: "move", duration: 0, absolutePosition: [0, 0, 0] },
+		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 0, 0] },
+		{ actor: 'scrum stage', actionType: 'appear', startDuration: 2 },
+		{ actor: "scrum stage", actionType: "move", duration: 2, absolutePosition: [-500, -500, 0], offset: 0.5 },
+		{ actor: 'direction', actionType: 'appear', startDuration: 1, offset: 2 },
+		{ actor: 'adaptiveness', actionType: 'connect to', target: "direction", bentLevel: 0, startDuration: 1, offset: 2, radiusSource: 500, radiusTarget: 190 },
+
+]},
+{ leadingBlank: 1, duration: 5, text: 'Maximizing value delivered to customers and end-users.', actions: [
+		{ actor: 'value-customer', actionType: 'appear', startDuration: 1, offset: 0 },
+		{ actor: "value-customer", actionType: "move", duration: 1, absolutePosition: [190, -160, 0], offset: 0.5 },
+		{ actor: 'value', actionType: 'appear', startDuration: 1, offset: 1 },
+		{ actor: 'adaptiveness', actionType: 'connect to', target: "value", bentLevel: 0, startDuration: 1, offset: 1, radiusSource: 500, radiusTarget: 190 },
+]},
+{ leadingBlank: 1, duration: 6, text: 'Lastly, the updated article sheds light on the origins of LeSS, serving as a prime example of the principles-guided experiments.', actions: [
+		{ actor: 'complete picture', actionType: 'appear', startDuration: 1, endDuration: 1 },
+		{ actor: "value-customer", actionType: "move", duration: 1, absolutePosition: [190, -160, 0], offset: 0.5 },
+		{ actor: 'complete picture', actionType: 'appear', startDuration: 1, endDuration: 1 },
+		{ actor: 'complete picture', actionType: 'scale', duration: 0.5, outputRange: [1, 0.4] },
+		{ actor: "complete picture", actionType: "move", duration: 1, absolutePosition: [0, 460, 0], offset: 0.5 },
+]},
+{ leadingBlank: 1, duration: 10, text: 'Thanks for watching', actions: [
 		{ actor: 'logos', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 10, offset: 0 },
 
 ]},
@@ -229,6 +258,23 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 				<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 				<LeSSComplete />
 			</ThreeDFrame>
+			</AnimationEffect>
+			<AnimationEffect actor="adaptiveness" style={{ top: "30%", height: "20%", fontFamily: "Poppins, sans serif", perspective: "400px", transformStyle: "preserve-3d"}}>
+				<Adaptiveness />
+			</AnimationEffect>
+			<AnimationEffect actor="direction" style={{ left: '3%', top: '28%', width: '40%', height: '20%', textAlign: "center"}}>
+				<span style={{fontSize: '20px', fontFamily: "Poppins, sans serif"}}>
+					Change direction at<br/>
+					relatively low cost
+				</span>
+			</AnimationEffect>
+			<AnimationEffect actor="value-customer" style={{ left: "35%", width: "25%", top: "30%" }}>
+				<Img src={staticFile('assets/less/customer.png')} style={{ width: "100%" }}/>
+			</AnimationEffect>
+			<AnimationEffect actor="value" style={{ left: '53%', top: '28%', width: '40%', height: '20%', textAlign: "center"}}>
+				<span style={{fontSize: '20px', fontFamily: "Poppins, sans serif"}}>
+					Maximizing value<br/> delivered to customers
+				</span>
 			</AnimationEffect>
 	
 			<AnimationEffect actor="overview" style={{ width: "100%", top: "30%" }}>

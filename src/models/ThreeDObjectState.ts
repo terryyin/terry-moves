@@ -37,8 +37,7 @@ export class ThreeDObjectState {
 			}
 		});
 
-		const result: CSSProperties = {transformOrigin: 'center'};
-		result.transformOrigin = 'center';
+		const result: CSSProperties = {};
 
 		if (transforms.length > 0) {
 			result.transform = transforms.join(' ');
