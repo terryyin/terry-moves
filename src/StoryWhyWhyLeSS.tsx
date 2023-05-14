@@ -20,9 +20,9 @@ import { LeSSComplete } from './stories/LeSSComplete';
 import { Adaptiveness } from './parts/Adaptiveness';
 
 export const whyWhyLeSSSubtitles: Subtitle[] = [
-	{ leadingBlank: 0, duration: 3, text: "Spot the Scrum!",
-	  flashBack: {from: 50, duration: 3, speed: 0.5} },
-{ leadingBlank: 1, duration: 5, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', actions: [
+	{ leadingBlank: 0, duration: 4, text: "Spot the Scrum!",
+	  flashBack: {from: 52, duration: 4, speed: 0.5} },
+{ leadingBlank: 1, duration: 6, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', actions: [
 	{ actor: "overview", actionType: "appear", endingTimeAdjustment: 0, endDuration: 2,  persistUntilSubtitleId: "letsdelve"},
 	{ actor: "overview", actionType: "scale", duration: 4, outputRange: [1, 6]},
 	{ actor: "overview", actionType: "move", duration: 4, absolutePosition: [0, 170, 0]},
@@ -95,7 +95,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'where is scrum', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 4, offset: 8 },
 
 ]},
-{ leadingBlank: 1, duration: 8, text: 'The updated version underscores the essence of the original Scrum - prioritizing systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', actions: [
+{ leadingBlank: 1, duration: 9, text: 'The updated version underscores the essence of the original Scrum - prioritizing systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', actions: [
 		{ actor: 'wrong scrum stage', actionType: 'disappear', startDuration: 1 },
 		{ actor: 'scrum stage', actionType: 'disappear', startDuration: 1 },
 		{ actor: "camera", actionType: "camera look at", duration: 1, absolutePosition: [0, 0, 0] },
@@ -107,13 +107,13 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'principles picture', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 5, endDuration: 1 },
 
 ]},
-{ leadingBlank: 1, duration: 5, text: 'The LeSS rules, serving as the minimal core structure, replace prescriptive frameworks. This emphasizes that LeSS is less about adhering to a rigid framework and more about abiding by minimal guiding rules.', actions: [
+{ leadingBlank: 1, duration: 8, text: 'The LeSS rules, serving as the minimal core structure, replace the prescriptive frameworks. The meaning is pretty much the same.', actions: [
 		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 0, -6], offset: 0 },
 ]},
-{ leadingBlank: 1, duration: 5, text: 'The Guides and Experiments remain unchanged.', actions: [
+{ leadingBlank: 1, duration: 4, text: 'The Guides and Experiments remain unchanged.', actions: [
 		{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 0], offset: 0 },
 ]},
-{ leadingBlank: 1, duration: 5, text: 'A new arrow pointing out from the principles at the core of the diagram has been introduced.', actions: [
+{ leadingBlank: 1, duration: 6, text: 'A new arrow pointing out from the principles through the the diagram has been introduced.', actions: [
 			{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [-6, 0, -3] },
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
 			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 0.58, offset: 1 },
@@ -121,19 +121,19 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 			{ actor: "camera", actionType: "camera look at", duration: 2, absolutePosition: [0, 0, 0], offset: 3 },
 
 ]},
-{ leadingBlank: 1, duration: 5, text: 'The revised "LeSS Complete Picture" visually represents the equilibrium between abstract principles and concrete practices.', actions: []},
+{ leadingBlank: 1, duration: 7, text: 'The revised "LeSS Complete Picture" visually represents the equilibrium between abstract principles and concrete practices.', actions: []},
 { leadingBlank: 1, duration: 5, text: 'This arrow signifies that principles guide experimentation and adoption.', actions: [
 			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [6, 0, -3] },
 			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 1},
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
 ]},
-{id: "adaptiveness", leadingBlank: 1, duration: 5, text: `The latest version underscores that LeSS aims to amplify an organization's "adaptiveness," reverting to the original intent of agile development.`, actions: [
+{id: "adaptiveness", leadingBlank: 1, duration: 7, text: `It also underscores that LeSS aims to amplify an organization's "adaptiveness," reverting to the original intent of agile development.`, actions: [
 		{ actor: 'adaptiveness', actionType: 'appear', startDuration: 1},
 		{ actor: "adaptiveness", actionType: "3d rotate", endingTimeAdjustment: 3, totalRotation: [0, -45, 0], offset: 1 },
 		{ actor: "agility-text", actionType: "3d rotate", endingTimeAdjustment: 3, totalRotation: [-145, 0, 0], offset: 1 },
 
 ]},
-{ leadingBlank: 1, duration: 3, text: 'This adaptiveness is defined as:', actions: [
+{ leadingBlank: 1, duration: 5, text: 'This adaptiveness is defined by the optimization goals of LeSS:', actions: [
 		{ actor: "adaptiveness", actionType: "move", duration: 2, absolutePosition: [0, 100, 0] },
 
 ]},
@@ -162,9 +162,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 ]},
 { leadingBlank: 1, duration: 10, text: 'Thanks for watching', actions: [
 		{ actor: 'logos', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 10, offset: 0 },
-
 ]},
-
 ];
 
 export const StoryWhyWhyLeSS: React.FC = () => {
