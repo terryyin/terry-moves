@@ -41,15 +41,6 @@ export const StoryTransparent: React.FC = () => {
 			</span>
 		</AbsoluteFill>
 		</AbsoluteFill>
-			<AbsoluteFill style={{ left: '83%', top: '94.6%', width: '10%', height: '20%'}}>
-				<span style={{fontSize: '20px', fontFamily: "Poppins, sans serif", color: "beige"}}>terry@</span>
-			</AbsoluteFill>
-			<AbsoluteFill style={{ left: '90%', top: '92%', width: '10%', height: '20%'}}>
-				<OddeLogo />
-				<FlipCoin speed={2} interval={20} shift={0} >
-					<OddeLogoInner />
-				</FlipCoin>
-			</AbsoluteFill>
 		</Story>
   );
 };
