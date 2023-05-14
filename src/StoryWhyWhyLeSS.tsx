@@ -184,13 +184,13 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 					<GroupInitialState position={[-3, 1, -2]}>
-						<Scrum actor="wrong scrum 1" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
+						<Scrum actor="wrong scrum 1" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
 					</GroupInitialState>
 					<GroupInitialState position={[0, 1, -2]}>
-						<Scrum actor="wrong scrum 2" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
+						<Scrum actor="wrong scrum 2" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
 					</GroupInitialState>
 					<GroupInitialState position={[3, 1, -2]}>
-						<Scrum actor="wrong scrum 3" headActor="x" bendingActor="x" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
+						<Scrum actor="wrong scrum 3" color={new THREE.Color(0x440000) } rotationZ={Math.PI/2} />
 					</GroupInitialState>
 					<ThreeAnimationEffect actor="team PO1" position={[-4, 5, 0]}>
 						<BoxWithText actor="wrong scrum head" text="Team PO" />
