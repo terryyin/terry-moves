@@ -61,8 +61,8 @@ export const booleanReturnsSutitles: Subtitle[] = [
 		}, actions:[
 		] },
 		{ leadingBlank: 1, duration: 3, text: "And how can we make our code reveal my STYLE.", translations: {
-			zhCN: "我们如何让代码展现我的风格。",
-			zhTW: "我們如何讓程式碼展現我的風格。",
+			zhCN: "以及如何让代码展现我独到的风格。",
+			zhTW: "以及如何讓程式碼展現我獨到的風格。",
 		}, actions:[
 				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "and make our code reveal my STYLE", startDuration: 1, endDuration: 1 },
 				{ actor: "punk head", actionType: "rotate and rise", duration: 1, value: 5 },
@@ -210,9 +210,9 @@ export const booleanReturnsSutitles: Subtitle[] = [
 			{ actor: "callee", actionType: "insert text", endingTimeAdjustment: 4, line: 4, column: 0, text: "  Boolean isSafetyOn() {...}\n  void setSafetyOff(fingerprint) {...}", startDuration: 1, endDuration: 0 },
 		] },
 
-		{ leadingBlank: 1, duration: 5, text: "The soldier need to check if the safety is on. And if so, switch it off.",  translations: {
-			zhCN: "士兵需要检查保险是否打开。如果是这样，就把它关掉。",
-			zhTW: "士兵需要檢查保險是否打開。如果是這樣，就把它關掉。",
+		{ leadingBlank: 1, duration: 5, text: "The soldier need to check if the safety is on. And if so, switch it off before firing.",  translations: {
+			zhCN: "在开火前士兵需要检查保险是否启动。如果是这样，将其关闭。",
+			zhTW: "在開火前士兵需要檢查保險是否啟動。如果是這樣，將其關閉。",
 		},actions:[
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, -6, -1] },
 			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [6, -8, 0] },
@@ -358,8 +358,8 @@ const announceBoardStyle: CSSProperties = {
 
 export const StoryBooleanReturns: React.FC = () => {
   return (
-		<Story id="StoryBooleanReturns" width={720} height={720} subtitles={booleanReturnsSutitles}  >
-		  <Audio src={staticFile("assets/audios/boolean2.mp3")} />
+		<Story id="StoryBooleanReturns" width={720} height={720} subtitles={booleanReturnsSutitles}>
+		  <Audio src={staticFile("assets/audios/boolean2zh.mp3")} />
 
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
 
@@ -432,7 +432,7 @@ export const StoryBooleanReturns: React.FC = () => {
 
 
     <AnimationEffect actor="subtitles">
-			<Subtitles scale={1} language="zhCN"/>
+			<Subtitles scale={1} language="zhTW"/>
 		</AnimationEffect>
     </AbsoluteFill>
     <AnimationEffect actor="title" style={announceBoardStyle} >
@@ -475,7 +475,7 @@ export const StoryBooleanReturns: React.FC = () => {
 
     <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '-2%', width: '12%', height: '20%'}}>
 			<OddeLogo />
-			<FlipCoin speed={2} interval={4} shift={1} >
+			<FlipCoin speed={2} interval={30} shift={0} >
 			  <OddeLogoInner />
 			</FlipCoin>
 		</AbsoluteFill>
