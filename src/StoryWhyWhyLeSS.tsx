@@ -1,4 +1,5 @@
 
+import {Audio} from 'remotion'
 import { Subtitle } from './models/Subtitles';
 import { AbsoluteFill, Img, staticFile } from 'remotion';
 import { ThreeDFrame } from './video_components/ThreeDFrame';
@@ -20,11 +21,11 @@ import { LeSSComplete } from './stories/LeSSComplete';
 import { Adaptiveness } from './parts/Adaptiveness';
 
 export const whyWhyLeSSSubtitles: Subtitle[] = [
-	{ leadingBlank: 0, duration: 4, text: "Recent Changes in Large-Scale Scrum (Spot the Scrum!)", translations: {
+	{ leadingBlank: 0, duration: 4, text: ["Recent Changes in Large-Scale Scrum", "(Spot the Scrum!)"], translations: {
 		zhCN: "大规模Scrum的最新变化（看谁先找出Scrum！）",
 		zhTW: "大規模Scrum的最新變化（看誰先找出Scrum！）",
 	},
-	  flashBack: {from: 52, duration: 4, speed: 0.5} },
+	  flashBack: {from: 51.5, duration: 4, speed: 0.5} },
 { leadingBlank: 1, duration: 6, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', translations: {
 	zhCN: "大规模Scrum的创始人和培训师们对“为什么要使用LeSS？”这篇文章进行了一些微调。",
 	zhTW: "大規模Scrum的創始人和培訓師們對“為什麼要使用LeSS？”這篇文章進行了一些微調。",
@@ -57,7 +58,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	zhCN: "这次更新将焦点从扩展Scrum转移到了实现组织适应性。",
 	zhTW: "這次更新將焦點從擴展Scrum轉移到了實現組織適應性。",
 }, actions: []},
-{ id: "letsdelve", leadingBlank: 1, duration: 3, text: `Let's see some of these changes.`, translations: {
+{ id: "letsdelve", leadingBlank: 1, duration: 2.5, text: `Let's look at some of these changes.`, translations: {
 	zhCN: "让我们来看看这些变化。",
 	zhTW: "讓我們來看看這些變化。",
 }, actions: [
@@ -122,7 +123,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'where is scrum', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 4, offset: 8 },
 
 ]},
-{ leadingBlank: 1, duration: 9, text: 'The updated version underscores the essence of the original Scrum, and also prioritizes systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', translations: {
+{ leadingBlank: 1, duration: 11, text: 'The updated version underscores the essence of the original Scrum, and also prioritizes systems thinking, simpler structures, and continuous improvement for building adaptable organizations.', translations: {
 	zhCN: "更新的版本强调了原始Scrum的本质，也优先考虑了系统思维、更简单的结构和持续改进，以建立适应性组织。",
 	zhTW: "更新的版本強調了原始Scrum的本質，也優先考慮了系統思維、更簡單的結構和持續改進，以建立適應性組織。",
 }, actions: [
@@ -163,9 +164,9 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 			{ actor: "camera", actionType: "camera look at", duration: 2, absolutePosition: [0, 0, 0], offset: 3 },
 
 ]},
-{ leadingBlank: 1, duration: 7, text: 'The revised "LeSS Complete Picture" visually represents the equilibrium between abstract principles and concrete practices.', translations: {
-	zhCN: "修订后的“LeSS完整图片”在视觉上表示了抽象原则和具体实践之间的平衡。",
-	zhTW: "修訂後的“LeSS完整圖片”在視覺上表示了抽象原則和具體實踐之間的平衡。",
+{ leadingBlank: 1, duration: 8, text: 'The revised "LeSS Complete Picture" visually represents the equilibrium between abstract principles and concrete practices.', translations: {
+	zhCN: "修订后的“LeSS全图”在视觉上表示了抽象原则和具体实践之间的平衡。",
+	zhTW: "修訂後的“LeSS全圖”在視覺上表示了抽象原則和具體實踐之間的平衡。",
 }, actions: []},
 { leadingBlank: 1, duration: 5, text: 'This arrow signifies that principles guide experimentation and adoption.', translations: {
 	zhCN: "这个箭头表示原则指导实验和采用。",
@@ -175,7 +176,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 1},
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
 ]},
-{id: "adaptiveness", leadingBlank: 1, duration: 7, text: `It also underscores that LeSS aims to amplify an organization's "adaptiveness," reverting to the original intent of agile development.`, translations: {
+{id: "adaptiveness", leadingBlank: 1, duration: 8, text: `It also underscores that LeSS aims to amplify an organization's "adaptiveness," reverting to the original intent of agile development.`, translations: {
 	zhCN: "它还强调了LeSS旨在增强组织的“适应性(Adaptiveness)”，恢复到敏捷(Agility)开发的原始意图。",
 	zhTW: "它還強調了LeSS旨在增強組織的“適應性(Adaptiveness)”，恢復到敏捷(Agility)開發的原始意圖。",
 }, actions: [
@@ -191,7 +192,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: "adaptiveness", actionType: "move", duration: 2, absolutePosition: [0, 100, 0] },
 
 ]},
-{ leadingBlank: 1, duration: 5, text: 'The capacity to change direction at a relatively low cost, primarily through discovery via frequent delivery, and...', translations: {
+{ leadingBlank: 1, duration: 7, text: 'The capacity to change direction at a relatively low cost, primarily through discovery via frequent delivery, and...', translations: {
 	zhCN: "一个是以相对低的成本改变方向的能力，主要是基于通过频繁交付产生的探索。从而……",
 	zhTW: "一個是以相對低的成本改變方向的能力，主要是基於通過頻繁交付產生的探索。從而……",
 }, actions: [
@@ -204,7 +205,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'adaptiveness', actionType: 'connect to', target: "direction", bentLevel: 0, startDuration: 1, offset: 2, radiusSource: 500, radiusTarget: 190 },
 
 ]},
-{ leadingBlank: 1, duration: 5, text: 'Maximizing value delivered to customers and end-users.', translations: {
+{ leadingBlank: 1, duration: 6, text: 'Maximizing value delivered to customers and end-users.', translations: {
 	zhCN: "最大化交付给客户和最终用户的价值。",
 	zhTW: "最大化交付給客戶和最終用戶的價值。",
 }, actions: [
@@ -213,7 +214,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'value', actionType: 'appear', startDuration: 1, offset: 1 },
 		{ actor: 'adaptiveness', actionType: 'connect to', target: "value", bentLevel: 0, startDuration: 1, offset: 1, radiusSource: 500, radiusTarget: 190 },
 ]},
-{ leadingBlank: 1, duration: 6, text: 'Lastly, the updated article sheds light on the origins of LeSS, serving as a prime example of the principles-guided experiments.', translations: {
+{ leadingBlank: 1, duration: 8, text: 'Lastly, the updated article sheds light on the origins of LeSS, serving as a prime example of the principles-guided experiments.', translations: {
 	zhCN: "最后，更新的文章提及了LeSS的起源，本身也是原则指导实验的典型例子。",
 	zhTW: "最後，更新的文章提及了LeSS的起源，本身也是原則指導實驗的典型例子。",
 
@@ -236,6 +237,7 @@ export const StoryWhyWhyLeSS: React.FC = () => {
   return (
 		<Story id="StoryWhyWhyLeSS" width={720} height={720} subtitles={whyWhyLeSSSubtitles}  >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+		  <Audio src={staticFile("assets/audios/whyless.zh.mp3")} />
     <AbsoluteFill style={{backgroundColor: "beige"}}>
 			<Anchor actor="center" style={{left: "50%", top: "45%"}}/>
 			<Anchor actor="adjust-direction" style={{left: "70%", top: "50%"}}/>
@@ -369,7 +371,7 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 			</AbsoluteFill>
 			</AnimationEffect>
 			<AnimationEffect actor="subtitles">
-				<Subtitles scale={1} language="zhTW"/>
+				<Subtitles scale={1} language="zhCN"/>
 			</AnimationEffect>
 		</AbsoluteFill>
 		</Story>
