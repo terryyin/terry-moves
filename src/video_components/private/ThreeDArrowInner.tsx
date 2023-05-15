@@ -1,3 +1,4 @@
+import {useMemo} from 'react'
 import {useRef} from 'react'
 import React  from 'react';
 
@@ -52,7 +53,8 @@ export const ThreeDArrowInner: React.FC<{percentage: number, points: THREE.Vecto
   // Create arrowhead geometry (cone)
   const arrowHeadRadius = tubeRadius * 2;
   const arrowHeadHeight = arrowLength;
-  const arrowHeadGeometry = new THREE.ConeGeometry(arrowHeadRadius, arrowHeadHeight, 32);
+  const arrowHeadGeometry = useMemo(() => new THREE.ConeGeometry(arrowHeadRadius, arrowHeadHeight, 32)
+  , [arrowHeadRadius, arrowHeadHeight]);
 
   // Calculate arrowhead position and orientation
   const arrowHead = useRef<THREE.Mesh>(null);
