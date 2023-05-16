@@ -6,6 +6,7 @@ import { StoryLeSSComplete } from './StoryLeSSComplete';
 import { StoryScalingScrum } from './StoryScalingScrum';
 import { StoryWhyWhyLeSS } from './StoryWhyWhyLeSS';
 import { StoryTransparent } from './StoryTransparent';
+import { StoryGameOfLife } from './StoryGameOfLife';
 
 export const RemotionRoot: React.FC = () => {
 	return (
@@ -18,6 +19,7 @@ export const RemotionRoot: React.FC = () => {
 			<StoryWhyWhyLeSS />
 			<StoryProductDeveloper />
 			<StoryTransparent />
+			<StoryGameOfLife />
 		</>
 	);
 };
