@@ -23,17 +23,18 @@ function gameOfLifeSurvivors(aliveCells: Cell[]): Cell[] {
 
 describe('An alive cell in Game Of Life', () => {
   const subject = new Cell(2, 3);
+  const aliveNeighbours = (n: number): Cell[] => subject.neighbourCells().slice(0, n);
 
   it('dies with no alive neighbours', () => {
     expect(gameOfLifeSurvivors([subject])).not.toContain(subject);
   });
 
   it('survives with 2 alive neighbours', () => {
-    expect(gameOfLifeSurvivors([subject, ...subject.neighbourCells().slice(0, 2)])).toContain(subject);
+    expect(gameOfLifeSurvivors([subject, ...aliveNeighbours(2)])).toContain(subject);
   });
 
   it('survives with 3 alive neighbours', () => {
-    expect(gameOfLifeSurvivors([subject, ...subject.neighbourCells().slice(0, 3)])).toContain(subject);
+    expect(gameOfLifeSurvivors([subject, ...aliveNeighbours(3)])).toContain(subject);
   });
 
 });
