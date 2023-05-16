@@ -17,7 +17,7 @@ class Cell {
 }
 
 function gameOfLifeSurvivors(aliveCells: Cell[]): Cell[] {
-  if(aliveCells.length === 3) return aliveCells;
+  if(aliveCells.length === 3 || aliveCells.length === 4) return aliveCells;
   return [];
 }
 
@@ -30,6 +30,10 @@ describe('An alive cell in Game Of Life', () => {
 
   it('survives with 2 alive neighbours', () => {
     expect(gameOfLifeSurvivors([subject, ...subject.neighbourCells().slice(0, 2)])).toContain(subject);
+  });
+
+  it('survives with 3 alive neighbours', () => {
+    expect(gameOfLifeSurvivors([subject, ...subject.neighbourCells().slice(0, 3)])).toContain(subject);
   });
 
 });
