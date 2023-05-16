@@ -1,3 +1,4 @@
+import _ from 'lodash';
 class Cell {
   // eslint-disable-next-line no-useless-constructor
   constructor(private x: number, private y: number) { }
@@ -17,8 +18,12 @@ class Cell {
 }
 
 function gameOfLifeSurvivors(aliveCells: Cell[]): Cell[] {
-  if(aliveCells.length === 3 || aliveCells.length === 4) return aliveCells;
-  return [];
+  return aliveCells.filter((cell) => {
+    const aliveNeighbours = _.intersectionWith(aliveCells, cell.neighbourCells(), _.isEqual);
+    console.log(aliveNeighbours)
+    return aliveNeighbours.length === 2 || aliveNeighbours.length === 3;
+  }
+  );
 }
 
 describe('An alive cell in Game Of Life', () => {
@@ -27,6 +32,12 @@ describe('An alive cell in Game Of Life', () => {
 
   it('dies with no alive neighbours', () => {
     expect(gameOfLifeSurvivors([subject])).not.toContain(subject);
+  });
+
+  it('dies if there are only remote neighbours', () => {
+    const remoteNeighbour1 = subject.neighbourCells()[0].neighbourCells()[0];
+    const remoteNeighbour2 = subject.neighbourCells()[1].neighbourCells()[1];
+    expect(gameOfLifeSurvivors([subject, remoteNeighbour1, remoteNeighbour2])).not.toContain(subject);
   });
 
   it('survives with 2 alive neighbours', () => {
