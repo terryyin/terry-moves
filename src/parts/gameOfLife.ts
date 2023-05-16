@@ -18,11 +18,28 @@ export function neighbourCells(c: Cell): Cell[] {
 }
 
 function gameOfLifeSurvivors(aliveCells: Cell[]): Cell[] {
-  const aliveNeighbours = (cell: Cell): Cell[] => _.intersectionWith(aliveCells, neighbourCells(cell), _.isEqual);
-  const nearbyCells = _.uniqWith(aliveCells.flatMap((cell) => neighbourCells(cell)), _.isEqual);
-  const having3Neighbours = nearbyCells.filter((cell) => aliveNeighbours(cell).length === 3);
-  const having2Neighbours = aliveCells.filter((cell) => aliveNeighbours(cell).length === 2);
-  return _.uniqWith([...having3Neighbours, ...having2Neighbours], _.isEqual);
+  const aliveCellsSet = new Set(aliveCells.map(cell => cell.x + ',' + cell.y));
+  const neighbourCounts: Record<string, number> = {};
+
+  for (const cell of aliveCells) {
+    for (const neighbour of neighbourCells(cell)) {
+      const key = neighbour.x + ',' + neighbour.y;
+      neighbourCounts[key] = (neighbourCounts[key] || 0) + 1;
+    }
+  }
+
+  const newAliveCells = [];
+
+  for (const [key, count] of Object.entries(neighbourCounts)) {
+    const [x, y] = key.split(',').map(Number);
+    const isAlive = aliveCellsSet.has(key);
+
+    if ((isAlive && (count === 2 || count === 3)) || (!isAlive && count === 3)) {
+      newAliveCells.push({ x, y });
+    }
+  }
+
+  return newAliveCells;
 }
 
 export { Cell, gameOfLifeSurvivors };
