@@ -9,7 +9,7 @@ export const GameOfLife3D: React.FC<{lives: Cell[]}>  = ({lives}) => {
 	const ballRadius = gridSize / 3;
 	
 	React.useEffect(() => {
-		scene.fog = new Fog('beige', 5, 40);
+		scene.fog = new Fog('beige', 0, 100);
 	}, [scene]);
 	return <group>
 				<gridHelper args={[500, 500]} position={[gridSize / 2, 0, gridSize / 2]} />
