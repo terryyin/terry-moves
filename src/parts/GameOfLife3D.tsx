@@ -16,7 +16,7 @@ export const GameOfLife3D: React.FC<{lives: Cell[]}>  = ({lives}) => {
 				{lives.map((life, idx) => (
 					<mesh key={idx} position={[life.x, ballRadius, life.y]}>
 						<sphereGeometry args={[ballRadius, 32, 32]} />
-						<meshPhysicalMaterial color={0xff0000} />
+						<meshPhysicalMaterial color={0xff0000} emissive="#00ff00" emissiveIntensity={0.2} />
 					</mesh>
 				))}
 			</group>
