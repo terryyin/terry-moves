@@ -577,8 +577,8 @@ const announceBoardStyle: CSSProperties = {
 
 export const StoryBooleanParameters: React.FC = () => {
   return (
-		<Story id="StoryBooleanParameters" width={720} height={720} subtitles={booleanParametersSutitles}  >
-		<Audio src={staticFile("assets/audios/boolean_cn.mp3")} />
+		<Story id="StoryBooleanParameters" width={1024} height={720} subtitles={booleanParametersSutitles}  >
+		<Audio src={staticFile("assets/audios/boolean1.mp3")} />
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
@@ -658,7 +658,7 @@ export const StoryBooleanParameters: React.FC = () => {
 
 
     <AnimationEffect actor="subtitles">
-			<Subtitles scale={1} language="zhTW"/>
+			<Subtitles scale={1} language="en"/>
 		</AnimationEffect>
     </AbsoluteFill>
     <AnimationEffect actor="title" style={announceBoardStyle} >
@@ -697,7 +697,7 @@ export const StoryBooleanParameters: React.FC = () => {
 		</AbsoluteFill>
     <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '-2%', width: '12%', height: '20%'}}>
 			<OddeLogo />
-			<FlipCoin speed={2} interval={4} shift={1} >
+			<FlipCoin speed={2} interval={30} shift={0} >
 			  <OddeLogoInner />
 			</FlipCoin>
 		</AbsoluteFill>

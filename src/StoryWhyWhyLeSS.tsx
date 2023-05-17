@@ -25,7 +25,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		zhCN: "大规模Scrum的最新变化（看谁先找出Scrum！）",
 		zhTW: "大規模Scrum的最新變化（看誰先找出Scrum！）",
 	},
-	  flashBack: {from: 51.5, duration: 4, speed: 0.5} },
+	  flashBack: {from: 49, duration: 4, speed: 0.5} },
 { leadingBlank: 1, duration: 6, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', translations: {
 	zhCN: "大规模Scrum的创始人和培训师们对“为什么要使用LeSS？”这篇文章进行了一些微调。",
 	zhTW: "大規模Scrum的創始人和培訓師們對“為什麼要使用LeSS？”這篇文章進行了一些微調。",
@@ -54,16 +54,11 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	{ actor: 'role18', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
 	{ actor: 'role19', actionType: 'move', duration: 0, absolutePosition: [0, 20, 0] },
 ]},
-{ leadingBlank: 1, duration: 5, text: 'This update shifts focus from scaling Scrum to achieving organizational adaptiveness.', translations: {
+{leadingBlank: 1, duration: 5, text: 'This update shifts focus from scaling Scrum to achieving organizational adaptiveness.', translations: {
 	zhCN: "这次更新将焦点从扩展Scrum转移到了实现组织适应性。",
 	zhTW: "這次更新將焦點從擴展Scrum轉移到了實現組織適應性。",
 }, actions: []},
-{ id: "letsdelve", leadingBlank: 1, duration: 2.5, text: `Let's look at some of these changes.`, translations: {
-	zhCN: "让我们来看看这些变化。",
-	zhTW: "讓我們來看看這些變化。",
-}, actions: [
-]},
-{ leadingBlank: 1, duration: 5, text: '"Why LeSS?" was penned by Bas Vodde and Craig Larman as the foundational reasoning behind LeSS.', translations: {
+{id: "letsdelve",  leadingBlank: 1, duration: 5, text: '"Why LeSS?" was penned by Bas Vodde and Craig Larman as the foundational reasoning behind LeSS.', translations: {
 	zhCN: "Bas和Craig撰写“Why LeSS？”的目的是解答LeSS背后的基本原由。",
 	zhTW: "Bas和Craig撰寫“Why LeSS？”的目的是解答LeSS背後的基本原由。",
 }, actions: [
@@ -141,21 +136,21 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'principles picture', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 5, endDuration: 1 },
 
 ]},
-{ leadingBlank: 1, duration: 8, text: 'The LeSS rules, serving as the minimal core structure, replace the prescriptive frameworks. The meaning is pretty much the same.', translations: {
-	zhCN: "LeSS规则作为最小核心结构取代了规范性框架。意义基本相同。",
-	zhTW: "LeSS規則作為最小核心結構取代了規範性框架。意義基本相同。",
+{ leadingBlank: 1, duration: 6, text: 'The LeSS rules, serving as the minimal core structure, replace the prescriptive frameworks. The meaning is pretty much the same.', translations: {
+	zhCN: "LeSS规则作为最小核心结构取代了框架。意义基本相同。",
+	zhTW: "LeSS規則作為最小核心結構取代了框架。意義基本相同。",
 }, actions: [
 		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 0, -6], offset: 0 },
 ]},
-{ leadingBlank: 1, duration: 4, text: 'The Guides and Experiments remain unchanged.', translations: {
+{ leadingBlank: 1, duration: 3, text: 'The Guides and Experiments remain unchanged.', translations: {
 	zhCN: "指南和实验保持不变。",
 	zhTW: "指南和實驗保持不變。",
 }, actions: [
 		{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 0], offset: 0 },
 ]},
 { leadingBlank: 1, duration: 6, text: 'A new arrow pointing out from the principles through the the diagram has been introduced.', translations: {
-	zhCN: "新图中从原则引出了一个箭头，贯穿了LeSS的各个部分直到实验。",
-	zhTW: "新圖中從原則引出了一個箭頭，貫穿了LeSS的各個部分直到實驗。",
+	zhCN: "修订后的“LeSS全图”从原则引出了一个箭头，贯穿了LeSS的各个部分直到实验。",
+	zhTW: "修訂後的“LeSS全圖”從原則引出了一個箭頭，貫穿了LeSS的各個部分直到實驗。",
 }, actions: [
 			{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [-6, 0, -3] },
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
@@ -165,8 +160,8 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 
 ]},
 { leadingBlank: 1, duration: 8, text: 'The revised "LeSS Complete Picture" visually represents the equilibrium between abstract principles and concrete practices.', translations: {
-	zhCN: "修订后的“LeSS全图”在视觉上表示了抽象原则和具体实践之间的平衡。",
-	zhTW: "修訂後的“LeSS全圖”在視覺上表示了抽象原則和具體實踐之間的平衡。",
+	zhCN: "在视觉上表示了抽象原则和具体实践之间的平衡。",
+	zhTW: "在視覺上表示了抽象原則和具體實踐之間的平衡。",
 }, actions: []},
 { leadingBlank: 1, duration: 5, text: 'This arrow signifies that principles guide experimentation and adoption.', translations: {
 	zhCN: "这个箭头表示原则指导实验和采用。",
@@ -177,17 +172,17 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
 ]},
 {id: "adaptiveness", leadingBlank: 1, duration: 8, text: `It also underscores that LeSS aims to amplify an organization's "adaptiveness," reverting to the original intent of agile development.`, translations: {
-	zhCN: "它还强调了LeSS旨在增强组织的“适应性(Adaptiveness)”，恢复到敏捷(Agility)开发的原始意图。",
-	zhTW: "它還強調了LeSS旨在增強組織的“適應性(Adaptiveness)”，恢復到敏捷(Agility)開發的原始意圖。",
+	zhCN: "它还强调了LeSS旨在增强组织的“适应性(Adaptiveness)”，恢复到敏捷(Agility)开发的本意。",
+	zhTW: "它還強調了LeSS旨在增強組織的“適應性(Adaptiveness)”，恢復到敏捷(Agility)開發的本意。",
 }, actions: [
 		{ actor: 'adaptiveness', actionType: 'appear', startDuration: 1},
 		{ actor: "adaptiveness", actionType: "3d rotate", endingTimeAdjustment: 3, totalRotation: [0, -45, 0], offset: 1 },
 		{ actor: "agility-text", actionType: "3d rotate", endingTimeAdjustment: 3, totalRotation: [-145, 0, 0], offset: 1 },
 
 ]},
-{ leadingBlank: 1, duration: 5, text: 'LeSS sets two optimization goals to achieve this adaptiveness:', translations: {
-	zhCN: "LeSS设置了两个优化目标来实现这种适应性：",
-	zhTW: "LeSS設置了兩個優化目標來實現這種適應性：",
+{ leadingBlank: 1, duration: 5, text: 'Adaptiveness can be explained by two optimization goals:', translations: {
+	zhCN: "Adaptiveness可以通过两个优化目标来解释：",
+	zhTW: "Adaptiveness可以通過兩個優化目標來解釋：",
 }, actions: [
 		{ actor: "adaptiveness", actionType: "move", duration: 2, absolutePosition: [0, 100, 0] },
 
