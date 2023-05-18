@@ -18,14 +18,18 @@ export const transparentSubtitles: Subtitle[] = [
   { actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 20, -40],},
   { actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 0, -30],},
 	{ actor: "gol", actionType: "additive value change to", duration: 4, value: 100},
-  { actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 5, -0.6], offset: 3},
+  { actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 4, -0.6], offset: 3},
   { actor: "camera", actionType: "camera look at", duration: 2, absolutePosition: [0.7, 0, -0.6], offset: 3},
 ]},
 { leadingBlank: 1, duration: 7, text: `Each cell expresses one of two states: alive or dead.`, actions: [
-	{ actor: "aliveDemo", actionType: "additive value change to", duration: 0.5, value: 1, offset: 3},
-	{ actor: "aliveDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 5},
-	{ actor: "deadDemo", actionType: "additive value change to", duration: 0.5, value: 1, offset: 5},
-	{ actor: "deadDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 7},
+	{ actor: "deadDemo", actionType: "additive value change to", duration: 0.5, value: 1, offset: 3},
+	{ actor: "deadDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 5},
+	{ actor: "aliveDemo", actionType: "additive value change to", duration: 0.5, value: 1, offset: 5},
+]},
+{ leadingBlank: 1, duration: 4, text: `Each cell has eight neighbour cells`, actions: [
+	{ actor: "neighboursDemo", actionType: "additive value change to", duration: 0.5, value: 1, offset: 1},
+	{ actor: "neighboursDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 4},
+	{ actor: "aliveDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 4},
 ]},
 { leadingBlank: 0, duration: 7, text: `Conway's Game of Life, a zero-player game, emerged as a remarkable creation from mathematics and computer science.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 8, value: 50},

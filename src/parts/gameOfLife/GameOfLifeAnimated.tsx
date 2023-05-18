@@ -40,6 +40,7 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
       progress: deadDemo,
     });
   }
+  
   const aliveDemo = context.getGeneralValue("aliveDemo") ?? 0;
   if(aliveDemo > 0) {
     highlightCells.push({
@@ -48,6 +49,20 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
       progress: aliveDemo,
     });
   }
+
+  const neighborsBox = (cell: Cell, progress: number) => {
+    return world.neighbourCells(cell).map((c) => ({
+      cell: c,
+      color: new THREE.Color(0x00ffff),
+      progress,
+    })
+    );
+  };
+  const neighboursDemo = context.getGeneralValue("neighboursDemo") ?? 0;
+  if(neighboursDemo > 0) {
+    highlightCells.push(...neighborsBox({x: 2, y: -1}, neighboursDemo));
+  }
+
 
 
   return (
