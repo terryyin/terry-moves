@@ -1,4 +1,3 @@
-import _ from 'lodash';
 interface Cell {
   x: number;
   y: number;
