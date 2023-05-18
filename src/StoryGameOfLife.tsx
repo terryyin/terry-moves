@@ -5,12 +5,22 @@ import { Subtitle } from './models/Subtitles';
 import { AbsoluteFill } from 'remotion';
 import { Story } from './video_components/Story';
 import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { GameOfLifeAnimated } from './parts/GameOfLifeAnimated';
-import { Cell } from './parts/gameOfLife';
+import { GameOfLifeAnimated } from './parts/gameOfLife/GameOfLifeAnimated';
+import { Cell } from './parts/gameOfLife/gameOfLife';
 import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
 
 export const transparentSubtitles: Subtitle[] = [
+
+{ leadingBlank: 0, duration: 5, text: `This game unfolds on an infinite, two-dimensional grid filled with square cells`, actions: [
+  { actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 20, -40],},
+  { actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 0, -30],},
+	{ actor: "gol", actionType: "additive value change to", duration: 5, value: 100},
+]},
+{ leadingBlank: 1, duration: 6, text: `Each cell expresses one of two states: alive or dead.`, actions: [
+  { actor: "camera", actionType: "move", duration: 5, absolutePosition: [0, 5, -0.6], offset: 0.1},
+  { actor: "camera", actionType: "camera look at", duration: 5, absolutePosition: [0.7, 0, -0.6], offset: 0.1},
+]},
 { leadingBlank: 0, duration: 7, text: `Conway's Game of Life, a zero-player game, emerged as a remarkable creation from mathematics and computer science.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 8, value: 50},
   { actor: "camera", actionType: "move", duration: 7, absolutePosition: [20, 30, 0],},
@@ -19,14 +29,7 @@ export const transparentSubtitles: Subtitle[] = [
 	{ actor: "gol", actionType: "additive value change to", duration: 6, value: 80},
   { actor: "camera", actionType: "move", duration: 5, absolutePosition: [20, 30, -10],},
 ]},
-{ leadingBlank: 1, duration: 5, text: `This game unfolds on an infinite, two-dimensional grid filled with square cells`, actions: [
-	{ actor: "gol", actionType: "additive value change to", duration: 5, value: 100},
-  { actor: "camera", actionType: "move", duration: 5, absolutePosition: [20, 5, -10],},
-]},
-{ leadingBlank: 1, duration: 6, text: `Each cell expresses one of two states: alive or dead.`, actions: [
-  { actor: "camera", actionType: "move", duration: 5, absolutePosition: [0, 5, 0],},
-  { actor: "camera", actionType: "camera look at", duration: 5, absolutePosition: [0, 0, -1],},
-]},
+
 { leadingBlank: 1, duration: 5, text: `Distinct steps mark the progression of time in this game. With each passing step, a cell's state transforms, influenced by the states of its eight neighbors.`, actions: []},
 { leadingBlank: 1, duration: 5, text: `Here are the rules:`, actions: []},
 { leadingBlank: 1, duration: 5, text: `A cell springs into life if it is surrounded by exactly three living neighbors - a simulation of reproduction.`, actions: []},

@@ -1,4 +1,4 @@
-import { GameOfLifeWorld, Cell } from "@/parts/gameOfLife";
+import { GameOfLifeWorld, Cell } from "@/parts/gameOfLife/gameOfLife";
 
 describe('An alive cell in Game Of Life', () => {
   const world = new GameOfLifeWorld();
