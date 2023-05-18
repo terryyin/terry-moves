@@ -19,6 +19,10 @@ class GameOfLifeWorld {
     return this.allCells.get(key)!;
   }
 
+  getCells(aliveCells: Cell[]): Set<Cell> {
+    return new Set(aliveCells.map(cell => this.getCell(cell.x, cell.y)));
+  }
+
   neighbourCells(c: Cell): Cell[] {
     return [
       this.getCell(c.x - 1, c.y - 1),
@@ -32,7 +36,7 @@ class GameOfLifeWorld {
     ];
   }
 
-  survivors(aliveCells: Set<Cell>): Cell[] {
+  survivors(aliveCells: Set<Cell>): Set<Cell> {
     const neighbourCounts: Map<Cell, number> = new Map;
 
     for (const cell of aliveCells) {
@@ -41,13 +45,13 @@ class GameOfLifeWorld {
       }
     }
 
-    const newAliveCells: Cell[] = [];
+    const newAliveCells: Set<Cell> = new Set;
 
     neighbourCounts.forEach((count, cell) => {
       const isAlive = aliveCells.has(cell);
 
       if ((isAlive && (count === 2 || count === 3)) || (!isAlive && count === 3)) {
-        newAliveCells.push(cell);
+        newAliveCells.add(cell);
       }
     });
 
@@ -55,10 +59,4 @@ class GameOfLifeWorld {
   }
 }
 
-function gameOfLifeSurvivors(aliveCells: Cell[]): Cell[] {
-  const world = new GameOfLifeWorld();
-  const aliveCellsSet = new Set(aliveCells.map(cell => world.getCell(cell.x, cell.y)));
-  return world.survivors(aliveCellsSet);
-}
-
-export { GameOfLifeWorld, Cell, gameOfLifeSurvivors };
+export { GameOfLifeWorld, Cell };
