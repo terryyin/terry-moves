@@ -31,6 +31,6 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
   const currentLives = survivors(round);
 
   return (
-    <GameOfLife3D lives={currentLives} />
+    <GameOfLife3D lives={currentLives} world={world}/>
   );
 };

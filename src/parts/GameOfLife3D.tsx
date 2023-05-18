@@ -1,9 +1,9 @@
 import React  from 'react';
-import { Cell } from './gameOfLife';
+import { Cell, GameOfLifeWorld } from './gameOfLife';
 import { Fog } from 'three/src/scenes/Fog';
 import { useThree } from '@react-three/fiber';
 
-export const GameOfLife3D: React.FC<{lives: Set<Cell>}>  = ({lives}) => {
+export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld}>  = ({lives, world}) => {
 	const { scene } = useThree();
 	const gridSize = 1;
 	const ballRadius = gridSize / 3;
