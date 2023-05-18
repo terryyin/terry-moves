@@ -2,6 +2,7 @@ import React  from 'react';
 import { Cell, GameOfLifeWorld } from './gameOfLife';
 import { Fog } from 'three/src/scenes/Fog';
 import { useThree } from '@react-three/fiber';
+import { CellPane } from './CellPane';
 
 export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld}>  = ({lives, world}) => {
 	const { scene } = useThree();
@@ -13,6 +14,7 @@ export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld}> 
 	}, [scene]);
 	return <group>
 				<gridHelper args={[500, 500]} position={[gridSize / 2, 0, gridSize / 2]} />
+				<CellPane cellToHighlight={{x: 0, y: 0}} />
 				{[...lives].map((life, idx) => (
 					<mesh key={idx} position={[life.x, ballRadius, life.y]}>
 						<sphereGeometry args={[ballRadius, 32, 32]} />
