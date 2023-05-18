@@ -3,6 +3,23 @@ interface Cell {
   y: number;
 }
 
+class GameOfLifeWorld {
+  private allCells: Map<string, Cell> = new Map();
+
+  constructor() {
+    this.allCells = new Map();
+  }
+
+  getCell(x: number, y: number): Cell {
+    const key = x + ',' + y;
+    if (!this.allCells.has(key)) {
+      this.allCells.set(key, {x, y});
+    }
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    return this.allCells.get(key)!;
+  }
+}
+
 export function neighbourCells(c: Cell): Cell[] {
   return [
     {x: c.x - 1, y: c.y - 1},
@@ -16,7 +33,14 @@ export function neighbourCells(c: Cell): Cell[] {
   ];
 }
 
+const world = new GameOfLifeWorld();
+
 function gameOfLifeSurvivors(aliveCells: Cell[]): Cell[] {
+  const aliveCellsSet = new Set(aliveCells.map(cell => world.getCell(cell.x, cell.y)));
+  return gameOfLifeSurvivors1([...aliveCellsSet]);
+}
+
+function gameOfLifeSurvivors1(aliveCells: Cell[]): Cell[] {
   const aliveCellsSet = new Set(aliveCells.map(cell => cell.x + ',' + cell.y));
   const neighbourCounts: Record<string, number> = {};
 
@@ -41,4 +65,4 @@ function gameOfLifeSurvivors(aliveCells: Cell[]): Cell[] {
   return newAliveCells;
 }
 
-export { Cell, gameOfLifeSurvivors };
+export { GameOfLifeWorld, Cell, gameOfLifeSurvivors };
