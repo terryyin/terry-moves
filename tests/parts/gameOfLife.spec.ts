@@ -1,16 +1,18 @@
-import { Cell, gameOfLifeSurvivors, neighbourCells } from "@/parts/gameOfLife";
+import { GameOfLifeWorld, Cell } from "@/parts/gameOfLife";
 
 describe('An alive cell in Game Of Life', () => {
-  const subject = {x: 2, y: 3};
-  const aliveNeighbours = (n: number): Cell[] => neighbourCells(subject).slice(0, n);
+  const world = new GameOfLifeWorld();
+  const subject = world.getCell(2, 3);
+  const aliveNeighbours = (n: number): Cell[] => world.neighbourCells(subject).slice(0, n);
+  const gameOfLifeSurvivors = (aliveCells: Cell[]): Cell[] => world.survivors(new Set(aliveCells));
 
   it('dies with no alive neighbours', () => {
     expect(gameOfLifeSurvivors([subject])).not.toContainEqual(subject);
   });
 
   it('dies if there are only remote neighbours', () => {
-    const remoteNeighbour1 = neighbourCells(neighbourCells(subject)[0])[0];
-    const remoteNeighbour2 = neighbourCells(neighbourCells(subject)[1])[1];
+    const remoteNeighbour1 = world.neighbourCells(world.neighbourCells(subject)[0])[0];
+    const remoteNeighbour2 = world.neighbourCells(world.neighbourCells(subject)[1])[1];
     expect(gameOfLifeSurvivors([subject, remoteNeighbour1, remoteNeighbour2])).not.toContainEqual(subject);
   });
 
