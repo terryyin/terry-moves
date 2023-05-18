@@ -1,12 +1,14 @@
 import React, { useMemo } from "react";
 import { useAnimationContext } from "../../hooks/useAnimationContext";
-import { GameOfLife3D } from "./GameOfLife3D";
+import { GameOfLife3D, HighlightedCell } from "./GameOfLife3D";
 import { Cell, GameOfLifeWorld } from "./gameOfLife";
+import * as THREE from "three";
 
 const world = new GameOfLifeWorld();
 
 export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> = ({actor, startLives}) => {
-  const progress = useAnimationContext().getGeneralValue(actor) ?? 0;
+  const context = useAnimationContext();
+  const progress = context.getGeneralValue(actor) ?? 0;
   const round = Math.floor(progress);
   
   const survivors = useMemo(() => {
@@ -28,8 +30,27 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
   }, [startLives]);
 
   const currentLives = survivors(round);
+  const highlightCells: HighlightedCell[] = [];
+
+  const deadDemo = context.getGeneralValue("deadDemo") ?? 0;
+  if(deadDemo > 0) {
+    highlightCells.push({
+      cell: {x: 2, y: 0},
+      color: new THREE.Color(0x0000ff),
+      progress: deadDemo,
+    });
+  }
+  const aliveDemo = context.getGeneralValue("aliveDemo") ?? 0;
+  if(aliveDemo > 0) {
+    highlightCells.push({
+      cell: {x: 2, y: -1},
+      color: new THREE.Color(0x0000ff),
+      progress: aliveDemo,
+    });
+  }
+
 
   return (
-    <GameOfLife3D lives={currentLives} world={world}/>
+    <GameOfLife3D lives={currentLives} world={world} highightCells={highlightCells}/>
   );
 };

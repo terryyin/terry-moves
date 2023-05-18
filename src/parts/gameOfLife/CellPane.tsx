@@ -8,13 +8,13 @@ function createGradientTexture(color1: THREE.Color, color2: THREE.Color, alpha: 
   const canvas = document.createElement('canvas');
   // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
   const ctx = canvas.getContext('2d')!;
-  const gradient = ctx.createRadialGradient(50, 50, 0, 50, 50, 50);
+  const gradient = ctx.createRadialGradient(50, 50, 0, 50, 50, 70);
 
   canvas.width = 100;
   canvas.height = 100;
 
-  gradient.addColorStop(0, color1.getStyle());
-  gradient.addColorStop(1, `${color2.getStyle().substring(0, color2.getStyle().length -1)},0)`);
+  gradient.addColorStop(0, `${color1.getStyle().substring(0, color2.getStyle().length -1)},${alpha})`);
+  gradient.addColorStop(1, `${color2.getStyle().substring(0, color2.getStyle().length -1)},${alpha * alpha})`);
 
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -23,14 +23,14 @@ function createGradientTexture(color1: THREE.Color, color2: THREE.Color, alpha: 
   return texture;
 }
 
-export const CellPane: React.FC<{ cellToHighlight: Cell }> = ({ cellToHighlight }) => {
+export const CellPane: React.FC<{ cellToHighlight: Cell, color: THREE.Color, progress: number }> = ({ cellToHighlight, color, progress }) => {
   const { size } = useThree();
   const cellSize = 1;
 
   const gradientTexture = createGradientTexture(
-    new THREE.Color(0x008800),
-    new THREE.Color(0xffffff),
-    0 // Alpha value for the second color (0 means fully transparent)
+    color,
+		color,
+		progress / 3,
   );
 
   return (

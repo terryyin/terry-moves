@@ -3,8 +3,15 @@ import { Cell, GameOfLifeWorld } from './gameOfLife';
 import { Fog } from 'three/src/scenes/Fog';
 import { useThree } from '@react-three/fiber';
 import { CellPane } from './CellPane';
+import * as THREE from 'three';
 
-export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld}>  = ({lives, world}) => {
+export interface HighlightedCell {
+	cell: Cell;
+	color: THREE.Color;
+	progress: number;
+}
+
+export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld, highightCells: HighlightedCell[]}>  = ({lives, world, highightCells}) => {
 	const { scene } = useThree();
 	const gridSize = 1;
 	const ballRadius = gridSize / 3;
@@ -14,7 +21,9 @@ export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld}> 
 	}, [scene]);
 	return <group>
 				<gridHelper args={[500, 500]} position={[gridSize / 2, 0, gridSize / 2]} />
-				<CellPane cellToHighlight={{x: 0, y: 0}} />
+				{highightCells.map(({cell, progress, color}, idx) => (
+					<CellPane key={idx} cellToHighlight={cell} progress={progress} color={color} />
+				))}
 				{[...lives].map((life, idx) => (
 					<mesh key={idx} position={[life.x, ballRadius, life.y]}>
 						<sphereGeometry args={[ballRadius, 32, 32]} />
