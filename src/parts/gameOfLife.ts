@@ -20,47 +20,44 @@ class GameOfLifeWorld {
   }
 }
 
+const world = new GameOfLifeWorld();
+
 export function neighbourCells(c: Cell): Cell[] {
   return [
-    {x: c.x - 1, y: c.y - 1},
-    {x: c.x - 1, y: c.y},
-    {x: c.x - 1, y: c.y + 1},
-    {x: c.x,     y: c.y - 1},
-    {x: c.x,     y: c.y + 1},
-    {x: c.x + 1, y: c.y - 1},
-    {x: c.x + 1, y: c.y},
-    {x: c.x + 1, y: c.y + 1},
+    world.getCell(c.x - 1, c.y - 1),
+    world.getCell(c.x - 1, c.y),
+    world.getCell(c.x - 1, c.y + 1),
+    world.getCell(c.x,     c.y - 1),
+    world.getCell(c.x,     c.y + 1),
+    world.getCell(c.x + 1, c.y - 1),
+    world.getCell(c.x + 1, c.y),
+    world.getCell(c.x + 1, c.y + 1),
   ];
 }
 
-const world = new GameOfLifeWorld();
-
 function gameOfLifeSurvivors(aliveCells: Cell[]): Cell[] {
   const aliveCellsSet = new Set(aliveCells.map(cell => world.getCell(cell.x, cell.y)));
-  return gameOfLifeSurvivors1([...aliveCellsSet]);
+  return gameOfLifeSurvivors1(aliveCellsSet);
 }
 
-function gameOfLifeSurvivors1(aliveCells: Cell[]): Cell[] {
-  const aliveCellsSet = new Set(aliveCells.map(cell => cell.x + ',' + cell.y));
-  const neighbourCounts: Record<string, number> = {};
+function gameOfLifeSurvivors1(aliveCells: Set<Cell>): Cell[] {
+  const neighbourCounts: Map<Cell, number> = new Map;
 
   for (const cell of aliveCells) {
     for (const neighbour of neighbourCells(cell)) {
-      const key = neighbour.x + ',' + neighbour.y;
-      neighbourCounts[key] = (neighbourCounts[key] || 0) + 1;
+      neighbourCounts.set(neighbour, (neighbourCounts.get(neighbour) ?? 0) + 1);
     }
   }
 
-  const newAliveCells = [];
+  const newAliveCells: Cell[] = [];
 
-  for (const [key, count] of Object.entries(neighbourCounts)) {
-    const [x, y] = key.split(',').map(Number);
-    const isAlive = aliveCellsSet.has(key);
+  neighbourCounts.forEach((count, cell) => {
+    const isAlive = aliveCells.has(cell);
 
     if ((isAlive && (count === 2 || count === 3)) || (!isAlive && count === 3)) {
-      newAliveCells.push({ x, y });
+      newAliveCells.push(cell);
     }
-  }
+  });
 
   return newAliveCells;
 }
