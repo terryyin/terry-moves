@@ -1,3 +1,4 @@
+import {interpolate} from 'remotion'
 import React  from 'react';
 import { Cell, GameOfLifeWorld } from './gameOfLife';
 import { Fog } from 'three/src/scenes/Fog';
@@ -12,6 +13,9 @@ export interface HighlightedCell {
 	progress: number;
 }
 
+const gridSize = 1;
+const ballRadius = gridSize / 3;
+
 function getColor(neighbourCount: number, progress: number) {
 	const startColor = "#00ff00"
 	if (neighbourCount === 1) {
@@ -23,10 +27,15 @@ function getColor(neighbourCount: number, progress: number) {
 	return new THREE.Color(0x00ff00);
 }
 
+function getRadius(neighbourCount: number, progress: number) {
+	if (neighbourCount === 1) {
+		return interpolate(progress, [0.6, 1],  [ballRadius, 0], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
+	} 
+	return ballRadius;
+}
+
 export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld, highightCells: HighlightedCell[], progress: number}>  = ({lives, world, highightCells, progress}) => {
 	const { scene } = useThree();
-	const gridSize = 1;
-	const ballRadius = gridSize / 3;
 	
 	React.useEffect(() => {
 		scene.fog = new Fog('beige', 0, 100);
@@ -40,8 +49,9 @@ export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld, h
 				{[...lives].map((life, idx) => {
 					const neighbourCount = world.getAliveNeighbourCount(lives, life);
 					const color = getColor(neighbourCount, progress);
+					const radius = getRadius(neighbourCount, progress);
 					return <mesh key={idx} position={[life.x, ballRadius, life.y]}>
-						<sphereGeometry args={[ballRadius, 32, 32]} />
+						<sphereGeometry args={[radius, 32, 32]} />
 						<meshPhysicalMaterial color={color} emissive="#00ff00" emissiveIntensity={0.2} />
 					</mesh>
 				})}
