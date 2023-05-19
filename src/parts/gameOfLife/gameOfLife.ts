@@ -57,6 +57,10 @@ class GameOfLifeWorld {
 
     return newAliveCells;
   }
+
+  getAliveNeighbourCount(lives: Set<Cell>, life: Cell) {
+    return this.neighbourCells(life).filter(cell => lives.has(cell)).length;
+  }
 }
 
 export { GameOfLifeWorld, Cell };

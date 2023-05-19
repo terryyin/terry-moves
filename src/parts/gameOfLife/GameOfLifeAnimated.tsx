@@ -10,6 +10,7 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
   const context = useAnimationContext();
   const progress = context.getGeneralValue(actor) ?? 0;
   const round = Math.floor(progress);
+  const inRoundProgress = progress - round;
   
   const survivors = useMemo(() => {
     const cache = new Map();
@@ -66,6 +67,6 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
 
 
   return (
-    <GameOfLife3D lives={currentLives} world={world} highightCells={highlightCells}/>
+    <GameOfLife3D lives={currentLives} world={world} highightCells={highlightCells} progress={inRoundProgress}/>
   );
 };
