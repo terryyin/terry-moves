@@ -15,16 +15,16 @@ export interface HighlightedCell {
 
 const gridSize = 1;
 const ballRadius = gridSize / 3;
+const startColor = "#00aa00"
 
 function getColor(neighbourCount: number, progress: number) {
-	const startColor = "#00ff00"
 	if (neighbourCount === 1) {
 		return interpolateColors(progress, [0, 1],  [startColor, "#00ffff"]);
 	} 
  if (neighbourCount > 3) {
-		return interpolateColors(progress, [0, 0.5],  [startColor, "#ff0000"]);
+		return interpolateColors(progress, [0, 0.5],  [startColor, "#ff7700"]);
 	}
-	return new THREE.Color(0x00ff00);
+	return startColor;
 }
 
 function getRadius(neighbourCount: number, progress: number) {
@@ -34,7 +34,7 @@ function getRadius(neighbourCount: number, progress: number) {
 	return ballRadius;
 }
 
-export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld, highightCells: HighlightedCell[], progress: number}>  = ({lives, world, highightCells, progress}) => {
+export const GameOfLife3D: React.FC<{lives: Set<Cell>, comingNext: Cell[], world: GameOfLifeWorld, highightCells: HighlightedCell[], progress: number}>  = ({lives, comingNext, world, highightCells, progress}) => {
 	const { scene } = useThree();
 	
 	React.useEffect(() => {
@@ -46,14 +46,25 @@ export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld, h
 				{highightCells.map(({cell, progress, color}, idx) => (
 					<CellPane key={idx} cellToHighlight={cell} progress={progress} color={color} />
 				))}
+
 				{[...lives].map((life, idx) => {
 					const neighbourCount = world.getAliveNeighbourCount(lives, life);
 					const color = getColor(neighbourCount, progress);
 					const radius = getRadius(neighbourCount, progress);
 					return <mesh key={idx} position={[life.x, radius, life.y]}>
 						<sphereGeometry args={[radius, 32, 32]} />
-						<meshPhysicalMaterial color={color} emissive="#00ff00" emissiveIntensity={0.2} />
+						<meshPhysicalMaterial color={color} />
 					</mesh>
 				})}
+
+				{comingNext.map((life, idx) => {
+					const color = interpolateColors(progress, [0.8, 1],  ["#00ff00", startColor]);
+					const radius = interpolate(progress, [0.8, 1],  [0, ballRadius], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
+					return <mesh key={idx} position={[life.x, radius, life.y]}>
+						<sphereGeometry args={[radius, 32, 32]} />
+						<meshPhysicalMaterial color={color} />
+					</mesh>
+				})}
+
 			</group>
 };

@@ -14,6 +14,7 @@ import { WindBlow } from './parts/WindBlow';
 export const transparentSubtitles: Subtitle[] = [
 
 { leadingBlank: 0, duration: 4, text: `On an infinite, two-dimensional grid filled with square cells`, actions: [
+	{ actor: "gol", actionType: "additive value change to", duration: 0, value: 80},
 	{ actor: "aliveDemo", actionType: "additive value change to", duration: 0, value: 0},
 	{ actor: "deadDemo", actionType: "additive value change to", duration: 0, value: 0},
   { actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 20, -40],},
@@ -52,15 +53,15 @@ export const transparentSubtitles: Subtitle[] = [
 	{ actor: "neighboursDemoSurvive", actionType: "additive value change to", duration: 0.5, value: 0, offset: 4},
 ]},
 
-
-
+{ leadingBlank: 1, duration: 5, text: `Complex behaviors arise from these simple rules, underscoring the game's intriguing nature.`, actions: []},
 
 { leadingBlank: 0, duration: 7, text: `Conway's Game of Life, a zero-player game, emerged as a remarkable creation from mathematics and computer science.`, actions: [
-	{ actor: "gol", actionType: "additive value change to", duration: 8, value: 50},
+	{ actor: "gol", actionType: "additive value change to", duration: 8, value: 120},
   { actor: "camera", actionType: "move", duration: 7, absolutePosition: [20, 30, 0],},
 ]},
+
 { leadingBlank: 1, duration: 5, text: `It was invented in 1970 by the renowned British mathematician John Horton Conway.`, actions: [
-	{ actor: "gol", actionType: "additive value change to", duration: 6, value: 80},
+	{ actor: "gol", actionType: "additive value change to", duration: 6, value: 140},
   { actor: "camera", actionType: "move", duration: 5, absolutePosition: [20, 30, -10],},
 ]},
 
@@ -72,7 +73,6 @@ export const transparentSubtitles: Subtitle[] = [
 { leadingBlank: 1, duration: 5, text: `Despite its simple rules, Conway's Game of Life is far from straightforward, and it exemplifies emergence and self-organization.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 10, value: 100},
 ]},
-{ leadingBlank: 1, duration: 5, text: `Complex behaviors arise from these simple rules, underscoring the game's intriguing nature.`, actions: []},
 { leadingBlank: 1, duration: 5, text: `The Game of Life has found applications in various scientific and mathematical research due to its unique properties.`, actions: []},
 { leadingBlank: 1, duration: 5, text: `And beyond its academic allure, it's simply fun to watch as the game's 'life' unfolds!`, actions: []},
 

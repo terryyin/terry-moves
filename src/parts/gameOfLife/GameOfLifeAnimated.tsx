@@ -31,6 +31,7 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
   }, [startLives]);
 
   const currentLives = survivors(round);
+  const comingNext = [...survivors(round + 1)].filter((c: Cell) => !currentLives.has(c));
   const highlightCells: HighlightedCell[] = [];
 
   const deadDemo = context.getGeneralValue("deadDemo") ?? 0;
@@ -71,6 +72,6 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
   }
 
   return (
-    <GameOfLife3D lives={currentLives} world={world} highightCells={highlightCells} progress={inRoundProgress}/>
+    <GameOfLife3D lives={currentLives} comingNext={comingNext} world={world} highightCells={highlightCells} progress={inRoundProgress}/>
   );
 };
