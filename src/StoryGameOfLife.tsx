@@ -33,7 +33,7 @@ export const transparentSubtitles: Subtitle[] = [
 ]},
 { leadingBlank: 1, duration: 5, text: `the living cell will die if it has one or no neighour, as if isolation.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 4, value: 101},
-	{ actor: "wind", actionType: "additive value change to", duration: 2, value: 200, offset: 1},
+	{ actor: "wind", actionType: "additive value change to", duration: 1, value: 1, offset: 2},
 	{ actor: "neighboursDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 3},
 ]},
 { leadingBlank: 0, duration: 7, text: `Conway's Game of Life, a zero-player game, emerged as a remarkable creation from mathematics and computer science.`, actions: [
@@ -96,7 +96,7 @@ export const StoryGameOfLife: React.FC = () => {
 				<GameOfLifeAnimated actor="gol" startLives={gliders} />
 			</ThreeDFrame>
 		</AbsoluteFill>
-		<WindBlow actor="wind" style={{left: "30%", width: "50%"}} />
+		<WindBlow actor="wind" style={{left: "30%", width: "30%", top: "10%"}} />
 			<AnimationEffect actor="subtitles">
 				<Subtitles scale={1} language="zhCN"/>
 			</AnimationEffect>

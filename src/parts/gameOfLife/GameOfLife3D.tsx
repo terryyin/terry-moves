@@ -50,7 +50,7 @@ export const GameOfLife3D: React.FC<{lives: Set<Cell>, world: GameOfLifeWorld, h
 					const neighbourCount = world.getAliveNeighbourCount(lives, life);
 					const color = getColor(neighbourCount, progress);
 					const radius = getRadius(neighbourCount, progress);
-					return <mesh key={idx} position={[life.x, ballRadius, life.y]}>
+					return <mesh key={idx} position={[life.x, radius, life.y]}>
 						<sphereGeometry args={[radius, 32, 32]} />
 						<meshPhysicalMaterial color={color} emissive="#00ff00" emissiveIntensity={0.2} />
 					</mesh>
