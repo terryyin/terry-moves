@@ -21,15 +21,15 @@ function getColor(neighbourCount: number, progress: number) {
 	if (neighbourCount === 1) {
 		return interpolateColors(progress, [0, 1],  [startColor, "#00ffff"]);
 	} 
- if (neighbourCount === 3) {
-		return new THREE.Color(0x0000ff);
+ if (neighbourCount > 3) {
+		return interpolateColors(progress, [0, 0.5],  [startColor, "#ff0000"]);
 	}
 	return new THREE.Color(0x00ff00);
 }
 
 function getRadius(neighbourCount: number, progress: number) {
-	if (neighbourCount === 1) {
-		return interpolate(progress, [0.6, 1],  [ballRadius, 0], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
+	if (neighbourCount === 1 || neighbourCount > 3) {
+		return interpolate(progress, [0.7, 1],  [ballRadius, 0], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
 	} 
 	return ballRadius;
 }

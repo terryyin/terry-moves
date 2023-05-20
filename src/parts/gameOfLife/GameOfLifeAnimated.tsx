@@ -59,12 +59,16 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
     })
     );
   };
+
   const neighboursDemo = context.getGeneralValue("neighboursDemo") ?? 0;
   if(neighboursDemo > 0) {
     highlightCells.push(...neighborsBox({x: 2, y: -1}, neighboursDemo));
   }
 
-
+  const neighboursDemoSurvive = context.getGeneralValue("neighboursDemoSurvive") ?? 0;
+  if(neighboursDemoSurvive > 0) {
+    highlightCells.push(...neighborsBox({x: 1, y: -1}, neighboursDemoSurvive));
+  }
 
   return (
     <GameOfLife3D lives={currentLives} world={world} highightCells={highlightCells} progress={inRoundProgress}/>
