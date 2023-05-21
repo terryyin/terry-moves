@@ -7,12 +7,14 @@ import { StoryScalingScrum } from './StoryScalingScrum';
 import { StoryWhyWhyLeSS } from './StoryWhyWhyLeSS';
 import { StoryTransparent } from './StoryTransparent';
 import { StoryGameOfLife } from './StoryGameOfLife';
+import { StoryBooleanData } from './StoryBooleanData';
 
 export const RemotionRoot: React.FC = () => {
 	return (
 		<>
 			<StoryFailureVsFailure />
 			<StoryBooleanParameters />
+			<StoryBooleanData />
 			<StoryBooleanReturns />
 			<StoryLeSSComplete />
 			<StoryScalingScrum />

@@ -11,7 +11,7 @@ import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
 import { WindBlow } from './parts/WindBlow';
 
-export const gameOfLifeSubtitles: Subtitle[] = [
+export const booleanDataSubtitles: Subtitle[] = [
 
 { leadingBlank: 0, duration: 4, text: `Imagine an infinite, two-dimensional grid of square cells.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 0, value: 90},
@@ -95,9 +95,9 @@ export function generateRandomCells(n: number, d: number, seed: number): Cell[] 
 // Const gliders: Cell[] = generateRandomCells(30, 0.2, 0);
 const gliders: Cell[] = generateRandomCells(2000, 0.3, 30000);
 
-export const StoryGameOfLife: React.FC = () => {
+export const StoryBooleanData: React.FC = () => {
   return (
-		<Story id="StoryGameOfLife" width={720} height={720} subtitles={gameOfLifeSubtitles}  >
+		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles}  >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
     <AbsoluteFill style={{backgroundColor: "black"}}>
 			<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={0} cameraY={0} cameraZ={0}>
