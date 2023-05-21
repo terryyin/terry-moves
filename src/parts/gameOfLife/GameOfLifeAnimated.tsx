@@ -34,11 +34,12 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
   const comingNext = [...survivors(round + 1)].filter((c: Cell) => !currentLives.has(c));
   const highlightCells: HighlightedCell[] = [];
 
+  const highlightColor = new THREE.Color(0xff00ff);
   const deadDemo = context.getGeneralValue("deadDemo") ?? 0;
   if(deadDemo > 0) {
     highlightCells.push({
       cell: {x: 2, y: 0},
-      color: new THREE.Color(0x0000ff),
+      color: highlightColor,
       progress: deadDemo,
     });
   }
@@ -47,7 +48,7 @@ export const GameOfLifeAnimated: React.FC<{actor: string, startLives: Cell[]}> =
   if(aliveDemo > 0) {
     highlightCells.push({
       cell: {x: 2, y: -1},
-      color: new THREE.Color(0x0000ff),
+      color: highlightColor,
       progress: aliveDemo,
     });
   }

@@ -1,7 +1,6 @@
 import {interpolate} from 'remotion'
 import React  from 'react';
 import { Cell, GameOfLifeWorld } from './gameOfLife';
-import { Fog } from 'three/src/scenes/Fog';
 import { useThree } from '@react-three/fiber';
 import { CellPane } from './CellPane';
 import * as THREE from 'three';
@@ -38,7 +37,7 @@ export const GameOfLife3D: React.FC<{lives: Set<Cell>, comingNext: Cell[], world
 	const { scene } = useThree();
 	
 	React.useEffect(() => {
-		scene.fog = new Fog('beige', 0, 100);
+		scene.fog = new THREE.Fog('skyblue', 0, 100);
 	}, [scene]);
 
 	return <group>

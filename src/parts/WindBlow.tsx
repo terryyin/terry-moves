@@ -22,7 +22,7 @@ export const WindBlow: React.FC<{actor: string; style: CSSProperties}> = ({
 		const paths = svg.querySelectorAll('path');
 
 		paths.forEach((path) => {
-			path.style.stroke = 'rgba(0,0,0,0.3)';
+			path.style.stroke = 'rgba(255,255,255,0.3)';
 			const pathLength = path.getTotalLength();
 			const progress = Math.min(1, wholeProgress * 2);
 			const progressDisappear = Math.max(0, wholeProgress * 2 - 1);
