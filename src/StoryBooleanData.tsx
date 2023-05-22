@@ -82,6 +82,7 @@ export const booleanDataSubtitles: Subtitle[] = [
 { leadingBlank: 1, duration: 4, text: `My first thought was, 'Why not use a 2D array of Booleans?'`, actions: [
 ]},
 { leadingBlank: 1, duration: 4, text: `'Alive cells are true, dead ones are false. Simple.'`, actions: [
+	{ actor: "mask", actionType: "appear", startDuration: 0.2, persistUntilSubtitleId: "2nd example"},
 ]},
 { leadingBlank: 1, duration: 5, text: `To further simplify, I began with a smaller world, a 3x3 cell grid.`, actions: [
 ]},
@@ -103,7 +104,8 @@ export const booleanDataSubtitles: Subtitle[] = [
 ]},
 { leadingBlank: 1, duration: 6, text: `It cautions us that oversimplification can lead to misinformation or undesirable outcomes.`, actions: [
 ]},
-{ leadingBlank: 2, duration: 4, text: `Moving on to our second example.`, actions: [
+{ id: "2nd example", leadingBlank: 2, duration: 4, text: `Moving on to our second example.`, actions: [
+	{ actor: "game of life", actionType: "disappear", startDuration: 0.2},
 ]},
 { leadingBlank: 1, duration: 5, text: `In a course management system, courses can be public and have some price information.`, actions: [
 ]},
@@ -173,13 +175,15 @@ export const StoryBooleanData: React.FC = () => {
 		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles}  >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
     <AbsoluteFill style={{backgroundColor: "black"}}>
+    <AnimationEffect actor="game of life">
 			<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={0} cameraY={0} cameraZ={0}>
 				{/* <ambientLight intensity={0.5} /> */}
 				<directionalLight castShadow position={[10, 20, 15]} intensity={5} color={0xffffff} />	
 				<GameOfLifeAnimated actor="gol" startLives={gliders} />
 			</ThreeDFrame>
-		</AbsoluteFill>
+		</AnimationEffect>
 		<WindBlow actor="wind" style={{left: "35%", width: "20%", top: "18%"}} />
+    <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.7)"}}/>
 
     <AnimationEffect actor="title" style={announceBoardStyle} >
 			<span style={{
@@ -200,6 +204,7 @@ export const StoryBooleanData: React.FC = () => {
 			fontFamily: 'IBM Plex Mono',
     }} language="html" codeString=""/>
 		</AnimationEffect>
+		</AbsoluteFill>
 
 			<AnimationEffect actor="subtitles">
 				<Subtitles scale={1} language="zhCN"/>
