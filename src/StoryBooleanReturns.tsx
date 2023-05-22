@@ -404,7 +404,6 @@ export const StoryBooleanReturns: React.FC = () => {
 				<Anchor actor="callee-right" style={{left: "430px", top: "75px"}}/>
 			</CodeHighlight>
 
-      <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
           <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
 						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
@@ -415,7 +414,6 @@ export const StoryBooleanReturns: React.FC = () => {
 						</ThreeAnimationEffect>
           </ThreeDFrame>
 				</AbsoluteFill>
-			</AnimationEffect>
 
     <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.7)"}}/>
     <Markdown actor="learning from not return" style={announceBoardStyle}

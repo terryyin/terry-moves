@@ -12,6 +12,10 @@ import AnimationEffect from './video_components/AnimationEffect';
 import { WindBlow } from './parts/WindBlow';
 import { CodeHighlight } from './video_components/CodeHighlight';
 import { CSSProperties } from 'react';
+import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
+import { GroupInitialState } from './video_components/GroupInitialState';
+import { ThinkingEmoji } from './parts/ThinkingEmoji';
+import { CalloutCloud } from './video_components/CalloutCloud';
 
 export const booleanDataSubtitles: Subtitle[] = [
 
@@ -80,19 +84,29 @@ export const booleanDataSubtitles: Subtitle[] = [
   { actor: "camera", actionType: "move", duration: 5, absolutePosition: [20, 30, -10],},
 ]},
 { leadingBlank: 1, duration: 4, text: `My first thought was, 'Why not use a 2D array of Booleans?'`, actions: [
+	{ actor: "array", actionType: "appear", startDuration: 1},
+	{ actor: "array", actionType: "3d rotate", endingTimeAdjustment: 0, totalRotation: [40, 0, -65], offset: 0},
 ]},
 { leadingBlank: 1, duration: 4, text: `'Alive cells are true, dead ones are false. Simple.'`, actions: [
+	{ actor: "array", actionType: "3d rotate", endingTimeAdjustment: 2, totalRotation: [0, 0, 0], offset: 0},
 	{ actor: "mask", actionType: "appear", startDuration: 0.2, persistUntilSubtitleId: "2nd example"},
 ]},
 { leadingBlank: 1, duration: 5, text: `To further simplify, I began with a smaller world, a 3x3 cell grid.`, actions: [
+	{ actor: "array", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 2, count: 11, offset: 1},
+	{ actor: "array", actionType: "insert text", endingTimeAdjustment: 1, line: 1, column: 2, text: `
+  [ false, true, false ],
+  [ false, true, false ],
+  [ true, true, false ]`, startDuration: 1, endDuration: 0 },
+
 ]},
 { leadingBlank: 1, duration: 5, text: `But this is where I stumbled into the trap of 'illusory simplicity.'`, actions: [
 ]},
 { leadingBlank: 1, duration: 6, text: `This approach, which seemed to simplify the task, actually introduced non-intrinsic complexity by forcing me to deal with boundary cases.`, actions: [
-]},
-{ leadingBlank: 1, duration: 5, text: `What initially appeared more manageable was, in reality, far more complex.`, actions: [
+			  { actor: "thinker", actionType: "rotate and rise", duration: 2, value: 3, offset: 0 },
+	{ actor: "boundary callout", actionType: "appear", startDuration: 1, endingTimeAdjustment: 4, endDuration: 0, offset: 2},
 ]},
 { leadingBlank: 1, duration: 6, text: `However, a more elegant solution exists: simply track the coordinates of living cells.`, actions: [
+			  { actor: "thinker", actionType: "disappear", startDuration: 1 },
 ]},
 { leadingBlank: 1, duration: 3, text: `This strategy bypasses the boundary problem, `, actions: [
 ]},
@@ -170,11 +184,25 @@ const announceBoardStyle: CSSProperties = {
 	fontFamily: 'Roboto, sans-serif', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
 
 
+	const bigArray = `[
+  [false, false, true, true, false, false, true, false],
+  [true, false, false, false, true, false, false, false],
+  [true, false, false, false, false, false, false, false],
+  [false, false, false, false, false, false, false, false],
+  [false, false, false, false, false, true, false, false],
+  [false, true, false, false, true, false, false, false],
+  [false, true, false, false, false, false, true, false],
+  [false, false, false, false, false, false, false, false],
+  [false, false, true, false, true, false, false, false],
+  [false, false, true, false, false, false, false, false],
+  [false, true, false, false, true, false, false, false],
+]`
+
 export const StoryBooleanData: React.FC = () => {
   return (
 		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles}  >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
-    <AbsoluteFill style={{backgroundColor: "black"}}>
+    <AbsoluteFill style={{backgroundColor: "black", perspective: "400px"}}>
     <AnimationEffect actor="game of life">
 			<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={0} cameraY={0} cameraZ={0}>
 				{/* <ambientLight intensity={0.5} /> */}
@@ -184,6 +212,7 @@ export const StoryBooleanData: React.FC = () => {
 		</AnimationEffect>
 		<WindBlow actor="wind" style={{left: "35%", width: "20%", top: "18%"}} />
     <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.7)"}}/>
+		<CodeHighlight actor="array" codeString={bigArray} style={{ left: '2%', top: '25%', width: '60%', height: '20%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}} />
 
     <AnimationEffect actor="title" style={announceBoardStyle} >
 			<span style={{
@@ -205,6 +234,21 @@ export const StoryBooleanData: React.FC = () => {
     }} language="html" codeString=""/>
 		</AnimationEffect>
 		</AbsoluteFill>
+		<CalloutCloud actor='boundary callout' style={{top: '45%', left: "2%"}} tailShift={5} tailHeightPx={50}>
+			<span style={{ fontSize: '30px', margin: 0 }} > 🤔 How many neighbours does (0, 0) have? (2, 2)? 🤔 </span>
+		</CalloutCloud>
+
+		<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
+			<ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
+				<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
+				<ThreeAnimationEffect actor="thinker">
+					<GroupInitialState rotation={[-0.8, -0, 0.9]} position={[10, -0.5, -6]} scale={4}>
+					<ThinkingEmoji/>
+					</GroupInitialState>
+				</ThreeAnimationEffect>
+			</ThreeDFrame>
+		</AbsoluteFill>
+
 
 			<AnimationEffect actor="subtitles">
 				<Subtitles scale={1} language="zhCN"/>
