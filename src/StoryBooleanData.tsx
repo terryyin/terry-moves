@@ -101,13 +101,9 @@ export const booleanDataSubtitles: Subtitle[] = [
 ]},
 { leadingBlank: 2, duration: 4, text: `Moving on to our second example.`, actions: [
 ]},
-{ leadingBlank: 1, duration: 3, text: `Let's take a course management system.`, actions: [
-]},
-{ leadingBlank: 1, duration: 4, text: `Courses can be private or public and have a price.`, actions: [
+{ leadingBlank: 1, duration: 5, text: `In a course management system, courses can be public and have some price information.`, actions: [
 ]},
 { leadingBlank: 1, duration: 4, text: `But when a course is private, the price becomes meaningless.`, actions: [
-]},
-{ leadingBlank: 1, duration: 6, text: `Can you see the problem here? If we try to calculate the average price of all courses, the private ones distort the result.`, actions: [
 ]},
 { leadingBlank: 1, duration: 5, text: `This inconsistency violates the Principle of Least Astonishment`, actions: [
 ]},
