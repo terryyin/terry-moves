@@ -33,7 +33,7 @@ export const gameOfLifeSubtitles: Subtitle[] = [
 	{ actor: "aliveDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 4},
 ]},
 
-{ leadingBlank: 1, duration: 5, text: `A living cell will die if it has one or no alive neighour, as if isolation.`, actions: [
+{ leadingBlank: 1, duration: 5, text: `A living cell will die if it has one or no alive neighour, as if in isolation.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 3, value: 100.8},
 	{ actor: "wind", actionType: "additive value change to", duration: 1, value: 1, offset: 2},
 	{ actor: "neighboursDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 5},

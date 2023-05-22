@@ -1,3 +1,4 @@
+import { booleanDataSubtitles } from './StoryBooleanData';
 import { gameOfLifeSubtitles } from './StoryGameOfLife';
 import { Subtitle } from "./models/Subtitles";
 
@@ -38,7 +39,7 @@ function formatTime(seconds: number): string {
 }
 
 
-const srtContent = formatSubtitlesToSRT(gameOfLifeSubtitles, "zhCN")
+const srtContent = formatSubtitlesToSRT(booleanDataSubtitles, "zhCN")
 process.stdout.write(srtContent);
 
 
