@@ -435,6 +435,7 @@ export const StoryBooleanReturns: React.FC = () => {
 			<Subtitles scale={1} language="zhTW"/>
 		</AnimationEffect>
     </AbsoluteFill>
+
     <AnimationEffect actor="title" style={announceBoardStyle} >
 			<span style={{
 				display: 'block',

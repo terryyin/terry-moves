@@ -10,6 +10,8 @@ import { Cell } from './parts/gameOfLife/gameOfLife';
 import { Subtitles } from './video_components/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
 import { WindBlow } from './parts/WindBlow';
+import { CodeHighlight } from './video_components/CodeHighlight';
+import { CSSProperties } from 'react';
 
 export const booleanDataSubtitles: Subtitle[] = [
 
@@ -21,8 +23,10 @@ export const booleanDataSubtitles: Subtitle[] = [
   { actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 0, -30],},
 ]},
 { leadingBlank: 1, duration: 5, text: `After bad boolean parameters and return values, let's see 'Why Do I Need To Reconsider My Boolean Data?'`, actions: [
+		{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "Keep it simple, but not simpler", startDuration: 1, endDuration: 1 },
 ]},
 { leadingBlank: 1, duration: 3, text: `Let's start with our first example.`, actions: [
+	{ actor: "title", actionType: "disappear", startDuration: 1, offset: 0 },
 ]},
 
 { leadingBlank: 0, duration: 4, text: `Imagine an infinite, two-dimensional grid of square cells,`, actions: [
@@ -158,6 +162,12 @@ export function generateRandomCells(n: number, d: number, seed: number): Cell[] 
 // Const gliders: Cell[] = generateRandomCells(30, 0.2, 0);
 const gliders: Cell[] = generateRandomCells(2000, 0.3, 30000);
 
+const announceBoardStyle: CSSProperties = { 
+				paddingTop: '20px',
+				paddingLeft: '10px',
+	fontFamily: 'Roboto, sans-serif', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
+
+
 export const StoryBooleanData: React.FC = () => {
   return (
 		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles}  >
@@ -170,6 +180,27 @@ export const StoryBooleanData: React.FC = () => {
 			</ThreeDFrame>
 		</AbsoluteFill>
 		<WindBlow actor="wind" style={{left: "35%", width: "20%", top: "18%"}} />
+
+    <AnimationEffect actor="title" style={announceBoardStyle} >
+			<span style={{
+				display: 'block',
+				paddingTop: '30px',
+      fontSize: '36px',
+			color: 'white',
+      fontWeight: 'bold',
+			fontFamily: 'Roboto, sans-serif',
+    }}>Why Do I Have To Reconsider My Boolean Data?</span>
+
+			<CodeHighlight actor="second title" style={{
+				position: 'relative',
+				paddingTop: '35px',
+				display: 'block',
+      fontSize: '30px',
+			color: 'white',
+			fontFamily: 'IBM Plex Mono',
+    }} language="html" codeString=""/>
+		</AnimationEffect>
+
 			<AnimationEffect actor="subtitles">
 				<Subtitles scale={1} language="zhCN"/>
 			</AnimationEffect>
