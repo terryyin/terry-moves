@@ -1,5 +1,6 @@
 
-import {random} from 'remotion'
+import {Img} from 'remotion'
+import {random, staticFile} from 'remotion'
 import {interpolate} from 'remotion'
 import { Subtitle } from './models/Subtitles';
 import { AbsoluteFill } from 'remotion';
@@ -75,9 +76,8 @@ export const booleanDataSubtitles: Subtitle[] = [
 ]},
 
 { leadingBlank: 0, duration: 5, text: `This is the Conway's Game of Life.`, actions: [
-	{ actor: "gol", actionType: "additive value change to", duration: 0, value: 0},
 	{ actor: "gol", actionType: "additive value change to", duration: 20, value: 200},
-  { actor: "camera", actionType: "move", duration: 7, absolutePosition: [20, 30, 0],},
+  { actor: "camera", actionType: "move", duration: 5, absolutePosition: [20, 30, 0],},
 ]},
 
 { leadingBlank: 1, duration: 6, text: `It is also a popular programming exercise, to calculate the next step of a given state.`, actions: [
@@ -107,16 +107,26 @@ export const booleanDataSubtitles: Subtitle[] = [
 ]},
 { leadingBlank: 1, duration: 6, text: `However, a more elegant solution exists: simply track the coordinates of living cells.`, actions: [
 			  { actor: "thinker", actionType: "disappear", startDuration: 1 },
+				{ actor: "positions", actionType: "appear", startDuration: 1},
 ]},
 { leadingBlank: 1, duration: 3, text: `This strategy bypasses the boundary problem, `, actions: [
+	{ actor: "positions", actionType: "insert text", endingTimeAdjustment: 2, line: 5, column: 20, text: `
+  {x: -2, y: -3},
+  {x: -200, y: 999999},`, startDuration: 1, endDuration: 0 },
 ]},
 { leadingBlank: 1, duration: 4, text: `and if needed, boundaries can be added later as an additional constraint.`, actions: [
 ]},
 { leadingBlank: 1, duration: 6, text: `This brings us back to a critical design principle, 'Einstein's Razor.' This heuristic, akin to Occam's Razor,`, actions: [
+	{ actor: "einstein's razor", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "oversimple"},
+	{ actor: "einstein quote", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: 
+	`"Make everything as simple as possible,
+but not simpler."
+
+  -- Einstein's Razor`, startDuration: 1, endDuration: 1 },
 ]},
 { leadingBlank: 1, duration: 5, text: `reminds us to 'Make everything as simple as possible, but not simpler.' `, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `It cautions us that oversimplification can lead to misinformation or undesirable outcomes.`, actions: [
+{ id: "oversimple", leadingBlank: 1, duration: 6, text: `In this case using boolean might be a oversimplification and introduce more complexity.`, actions: [
 ]},
 { id: "2nd example", leadingBlank: 2, duration: 4, text: `Moving on to our second example.`, actions: [
 	{ actor: "game of life", actionType: "disappear", startDuration: 0.2},
@@ -198,45 +208,58 @@ const announceBoardStyle: CSSProperties = {
   [false, true, false, false, true, false, false, false],
 ]`
 
+	const listOfPos = `[
+  {x: 1, y: 0},
+  {x: 1, y: 1},
+  {x: 0, y: 2},
+  {x: 1, y: 2},
+]`
+
 export const StoryBooleanData: React.FC = () => {
   return (
 		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles}  >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
     <AbsoluteFill style={{backgroundColor: "black", perspective: "400px"}}>
-    <AnimationEffect actor="game of life">
+    <AnimationEffect actor="game of life" style={{transformStyle: "preserve-3d"}}>
 			<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={0} cameraY={0} cameraZ={0}>
 				{/* <ambientLight intensity={0.5} /> */}
 				<directionalLight castShadow position={[10, 20, 15]} intensity={5} color={0xffffff} />	
 				<GameOfLifeAnimated actor="gol" startLives={gliders} />
 			</ThreeDFrame>
-		</AnimationEffect>
-		<WindBlow actor="wind" style={{left: "35%", width: "20%", top: "18%"}} />
-    <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.7)"}}/>
-		<CodeHighlight actor="array" codeString={bigArray} style={{ left: '2%', top: '25%', width: '60%', height: '20%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}} />
+			<WindBlow actor="wind" style={{left: "35%", width: "20%", top: "18%"}} />
+			<AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.7)"}}/>
+			<CodeHighlight actor="array" codeString={bigArray} style={{ left: '2%', top: '25%', width: '60%', height: '20%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}} />
+			<CodeHighlight actor="positions" codeString={listOfPos} style={{ left: '55%', top: '25%', width: '60%', height: '20%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(0,0,0,0.7)"}} />
 
-    <AnimationEffect actor="title" style={announceBoardStyle} >
-			<span style={{
-				display: 'block',
-				paddingTop: '30px',
-      fontSize: '36px',
-			color: 'white',
-      fontWeight: 'bold',
-			fontFamily: 'Roboto, sans-serif',
-    }}>Why Do I Have To Reconsider My Boolean Data?</span>
+			<AnimationEffect actor="einstein's razor" style={{backgroundColor: "rgba(0,0,0, 0.8)", width: "100%", height: "100%"}}>
+				<Img src={staticFile("assets/Einstein_1921.jpg")} style={{position: "absolute", width: "100%"}}/>
+				<CodeHighlight actor="einstein quote" codeString="" style={{ left: '10%', top: '60%', width: '40%', height: '60%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible'}} preStyle={{backgroundColor: "rgba(0,0,0,0.1)"}} />
+			</AnimationEffect>
 
-			<CodeHighlight actor="second title" style={{
-				position: 'relative',
-				paddingTop: '35px',
-				display: 'block',
-      fontSize: '30px',
-			color: 'white',
-			fontFamily: 'IBM Plex Mono',
-    }} language="html" codeString=""/>
 		</AnimationEffect>
 		</AbsoluteFill>
 		<CalloutCloud actor='boundary callout' style={{top: '45%', left: "2%"}} tailShift={5} tailHeightPx={50}>
 			<span style={{ fontSize: '30px', margin: 0 }} > 🤔 How many neighbours does (0, 0) have? (2, 2)? 🤔 </span>
 		</CalloutCloud>
+
+		<AnimationEffect actor="title" style={announceBoardStyle} >
+			<span style={{
+				display: 'block',
+				paddingTop: '30px',
+			fontSize: '36px',
+			color: 'white',
+			fontWeight: 'bold',
+			fontFamily: 'Roboto, sans-serif',
+		}}>Why Do I Have To Reconsider My Boolean Data?</span>
+			<CodeHighlight actor="second title" style={{
+				position: 'relative',
+				paddingTop: '35px',
+				display: 'block',
+			fontSize: '30px',
+			color: 'white',
+			fontFamily: 'IBM Plex Mono',
+		}} language="html" codeString=""/>
+		</AnimationEffect>
 
 		<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
 			<ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
