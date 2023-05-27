@@ -4,7 +4,7 @@
 	"description": "A React Three Fiber Project",
 	"scripts": {
 		"start": "remotion preview",
-		"build": "remotion render --timeout=60000 --scale 1 StoryGameOfLife out/video.mp4",
+		"build": "remotion render --timeout=60000 --scale 1.5 StoryWhyWhyLeSS out/video.mp4",
 		"upgrade": "remotion upgrade",
 		"test": "npx jest && eslint src --ext ts,tsx,js,jsx && tsc",
 		"srt": "ts-node ./src/srt.ts"

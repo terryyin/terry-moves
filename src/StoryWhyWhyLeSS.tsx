@@ -366,7 +366,7 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 			</AbsoluteFill>
 			</AnimationEffect>
 			<AnimationEffect actor="subtitles">
-				<Subtitles scale={1} language="zhCN"/>
+				<Subtitles scale={1} language="zhTW"/>
 			</AnimationEffect>
 		</AbsoluteFill>
 		</Story>
