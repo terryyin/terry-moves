@@ -18,6 +18,9 @@ import { GroupInitialState } from './video_components/GroupInitialState';
 import { ThinkingEmoji } from './parts/ThinkingEmoji';
 import { CalloutCloud } from './video_components/CalloutCloud';
 import { Markdown } from './video_components/Markdown';
+import { OddeLogo } from './parts/OddeLogo';
+import { OddeLogoInner } from './parts/OddeLogoInner';
+import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 
 export const booleanDataSubtitles: Subtitle[] = [
 
@@ -27,72 +30,73 @@ export const booleanDataSubtitles: Subtitle[] = [
 	{ actor: "deadDemo", actionType: "additive value change to", duration: 0, value: 0},
   { actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 20, -40],},
   { actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 0, -30],},
+	{ actor: "logos", actionType: "appear", startDuration: 0, endDuration: 1, endingTimeAdjustment: 20},
 ]},
-{ leadingBlank: 1, duration: 5, text: `After bad boolean parameters and return values, let's see 'Why Do I Need To Reconsider My Boolean Data?'`, actions: [
+{ leadingBlank: 1, duration: 5, text: `After exploring pitfalls with boolean parameters and return values, let's delve into 'Why Should We Rethink Our Boolean Data?'`, actions: [
 		{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "Keep it simple, but not simpler", startDuration: 1, endDuration: 1 },
 ]},
-{ leadingBlank: 1, duration: 3, text: `Let's start with our first example.`, actions: [
+{ leadingBlank: 1, duration: 3, text: `Our first example is on deck.`, actions: [
 	{ actor: "title", actionType: "disappear", startDuration: 1, offset: 0 },
 ]},
 
-{ leadingBlank: 0, duration: 4, text: `Imagine an infinite, two-dimensional grid of square cells,`, actions: [
+{ leadingBlank: 0, duration: 4, text: `Picture an infinite, two-dimensional grid of square cells.`, actions: [
   { actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0.7, 0, -0.6], offset: 1},
 	{ actor: "gol", actionType: "additive value change to", duration: 4, value: 100},
   { actor: "camera", actionType: "move", duration: 2, absolutePosition: [-1, 2, -0.4], offset: 3},
 ]},
 
-{ leadingBlank: 1, duration: 3, text: `that are either dead or alive.`, actions: [
+{ leadingBlank: 1, duration: 3, text: `Each cell is either dead or alive.`, actions: [
 	{ actor: "deadDemo", actionType: "additive value change to", duration: 0.5, value: 1, offset: 1},
 	{ actor: "deadDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 2},
 	{ actor: "aliveDemo", actionType: "additive value change to", duration: 0.5, value: 1, offset: 2},
 ]},
-{ leadingBlank: 1, duration: 4, text: `Surrounding every cell are eight neighbors.`, actions: [
+{ leadingBlank: 1, duration: 4, text: `Each cell is surrounded by eight neighbors.`, actions: [
 	{ actor: "neighboursDemo", actionType: "additive value change to", duration: 0.5, value: 1, offset: 1},
 	{ actor: "aliveDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 4},
 ]},
 
-{ leadingBlank: 1, duration: 5, text: `An living cell will die if it has one or no alive neighour, as if in isolation.`, actions: [
+{ leadingBlank: 1, duration: 5, text: `A living cell dies if it has one or no living neighbors - it's as if in isolation.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 3, value: 100.8},
 	{ actor: "wind", actionType: "additive value change to", duration: 1, value: 1, offset: 2},
 	{ actor: "neighboursDemo", actionType: "additive value change to", duration: 0.5, value: 0, offset: 5},
 ]},
 
-{ leadingBlank: 1, duration: 4, text: `It will survive if there are two or three neighbours.`, actions: [
+{ leadingBlank: 1, duration: 4, text: `It survives if there are two or three neighbors.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 5, value: 103},
 	{ actor: "neighboursDemoSurvive", actionType: "additive value change to", duration: 0.5, value: 1, offset: 1},
 ]},
 
-{ leadingBlank: 1, duration: 5, text: `It will die if there are four or more neighbours, as if overcrowding.`, actions: [
+{ leadingBlank: 1, duration: 5, text: `It dies if there are four or more neighbors due to overcrowding.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 3, value: 103.8, offset: 1},
 ]},
 
-{ leadingBlank: 1, duration: 5, text: `A dead cell with exactly 3 alive neighbours will come to life, as if reproduction.`, actions: [
+{ leadingBlank: 1, duration: 5, text: `A dead cell springs to life if exactly 3 neighbors are alive, as if through reproduction`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 0.5, value: 104.2, offset: 0},
 	{ actor: "neighboursDemoSurvive", actionType: "additive value change to", duration: 0.5, value: 0, offset: 5},
 	{ actor: "gol", actionType: "additive value change to", duration: 2, value: 105, offset: 2},
 ]},
 
-{ leadingBlank: 1, duration: 5, text: `From these simple rules, a complex dance of life and death unfolds.`, actions: [
+{ leadingBlank: 1, duration: 5, text: `These simple rules yield a complex dance of life and death.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 5, value: 108},
 ]},
 
-{ leadingBlank: 0, duration: 5, text: `This is the Conway's Game of Life.`, actions: [
+{ leadingBlank: 0, duration: 5, text: `Welcome to Conway's Game of Life.`, actions: [
 	{ actor: "gol", actionType: "additive value change to", duration: 20, value: 200},
   { actor: "camera", actionType: "move", duration: 5, absolutePosition: [20, 30, 0],},
 ]},
 
-{ leadingBlank: 1, duration: 6, text: `It is also a popular programming exercise, to calculate the next step of a given state.`, actions: [
+{ leadingBlank: 1, duration: 6, text: `It's a popular programming exercise to calculate the next state based on the current state.`, actions: [
   { actor: "camera", actionType: "move", duration: 5, absolutePosition: [20, 30, -10],},
 ]},
 { leadingBlank: 1, duration: 4, text: `My first thought was, 'Why not use a 2D array of Booleans?'`, actions: [
 	{ actor: "array", actionType: "appear", startDuration: 1},
 	{ actor: "array", actionType: "3d rotate", endingTimeAdjustment: 0, totalRotation: [40, 0, -65], offset: 0},
 ]},
-{ leadingBlank: 1, duration: 4, text: `'Alive cells are true, dead ones are false. Simple.'`, actions: [
+{ leadingBlank: 1, duration: 4, text: `'Living cells are true, dead cells are false. Simple.'`, actions: [
 	{ actor: "array", actionType: "3d rotate", endingTimeAdjustment: 2, totalRotation: [0, 0, 0], offset: 0},
 	{ actor: "mask", actionType: "appear", startDuration: 0.2, persistUntilSubtitleId: "2nd example"},
 ]},
-{ leadingBlank: 1, duration: 5, text: `To further simplify, I began with a smaller world, a 3x3 cell grid.`, actions: [
+{ leadingBlank: 1, duration: 5, text: `To simplify further, I opted for a smaller world, a 3x3 cell grid.`, actions: [
 	{ actor: "array", actionType: "delete lines", endingTimeAdjustment: 1, fromLine: 2, count: 11, offset: 1},
 	{ actor: "array", actionType: "insert text", endingTimeAdjustment: 1, line: 1, column: 2, text: `
   [ false, true, false ],
@@ -102,22 +106,22 @@ export const booleanDataSubtitles: Subtitle[] = [
 ]},
 { leadingBlank: 1, duration: 5, text: `But this is where I stumbled into the trap of 'illusory simplicity.'`, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `This approach, which seemed to simplify the task, actually introduced non-intrinsic complexity by forcing me to deal with boundary cases.`, actions: [
+{ leadingBlank: 1, duration: 6, text: `This approach, seemingly simple, unexpectedly added complexity by forcing me to handle boundary cases.`, actions: [
 			  { actor: "thinker", actionType: "rotate and rise", duration: 2, value: 3, offset: 0 },
 	{ actor: "boundary callout", actionType: "appear", startDuration: 1, endingTimeAdjustment: 4, endDuration: 0, offset: 2},
 ]},
-{ leadingBlank: 1, duration: 6, text: `However, a more elegant solution exists: simply track the coordinates of living cells.`, actions: [
+{ leadingBlank: 1, duration: 6, text: `A more elegant solution, though, is to track the coordinates of living cells.`, actions: [
 			  { actor: "thinker", actionType: "disappear", startDuration: 1 },
 				{ actor: "positions", actionType: "appear", startDuration: 1},
 ]},
-{ leadingBlank: 1, duration: 3, text: `This strategy bypasses the boundary problem, `, actions: [
+{ leadingBlank: 1, duration: 3, text: `This sidesteps the boundary problem,`, actions: [
 	{ actor: "positions", actionType: "insert text", endingTimeAdjustment: 2, line: 5, column: 20, text: `
   {x: -2, y: -3},
   {x: -200, y: 999999},`, startDuration: 1, endDuration: 0 },
 ]},
-{ leadingBlank: 1, duration: 4, text: `and if needed, boundaries can be added later as an additional constraint.`, actions: [
+{ leadingBlank: 1, duration: 4, text: `and boundaries can be added later if needed.`, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `This brings us back to a critical design principle, 'Einstein's Razor.' This heuristic, akin to Occam's Razor,`, actions: [
+{ leadingBlank: 1, duration: 6, text: `This is where 'Einstein's Razor,' a principle akin to Occam's Razor, comes into play.`, actions: [
 	{ actor: "einstein's razor", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "oversimple"},
 	{ actor: "einstein quote", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: 
 	`"Make everything as simple as possible,
@@ -125,42 +129,43 @@ but not simpler."
 
   -- Einstein's Razor`, startDuration: 1, endDuration: 1 },
 ]},
-{ leadingBlank: 1, duration: 5, text: `reminds us to 'Make everything as simple as possible, but not simpler.' `, actions: [
+{ leadingBlank: 1, duration: 5, text: `It advises us to 'Make everything as simple as possible, but not simpler.'`, actions: [
 ]},
-{ id: "oversimple", leadingBlank: 1, duration: 6, text: `In this case using boolean might be a oversimplification and introduce more complexity.`, actions: [
+{ id: "oversimple", leadingBlank: 1, duration: 6, text: `In this case, using booleans might oversimplify and inadvertently add complexity.`, actions: [
 ]},
 { id: "2nd example", leadingBlank: 2, duration: 4, text: `Moving on to our second example.`, actions: [
 	{ actor: "game of life", actionType: "disappear", startDuration: 0.2},
 ]},
-{ leadingBlank: 1, duration: 5, text: `In a course management system, courses can be public and have some price information.`, actions: [
+{ leadingBlank: 1, duration: 5, text: `Consider a course management system where courses can be public and carry price information.`, actions: [
 	{ actor: "public course", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "summary"},
 	{ actor: "public course", actionType: "highlight lines", endingTimeAdjustment: 2, lines: [3], offset: 1},
 	{ actor: "public course", actionType: "highlight lines", endingTimeAdjustment: 2, lines: [4, 5, 6], offset: 3},
 ]},
-{ leadingBlank: 1, duration: 4, text: `But when a course is private, the price becomes meaningless.`, actions: [
+{ leadingBlank: 1, duration: 4, text: `But when a course is private, the price becomes irrelevant.`, actions: [
 	{ actor: "private course", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "summary"},
 	{ actor: "private course", actionType: "highlight lines", endingTimeAdjustment: 2, lines: [3], offset: 2},
 ]},
-{ leadingBlank: 1, duration: 5, text: `This inconsistency violates the Principle of Least Astonishment`, actions: [
+{ leadingBlank: 1, duration: 5, text: `This inconsistency contravenes the Principle of Least Astonishment.`, actions: [
 	{ actor: "confused course", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "summary"},
 	{ actor: "confused course", actionType: "highlight lines", endingTimeAdjustment: 4, lines: [3], offset: 1},
 	{ actor: "confused course", actionType: "highlight lines", endingTimeAdjustment: 3, lines: [4], offset: 2, style: 'wavy underline'},
 ]},
-{ leadingBlank: 1, duration: 6, text: `Whether 'isPrivate' represents a solid business concept depend heavily on the business domain.`, actions: [
+{ leadingBlank: 1, duration: 6, text: `The extent to which 'isPrivate' encapsulates a concrete business concept depends heavily on the business domain`, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `But in this example we can see that additional complexity will be necessary to keep the consistency.`, actions: [
+{ leadingBlank: 1, duration: 6, text: `This example underscores that additional complexity will be required to maintain consistency.`, actions: [
 ]},
-{id: "summary", leadingBlank: 1, duration: 6, text: `So, to wrap things up, Boolean data, being the simplest data type, can sometimes be too simple. `, actions: [
+{id: "summary", leadingBlank: 1, duration: 6, text: `So, in conclusion, while Boolean data is the simplest data type, it can sometimes be deceptively simple.`, actions: [
+	{ actor: "logos", actionType: "appear", startDuration: 2},
 	{ actor: "mask", actionType: "appear", startDuration: 0.5 },
 	{ actor: "conclusion", actionType: "appear", startDuration: 1 },
 ]},
-{ leadingBlank: 1, duration: 6, text: `When it can't effectively represent the problem, other complexities creep in. `, actions: [
+{ leadingBlank: 1, duration: 6, text: `If it fails to effectively represent the problem at hand, other complexities creep in.`, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `Remember Eintein's Razor and the Principle of Least Astonishment.`, actions: [
+{ leadingBlank: 1, duration: 5, text: `Remember Eintein's Razor and the Principle of Least Astonishment.`, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `It will be great if we can make illegal states unrepresentable`, actions: [
+{ leadingBlank: 1, duration: 5, text: `Strive to make illegal states unrepresentable`, actions: [
 ]},
-{ leadingBlank: 1, duration: 10, text: `Thanks for watching! There is so much I want to share about boolean still. Maybe in the future. I'd like to talk about the art of copy-paste next. Stay tuned.`, actions: [
+{ leadingBlank: 1, duration: 10, text: `Thanks for watching! There's so much more about booleans I'd love to share. Maybe another time. Next, let's explore the art of copy-pasting. Stay tuned!`, actions: [
 ]},
 
 
@@ -300,7 +305,17 @@ export const StoryBooleanData: React.FC = () => {
     <Markdown actor="conclusion" style={{...announceBoardStyle, top: "15%", height: "60%", paddingTop: "20p", fontFamily: "Poppins", fontSize: "x-large"}}
 			md={conclusion}
 		 />
-
+			<AnimationEffect actor="logos">
+			<AbsoluteFill style={{ left: '83%', top: '5.9%', width: '10%', height: '20%'}}>
+				<span style={{fontSize: '20px', color: "white", fontFamily: "Poppins, sans serif"}}>terry@</span>
+			</AbsoluteFill>
+			<AbsoluteFill style={{ left: '90%', top: '2%', width: '12%', height: '20%'}}>
+				<OddeLogo />
+				<FlipCoin speed={2} interval={20} shift={0} >
+					<OddeLogoInner />
+				</FlipCoin>
+			</AbsoluteFill>
+			</AnimationEffect>
 
 		<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
 			<ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
