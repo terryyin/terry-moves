@@ -1,5 +1,4 @@
 import { booleanDataSubtitles } from './StoryBooleanData';
-import { gameOfLifeSubtitles } from './StoryGameOfLife';
 import { Subtitle } from "./models/Subtitles";
 
 function formatSubtitlesToSRT(subtitles: Subtitle[], language: string | undefined): string {

@@ -132,10 +132,13 @@ but not simpler."
 	{ actor: "game of life", actionType: "disappear", startDuration: 0.2},
 ]},
 { leadingBlank: 1, duration: 5, text: `In a course management system, courses can be public and have some price information.`, actions: [
+	{ actor: "public course", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "summary"},
 ]},
 { leadingBlank: 1, duration: 4, text: `But when a course is private, the price becomes meaningless.`, actions: [
+	{ actor: "private course", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "summary"},
 ]},
 { leadingBlank: 1, duration: 5, text: `This inconsistency violates the Principle of Least Astonishment`, actions: [
+	{ actor: "confused course", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "summary"},
 ]},
 { leadingBlank: 1, duration: 6, text: `A potential solution would be to group related data together, making it optional. `, actions: [
 ]},
@@ -147,7 +150,7 @@ but not simpler."
 ]},
 { leadingBlank: 1, duration: 6, text: `However, it's crucial to remember that solutions depend heavily on the business domain.`, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `So, to wrap things up, Boolean data, being the simplest data type, can sometimes be too simple. `, actions: [
+{id: "summary", leadingBlank: 1, duration: 6, text: `So, to wrap things up, Boolean data, being the simplest data type, can sometimes be too simple. `, actions: [
 ]},
 { leadingBlank: 1, duration: 6, text: `When it can't effectively represent the problem, other complexities creep in. `, actions: [
 ]},
@@ -208,12 +211,31 @@ const announceBoardStyle: CSSProperties = {
   [false, true, false, false, true, false, false, false],
 ]`
 
-	const listOfPos = `[
+const listOfPos = `[
   {x: 1, y: 0},
   {x: 1, y: 1},
   {x: 0, y: 2},
   {x: 1, y: 2},
 ]`
+
+const publicCourse = `publicCourse = {
+  name: "Boolean Master",
+  isPrivate: false,
+  price: Money(100, "USD"),
+  earlyBirdPrice: Money(80, "USD"),
+  earlyBirdDeadline: Date("2020-01-01"),
+}`
+
+const privateCourse = `privateCourse = {
+  name: "Boolean Deep Dive",
+  sPrivate: true,
+}`
+
+const confusedCourse = `confusedCourse = {
+  name: "Three States of Boolean",
+  isPrivate: true,
+  price: Money(100, "USD"),
+}`
 
 export const StoryBooleanData: React.FC = () => {
   return (
@@ -241,6 +263,10 @@ export const StoryBooleanData: React.FC = () => {
 		<CalloutCloud actor='boundary callout' style={{top: '45%', left: "2%"}} tailShift={5} tailHeightPx={50}>
 			<span style={{ fontSize: '30px', margin: 0 }} > 🤔 How many neighbours does (0, 0) have? (2, 2)? 🤔 </span>
 		</CalloutCloud>
+
+		<CodeHighlight actor="public course" codeString={publicCourse} style={{ left: '10%', top: '10%', width: '80%', height: '20%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(100,100,100,0.7)"}} />
+		<CodeHighlight actor="private course" codeString={privateCourse} style={{ left: '10%', top: '40%', width: '80%', height: '20%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(100,100,100,0.7)"}} />
+		<CodeHighlight actor="confused course" codeString={confusedCourse} style={{ left: '10%', top: '60%', width: '80%', height: '20%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible', backgroundColor: "rgba(0,0,0,0)" }} preStyle={{backgroundColor: "rgba(100,100,100,0.7)"}} />
 
 		<AnimationEffect actor="title" style={announceBoardStyle} >
 			<span style={{
@@ -271,8 +297,6 @@ export const StoryBooleanData: React.FC = () => {
 				</ThreeAnimationEffect>
 			</ThreeDFrame>
 		</AbsoluteFill>
-
-
 			<AnimationEffect actor="subtitles">
 				<Subtitles scale={1} language="zhCN"/>
 			</AnimationEffect>
