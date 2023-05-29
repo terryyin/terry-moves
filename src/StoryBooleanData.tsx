@@ -156,9 +156,9 @@ but not simpler."
 ]},
 { leadingBlank: 1, duration: 6, text: `When it can't effectively represent the problem, other complexities creep in. `, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `Remember the Principle of Least Astonishment and Avoid Premature Abstraction when designing your data structures.`, actions: [
+{ leadingBlank: 1, duration: 6, text: `Remember Eintein's Razor and the Principle of Least Astonishment.`, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `Think carefully about your Boolean data - it might not be as straightforward as it seems!`, actions: [
+{ leadingBlank: 1, duration: 6, text: `It will be great if we can make illegal states unrepresentable`, actions: [
 ]},
 { leadingBlank: 1, duration: 10, text: `Thanks for watching! There is so much I want to share about boolean still. Maybe in the future. I'd like to talk about the art of copy-paste next. Stay tuned.`, actions: [
 ]},
@@ -242,9 +242,10 @@ const confusedCourse = `confusedCourse = {
 const conclusion = `## Conclusion
 
 * Boolean data is the simplest data type, but it can be too simple.
-* Remember Einstein's quote:
-  * "Make things as simple as possible, but not simpler."
-* Remember the Principle of Least Astonishment and make mistakes impresentable.
+* Remember Einstein's Razor:
+  * "_Make things as simple as possible, but not simpler._"
+* Remember the Principle of Least Astonishment
+* Make illegal states unrepresentable
 `;
 
 export const StoryBooleanData: React.FC = () => {
