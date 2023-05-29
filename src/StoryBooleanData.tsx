@@ -17,6 +17,7 @@ import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
 import { GroupInitialState } from './video_components/GroupInitialState';
 import { ThinkingEmoji } from './parts/ThinkingEmoji';
 import { CalloutCloud } from './video_components/CalloutCloud';
+import { Markdown } from './video_components/Markdown';
 
 export const booleanDataSubtitles: Subtitle[] = [
 
@@ -133,24 +134,25 @@ but not simpler."
 ]},
 { leadingBlank: 1, duration: 5, text: `In a course management system, courses can be public and have some price information.`, actions: [
 	{ actor: "public course", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "summary"},
+	{ actor: "public course", actionType: "highlight lines", endingTimeAdjustment: 2, lines: [3], offset: 1},
+	{ actor: "public course", actionType: "highlight lines", endingTimeAdjustment: 2, lines: [4, 5, 6], offset: 3},
 ]},
 { leadingBlank: 1, duration: 4, text: `But when a course is private, the price becomes meaningless.`, actions: [
 	{ actor: "private course", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "summary"},
+	{ actor: "private course", actionType: "highlight lines", endingTimeAdjustment: 2, lines: [3], offset: 2},
 ]},
 { leadingBlank: 1, duration: 5, text: `This inconsistency violates the Principle of Least Astonishment`, actions: [
 	{ actor: "confused course", actionType: "appear", startDuration: 1, persistUntilSubtitleId: "summary"},
+	{ actor: "confused course", actionType: "highlight lines", endingTimeAdjustment: 4, lines: [3], offset: 1},
+	{ actor: "confused course", actionType: "highlight lines", endingTimeAdjustment: 3, lines: [4], offset: 2, style: 'wavy underline'},
 ]},
-{ leadingBlank: 1, duration: 6, text: `A potential solution would be to group related data together, making it optional. `, actions: [
+{ leadingBlank: 1, duration: 6, text: `Whether 'isPrivate' represents a solid business concept depend heavily on the business domain.`, actions: [
 ]},
-{ leadingBlank: 1, duration: 6, text: `In our specific business domain, a private course and a course with no price info are considered the same concept.`, actions: [
-]},
-{ leadingBlank: 1, duration: 4, text: `Therefore, we could bundle price information and make it optional. `, actions: [
-]},
-{ leadingBlank: 1, duration: 6, text: `That way, a private course simply doesn't have this information, eliminating any ambiguity.`, actions: [
-]},
-{ leadingBlank: 1, duration: 6, text: `However, it's crucial to remember that solutions depend heavily on the business domain.`, actions: [
+{ leadingBlank: 1, duration: 6, text: `But in this example we can see that additional complexity will be necessary to keep the consistency.`, actions: [
 ]},
 {id: "summary", leadingBlank: 1, duration: 6, text: `So, to wrap things up, Boolean data, being the simplest data type, can sometimes be too simple. `, actions: [
+	{ actor: "mask", actionType: "appear", startDuration: 0.5 },
+	{ actor: "conclusion", actionType: "appear", startDuration: 1 },
 ]},
 { leadingBlank: 1, duration: 6, text: `When it can't effectively represent the problem, other complexities creep in. `, actions: [
 ]},
@@ -194,7 +196,7 @@ const gliders: Cell[] = generateRandomCells(2000, 0.3, 30000);
 const announceBoardStyle: CSSProperties = { 
 				paddingTop: '20px',
 				paddingLeft: '10px',
-	fontFamily: 'Roboto, sans-serif', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
+	fontFamily: 'Poppins', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
 
 
 	const bigArray = `[
@@ -237,6 +239,14 @@ const confusedCourse = `confusedCourse = {
   price: Money(100, "USD"),
 }`
 
+const conclusion = `## Conclusion
+
+* Boolean data is the simplest data type, but it can be too simple.
+* Remember Einstein's quote:
+  * "Make things as simple as possible, but not simpler."
+* Remember the Principle of Least Astonishment and make mistakes impresentable.
+`;
+
 export const StoryBooleanData: React.FC = () => {
   return (
 		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles}  >
@@ -275,7 +285,6 @@ export const StoryBooleanData: React.FC = () => {
 			fontSize: '36px',
 			color: 'white',
 			fontWeight: 'bold',
-			fontFamily: 'Roboto, sans-serif',
 		}}>Why Do I Have To Reconsider My Boolean Data?</span>
 			<CodeHighlight actor="second title" style={{
 				position: 'relative',
@@ -286,6 +295,11 @@ export const StoryBooleanData: React.FC = () => {
 			fontFamily: 'IBM Plex Mono',
 		}} language="html" codeString=""/>
 		</AnimationEffect>
+
+    <Markdown actor="conclusion" style={{...announceBoardStyle, top: "15%", height: "60%", paddingTop: "20p", fontFamily: "Poppins", fontSize: "x-large"}}
+			md={conclusion}
+		 />
+
 
 		<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
 			<ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
