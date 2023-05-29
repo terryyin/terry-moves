@@ -50,8 +50,8 @@ export const GameOfLife3D: React.FC<{lives: Set<Cell>, comingNext: Cell[], world
 					const neighbourCount = world.getAliveNeighbourCount(lives, life);
 					const color = getColor(neighbourCount, progress);
 					const radius = getRadius(neighbourCount, progress);
-					return <mesh key={idx} position={[life.x, radius, life.y]}>
-						<sphereGeometry args={[radius, 32, 32]} />
+					return <mesh key={idx} position={[life.x, 0, life.y]}>
+						<sphereGeometry args={[radius, 32, 32, 0, 2 * Math.PI, 0, Math.PI / 2]} />
 						<meshPhysicalMaterial color={color} />
 					</mesh>
 				})}
@@ -59,8 +59,8 @@ export const GameOfLife3D: React.FC<{lives: Set<Cell>, comingNext: Cell[], world
 				{comingNext.map((life, idx) => {
 					const color = interpolateColors(progress, [0.8, 1],  ["#00ff00", startColor]);
 					const radius = interpolate(progress, [0.8, 1],  [0, ballRadius], {extrapolateLeft: "clamp", extrapolateRight: "clamp"});
-					return <mesh key={idx} position={[life.x, radius, life.y]}>
-						<sphereGeometry args={[radius, 32, 32]} />
+					return <mesh key={idx} position={[life.x, 0, life.y]}>
+						<sphereGeometry args={[radius, 32, 32, 0, 2 * Math.PI, 0, Math.PI / 2]} />
 						<meshPhysicalMaterial color={color} />
 					</mesh>
 				})}

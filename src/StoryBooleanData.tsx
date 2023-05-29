@@ -1,4 +1,5 @@
 
+import {Audio} from 'remotion'
 import {Img} from 'remotion'
 import {random, staticFile} from 'remotion'
 import {interpolate} from 'remotion'
@@ -362,6 +363,7 @@ export const StoryBooleanData: React.FC = () => {
   return (
 		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles}  >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+		<Audio src={staticFile("assets/audios/boolean3ch.mp3")} />
     <AbsoluteFill style={{backgroundColor: "black", perspective: "400px"}}>
     <AnimationEffect actor="game of life" style={{transformStyle: "preserve-3d"}}>
 			<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={0} cameraY={0} cameraZ={0}>
@@ -433,7 +435,7 @@ export const StoryBooleanData: React.FC = () => {
 			</ThreeDFrame>
 		</AbsoluteFill>
 			<AnimationEffect actor="subtitles">
-				<Subtitles scale={1} language="zhCN"/>
+				<Subtitles scale={1} language="zhTW"/>
 			</AnimationEffect>
 		</Story>
   );
