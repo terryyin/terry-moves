@@ -10,7 +10,7 @@ describe('HealthBar', () => {
   const renderAndGetDiv = (animationContext: AnimationContextWrapper): HTMLDivElement => {
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
-        <EdgeWaver actor="under-test" sides={[]} />
+        <EdgeWaver actor="under-test" amplitudePercentageOfHeight={10} frequency={2}  />
       </AnimationContextProvider>
     );
     const div = container.querySelector<HTMLDivElement>('#under-test');
@@ -18,14 +18,11 @@ describe('HealthBar', () => {
     return div;
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-  const divOfHealthBar = (div: HTMLDivElement): HTMLDivElement => div.querySelector(`div>:nth-child(${3})`)!;
-
   describe('value change', () => {
     [
-      { sec: 0.1, expectedValue: '100%' },
-      { sec: 1.1, expectedValue: '7%' },
-      { sec: 3.1, expectedValue: '70%' },
+      { sec: 0.1, expectedValue: 'polygon(0% 10%,1% 11.253332335643043%' },
+      { sec: 1.1, expectedValue: 'polygon(0% 11.395431146442364%,1% 12.625497482381872%' },
+      { sec: 3.1, expectedValue: 'polygon(0% 19.8544972998846%,1% 19.989816961473075%' },
     ].forEach(({sec, expectedValue}) => {
       test(` at sec ${sec}`, () => {
         const animationContext = makeMe
@@ -36,7 +33,7 @@ describe('HealthBar', () => {
                 .seconds(sec)
                 .please();
         const div = renderAndGetDiv(animationContext);
-        expect(divOfHealthBar(div).style.width).toBe(expectedValue);
+        expect(div.style.clipPath).toContain(expectedValue);
       });
     });
   });

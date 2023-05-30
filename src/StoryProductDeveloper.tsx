@@ -14,6 +14,7 @@ import EdgeWaver from './video_components/EdgeWaver';
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 4, text: 'Product Developers: who are they and why are they on the rise?', actions:[
 		{ actor: 'value to customer', actionType: 'appear', startDuration: 1 },
+		{ actor: "title", actionType: "additive value change to", duration: 4, value: 90},
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Picture this: a company delivering essential solutions to its users.', actions:[
 		{ actor: 'value to customer', actionType: 'appear', startDuration: 1 },
@@ -77,7 +78,7 @@ export const StoryProductDeveloper: React.FC = () => {
 						</AnimationEffect>
 					</div>
 
-					<EdgeWaver actor="title" style={{ paddingTop: '20px', paddingLeft: '10px', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }} sides={[]} >
+					<EdgeWaver actor="title" amplitudePercentageOfHeight={6} frequency={1.2} style={{ paddingTop: '50px', paddingLeft: '10px', left: '0%', top: '35%', width: '100%', height: '65%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }}  >
 						<Markdown actor="conclusion" style={{fontSize: "x-large"}}
 							md={titleText}
 						/>
