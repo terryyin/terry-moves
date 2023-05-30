@@ -19,7 +19,7 @@ const EdgeWaver: React.FC<EdgeWaverProps> = ({
 }) => {
   const progress = useAnimationContext().getGeneralValue(actor) ?? 0;
 
-  const data = Array.from({ length: 100 }, (_, i) => ({
+  const data = Array.from({ length: 101 }, (_, i) => ({
     x: i,
     y: amplitude + amplitude * Math.sin((i * frequency * Math.PI + progress) / 50),
   }));
