@@ -1,4 +1,4 @@
-import { booleanDataSubtitles } from './StoryBooleanData';
+import { productDeveloperSubtitles } from './StoryProductDeveloper';
 import { Subtitle } from "./models/Subtitles";
 
 function formatSubtitlesToSRT(subtitles: Subtitle[], language: string | undefined): string {
@@ -38,7 +38,7 @@ function formatTime(seconds: number): string {
 }
 
 
-const srtContent = formatSubtitlesToSRT(booleanDataSubtitles, "zhCN")
+const srtContent = formatSubtitlesToSRT(productDeveloperSubtitles, "zhCN")
 process.stdout.write(srtContent);
 
 
