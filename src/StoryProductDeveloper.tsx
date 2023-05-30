@@ -1,7 +1,13 @@
 import React from 'react';
 import { Subtitle } from './models/Subtitles';
-import { SceneLayout } from './SceneLayout';
+import AnimationEffect from './video_components/AnimationEffect';
 import { Story } from './video_components/Story';
+import { AbsoluteFill } from 'remotion';
+import { Company } from './parts/Company';
+import { CustomerGroup } from './parts/CustomerGroup';
+import { MoneyArrow } from './parts/MoneyArrow';
+import { ValueArrow } from './parts/ValueArrow';
+import { Subtitles } from './video_components/Subtitles';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 4, text: 'Product Developers: who are they and why are they on the rise?', position: "center",  scale: 2,  actions:[
@@ -33,15 +39,15 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 3, text: 'They typically work on projects,' },
 
 	{ leadingBlank: 1, duration: 5, text: 'delivering components to be integrated into the larger product later.' },
-	{ leadingBlank: 1, duration: 6, text: 'However, times are changing. More and more businesses are adopting a product-centric strategy, aiming to grow their competitive edge.' },
-	{ leadingBlank: 1, duration: 4, text: 'This has sparked the rise of a new breed of developers - Product Developers.' },
-	{ leadingBlank: 1, duration: 5, text: 'Who guides their work? A Product Owner.' },
+	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.' },
+	{ leadingBlank: 1, duration: 5, text: 'This has sparked the rise of a new breed of developers - Product Developers.' },
+	{ leadingBlank: 1, duration: 3, text: 'Who guides their work? A Product Owner.' },
 	{ leadingBlank: 1, duration: 6, text: `Yet, Product Developers aren't solely reliant on the PO. They engage directly with 'requirement donors,'` },
 	{ leadingBlank: 1, duration: 6, text: `a term for those who've convinced the Product Owner to invest in their product hypothesis.` },
 	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even fellow developers.	` },
 	{ leadingBlank: 1, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.' },
 	{ leadingBlank: 1, duration: 6, text: 'They also maintain a view of the whole product, avoiding local optimization to foster product growth.' },
-	{ leadingBlank: 1, duration: 6, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.` },
+	{ leadingBlank: 1, duration: 7, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.` },
 	{ leadingBlank: 1, duration: 6, text: `They're empowered to work directly with those who hypothesize about the product, in a customer-centric, whole-product-focused way.` },
 	{ leadingBlank: 1, duration: 4, text: `Now that's a transformation worth watching.` },
 	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about the roles and work processes of Product Developers in future videos. Stay tuned for more insights into this evolving field.` },
@@ -50,7 +56,25 @@ export const productDeveloperSubtitles: Subtitle[] = [
 export const StoryProductDeveloper: React.FC = () => {
   return (
 		<Story id="StoryProductDeveloper" subtitles={productDeveloperSubtitles} width={720} >
-			<SceneLayout />
+		  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+			<AbsoluteFill style={{ backgroundColor: 'beige'}}>
+				<AnimationEffect actor="stage">
+					<Company style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
+					<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
+					<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
+						<AnimationEffect actor="value to customer">
+							<ValueArrow />
+						</AnimationEffect>
+					</div>
+					<div style={{position: 'absolute', left: '45%', top: '50%', width: '37%', height: '37%'}}>
+						<AnimationEffect actor="value from customer">
+							<MoneyArrow />
+						</AnimationEffect>
+					</div>
+				</AnimationEffect>
+				<Subtitles />
+			</AbsoluteFill>
+
     </Story>
   );
 };
