@@ -9,6 +9,7 @@ import { MoneyArrow } from './parts/MoneyArrow';
 import { ValueArrow } from './parts/ValueArrow';
 import { Subtitles } from './video_components/Subtitles';
 import { Markdown } from './video_components/Markdown';
+import EdgeWaver from './video_components/EdgeWaver';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 4, text: 'Product Developers: who are they and why are they on the rise?', actions:[
@@ -38,8 +39,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 5, text: 'Or, internal teams working on individual components, not the whole.', actions:[
 	] },
 	{ leadingBlank: 1, duration: 3, text: 'They typically work on projects,' },
-
-	{ leadingBlank: 1, duration: 5, text: 'delivering components to be integrated into the larger product later.' },
+	{ leadingBlank: 1, duration: 5, text: 'delivering components that are ususally defined by their technology rather than their purpose.' },
+	{ leadingBlank: 1, duration: 5, text: 'These components need to be integrated into the larger product later.' },
 	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.' },
 	{ leadingBlank: 1, duration: 5, text: 'This has sparked the rise of a new breed of developers - Product Developers.' },
 	{ leadingBlank: 1, duration: 3, text: 'Who guides their work? A Product Owner.' },
@@ -76,11 +77,11 @@ export const StoryProductDeveloper: React.FC = () => {
 						</AnimationEffect>
 					</div>
 
-					<AnimationEffect actor="title" style={{ paddingTop: '20px', paddingLeft: '10px', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }} >
+					<EdgeWaver actor="title" style={{ paddingTop: '20px', paddingLeft: '10px', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }} sides={[]} >
 						<Markdown actor="conclusion" style={{fontSize: "x-large"}}
 							md={titleText}
 						/>
-					</AnimationEffect>
+					</EdgeWaver>
 				</AnimationEffect>
 
 				<Subtitles />
