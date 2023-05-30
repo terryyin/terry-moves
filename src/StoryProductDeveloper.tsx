@@ -8,7 +8,6 @@ import { CustomerGroup } from './parts/CustomerGroup';
 import { MoneyArrow } from './parts/MoneyArrow';
 import { ValueArrow } from './parts/ValueArrow';
 import { Subtitles } from './video_components/Subtitles';
-import { CodeHighlight } from './video_components/CodeHighlight';
 import { Markdown } from './video_components/Markdown';
 
 export const productDeveloperSubtitles: Subtitle[] = [
@@ -55,6 +54,9 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about the roles and work processes of Product Developers in future videos. Stay tuned for more insights into this evolving field.` },
 ];
 
+const titleText = `
+# Product Developers:
+Who are they and why are they on the rise?`
 export const StoryProductDeveloper: React.FC = () => {
   return (
 		<Story id="StoryProductDeveloper" subtitles={productDeveloperSubtitles} width={720} >
@@ -75,8 +77,8 @@ export const StoryProductDeveloper: React.FC = () => {
 					</div>
 
 					<AnimationEffect actor="title" style={{ paddingTop: '20px', paddingLeft: '10px', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }} >
-						<Markdown actor="conclusion" style={{fontSize: "xx-large"}}
-							md="Why Do I Have To Reconsider My Boolean Data?"
+						<Markdown actor="conclusion" style={{fontSize: "x-large"}}
+							md={titleText}
 						/>
 					</AnimationEffect>
 				</AnimationEffect>
