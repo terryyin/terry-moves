@@ -354,12 +354,13 @@ const conclusion = `## Conclusion
 const announceBoardStyle: CSSProperties = { 
 				paddingTop: '20px',
 				paddingLeft: '10px',
-	fontFamily: 'Roboto, sans-serif', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
+				fontSize: "x-large",
+	left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }
 
 export const StoryBooleanReturns: React.FC = () => {
   return (
-		<Story id="StoryBooleanReturns" width={720} height={720} subtitles={booleanReturnsSutitles}>
-		  <Audio src={staticFile("assets/audios/boolean2zh.mp3")} />
+		<Story id="StoryBooleanReturns" width={1024} height={720} subtitles={booleanReturnsSutitles}>
+		  <Audio src={staticFile("assets/audios/boolean2.mp3")} />
 
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
 
@@ -430,7 +431,7 @@ export const StoryBooleanReturns: React.FC = () => {
 
 
     <AnimationEffect actor="subtitles">
-			<Subtitles scale={1} language="zhTW"/>
+			<Subtitles scale={1} language="en"/>
 		</AnimationEffect>
     </AbsoluteFill>
 
@@ -472,7 +473,7 @@ export const StoryBooleanReturns: React.FC = () => {
 			<Img src={staticFile("assets/punk-head.svg")} style={{position: 'absolute', width: '100%'}} />
 		</AnimationEffect>
 
-    <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '-2%', width: '12%', height: '20%'}}>
+    <AbsoluteFill style={{ marginLeft: 'auto', marginRight: 'auto', top: '-4%', width: '12%', height: '20%'}}>
 			<OddeLogo />
 			<FlipCoin speed={2} interval={30} shift={0} >
 			  <OddeLogoInner />
