@@ -8,9 +8,11 @@ import { CustomerGroup } from './parts/CustomerGroup';
 import { MoneyArrow } from './parts/MoneyArrow';
 import { ValueArrow } from './parts/ValueArrow';
 import { Subtitles } from './video_components/Subtitles';
+import { CodeHighlight } from './video_components/CodeHighlight';
+import { Markdown } from './video_components/Markdown';
 
 export const productDeveloperSubtitles: Subtitle[] = [
-	{ leadingBlank: 0, duration: 4, text: 'Product Developers: who are they and why are they on the rise?', position: "center",  scale: 2,  actions:[
+	{ leadingBlank: 0, duration: 4, text: 'Product Developers: who are they and why are they on the rise?', actions:[
 		{ actor: 'value to customer', actionType: 'appear', startDuration: 1 },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Picture this: a company delivering essential solutions to its users.', actions:[
@@ -57,7 +59,7 @@ export const StoryProductDeveloper: React.FC = () => {
   return (
 		<Story id="StoryProductDeveloper" subtitles={productDeveloperSubtitles} width={720} >
 		  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
-			<AbsoluteFill style={{ backgroundColor: 'beige'}}>
+			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins"}}>
 				<AnimationEffect actor="stage">
 					<Company style={{position: 'absolute', left: '5%', top:'10%', width: '45%', height: '100%'}}/>
 					<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
@@ -71,7 +73,14 @@ export const StoryProductDeveloper: React.FC = () => {
 							<MoneyArrow />
 						</AnimationEffect>
 					</div>
+
+					<AnimationEffect actor="title" style={{ paddingTop: '20px', paddingLeft: '10px', left: '0%', top: '35%', width: '100%', height: '45%', backgroundColor: 'rgba(0, 114, 160, 0.8)' }} >
+						<Markdown actor="conclusion" style={{fontSize: "xx-large"}}
+							md="Why Do I Have To Reconsider My Boolean Data?"
+						/>
+					</AnimationEffect>
 				</AnimationEffect>
+
 				<Subtitles />
 			</AbsoluteFill>
 
