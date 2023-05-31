@@ -16,8 +16,8 @@ import { ThreeDFrame } from './video_components/ThreeDFrame';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 5, text: 'Product Developers: who are they and why are they on the rise?', actions:[
-		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 1, 0] },
-		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, -1, 5] },
+		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 1.5, 0] },
+		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 5] },
 		{ actor: "title", actionType: "appear", startDuration: 0, endingTimeAdjustment: 5, endDuration: 1 },
 		{ actor: "title", actionType: "additive value change to", duration: 5, value: 90},
 		{ actor: "title-shadow", actionType: "additive value change to", duration: 0, value: -30},
@@ -37,7 +37,7 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Software products often play a crucial role in providing services.', actions:[
 		{ actor: 'product', actionType: 'rotate and rise', duration: 1, value: 4 },
-		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 4, totalRotation: [0, 360 + 30, 0] },
+		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 4, totalRotation: [0, 360 + 180 + 30, 0] },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'But traditionally, businesses have been focused on their core domain, not software. ' },
 	{ leadingBlank: 1, duration: 4, text: 'In the past, developers were commonly external.', actions:[

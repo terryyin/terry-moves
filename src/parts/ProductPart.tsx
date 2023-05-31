@@ -1,57 +1,43 @@
 import {useLoader } from '@react-three/fiber';
-import React, {useMemo} from 'react';
-import {staticFile, useVideoConfig} from 'remotion';
-import {
-	getPhoneLayout,
-	PHONE_COLOR,
-	PHONE_CURVE_SEGMENTS,
-	PHONE_SHININESS,
-} from '../helpers/layout';
+import React from 'react';
+import {staticFile} from 'remotion';
 import {roundedRect} from '../helpers/rounded-rectangle';
-import {RoundedBox} from '../RoundedBox';
 import { TextureLoader } from 'three';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { GLTFNode } from '../video_components/GLTFNode';
+import { GroupInitialState } from '../video_components/GroupInitialState';
+
+const url = staticFile('assets/shape_sorting_box/scene.gltf')
+useLoader.preload(GLTFLoader, url);
 
 export const ProductPart: React.FC<{
 	aspectRatio: number;
 	baseScale: number;
 }> = ({aspectRatio, baseScale}) => {
-	useVideoConfig();
-
-	const layout = useMemo(
-		() => getPhoneLayout(aspectRatio, baseScale),
-		[aspectRatio, baseScale]
-	);
 
 	// Calculate a rounded rectangle for the phone screen
-	const screenGeometry = useMemo(() => {
-		return roundedRect({
-			width: layout.screen.width,
-			height: layout.screen.height,
-			radius: layout.screen.radius,
+	const screenGeometry = roundedRect({
+			width: 2,
+			height: 2,
+			radius: 0,
 		});
-	}, [layout.screen.height, layout.screen.radius, layout.screen.width]);
 
 	const servicePersonTexture = useLoader(TextureLoader, staticFile('assets/ProductPart1.svg'));
 
 	return (
 		<>
-			<RoundedBox
-				radius={layout.phone.radius}
-				depth={layout.phone.thickness}
-				curveSegments={PHONE_CURVE_SEGMENTS}
-				position={layout.phone.position}
-				width={layout.phone.width}
-				height={layout.phone.height}
-			>
-				<meshPhongMaterial color={PHONE_COLOR} shininess={PHONE_SHININESS} />
-			</RoundedBox>
-			<mesh position={layout.screen.position}>
+		<GroupInitialState scale={0.1}>
+      <GLTFNode url={url} nodeName="Box" scale={1} />
+		</GroupInitialState>
+
+			<mesh position={[0,0,0.76]}>
 				<shapeGeometry args={[screenGeometry]}/>
 					<meshBasicMaterial
 						toneMapped={false}
 						map={servicePersonTexture}
 					/>
 			</mesh>
+
 		</>
 	);
 };
