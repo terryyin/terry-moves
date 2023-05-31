@@ -113,7 +113,7 @@ export const StoryFailureVsFailure: React.FC = () => {
 			</AbsoluteFill>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-          <ThreeDFrame  cameraDistance={0} lookAtY={16} cameraY={10}>
+          <ThreeDFrame   lookAtY={16} cameraY={10}>
 						<directionalLight
 							castShadow
 							position={[50, 100, 50]}

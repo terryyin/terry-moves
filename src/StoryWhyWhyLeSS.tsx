@@ -238,14 +238,14 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 			<Anchor actor="center" style={{left: "50%", top: "45%"}}/>
 			<Anchor actor="adjust-direction" style={{left: "70%", top: "50%"}}/>
 			<AnimationEffect actor="scrum stage" style={{}}>
-				<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={0} cameraY={-1}>
+				<ThreeDFrame  lookAtY={0} lookAtZ={0} cameraY={-1}>
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 					<ScalableScrum />
 				</ThreeDFrame>
 			</AnimationEffect>
 			<AnimationEffect actor="wrong scrum stage" style={{}}>
-				<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={0} cameraY={-1}>
+				<ThreeDFrame  lookAtY={0} lookAtZ={0} cameraY={-1}>
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 					<GroupInitialState position={[-3, 1, -2]}>
@@ -317,7 +317,7 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 				</ThreeDFrame>
 			</AnimationEffect>
 			<AnimationEffect actor="complete picture" style={{}}>
-			<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={-6} cameraY={0}>
+			<ThreeDFrame lookAtY={0} lookAtZ={-6} cameraY={0}>
 				<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 				<LeSSComplete />
 			</ThreeDFrame>

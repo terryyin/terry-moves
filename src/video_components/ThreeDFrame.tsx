@@ -13,18 +13,17 @@ const container: React.CSSProperties = {
 export const ThreeDFrame: React.FC<{
 	cameraY?: number,
 	cameraZ?: number,
-	cameraDistance: number,
 	lookAtY?: number,
 	lookAtZ?: number,
 	debug?: boolean,
   children: React.ReactNode;
-}> = ({cameraY, cameraZ, cameraDistance, lookAtY, lookAtZ, debug, children}) => {
+}> = ({cameraY, cameraZ, lookAtY, lookAtZ, debug, children}) => {
 	const {ref, metrics} = useParentSize();
 
 	return (
 		<AbsoluteFill ref={ref} style={container} >
 		<ThreeCanvas linear width={metrics.width} height={metrics.height} >
-			<ThreeDFrameInner debug={debug} cameraY={cameraY} cameraZ={cameraZ} cameraDistance={cameraDistance} lookAtY={lookAtY} lookAtZ={lookAtZ}>
+			<ThreeDFrameInner debug={debug} cameraY={cameraY} cameraZ={cameraZ} lookAtY={lookAtY} lookAtZ={lookAtZ}>
 				{children}
 			</ThreeDFrameInner>
 		</ThreeCanvas>

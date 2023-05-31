@@ -6,12 +6,11 @@ import { AxesHelper, CameraHelper } from 'three';
 export const ThreeDFrameInner: React.FC<{
 	cameraY?: number,
 	cameraZ?: number,
-	cameraDistance: number,
 	lookAtY?: number,
 	lookAtZ?: number,
 	debug?: boolean,
   children: React.ReactNode;
-}> = ({cameraY, cameraZ, cameraDistance, lookAtY, lookAtZ, debug, children}) => {
+}> = ({cameraY, cameraZ, lookAtY, lookAtZ, debug, children}) => {
 	const { scene, camera } = useThree();
 
   useEffect(() => {
@@ -29,7 +28,7 @@ export const ThreeDFrameInner: React.FC<{
 		<>
 			<ambientLight intensity={1.5} color={0xffffff} />
 			<pointLight position={[10, 10, 0]} />
-			<UnderCamera cameraY={cameraY} cameraZ={cameraZ} cameraDistance={cameraDistance} lookAtY={lookAtY} lookAtZ={lookAtZ}>
+			<UnderCamera cameraY={cameraY} cameraZ={cameraZ} lookAtY={lookAtY} lookAtZ={lookAtZ}>
 				{children}
 			</UnderCamera>
 		</>

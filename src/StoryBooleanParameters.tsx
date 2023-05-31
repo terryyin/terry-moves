@@ -583,7 +583,7 @@ export const StoryBooleanParameters: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-          <ThreeDFrame cameraDistance={0} lookAtY={0} cameraY={0}>
+          <ThreeDFrame  lookAtY={0} cameraY={0}>
 						<directionalLight
 							castShadow
 							position={[10, 20, 15]}
