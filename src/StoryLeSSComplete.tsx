@@ -34,7 +34,7 @@ export const StoryLeSSComplete: React.FC = () => {
   return (
 		<Story id="StoryLeSSComplete" width={720} height={720} subtitles={lessCompletePictureSubtitles}  >
     <AbsoluteFill style={{backgroundColor: "beige"}}>
-			<ThreeDFrame    cameraY={0}>
+			<ThreeDFrame>
 				{/* <ambientLight intensity={0.5} /> */}
 				<pointLight position={[10, 10, 10]} />
 				<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	

@@ -30,7 +30,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	zhCN: "大规模Scrum的创始人和培训师们对“为什么要使用LeSS？”这篇文章进行了一些微调。",
 	zhTW: "大規模Scrum的創始人和培訓師們對“為什麼要使用LeSS？”這篇文章進行了一些微調。",
 }, actions: [
-	{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 6] },
+	{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, -1, 6] },
 	{ actor: "overview", actionType: "appear", endingTimeAdjustment: 0, endDuration: 2,  persistUntilSubtitleId: "letsdelve"},
 	{ actor: "overview", actionType: "scale", duration: 4, outputRange: [1, 6]},
 	{ actor: "overview", actionType: "move", duration: 4, absolutePosition: [0, 170, 0]},
@@ -115,7 +115,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'role18', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
 		{ actor: 'role19', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
 		{ actor: "camera", actionType: "camera look at", duration: 4, absolutePosition: [0, 3, 0], offset: 4 },
-		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 20, 6], offset: 8 },
+		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 19, 6], offset: 8 },
 		{ actor: 'where is scrum', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 4, offset: 8 },
 
 ]},
@@ -238,14 +238,14 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 			<Anchor actor="center" style={{left: "50%", top: "45%"}}/>
 			<Anchor actor="adjust-direction" style={{left: "70%", top: "50%"}}/>
 			<AnimationEffect actor="scrum stage" style={{}}>
-				<ThreeDFrame    cameraY={-1}>
+				<ThreeDFrame    >
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 					<ScalableScrum />
 				</ThreeDFrame>
 			</AnimationEffect>
 			<AnimationEffect actor="wrong scrum stage" style={{}}>
-				<ThreeDFrame    cameraY={-1}>
+				<ThreeDFrame    >
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 					<GroupInitialState position={[-3, 1, -2]}>
@@ -317,7 +317,7 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 				</ThreeDFrame>
 			</AnimationEffect>
 			<AnimationEffect actor="complete picture" style={{}}>
-			<ThreeDFrame   cameraY={0}>
+			<ThreeDFrame   >
 				<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 				<LeSSComplete />
 			</ThreeDFrame>

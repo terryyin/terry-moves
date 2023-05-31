@@ -367,7 +367,7 @@ export const StoryBooleanReturns: React.FC = () => {
 
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%', zIndex:2000}}>
-          <ThreeDFrame   cameraY={0}>
+          <ThreeDFrame>
 						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
 						<GroupInitialState rotation={[0, Math.PI * 3 / 2, 0]} position={[-0, 0, 0]} scale={0.15}>
 							<Explosion actor="blaster explosion" />
@@ -407,7 +407,7 @@ export const StoryBooleanReturns: React.FC = () => {
 			</CodeHighlight>
 
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-          <ThreeDFrame   cameraY={0}>
+          <ThreeDFrame>
 						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
 						<ThreeAnimationEffect actor="thinker">
 							<GroupInitialState rotation={[0, -0.5, 0]} position={[2.8, -0.5, 0]} scale={1}>
