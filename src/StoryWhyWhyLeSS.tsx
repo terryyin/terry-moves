@@ -30,6 +30,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	zhCN: "大规模Scrum的创始人和培训师们对“为什么要使用LeSS？”这篇文章进行了一些微调。",
 	zhTW: "大規模Scrum的創始人和培訓師們對“為什麼要使用LeSS？”這篇文章進行了一些微調。",
 }, actions: [
+	{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 6] },
 	{ actor: "overview", actionType: "appear", endingTimeAdjustment: 0, endDuration: 2,  persistUntilSubtitleId: "letsdelve"},
 	{ actor: "overview", actionType: "scale", duration: 4, outputRange: [1, 6]},
 	{ actor: "overview", actionType: "move", duration: 4, absolutePosition: [0, 170, 0]},
@@ -114,7 +115,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'role18', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
 		{ actor: 'role19', actionType: 'move', duration: 1, absolutePosition: [0, 0, 0], offset: 7 },
 		{ actor: "camera", actionType: "camera look at", duration: 4, absolutePosition: [0, 3, 0], offset: 4 },
-		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 20, 0], offset: 8 },
+		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 20, 6], offset: 8 },
 		{ actor: 'where is scrum', actionType: 'appear', startDuration: 0.5, endingTimeAdjustment: 4, offset: 8 },
 
 ]},
@@ -125,14 +126,14 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 		{ actor: 'wrong scrum stage', actionType: 'disappear', startDuration: 1 },
 		{ actor: 'scrum stage', actionType: 'disappear', startDuration: 1 },
 		{ actor: "camera", actionType: "camera look at", duration: 1, absolutePosition: [0, 0, 0] },
-		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [0, 0, 0] },
+		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [0, 0, 4] },
 		{ actor: 'complete picture', actionType: 'appear', startDuration: 1, endDuration: 1,  persistUntilSubtitleId: "adaptiveness" },
 ]},
 { leadingBlank: 1, duration: 5, text: 'This essence is embodied in the principles of LeSS.', translations: {
 	zhCN: "这种本质体现在LeSS的原则中。",
 	zhTW: "這種本質體現在LeSS的原則中。",
 }, actions: [
-		{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, -8], offset: -3 },
+		{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 4], offset: -3 },
 		{ actor: 'principles picture', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 5, endDuration: 1 },
 
 ]},
@@ -140,22 +141,22 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	zhCN: "LeSS规则作为最小核心结构取代了框架。意义基本相同。",
 	zhTW: "LeSS規則作為最小核心結構取代了框架。意義基本相同。",
 }, actions: [
-		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 0, -6], offset: 0 },
+		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [0, 0, -2], offset: 0 },
 ]},
 { leadingBlank: 1, duration: 3, text: 'The Guides and Experiments remain unchanged.', translations: {
 	zhCN: "指南和实验保持不变。",
 	zhTW: "指南和實驗保持不變。",
 }, actions: [
-		{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 0], offset: 0 },
+		{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 4], offset: 0 },
 ]},
 { leadingBlank: 1, duration: 6, text: 'A new arrow pointing out from the principles through the the diagram has been introduced.', translations: {
 	zhCN: "修订后的“LeSS全图”从原则引出了一个箭头，贯穿了LeSS的各个部分直到实验。",
 	zhTW: "修訂後的“LeSS全圖”從原則引出了一個箭頭，貫穿了LeSS的各個部分直到實驗。",
 }, actions: [
-			{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [-6, 0, -3] },
+			{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [-6, 0, 1] },
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
 			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 0.58, offset: 1 },
-			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 0], offset: 2 },
+			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 4], offset: 2 },
 			{ actor: "camera", actionType: "camera look at", duration: 2, absolutePosition: [0, 0, 0], offset: 3 },
 
 ]},
@@ -167,7 +168,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	zhCN: "这个箭头表示原则指导实验和采用。",
 	zhTW: "這個箭頭表示原則指導實驗和採用。",
 }, actions: [
-			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [6, 0, -3] },
+			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [6, 0, 1] },
 			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 1},
 			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
 ]},
@@ -191,7 +192,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	zhCN: "一个是以相对低的成本改变方向的能力，主要是基于通过频繁交付产生的探索。从而……",
 	zhTW: "一個是以相對低的成本改變方向的能力，主要是基於通過頻繁交付產生的探索。從而……",
 }, actions: [
-		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 0] },
+		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 4] },
 		{ actor: "scrum stage", actionType: "move", duration: 0, absolutePosition: [0, 0, 0] },
 		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 0, 0] },
 		{ actor: 'scrum stage', actionType: 'appear', startDuration: 2 },
@@ -237,14 +238,14 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 			<Anchor actor="center" style={{left: "50%", top: "45%"}}/>
 			<Anchor actor="adjust-direction" style={{left: "70%", top: "50%"}}/>
 			<AnimationEffect actor="scrum stage" style={{}}>
-				<ThreeDFrame cameraDistance={6} lookAtY={0} lookAtZ={0} cameraY={-1}>
+				<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={0} cameraY={-1}>
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 					<ScalableScrum />
 				</ThreeDFrame>
 			</AnimationEffect>
 			<AnimationEffect actor="wrong scrum stage" style={{}}>
-				<ThreeDFrame cameraDistance={12} lookAtY={0} lookAtZ={0} cameraY={-1}>
+				<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={0} cameraY={-1}>
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 					<GroupInitialState position={[-3, 1, -2]}>
@@ -316,7 +317,7 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 				</ThreeDFrame>
 			</AnimationEffect>
 			<AnimationEffect actor="complete picture" style={{}}>
-			<ThreeDFrame cameraDistance={4} lookAtY={0} lookAtZ={-6} cameraY={0}>
+			<ThreeDFrame cameraDistance={0} lookAtY={0} lookAtZ={-6} cameraY={0}>
 				<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 				<LeSSComplete />
 			</ThreeDFrame>
