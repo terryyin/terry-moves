@@ -52,6 +52,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	] },
 	{ leadingBlank: 1, duration: 6, text: 'Regardless, they engaged in predictive projects, focusing on tasks split by technology, rather than user needs.', actions:[
 		{ actor: 'internal developers', actionType: 'appear', startDuration: 2, offset: 0 },
+		{ actor: 'cylinder', actionType: 'rotate and rise', duration: 3, value: 4, offset: 2 },
+		{ actor: 'trig', actionType: 'rotate and rise', duration: 3, value: 4, offset: 2 },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Integration was viewed as a simple phase, yet it consistently led to unexpected complications.' },
 	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.' },
