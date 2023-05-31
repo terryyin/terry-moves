@@ -14,6 +14,10 @@ import EdgeWaver from './video_components/EdgeWaver';
 import { ProductPart } from './parts/ProductPart';
 import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
 import { ThreeDFrame } from './video_components/ThreeDFrame';
+import { GroupInitialState } from './video_components/GroupInitialState';
+import { GLTFNode } from './video_components/GLTFNode';
+import { useLoader } from '@react-three/fiber';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 5, text: 'Product Developers: who are they and why are they on the rise?', actions:[
@@ -38,7 +42,7 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Software products often play a crucial role in providing services.', actions:[
 		{ actor: 'product', actionType: 'rotate and rise', duration: 1, value: 4 },
-		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 4, totalRotation: [0, 360 + 30, 0] },
+		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 4, totalRotation: [0, 360 + 15, 0] },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'But traditionally, businesses have been focused on their core domain, not software. ' },
 	{ leadingBlank: 1, duration: 4, text: 'In the past, developers were commonly external.', actions:[
@@ -66,6 +70,10 @@ export const productDeveloperSubtitles: Subtitle[] = [
 const titleText = `
 # Product Developers:
 Who are they and why are they on the rise?`
+
+const url = staticFile('assets/shape_sorting_box/scene.gltf')
+useLoader.preload(GLTFLoader, url);
+
 export const StoryProductDeveloper: React.FC = () => {
   return (
 		<Story id="StoryProductDeveloper" subtitles={productDeveloperSubtitles} width={720} >
@@ -75,8 +83,17 @@ export const StoryProductDeveloper: React.FC = () => {
 					<Company style={{position: 'absolute', left: '0%', top:'15%', width: '50%', height: "60%"}}/>
 					<AbsoluteFill style={{width: "150%", left: "-50%"}}>
 					<ThreeDFrame debug>
+						<directionalLight
+							castShadow
+							position={[10, 20, 15]}
+							intensity={15}
+							color={0xffffff}
+						/>	
 						<ThreeAnimationEffect actor="product">
 							<ProductPart />
+						</ThreeAnimationEffect>
+						<ThreeAnimationEffect actor="cylinder" scale={0.05} rotation={[0.3, 0, 0.1]} position={[-1.5,0.3,1]}>
+							<GLTFNode url={url} nodeName="g_circle"/>
 						</ThreeAnimationEffect>
 					</ThreeDFrame>
 					</AbsoluteFill>
