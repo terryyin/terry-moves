@@ -10,7 +10,9 @@ import { ValueArrow } from './parts/ValueArrow';
 import { Subtitles } from './video_components/Subtitles';
 import { Markdown } from './video_components/Markdown';
 import EdgeWaver from './video_components/EdgeWaver';
-import { Product } from './parts/Product';
+import { ProductPart } from './parts/ProductPart';
+import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
+import { ThreeDFrame } from './video_components/ThreeDFrame';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 5, text: 'Product Developers: who are they and why are they on the rise?', actions:[
@@ -66,7 +68,19 @@ export const StoryProductDeveloper: React.FC = () => {
 			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins"}}>
 				<AnimationEffect actor="stage">
 					<Company style={{position: 'absolute', left: '0%', top:'15%', width: '50%', height: "60%"}}/>
-					<Product style={{position: 'absolute', left: '10%', top: '40%', width: '20%', height: '25%'}} />
+					<AbsoluteFill style={{position: 'absolute', left: '10%', top: '40%', width: '20%', height: '25%'}}>
+						<div style={{position: 'relative', left: '0%', top: '0%', width: '100%', height: '100%'}}>
+							<ThreeDFrame debug cameraDistance={2} cameraY={-0.5}>
+								<ThreeAnimationEffect actor="product">
+									<ProductPart
+										baseScale={1.4}
+										aspectRatio={1}
+									/>
+								</ThreeAnimationEffect>
+							</ThreeDFrame>
+						</div>
+					</AbsoluteFill>
+
 					<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
 					<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
 						<AnimationEffect actor="value to customer">
