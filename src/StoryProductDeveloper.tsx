@@ -1,8 +1,9 @@
+import {Img} from 'remotion'
 import React from 'react';
 import { Subtitle } from './models/Subtitles';
 import AnimationEffect from './video_components/AnimationEffect';
 import { Story } from './video_components/Story';
-import { AbsoluteFill } from 'remotion';
+import { AbsoluteFill, staticFile } from 'remotion';
 import { Company } from './parts/Company';
 import { CustomerGroup } from './parts/CustomerGroup';
 import { MoneyArrow } from './parts/MoneyArrow';
@@ -37,13 +38,15 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Software products often play a crucial role in providing services.', actions:[
 		{ actor: 'product', actionType: 'rotate and rise', duration: 1, value: 4 },
-		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 4, totalRotation: [0, 360 + 180 + 30, 0] },
+		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 4, totalRotation: [0, 360 + 30, 0] },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'But traditionally, businesses have been focused on their core domain, not software. ' },
 	{ leadingBlank: 1, duration: 4, text: 'In the past, developers were commonly external.', actions:[
 		{ actor: 'stage', actionType: 'move', duration: 1, absolutePosition: [350, 0] },
+		{ actor: 'external developers', actionType: 'appear', startDuration: 2, offset: 1 },
 	] },
 	{ leadingBlank: 1, duration: 6, text: 'Regardless, they engaged in predictive projects, focusing on tasks split by technology, rather than user needs.', actions:[
+		{ actor: 'internal developers', actionType: 'appear', startDuration: 2, offset: 0 },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Integration was viewed as a simple phase, yet it consistently led to unexpected complications.' },
 	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.' },
@@ -73,10 +76,7 @@ export const StoryProductDeveloper: React.FC = () => {
 					<AbsoluteFill style={{width: "150%", left: "-50%"}}>
 					<ThreeDFrame debug>
 						<ThreeAnimationEffect actor="product">
-							<ProductPart
-								baseScale={1.4}
-								aspectRatio={1}
-							/>
+							<ProductPart />
 						</ThreeAnimationEffect>
 					</ThreeDFrame>
 					</AbsoluteFill>
@@ -87,11 +87,35 @@ export const StoryProductDeveloper: React.FC = () => {
 							<ValueArrow />
 						</AnimationEffect>
 					</div>
-					<div style={{position: 'absolute', left: '47%', top: '45%', width: '37%', height: '37%'}}>
-						<AnimationEffect actor="value from customer">
+					<div >
+						<AnimationEffect actor="value from customer" style={{position: 'absolute', left: '47%', top: '45%', width: '37%', height: '37%'}}>
 							<MoneyArrow />
 						</AnimationEffect>
 					</div>
+
+					<AnimationEffect actor="external developers" style={{left: "-40%", top: "65%"}}>
+						<AbsoluteFill style={{width: "5%", top: "0", left: "0%"}}>
+							<Img src={staticFile("assets/less/manager.svg")} />
+						</AbsoluteFill>
+						<AbsoluteFill style={{width: "15%", top: "3%", left: "8%"}}>
+							<Img src={staticFile("assets/less/team_of_three.svg")} />
+						</AbsoluteFill>
+						<AbsoluteFill style={{width: "22%", top: "12%", left: "1%"}}>
+							External Developers
+						</AbsoluteFill>
+					</AnimationEffect>
+
+					<AnimationEffect actor="internal developers" style={{left: "3%", top: "25%", width: "80%"}}>
+						<AbsoluteFill style={{width: "5%", top: "0", left: "0%"}}>
+							<Img src={staticFile("assets/less/manager.svg")} />
+						</AbsoluteFill>
+						<AbsoluteFill style={{width: "15%", top: "3%", left: "8%"}}>
+							<Img src={staticFile("assets/less/team_of_three.svg")} />
+						</AbsoluteFill>
+						<AbsoluteFill style={{width: "30%", top: "10%", left: "0%"}}>
+							Internal Developers
+						</AbsoluteFill>
+					</AnimationEffect>
 
 					<AnimationEffect actor="title" style={{ left: '0%', top: '35%', width: '100%', height: '65%' }} >
 						<EdgeWaver actor="title-shadow" amplitudePercentageOfHeight={6} frequency={1.2} style={{ backgroundColor: 'rgba(253, 250, 88, 0.8)' }}  />

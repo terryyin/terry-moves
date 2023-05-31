@@ -5,9 +5,8 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export const GLTFNode: React.FC<{
   nodeName: string,
-  scale?: number,
   url: string,
-}> = ({ nodeName, scale, url }) => {
+}> = ({ nodeName, url }) => {
   const gltf = useLoader(GLTFLoader, url);
   const [node, setNode] = useState<Group | null>(null);
 
@@ -21,7 +20,7 @@ export const GLTFNode: React.FC<{
   }, [gltf, nodeName]);
 
   return (
-    <group scale={scale}>
+    <group>
       {node && <primitive object={node} />}
     </group>
   );

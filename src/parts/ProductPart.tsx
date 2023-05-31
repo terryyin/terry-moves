@@ -10,15 +10,14 @@ import { GroupInitialState } from '../video_components/GroupInitialState';
 const url = staticFile('assets/shape_sorting_box/scene.gltf')
 useLoader.preload(GLTFLoader, url);
 
-export const ProductPart: React.FC<{
-	aspectRatio: number;
-	baseScale: number;
-}> = ({aspectRatio, baseScale}) => {
+export const ProductPart: React.FC = () => {
 
+	const boxSize = 1.4;
+	const edge = 0.06;
 	// Calculate a rounded rectangle for the phone screen
 	const screenGeometry = roundedRect({
-			width: 2,
-			height: 2,
+			width: boxSize - edge * 2,
+			height: boxSize - edge * 2,
 			radius: 0,
 		});
 
@@ -26,11 +25,11 @@ export const ProductPart: React.FC<{
 
 	return (
 		<>
-		<GroupInitialState scale={0.1}>
-      <GLTFNode url={url} nodeName="Box" scale={1} />
+		<GroupInitialState scale={0.1} rotation={[0, Math.PI, 0]}>
+      <GLTFNode url={url} nodeName="Box"/>
 		</GroupInitialState>
 
-			<mesh position={[0,0,0.76]}>
+			<mesh position={[-boxSize/2+edge, edge,boxSize/2 + 0.001]}>
 				<shapeGeometry args={[screenGeometry]}/>
 					<meshBasicMaterial
 						toneMapped={false}
