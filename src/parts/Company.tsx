@@ -1,18 +1,24 @@
 import React, { CSSProperties } from 'react';
-import {Img, staticFile} from 'remotion';
-import { Product } from './Product';
+import {AbsoluteFill, Img, staticFile} from 'remotion';
 import AnimationEffect from '../video_components/AnimationEffect';
 
 export const Company: React.FC<{style?: CSSProperties}> = ({ style }) => {
   return (
-      <div style={style}>
-				<AnimationEffect actor="company">
-				<div style={{position: 'relative', left: '0%', top:'0%', width: '100%', height: '100%'}}>
-					<Img src={staticFile("assets/House.svg")} style={{position: 'absolute', left: '0%', top: '0%', width: '100%'}} />
-					<Img src={staticFile("assets/ServicePerson.svg")} style={{position: 'absolute', left: '45%', top: '30%', width: '40%'}} />
-					<Product style={{position: 'absolute', left: '20%', top: '40%', width: '40%', height: '45%'}} />
-				</div>
-				</AnimationEffect>
-      </div>
+		<AnimationEffect actor="company" style={style}>
+			<AbsoluteFill>
+				<svg width="100%" height="100%" viewBox="0 0 100 120">
+				<defs>
+					<linearGradient id="linear" x1="0%" y1="0%" x2="100%" y2="0%">
+					<stop offset="0%" stopColor="#95a"/>
+					<stop offset="100%" stopColor="#0a5"/>
+					</linearGradient>
+					</defs>
+					<rect x="1" y="10" width="98" height="108" rx="10" ry="10" fill="rgb(0, 0, 0, 0.3)" stroke='black' strokeWidth={1} />
+					<rect x="20" y="1" width="60" height="18" rx="10" ry="10" fill="white" stroke='black' strokeWidth={1} />
+					<text x="50" y="13.5" fontSize={10} fontWeight="bolder" textAnchor="middle" fill="url(#linear)">COMPANY</text>
+				</svg>
+			</AbsoluteFill>
+			<Img src={staticFile("assets/ServicePerson.svg")} style={{position: 'absolute', left: '45%', top: '20%', width: '40%'}} />
+		</AnimationEffect>
   );
 };

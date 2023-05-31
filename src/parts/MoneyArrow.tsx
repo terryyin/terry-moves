@@ -6,9 +6,9 @@ const MoneyArrowInner: React.FC<AutonomousComponentProps> = ({frame}) => {
 
   return (
     <div style={{position: 'relative', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-    <Img src={staticFile("assets/Money.svg")} style={{position: 'absolute', left: '45%', top: '63%', width: '10%'}} />
-    <Img src={staticFile("assets/Money.svg")} style={{position: 'absolute', left: '60%', top: '60%', width: '10%'}} />
-    <Img src={staticFile("assets/Money.svg")} style={{position: 'absolute', left: '70%', top: '56%', width: '10%'}} />
+    <Img src={staticFile("assets/Money.svg")} style={{position: 'absolute', left: '45%', top: '43%', width: '10%'}} />
+    <Img src={staticFile("assets/Money.svg")} style={{position: 'absolute', left: '60%', top: '40%', width: '10%'}} />
+    <Img src={staticFile("assets/Money.svg")} style={{position: 'absolute', left: '70%', top: '36%', width: '10%'}} />
     <svg
       style={{position: 'absolute', left: '0%', top: '0%', width: '100%'}}
       viewBox="0 0 300 130"

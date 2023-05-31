@@ -7,8 +7,8 @@ const ValueArrowInner: React.FC<ValueArrowProps> = ({frame}) => {
 
   return (
     <div style={{position: 'relative', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-    <Img src={staticFile("assets/Music.svg")} style={{position: 'absolute', left: '30%', top: '30%', width: '15%'}} />
-    <Img src={staticFile("assets/Clawn.svg")} style={{position: 'absolute', left: '50%', top: '30%', width: '15%'}} />
+    <Img src={staticFile("assets/Music.svg")} style={{position: 'absolute', left: '30%', top: '15%', width: '15%'}} />
+    <Img src={staticFile("assets/Clawn.svg")} style={{position: 'absolute', left: '50%', top: '15%', width: '15%'}} />
     <svg
       viewBox="0 0 200 100"
       style={{position: 'absolute', left: '0%', top: '0%', width: '100%'}}
