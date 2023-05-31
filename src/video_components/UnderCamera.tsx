@@ -5,9 +5,8 @@ import { useThree } from '@react-three/fiber';
 export const UnderCamera: React.FC<{
 	cameraY?: number,
 	cameraZ?: number,
-	lookAtZ?: number,
   children: React.ReactNode;
-}> = ({cameraY, cameraZ, lookAtZ, children}) => {
+}> = ({cameraY, cameraZ, children}) => {
 	const animationContextWrapper = useAnimationContext();
 	const { position, lookAtD } = animationContextWrapper.get3DObjectStateOf("camera");
 
@@ -18,8 +17,8 @@ export const UnderCamera: React.FC<{
 	useEffect(() => {
 		camera.position.set(position.x, (cameraY ?? -0) + position.y, position.z + (cameraZ ?? 0));
 		camera.near = 0.2;
-		camera.lookAt(lookAtD.x,  lookAtD.y, (lookAtZ ?? 0) + lookAtD.z);
-	}, [camera, lookAtZ, cameraY, cameraZ, lookAtD, position]);
+		camera.lookAt(lookAtD.x,  lookAtD.y,  lookAtD.z);
+	}, [camera, cameraY, cameraZ, lookAtD, position]);
 
 
 	return (

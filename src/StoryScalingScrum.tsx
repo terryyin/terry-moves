@@ -22,7 +22,7 @@ export const StoryScalingScrum: React.FC = () => {
   return (
 		<Story id="StoryScalingScrum" width={720} height={720} subtitles={scalingScrumSubtitles}  >
     <AbsoluteFill style={{backgroundColor: "beige"}}>
-			<ThreeDFrame   lookAtZ={0} cameraY={-1}>
+			<ThreeDFrame    cameraY={-1}>
 				<pointLight position={[10, 10, 10]} />
 				<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 				<ScalableScrum />

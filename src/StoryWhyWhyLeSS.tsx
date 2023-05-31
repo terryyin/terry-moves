@@ -125,7 +125,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 }, actions: [
 		{ actor: 'wrong scrum stage', actionType: 'disappear', startDuration: 1 },
 		{ actor: 'scrum stage', actionType: 'disappear', startDuration: 1 },
-		{ actor: "camera", actionType: "camera look at", duration: 1, absolutePosition: [0, 0, 0] },
+		{ actor: "camera", actionType: "camera look at", duration: 1, absolutePosition: [0, 0, -6] },
 		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [0, 0, 4] },
 		{ actor: 'complete picture', actionType: 'appear', startDuration: 1, endDuration: 1,  persistUntilSubtitleId: "adaptiveness" },
 ]},
@@ -154,10 +154,10 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 	zhTW: "修訂後的“LeSS全圖”從原則引出了一個箭頭，貫穿了LeSS的各個部分直到實驗。",
 }, actions: [
 			{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [-6, 0, 1] },
-			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
+			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, -3] },
 			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 0.58, offset: 1 },
 			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [0, 0, 4], offset: 2 },
-			{ actor: "camera", actionType: "camera look at", duration: 2, absolutePosition: [0, 0, 0], offset: 3 },
+			{ actor: "camera", actionType: "camera look at", duration: 2, absolutePosition: [0, 0, -6], offset: 3 },
 
 ]},
 { leadingBlank: 1, duration: 8, text: 'The revised "LeSS Complete Picture" visually represents the equilibrium between abstract principles and concrete practices.', translations: {
@@ -170,7 +170,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 }, actions: [
 			{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [6, 0, 1] },
 			{ actor: "less complete arrow", actionType: "additive value change to", duration: 3, value: 1},
-			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 3] },
+			{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, -3] },
 ]},
 {id: "adaptiveness", leadingBlank: 1, duration: 8, text: `It also underscores that LeSS aims to amplify an organization's "adaptiveness," reverting to the original intent of agile development.`, translations: {
 	zhCN: "它还强调了LeSS旨在增强组织的“适应性(Adaptiveness)”，恢复到敏捷(Agility)开发的本意。",
@@ -194,7 +194,7 @@ export const whyWhyLeSSSubtitles: Subtitle[] = [
 }, actions: [
 		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 4] },
 		{ actor: "scrum stage", actionType: "move", duration: 0, absolutePosition: [0, 0, 0] },
-		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 0, 0] },
+		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 0, -6] },
 		{ actor: 'scrum stage', actionType: 'appear', startDuration: 2 },
 		{ actor: "scrum stage", actionType: "move", duration: 2, absolutePosition: [-500, -500, 0], offset: 0.5 },
 		{ actor: 'direction', actionType: 'appear', startDuration: 1, offset: 2 },
@@ -238,14 +238,14 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 			<Anchor actor="center" style={{left: "50%", top: "45%"}}/>
 			<Anchor actor="adjust-direction" style={{left: "70%", top: "50%"}}/>
 			<AnimationEffect actor="scrum stage" style={{}}>
-				<ThreeDFrame   lookAtZ={0} cameraY={-1}>
+				<ThreeDFrame    cameraY={-1}>
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 					<ScalableScrum />
 				</ThreeDFrame>
 			</AnimationEffect>
 			<AnimationEffect actor="wrong scrum stage" style={{}}>
-				<ThreeDFrame   lookAtZ={0} cameraY={-1}>
+				<ThreeDFrame    cameraY={-1}>
 					<pointLight position={[10, 10, 10]} />
 					<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 					<GroupInitialState position={[-3, 1, -2]}>
@@ -317,7 +317,7 @@ export const StoryWhyWhyLeSS: React.FC = () => {
 				</ThreeDFrame>
 			</AnimationEffect>
 			<AnimationEffect actor="complete picture" style={{}}>
-			<ThreeDFrame  lookAtZ={-6} cameraY={0}>
+			<ThreeDFrame   cameraY={0}>
 				<directionalLight castShadow position={[10, 20, 15]} intensity={.9} color={0xffffff} />	
 				<LeSSComplete />
 			</ThreeDFrame>
