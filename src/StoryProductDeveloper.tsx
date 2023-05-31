@@ -47,6 +47,7 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 5, text: 'But traditionally, businesses have been focused on their core domain, not software. ' },
 	{ leadingBlank: 1, duration: 4, text: 'In the past, developers were commonly external.', actions:[
 		{ actor: 'stage', actionType: 'move', duration: 1, absolutePosition: [350, 0] },
+		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [-1, 0, 5] },
 		{ actor: 'external developers', actionType: 'appear', startDuration: 2, offset: 1 },
 	] },
 	{ leadingBlank: 1, duration: 6, text: 'Regardless, they engaged in predictive projects, focusing on tasks split by technology, rather than user needs.', actions:[
@@ -82,7 +83,7 @@ export const StoryProductDeveloper: React.FC = () => {
 				<AnimationEffect actor="stage">
 					<Company style={{position: 'absolute', left: '0%', top:'15%', width: '50%', height: "60%"}}/>
 					<AbsoluteFill style={{width: "150%", left: "-50%"}}>
-					<ThreeDFrame debug>
+					<ThreeDFrame debug={false}>
 						<directionalLight
 							castShadow
 							position={[10, 20, 15]}
@@ -92,9 +93,15 @@ export const StoryProductDeveloper: React.FC = () => {
 						<ThreeAnimationEffect actor="product">
 							<ProductPart />
 						</ThreeAnimationEffect>
-						<ThreeAnimationEffect actor="cylinder" scale={0.05} rotation={[0.3, 0, 0.1]} position={[-1.5,0.3,1]}>
+
+						<ThreeAnimationEffect actor="cylinder" scale={0.04} rotation={[0.3, 0, 0.0]} position={[-1.7,0.4,2]}>
+							<GLTFNode url={url} nodeName="g_hex"/>
+						</ThreeAnimationEffect>
+
+						<ThreeAnimationEffect actor="trig" scale={0.04} rotation={[0.0, 0.2, 0.0]} position={[-1.1,1.1,2]}>
 							<GLTFNode url={url} nodeName="g_circle"/>
 						</ThreeAnimationEffect>
+
 					</ThreeDFrame>
 					</AbsoluteFill>
 
