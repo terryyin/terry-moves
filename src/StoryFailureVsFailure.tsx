@@ -25,6 +25,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 	  flashBack: {from: 40, duration: 3, speed: 0.5} },
 
 	{ leadingBlank: 0.5, duration: 4, text: "SpaceX is celebrating their rocket explosion.", actions: [
+			{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 30] },
 			{ actor: "starship", actionType: "rotate and rise", duration: 3, value: 4 },
 			{ actor: "starship", actionType: "oscillate", endingTimeAdjustment: 10, delta: [0, 0.1, 0] },
 	]},
@@ -32,7 +33,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 			{ actor: "blue background", actionType: "disappear", startDuration: 5 },
 			{ actor: "starship", actionType: "move", duration: 5, absolutePosition: [0, 20, 0] },
 			{ actor: "camera", actionType: "camera look at", duration: 6, absolutePosition: [0, 5, 0] },
-			{ actor: "camera", actionType: "move", duration: 6, absolutePosition: [0, 0, -20] },
+			{ actor: "camera", actionType: "move", duration: 6, absolutePosition: [0, 0, 10] },
 	]},
 	{ leadingBlank: 0, duration: 1.5, text: "", actions: [
 			{ actor: "starship", actionType: "3d rotate", endingTimeAdjustment: 20, totalRotation: [0, 240, 0] },
@@ -112,7 +113,7 @@ export const StoryFailureVsFailure: React.FC = () => {
 			</AbsoluteFill>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-          <ThreeDFrame  cameraDistance={30} lookAtY={16} cameraY={10}>
+          <ThreeDFrame  cameraDistance={0} lookAtY={16} cameraY={10}>
 						<directionalLight
 							castShadow
 							position={[50, 100, 50]}

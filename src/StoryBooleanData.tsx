@@ -425,7 +425,7 @@ export const StoryBooleanData: React.FC = () => {
 			</AnimationEffect>
 
 		<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-			<ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
+			<ThreeDFrame cameraDistance={0} lookAtY={0} cameraY={0}>
 				<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
 				<ThreeAnimationEffect actor="thinker">
 					<GroupInitialState rotation={[-0.8, -0, 0.9]} position={[10, -0.5, -6]} scale={4}>

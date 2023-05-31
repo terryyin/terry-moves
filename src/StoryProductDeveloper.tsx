@@ -70,7 +70,7 @@ export const StoryProductDeveloper: React.FC = () => {
 			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins"}}>
 				<AnimationEffect actor="stage">
 					<Company style={{position: 'absolute', left: '0%', top:'15%', width: '50%', height: "60%"}}/>
-							<ThreeDFrame debug cameraDistance={2}>
+							<ThreeDFrame debug cameraDistance={0}>
 								<ThreeAnimationEffect actor="product">
 									<ProductPart
 										baseScale={1.4}

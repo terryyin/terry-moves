@@ -34,6 +34,7 @@ export const booleanParametersSutitles: Subtitle[] = [
 			translations: {zhCN: "大家好，欢迎来到《我的布尔值的坏习惯》系列。",
 		zhTW: "大家好，歡迎來到《我的布林值的壞習慣》系列。"},
 			actions: [
+        { actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 8],},
 				{ actor: "second title", actionType: "insert text", endingTimeAdjustment: 3, line: 1, column: 1, text: "Seeking High Cohesion, Loose Coupling design", startDuration: 1, endDuration: 2 },
 			  { actor: "blaster assembly", actionType: "oscillate", delta: [0, 0.02, 0]},
 				// { actor: "subtitles", actionType: "appear", duration: 1, offset: 1000 },
@@ -582,7 +583,7 @@ export const StoryBooleanParameters: React.FC = () => {
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-          <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
+          <ThreeDFrame cameraDistance={0} lookAtY={0} cameraY={0}>
 						<directionalLight
 							castShadow
 							position={[10, 20, 15]}

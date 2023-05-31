@@ -44,6 +44,7 @@ export const booleanReturnsSutitles: Subtitle[] = [
 				zhTW: "歡迎回到《布林值的壞習慣》系列！",
 			},
 			actions:[
+        { actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 8],},
 			  { actor: "caller", actionType: "appear" },
 			  { actor: "soldier", actionType: "disappear"},
 			  { actor: "blaster assembly", actionType: "oscillate", delta: [0, 0.02, 0]},
@@ -366,7 +367,7 @@ export const StoryBooleanReturns: React.FC = () => {
 
       <AnimationEffect actor="stage">
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%', zIndex:2000}}>
-          <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
+          <ThreeDFrame cameraDistance={0} lookAtY={0} cameraY={0}>
 						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
 						<GroupInitialState rotation={[0, Math.PI * 3 / 2, 0]} position={[-0, 0, 0]} scale={0.15}>
 							<Explosion actor="blaster explosion" />
@@ -406,7 +407,7 @@ export const StoryBooleanReturns: React.FC = () => {
 			</CodeHighlight>
 
 				<AbsoluteFill style={{position: 'absolute', left: '0%', top: '0%', width: '100%', height: '100%'}}>
-          <ThreeDFrame cameraDistance={8} lookAtY={0} cameraY={0}>
+          <ThreeDFrame cameraDistance={0} lookAtY={0} cameraY={0}>
 						<directionalLight castShadow position={[10, 20, 15]} intensity={15} color={0xffffff} />	
 						<ThreeAnimationEffect actor="thinker">
 							<GroupInitialState rotation={[0, -0.5, 0]} position={[2.8, -0.5, 0]} scale={1}>
