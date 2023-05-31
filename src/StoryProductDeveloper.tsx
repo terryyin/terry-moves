@@ -16,8 +16,8 @@ import { ThreeDFrame } from './video_components/ThreeDFrame';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 5, text: 'Product Developers: who are they and why are they on the rise?', actions:[
-		{ actor: "camera", actionType: "camera look at", duration: 3, absolutePosition: [0, 0, 0] },
-		{ actor: "camera", actionType: "move", duration: 3, absolutePosition: [6, -8, 0] },
+		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 1, 0] },
+		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, -1, 5] },
 		{ actor: "title", actionType: "appear", startDuration: 0, endingTimeAdjustment: 5, endDuration: 1 },
 		{ actor: "title", actionType: "additive value change to", duration: 5, value: 90},
 		{ actor: "title-shadow", actionType: "additive value change to", duration: 0, value: -30},
@@ -70,14 +70,16 @@ export const StoryProductDeveloper: React.FC = () => {
 			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins"}}>
 				<AnimationEffect actor="stage">
 					<Company style={{position: 'absolute', left: '0%', top:'15%', width: '50%', height: "60%"}}/>
-							<ThreeDFrame debug >
-								<ThreeAnimationEffect actor="product">
-									<ProductPart
-										baseScale={1.4}
-										aspectRatio={1}
-									/>
-								</ThreeAnimationEffect>
-							</ThreeDFrame>
+					<AbsoluteFill style={{width: "150%", left: "-50%"}}>
+					<ThreeDFrame debug>
+						<ThreeAnimationEffect actor="product">
+							<ProductPart
+								baseScale={1.4}
+								aspectRatio={1}
+							/>
+						</ThreeAnimationEffect>
+					</ThreeDFrame>
+					</AbsoluteFill>
 
 					<CustomerGroup style={{position: 'absolute', left: '70%', top:'15%', width: '25%', height: '100%'}} />
 					<div style={{position: 'absolute', left: '45%', top: '35%', width: '25%', height: '25%'}}>
