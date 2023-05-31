@@ -366,7 +366,7 @@ export const StoryBooleanData: React.FC = () => {
 		<Audio src={staticFile("assets/audios/boolean3ch.mp3")} />
     <AbsoluteFill style={{backgroundColor: "black", perspective: "400px"}}>
     <AnimationEffect actor="game of life" style={{transformStyle: "preserve-3d"}}>
-			<ThreeDFrame cameraZ={0}>
+			<ThreeDFrame>
 				{/* <ambientLight intensity={0.5} /> */}
 				<directionalLight castShadow position={[10, 20, 15]} intensity={5} color={0xffffff} />	
 				<GameOfLifeAnimated actor="gol" startLives={gliders} />

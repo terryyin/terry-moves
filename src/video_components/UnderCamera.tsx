@@ -3,9 +3,8 @@ import { useAnimationContext } from '../hooks/useAnimationContext';
 import { useThree } from '@react-three/fiber';
 
 export const UnderCamera: React.FC<{
-	cameraZ?: number,
   children: React.ReactNode;
-}> = ({cameraZ, children}) => {
+}> = ({children}) => {
 	const animationContextWrapper = useAnimationContext();
 	const { position, lookAtD } = animationContextWrapper.get3DObjectStateOf("camera");
 
@@ -14,10 +13,10 @@ export const UnderCamera: React.FC<{
 	// Then make it look at the object.
 	const camera = useThree((state) => state.camera);
 	useEffect(() => {
-		camera.position.set(position.x,  position.y, position.z + (cameraZ ?? 0));
+		camera.position.set(position.x,  position.y, position.z);
 		camera.near = 0.2;
 		camera.lookAt(lookAtD.x,  lookAtD.y,  lookAtD.z);
-	}, [camera, cameraZ, lookAtD, position]);
+	}, [camera, lookAtD, position]);
 
 
 	return (

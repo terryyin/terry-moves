@@ -100,7 +100,7 @@ export const StoryGameOfLife: React.FC = () => {
 		<Story id="StoryGameOfLife" width={720} height={720} subtitles={gameOfLifeSubtitles}  >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
     <AbsoluteFill style={{backgroundColor: "black"}}>
-			<ThreeDFrame cameraZ={0}>
+			<ThreeDFrame>
 				{/* <ambientLight intensity={0.5} /> */}
 				<directionalLight castShadow position={[10, 20, 15]} intensity={5} color={0xffffff} />	
 				<GameOfLifeAnimated actor="gol" startLives={gliders} />
