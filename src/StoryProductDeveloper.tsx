@@ -89,7 +89,7 @@ export const StoryProductDeveloper: React.FC = () => {
 					<Anchor actor="company service" style={{left: "50%", top: "44%"}}/>
 					<Anchor actor="company receiver" style={{left: "50%", top: "60%"}}/>
 					<AbsoluteFill style={{width: "150%", left: "-50%"}}>
-					<ThreeDFrame debug>
+					<ThreeDFrame debug={false}>
 						<directionalLight
 							castShadow
 							position={[10, 20, 15]}
@@ -100,11 +100,11 @@ export const StoryProductDeveloper: React.FC = () => {
 							<ProductPart />
 						</ThreeAnimationEffect>
 
-						<ThreeAnimationEffect actor="cylinder" scale={0.04} rotation={[0.3, 0, 0.0]} position={[-1.7,0.4,2]}>
+						<ThreeAnimationEffect actor="cylinder" scale={0.1} rotation={[0.4, 0, 0.0]} position={[-2.5,0,0]}>
 							<GLTFNode recenter url={url} nodeName="g_hex"/>
 						</ThreeAnimationEffect>
 
-						<ThreeAnimationEffect actor="trig" scale={0.04} rotation={[0.0, 0.2, 0.0]} position={[-1.1,1.1,2]}>
+						<ThreeAnimationEffect actor="trig" scale={0.1} rotation={[0.0, 0.2, 0.0]} position={[0.1,3.2,0]}>
 							<GLTFNode recenter url={url} nodeName="g_circle"/>
 						</ThreeAnimationEffect>
 
