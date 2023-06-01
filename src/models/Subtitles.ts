@@ -117,6 +117,7 @@ export interface ConnectAction extends StartAndEndAction {
   actionType: 'connect to';
   target: string;
   bentLevel: number;
+  strokeWidth?: number;
   radiusSource?: number;
   radiusTarget?: number;
 }

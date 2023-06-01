@@ -14,10 +14,10 @@ import EdgeWaver from './video_components/EdgeWaver';
 import { ProductPart } from './parts/ProductPart';
 import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
 import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { GroupInitialState } from './video_components/GroupInitialState';
 import { GLTFNode } from './video_components/GLTFNode';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import { Anchor } from './video_components/Anchor';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 5, text: 'Product Developers: who are they and why are they on the rise?', actions:[
@@ -30,6 +30,7 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Picture this: a company delivering services to its users.', actions:[
 		{ actor: 'value to customer', actionType: 'appear', startDuration: 1 },
+		{ actor: "company service", actionType: "connect to", startDuration: 1, target: "user", bentLevel: -30, strokeWidth: 5 },
 	] },
 	{ leadingBlank: 0, duration: 6, text: `These solutions tackle the customer's problems and fulfill their needs. And in return?`, actions:[
 		{ actor: 'worried-mom', actionType: 'disappear', startDuration: 2 },
@@ -38,6 +39,7 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Customers provide the fuel for the company to grow - resources like money.	', actions: [
 		{ actor: 'value from customer', actionType: 'appear', startDuration: 1 },
+		{ actor: "customer", actionType: "connect to", startDuration: 1, target: "company receiver", bentLevel: -70, strokeWidth: 5 },
 		{ actor: 'company', actionType: 'glow', duration: 2, offset: 3 },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Software products often play a crucial role in providing services.', actions:[
@@ -84,8 +86,10 @@ export const StoryProductDeveloper: React.FC = () => {
 			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins"}}>
 				<AnimationEffect actor="stage">
 					<Company style={{position: 'absolute', left: '0%', top:'15%', width: '50%', height: "60%"}}/>
+					<Anchor actor="company service" style={{left: "50%", top: "44%"}}/>
+					<Anchor actor="company receiver" style={{left: "50%", top: "60%"}}/>
 					<AbsoluteFill style={{width: "150%", left: "-50%"}}>
-					<ThreeDFrame debug={false}>
+					<ThreeDFrame debug>
 						<directionalLight
 							castShadow
 							position={[10, 20, 15]}
@@ -96,7 +100,7 @@ export const StoryProductDeveloper: React.FC = () => {
 							<ProductPart />
 						</ThreeAnimationEffect>
 
-						<ThreeAnimationEffect actor="cylinder" scale={0.04} rotation={[0.3, 0, 0.0]} position={[-1.7,0.4,2]}>
+						<ThreeAnimationEffect actor="cylinder1" scale={0.04} rotation={[0.3, 0, 0.0]} position={[-1.7,0.4,2]}>
 							<GLTFNode url={url} nodeName="g_hex"/>
 						</ThreeAnimationEffect>
 
@@ -118,6 +122,8 @@ export const StoryProductDeveloper: React.FC = () => {
 							<MoneyArrow />
 						</AnimationEffect>
 					</div>
+					<Anchor actor="user" style={{left: "70%", top: "45%"}}/>
+					<Anchor actor="customer" style={{left: "86%", top: "50%"}}/>
 
 					<AnimationEffect actor="external developers" style={{left: "-40%", top: "65%"}}>
 						<AbsoluteFill style={{width: "5%", top: "0", left: "0%"}}>

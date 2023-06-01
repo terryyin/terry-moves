@@ -36,6 +36,7 @@ export const Connector: React.FC<ConnectorProps> = ({
       actor,
       target,
       bentLevel,
+      strokeWidth,
       radiusSource,
       radiusTarget,
     },
@@ -129,7 +130,7 @@ export const Connector: React.FC<ConnectorProps> = ({
         ref={svgPath}
         fill="none"
         stroke="#88a"
-        strokeWidth="2"
+        strokeWidth={strokeWidth ?? 2}
         strokeLinecap="round"
         markerEnd="url(#arrowhead)"
       />
