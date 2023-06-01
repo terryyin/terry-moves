@@ -72,12 +72,25 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.', actions: [
+		{ actor: 'hex', actionType: 'disappear', startDuration: 0.1 },
+		{ actor: 'cylinder', actionType: 'disappear', startDuration: 0.1 },
+		{ actor: 'stage', actionType: 'move', duration: 2, absolutePosition: [0, 0] },
+		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 360 -10, 0], offset: 0 },
+		{ actor: 'product', actionType: 'move', duration: 2, absolutePosition: [0, 0.9, 0] },
 
 	]},
 	{ leadingBlank: 1, duration: 5, text: 'This has sparked the rise of Product Developers.', actions: [
+		{ actor: 'external developers', actionType: 'move', duration: 2, absolutePosition: [280, -125, 0] },
+		{ actor: 'external developers', actionType: 'scale', duration: 2, outputRange: [1, 0.8] },
+		{ actor: 'developers2', actionType: 'move', duration: 1, absolutePosition: [-9, -15, 0], offset: 2, },
+		{ actor: 'developers2', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 180, 0], offset: 3 },
+		{ actor: 'manager1', actionType: 'move', duration: 1, absolutePosition: [130, 15, 0], offset: 2, },
+		{ actor: 'developers1', actionType: 'move', duration: 1, absolutePosition: [-40, 0, 0], offset: 2, },
+		{ actor: 'developers1', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 180, 0], offset: 3 },
 
 	]},
 	{ leadingBlank: 1, duration: 3, text: 'Who guides their work? A Product Owner.', actions: [
+		{ actor: 'product owner', actionType: 'appear', startDuration: 1, offset: 2 },
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: `Yet, Product Developers aren't solely reliant on the PO. They engage directly with 'requirement donors,'`, actions: [
@@ -177,27 +190,26 @@ export const StoryProductDeveloper: React.FC = () => {
 						</AnimationEffect>
 					</AnimationEffect>
 					<AnimationEffect actor="external developers" style={{left: "-40%", top: "65%"}}>
-						<AbsoluteFill style={{width: "5%", top: "0", left: "0%"}}>
-							<Img src={staticFile("assets/less/manager.svg")} />
-						</AbsoluteFill>
-						<AbsoluteFill style={{width: "15%", top: "3%", left: "8%"}}>
-							<Img src={staticFile("assets/less/team_of_three.svg")} />
-						</AbsoluteFill>
-						<AbsoluteFill style={{width: "22%", top: "12%", left: "1%"}}>
-							External Developers
-						</AbsoluteFill>
+						<AnimationEffect actor="manager1" style={{width: "5%", top: "0", left: "0%"}}>
+							<Img src={staticFile("assets/less/manager.svg")} width="100%" />
+						</AnimationEffect>
+						<AnimationEffect actor="developers1" style={{width: "15%", top: "3%", left: "8%"}}>
+							<Img src={staticFile("assets/less/team_of_three.svg")}  width="100%"/>
+						</AnimationEffect>
 					</AnimationEffect>
 
+					<AnimationEffect actor="product owner" style={{left: "40%", top: "25%", width: "80%"}}>
+						<AbsoluteFill style={{width: "8%", top: "0", left: "0%"}}>
+							<Img src={staticFile("assets/less/po.svg")} />
+						</AbsoluteFill>
+					</AnimationEffect>
 					<AnimationEffect actor="internal developers" style={{left: "3%", top: "25%", width: "80%"}}>
-						<AbsoluteFill style={{width: "5%", top: "0", left: "0%"}}>
-							<Img src={staticFile("assets/less/manager.svg")} />
-						</AbsoluteFill>
-						<AbsoluteFill style={{width: "15%", top: "3%", left: "8%"}}>
-							<Img src={staticFile("assets/less/team_of_three.svg")} />
-						</AbsoluteFill>
-						<AbsoluteFill style={{width: "30%", top: "10%", left: "0%"}}>
-							Internal Developers
-						</AbsoluteFill>
+						<AnimationEffect actor="manager2" style={{width: "5%", top: "0", left: "0%"}}>
+							<Img src={staticFile("assets/less/manager.svg")} width="100%"/>
+						</AnimationEffect>
+						<AnimationEffect actor="developers2" style={{width: "15%", top: "3%", left: "8%"}}>
+							<Img src={staticFile("assets/less/team_of_three.svg")} width="100%" />
+						</AnimationEffect>
 					</AnimationEffect>
 
 					<AnimationEffect actor="title" style={{ left: '0%', top: '35%', width: '100%', height: '65%' }} >
