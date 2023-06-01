@@ -100,7 +100,11 @@ export const StoryProductDeveloper: React.FC = () => {
 							<ProductPart />
 						</ThreeAnimationEffect>
 
-						<ThreeAnimationEffect actor="cylinder1" scale={0.04} rotation={[0.3, 0, 0.0]} position={[-1.7,0.4,2]}>
+						<ThreeAnimationEffect actor="cylinder" scale={0.04} rotation={[0, 0, 0]} position={[0,0,0]}>
+							<GLTFNode recenter url={url} nodeName="g_penta" />
+						</ThreeAnimationEffect>
+
+						<ThreeAnimationEffect actor="cylinder" scale={0.04} rotation={[0.3, 0, 0.0]} position={[-1.7,0.4,2]}>
 							<GLTFNode url={url} nodeName="g_hex"/>
 						</ThreeAnimationEffect>
 

@@ -1,13 +1,14 @@
 import { Clone } from '@react-three/drei';
-import { useFrame, useLoader } from '@react-three/fiber';
+import { useLoader } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
-import { Group } from 'three';
+import { Box3, Group, Vector3 } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export const GLTFNode: React.FC<{
   nodeName: string,
   url: string,
-}> = ({ nodeName, url }) => {
+  recenter?: boolean,
+}> = ({ nodeName, recenter, url }) => {
   const gltf = useLoader(GLTFLoader, url);
   const [node, setNode] = useState<Group | null>(null);
 
@@ -17,10 +18,17 @@ export const GLTFNode: React.FC<{
     if (gltf) {
       const foundNode = gltf.scene.getObjectByName(nodeName);
       if (foundNode) {
+        const box = new Box3().setFromObject(foundNode);
+        if(recenter) {
+          const center = box.getCenter(new Vector3()).negate();
+
+          foundNode.position.set(center.x, center.y, center.z);
+          foundNode.updateMatrixWorld();
+        }
         setNode(foundNode as THREE.Group);
       }
     }
-  }, [gltf, nodeName, url]); // Added url to the dependencies array
+  }, [gltf, nodeName, recenter, url]);
 
   return (
     <group ref={meshRef}>

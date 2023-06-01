@@ -23,17 +23,19 @@ export const ThreeAnimationEffect: React.FC<{
 
 	const animationContextWrapper = useAnimationContext();
 	const { scale, position, rotation, opacity } = animationContextWrapper.get3DObjectStateOf(actor);
-	const totalPosition = position.add(new THREE.Vector3(...(intialPosition ?? [0, 0, 0])));
-	const totoalRotation = mutliplyRotations(rotation, new THREE.Euler(...(initialRotation ?? [0, 0, 0])));
-
 
 	return (
 		<GroupInitialState
+			rotation={ rotation.toArray() as [number, number, number] }
+			position={ position.toArray() as [number, number, number] }
+		>
+		<GroupInitialState
 			scale={scale * (initialScale ?? 1)}
-			rotation={ totoalRotation.toArray() as [number, number, number] }
-			position={ totalPosition.toArray() as [number, number, number] }
+			rotation={ initialRotation }
+			position={ intialPosition }
 		>
 			{opacity > 0.1 && children}
+		</GroupInitialState>
 		</GroupInitialState>
 	);
 };
