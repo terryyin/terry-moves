@@ -15,15 +15,21 @@ export const ThreeAnimationEffect: React.FC<{
 
 	return (
 		<GroupInitialState
-			rotation={ rotation.toArray() as [number, number, number] }
 			position={ position.toArray() as [number, number, number] }
+		>
+		<GroupInitialState
+			position={ intialPosition }
+		>
+		<GroupInitialState
+			rotation={ rotation.toArray() as [number, number, number] }
 		>
 		<GroupInitialState
 			scale={scale * (initialScale ?? 1)}
 			rotation={ initialRotation }
-			position={ intialPosition }
 		>
 			{opacity > 0.1 && children}
+		</GroupInitialState>
+		</GroupInitialState>
 		</GroupInitialState>
 		</GroupInitialState>
 	);

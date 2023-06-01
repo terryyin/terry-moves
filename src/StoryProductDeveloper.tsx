@@ -28,16 +28,14 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: "title-shadow", actionType: "additive value change to", duration: 0, value: -30},
 		{ actor: "title-shadow", actionType: "additive value change to", duration: 5, value: -90},
 	] },
-	{ leadingBlank: 1, duration: 5, text: 'Picture this: a company delivering services to its users.', actions:[
+	{ leadingBlank: 1, duration: 6, text: 'Picture this: a company delivering services to its users to fulfill their needs.', actions:[
 		{ actor: 'value to customer', actionType: 'appear', startDuration: 1 },
 		{ actor: "company service", actionType: "connect to", startDuration: 1, target: "user", bentLevel: -30, strokeWidth: 5 },
+		{ actor: 'worried-mom', actionType: 'disappear', startDuration: 2, offset: 3 },
+		{ actor: 'happy-mom', actionType: 'appear', startDuration: 2, offset: 3 },
+		{ actor: 'happy-mom', actionType: 'glow', duration: 2, offset: 4 },
 	] },
-	{ leadingBlank: 0, duration: 6, text: `These solutions tackle the customer's problems and fulfill their needs. And in return?`, actions:[
-		{ actor: 'worried-mom', actionType: 'disappear', startDuration: 2 },
-		{ actor: 'happy-mom', actionType: 'appear', startDuration: 2 },
-		{ actor: 'happy-mom', actionType: 'glow', duration: 2, offset: 3 },
-	] },
-	{ leadingBlank: 1, duration: 5, text: 'Customers provide the fuel for the company to grow - resources like money.	', actions: [
+	{ leadingBlank: 1, duration: 6, text: 'And in return? Customers provide the fuel for the company to grow - resources like money.	', actions: [
 		{ actor: 'value from customer', actionType: 'appear', startDuration: 1 },
 		{ actor: "customer", actionType: "connect to", startDuration: 1, target: "company receiver", bentLevel: -70, strokeWidth: 5 },
 		{ actor: 'company', actionType: 'glow', duration: 2, offset: 3 },
@@ -55,25 +53,52 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 6, text: 'Regardless, they engaged in predictive projects, focusing on tasks split by technology, rather than user needs.', actions:[
 		{ actor: 'internal developers', actionType: 'appear', startDuration: 2, offset: 0 },
 		{ actor: 'cylinder', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
-		{ actor: 'trig', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
+		{ actor: 'hex', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
 		{ actor: 'month1', actionType: 'appear', startDuration: 1, offset: 2 },
 		{ actor: 'month2', actionType: 'appear', startDuration: 1, offset: 3 },
 		{ actor: 'month3', actionType: 'appear', startDuration: 1, offset: 4 },
 		{ actor: 'month4', actionType: 'appear', startDuration: 1, offset: 5 },
 	] },
-	{ leadingBlank: 1, duration: 5, text: 'Integration was viewed as a simple phase, yet it consistently led to unexpected complications.' },
-	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.' },
-	{ leadingBlank: 1, duration: 5, text: 'This has sparked the rise of Product Developers.' },
-	{ leadingBlank: 1, duration: 3, text: 'Who guides their work? A Product Owner.' },
-	{ leadingBlank: 1, duration: 6, text: `Yet, Product Developers aren't solely reliant on the PO. They engage directly with 'requirement donors,'` },
-	{ leadingBlank: 1, duration: 6, text: `a term for those who've convinced the Product Owner to invest in their product hypothesis.` },
-	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even fellow developers.	` },
-	{ leadingBlank: 1, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.' },
-	{ leadingBlank: 1, duration: 6, text: 'They also maintain a view of the whole product, avoiding local optimization to foster product growth.' },
-	{ leadingBlank: 1, duration: 7, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.` },
-	{ leadingBlank: 1, duration: 6, text: `They work directly with those who hypothesize about the product, in a customer-centric, whole-product-focused way.` },
-	{ leadingBlank: 1, duration: 4, text: `Now that's a transformation worth watching.` },
-	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about the roles and work processes of Product Developers in future videos. Stay tuned for more insights into this evolving field.` },
+	{ leadingBlank: 1, duration: 5, text: 'Integration was viewed as a simple phase, yet it consistently led to unexpected complications.', actions: [
+		{ actor: 'hex', actionType: '3d rotate', totalRotation: [0, 0, -90], endingTimeAdjustment: 10, offset: 2 },
+
+	]},
+	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.', actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 5, text: 'This has sparked the rise of Product Developers.', actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 3, text: 'Who guides their work? A Product Owner.', actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 6, text: `Yet, Product Developers aren't solely reliant on the PO. They engage directly with 'requirement donors,'`, actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 6, text: `a term for those who've convinced the Product Owner to invest in their product hypothesis.`, actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even fellow developers.	`, actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.', actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 6, text: 'They also maintain a view of the whole product, avoiding local optimization to foster product growth.', actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 7, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.`, actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 6, text: `They work directly with those who hypothesize about the product, in a customer-centric, whole-product-focused way.`, actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 4, text: `Now that's a transformation worth watching.`, actions: [
+
+	]},
+	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about the roles and work processes of Product Developers in future videos. Stay tuned for more insights into this evolving field.`, actions: [
+
+	]},
 ];
 
 const titleText = `
@@ -104,11 +129,11 @@ export const StoryProductDeveloper: React.FC = () => {
 							<ProductPart />
 						</ThreeAnimationEffect>
 
-						<ThreeAnimationEffect actor="cylinder" scale={0.1} rotation={[0.4, 0, 0.0]} position={[-2.5,0,0]}>
+						<ThreeAnimationEffect actor="hex" scale={0.1} rotation={[0.4, 0, 0.0]} position={[-2.5,0,0]}>
 							<GLTFNode recenter url={url} nodeName="g_hex"/>
 						</ThreeAnimationEffect>
 
-						<ThreeAnimationEffect actor="trig" scale={0.1} rotation={[0.0, 0.2, 0.0]} position={[0.1,3.2,0]}>
+						<ThreeAnimationEffect actor="cylinder" scale={0.1} rotation={[0.0, 0.2, 0.0]} position={[0.1,3.2,0]}>
 							<GLTFNode recenter url={url} nodeName="g_circle"/>
 						</ThreeAnimationEffect>
 
