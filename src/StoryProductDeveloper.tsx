@@ -59,11 +59,16 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'month3', actionType: 'appear', startDuration: 1, offset: 4 },
 		{ actor: 'month4', actionType: 'appear', startDuration: 1, offset: 5 },
 	] },
-	{ leadingBlank: 1, duration: 5, text: 'Integration was viewed as a simple phase, yet it consistently led to unexpected complications.', actions: [
+	{ leadingBlank: 1, duration: 6, text: 'Integration was viewed as a simple phase, yet it consistently led to unexpected complications.', actions: [
 		{ actor: 'hex', actionType: '3d rotate', totalRotation: [-120, 0, -90], endingTimeAdjustment: 3, offset: 2 },
 		{ actor: "hex", actionType: "move", duration: 3, absolutePosition: [1.5, 1.1, -0.3], offset: 2 },
 		{ actor: 'cylinder', actionType: '3d rotate', totalRotation: [-120, 0, -90], endingTimeAdjustment: 3, offset: 2 },
 		{ actor: "cylinder", actionType: "move", duration: 3, absolutePosition: [-1.2, -2.7, -0.2], offset: 2 },
+		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 360 + 15 + 90, 0], offset: 4 },
+		{ actor: "hex", actionType: "move", duration: .5, absolutePosition: [1.0, 1.1, -0.3], offset: 5 },
+		{ actor: "cylinder", actionType: "move", duration: .5, absolutePosition: [-1.7, -2.7, -0.2], offset: 5 },
+		{ actor: "hex", actionType: "move", duration: .5, absolutePosition: [1.5, 1.1, -0.3], offset: 5.5 },
+		{ actor: "cylinder", actionType: "move", duration: .5, absolutePosition: [-1.2, -2.7, -0.2], offset: 5.5 },
 
 	]},
 	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.', actions: [

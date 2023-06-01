@@ -26,7 +26,7 @@ export const ProductPart: React.FC = () => {
 	return (
 		<>
 		<GroupInitialState scale={0.1} rotation={[0, Math.PI, 0]}>
-      <GLTFNode url={url} nodeName="Box"/>
+      <GLTFNode recenter url={url} nodeName="Box"/>
 		</GroupInitialState>
 
 			<mesh position={[-boxSize/2+edge, edge,boxSize/2 + 0.001]}>

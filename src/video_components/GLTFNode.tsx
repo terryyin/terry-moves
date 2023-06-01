@@ -1,7 +1,7 @@
 import { Clone } from '@react-three/drei';
 import { useLoader } from '@react-three/fiber';
 import React, { useEffect, useRef, useState } from 'react';
-import { Box3, Box3Helper, Group, Vector3 } from 'three';
+import { Box3, Box3Helper, Group } from 'three';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 
 export const GLTFNode: React.FC<{
@@ -22,7 +22,6 @@ export const GLTFNode: React.FC<{
         const foundNode = gltf.scene.getObjectByName(nodeName);
         if (foundNode) {
           if(recenter) {
-
             foundNode.position.set(0, 0, 0);
             foundNode.updateMatrixWorld();
           }
