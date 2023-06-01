@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { UnderCamera } from '../UnderCamera';
 import { useThree } from '@react-three/fiber';
-import { AxesHelper, CameraHelper } from 'three';
+import { AxesHelper } from 'three';
 
 export const ThreeDFrameInner: React.FC<{
 	debug?: boolean,
@@ -12,10 +12,8 @@ export const ThreeDFrameInner: React.FC<{
   useEffect(() => {
 			if(debug) {
 				const axesHelper = new AxesHelper(5); 
-				const cameraHelper = new CameraHelper(camera);
 
 				scene.add(axesHelper);
-				scene.add(cameraHelper);
 		}
   }, [scene, camera, debug]);
 	
