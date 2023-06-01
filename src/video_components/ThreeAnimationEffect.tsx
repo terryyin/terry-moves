@@ -1,17 +1,6 @@
 import React  from 'react';
 import { useAnimationContext } from '../hooks/useAnimationContext';
-import * as THREE from 'three';
 import { GroupInitialState } from './GroupInitialState';
-
-function mutliplyRotations(euler1: THREE.Euler, euler2: THREE.Euler): THREE.Euler {
-
-	const quaternion1 = new THREE.Quaternion().setFromEuler(euler1);
-	const quaternion2 = new THREE.Quaternion().setFromEuler(euler2);
-
-	const combinedQuaternion = new THREE.Quaternion().multiplyQuaternions(quaternion1, quaternion2);
-	return new THREE.Euler().setFromQuaternion(combinedQuaternion);
-}
-
 
 export const ThreeAnimationEffect: React.FC<{
 	actor: string,

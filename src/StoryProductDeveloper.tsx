@@ -54,8 +54,12 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	] },
 	{ leadingBlank: 1, duration: 6, text: 'Regardless, they engaged in predictive projects, focusing on tasks split by technology, rather than user needs.', actions:[
 		{ actor: 'internal developers', actionType: 'appear', startDuration: 2, offset: 0 },
-		{ actor: 'cylinder', actionType: 'rotate and rise', duration: 3, value: 4, offset: 2 },
-		{ actor: 'trig', actionType: 'rotate and rise', duration: 3, value: 4, offset: 2 },
+		{ actor: 'cylinder', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
+		{ actor: 'trig', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
+		{ actor: 'month1', actionType: 'appear', startDuration: 1, offset: 2 },
+		{ actor: 'month2', actionType: 'appear', startDuration: 1, offset: 3 },
+		{ actor: 'month3', actionType: 'appear', startDuration: 1, offset: 4 },
+		{ actor: 'month4', actionType: 'appear', startDuration: 1, offset: 5 },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Integration was viewed as a simple phase, yet it consistently led to unexpected complications.' },
 	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.' },
@@ -125,6 +129,20 @@ export const StoryProductDeveloper: React.FC = () => {
 					<Anchor actor="user" style={{left: "70%", top: "45%"}}/>
 					<Anchor actor="customer" style={{left: "86%", top: "50%"}}/>
 
+					<AnimationEffect actor="calendars" style={{left: "-40%", top: "15%", width: "30%"}}>
+						<AnimationEffect actor="month1" style={{position: "initial", display: "inline"}}>
+							<Img src={staticFile("assets/calendar.svg")} width="80px" />
+						</AnimationEffect>
+						<AnimationEffect actor="month2" style={{position: "initial", display: "inline"}}>
+							<Img src={staticFile("assets/calendar.svg")} width="80px" />
+						</AnimationEffect>
+						<AnimationEffect actor="month3" style={{position: "initial", display: "inline"}}>
+							<Img src={staticFile("assets/calendar.svg")} width="80px" />
+						</AnimationEffect>
+						<AnimationEffect actor="month4" style={{position: "initial", display: "inline"}}>
+							<Img src={staticFile("assets/calendar-deliver.svg")} width="80px" />
+						</AnimationEffect>
+					</AnimationEffect>
 					<AnimationEffect actor="external developers" style={{left: "-40%", top: "65%"}}>
 						<AbsoluteFill style={{width: "5%", top: "0", left: "0%"}}>
 							<Img src={staticFile("assets/less/manager.svg")} />
