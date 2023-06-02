@@ -89,17 +89,16 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'developers1', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 180, 0], offset: 3 },
 
 	]},
-	{ leadingBlank: 1, duration: 3, text: 'Who guides their work? A Product Owner.', actions: [
+	{ leadingBlank: 1, duration: 4, text: 'A Product Owner sets the direction for development.', actions: [
 		{ actor: 'product owner', actionType: 'appear', startDuration: 1, offset: 2 },
-
 	]},
-	{ leadingBlank: 1, duration: 6, text: `Yet, Product Developers aren't solely reliant on the PO. They engage directly with 'requirement donors,'`, actions: [
+	{ leadingBlank: 1, duration: 6, text: `Yet, instead of solely relying on the PO's explanation, Product Developers engage directly with 'requirement donors',`, actions: [
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: `a term for those who've convinced the Product Owner to invest in their product hypothesis.`, actions: [
 
 	]},
-	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even fellow developers.	`, actions: [
+	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even fellow developers, etc.	`, actions: [
 		{ actor: 'donor cap', actionType: 'move', duration: 1, absolutePosition: [230, 150, 0] },
 		{ actor: 'donor cap', actionType: 'scale', duration: 1, outputRange: [1, 0.6] },
 		{ actor: 'donor cap', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 0, 20], offset: 0 },
