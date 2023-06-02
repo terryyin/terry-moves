@@ -100,6 +100,21 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even fellow developers.	`, actions: [
+		{ actor: 'donor cap', actionType: 'move', duration: 1, absolutePosition: [230, 150, 0] },
+		{ actor: 'donor cap', actionType: 'scale', duration: 1, outputRange: [1, 0.6] },
+		{ actor: 'donor cap', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 0, 20], offset: 0 },
+		{ actor: 'donor cap', actionType: 'move', duration: 1, absolutePosition: [180, 380, 0], offset: 2 },
+		{ actor: 'donor cap', actionType: 'scale', duration: 1, outputRange: [0.6, 0.4], offset: 2 },
+		{ actor: 'donor cap', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 0, 20], offset: 2 },
+		{ actor: 'donor cap', actionType: 'move', duration: 0.5, absolutePosition: [180, 460, 0], offset: 3 },
+		{ actor: 'donor cap', actionType: '3d rotate', endingTimeAdjustment: 0.5, totalRotation: [0, 0, -20], offset: 3 },
+		{ actor: 'donor cap', actionType: 'move', duration: 1, absolutePosition: [-530, 780, 0], offset: 4 },
+		{ actor: 'donor cap', actionType: 'scale', duration: 1, outputRange: [0.4, 0.3], offset: 4 },
+		{ actor: 'donor cap', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 0, 20], offset: 4 },
+		{ actor: 'donor cap', actionType: 'move', duration: 1, absolutePosition: [-1330, 1080, 0], offset: 6 },
+		{ actor: 'donor cap', actionType: 'scale', duration: 1, outputRange: [0.4, 0.3], offset: 6 },
+		{ actor: 'donor cap', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 0, 20], offset: 6 },
+
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.', actions: [
@@ -133,7 +148,7 @@ export const StoryProductDeveloper: React.FC = () => {
   return (
 		<Story id="StoryProductDeveloper" subtitles={productDeveloperSubtitles} width={720} >
 		  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
-			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins"}}>
+			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins", transformStyle: "preserve-3d" }}>
 				<AnimationEffect actor="stage">
 					<Company style={{position: 'absolute', left: '0%', top:'15%', width: '50%', height: "60%"}}/>
 					<Anchor actor="company service" style={{left: "50%", top: "44%"}}/>
@@ -198,6 +213,9 @@ export const StoryProductDeveloper: React.FC = () => {
 						</AnimationEffect>
 					</AnimationEffect>
 
+					<AnimationEffect actor="donor cap" style={{left: "50%", height: "30%", top: "2%", width: "30%", transformStyle: "preserve-3d" }}>
+							<Img src={staticFile("assets/cap.svg")} width="100%" />
+					</AnimationEffect>
 					<AnimationEffect actor="product owner" style={{left: "40%", top: "25%", width: "80%"}}>
 						<AbsoluteFill style={{width: "8%", top: "0", left: "0%"}}>
 							<Img src={staticFile("assets/less/po.svg")} />
