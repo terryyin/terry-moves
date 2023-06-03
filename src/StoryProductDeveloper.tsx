@@ -123,6 +123,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.', actions: [
+		{ actor: 'gift product', actionType: 'appear', startDuration: 1, endDuration: 4, endingTimeAdjustment: 6 },
+		{ actor: 'gift product', actionType: 'move', duration: 4, absolutePosition: [350, 0, 0], offset: 2 },
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: 'They also maintain a view of the whole product, avoiding local optimization to foster product growth.', actions: [
@@ -259,6 +261,9 @@ Anyone who has successfully convinced the Product Owner to invest in their produ
 				</AnimationEffect>
 				<AnimationEffect actor="aha" style={{left: "70%", height: "30%", top: "55%", width: "28%", transformStyle: "preserve-3d" }}>
 					<Img src={staticFile("assets/aha.jpeg")} width="100%" style={{ clipPath: "circle()"}}/>
+				</AnimationEffect>
+				<AnimationEffect actor="gift product" style={{left: "10%", height: "20%", top: "28%", width: "20%", transformStyle: "preserve-3d" }}>
+					<Img src={staticFile("assets/gift_product.svg")} width="100%" />
 				</AnimationEffect>
 
 
