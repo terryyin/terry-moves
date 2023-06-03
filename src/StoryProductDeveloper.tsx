@@ -18,6 +18,7 @@ import { GLTFNode } from './video_components/GLTFNode';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Anchor } from './video_components/Anchor';
+import { AnimatedGlb } from './video_components/AnimatedGlb';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 5, text: 'Product Developers: who are they and why are they on the rise?', actions:[
@@ -129,6 +130,7 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	]},
 	{ leadingBlank: 1, duration: 6, text: 'They also maintain a view of the whole product, avoiding local optimization to foster product growth.', actions: [
 
+		{ actor: "watering", actionType: "3d animation start", duration: 4, percentage: 100, speed: 1 },
 	]},
 	{ leadingBlank: 1, duration: 7, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.`, actions: [
 
@@ -150,6 +152,8 @@ Who are they and why are they on the rise?`
 
 const url = staticFile('assets/shape_sorting_box/scene.gltf')
 useLoader.preload(GLTFLoader, url);
+const urlPot = staticFile('assets/quillustration_flower_and_water-can/scene.gltf')
+useLoader.preload(GLTFLoader, urlPot);
 
 export const StoryProductDeveloper: React.FC = () => {
   return (
@@ -180,6 +184,9 @@ export const StoryProductDeveloper: React.FC = () => {
 							<GLTFNode recenter url={url} nodeName="g_circle"/>
 						</ThreeAnimationEffect>
 
+						<ThreeAnimationEffect actor="pot" scale={2.0} rotation={[0.0, 0, 0.0]} position={[1.8,-0.1,1.8]}>
+							<AnimatedGlb url={urlPot} actor="watering" />
+						</ThreeAnimationEffect>
 					</ThreeDFrame>
 					</AbsoluteFill>
 

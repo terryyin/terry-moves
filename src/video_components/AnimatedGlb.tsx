@@ -29,6 +29,7 @@ export const AnimatedGlb: React.FC<{
   useFrame(() => {
     if(time !== undefined) {
       mixer.setTime(time);
+      console.log(time)
     }
   });
 
