@@ -124,6 +124,7 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.', actions: [
+		{ actor: 'donor cap', actionType: 'disappear', startDuration: 2},
 		{ actor: 'gift product', actionType: 'appear', startDuration: 1, endDuration: 4, endingTimeAdjustment: 6 },
 		{ actor: 'gift product', actionType: 'move', duration: 4, absolutePosition: [350, 0, 0], offset: 2 },
 
@@ -133,7 +134,9 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: "watering", actionType: "3d animation start", duration: 4, percentage: 100, speed: 1 },
 	]},
 	{ leadingBlank: 1, duration: 7, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.`, actions: [
-
+		{ actor: 'mask', actionType: 'appear', startDuration: 1 },
+		{ actor: 'connectors', actionType: 'disappear', startDuration: 1 },
+		{ actor: 'conclusion', actionType: 'appear', startDuration: 1 },
 	]},
 	{ leadingBlank: 1, duration: 6, text: `They work directly with those who hypothesize about the product, in a customer-centric, whole-product-focused way.`, actions: [
 
@@ -255,12 +258,25 @@ export const StoryProductDeveloper: React.FC = () => {
 				</AnimationEffect>
 
 				</AnimationEffect>
+
 					<Markdown actor="donor explainer" style={{ backgroundColor:"indigo", width: "80%", left:"10%", top: "25%", height:"45%", paddingTop: '', padding: '20px', fontSize: "x-large", borderRadius: "10px"}}
 					md={`## Requirement Donor
 
 Anyone who has successfully convinced the Product Owner to invest in their product *hypothesis*.
 							`}
 				/>
+
+					<Markdown actor="conclusion" style={{ backgroundColor:"indigo", width: "90%", left:"5%", top: "15%", height:"75%", paddingTop: '', padding: '20px', fontSize: "x-large", borderRadius: "10px"}}
+					md={`## Conclusion
+
+*	Software product shifts to the center of the business.
+*	Therefore, the rise of Product Developers.
+*	They work directly with requirement donors, those who hypothesize about the product
+* in a customer-centric,
+* whole-product-focused way.
+							`}
+				/>
+
 
 				<AnimationEffect actor="donor cap" style={{left: "50%", height: "30%", top: "2%", width: "30%", transformStyle: "preserve-3d" }}>
 					<Anchor actor="donor edge" style={{left: "20%", top: "50%"}}/>

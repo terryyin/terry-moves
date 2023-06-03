@@ -18,7 +18,10 @@ export const Company: React.FC<{style?: CSSProperties}> = ({ style }) => {
 					<text x="50" y="13.5" fontSize={10} fontWeight="bolder" textAnchor="middle" fill="url(#linear)">COMPANY</text>
 				</svg>
 			</AbsoluteFill>
-			<Img src={staticFile("assets/ServicePerson.svg")} style={{position: 'absolute', left: '65%', top: '58%', width: '40%'}} />
+			<AnimationEffect actor="business person" style={{left: '78%', top: '60%', width: '15%'}} >
+				<Img src={staticFile("assets/less/service_person.svg")} width="100%"/>
+				<span>Business person</span>
+			</AnimationEffect>
 		</AnimationEffect>
   );
 };
