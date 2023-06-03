@@ -6,6 +6,7 @@ import React from 'react';
 import AnimationContextWrapper from '../models/AnimationContextWrapper';
 import { Connectors } from './private/Connectors';
 import { Script } from "../models/Script";
+import AnimationEffect from './AnimationEffect';
 
 export const Story: React.FC<{id: string, subtitles: Subtitle[], width?: number, height?: number, children: React.ReactNode}> = (({
   subtitles, id, width, height, children}) => {
@@ -17,7 +18,9 @@ export const Story: React.FC<{id: string, subtitles: Subtitle[], width?: number,
     return (
       <AnimationContextProvider value={animationContextWrapper}>
         {children}
-		    <Connectors />
+        <AnimationEffect actor="connectors">
+          <Connectors />
+        </AnimationEffect>
       </AnimationContextProvider>
     );
   });

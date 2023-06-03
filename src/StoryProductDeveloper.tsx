@@ -93,9 +93,15 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'product owner', actionType: 'appear', startDuration: 1, offset: 2 },
 	]},
 	{ leadingBlank: 1, duration: 6, text: `Yet, instead of solely relying on the PO's explanation, Product Developers engage directly with 'requirement donors',`, actions: [
-
+		{ actor: 'donor cap', actionType: 'appear', startDuration: 1, offset: 2 },
+		{ actor: "pd team1", actionType: "connect to", startDuration: 1, endingTimeAdjustment: 3, target: "donor edge", bentLevel: -30, strokeWidth: 2, offset: 3},
+		{ actor: "pd team2", actionType: "connect to", startDuration: 1, endingTimeAdjustment: 3, target: "donor edge", bentLevel: -30, strokeWidth: 2, offset: 3},
 	]},
 	{ leadingBlank: 1, duration: 6, text: `a term for those who've convinced the Product Owner to invest in their product hypothesis.`, actions: [
+		{ actor: 'mask', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 6 },
+		{ actor: 'connectors', actionType: 'disappear', startDuration: 1, endingTimeAdjustment: 6 },
+		{ actor: 'donor explainer', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 6 },
+		{ actor: 'aha', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 4, offset: 2 },
 
 	]},
 	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even fellow developers, etc.	`, actions: [
@@ -186,6 +192,8 @@ export const StoryProductDeveloper: React.FC = () => {
 							<MoneyArrow />
 						</AnimationEffect>
 					</div>
+					<Anchor actor="pd team1" style={{left: "20%", top: "28%"}}/>
+					<Anchor actor="pd team2" style={{left: "20%", top: "63%"}}/>
 					<Anchor actor="user" style={{left: "70%", top: "45%"}}/>
 					<Anchor actor="customer" style={{left: "86%", top: "50%"}}/>
 
@@ -212,10 +220,7 @@ export const StoryProductDeveloper: React.FC = () => {
 						</AnimationEffect>
 					</AnimationEffect>
 
-					<AnimationEffect actor="donor cap" style={{left: "50%", height: "30%", top: "2%", width: "30%", transformStyle: "preserve-3d" }}>
-							<Img src={staticFile("assets/cap.svg")} width="100%" />
-					</AnimationEffect>
-					<AnimationEffect actor="product owner" style={{left: "40%", top: "25%", width: "80%"}}>
+				  <AnimationEffect actor="product owner" style={{left: "40%", top: "25%", width: "80%"}}>
 						<AbsoluteFill style={{width: "8%", top: "0", left: "0%"}}>
 							<Img src={staticFile("assets/less/po.svg")} />
 						</AbsoluteFill>
@@ -229,6 +234,8 @@ export const StoryProductDeveloper: React.FC = () => {
 						</AnimationEffect>
 					</AnimationEffect>
 
+				  <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.9)"}}/>
+
 					<AnimationEffect actor="title" style={{ left: '0%', top: '35%', width: '100%', height: '65%' }} >
 						<EdgeWaver actor="title-shadow" amplitudePercentageOfHeight={6} frequency={1.2} style={{ backgroundColor: 'rgba(253, 250, 88, 0.8)' }}  />
 						<EdgeWaver actor="title" amplitudePercentageOfHeight={6} frequency={1.2} style={{backgroundColor: 'rgba(0, 114, 160, 0.8)' }}  >
@@ -236,8 +243,24 @@ export const StoryProductDeveloper: React.FC = () => {
 							md={titleText}
 						/>
 					</EdgeWaver>
-					</AnimationEffect>
 				</AnimationEffect>
+
+				</AnimationEffect>
+					<Markdown actor="donor explainer" style={{ backgroundColor:"indigo", width: "80%", left:"10%", top: "25%", height:"45%", paddingTop: '', padding: '20px', fontSize: "x-large", borderRadius: "10px"}}
+					md={`## Requirement Donor
+
+Anyone who has successfully convinced the Product Owner to invest in their product *hypothesis*.
+							`}
+				/>
+
+				<AnimationEffect actor="donor cap" style={{left: "50%", height: "30%", top: "2%", width: "30%", transformStyle: "preserve-3d" }}>
+					<Anchor actor="donor edge" style={{left: "20%", top: "50%"}}/>
+					<Img src={staticFile("assets/cap.svg")} width="100%" />
+				</AnimationEffect>
+				<AnimationEffect actor="aha" style={{left: "70%", height: "30%", top: "55%", width: "28%", transformStyle: "preserve-3d" }}>
+					<Img src={staticFile("assets/aha.jpeg")} width="100%" style={{ clipPath: "circle()"}}/>
+				</AnimationEffect>
+
 
 				<Subtitles />
 			</AbsoluteFill>
