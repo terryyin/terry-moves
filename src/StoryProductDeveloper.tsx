@@ -19,6 +19,9 @@ import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { Anchor } from './video_components/Anchor';
 import { AnimatedGlb } from './video_components/AnimatedGlb';
+import { OddeLogo } from './parts/OddeLogo';
+import { OddeLogoInner } from './parts/OddeLogoInner';
+import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 5, text: 'Product Developers: who are they and why are they on the rise?', actions:[
@@ -257,6 +260,15 @@ export const StoryProductDeveloper: React.FC = () => {
 							md={titleText}
 						/>
 					</EdgeWaver>
+					<AbsoluteFill style={{ left: '70%', top: '61%', width: '10%', height: '20%'}}>
+						<span style={{fontSize: '28px'}}>terry@</span>
+					</AbsoluteFill>
+					<AbsoluteFill style={{ left: '80%', top: '56%', width: '12%', height: '20%'}}>
+						<OddeLogo />
+						<FlipCoin speed={2} interval={4} shift={0} >
+							<OddeLogoInner />
+						</FlipCoin>
+					</AbsoluteFill>
 				</AnimationEffect>
 
 				</AnimationEffect>
@@ -271,11 +283,13 @@ Anyone who has successfully convinced the Product Owner to invest in their produ
 					<Markdown actor="conclusion" style={{ backgroundColor:"indigo", width: "90%", left:"5%", top: "15%", height:"75%", paddingTop: '', padding: '20px', fontSize: "x-large", borderRadius: "10px"}}
 					md={`## Conclusion
 
-*	Software product shifts to the center of the business.
-*	Therefore, the rise of Product Developers.
-*	They work directly with requirement donors, those who hypothesize about the product
-* in a customer-centric,
-* whole-product-focused way.
+*	Businesses are shifting to product-building strategies.
+* This shift fuels the rise of Product Developers.
+* Product Developers:
+  * Are guided by a Product Owner.
+  * Collaborate directly with 'requirement donors' on product hypotheses.
+  * Adopt a customer-centric approach.
+  * Focus on the whole product, not isolated parts.
 							`}
 				/>
 
