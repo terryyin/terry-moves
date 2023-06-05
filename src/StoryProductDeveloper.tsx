@@ -1,3 +1,4 @@
+import {Audio} from 'remotion'
 import {Img} from 'remotion'
 import React from 'react';
 import { Subtitle } from './models/Subtitles';
@@ -56,16 +57,16 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [-1, 0, 5] },
 		{ actor: 'external developers', actionType: 'appear', startDuration: 2, offset: 1 },
 	] },
-	{ leadingBlank: 1, duration: 6, text: 'Regardless, they engaged in predictive projects, focusing on tasks split by technology, rather than user needs.', actions:[
+	{ leadingBlank: 1, duration: 8, text: 'Regardless, they were involved in traditional projects, with tasks split by technology rather than user needs, aiming for pre-determined deliverables.', actions:[
 		{ actor: 'internal developers', actionType: 'appear', startDuration: 2, offset: 0 },
 		{ actor: 'cylinder', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
 		{ actor: 'hex', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
 		{ actor: 'month1', actionType: 'appear', startDuration: 1, offset: 2 },
 		{ actor: 'month2', actionType: 'appear', startDuration: 1, offset: 4 },
-		{ actor: 'month3', actionType: 'appear', startDuration: 1, offset: 5 },
-		{ actor: 'month4', actionType: 'appear', startDuration: 1, offset: 6 },
+		{ actor: 'month3', actionType: 'appear', startDuration: 1, offset: 5.5 },
+		{ actor: 'month4', actionType: 'appear', startDuration: 1, offset: 6.5 },
 	] },
-	{ leadingBlank: 1, duration: 6, text: 'Integration was viewed as a simple phase, yet it consistently led to unexpected complications.', actions: [
+	{ leadingBlank: 1, duration: 6, text: 'Integration was seen as a simple phase but often led to unexpected complications.', actions: [
 		{ actor: 'hex', actionType: '3d rotate', totalRotation: [-120, 0, -90], endingTimeAdjustment: 3, offset: 2 },
 		{ actor: "hex", actionType: "move", duration: 3, absolutePosition: [1.5, 1.1, -0.3], offset: 2 },
 		{ actor: 'cylinder', actionType: '3d rotate', totalRotation: [-120, 0, -90], endingTimeAdjustment: 3, offset: 2 },
@@ -77,7 +78,7 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: "cylinder", actionType: "move", duration: .5, absolutePosition: [0, -2.1, -0.2], offset: 5.5 },
 
 	]},
-	{ leadingBlank: 1, duration: 7, text: 'However, times are changing. More businesses are adopting a product-centric strategy, aiming to grow their competitive edge.', actions: [
+	{ leadingBlank: 1, duration: 7, text: 'But now, more businesses are adopting a product-centric strategy, aiming to grow their competitive edge.', actions: [
 		{ actor: 'hex', actionType: 'disappear', startDuration: 0.1 },
 		{ actor: 'cylinder', actionType: 'disappear', startDuration: 0.1 },
 		{ actor: 'stage', actionType: 'move', duration: 2, absolutePosition: [0, 0], },
@@ -148,7 +149,7 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 1, duration: 4, text: `Now that's a transformation worth watching.`, actions: [
 
 	]},
-	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about the roles and work processes of Product Developers in future videos. Stay tuned for more insights into this evolving field.`, actions: [
+	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about how the Product Developers work in future videos. Stay tuned.`, actions: [
 
 	]},
 ];
@@ -167,6 +168,7 @@ export const StoryProductDeveloper: React.FC = () => {
   return (
 		<Story id="StoryProductDeveloper" subtitles={productDeveloperSubtitles} width={720} >
 		  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
+			<Audio src={staticFile("assets/audios/product_developer.mp3")} />
 			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins", transformStyle: "preserve-3d" }}>
 				<AnimationEffect actor="stage">
 					<Company style={{position: 'absolute', left: '0%', top:'15%', width: '50%', height: "60%"}}/>
