@@ -27,6 +27,10 @@ export default class AnimationContextWrapper {
     this.language = language;
   }
 
+  getLanguage() {
+    return this.language;
+  }
+
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
     const result = this.getActionOfActor(actor)
       .map(effectCalculator => new GLBAnimationActioner(effectCalculator))

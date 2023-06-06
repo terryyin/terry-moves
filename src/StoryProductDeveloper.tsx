@@ -217,10 +217,68 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	]},
 ];
 
-const titleText = `
+const titleText = {
+	en: `
 # Product Developers:
 
-### Who are they and why are they on the rise?`
+### Who are they and why are they on the rise?`,
+	zhCN: `
+# 产品开发人员：
+
+### 他们是谁？为什么他们的崛起如此重要？`,
+	zhTW: `
+# 產品開發人員：
+
+### 他們是誰？為什麼他們的崛起如此重要？`,
+}
+
+const textDonorExplainer = {
+	en: `## Requirement Donor
+
+Anyone who has successfully convinced the Product Owner to invest in their product *hypothesis*.
+							`,
+	zhCN: `## 需求捐赠者(Requirement Donor)
+
+任何成功说服产品负责人投资于他们的产品*假设*的人。
+							`,
+	zhTW: `## 需求捐贈者(Requirement Donor)
+
+任何成功說服產品負責人投資於他們的產品*假設*的人。
+							`,
+}
+
+const textConclusion = {
+	en: `## Conclusion
+
+*	Businesses are shifting to product-building strategies.
+* This shift fuels the rise of Product Developers.
+* Product Developers:
+  * Are guided by a Product Owner.
+  * Collaborate directly with 'requirement donors' on product hypotheses.
+  * Adopt a customer-centric approach.
+  * Focus on the whole product, not isolated parts.
+							`,
+	zhCN: `## 结论
+
+*	企业正在转向以构建产品来引领发展的策略。
+* 这种转变推动了产品开发人员的崛起。
+* 产品开发人员：
+	* 由产品负责人指出方向。
+	* 与“需求捐赠者”直接合作，实现和验证产品假设。	
+	* 采用以客户为中心的方法。
+	* 关注整个产品，而不是孤立的部分。
+							`,
+	zhTW: `## 結論
+
+*	企業正在轉向以構建產品來引領發展的策略。
+* 這種轉變推動了產品開發人員的崛起。
+* 產品開發人員：
+	* 由產品負責人指出方向。
+	* 與“需求捐贈者”直接合作，實現和驗證產品假設。
+	* 採用以客戶為中心的方法。
+	* 關注整個產品，而不是孤立的部分。
+							`,
+}
 
 const url = staticFile('assets/shape_sorting_box/scene.gltf')
 useLoader.preload(GLTFLoader, url);
@@ -350,23 +408,11 @@ export const StoryProductDeveloper: React.FC = () => {
 				</AnimationEffect>
 
 					<Markdown actor="donor explainer" style={{ backgroundColor:"indigo", width: "80%", left:"10%", top: "25%", height:"45%", paddingTop: '', padding: '20px', fontSize: "x-large", borderRadius: "10px"}}
-					md={`## Requirement Donor
-
-Anyone who has successfully convinced the Product Owner to invest in their product *hypothesis*.
-							`}
+					md={textDonorExplainer}
 				/>
 
 					<Markdown actor="conclusion" style={{ backgroundColor:"indigo", width: "90%", left:"5%", top: "15%", height:"75%", paddingTop: '', padding: '20px', fontSize: "x-large", borderRadius: "10px"}}
-					md={`## Conclusion
-
-*	Businesses are shifting to product-building strategies.
-* This shift fuels the rise of Product Developers.
-* Product Developers:
-  * Are guided by a Product Owner.
-  * Collaborate directly with 'requirement donors' on product hypotheses.
-  * Adopt a customer-centric approach.
-  * Focus on the whole product, not isolated parts.
-							`}
+					md={textConclusion}
 				/>
 
 

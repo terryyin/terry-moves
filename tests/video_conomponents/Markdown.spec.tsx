@@ -7,7 +7,7 @@ import { Markdown } from '@/video_components/Markdown';
 
 describe('CodeHighlight', () => {
 
-  const renderAndGetDiv = (animationContext: AnimationContextWrapper, markdown: string): HTMLDivElement => {
+  const renderAndGetDiv = (animationContext: AnimationContextWrapper, markdown: string | Record<string, string>): HTMLDivElement => {
     const { container } = render(
       <AnimationContextProvider value={animationContext}>
         <Markdown actor="under-test" md={markdown}/>
@@ -19,13 +19,20 @@ describe('CodeHighlight', () => {
   };
 
   describe('translation', () => {
+    const animationContext = makeMe
+            .animationContext
+            .lang('zhCN')
+            .please();
+
     test(`render text`, () => {
-      const animationContext = makeMe
-              .animationContext
-              .lang('zhCN')
-              .please();
       const div = renderAndGetDiv(animationContext, "abc");
       expect(div).toHaveTextContent('abc');
     });
+
+    test(`render translation`, () => {
+      const div = renderAndGetDiv(animationContext, { en: "abc", zhCN: "def" });
+      expect(div).toHaveTextContent('def');
+    });
+
   });
 });
