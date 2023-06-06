@@ -17,6 +17,7 @@ class ScriptBuilder {
 class AnimationContextBuilder {
   scriptBuilder: ScriptBuilder = new ScriptBuilder();
   second = 2;
+  language = 'en';
 
   withSubtitle(subtitle: Subtitle) {
     this.scriptBuilder.withSubtitle(subtitle);
@@ -28,9 +29,14 @@ class AnimationContextBuilder {
     return this;
   }
 
+  lang(language: string) {
+    this.language = language;
+    return this;
+  }
+
   please() {
     const script = this.scriptBuilder.please();
-    return new AnimationContextWrapper(this.second * script.fps, script, 'en');
+    return new AnimationContextWrapper(this.second * script.fps, script, this.language);
   }
 }
 class MakeMe {
