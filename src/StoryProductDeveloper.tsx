@@ -26,6 +26,8 @@ import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 6, text: 'Product Developers: who are they and why are they on the rise?', translations: {
+		zhCN: '产品开发者：他们是谁，为什么他们正在崛起？',
+		zhTW: '產品開發者：他們是誰，為什麼他們正在崛起？',
 	}, actions:[
 		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 1.5, 0] },
 		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 5] },
@@ -38,6 +40,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'product developer2', actionType: 'disappear', startDuration: 1, offset: 4 },
 	] },
 	{ leadingBlank: 1, duration: 6, text: 'Picture this: a company delivering services to its users to fulfill their needs.', translations: {
+		zhCN: '想象一下：一家公司向其用户提供服务，以满足他们的需求。',
+		zhTW: '想像一下：一家公司向其用戶提供服務，以滿足他們的需求。',
 	}, actions:[
 		{ actor: 'value to customer', actionType: 'appear', startDuration: 1 },
 		{ actor: "company service", actionType: "connect to", startDuration: 1, target: "user", bentLevel: -30, strokeWidth: 5 },
@@ -46,27 +50,37 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'happy-mom', actionType: 'glow', duration: 2, offset: 4 },
 	] },
 	{ leadingBlank: 1, duration: 6, text: 'And in return? Customers provide the fuel for the company to grow - resources like money.	', translations: {
+		zhCN: '作为回报？客户为公司提供了成长的动力-像金钱这样的资源。',
+		zhTW: '作為回報？客戶為公司提供了成長的動力-像金錢這樣的資源。',
 	}, actions: [
 		{ actor: 'value from customer', actionType: 'appear', startDuration: 1 },
 		{ actor: "customer", actionType: "connect to", startDuration: 1, target: "company receiver", bentLevel: -70, strokeWidth: 5 },
 		{ actor: 'company', actionType: 'glow', duration: 2, offset: 3 },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'Software products often play a crucial role in providing services.', translations: {
+		zhCN: '软件产品在提供服务方面通常起着至关重要的作用。',
+		zhTW: '軟體產品在提供服務方面通常起著至關重要的作用。',
 	}, actions:[
 		{ actor: 'product', actionType: 'rotate and rise', duration: 1, value: 4 },
 		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 4, totalRotation: [0, 360 + 15, 0] },
 	] },
 	{ leadingBlank: 1, duration: 5, text: 'But traditionally, businesses have been focused on their core domain, not software. ', translations: {
+		zhCN: '但是传统上，企业专注于其核心领域，而不是软件。',
+		zhTW: '但是傳統上，企業專注於其核心領域，而不是軟體。',
 	}, actions: [
 		{ actor: 'business person', actionType: 'appear', startDuration: 1 },
 	] },
 	{ leadingBlank: 1, duration: 4, text: 'In the past, developers were commonly external.', translations: {
+		zhCN: '过去，开发人员通常是外部的。',
+		zhTW: '過去，開發人員通常是外部的。',
 	}, actions:[
 		{ actor: 'stage', actionType: 'move', duration: 1, absolutePosition: [350, 0] },
 		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [-1, 0, 5] },
 		{ actor: 'external developers', actionType: 'appear', startDuration: 2, offset: 1 },
 	] },
 	{ leadingBlank: 1, duration: 8, text: 'Regardless, they were involved in traditional projects, with tasks split by technology rather than user needs, aiming for pre-determined deliverables.', translations: {
+		zhCN: '无论如何，他们都参与了传统项目，任务是按技术而不是用户需求划分的，目标是预先确定的可交付成果。',
+		zhTW: '無論如何，他們都參與了傳統項目，任務是按技術而不是用戶需求劃分的，目標是預先確定的可交付成果。',
 	}, actions:[
 		{ actor: 'internal developers', actionType: 'appear', startDuration: 2, offset: 0 },
 		{ actor: 'cylinder', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
@@ -77,6 +91,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'month4', actionType: 'appear', startDuration: 1, offset: 6.5 },
 	] },
 	{ leadingBlank: 1, duration: 6, text: 'Integration was seen as a simple phase but often led to unexpected complications.', translations: {
+		zhCN: '集成被视为一个简单的阶段，但往往会导致意想不到的复杂性。',
+		zhTW: '整合被視為一個簡單的階段，但往往會導致意想不到的複雜性。',
 	}, actions: [
 		{ actor: 'hex', actionType: '3d rotate', totalRotation: [-120, 0, -90], endingTimeAdjustment: 3, offset: 2 },
 		{ actor: "hex", actionType: "move", duration: 3, absolutePosition: [1.5, 1.1, -0.3], offset: 2 },
@@ -90,6 +106,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 7, text: 'But now, more businesses are adopting a product-centric strategy, aiming to grow their competitive edge.', translations: {
+		zhCN: '但现在，越来越多的企业正在采用以产品为中心的策略，旨在增强其竞争优势。',
+		zhTW: '但現在，越來越多的企業正在採用以產品為中心的策略，旨在增強其競爭優勢。',
 	}, actions: [
 		{ actor: 'hex', actionType: 'disappear', startDuration: 0.1 },
 		{ actor: 'cylinder', actionType: 'disappear', startDuration: 0.1 },
@@ -99,6 +117,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 5, text: 'This has sparked the rise of Product Developers.', translations: {
+		zhCN: '这引发了产品开发人员的崛起。',
+		zhTW: '這引發了產品開發人員的崛起。',
 	}, actions: [
 		{ actor: 'external developers', actionType: 'move', duration: 2, absolutePosition: [280, -125, 0] },
 		{ actor: 'external developers', actionType: 'scale', duration: 2, outputRange: [1, 0.8] },
@@ -110,16 +130,22 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 4, text: 'A Product Owner sets the direction for development.', translations: {
+		zhCN: '产品负责人为开发制定方向。',
+		zhTW: '產品負責人為開發制定方向。',
 	}, actions: [
 		{ actor: 'product owner', actionType: 'appear', startDuration: 1, offset: 2 },
 	]},
 	{ leadingBlank: 1, duration: 6, text: `Yet, instead of solely relying on the PO's explanation, Product Developers engage directly with 'requirement donors',`, translations: {
+		zhCN: '然而，产品开发人员不仅仅依靠PO的解释，而是直接与“需求捐赠者”接触，',
+		zhTW: '然而，產品開發人員不僅僅依靠PO的解釋，而是直接與“需求捐贈者”接觸，',
 	}, actions: [
 		{ actor: 'donor cap', actionType: 'appear', startDuration: 1, offset: 2 },
 		{ actor: "pd team1", actionType: "connect to", startDuration: 1, endingTimeAdjustment: 3, target: "donor edge", bentLevel: -30, strokeWidth: 2, offset: 3},
 		{ actor: "pd team2", actionType: "connect to", startDuration: 1, endingTimeAdjustment: 3, target: "donor edge", bentLevel: -30, strokeWidth: 2, offset: 3},
 	]},
 	{ leadingBlank: 1, duration: 8, text: `a term for those who've convinced the Product Owner to invest in their product hypothesis.`, translations: {
+		zhCN: '这是一个术语，用于那些说服产品负责人投资于他们的产品假设的人。',
+		zhTW: '這是一個術語，用於那些說服產品負責人投資於他們的產品假設的人。',
 	}, actions: [
 		{ actor: 'mask', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 8 },
 		{ actor: 'connectors', actionType: 'disappear', startDuration: 1, endingTimeAdjustment: 8 },
@@ -128,6 +154,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even developers, etc.	`, translations: {
+		zhCN: '这些捐赠者可以是客户，用户，产品经理，甚至是开发人员等。',
+		zhTW: '這些捐贈者可以是客戶，用戶，產品經理，甚至是開發人員等。',
 	}, actions: [
 		{ actor: 'donor cap', actionType: 'move', duration: 1, absolutePosition: [230, 150, 0] },
 		{ actor: 'donor cap', actionType: 'scale', duration: 1, outputRange: [1, 0.6] },
@@ -146,6 +174,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	]},
 	{ leadingBlank: 1, duration: 3, text: 'Regardless who is the requirement donor, '},
 	{ leadingBlank: 0, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.', translations: {
+		zhCN: '产品开发人员以客户为中心，不断检查现实并寻求早期反馈。',
+		zhTW: '產品開發人員以客戶為中心，不斷檢查現實並尋求早期反饋。',
 	}, actions: [
 		{ actor: 'donor cap', actionType: 'disappear', startDuration: 2},
 		{ actor: 'gift product', actionType: 'appear', startDuration: 1, endDuration: 4, endingTimeAdjustment: 6 },
@@ -153,25 +183,35 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: 'They also maintain a view of the whole product, avoiding local optimization to foster product growth.', translations: {
+		zhCN: '他们还保持对整个产品的视图，避免局部优化以促进产品增长。',
+		zhTW: '他們還保持對整個產品的視圖，避免局部優化以促進產品增長。',
 	}, actions: [
 
 		{ actor: "watering", actionType: "3d animation start", duration: 4, percentage: 100, speed: 1 },
 	]},
 	{ leadingBlank: 1, duration: 7, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.`, translations: {
+		zhCN: '那么，这有什么关系？产品开发人员的崛起反映了商业战略向以产品为中心的模式的关键转变。',
+		zhTW: '那麼，這有什麼關係？產品開發人員的崛起反映了商業戰略向以產品為中心的模式的關鍵轉變。',
 	}, actions: [
 		{ actor: 'mask', actionType: 'appear', startDuration: 1 },
 		{ actor: 'connectors', actionType: 'disappear', startDuration: 1 },
 		{ actor: 'conclusion', actionType: 'appear', startDuration: 1 },
 	]},
 	{ leadingBlank: 1, duration: 6, text: `They collaborate directly with 'requirement donors' on product hypothes, in a customer-centric, whole-product-focused way.`, translations: {
+		zhCN: '他们与“需求捐赠者”直接合作，以客户为中心，以整个产品为中心的方式进行产品假设。',
+		zhTW: '他們與“需求捐贈者”直接合作，以客戶為中心，以整個產品為中心的方式進行產品假設。',
 	}, actions: [
 
 	]},
 	{ leadingBlank: 1, duration: 4, text: `Now that's a transformation worth watching.`, translations: {
+		zhCN: '现在这是值得一看的转变。',
+		zhTW: '現在這是值得一看的轉變。',
 	}, actions: [
 
 	]},
 	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about how the Product Developers work in future videos. Stay tuned.`, translations: {
+		zhCN: '谢谢观看。我很高兴在未来的视频中分享有关产品开发人员如何工作的更多信息。敬请关注。',
+		zhTW: '謝謝觀看。我很高興在未來的視頻中分享有關產品開發人員如何工作的更多信息。敬請關注。',
 	}, actions: [
 
 	]},
