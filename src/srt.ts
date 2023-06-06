@@ -38,7 +38,7 @@ function formatTime(seconds: number): string {
 }
 
 
-const srtContent = formatSubtitlesToSRT(productDeveloperSubtitles, "zhCN")
+const srtContent = formatSubtitlesToSRT(productDeveloperSubtitles, "en")
 process.stdout.write(srtContent);
 
 
