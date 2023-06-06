@@ -26,8 +26,8 @@ import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 
 export const productDeveloperSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 6, text: 'Product Developers: who are they and why are they on the rise?', translations: {
-		zhCN: '产品开发者：他们是谁，为什么他们正在崛起？',
-		zhTW: '產品開發者：他們是誰，為什麼他們正在崛起？',
+		zhCN: '何谓产品开发者?为什么说他们正在崛起？',
+		zhTW: '何謂產品開發者？為什麼說他們正在崛起？',
 	}, actions:[
 		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 1.5, 0] },
 		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 5] },
@@ -71,16 +71,16 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'business person', actionType: 'appear', startDuration: 1 },
 	] },
 	{ leadingBlank: 1, duration: 4, text: 'In the past, developers were commonly external.', translations: {
-		zhCN: '过去，开发人员通常是外部的。',
-		zhTW: '過去，開發人員通常是外部的。',
+		zhCN: '过去，来自外部开发人员是很普遍的。',
+		zhTW: '過去，來自外部開發人員是很普遍的。',
 	}, actions:[
 		{ actor: 'stage', actionType: 'move', duration: 1, absolutePosition: [350, 0] },
 		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [-1, 0, 5] },
 		{ actor: 'external developers', actionType: 'appear', startDuration: 2, offset: 1 },
 	] },
 	{ leadingBlank: 1, duration: 8, text: 'Regardless, they were involved in traditional projects, with tasks split by technology rather than user needs, aiming for pre-determined deliverables.', translations: {
-		zhCN: '无论如何，他们都参与了传统项目，任务是按技术而不是用户需求划分的，目标是预先确定的可交付成果。',
-		zhTW: '無論如何，他們都參與了傳統項目，任務是按技術而不是用戶需求劃分的，目標是預先確定的可交付成果。',
+		zhCN: '无论内外，他们是以传统项目的形式工作，任务是按技术而不是用户需求划分的，目标是预先确定的可交付品。',
+		zhTW: '無論內外，他們是以傳統項目的形式工作，任務是按技術而不是用戶需求劃分的，目標是預先確定的可交付品。',
 	}, actions:[
 		{ actor: 'internal developers', actionType: 'appear', startDuration: 2, offset: 0 },
 		{ actor: 'cylinder', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
@@ -117,8 +117,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 5, text: 'This has sparked the rise of Product Developers.', translations: {
-		zhCN: '这引发了产品开发人员的崛起。',
-		zhTW: '這引發了產品開發人員的崛起。',
+		zhCN: '于是也就有了产品开发人员的崛起。',
+		zhTW: '於是也就有了產品開發人員的崛起。',
 	}, actions: [
 		{ actor: 'external developers', actionType: 'move', duration: 2, absolutePosition: [280, -125, 0] },
 		{ actor: 'external developers', actionType: 'scale', duration: 2, outputRange: [1, 0.8] },
@@ -130,8 +130,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 4, text: 'A Product Owner sets the direction for development.', translations: {
-		zhCN: '产品负责人为开发制定方向。',
-		zhTW: '產品負責人為開發制定方向。',
+		zhCN: '产品负责人(Product Onwer)为开发制定方向。',
+		zhTW: '產品負責人(Product Onwer)為開發制定方向。',
 	}, actions: [
 		{ actor: 'product owner', actionType: 'appear', startDuration: 1, offset: 2 },
 	]},
@@ -144,8 +144,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: "pd team2", actionType: "connect to", startDuration: 1, endingTimeAdjustment: 3, target: "donor edge", bentLevel: -30, strokeWidth: 2, offset: 3},
 	]},
 	{ leadingBlank: 1, duration: 8, text: `a term for those who've convinced the Product Owner to invest in their product hypothesis.`, translations: {
-		zhCN: '这是一个术语，用于那些说服产品负责人投资于他们的产品假设的人。',
-		zhTW: '這是一個術語，用於那些說服產品負責人投資於他們的產品假設的人。',
+		zhCN: '所谓“需求捐赠者“是指那些说服了产品负责人投资于他们的产品假设的人。',
+		zhTW: '所謂“需求捐贈者“是指那些說服了產品負責人投資於他們的產品假設的人。',
 	}, actions: [
 		{ actor: 'mask', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 8 },
 		{ actor: 'connectors', actionType: 'disappear', startDuration: 1, endingTimeAdjustment: 8 },
@@ -174,8 +174,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 	]},
 	{ leadingBlank: 1, duration: 3, text: 'Regardless who is the requirement donor, '},
 	{ leadingBlank: 0, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.', translations: {
-		zhCN: '产品开发人员以客户为中心，不断检查现实并寻求早期反馈。',
-		zhTW: '產品開發人員以客戶為中心，不斷檢查現實並尋求早期反饋。',
+		zhCN: '产品开发人员以客户为中心，不断进行现实检查并寻求早期反馈。',
+		zhTW: '產品開發人員以客戶為中心，不斷進行現實檢查並尋求早期反饋。',
 	}, actions: [
 		{ actor: 'donor cap', actionType: 'disappear', startDuration: 2},
 		{ actor: 'gift product', actionType: 'appear', startDuration: 1, endDuration: 4, endingTimeAdjustment: 6 },
@@ -183,35 +183,35 @@ export const productDeveloperSubtitles: Subtitle[] = [
 
 	]},
 	{ leadingBlank: 1, duration: 6, text: 'They also maintain a view of the whole product, avoiding local optimization to foster product growth.', translations: {
-		zhCN: '他们还保持对整个产品的视图，避免局部优化以促进产品增长。',
-		zhTW: '他們還保持對整個產品的視圖，避免局部優化以促進產品增長。',
+		zhCN: '他们还保持对整个产品的视角，避免局部优化以促进产品增长。',
+		zhTW: '他們還保持對整個產品的視角，避免局部優化以促進產品增長。',
 	}, actions: [
 
 		{ actor: "watering", actionType: "3d animation start", duration: 4, percentage: 100, speed: 1 },
 	]},
 	{ leadingBlank: 1, duration: 7, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.`, translations: {
-		zhCN: '那么，这有什么关系？产品开发人员的崛起反映了商业战略向以产品为中心的模式的关键转变。',
-		zhTW: '那麼，這有什麼關係？產品開發人員的崛起反映了商業戰略向以產品為中心的模式的關鍵轉變。',
+		zhCN: '那么，为什么这很值得一提呢？产品开发人员的崛起反映了商业战略向以产品为中心的模式的关键转变。',
+		zhTW: '那麼，為什麼這很值得一提呢？產品開發人員的崛起反映了商業戰略向以產品為中心的模式的關鍵轉變。',
 	}, actions: [
 		{ actor: 'mask', actionType: 'appear', startDuration: 1 },
 		{ actor: 'connectors', actionType: 'disappear', startDuration: 1 },
 		{ actor: 'conclusion', actionType: 'appear', startDuration: 1 },
 	]},
 	{ leadingBlank: 1, duration: 6, text: `They collaborate directly with 'requirement donors' on product hypothes, in a customer-centric, whole-product-focused way.`, translations: {
-		zhCN: '他们与“需求捐赠者”直接合作，以客户为中心，以整个产品为中心的方式进行产品假设。',
-		zhTW: '他們與“需求捐贈者”直接合作，以客戶為中心，以整個產品為中心的方式進行產品假設。',
+		zhCN: '他们与“需求捐赠者”直接合作，以客户为中心，以产品整体视角出发的方式进行产品假设的实现与验证。',
+		zhTW: '他們與“需求捐贈者”直接合作，以客戶為中心，以產品整體視角出發的方式進行產品假設的實現與驗證。',
 	}, actions: [
 
 	]},
 	{ leadingBlank: 1, duration: 4, text: `Now that's a transformation worth watching.`, translations: {
-		zhCN: '现在这是值得一看的转变。',
-		zhTW: '現在這是值得一看的轉變。',
+		zhCN: '这,才是真正值得期待的转变。',
+		zhTW: '這,才是真正值得期待的轉變。',
 	}, actions: [
 
 	]},
 	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about how the Product Developers work in future videos. Stay tuned.`, translations: {
-		zhCN: '谢谢观看。我很高兴在未来的视频中分享有关产品开发人员如何工作的更多信息。敬请关注。',
-		zhTW: '謝謝觀看。我很高興在未來的視頻中分享有關產品開發人員如何工作的更多信息。敬請關注。',
+		zhCN: '谢谢观看。我很期待在未来的视频中分享有关产品开发人员如何工作的更多信息。敬请关注。',
+		zhTW: '謝謝觀看。我很期待在未來的視頻中分享有關產品開發人員如何工作的更多信息。敬請關注。',
 	}, actions: [
 
 	]},
