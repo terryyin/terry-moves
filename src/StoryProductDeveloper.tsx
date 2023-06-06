@@ -25,39 +25,49 @@ import { OddeLogoInner } from './parts/OddeLogoInner';
 import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
 
 export const productDeveloperSubtitles: Subtitle[] = [
-	{ leadingBlank: 0, duration: 5, text: 'Product Developers: who are they and why are they on the rise?', actions:[
+	{ leadingBlank: 0, duration: 6, text: 'Product Developers: who are they and why are they on the rise?', translations: {
+	}, actions:[
 		{ actor: "camera", actionType: "camera look at", duration: 0, absolutePosition: [0, 1.5, 0] },
 		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, 0, 5] },
-		{ actor: "title", actionType: "appear", startDuration: 0, endingTimeAdjustment: 5, endDuration: 1 },
-		{ actor: "title", actionType: "additive value change to", duration: 5, value: 90},
+		{ actor: "title", actionType: "appear", startDuration: 0, endingTimeAdjustment: 6, endDuration: 1 },
+		{ actor: "title", actionType: "additive value change to", duration: 6, value: 90},
 		{ actor: "title-shadow", actionType: "additive value change to", duration: 0, value: -30},
-		{ actor: "title-shadow", actionType: "additive value change to", duration: 5, value: -90},
+		{ actor: "title-shadow", actionType: "additive value change to", duration: 6, value: -90},
+		{ actor: 'mask', actionType: 'appear', startDuration: 0, endingTimeAdjustment: 6 },
+		{ actor: 'product developer1', actionType: 'disappear', startDuration: 1, offset: 3 },
+		{ actor: 'product developer2', actionType: 'disappear', startDuration: 1, offset: 4 },
 	] },
-	{ leadingBlank: 1, duration: 6, text: 'Picture this: a company delivering services to its users to fulfill their needs.', actions:[
+	{ leadingBlank: 1, duration: 6, text: 'Picture this: a company delivering services to its users to fulfill their needs.', translations: {
+	}, actions:[
 		{ actor: 'value to customer', actionType: 'appear', startDuration: 1 },
 		{ actor: "company service", actionType: "connect to", startDuration: 1, target: "user", bentLevel: -30, strokeWidth: 5 },
 		{ actor: 'worried-mom', actionType: 'disappear', startDuration: 2, offset: 3 },
 		{ actor: 'happy-mom', actionType: 'appear', startDuration: 2, offset: 3 },
 		{ actor: 'happy-mom', actionType: 'glow', duration: 2, offset: 4 },
 	] },
-	{ leadingBlank: 1, duration: 6, text: 'And in return? Customers provide the fuel for the company to grow - resources like money.	', actions: [
+	{ leadingBlank: 1, duration: 6, text: 'And in return? Customers provide the fuel for the company to grow - resources like money.	', translations: {
+	}, actions: [
 		{ actor: 'value from customer', actionType: 'appear', startDuration: 1 },
 		{ actor: "customer", actionType: "connect to", startDuration: 1, target: "company receiver", bentLevel: -70, strokeWidth: 5 },
 		{ actor: 'company', actionType: 'glow', duration: 2, offset: 3 },
 	] },
-	{ leadingBlank: 1, duration: 5, text: 'Software products often play a crucial role in providing services.', actions:[
+	{ leadingBlank: 1, duration: 5, text: 'Software products often play a crucial role in providing services.', translations: {
+	}, actions:[
 		{ actor: 'product', actionType: 'rotate and rise', duration: 1, value: 4 },
 		{ actor: 'product', actionType: '3d rotate', endingTimeAdjustment: 4, totalRotation: [0, 360 + 15, 0] },
 	] },
-	{ leadingBlank: 1, duration: 5, text: 'But traditionally, businesses have been focused on their core domain, not software. ', actions: [
+	{ leadingBlank: 1, duration: 5, text: 'But traditionally, businesses have been focused on their core domain, not software. ', translations: {
+	}, actions: [
 		{ actor: 'business person', actionType: 'appear', startDuration: 1 },
 	] },
-	{ leadingBlank: 1, duration: 4, text: 'In the past, developers were commonly external.', actions:[
+	{ leadingBlank: 1, duration: 4, text: 'In the past, developers were commonly external.', translations: {
+	}, actions:[
 		{ actor: 'stage', actionType: 'move', duration: 1, absolutePosition: [350, 0] },
 		{ actor: "camera", actionType: "move", duration: 1, absolutePosition: [-1, 0, 5] },
 		{ actor: 'external developers', actionType: 'appear', startDuration: 2, offset: 1 },
 	] },
-	{ leadingBlank: 1, duration: 8, text: 'Regardless, they were involved in traditional projects, with tasks split by technology rather than user needs, aiming for pre-determined deliverables.', actions:[
+	{ leadingBlank: 1, duration: 8, text: 'Regardless, they were involved in traditional projects, with tasks split by technology rather than user needs, aiming for pre-determined deliverables.', translations: {
+	}, actions:[
 		{ actor: 'internal developers', actionType: 'appear', startDuration: 2, offset: 0 },
 		{ actor: 'cylinder', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
 		{ actor: 'hex', actionType: 'scale', outputRange: [0, 1], duration: 3, offset: 2 },
@@ -66,7 +76,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'month3', actionType: 'appear', startDuration: 1, offset: 5.5 },
 		{ actor: 'month4', actionType: 'appear', startDuration: 1, offset: 6.5 },
 	] },
-	{ leadingBlank: 1, duration: 6, text: 'Integration was seen as a simple phase but often led to unexpected complications.', actions: [
+	{ leadingBlank: 1, duration: 6, text: 'Integration was seen as a simple phase but often led to unexpected complications.', translations: {
+	}, actions: [
 		{ actor: 'hex', actionType: '3d rotate', totalRotation: [-120, 0, -90], endingTimeAdjustment: 3, offset: 2 },
 		{ actor: "hex", actionType: "move", duration: 3, absolutePosition: [1.5, 1.1, -0.3], offset: 2 },
 		{ actor: 'cylinder', actionType: '3d rotate', totalRotation: [-120, 0, -90], endingTimeAdjustment: 3, offset: 2 },
@@ -78,7 +89,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: "cylinder", actionType: "move", duration: .5, absolutePosition: [0, -2.1, -0.2], offset: 5.5 },
 
 	]},
-	{ leadingBlank: 1, duration: 7, text: 'But now, more businesses are adopting a product-centric strategy, aiming to grow their competitive edge.', actions: [
+	{ leadingBlank: 1, duration: 7, text: 'But now, more businesses are adopting a product-centric strategy, aiming to grow their competitive edge.', translations: {
+	}, actions: [
 		{ actor: 'hex', actionType: 'disappear', startDuration: 0.1 },
 		{ actor: 'cylinder', actionType: 'disappear', startDuration: 0.1 },
 		{ actor: 'stage', actionType: 'move', duration: 2, absolutePosition: [0, 0], },
@@ -86,7 +98,8 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'product', actionType: 'move', duration: 2, absolutePosition: [0, 0.9, 0], offset: 3 },
 
 	]},
-	{ leadingBlank: 1, duration: 5, text: 'This has sparked the rise of Product Developers.', actions: [
+	{ leadingBlank: 1, duration: 5, text: 'This has sparked the rise of Product Developers.', translations: {
+	}, actions: [
 		{ actor: 'external developers', actionType: 'move', duration: 2, absolutePosition: [280, -125, 0] },
 		{ actor: 'external developers', actionType: 'scale', duration: 2, outputRange: [1, 0.8] },
 		{ actor: 'developers2', actionType: 'move', duration: 1, absolutePosition: [-9, -15, 0], offset: 2, },
@@ -96,22 +109,26 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'developers1', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 180, 0], offset: 3 },
 
 	]},
-	{ leadingBlank: 1, duration: 4, text: 'A Product Owner sets the direction for development.', actions: [
+	{ leadingBlank: 1, duration: 4, text: 'A Product Owner sets the direction for development.', translations: {
+	}, actions: [
 		{ actor: 'product owner', actionType: 'appear', startDuration: 1, offset: 2 },
 	]},
-	{ leadingBlank: 1, duration: 6, text: `Yet, instead of solely relying on the PO's explanation, Product Developers engage directly with 'requirement donors',`, actions: [
+	{ leadingBlank: 1, duration: 6, text: `Yet, instead of solely relying on the PO's explanation, Product Developers engage directly with 'requirement donors',`, translations: {
+	}, actions: [
 		{ actor: 'donor cap', actionType: 'appear', startDuration: 1, offset: 2 },
 		{ actor: "pd team1", actionType: "connect to", startDuration: 1, endingTimeAdjustment: 3, target: "donor edge", bentLevel: -30, strokeWidth: 2, offset: 3},
 		{ actor: "pd team2", actionType: "connect to", startDuration: 1, endingTimeAdjustment: 3, target: "donor edge", bentLevel: -30, strokeWidth: 2, offset: 3},
 	]},
-	{ leadingBlank: 1, duration: 8, text: `a term for those who've convinced the Product Owner to invest in their product hypothesis.`, actions: [
+	{ leadingBlank: 1, duration: 8, text: `a term for those who've convinced the Product Owner to invest in their product hypothesis.`, translations: {
+	}, actions: [
 		{ actor: 'mask', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 8 },
 		{ actor: 'connectors', actionType: 'disappear', startDuration: 1, endingTimeAdjustment: 8 },
 		{ actor: 'donor explainer', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 8 },
 		{ actor: 'aha', actionType: 'appear', startDuration: 1, endingTimeAdjustment: 5, offset: 3 },
 
 	]},
-	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even fellow developers, etc.	`, actions: [
+	{ leadingBlank: 1, duration: 8, text: `These donors could be customers, users, product managers, or even developers, etc.	`, translations: {
+	}, actions: [
 		{ actor: 'donor cap', actionType: 'move', duration: 1, absolutePosition: [230, 150, 0] },
 		{ actor: 'donor cap', actionType: 'scale', duration: 1, outputRange: [1, 0.6] },
 		{ actor: 'donor cap', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 0, 20], offset: 0 },
@@ -128,28 +145,34 @@ export const productDeveloperSubtitles: Subtitle[] = [
 		{ actor: 'donor cap', actionType: '3d rotate', endingTimeAdjustment: 1, totalRotation: [0, 0, 20], offset: 6 },
 	]},
 	{ leadingBlank: 1, duration: 3, text: 'Regardless who is the requirement donor, '},
-	{ leadingBlank: 0, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.', actions: [
+	{ leadingBlank: 0, duration: 6, text: 'Product Developers operate with a customer-centric focus, constantly checking in with reality and seeking early feedback.', translations: {
+	}, actions: [
 		{ actor: 'donor cap', actionType: 'disappear', startDuration: 2},
 		{ actor: 'gift product', actionType: 'appear', startDuration: 1, endDuration: 4, endingTimeAdjustment: 6 },
 		{ actor: 'gift product', actionType: 'move', duration: 4, absolutePosition: [350, 0, 0], offset: 2 },
 
 	]},
-	{ leadingBlank: 1, duration: 6, text: 'They also maintain a view of the whole product, avoiding local optimization to foster product growth.', actions: [
+	{ leadingBlank: 1, duration: 6, text: 'They also maintain a view of the whole product, avoiding local optimization to foster product growth.', translations: {
+	}, actions: [
 
 		{ actor: "watering", actionType: "3d animation start", duration: 4, percentage: 100, speed: 1 },
 	]},
-	{ leadingBlank: 1, duration: 7, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.`, actions: [
+	{ leadingBlank: 1, duration: 7, text: `So, why does this matter? The rise of Product Developers reflects a pivotal shift in business strategy towards a product-centric model.`, translations: {
+	}, actions: [
 		{ actor: 'mask', actionType: 'appear', startDuration: 1 },
 		{ actor: 'connectors', actionType: 'disappear', startDuration: 1 },
 		{ actor: 'conclusion', actionType: 'appear', startDuration: 1 },
 	]},
-	{ leadingBlank: 1, duration: 6, text: `They work directly with those who hypothesize about the product, in a customer-centric, whole-product-focused way.`, actions: [
+	{ leadingBlank: 1, duration: 6, text: `They collaborate directly with 'requirement donors' on product hypothes, in a customer-centric, whole-product-focused way.`, translations: {
+	}, actions: [
 
 	]},
-	{ leadingBlank: 1, duration: 4, text: `Now that's a transformation worth watching.`, actions: [
+	{ leadingBlank: 1, duration: 4, text: `Now that's a transformation worth watching.`, translations: {
+	}, actions: [
 
 	]},
-	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about how the Product Developers work in future videos. Stay tuned.`, actions: [
+	{ leadingBlank: 1, duration: 10, text: `Thank you for watching. I'm excited to share more about how the Product Developers work in future videos. Stay tuned.`, translations: {
+	}, actions: [
 
 	]},
 ];
@@ -253,25 +276,36 @@ export const StoryProductDeveloper: React.FC = () => {
 						</AnimationEffect>
 					</AnimationEffect>
 
-				  <AnimationEffect actor="mask" style={{backgroundColor: "rgba(0, 0, 0, 0.9)"}}/>
+				  <AnimationEffect actor="mask" style={{backgroundColor: "rgba(240, 235, 210, 0.9)"}}/>
 
-					<AnimationEffect actor="title" style={{ left: '0%', top: '35%', width: '100%', height: '65%' }} >
+					<AnimationEffect actor="title">
+					<AnimationEffect actor="product developer1" style={{left: "30%", height: "30%", top: "15%", width: "30%", transformStyle: "preserve-3d" }}>
+						<Img src={staticFile("assets/product_developer.svg")} width="100%" style={{opacity: 0.2}}/>
+					</AnimationEffect>
+					<AnimationEffect actor="product developer2" style={{left: "35%", height: "30%", top: "12%", width: "30%", transformStyle: "preserve-3d" }}>
+						<Img src={staticFile("assets/product_developer.svg")} width="100%" style={{opacity: 0.6}}/>
+					</AnimationEffect>
+					<AnimationEffect actor="product developer3" style={{left: "40%", height: "30%", top: "9%", width: "30%", transformStyle: "preserve-3d" }}>
+						<Img src={staticFile("assets/product_developer.svg")} width="100%" style={{opacity: 1}}/>
+					</AnimationEffect>
+					<AbsoluteFill style={{ left: '0%', top: '40%', width: '100%', height: '65%' }} >
 						<EdgeWaver actor="title-shadow" amplitudePercentageOfHeight={6} frequency={1.2} style={{ backgroundColor: 'rgba(253, 250, 88, 0.8)' }}  />
 						<EdgeWaver actor="title" amplitudePercentageOfHeight={6} frequency={1.2} style={{backgroundColor: 'rgba(0, 114, 160, 0.8)' }}  >
-						<Markdown actor="" style={{ paddingTop: '50px', paddingLeft: '10px', fontSize: "x-large"}}
-							md={titleText}
-						/>
-					</EdgeWaver>
-					<AbsoluteFill style={{ left: '70%', top: '61%', width: '10%', height: '20%'}}>
-						<span style={{fontSize: '28px'}}>terry@</span>
+							<Markdown actor="" style={{ paddingTop: '50px', paddingLeft: '10px', fontSize: "x-large"}}
+								md={titleText}
+							/>
+						</EdgeWaver>
+						<AbsoluteFill style={{ left: '70%', top: '61%', width: '10%', height: '20%'}}>
+							<span style={{fontSize: '28px'}}>terry@</span>
+						</AbsoluteFill>
+						<AbsoluteFill style={{ left: '80%', top: '56%', width: '12%', height: '20%'}}>
+							<OddeLogo />
+							<FlipCoin speed={2} interval={4} shift={0} >
+								<OddeLogoInner />
+							</FlipCoin>
+						</AbsoluteFill>
 					</AbsoluteFill>
-					<AbsoluteFill style={{ left: '80%', top: '56%', width: '12%', height: '20%'}}>
-						<OddeLogo />
-						<FlipCoin speed={2} interval={4} shift={0} >
-							<OddeLogoInner />
-						</FlipCoin>
-					</AbsoluteFill>
-				</AnimationEffect>
+					</AnimationEffect>
 
 				</AnimationEffect>
 
@@ -306,6 +340,7 @@ Anyone who has successfully convinced the Product Owner to invest in their produ
 				<AnimationEffect actor="gift product" style={{left: "10%", height: "20%", top: "28%", width: "20%", transformStyle: "preserve-3d" }}>
 					<Img src={staticFile("assets/gift_product.svg")} width="100%" />
 				</AnimationEffect>
+
 
 
 				<Subtitles scale={0.6} />
