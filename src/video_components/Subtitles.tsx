@@ -1,7 +1,7 @@
 import { useAnimationContext } from "../hooks/useAnimationContext";
 
-export const Subtitles: React.FC<{scale?: number, language?: string}> = ({scale, language}) => {
-  const { subtitle, text} = useAnimationContext().getCurrentSubtitleText(language);
+export const Subtitles: React.FC<{scale?: number}> = ({scale}) => {
+  const { subtitle, text} = useAnimationContext().getCurrentSubtitleText();
   if(!subtitle) return <></>;
   const basicSize = 28;
   const size = basicSize * (scale ?? 1) * (subtitle.scale ?? 1);

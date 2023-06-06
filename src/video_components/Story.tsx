@@ -8,12 +8,12 @@ import { Connectors } from './private/Connectors';
 import { Script } from "../models/Script";
 import AnimationEffect from './AnimationEffect';
 
-export const Story: React.FC<{id: string, subtitles: Subtitle[], width?: number, height?: number, children: React.ReactNode}> = (({
-  subtitles, id, width, height, children}) => {
+export const Story: React.FC<{id: string, subtitles: Subtitle[], width?: number, height?: number, language?: string, children: React.ReactNode}> = (({
+  subtitles, id, width, height, language, children}) => {
   const globalFps = 30;
   const script = new Script(subtitles, globalFps);
   const InnerStory = autonomousComponent(({frame}) => {
-    const animationContextWrapper = new AnimationContextWrapper(frame, script);
+    const animationContextWrapper = new AnimationContextWrapper(frame, script, language ?? 'en');
 
     return (
       <AnimationContextProvider value={animationContextWrapper}>

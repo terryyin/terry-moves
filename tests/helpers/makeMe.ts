@@ -30,7 +30,7 @@ class AnimationContextBuilder {
 
   please() {
     const script = this.scriptBuilder.please();
-    return new AnimationContextWrapper(this.second * script.fps, script);
+    return new AnimationContextWrapper(this.second * script.fps, script, 'en');
   }
 }
 class MakeMe {

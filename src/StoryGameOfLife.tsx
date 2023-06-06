@@ -108,7 +108,7 @@ export const StoryGameOfLife: React.FC = () => {
 		</AbsoluteFill>
 		<WindBlow actor="wind" style={{left: "35%", width: "20%", top: "18%"}} />
 			<AnimationEffect actor="subtitles">
-				<Subtitles scale={1} language="zhCN"/>
+				<Subtitles scale={1}/>
 			</AnimationEffect>
 		</Story>
   );

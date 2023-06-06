@@ -659,7 +659,7 @@ export const StoryBooleanParameters: React.FC = () => {
 
 
     <AnimationEffect actor="subtitles">
-			<Subtitles scale={1} language="en"/>
+			<Subtitles scale={1}/>
 		</AnimationEffect>
     </AbsoluteFill>
     <AnimationEffect actor="title" style={announceBoardStyle} >

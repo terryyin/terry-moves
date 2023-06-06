@@ -432,7 +432,7 @@ export const StoryBooleanReturns: React.FC = () => {
 
 
     <AnimationEffect actor="subtitles">
-			<Subtitles scale={1} language="en"/>
+			<Subtitles scale={1}/>
 		</AnimationEffect>
     </AbsoluteFill>
 

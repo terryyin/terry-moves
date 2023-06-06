@@ -16,13 +16,15 @@ export default class AnimationContextWrapper {
   private currentSubtitleEndTime: number;
   private script: Script;
   private frame: number;
+  private language: string;
 
-  constructor(frame: number, script: Script) {
+  constructor(frame: number, script: Script, language: string) {
     this.frame = frame;
     this.script = script;
     const { subtitle, endTime } = this.script.getSubtitleAndItsEndTimeAt(frame);
     this.currentSubtitle = subtitle;
     this.currentSubtitleEndTime = endTime;
+    this.language = language;
   }
 
   getGLBAnimationAttributes(actor: string): GLBAnimationAttributes {
@@ -86,10 +88,10 @@ export default class AnimationContextWrapper {
     return this.frame;
   }
 
-  getCurrentSubtitleText(language?: string) {
+  getCurrentSubtitleText() {
     const subtitle = this.currentSubtitle;
     const endTime = this.currentSubtitleEndTime;
-    const translation = subtitle.translations && language ? subtitle.translations[language] : undefined;
+    const translation = subtitle.translations && this.language ? subtitle.translations[this.language] : undefined;
     const text = translation ?? subtitle.text;
     return {
       subtitle,

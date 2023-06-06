@@ -435,7 +435,7 @@ export const StoryBooleanData: React.FC = () => {
 			</ThreeDFrame>
 		</AbsoluteFill>
 			<AnimationEffect actor="subtitles">
-				<Subtitles scale={1} language="zhTW"/>
+				<Subtitles scale={1}/>
 			</AnimationEffect>
 		</Story>
   );
