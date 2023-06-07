@@ -202,10 +202,25 @@ export const StoryProductDeveloper: React.FC = () => {
 								md={titleText}
 							/>
 						</EdgeWaver>
-						<AbsoluteFill style={{ left: '70%', top: '61%', width: '10%', height: '20%'}}>
-							<span style={{fontSize: '28px'}}>terry@</span>
+						<AbsoluteFill style={{ left: '2%', top: '61%', width: '10%', height: '20%'}}>
+							<Img src={staticFile('assets/less/less-logo.svg')} style={{ width: "100%" }}/>
 						</AbsoluteFill>
-						<AbsoluteFill style={{ left: '80%', top: '56%', width: '12%', height: '20%'}}>
+						<AbsoluteFill style={{ left: '13%', top: '58%', width: '7%', height: '20%'}}>
+							<Img src={staticFile('assets/SA_badge_csd.png')} style={{ width: "100%" }}/>
+						</AbsoluteFill>
+						<AbsoluteFill style={{ left: '23%', top: '58%', width: '7%', height: '20%'}}>
+							<Img src={staticFile('assets/SA_badge_a_csd.png')} style={{ width: "100%" }}/>
+						</AbsoluteFill>
+						<AbsoluteFill style={{ left: '31%', top: '58%', width: '70%', height: '20%'}}>
+							<span style={{fontSize: '20px'}}>LeSS in Action course (八月21 - 25)</span>
+						</AbsoluteFill>
+						<AbsoluteFill style={{ left: '47%', top: '64%', width: '70%', height: '20%'}}>
+							<span style={{fontSize: '20px'}}>TOKYO</span>
+						</AbsoluteFill>
+						<AbsoluteFill style={{ left: '80%', top: '61%', width: '70%', height: '20%'}}>
+							<span style={{fontSize: '18px'}}>By terry@</span>
+						</AbsoluteFill>
+						<AbsoluteFill style={{ left: '89%', top: '55%', width: '12%', height: '20%'}}>
 							<OddeLogo />
 							<FlipCoin speed={2} interval={4} shift={0} >
 								<OddeLogoInner />
@@ -238,7 +253,7 @@ export const StoryProductDeveloper: React.FC = () => {
 
 
 
-				<Subtitles scale={0.4} />
+				<Subtitles scale={1} />
 			</AbsoluteFill>
 
     </Story>
