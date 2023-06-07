@@ -37,6 +37,10 @@ const titleText = {
 # 產品開發发者：
 
 ### 他們是誰？為什麼他們的崛起如此重要？`,
+	ja: `
+# プロダクトデベロッパー：
+
+### 彼らは誰で、なぜ彼らは台頭しているのか？`,
 }
 
 const textDonorExplainer = {
@@ -51,6 +55,10 @@ Anyone who has successfully convinced the Product Owner to invest in their produ
 	zhTW: `## 需求捐贈者(Requirement Donor)
 
 任何成功說服產品負責人投資於他們的產品*假設*的人。
+							`,
+	ja: `## 要求ドナー
+
+製品所有者を説得して、彼らの製品*仮説*に投資することに成功した人は誰でも。
 							`,
 }
 
@@ -86,6 +94,16 @@ const textConclusion = {
 * 為什麼他們要崛起？
 	* 企業正在轉向以構建產品來引領發展的策略。
 							`,
+	ja: `## 結論
+
+* プロダクトデベロッパーは誰ですか：
+	* 顧客中心のアプローチを採用します。
+	* 部分的な製品ではなく、製品全体に焦点を当てます。
+	* 製品オーナーによって導かれますが、「要求ドナー」と直接協力します。
+	* 製品仮説の価値を実装して検証します。
+* なぜ彼らは台頭しているのか？
+	* 企業は、製品構築戦略にシフトしています。
+							`,
 
 }
 
@@ -96,7 +114,7 @@ useLoader.preload(GLTFLoader, urlPot);
 
 export const StoryProductDeveloper: React.FC = () => {
   return (
-		<Story id="StoryProductDeveloper" subtitles={productDeveloperSubtitles} width={720} language="en">
+		<Story id="StoryProductDeveloper" subtitles={productDeveloperSubtitles} width={720} language="ja">
 		  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
 			<Audio src={staticFile("assets/audios/product_developer.mp3")} />
 			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins", transformStyle: "preserve-3d" }}>
@@ -253,7 +271,7 @@ export const StoryProductDeveloper: React.FC = () => {
 
 
 
-				<Subtitles scale={1} />
+				<Subtitles scale={0.6} />
 			</AbsoluteFill>
 
     </Story>
