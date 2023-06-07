@@ -30,57 +30,57 @@ border-right: none; /* Remove the border */
 
 type CurrentEdit = { text: string, cursorLine: number, cursorColumn: number, cursor?: boolean, insertCursor?: boolean };
 
+const singleEdit =(edit: TextEdit, original: string): CurrentEdit => {
+  const lines = original === '' ? [] : original.split('\n');
+  const { line, progress, cursor, insertCursor } = edit;
+  let cursorLine = line;
+  let cursorColumn = 0;
+
+  if ('count' in edit) {
+    const { count, } = edit;
+    lines.splice(line - 1, Math.ceil(count * progress));
+  }
+  else {
+    const { text } = edit;
+    const partialLength = Math.ceil(text.length * progress);
+    const partialText = text.slice(0, partialLength);
+    cursorLine += partialText.split('\n').length - 1;
+    cursorColumn = partialText.length - partialText.lastIndexOf('\n') - 1;
+
+    if (line > lines.length) {
+      lines.push(partialText);
+    }
+    else {
+      const currentLine = lines[line - 1];
+
+      if ('match' in edit) {
+        const { match } = edit;
+        if(partialText.split("\n").length === 1) {
+          cursorColumn += currentLine.indexOf(match ?? '');
+        }
+        lines[line - 1] = currentLine.replace(match ?? /.*/, partialText);
+      } else if ('column' in edit) {
+        const { column } = edit;
+        lines[line - 1] =
+          currentLine.slice(0, column) +
+          partialText +
+          currentLine.slice(column);
+        if(partialText.indexOf("\n") === -1) {
+          cursorColumn += column;
+        }
+      }  
+    }
+  }
+  return { text: lines.join('\n'), cursorLine, cursorColumn, cursor, insertCursor};
+};
+
+const edit = (textEdits: TextEdit[],currentText: string): CurrentEdit => {
+  return textEdits.reduce((prev, e) => singleEdit(e, prev.text), {text: currentText, cursorLine: 1, cursorColumn: 0});
+}
+
 export const CodeHighlight: React.FC<{actor: string, codeString: string, language?: string, style?: CSSProperties, preStyle?: CSSProperties, children?: React.ReactNode}> = ({
   actor, language, style, preStyle, codeString, children}) => {
   const { highlights, textEdits } = useAnimationContext().getCodeTransfomation(actor);
-
-  const singleEdit =(edit: TextEdit, original: string): CurrentEdit => {
-    const lines = original === '' ? [] : original.split('\n');
-    const { line, progress, cursor, insertCursor } = edit;
-    let cursorLine = line;
-    let cursorColumn = 0;
-
-   if ('count' in edit) {
-      const { count, } = edit;
-      lines.splice(line - 1, Math.ceil(count * progress));
-    }
-    else {
-      const { text } = edit;
-      const partialLength = Math.ceil(text.length * progress);
-      const partialText = text.slice(0, partialLength);
-      cursorLine += partialText.split('\n').length - 1;
-      cursorColumn = partialText.length - partialText.lastIndexOf('\n') - 1;
-
-      if (line > lines.length) {
-        lines.push(partialText);
-      }
-      else {
-        const currentLine = lines[line - 1];
-
-        if ('match' in edit) {
-          const { match } = edit;
-          if(partialText.split("\n").length === 1) {
-            cursorColumn += currentLine.indexOf(match ?? '');
-          }
-          lines[line - 1] = currentLine.replace(match ?? /.*/, partialText);
-        } else if ('column' in edit) {
-          const { column } = edit;
-          lines[line - 1] =
-            currentLine.slice(0, column) +
-            partialText +
-            currentLine.slice(column);
-          if(partialText.indexOf("\n") === -1) {
-            cursorColumn += column;
-          }
-        }  
-      }
-    }
-    return { text: lines.join('\n'), cursorLine, cursorColumn, cursor, insertCursor};
-  };
-
-  const edit = (currentText: string): CurrentEdit => {
-    return textEdits.reduce((prev, e) => singleEdit(e, prev.text), {text: currentText, cursorLine: 1, cursorColumn: 0});
-  }
 
   const lineHighlightStyle = (line: number): HighlightStyle[] => {
     const result: HighlightStyle[] = [];
@@ -119,7 +119,7 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, languag
     }, {} as CSSProperties);
   }
 
-  const { text: currentCode, cursorLine, cursorColumn, cursor, insertCursor } = edit(codeString);
+  const { text: currentCode, cursorLine, cursorColumn, cursor, insertCursor } = edit(textEdits, codeString);
   const lineStyle = (line: number): CSSProperties => highLightStylesToCSS(lineHighlightStyle(line));
   const tokenStyle = (token: string): CSSProperties => highLightStylesToCSS(tokenHighlightStyle(token));
     
