@@ -38,11 +38,65 @@ interface LineDeletion extends TextEditBase {
   line: number;
 }
 
-export type TextEdit = TextReplacement | TextInsertion | LineDeletion;
+type TextEdit = TextReplacement | TextInsertion | LineDeletion;
 
-export type CodeTransformation = {
+type CurrentEdit = { text: string, cursorLine: number, cursorColumn: number, cursor?: boolean, insertCursor?: boolean };
+
+const singleEdit =(edit: TextEdit, original: string): CurrentEdit => {
+  const lines = original === '' ? [] : original.split('\n');
+  const { line, progress, cursor, insertCursor } = edit;
+  let cursorLine = line;
+  let cursorColumn = 0;
+
+  if ('count' in edit) {
+    const { count, } = edit;
+    lines.splice(line - 1, Math.ceil(count * progress));
+  }
+  else {
+    const { text } = edit;
+    const partialLength = Math.ceil(text.length * progress);
+    const partialText = text.slice(0, partialLength);
+    cursorLine += partialText.split('\n').length - 1;
+    cursorColumn = partialText.length - partialText.lastIndexOf('\n') - 1;
+
+    if (line > lines.length) {
+      lines.push(partialText);
+    }
+    else {
+      const currentLine = lines[line - 1];
+
+      if ('match' in edit) {
+        const { match } = edit;
+        if(partialText.split("\n").length === 1) {
+          cursorColumn += currentLine.indexOf(match ?? '');
+        }
+        lines[line - 1] = currentLine.replace(match ?? /.*/, partialText);
+      } else if ('column' in edit) {
+        const { column } = edit;
+        lines[line - 1] =
+          currentLine.slice(0, column) +
+          partialText +
+          currentLine.slice(column);
+        if(partialText.indexOf("\n") === -1) {
+          cursorColumn += column;
+        }
+      }  
+    }
+  }
+  return { text: lines.join('\n'), cursorLine, cursorColumn, cursor, insertCursor};
+}
+export class TextEdits {
+  // eslint-disable-next-line no-useless-constructor
+  constructor(private textEdits: TextEdit[]) {}
+
+   edit(currentText: string): CurrentEdit {
+    return this.textEdits.reduce((prev, e) => singleEdit(e, prev.text), {text: currentText, cursorLine: 1, cursorColumn: 0});
+  }
+}
+
+export type TextTransformation = {
   highlights: Highlight[];
-  textEdits: TextEdit[];
+  textEdits: TextEdits;
 }
 
 
@@ -51,10 +105,10 @@ export class LazyCodeTransformation {
   textEdits: TextEdit[] = [];
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  getCodeTransfomation(adjustedFrame: number, fps: number): CodeTransformation {
+  getTextTransfomation(adjustedFrame: number, fps: number): TextTransformation {
     return {
       highlights: this.highlights,
-      textEdits: this.textEdits,
+      textEdits: new TextEdits(this.textEdits),
     }
   }
 

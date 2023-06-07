@@ -5,7 +5,7 @@ import { EffectCalculatorAndAction } from './EffectCalculator';
 import GLBAnimationActioner, { GLBAnimationAttributes } from './GLBAnimationActioner';
 import { Script } from './Script';
 import { ThreeDObjectState } from "./ThreeDObjectState";
-import CodeActioner, { CodeTransformation } from './CodeActioner';
+import CodeActioner, { TextTransformation } from './CodeActioner';
 import GeneralActioner from './GeneralActioner';
 import ConnectorsActioner, { ConnectorStates } from './ConnectorsActioner';
 
@@ -46,11 +46,11 @@ export default class AnimationContextWrapper {
       .get3DObjedctState(this.adjustedFrame, this.script.fps);
   }
 
-  getCodeTransfomation(actor: string): CodeTransformation {
+  getTextTransformation(actor: string): TextTransformation {
      return this.getActionOfActor(actor)
       .map(effectCalculator => new CodeActioner(effectCalculator))
       .reduce((prev, curr) => curr.combine(prev), CodeActioner.defaultValue)
-      .getCodeTransfomation(this.adjustedFrame, this.script.fps);
+      .getTextTransfomation(this.adjustedFrame, this.script.fps);
   }
 
   getGeneralValue(actor: string): number | undefined {
