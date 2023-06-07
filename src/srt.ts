@@ -1,5 +1,5 @@
-import { productDeveloperSubtitles } from './StoryProductDeveloper';
 import { Subtitle } from "./models/Subtitles";
+import { productDeveloperSubtitles } from "./productDeveloperSubtitles";
 
 function formatSubtitlesToSRT(subtitles: Subtitle[], language: string | undefined): string {
   let output = "";
@@ -38,7 +38,7 @@ function formatTime(seconds: number): string {
 }
 
 
-const srtContent = formatSubtitlesToSRT(productDeveloperSubtitles, "en")
+const srtContent = formatSubtitlesToSRT(productDeveloperSubtitles, "")
 process.stdout.write(srtContent);
 
 
