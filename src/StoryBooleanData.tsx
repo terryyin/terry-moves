@@ -361,9 +361,10 @@ const conclusion = `## Conclusion
 
 export const StoryBooleanData: React.FC = () => {
   return (
-		<Story id="StoryBooleanData" width={1024} height={720} subtitles={booleanDataSubtitles}  >
+		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles} language='zhCN' >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
-		<Audio src={staticFile("assets/audios/booean3en.mp3")} />
+		<Audio src={staticFile("assets/audios/boolean3ch.mp3")} />
+    <AbsoluteFill style={{fontFamily: "Poppins"}}>
     <AbsoluteFill style={{backgroundColor: "black", perspective: "400px"}}>
     <AnimationEffect actor="game of life" style={{transformStyle: "preserve-3d"}}>
 			<ThreeDFrame>
@@ -378,7 +379,7 @@ export const StoryBooleanData: React.FC = () => {
 
 			<AnimationEffect actor="einstein's razor" style={{backgroundColor: "rgba(0,0,0, 0.8)", width: "100%", height: "100%"}}>
 				<Img src={staticFile("assets/Einstein_1921.jpg")} style={{position: "absolute", width: "100%"}}/>
-				<Markdown actor="einstein quote" md="" style={{ left: '10%', top: '60%', width: '40%', height: '60%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible'}} />
+				<Markdown actor="einstein quote" md="" style={{ left: '10%', top: '50%', width: '40%', height: '60%', perspective: "400px", transformStyle: "preserve-3d", overflow: 'visible', fontSize: "xx-large"}} />
 			</AnimationEffect>
 
 		</AnimationEffect>
@@ -437,6 +438,7 @@ export const StoryBooleanData: React.FC = () => {
 			<AnimationEffect actor="subtitles">
 				<Subtitles scale={1}/>
 			</AnimationEffect>
+		</AbsoluteFill>
 		</Story>
   );
 };

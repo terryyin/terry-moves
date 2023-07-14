@@ -32,6 +32,7 @@ border-right: none; /* Remove the border */
 export const CodeHighlight: React.FC<{actor: string, codeString: string, language?: string, style?: CSSProperties, preStyle?: CSSProperties, children?: React.ReactNode}> = ({
   actor, language, style, preStyle, codeString, children}) => {
   const { highlights, textEdits } = useAnimationContext().getTextTransformation(actor);
+  const { text: currentCode, cursorLine, cursorColumn, cursor, insertCursor } = textEdits.edit(codeString);
 
   const lineHighlightStyle = (line: number): HighlightStyle[] => {
     const result: HighlightStyle[] = [];
@@ -70,7 +71,6 @@ export const CodeHighlight: React.FC<{actor: string, codeString: string, languag
     }, {} as CSSProperties);
   }
 
-  const { text: currentCode, cursorLine, cursorColumn, cursor, insertCursor } = textEdits.edit(codeString);
   const lineStyle = (line: number): CSSProperties => highLightStylesToCSS(lineHighlightStyle(line));
   const tokenStyle = (token: string): CSSProperties => highLightStylesToCSS(tokenHighlightStyle(token));
     
