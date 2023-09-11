@@ -31,22 +31,23 @@ function generateSpiralCirclePoints(
   return points;
 }
 
-export const Scrum: React.FC<{actor: string, headActor?: string, bendingActor?: string, rotationZ?: number, color?: THREE.Color}> = ({actor, headActor, bendingActor, rotationZ, color}) => {
+export const Scrum: React.FC<{actor: string, headActor?: string, bendingActor?: string, rotationZ?: number, color?: THREE.Color, coils?: number}> = ({actor, headActor, bendingActor, rotationZ, color, coils}) => {
   const context = useAnimationContext();
   const headMove = headActor ? (context.getGeneralValue(headActor) ?? 0) : 0;
   const trueBending = bendingActor? (context.getGeneralValue(bendingActor) ?? 0) : 0;
+  const totalCols = coils ?? 1;
 
   const radius = 1;
   const spiralCirclePoints = generateSpiralCirclePoints(
     radius,
-    1,
-    20,
-    1,
+    1+0.2 * totalCols,
+    20 * totalCols,
+    totalCols,
     trueBending
   );
 
 
-  const oneSprint = [new THREE.Vector3(-2.4, -radius, -1), ...spiralCirclePoints, new THREE.Vector3(1, -radius, 1.2), new THREE.Vector3(2, -radius + headMove, 1.4)]
+  const oneSprint = [new THREE.Vector3(-2.4, -radius, -1), ...spiralCirclePoints, new THREE.Vector3(1, -radius, 1+0.2 * totalCols), new THREE.Vector3(2, -radius + headMove, 1 + .3 * totalCols)]
 
   const daily = generateSpiralCirclePoints(
     0.3,

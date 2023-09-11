@@ -8,6 +8,7 @@ import { StoryWhyWhyLeSS } from './StoryWhyWhyLeSS';
 import { StoryTransparent } from './StoryTransparent';
 import { StoryGameOfLife } from './StoryGameOfLife';
 import { StoryBooleanData } from './StoryBooleanData';
+import { StoryInterationSprint } from './StoryIternationSprint';
 
 export const RemotionRoot: React.FC = () => {
 	return (
@@ -18,6 +19,7 @@ export const RemotionRoot: React.FC = () => {
 			<StoryBooleanReturns />
 			<StoryLeSSComplete />
 			<StoryScalingScrum />
+			<StoryInterationSprint />
 			<StoryWhyWhyLeSS />
 			<StoryProductDeveloper />
 			<StoryTransparent />
