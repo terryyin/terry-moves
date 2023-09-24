@@ -4,7 +4,8 @@
 	"description": "A React Three Fiber Project",
 	"scripts": {
 		"start": "remotion preview",
-		"build": "remotion render --timeout=60000 --scale 1 StoryProductDeveloper out/video.mp4",
+		"build": "remotion render --timeout=60000 --scale 1 StoryIterationSprint out/video.mp4",
+		"buildgif": "remotion render --codec=gif --timeout=60000 --scale 1 StoryIterationSprint out/video.gif",
 		"upgrade": "remotion upgrade",
 		"test": "npx jest && eslint src --ext ts,tsx,js,jsx && tsc",
 		"srt": "ts-node ./src/srt.ts"
