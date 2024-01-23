@@ -9,10 +9,12 @@ import { StoryTransparent } from './stories/StoryTransparent';
 import { StoryGameOfLife } from './stories/StoryGameOfLife';
 import { StoryBooleanData } from './stories/StoryBooleanData';
 import { StoryInterationSprint } from './stories/StoryIternationSprint';
+import { StorySimpleExample } from './stories/StorySimpleExample';
 
 export const RemotionRoot: React.FC = () => {
 	return (
 		<>
+			<StorySimpleExample />
 			<StoryFailureVsFailure />
 			<StoryBooleanParameters />
 			<StoryBooleanData />
