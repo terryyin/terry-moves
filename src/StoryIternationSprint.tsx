@@ -11,21 +11,15 @@ export const growScrumActions: Action[] = [
 		];
 
 export const iterationSprint: Subtitle[] = [
-	{ leadingBlank: 0, duration: 0.5, text: [
-			"One Sprint",
-			"can have multiple Iterations.",
-	],
+	{ leadingBlank: 0, duration: 0.5, text: [ "One Sprint", "can have multiple Iterations."],
 	  flashBack: {from: 40, duration: 3, speed: 0.5} },
-		{ leadingBlank: 0, duration: 3, text: "One Sprint", actions: [
-			...growScrumActions,
-		  { actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, -1, 6] },
-		]},
-		{ leadingBlank: 0, duration: 5, text:[
-			"One Sprint",
-			"can have multiple Iterations.",
-	], actions: [
-		  { actor: "camera", actionType: "move", duration: 2, absolutePosition: [1, -6, 3.0] },
-		]},
+	{ leadingBlank: 0, duration: 3, text: "One Sprint", actions: [
+		...growScrumActions,
+		{ actor: "camera", actionType: "move", duration: 0, absolutePosition: [0, -1, 6] },
+	]},
+	{ leadingBlank: 0, duration: 5, text:[ "One Sprint", "can have multiple Iterations."], actions: [
+		{ actor: "camera", actionType: "move", duration: 2, absolutePosition: [1, -6, 3.0] },
+	]},
 ];
 
 export const StoryInterationSprint: React.FC = () => {

@@ -24,7 +24,7 @@ import { Markdown } from './video_components/Markdown';
 import { Explosion } from './parts/Explosion';
 import { Subtitles } from './video_components/Subtitles';
 import { Anchor } from './video_components/Anchor';
-import { fireActions, loadActions, loadedFireActions } from './stories/booleans/common';
+import { fireActions, loadActions, loadedFireActions } from './subtitles/booleans/common';
 
 export const booleanParametersSutitles: Subtitle[] = [
 	{

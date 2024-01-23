@@ -22,7 +22,7 @@ import HealthBar from './video_components/HealthBar';
 import { Markdown } from './video_components/Markdown';
 import { Subtitles } from './video_components/Subtitles';
 import { Anchor } from './video_components/Anchor';
-import { fireActions } from './stories/booleans/common';
+import { fireActions } from './subtitles/booleans/common';
 import { ThinkingEmoji } from './parts/ThinkingEmoji';
 import { Explosion } from './parts/Explosion';
 import { Helmet } from './parts/Helmet';
