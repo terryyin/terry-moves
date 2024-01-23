@@ -64,6 +64,15 @@ To change the language, you need to make the change at the `<Story>` component l
 		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles} language='zhCN' >
 ```
 
+# Audio
+
+To add audio, you need to add a `<Audio/>` to the `<Story>` component:
+
+```typescript
+		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles}>
+			<Audio src={staticFile("assets/audios/boolean3ch.mp3")} />
+```
+
 # Special actors
 
 ## 'camera' actor
