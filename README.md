@@ -2,6 +2,14 @@ Congratuations! Now you've discovered how Terry moves.
 
 # How to add a new project
 
+## Step 0: Clone the repo and install dependencies
+
+```bash
+git clone	git@github.com:terryyin/terry-moves.git
+cd terry-moves
+yarn install
+```
+
 ## Step 1: Add a new story
 
 Under the /src/stories folder, add a new story file. 
