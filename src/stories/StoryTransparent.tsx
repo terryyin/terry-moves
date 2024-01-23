@@ -1,8 +1,8 @@
 
-import { Subtitle } from './models/Subtitles';
+import { Subtitle } from '../models/Subtitles';
 import { AbsoluteFill, Img, staticFile } from 'remotion';
-import { Story } from './video_components/Story';
-import AnimationEffect from './video_components/AnimationEffect';
+import { Story } from '../video_components/Story';
+import AnimationEffect from '../video_components/AnimationEffect';
 
 export const transparentSubtitles: Subtitle[] = [
 { leadingBlank: 1, duration: 3, text: 'The creators and trainers of Large-Scale Scrum have subtly updated the "Why LeSS?" article.', actions: [

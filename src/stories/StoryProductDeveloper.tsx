@@ -1,28 +1,28 @@
 import {Audio} from 'remotion'
 import {Img} from 'remotion'
 import React from 'react';
-import AnimationEffect from './video_components/AnimationEffect';
-import { Story } from './video_components/Story';
+import AnimationEffect from '../video_components/AnimationEffect';
+import { Story } from '../video_components/Story';
 import { AbsoluteFill, staticFile } from 'remotion';
-import { Company } from './parts/Company';
-import { CustomerGroup } from './parts/CustomerGroup';
-import { MoneyArrow } from './parts/MoneyArrow';
-import { ValueArrow } from './parts/ValueArrow';
-import { Subtitles } from './video_components/Subtitles';
-import { Markdown } from './video_components/Markdown';
-import EdgeWaver from './video_components/EdgeWaver';
-import { ProductPart } from './parts/ProductPart';
-import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
-import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { GLTFNode } from './video_components/GLTFNode';
+import { Company } from '../parts/Company';
+import { CustomerGroup } from '../parts/CustomerGroup';
+import { MoneyArrow } from '../parts/MoneyArrow';
+import { ValueArrow } from '../parts/ValueArrow';
+import { Subtitles } from '../video_components/Subtitles';
+import { Markdown } from '../video_components/Markdown';
+import EdgeWaver from '../video_components/EdgeWaver';
+import { ProductPart } from '../parts/ProductPart';
+import { ThreeAnimationEffect } from '../video_components/ThreeAnimationEffect';
+import { ThreeDFrame } from '../video_components/ThreeDFrame';
+import { GLTFNode } from '../video_components/GLTFNode';
 import { useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
-import { Anchor } from './video_components/Anchor';
-import { AnimatedGlb } from './video_components/AnimatedGlb';
-import { OddeLogo } from './parts/OddeLogo';
-import { OddeLogoInner } from './parts/OddeLogoInner';
-import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
-import { productDeveloperSubtitles } from './productDeveloperSubtitles';
+import { Anchor } from '../video_components/Anchor';
+import { AnimatedGlb } from '../video_components/AnimatedGlb';
+import { OddeLogo } from '../parts/OddeLogo';
+import { OddeLogoInner } from '../parts/OddeLogoInner';
+import { FlipCoin } from '../video_components/AutonomousComponents/FlipCoin';
+import { productDeveloperSubtitles } from '../productDeveloperSubtitles';
 
 const titleText = {
 	en: `

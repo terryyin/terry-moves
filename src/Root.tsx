@@ -1,14 +1,14 @@
-import { StoryProductDeveloper } from './StoryProductDeveloper';
-import { StoryFailureVsFailure } from './StoryFailureVsFailure';
-import { StoryBooleanParameters } from './StoryBooleanParameters';
-import { StoryBooleanReturns } from './StoryBooleanReturns';
-import { StoryLeSSComplete } from './StoryLeSSComplete';
-import { StoryScalingScrum } from './StoryScalingScrum';
-import { StoryWhyWhyLeSS } from './StoryWhyWhyLeSS';
-import { StoryTransparent } from './StoryTransparent';
-import { StoryGameOfLife } from './StoryGameOfLife';
-import { StoryBooleanData } from './StoryBooleanData';
-import { StoryInterationSprint } from './StoryIternationSprint';
+import { StoryProductDeveloper } from './stories/StoryProductDeveloper';
+import { StoryFailureVsFailure } from './stories/StoryFailureVsFailure';
+import { StoryBooleanParameters } from './stories/StoryBooleanParameters';
+import { StoryBooleanReturns } from './stories/StoryBooleanReturns';
+import { StoryLeSSComplete } from './stories/StoryLeSSComplete';
+import { StoryScalingScrum } from './stories/StoryScalingScrum';
+import { StoryWhyWhyLeSS } from './stories/StoryWhyWhyLeSS';
+import { StoryTransparent } from './stories/StoryTransparent';
+import { StoryGameOfLife } from './stories/StoryGameOfLife';
+import { StoryBooleanData } from './stories/StoryBooleanData';
+import { StoryInterationSprint } from './stories/StoryIternationSprint';
 
 export const RemotionRoot: React.FC = () => {
 	return (

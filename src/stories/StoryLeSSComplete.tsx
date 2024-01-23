@@ -1,8 +1,8 @@
-import { Subtitle } from './models/Subtitles';
+import { Subtitle } from '../models/Subtitles';
 import { AbsoluteFill  } from 'remotion';
-import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { Story } from './video_components/Story';
-import { LeSSComplete } from './subtitles/LeSSComplete';
+import { ThreeDFrame } from '../video_components/ThreeDFrame';
+import { Story } from '../video_components/Story';
+import { LeSSComplete } from '../subtitles/LeSSComplete';
 
 export const lessCompletePictureSubtitles: Subtitle[] = [
 		{ leadingBlank: 1, duration: 3, text: "LeSS provides a minimal barely sufficient core: the LeSS rules. And on top of that it encourages experimentation influenced by the LeSS principles.", actions: [

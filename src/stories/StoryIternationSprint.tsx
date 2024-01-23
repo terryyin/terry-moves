@@ -1,10 +1,10 @@
 
-import { Action, Subtitle } from './models/Subtitles';
+import { Action, Subtitle } from '../models/Subtitles';
 import { AbsoluteFill } from 'remotion';
-import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { Story } from './video_components/Story';
-import { Scrum } from './parts/Scrum';
-import { Subtitles } from './video_components/Subtitles';
+import { ThreeDFrame } from '../video_components/ThreeDFrame';
+import { Story } from '../video_components/Story';
+import { Scrum } from '../parts/Scrum';
+import { Subtitles } from '../video_components/Subtitles';
 
 export const growScrumActions: Action[] = [
 			{ actor: "scrum1", actionType: "additive value change to", duration: 2, value: 1},

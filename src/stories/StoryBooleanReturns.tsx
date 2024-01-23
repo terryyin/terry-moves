@@ -5,27 +5,27 @@ import {Img} from 'remotion'
 
 import React, { CSSProperties } from 'react';
 
-import { Action, Subtitle } from './models/Subtitles';
+import { Action, Subtitle } from '../models/Subtitles';
 import { AbsoluteFill } from 'remotion';
-import AnimationEffect from './video_components/AnimationEffect';
-import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
-import { OddeLogo } from './parts/OddeLogo';
-import { OddeLogoInner } from './parts/OddeLogoInner';
-import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
-import { Story } from './video_components/Story';
-import { Blaster } from './parts/Blaster';
-import { GroupInitialState } from './video_components/GroupInitialState';
-import { RocketPlume } from './parts/RocketPlume';
-import { CodeHighlight } from './video_components/CodeHighlight';
-import HealthBar from './video_components/HealthBar';
-import { Markdown } from './video_components/Markdown';
-import { Subtitles } from './video_components/Subtitles';
-import { Anchor } from './video_components/Anchor';
-import { fireActions } from './subtitles/booleans/common';
-import { ThinkingEmoji } from './parts/ThinkingEmoji';
-import { Explosion } from './parts/Explosion';
-import { Helmet } from './parts/Helmet';
+import AnimationEffect from '../video_components/AnimationEffect';
+import { ThreeDFrame } from '../video_components/ThreeDFrame';
+import { ThreeAnimationEffect } from '../video_components/ThreeAnimationEffect';
+import { OddeLogo } from '../parts/OddeLogo';
+import { OddeLogoInner } from '../parts/OddeLogoInner';
+import { FlipCoin } from '../video_components/AutonomousComponents/FlipCoin';
+import { Story } from '../video_components/Story';
+import { Blaster } from '../parts/Blaster';
+import { GroupInitialState } from '../video_components/GroupInitialState';
+import { RocketPlume } from '../parts/RocketPlume';
+import { CodeHighlight } from '../video_components/CodeHighlight';
+import HealthBar from '../video_components/HealthBar';
+import { Markdown } from '../video_components/Markdown';
+import { Subtitles } from '../video_components/Subtitles';
+import { Anchor } from '../video_components/Anchor';
+import { fireActions } from '../subtitles/booleans/common';
+import { ThinkingEmoji } from '../parts/ThinkingEmoji';
+import { Explosion } from '../parts/Explosion';
+import { Helmet } from '../parts/Helmet';
 
 const popupActios: Action[] = [
 				{ actor: "helmet position", actionType: "move", duration: 1, absolutePosition: [0, 0.8, 0] },

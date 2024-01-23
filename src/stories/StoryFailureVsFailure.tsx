@@ -1,20 +1,20 @@
 import {Audio} from 'remotion'
 import React from 'react';
-import { Subtitle } from './models/Subtitles';
+import { Subtitle } from '../models/Subtitles';
 import { AbsoluteFill, staticFile } from 'remotion';
-import { Subtitles } from './video_components/Subtitles';
-import AnimationEffect from './video_components/AnimationEffect';
-import { Starship } from './parts/Starship';
-import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
-import { StarshipPlume } from './parts/StarshipPlume';
-import { Explosion } from './parts/Explosion';
-import { GroupInitialState } from './video_components/GroupInitialState';
-import { OddeLogo } from './parts/OddeLogo';
-import { OddeLogoInner } from './parts/OddeLogoInner';
-import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
-import { Story } from './video_components/Story';
-import { ProblemDomain } from './parts/ProblemDomain';
+import { Subtitles } from '../video_components/Subtitles';
+import AnimationEffect from '../video_components/AnimationEffect';
+import { Starship } from '../parts/Starship';
+import { ThreeDFrame } from '../video_components/ThreeDFrame';
+import { ThreeAnimationEffect } from '../video_components/ThreeAnimationEffect';
+import { StarshipPlume } from '../parts/StarshipPlume';
+import { Explosion } from '../parts/Explosion';
+import { GroupInitialState } from '../video_components/GroupInitialState';
+import { OddeLogo } from '../parts/OddeLogo';
+import { OddeLogoInner } from '../parts/OddeLogoInner';
+import { FlipCoin } from '../video_components/AutonomousComponents/FlipCoin';
+import { Story } from '../video_components/Story';
+import { ProblemDomain } from '../parts/ProblemDomain';
 
 const storyFailureVsFailureSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 3, scale: 1.5, position: 'center', text: [

@@ -1,9 +1,9 @@
 
-import { Subtitle } from './models/Subtitles';
+import { Subtitle } from '../models/Subtitles';
 import { AbsoluteFill } from 'remotion';
-import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { Story } from './video_components/Story';
-import { ScalableScrum, empiricalActions, growScrum1Actions, scaleScrumActions } from './subtitles/scrum';
+import { ThreeDFrame } from '../video_components/ThreeDFrame';
+import { Story } from '../video_components/Story';
+import { ScalableScrum, empiricalActions, growScrum1Actions, scaleScrumActions } from '../subtitles/scrum';
 
 export const scalingScrumSubtitles: Subtitle[] = [
 		{ leadingBlank: 0, duration: 4, text: "Principles that guide experimentation and adoption.", actions: [

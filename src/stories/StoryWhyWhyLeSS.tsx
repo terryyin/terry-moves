@@ -1,24 +1,24 @@
 
 import {Audio} from 'remotion'
-import { Subtitle } from './models/Subtitles';
+import { Subtitle } from '../models/Subtitles';
 import { AbsoluteFill, Img, staticFile } from 'remotion';
-import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { Story } from './video_components/Story';
-import { OddeLogo } from './parts/OddeLogo';
-import { OddeLogoInner } from './parts/OddeLogoInner';
-import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
-import { Subtitles } from './video_components/Subtitles';
-import AnimationEffect from './video_components/AnimationEffect';
-import { ScalableScrum, empiricalActions, growScrum1Actions, scaleScrumActions } from './subtitles/scrum';
-import { Anchor } from './video_components/Anchor';
-import { Scrum } from './parts/Scrum';
+import { ThreeDFrame } from '../video_components/ThreeDFrame';
+import { Story } from '../video_components/Story';
+import { OddeLogo } from '../parts/OddeLogo';
+import { OddeLogoInner } from '../parts/OddeLogoInner';
+import { FlipCoin } from '../video_components/AutonomousComponents/FlipCoin';
+import { Subtitles } from '../video_components/Subtitles';
+import AnimationEffect from '../video_components/AnimationEffect';
+import { ScalableScrum, empiricalActions, growScrum1Actions, scaleScrumActions } from '../subtitles/scrum';
+import { Anchor } from '../video_components/Anchor';
+import { Scrum } from '../parts/Scrum';
 import * as THREE from 'three';
-import { GroupInitialState } from './video_components/GroupInitialState';
-import { BoxWithText } from './video_components/BoxWithText';
-import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
-import { CalloutCloud } from './video_components/CalloutCloud';
-import { LeSSComplete } from './subtitles/LeSSComplete';
-import { Adaptiveness } from './parts/Adaptiveness';
+import { GroupInitialState } from '../video_components/GroupInitialState';
+import { BoxWithText } from '../video_components/BoxWithText';
+import { ThreeAnimationEffect } from '../video_components/ThreeAnimationEffect';
+import { CalloutCloud } from '../video_components/CalloutCloud';
+import { LeSSComplete } from '../subtitles/LeSSComplete';
+import { Adaptiveness } from '../parts/Adaptiveness';
 
 export const whyWhyLeSSSubtitles: Subtitle[] = [
 	{ leadingBlank: 0, duration: 4, text: ["Recent Changes in Large-Scale Scrum", "(Spot the Scrum!)"], translations: {

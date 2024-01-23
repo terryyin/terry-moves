@@ -1,15 +1,15 @@
 
 import {random} from 'remotion'
 import {interpolate} from 'remotion'
-import { Subtitle } from './models/Subtitles';
+import { Subtitle } from '../models/Subtitles';
 import { AbsoluteFill } from 'remotion';
-import { Story } from './video_components/Story';
-import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { GameOfLifeAnimated } from './parts/gameOfLife/GameOfLifeAnimated';
-import { Cell } from './parts/gameOfLife/gameOfLife';
-import { Subtitles } from './video_components/Subtitles';
-import AnimationEffect from './video_components/AnimationEffect';
-import { WindBlow } from './parts/WindBlow';
+import { Story } from '../video_components/Story';
+import { ThreeDFrame } from '../video_components/ThreeDFrame';
+import { GameOfLifeAnimated } from '../parts/gameOfLife/GameOfLifeAnimated';
+import { Cell } from '../parts/gameOfLife/gameOfLife';
+import { Subtitles } from '../video_components/Subtitles';
+import AnimationEffect from '../video_components/AnimationEffect';
+import { WindBlow } from '../parts/WindBlow';
 
 export const gameOfLifeSubtitles: Subtitle[] = [
 

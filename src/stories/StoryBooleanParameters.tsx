@@ -4,27 +4,27 @@ import {Audio} from 'remotion'
 
 import React, { CSSProperties } from 'react';
 
-import { Subtitle } from './models/Subtitles';
+import { Subtitle } from '../models/Subtitles';
 import { AbsoluteFill } from 'remotion';
-import AnimationEffect from './video_components/AnimationEffect';
-import { ThreeDFrame } from './video_components/ThreeDFrame';
-import { ThreeAnimationEffect } from './video_components/ThreeAnimationEffect';
-import { OddeLogo } from './parts/OddeLogo';
-import { OddeLogoInner } from './parts/OddeLogoInner';
-import { FlipCoin } from './video_components/AutonomousComponents/FlipCoin';
-import { Story } from './video_components/Story';
-import { Blaster } from './parts/Blaster';
-import { GroupInitialState } from './video_components/GroupInitialState';
-import { RocketPlume } from './parts/RocketPlume';
-import { CodeHighlight } from './video_components/CodeHighlight';
-import { CalloutCloud } from './video_components/CalloutCloud';
-import HealthBar from './video_components/HealthBar';
-import { LightSource } from './video_components/LightSource';
-import { Markdown } from './video_components/Markdown';
-import { Explosion } from './parts/Explosion';
-import { Subtitles } from './video_components/Subtitles';
-import { Anchor } from './video_components/Anchor';
-import { fireActions, loadActions, loadedFireActions } from './subtitles/booleans/common';
+import AnimationEffect from '../video_components/AnimationEffect';
+import { ThreeDFrame } from '../video_components/ThreeDFrame';
+import { ThreeAnimationEffect } from '../video_components/ThreeAnimationEffect';
+import { OddeLogo } from '../parts/OddeLogo';
+import { OddeLogoInner } from '../parts/OddeLogoInner';
+import { FlipCoin } from '../video_components/AutonomousComponents/FlipCoin';
+import { Story } from '../video_components/Story';
+import { Blaster } from '../parts/Blaster';
+import { GroupInitialState } from '../video_components/GroupInitialState';
+import { RocketPlume } from '../parts/RocketPlume';
+import { CodeHighlight } from '../video_components/CodeHighlight';
+import { CalloutCloud } from '../video_components/CalloutCloud';
+import HealthBar from '../video_components/HealthBar';
+import { LightSource } from '../video_components/LightSource';
+import { Markdown } from '../video_components/Markdown';
+import { Explosion } from '../parts/Explosion';
+import { Subtitles } from '../video_components/Subtitles';
+import { Anchor } from '../video_components/Anchor';
+import { fireActions, loadActions, loadedFireActions } from '../subtitles/booleans/common';
 
 export const booleanParametersSutitles: Subtitle[] = [
 	{
