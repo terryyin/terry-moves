@@ -10,6 +10,7 @@ import { StoryGameOfLife } from './stories/StoryGameOfLife';
 import { StoryBooleanData } from './stories/StoryBooleanData';
 import { StoryInterationSprint } from './stories/StoryIternationSprint';
 import { StorySimpleExample } from './stories/StorySimpleExample';
+import { StoryLeSSInAction } from './stories/StoryLeSSInAction';
 
 export const RemotionRoot: React.FC = () => {
 	return (
@@ -26,6 +27,7 @@ export const RemotionRoot: React.FC = () => {
 			<StoryProductDeveloper />
 			<StoryTransparent />
 			<StoryGameOfLife />
+			<StoryLeSSInAction />
 		</>
 	);
 };
