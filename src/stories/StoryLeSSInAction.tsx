@@ -14,9 +14,9 @@ import { ScalableScrum, empiricalActions, growScrum1Actions, scaleScrumActions }
 
 export const lessInActionSubtitles: Subtitle[] = [
 		{ leadingBlank: 0, duration: 3, text: "", actions: [
-			{ actor: "lia", actionType: "connect to",  startDuration: 0, target: "org", bentLevel: 0, radiusSource: 50, offset: 0},
-			{ actor: "lia", actionType: "connect to",  startDuration: 0, target: "product", bentLevel: 0, radiusSource: 50, offset: 0},
-			{ actor: "lia", actionType: "connect to",  startDuration: 0, target: "dev", bentLevel: 0, radiusSource: 50, offset: 0},
+			{ actor: "lia", actionType: "connect to",  startDuration: 0, target: "org", bentLevel: 0, radiusSource: 50, offset: 0, strokeWidth: 3},
+			{ actor: "lia", actionType: "connect to",  startDuration: 0, target: "product", bentLevel: 0, radiusSource: 50, offset: 0, strokeWidth: 3},
+			{ actor: "lia", actionType: "connect to",  startDuration: 0, target: "dev", bentLevel: 0, radiusSource: 50, offset: 0, strokeWidth: 3},
 		]},
 		{ leadingBlank: 0, duration: 8, text: "", actions: [
 			...growScrum1Actions,
@@ -54,9 +54,9 @@ export const StoryLeSSInAction: React.FC = () => {
 			</FlipCoin>
 		</AbsoluteFill>
 			<AbsoluteFill style={{fontSize: '18px'}}>
-				<AbsoluteFill style={{ left: '3%', top: '35%', width: '30%', height: '20%'}}>
+				<AbsoluteFill style={{ left: '3%', top: '35%', width: '50%', height: '20%'}}>
 					<span style={{}}>
-						Organizing with LeSS
+						Organizing with Large-Scale Scrum
 					</span>
 				</AbsoluteFill>
 				<AbsoluteFill style={{ left: '35%', top: '20%', width: '40%', height: '20%'}}>

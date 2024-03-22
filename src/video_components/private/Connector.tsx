@@ -70,6 +70,7 @@ export const Connector: React.FC<ConnectorProps> = ({
       const dx = e2Pos.x - e1Pos.x;
       const dy = e2Pos.y - e1Pos.y;
       const distance = Math.sqrt(dx * dx + dy * dy);
+
     
       const middlePoint = {
         x: (e1Pos.x + e2Pos.x) / 2,
@@ -90,6 +91,12 @@ export const Connector: React.FC<ConnectorProps> = ({
         y: middlePoint.y + perpY * bentLevel,
       };
     
+      e1Pos.x += dx / distance * (radiusSource ?? 0);
+      e1Pos.y += dy / distance * (radiusSource ?? 0);
+
+      e2Pos.x -= dx / distance * (radiusTarget ?? 0);
+      e2Pos.y -= dy / distance * (radiusTarget ?? 0);
+
       path.setAttribute(
         "d",
         `M${e1Pos.x},${e1Pos.y} Q${controlPoint.x},${controlPoint.y} ${e2Pos.x},${e2Pos.y}`
@@ -103,13 +110,10 @@ export const Connector: React.FC<ConnectorProps> = ({
       const pathLength = approximateQuadraticCurveLength(p0, p1, p2);
 
 
-      const trimStart = radiusSource ?? 0;
-      const trimEnd = pathLength - (radiusTarget ?? 0);
-
-      const startOffset = trimStart + (trimEnd - trimStart) * (1 - startProgress);
+      const startOffset = pathLength * (1 - startProgress);
 
       if(startProgress < 1) {
-        path.style.strokeDasharray = `${trimEnd - startOffset} ${pathLength}`;
+        path.style.strokeDasharray = `${pathLength - startOffset} ${pathLength}`;
       } else {
         path.style.strokeDasharray = `5 5`;
       }
