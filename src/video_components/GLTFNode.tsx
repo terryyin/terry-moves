@@ -42,7 +42,7 @@ export const GLTFNode: React.FC<{
 
   return (
     <group ref={meshRef}>
-      {node && <Clone object={node} matrixWorldAutoUpdate={undefined} getObjectsByProperty={undefined} />}
+      {node && <Clone object={node} />}
       {boxHelper && <primitive object={boxHelper} />}
     </group>
   );

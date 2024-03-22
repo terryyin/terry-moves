@@ -40,8 +40,7 @@ export const CellPane: React.FC<{ cellToHighlight: Cell, color: THREE.Color, pro
 				args={[cellSize, cellSize]}
 				position={[cellToHighlight.x, 0.001, cellToHighlight.y]}
 				rotation-x={-Math.PI / 2}
-				matrixWorldAutoUpdate={undefined}
-				 getObjectsByProperty={undefined} getVertexPosition={undefined}      >
+				 >
         <meshBasicMaterial transparent map={gradientTexture} />
       </Plane>
     </>

@@ -116,7 +116,7 @@ export const StoryProductDeveloper: React.FC = () => {
   return (
 		<Story id="StoryProductDeveloper" subtitles={productDeveloperSubtitles} width={720} language="ja">
 		  <link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
-			<Audio src={staticFile("assets/audios/product_developer.mp3")} />
+			<Audio src={staticFile("assets/audios/product_developer.mp3")} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 			<AbsoluteFill style={{ backgroundColor: 'beige', fontFamily: "Poppins", transformStyle: "preserve-3d" }}>
 				<AnimationEffect actor="stage">
 					<Company style={{position: 'absolute', left: '0%', top:'15%', width: '50%', height: "60%"}}/>

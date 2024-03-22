@@ -363,7 +363,7 @@ export const StoryBooleanData: React.FC = () => {
   return (
 		<Story id="StoryBooleanData" width={720} height={720} subtitles={booleanDataSubtitles} language='zhCN' >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
-		<Audio src={staticFile("assets/audios/boolean3ch.mp3")} />
+		<Audio src={staticFile("assets/audios/boolean3ch.mp3")} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
     <AbsoluteFill style={{fontFamily: "Poppins"}}>
     <AbsoluteFill style={{backgroundColor: "black", perspective: "400px"}}>
     <AnimationEffect actor="game of life" style={{transformStyle: "preserve-3d"}}>

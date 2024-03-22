@@ -233,7 +233,7 @@ export const StoryWhyWhyLeSS: React.FC = () => {
   return (
 		<Story id="StoryWhyWhyLeSS" width={720} height={720} subtitles={whyWhyLeSSSubtitles}  >
 		<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'/>
-		  <Audio src={staticFile("assets/audios/whyless.zh.mp3")} />
+		  <Audio src={staticFile("assets/audios/whyless.zh.mp3")} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
     <AbsoluteFill style={{backgroundColor: "beige"}}>
 			<Anchor actor="center" style={{left: "50%", top: "45%"}}/>
 			<Anchor actor="adjust-direction" style={{left: "70%", top: "50%"}}/>

@@ -36,7 +36,7 @@ export const AnimatedGlb: React.FC<{
 
   return (
     <group ref={groupRef} visible={playing}>
-      <Clone object={scene} matrixWorldAutoUpdate={undefined} getObjectsByProperty={undefined} />
+      <Clone object={scene} />
     </group>
   );
 };

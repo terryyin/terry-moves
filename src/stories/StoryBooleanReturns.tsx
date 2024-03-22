@@ -361,7 +361,7 @@ const announceBoardStyle: CSSProperties = {
 export const StoryBooleanReturns: React.FC = () => {
   return (
 		<Story id="StoryBooleanReturns" width={1024} height={720} subtitles={booleanReturnsSutitles}>
-		  <Audio src={staticFile("assets/audios/boolean2.mp3")} />
+		  <Audio src={staticFile("assets/audios/boolean2.mp3")} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
 
     <AbsoluteFill style={{ backgroundColor: '#000', fontFamily: 'Roboto, sans-serif', }}>
 
