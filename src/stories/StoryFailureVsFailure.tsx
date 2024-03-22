@@ -97,7 +97,7 @@ const storyFailureVsFailureSubtitles: Subtitle[] = [
 export const StoryFailureVsFailure: React.FC = () => {
   return (
 		<Story id="StoryFailureVsFailure" width={720} height={720} subtitles={storyFailureVsFailureSubtitles}  >
-		<Audio src={staticFile("assets/audios/output.mp3")} placeholder={undefined} onPointerEnterCapture={undefined} onPointerLeaveCapture={undefined} />
+		<Audio src={staticFile("assets/audios/output.mp3")} />
     <AbsoluteFill style={{ backgroundColor: '#00abf0'}}>
       <AnimationEffect actor="blue background">
         <AbsoluteFill style={{ backgroundColor: '#e1f6ff'}}/>

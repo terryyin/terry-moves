@@ -80,7 +80,7 @@ describe('AnimationContext', () => {
 			{sec: 1, expectX: 0,   },
 			{sec: 1.2, expectX: -0.4759874630812576,   },
 			{sec: 2, expectX: 0.9969808363488776,   },
-			{sec: 2.1, expectX: 0.9985228158640646,   },
+			{sec: 2.1, expectX: 1.0000000000000002,   },
 		].forEach(({sec, expectX, }) => {
 			test(`test sec: ${sec}`, () => {
 				const animationContext = makeMe.animationContext

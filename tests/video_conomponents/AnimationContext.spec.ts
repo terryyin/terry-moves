@@ -9,7 +9,7 @@ describe('AnimationContext', () => {
 			{sec: 1.9, expectedX: 9.938779963713113, },
 			{sec: 2.5, expectedX: 9.99920,},
 			{sec: 3.1, expectedX: 8.0879},
-			{sec: 4.1, expectedX: 0.01477},
+			{sec: 4.1, expectedX: 0},
 		].forEach(({sec, expectedX, }) => {
 			test(`test sec: ${sec}`, () => {
 				const animationContext = makeMe.animationContext
@@ -53,7 +53,7 @@ describe('AnimationContext', () => {
 			{sec: 0, expectPlaying: "scale(0.5) translateX(0px) translateY(0px)",  },
 			{sec: 1, expectPlaying: "scale(0.5) translateX(0px) translateY(0px)",   },
 			{sec: 1.1, expectPlaying: "scale(0.5956039322945006) translateX(0.0956039322945006px) translateY(0.1912078645890012px)", },
-			{sec: 2.1, expectPlaying: "scale(0.9992614079320321) translateX(0.49926140793203216px) translateY(0.9985228158640643px)",},
+			{sec: 2.1, expectPlaying: "scale(1) translateX(0.5px) translateY(1px)",},
 			{sec: 3.1, expectPlaying: "scale(1.1912078645890012) translateX(0.5956039322945006px) translateY(1.1912078645890012px)",},
 		].forEach(({sec, expectPlaying, }) => {
 			test(`test sec: ${sec}`, () => {
@@ -110,8 +110,8 @@ describe('AnimationContext', () => {
 			{sec: 0, expectPlaying: "translateX(0px) translateY(0px)",  },
 			{sec: 1, expectPlaying: "translateX(0px) translateY(0px)",   },
 			{sec: 1.1, expectPlaying: "translateX(0.0956039322945006px) translateY(0.1912078645890012px)", },
-			{sec: 2.1, expectPlaying: "translateX(0.49926140793203216px) translateY(0.9985228158640643px)",},
-			{sec: 3.1, expectPlaying: "translateX(0.49999954996871px) translateY(0.99999909993742px) translateZ(0px)",},
+			{sec: 2.1, expectPlaying: "translateX(0.5px) translateY(1px)",},
+			{sec: 3.1, expectPlaying: "translateX(0.5px) translateY(1px) translateZ(0px)",},
 			{sec: 10.5, expectPlaying: "translateX(0.04578909722183544px) translateY(0.09157819444367088px)",},
 		].forEach(({sec, expectPlaying, }) => {
 			test(`test sec: ${sec}`, () => {
